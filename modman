@@ -1,2 +1,3 @@
 app/code/community/Diglin/Ricento app/code/community/Diglin/Ricento
 app/etc/modules/Diglin_Ricento.xml app/etc/modules/Diglin_Ricento.xml
+lib/Diglin/Ricardo lib/Diglin/Ricardo
