@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Diglin_Ricento>
+            <version>0.1.0</version>
+        </Diglin_Ricento>
+    </modules>
+    <global>
+        <models>
+            <diglin_ricento>
+                <class>Diglin_Ricento_Model</class>
+                <resourceModel>ricento_resource</resourceModel>
+            </diglin_ricento>
+            <ricento_resource>
+                <class>Diglin_Ricento_Model_Resource</class>
+            </ricento_resource>
+        </models>
+        <blocks>
+            <diglin_ricento>
+                <class>Diglin_Ricento_Block</class>
+            </diglin_ricento>
+        </blocks>
+        <helpers>
+            <diglin_ricento>
+                <class>Diglin_Ricento_Helper</class>
+            </diglin_ricento>
+        </helpers>
+        <resources>
+            <ricento_resource_setup>
+                <setup>
+                    <module>Diglin_Ricento</module>
+                </setup>
+            </ricento_resource_setup>
+        </resources>
+    </global>
+</config>

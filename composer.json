@@ -1,0 +1,16 @@
+{
+    "name":"diglin/ricento",
+    "type":"magento-module",
+    "license":"",
+    "homepage":"https://bitbucket.org/diglin/diglin_ricento",
+    "description":"Ricardo.ch extension for Magento.",
+    "authors":[
+        {
+            "name":"Sylvain Rayé",
+            "email":"{firstname}.{lastname}@diglin.com"
+        }
+    ],
+    "require":{
+        "magento-hackathon/magento-composer-installer":"*"
+    }
+}
