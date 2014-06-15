@@ -13,8 +13,6 @@ use Composer\Script\PackageEvent;
 
 class Magento
 {
-    const PACKAGE_NAME = 'diglin/ricardo';
-
     public static function postAction(Event $event)
     {
         $extras = $event->getComposer()->getPackage()->getExtra();
@@ -22,7 +20,9 @@ class Magento
         if (isset($extras['magento-root-dir'])) {
             $magentoPath = $extras['magento-root-dir'];
             if (is_dir($magentoPath . 'lib')) {
-                self::_recursiveRmDir($magentoPath . 'lib/Diglin/Ricardo');
+                if (is_dir($magentoPath . 'lib/Diglin/Ricardo')) {
+					self::_recursiveRmDir($magentoPath . 'lib/Diglin/Ricardo');
+				}
                 self::_recurseCopy(dirname(__DIR__), $magentoPath . 'lib/Diglin/Ricardo');
             }
         }
