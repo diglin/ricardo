@@ -1,5 +1,5 @@
 {
-    "name": "diglin/diglin_ricardo",
+    "name": "diglin/ricardo",
     "license": "proprietary",
     "description": "Diglin Library to get access to the Ricardo.ch API",
     "keywords": ["Ricardo", "Library"],
