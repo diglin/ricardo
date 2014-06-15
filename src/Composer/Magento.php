@@ -18,15 +18,6 @@ class Magento
     public static function postAction(Event $event)
     {
         $extras = $event->getComposer()->getPackage()->getExtra();
-        $packageName = $event->getComposer()->getPackage()->getName();
-
-
-        $event->getIO()->write($packageName);
-        
-        if ($packageName != self::PACKAGE_NAME)
-        {
-            return;
-        }
 
         if (isset($extras['magento-root-dir'])) {
             $magentoPath = $extras['magento-root-dir'];
@@ -40,12 +31,6 @@ class Magento
     public static function cleanAction(PackageEvent $event)
     {
         $extras = $event->getComposer()->getPackage()->getExtra();
-        $packageName = $event->getComposer()->getPackage()->getName();
-
-        if ($packageName != self::PACKAGE_NAME)
-        {
-            return;
-        }
 
         if (isset($extras['magento-root-dir'])) {
             $magentoPath = $extras['magento-root-dir'];
