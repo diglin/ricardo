@@ -6,9 +6,9 @@
  * @package     Diglin_
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
-set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(__DIR__) . '/../../'));
+set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(__DIR__) . '/src'));
 
-require '../SplAutoloader.php';
+require '../src/Diglin/Ricardo/SplAutoloader.php';
 $autoload = new SplAutoloader();
 $autoload->register();
 

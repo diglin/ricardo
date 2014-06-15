@@ -21,8 +21,8 @@
         "source": "https://bitbucket.org/diglin/diglin_ricardo"
     },
     "autoload":{
-        "psr-0":{
-            "MagentoHackathon\\Composer\\Magento":"src/"
+        "psr-4":{
+            "Diglin\\Ricardo":"src/"
         }
     }
 }
