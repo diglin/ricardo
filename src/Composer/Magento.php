@@ -20,6 +20,9 @@ class Magento
         $extras = $event->getComposer()->getPackage()->getExtra();
         $packageName = $event->getComposer()->getPackage()->getName();
 
+
+        $event->getIO()->write($packageName);
+        
         if ($packageName != self::PACKAGE_NAME)
         {
             return;
