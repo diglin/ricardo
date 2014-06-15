@@ -8,12 +8,11 @@
  */
 namespace Diglin\Ricardo\Composer;
 
-use Composer\Script\Event;
 use Composer\Script\PackageEvent;
 
 class Magento
 {
-    public static function postAction(Event $event)
+    public static function postPackageAction(PackageEvent $event)
     {
         $extras = $event->getComposer()->getPackage()->getExtra();
 
@@ -28,7 +27,7 @@ class Magento
         }
     }
 
-    public static function cleanAction(PackageEvent $event)
+    public static function cleanPackageAction(PackageEvent $event)
     {
         $extras = $event->getComposer()->getPackage()->getExtra();
 

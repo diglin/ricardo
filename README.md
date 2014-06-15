@@ -39,13 +39,13 @@
     },
     "scripts": {
         "post-package-install": [
-            "Diglin\\Ricardo\\Composer\\Magento::postAction"
+            "Diglin\\Ricardo\\Composer\\Magento::postPackageAction"
         ],
         "post-package-update": [
-            "Diglin\\Ricardo\\Composer\\Magento::postAction"
+            "Diglin\\Ricardo\\Composer\\Magento::postPackageAction"
         ],
         "post-package-uninstall": [
-            "Diglin\\Ricardo\\Composer\\Magento::cleanAction"
+            "Diglin\\Ricardo\\Composer\\Magento::cleanPackageAction"
         ]
     }
  }
