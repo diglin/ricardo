@@ -1,16 +1,21 @@
 {
-    "name":"diglin/ricento",
+    "name":"diglin/diglin_ricento",
     "type":"magento-module",
-    "license":"",
-    "homepage":"https://bitbucket.org/diglin/diglin_ricento",
+    "license":"proprietary",
+    "homepage":"http://www.ricento.ch",
     "description":"Ricardo.ch extension for Magento.",
     "authors":[
         {
-            "name":"Sylvain Rayé",
-            "email":"{firstname}.{lastname}@diglin.com"
+            "name":"Sylvain Rayé"
         }
     ],
+    "support": {
+        "source": "https://bitbucket.org/diglin/diglin_ricento",
+        "email": "support@diglin.com",
+        "issues": "http://support.diglin.com/"
+    },
     "require":{
-        "magento-hackathon/magento-composer-installer":"*"
+        "magento-hackathon/magento-composer-installer":"*",
+        "diglin/diglin_ricardo": "dev-master"
     }
 }

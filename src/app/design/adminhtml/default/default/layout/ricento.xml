@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Diglin
+ *
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+-->
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss"><style>ricento/css/ricento.css</style></action>
+        </reference>
+        <reference name="root">
+            <action method="unsetChild"><name>menu</name></action>
+            <block type="diglin_ricento/adminhtml_page_menu" name="menu" as="menu" />
+        </reference>
+    </default>
+
+    <adminhtml_dashboard_index>
+        <reference name="root">
+            <block type="core/template" name="ricento_dashboard" as="ricento.dashboard"
+                   template="diglin_ricento/dashboard.phtml">
+                <block type="core/text_list" name="ricento_dashboard_left" as="ricento.dashboard.left"/>
+                <block type="core/text_list" name="ricento_dashboard_right" as="ricento.dashboard.right"/>
+            </block>
+        </reference>
+    </adminhtml_dashboard_index>
+</layout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Diglin
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <tabs>
+        <diglin>
+            <label><![CDATA[<div><img alt="Diglin" title="Diglin" width="66" height="23" style="display:block;" src="data:image/png;base64,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"></div>]]></label>
+            <sort_order>400</sort_order>
+        </diglin>
+    </tabs>
+    
+    <sections>
+        <ricento module="diglin_ricento" translate="label">
+            <label><![CDATA[<img width="16" height="16" style="vertical-align:middle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkY5RTRGREZEMTI3MTFFM0ExQkNBQjM2QkYxRTNDMjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkY5RTRGRTBEMTI3MTFFM0ExQkNBQjM2QkYxRTNDMjMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjlFNEZEREQxMjcxMUUzQTFCQ0FCMzZCRjFFM0MyMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjlFNEZERUQxMjcxMUUzQTFCQ0FCMzZCRjFFM0MyMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvtFcEUAAAc/SURBVHjapFZ5bBxX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"/> Ricardo]]></label>
+            <tab>diglin</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>110</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <hint>
+                    <frontend_model>ricento/adminhtml_config_source_hint</frontend_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </hint>
+                <config module="diglin_ricento" translate="label">
+                    <label>Global Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<a href="http://api.ricardo.ch" target="_blank" title="Go to API Ricardo Website">Sign Up to Ricardo to get a key</a>]]></comment>
+                    <fields>
+                        <enabled module="diglin_ricento" translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enabled>
+                        <dev module="diglin_ricento" translate="label">
+                            <label>Dev Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Dev mode will set all API call to the Ricardo Sandbox]]></comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </dev>
+                    </fields>
+                </config>
+            </groups>
+        </ricento>
+    </sections>
+</config>

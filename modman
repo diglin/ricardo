@@ -1,3 +1,4 @@
-app/code/community/Diglin/Ricento app/code/community/Diglin/Ricento
-app/etc/modules/Diglin_Ricento.xml app/etc/modules/Diglin_Ricento.xml
-lib/Diglin/Ricardo lib/Diglin/Ricardo
+src/app/code/community/Diglin/Ricento app/code/community/Diglin/Ricento
+src/app/etc/modules/Diglin_Ricento.xml app/etc/modules/Diglin_Ricento.xml
+src/app/design/adminhtml/default/default/layout/ricento.xml app/design/adminhtml/default/default/layout/ricento.xml
+src/app/design/adminhtml/default/default/layout/ricento app/design/adminhtml/default/default/layout/ricento
