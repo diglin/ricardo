@@ -16,6 +16,11 @@
     },
     "require":{
         "magento-hackathon/magento-composer-installer":"*",
-        "diglin/diglin_ricardo": "dev-master"
-    }
+        "diglin/ricardo": "dev-master"
+    },
+    "repositories":[
+    {
+        "type": "vcs",
+        "url": "git@bitbucket.org:diglin/diglin_ricardo.git"
+    }]
 }
