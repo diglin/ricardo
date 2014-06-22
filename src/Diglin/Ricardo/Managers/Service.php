@@ -2,23 +2,37 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @category    Diglin Magento Demo
- * @package     Diglin_
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
-
-namespace Diglin\Ricardo;
+namespace Diglin\Ricardo\Managers;
 
 use \Diglin\Ricardo\Services\ServiceAbstract;
 use \Diglin\Ricardo\Core\ApiInterface;
 
-class ServiceManager
+/**
+ * Class Service
+ *
+ * @package Diglin\Ricardo\Managers
+ */
+class Service
 {
+    /**
+     * @var array
+     */
     protected $_services = array();
 
+    /**
+     * @var ApiInterface
+     */
     protected $_api;
 
-    private $_skipSecure = false;
+    /**
+     * @var Security
+     */
+    protected $_securityManager;
 
     /**
      * @param ApiInterface $api
@@ -36,6 +50,14 @@ class ServiceManager
     public function getApi()
     {
         return $this->_api;
+    }
+
+    /**
+     * @return Config
+     */
+    public function getConfig()
+    {
+        return $this->_api->getConfig();
     }
 
     /**
@@ -57,11 +79,11 @@ class ServiceManager
      */
     public function add($service, $return = false)
     {
-        if (! ($service instanceof ServiceAbstract)) {
+        if (!($service instanceof ServiceAbstract)) {
             $serviceName = $this->_getServiceName($service);
         }
 
-        if (! ($service instanceof ServiceAbstract) && !isset($this->_services[$serviceName])) {
+        if (!($service instanceof ServiceAbstract) && !isset($this->_services[$serviceName])) {
             $serviceClass = '\Diglin\Ricardo\Services\\'. $this->_getCleanServiceClassName($service);
             if (class_exists($serviceClass)) {
                 $service = new $serviceClass();
@@ -147,44 +169,45 @@ class ServiceManager
                 $service = $serviceInstance->$serviceMethod($arguments);
             }
 
-            if (empty($service['method']) || empty($service['params'])) {
-                throw new \Exception(printf('Method or parameters of the service %s cannot be empty', $serviceName));
+            if (empty($service['method'])) {
+                throw new \Exception(printf('Method "%s" of the service "%s" cannot be empty', $service['method'], $serviceName));
             }
 
-            // Implement get Token from here
-            if (!$this->_skipSecure) {
-                // @todo
+            if (!$this->_securityManager) {
+                $this->_securityManager = new Security($this, $this->getConfig()->getAllowValidationUrl());
+            }
 
-                // we add the security service to the manager if not already done & get it
-                /* @var $securityService \Diglin\Ricardo\Services\Security */
-                $securityService = $this->add('security', true);
-
-//                switch ($serviceInstance->getTypeOfToken())
-//                {
-//                    case ServiceAbstract::TOKEN_TYPE_IDENTIFIED:
-//                        $temporaryCredential = '';
-//
-//                        $this->proceed('security', 'getTemporaryCredential');
-//                        $this->proceed('security', 'getTokenCredential', $temporaryCredential);
-//                        $tokenCredential = '';
-//
-//
-//                        $this->getApi()->setUsername($tokenCredential);
-//                        $this->getApi()->setShouldSetPass(false);
-//                        break;
-//                    case ServiceAbstract::TOKEN_TYPE_ANONYMOUS:
-//                        $this->getApi()->setShouldSetPass(true);
-//                        break;
-//                    case ServiceAbstract::TOKEN_TYPE_DEFAULT:
-//                        $this->getApi()->setShouldSetPass(true);
-//                        break;
-//                }
-
-
-                $this->_skipSecure = false;
+            switch ($serviceInstance->getTypeOfToken())
+            {
+                case ServiceAbstract::TOKEN_TYPE_IDENTIFIED:
+                    $token = $this->_securityManager->getToken(ServiceAbstract::TOKEN_TYPE_IDENTIFIED);
+                    $this->getApi()
+                        ->setUsername($token)
+                        ->setShouldSetPass(false);
+                    break;
+                case ServiceAbstract::TOKEN_TYPE_ANTIFORGERY:
+                    $token = $this->_securityManager->getToken(ServiceAbstract::TOKEN_TYPE_ANTIFORGERY);
+                    $this->getApi()
+                        ->setUsername($token)
+                        ->setShouldSetPass(false);
+                    break;
+                case ServiceAbstract::TOKEN_TYPE_ANONYMOUS:
+                    $token = $this->_securityManager->getToken(ServiceAbstract::TOKEN_TYPE_ANONYMOUS);
+                    $this->getApi()
+                        ->setUsername($token)
+                        ->setShouldSetPass(false);
+                    break;
+                case ServiceAbstract::TOKEN_TYPE_DEFAULT:
+                default:
+                    $this->getApi()
+                        ->revertUsername()
+                        ->setShouldSetPass(true);
+                    break;
             }
 
             $data = $this->getApi()->connect($serviceInstance->getService(), $service['method'], $service['params']);
+
+            //@todo Manage errors
 
             $getResultServiceMethod = $this->_prepareServiceGetResultMethod($serviceMethod);
 

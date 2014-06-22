@@ -44,7 +44,7 @@
         "post-package-update": [
             "Diglin\\Ricardo\\Composer\\Magento::postPackageAction"
         ],
-        "post-package-uninstall": [
+        "pre-package-uninstall": [
             "Diglin\\Ricardo\\Composer\\Magento::cleanPackageAction"
         ]
     }

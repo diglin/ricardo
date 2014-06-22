@@ -12,6 +12,11 @@ use Composer\Script\PackageEvent;
 
 class Magento
 {
+    /**
+     * Copy the Diglin Ricardo Library into the appropriate Magento lib folder
+     *
+     * @param PackageEvent $event
+     */
     public static function postPackageAction(PackageEvent $event)
     {
         $extras = $event->getComposer()->getPackage()->getExtra();
@@ -27,6 +32,11 @@ class Magento
         }
     }
 
+    /**
+     * Remove the installed library Diglin Ricardo from the lib Magento folder
+     *
+     * @param PackageEvent $event
+     */
     public static function cleanPackageAction(PackageEvent $event)
     {
         $extras = $event->getComposer()->getPackage()->getExtra();
@@ -39,6 +49,12 @@ class Magento
         }
     }
 
+    /**
+     * Copy recursively the source to a target
+     *
+     * @param string $src
+     * @param string $dst
+     */
     protected static function _recurseCopy($src, $dst)
     {
         $dir = opendir($src);
@@ -55,6 +71,12 @@ class Magento
         closedir($dir);
     }
 
+    /**
+     * Remove directory recursively
+     *
+     * @param $dir
+     * @return bool
+     */
     public static function _recursiveRmDir($dir)
     {
         $files = array_diff(scandir($dir), array('.', '..'));

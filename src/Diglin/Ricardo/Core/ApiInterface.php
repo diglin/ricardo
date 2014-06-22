@@ -2,8 +2,9 @@
 /**
  * Diglin GmbH - Switzerland
  *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
  * @category    Diglin
- * @package     Diglin_Ricento
+ * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 

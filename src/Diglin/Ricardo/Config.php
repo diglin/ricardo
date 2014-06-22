@@ -2,11 +2,11 @@
 /**
  * Diglin GmbH - Switzerland
  *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
  * @category    Diglin
- * @package     Diglin_Ricento
+ * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
-
 namespace Diglin\Ricardo;
 
 use \Diglin\Ricardo\Core\ConfigInterface;
@@ -62,5 +62,35 @@ class Config extends \Zend_Config implements ConfigInterface
     public function getPartnershipPasswd()
     {
         return $this->get('partnership_passwd');
+    }
+
+    /**
+     * Get if we must simulate an authorization or not to Ricardo
+     *
+     * @return bool
+     */
+    public function getAllowValidationUrl()
+    {
+        return (bool) $this->get('allow_authorization_simulation');
+    }
+
+    /**
+     * Get the username configuration of the customer
+     *
+     * @return string
+     */
+    public function getCustomerUsername()
+    {
+        return $this->get('customer_username');
+    }
+
+    /**
+     * Get the password configuration of the customer
+     *
+     * @return string
+     */
+    public function getCustomerPassword()
+    {
+        return $this->get('customer_password');
     }
 }

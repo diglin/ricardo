@@ -2,14 +2,12 @@
 /**
  * Diglin GmbH - Switzerland
  *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
  * @category    Diglin
- * @package     Diglin_Ricento
+ * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
-
 namespace Diglin\Ricardo\Services;
-
-use \Diglin\Ricardo\Services\ServiceAbstract;
 
 /**
  * Class Security
@@ -17,18 +15,39 @@ use \Diglin\Ricardo\Services\ServiceAbstract;
  * Ricardo SecurityService API
  * Manage Token generation
  *
- * @package Diglin\Ricardo
+ * @package Diglin\Ricardo\Services
  */
 class Security extends ServiceAbstract
 {
+    const VALIDATION_SAVE_PATH = '/apiconnect/login/saveinfo/saveinfo';
+
+    /**
+     * @var string
+     */
     protected $_service = 'SecurityService';
 
+    /**
+     * @var string
+     */
     protected $_typeOfToken = self::TOKEN_TYPE_DEFAULT;
 
     /**
      * Some Ricardo API Services don't need to have a registered token like
      * SystemService, ArticleService, SearchService, BrandingService
      * but they need an anonymous token
+     *
+     * @return array
+     */
+    public function getAnonymousTokenCredential()
+    {
+        return array(
+            'method' => 'GetAnonymousTokenCredential',
+            'params' =>  array('getAnonymousTokenCredentialParameter' => array())
+        );
+    }
+
+    /**
+     * Get the result fo the API call to get the anonymous token
      *
      * The Ricardo API returns:
      * <pre>
@@ -42,18 +61,6 @@ class Security extends ServiceAbstract
      *     }
      *  }
      * </pre>
-     * @return array
-     */
-    public function getAnonymousTokenCredential()
-    {
-        return array(
-            'method' => 'GetAnonymousTokenCredential',
-            'params' =>  array('getAnonymousTokenCredentialParameter' => array())
-        );
-    }
-
-    /**
-     * Get the result fo the API call to get the anonymous token
      *
      * Array returned:
      * <pre>
@@ -80,19 +87,6 @@ class Security extends ServiceAbstract
      * Ask for temporary credential for very first time use. Return a validationUrl where to redirect a user
      * to autorize the application and Temporary Key.
      *
-     * The Ricardo API returns:
-     * <pre>
-     * {
-     *     "CreateTemporaryCredentialResult": {
-     *       "TemporaryCredential": {
-     *         "ExpirationDate": "\/Date(1385462160000+0100)\/",
-     *         "TemporaryCredentialKey": "[TEMPORARY_TOKEN]",
-     *         "ValidationUrl": "http://www.ch.betaqxl.com/ApiConnect/Login/Index?token=XXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX&countryId=2&partnershipId=XXXX&partnerurl=http://www.myshop.com/mypage/"
-     *       }
-     *     }
-     *   }
-     * </pre>
-     *
      * @return array
      */
     public function getTemporaryCredential()
@@ -106,6 +100,20 @@ class Security extends ServiceAbstract
     /**
      * Get the result of the temporary credential.
      * Take care here, the user will have to be redirected to validate it thanks to the validationUrl variable
+     *
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "CreateTemporaryCredentialResult": {
+     *       "TemporaryCredential": {
+     *         "ExpirationDate": "\/Date(1385462160000+0100)\/",
+     *         "TemporaryCredentialKey": "[TEMPORARY_TOKEN]",
+     *         "ValidationUrl": "http://www.ch.betaqxl.com/ApiConnect/Login/Index?token=XXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX&countryId=2&partnershipId=XXXX&partnerurl=http://www.myshop.com/mypage/"
+     *       }
+     *     }
+     *   }
+     * </pre>
      *
      * Array returned:
      * <pre>
@@ -132,19 +140,6 @@ class Security extends ServiceAbstract
      * Ask for the "real" token, providing the [TEMPORARY_TOKEN] received from the method createTemporaryCredential
      * and also as a get parameter when user is returning from the validationURl.
      *
-     * The Ricardo API returns:
-     * <pre>
-     * {
-     *     "CreateTokenCredentialResult": {
-     *       "TokenCredential": {
-     *         "SessionDuration": 30,
-     *         "TokenCredentialKey": "[REAL_TOKEN]",
-     *         "TokenExpirationDate": "\/Date(1386664920000+0100)\/"
-     *       }
-     *     }
-     *   }
-     * </pre>
-     *
      * @param string $temporaryCredentialKey
      * @return array
      */
@@ -158,6 +153,19 @@ class Security extends ServiceAbstract
 
     /**
      * Get the result of the token credential
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "CreateTokenCredentialResult": {
+     *       "TokenCredential": {
+     *         "SessionDuration": 30,
+     *         "TokenCredentialKey": "[REAL_TOKEN]",
+     *         "TokenExpirationDate": "\/Date(1386664920000+0100)\/"
+     *       }
+     *     }
+     *   }
+     * </pre>
      *
      * Array returned:
      * <pre>
@@ -185,6 +193,20 @@ class Security extends ServiceAbstract
      * You will get a new token credential in return. If TokenExpirationDate is above
      * of the current date, you will have to create again a temporary credential (sic!)
      *
+     * @param string $tokenCredentialKey
+     * @return array
+     */
+    public function getRefreshTokenCredential($tokenCredentialKey)
+    {
+        return array(
+            'method' => 'RefreshTokenCredential',
+            'params' => array('refreshTokenCredentialParameter' => array('TokenCredentialKey' => $tokenCredentialKey))
+        );
+    }
+
+    /**
+     * Get the refreshed the token
+     *
      * The Ricardo API returns:
      * <pre>
      * {
@@ -197,29 +219,30 @@ class Security extends ServiceAbstract
      *     }
      *   }
      * </pre>
+     *
+     * Array returned:
+     * <pre>
+     * array(
+     *     'TokenCredentialKey'
+     * );
+     * </pre>
+     *
+     * @param array $data
+     * @return array
      */
-    public function getRefreshTokenCredential($tokenCredentialKey)
+    public function getRefreshTokenCredentialResult(array $data)
     {
-        return array(
-            'method' => 'RefreshTokenCredential',
-            'params' => array('refreshTokenCredentialParameter' => array('TokenCredentialKey' => $tokenCredentialKey))
-        );
+        if (isset($data['RefreshTokenCredentialResult']) && isset($data['RefreshTokenCredentialResult']['TokenCredential'])) {
+            return $data['RefreshTokenCredentialResult']['TokenCredential'];
+        }
+
+        return array();
     }
 
     /**
      * Some API methods needs an antiforgery token to prevent Man-In-The-Middle attack
      *
-     * The Ricardo API returns:
-     * <pre>
-     * {
-     *     "CreateAntiforgeryTokenResult": {
-     *       "TokenCredential": {
-     *         "AntiforgeryTokenKey": "[REAL_TOKEN]",
-     *         "TokenExpirationDate": "\/Date(1386664920000+0100)\/"
-     *       }
-     *     }
-     *   }
-     * </pre>
+     * @return array
      */
     public function getAntiforgeryToken()
     {
@@ -227,5 +250,38 @@ class Security extends ServiceAbstract
             'method' => 'CreateAntiforgeryToken',
             'params' => array('createAntiforgeryTokenParameter' => array())
         );
+    }
+
+    /**
+     * Get the antiforgery token
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "CreateAntiforgeryTokenResult": {
+     *         "AntiforgeryTokenKey": "[REAL_TOKEN]",
+     *         "TokenExpirationDate": "\/Date(1386664920000+0100)\/"
+     *     }
+     *   }
+     * </pre>
+     *
+     * Array returned:
+     * <pre>
+     * array(
+     *     'AntiforgeryTokenKey'
+     *     'TokenExpirationDate'
+     * );
+     * </pre>
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getAntiforgeryTokenResult(array $data)
+    {
+        if (isset($data['CreateAntiforgeryTokenResult'])) {
+            return $data['CreateAntiforgeryTokenResult'];
+        }
+
+        return array();
     }
 }

@@ -1,0 +1,19 @@
+[GERMAN]
+host = ws.betaqxl.com
+partnership_id = YOUR_PARTNER_ID
+partnership_passwd = YOUR_PARTNER_PASS
+partner_url = YOUR_WEBSITE_URL
+allow_authorization_simulation = true
+customer_username =
+customer_password = ''
+debug = true
+
+[FRENCH]
+host = ws.betaqxl.com
+partnership_id = YOUR_PARTNER_ID
+partnership_passwd = YOUR_PARTNER_PASS
+partner_url = YOUR_WEBSITE_URL
+allow_authorization_simulation = true
+customer_username =
+customer_password = ''
+debug = true

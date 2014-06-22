@@ -2,8 +2,9 @@
 /**
  * Diglin GmbH - Switzerland
  *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
  * @category    Diglin
- * @package     Diglin_Ricento
+ * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 namespace Diglin\Ricardo;
@@ -20,16 +21,34 @@ use \Diglin\Ricardo\Core\ConfigInterface;
  */
 class Api implements ApiInterface
 {
+    /**
+     * @var Core\ConfigInterface
+     */
     protected $_config;
 
+    /**
+     * @var string
+     */
     protected $_username;
 
+    /**
+     * @var string
+     */
     protected $_partnerId;
 
+    /**
+     * @var bool
+     */
     protected $_debug = false;
 
+    /**
+     * @var array
+     */
     protected $_lastDebug = array();
 
+    /**
+     * @var bool
+     */
     protected $_shouldSetPass = true;
 
     public function __construct(ConfigInterface $config)
@@ -43,14 +62,19 @@ class Api implements ApiInterface
     }
 
     /**
+     * Connect to the Ricardo API depending of the service and method to be used
+     *
      * @param string $service Ricardo API Service
      * @param string $method Ricardo API Method
      * @param array $params API Parameters
      * @return mixed $result
+     * @throws \Exception
      */
     public function connect($service, $method, array $params)
     {
-        //@todo Error Management for config host
+        if (!$this->getConfig()->getHost()) {
+            throw new \Exception('Configuration Host not set.');
+        }
 
         $curlOptions = array(
             CURLOPT_URL => 'https://' . $this->getConfig()->getHost() . '/ricardoapi/' . $service . '.Json.svc/' . $method,
@@ -65,7 +89,6 @@ class Api implements ApiInterface
         curl_setopt_array($ch, $curlOptions);
         $return = curl_exec($ch);
         $result = json_decode($return, true);
-        curl_close($ch);
 
         if ($this->_debug) {
             $this->_lastDebug[] = array(
@@ -74,7 +97,11 @@ class Api implements ApiInterface
             );
         }
 
-        //@todo Error Management for curl and API response
+        if (curl_errno($ch)) {
+            throw new \Exception('Error while trying to connect with the API:' . curl_error($ch));
+        }
+
+        curl_close($ch);
 
         return $result;
     }
@@ -123,6 +150,8 @@ class Api implements ApiInterface
     }
 
     /**
+     * Get the username
+     *
      * @return mixed
      */
     public function getUsername()
@@ -131,6 +160,8 @@ class Api implements ApiInterface
     }
 
     /**
+     * Set if the pass should be send or not
+     *
      * @param boolean $boolean
      * @return $this
      */
@@ -141,6 +172,8 @@ class Api implements ApiInterface
     }
 
     /**
+     * Get if the pass should be send or not
+     *
      * @return boolean
      */
     public function getShouldSetPass()
@@ -149,11 +182,19 @@ class Api implements ApiInterface
     }
 
     /**
-     * @return mixed
+     * Get the content of the headers and content of one or more API calls
+     *
+     * @param bool $flush
+     * @return array
      */
-    public function getLastDebug()
+    public function getLastDebug($flush = false)
     {
-        return $this->_lastDebug;
+        $return = $this->_lastDebug;
+
+        if ($flush) {
+            $this->_lastDebug = array();
+        }
+        return $return;
     }
 
     /**
@@ -164,6 +205,7 @@ class Api implements ApiInterface
      */
     public function revertUsername()
     {
-        return ($this->_username = $this->_partnerId);
+        $this->_username = $this->_partnerId;
+        return $this;
     }
 }
