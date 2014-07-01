@@ -16,8 +16,13 @@ use \Diglin\Ricardo\Core\Helper;
  *
  * @package Diglin\Ricardo\Managers
  */
-class ManagerAbstract
+abstract class ManagerAbstract
 {
+    /**
+     * @var string
+     */
+    protected $_serviceName;
+
     /**
      * @var Service
      */
@@ -37,5 +42,20 @@ class ManagerAbstract
     public function getHelper()
     {
         return new Helper();
+    }
+
+    /**
+     * @param string $method
+     * @param string|null|array $parameters
+     * @return array
+     * @throws \Exception
+     */
+    protected function _proceed($method, $parameters = null)
+    {
+        if (!$this->_serviceName) {
+            throw new \Exception('Service Name missing to proceed from Manager');
+        }
+
+        return $this->_serviceManager->proceed($this->_serviceName, $method, $parameters);
     }
 }

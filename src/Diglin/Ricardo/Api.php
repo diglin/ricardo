@@ -93,12 +93,13 @@ class Api implements ApiInterface
         if ($this->_debug) {
             $this->_lastDebug[] = array(
                 'curl_options' => $curlOptions,
+                'params' => print_r($params, true),
                 'return' => $return
             );
         }
 
         if (curl_errno($ch)) {
-            throw new \Exception('Error while trying to connect with the API:' . curl_error($ch));
+            throw new \Exception('Error while trying to connect with the API - Curl Error Number: ' . curl_errno . ' - Curl Error Message: ' . curl_error($ch));
         }
 
         curl_close($ch);

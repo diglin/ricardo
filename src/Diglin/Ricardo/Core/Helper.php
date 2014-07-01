@@ -20,27 +20,41 @@ class Helper
      * @param string|null $format
      * @return string | DateTime
      */
-    public function convertJsonDate($date, $format = 'Y-m-d H:i:s')
+    public static function convertJsonDateToPhpDate($date, $format = 'Y-m-d H:i:s')
     {
         preg_match('/(\d{10})(\d{3})([\+\-]\d{4})/', $date, $matches);
 
         // Get the timestamp as the TS string
         $timestamp = (int) $matches[1];
 
-        // Get the timezone name by offset
-        $timezone = (int) $matches[3];
-        $timezone = timezone_name_from_abbr("", $timezone / 100 * 3600, false);
-        $timezone = new \DateTimeZone($timezone);
+        return date($format, $timestamp);
+    }
 
-        // Create a new DateTime, set the timestamp and the timezone
-        $datetime = new \DateTime();
-        $datetime->setTimestamp($timestamp);
-        $datetime->setTimezone($timezone);
+    public static function convertPhpDateToJsonDate ($date/*, $timezone = 'Europe/Berlin'*/)
+    {
+        //$tz = new \DateTimeZone($timezone);
 
-        if (is_null($format)) {
-            return $datetime;
+        // We want to calculate the date offset of the current system timezone
+        // Get the datetime from today instead of the one provided in parameter
+        // cause of a PHP 5.5.7 bug with date greater or equal than year 2038
+        // and the daylight savings
+        //$datetime = new \DateTime(date('Y-m-d H:m:i'));
+        //$datetime->setTimezone($tz);
+
+/*        $offset = $datetime->getOffset();
+        $offset = round($offset / 3600 * 100, 0);
+
+        if ($offset > 1200) {
+            $offsetSrting = '-0' . ($offset - 1200);
+        } else if ($offset < 1000) {
+            $offsetSrting = '+0' . $offset;
+        } else {
+            $offsetSrting = '+' . $offset;
         }
+*/
+        $datetimeReal = new \DateTime($date);
+        //$datetimeReal->setTimezone($tz);
 
-        return $datetime->format($format);
+        return '/Date[' . ($datetimeReal->getTimestamp()  * 1000) . date('O') . ']/';
     }
 }

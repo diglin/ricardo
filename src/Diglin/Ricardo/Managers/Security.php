@@ -252,7 +252,7 @@ class Security extends ManagerAbstract
      */
     public function isDateExpired($jsonExpirationDate)
     {
-        $datetime = $this->getHelper()->convertJsonDate($jsonExpirationDate, null);
+        $datetime = $this->getHelper()->convertJsonDateToPhpDate($jsonExpirationDate, null);
         $jsonDateTimestamp = $datetime->getTimestamp();
 
         if (time() < $jsonDateTimestamp) {

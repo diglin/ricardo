@@ -11,8 +11,183 @@ namespace Diglin\Ricardo\Managers;
 
 class SystemTest extends TestAbstract
 {
-    public function test()
+    /**
+     * @var System
+     */
+    protected $_systemManager;
+
+    protected function setUp()
     {
-        $result = $this->getServiceManager()->proceed('system', 'Templates');
+        $this->_systemManager = new System($this->getServiceManager());
+        parent::setUp();
+    }
+
+    public function testGetArticleConditions()
+    {
+        $result = $this->_systemManager->getArticleConditions();
+
+        $this->assertGreaterThanOrEqual(1, count($result), 'Article Conditions are empty');
+        $this->assertArrayHasKey('ArticleConditionText', $result[0], 'Data returned for the article conditions is not correct');
+    }
+
+    public function testGetAvailabilities()
+    {
+        $result = $this->_systemManager->getAvailabilities();
+
+        $this->assertGreaterThanOrEqual(1, count($result), 'Article availabilities are empty');
+        $this->assertArrayHasKey('AvailabilityText', $result[0], 'Data returned for the article availabilities is not correct');
+    }
+
+    public function testGetCategories()
+    {
+        // Set category_branding_filter = 0, you will get all categories, be aware it raises the memory to 24MB
+        $result = $this->_systemManager->getCategories(2, true);
+
+        $numberOfCategories = count($result);
+
+        $this->assertGreaterThanOrEqual(1, $numberOfCategories, 'No category found');
+        $this->assertArrayHasKey('CategoryId', $result[0], 'Category data structure is wrong');
+        $this->assertLessThanOrEqual(800, $numberOfCategories, 'Number of categories too high comparaed to the one expected - 800'); // category_branding_filter set to 2, decrease the number of categories
+
+        return $result[10]['CategoryId'];
+    }
+
+    /**
+     * @depends testGetCategories
+     */
+    public function testGetCategory($categoryId)
+    {
+        $result = $this->_systemManager->getCategory($categoryId);
+
+        $this->assertArrayHasKey('CategoryId', $result, 'Category data structure does not have CategoryId');
+        $this->assertArrayHasKey('CategoryName', $result, 'Category data structure does not have CategoryName');
+    }
+
+    public function testGetCountries()
+    {
+        $result = $this->_systemManager->getCountries();
+
+        $this->assertGreaterThanOrEqual(10, count($result), 'No country found');
+        $this->assertArrayHasKey('CountryId', $result[0], 'Country data structure is wrong');
+    }
+
+    public function testGetDeliveryConditions()
+    {
+        $result = $this->_systemManager->getDeliveryConditions();
+
+        $this->assertGreaterThanOrEqual(10, count($result), 'No delivery condition found');
+        $this->assertArrayHasKey('DeliveryConditionId', $result[0], 'Delivery condition data structure is wrong');
+        $this->assertArrayHasKey('PackageSizes', $result[0], 'PackageSizes is missing');
+        $this->assertArrayHasKey('PackageSizeCost', $result[0]['PackageSizes'][0], 'Delivery Package Size data structure is wrong');
+    }
+
+    /**
+     * @depends testGetCategories
+     */
+    public function testGetFirstChildsCategories($categoryId)
+    {
+        // Set category_branding_filter = 0, you will get all categories, be aware it raises the memory to 24MB
+        $result = $this->_systemManager->getFirstChildsCategories($categoryId, 2, true);
+
+        $this->assertGreaterThanOrEqual(1, count($result), 'No category childs found');
+        $this->assertArrayHasKey('CategoryId', $result[0], 'Category childs data structure does not have CategoryId');
+        $this->assertArrayHasKey('CategoryName', $result[0], 'Category childs data structure does not have CategoryName');
+    }
+
+    public function testGetLanguages()
+    {
+        $result = $this->_systemManager->getLanguages();
+
+        $this->assertGreaterThanOrEqual(1, count($result), 'No languages found');
+        $this->assertArrayHasKey('LanguageId', $result[0], 'Languages data structure does not have LanguageId');
+        $this->assertArrayHasKey('IsMainLanguage', $result[0], 'Languages data structure does not have IsMainLanguage');
+        $this->assertArrayHasKey('LanguageText', $result[0], 'Languages data structure does not have LanguageText');
+    }
+
+    public function testGetPackages()
+    {
+        $result = $this->_systemManager->getPackages();
+
+        $this->assertGreaterThanOrEqual(1, count($result), 'No Package found');
+        $this->assertArrayHasKey('PackageId', $result[0], 'Packages data structure does not have PackageId');
+        $this->assertArrayHasKey('PackagePrice', $result[0], 'Packages data structure does not have PackagePrice');
+        $this->assertArrayHasKey('PackageSize', $result[0], 'Packages data structure does not have PackageSize');
+    }
+
+    /**
+     * @depends testGetCategories
+     */
+    public function testGetParentsCategories($categoryId)
+    {
+        $result = $this->_systemManager->getParentsCategories($categoryId);
+
+        $this->assertGreaterThanOrEqual(1, count($result), 'No category parents found');
+        $this->assertArrayHasKey('CategoryId', $result[0], 'Category parents data structure does not have CategoryId');
+        $this->assertArrayHasKey('CategoryName', $result[0], 'Category parents data structure does not have CategoryName');
+    }
+
+    public function testGetPartnerConfigurations()
+    {
+        $result = $this->_systemManager->getPartnerConfigurations();
+
+        $this->assertGreaterThanOrEqual(5, count($result), 'No configuration found');
+        $this->assertArrayHasKey('CurrencyId', $result, 'Configuration CurrencyId missing');
+        $this->assertArrayHasKey('DataProtectionUrl', $result, 'Configuration DataProtectionUrl missing');
+        $this->assertArrayHasKey('DomainName', $result, 'Configuration DomainName missing');
+        $this->assertArrayHasKey('MaxSellingDuration', $result, 'Configuration MaxSellingDuration missing');
+    }
+
+    public function testGetPaymentConditions()
+    {
+        $result = $this->_systemManager->getPaymentConditions();
+
+        $this->assertGreaterThanOrEqual(1, count($result), 'No Payment Condition found');
+        $this->assertArrayHasKey('PaymentConditionId', $result[0], 'Payment Condition PaymentConditionId missing');
+        $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition PaymentConditionText missing');
+        $this->assertArrayHasKey('PaymentMethods', $result[0], 'Payment Condition PaymentMethods missing');
+
+        return $result[0]['PaymentConditionId'];
+    }
+
+    /**
+     * @depends testGetPaymentConditions
+     */
+    public function testGetPaymentConditionsAndMethods()
+    {
+        $result = $this->_systemManager->getPaymentConditionsAndMethods();
+
+        $this->assertArrayHasKey('PaymentConditionId', $result[0], 'Payment Condition & Methods PaymentConditionId missing');
+        $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition & Methods PaymentConditionText missing');
+        $this->assertArrayHasKey('PaymentMethods', $result[0], 'Payment Condition & Methods PaymentMethods missing');
+
+        return $result[0]['PaymentConditionId'];
+    }
+
+    /**
+     * @depends testGetPaymentConditionsAndMethods
+     */
+    public function testGetPaymentMethods($paymentConditionId)
+    {
+        $result = $this->_systemManager->getPaymentMethods(true, $paymentConditionId); // $paymentConditionId has no effect on the Ricardo API side ! @fixme
+
+        //$this->assertCount(1, $result[0], 'More than 1 Payment Methods found instead to get only the one provided in parameter ' . $paymentConditionId);
+        $this->assertArrayHasKey('PaymentMethodId', $result[0], 'Payment Methods PaymentMethodId missing');
+        $this->assertArrayHasKey('PaymentMethodText', $result[0], 'Payment Methods PaymentMethodText missing');
+
+        $this->_systemManager->setPaymentMethods(null);
+        $result = $this->_systemManager->getPaymentMethods(false);
+
+        $this->assertGreaterThanOrEqual(5, count($result), 'Payment Methods does not get the whole list of methods, even those which are not allow to sell');
+    }
+
+    public function testGetPhonePrefixes()
+    {
+        $result = $result = $this->_systemManager->getPhonePrefixes();
+
+        $this->assertGreaterThanOrEqual(10, count($result), 'No phone prefixes found');
+        $this->assertArrayHasKey('Value', $result[0], 'Key "Value" not found for phone prefixes');
+        $this->assertContains('+', $result[0]['Value'], 'No phone prefix value found');
+        print_r($this->_serviceManager->getApi()->getLastDebug());
+
     }
 }

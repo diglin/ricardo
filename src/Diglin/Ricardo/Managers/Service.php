@@ -212,7 +212,7 @@ class Service
             $getResultServiceMethod = $this->_prepareServiceGetResultMethod($serviceMethod);
 
             if (method_exists($serviceInstance, $getResultServiceMethod)) {
-                return $serviceInstance->$getResultServiceMethod($data);
+                return $serviceInstance->$getResultServiceMethod( (array) $data);
             } else {
                 return $data;
             }

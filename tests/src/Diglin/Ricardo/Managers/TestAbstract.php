@@ -55,4 +55,9 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
 
         return $this->_serviceManager;
     }
+
+    protected function getLastApiDebug($flush = true)
+    {
+        return print_r($this->getServiceManager()->getApi()->getLastDebug($flush), true);
+    }
 }
