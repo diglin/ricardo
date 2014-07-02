@@ -10,9 +10,9 @@
         }
     ],
     "support": {
-        "source": "https://bitbucket.org/diglin/diglin_ricento",
         "email": "support@diglin.com",
-        "issues": "http://support.diglin.com/"
+        "issues": "http://support.diglin.com/",
+        "source": "https://bitbucket.org/ricento/diglin_ricento"
     },
     "require":{
         "magento-hackathon/magento-composer-installer":"*",
@@ -21,7 +21,7 @@
     "repositories":[
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:diglin/diglin_ricardo.git"
+            "url": "git@bitbucket.org:ricento/diglin_ricardo.git"
         }
     ]
 }
