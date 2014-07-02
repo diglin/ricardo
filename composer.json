@@ -18,7 +18,7 @@
     "support": {
         "email": "support@diglin.com",
         "issues": "http://support.diglin.com/",
-        "source": "https://bitbucket.org/diglin/diglin_ricardo"
+        "source": "https://bitbucket.org/ricento/diglin_ricardo"
     },
     "autoload":{
         "psr-4":{
