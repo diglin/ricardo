@@ -44,7 +44,7 @@
             <show_in_store>1</show_in_store>
             <groups>
                 <hint>
-                    <frontend_model>ricento/adminhtml_config_source_hint</frontend_model>
+                    <frontend_model>diglin_ricento/adminhtml_config_source_hint</frontend_model>
                     <sort_order>0</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
