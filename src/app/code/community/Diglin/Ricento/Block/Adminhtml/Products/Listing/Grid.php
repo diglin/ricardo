@@ -61,14 +61,19 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
         ));
 
         if (!Mage::app()->isSingleStoreMode()) {
-            $this->addColumn('websites',
+            //TODO allow associaton of multiple stores
+            $this->addColumn('stores',
                 array(
-                    'header'=> Mage::helper('catalog')->__('Websites'),
-                    'width' => '100px',
-                    'sortable'  => false,
-                    'index'     => 'websites',
-                    'type'      => 'options',
-                    'options'   => Mage::getModel('core/website')->getCollection()->toOptionHash(),
+                    'header'        => Mage::helper('catalog')->__('Stores'),
+                    'width'         => '100px',
+                    'sortable'      => false,
+                    'index'         => 'store_id',
+                    'type'          => 'store',
+                    'store_all'     => true,
+                    'store_view'    => true,
+                    'sortable'      => false,
+                    'filter_condition_callback'
+                                    => array($this, '_filterStoreCondition'),
                 ));
         }
 
@@ -132,6 +137,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
                         'caption' => $helper->__('List'),
                         'url'     => array(
                             'base'=>'*/*/list',
+                            'params'=>array('store'=>$this->getRequest()->getParam('store'))
+                        ),
+                        'field'   => 'id'
+                    ),
+                    array(
+                        'caption' => $helper->__('Relist'),
+                        'url'     => array(
+                            'base'=>'*/*/relist',
                             'params'=>array('store'=>$this->getRequest()->getParam('store'))
                         ),
                         'field'   => 'id'
@@ -204,9 +217,22 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
             'confirm' => $this->__('Are you sure that you want to delete this/these products listing(s)?')
         ));
 
+        $this->getMassactionBlock()->addItem('logs', array(
+            'label'=> $this->__('View Logs'),
+            'url'  => $this->getUrl('*/*/massViewLogs', array('_current'=>true))
+        ));
+
         return $this;
     }
 
+    protected function _filterStoreCondition($collection, $column)
+    {
+        if (!$value = $column->getFilter()->getValue()) {
+            return;
+        }
+
+        $this->getCollection()->addStoreFilter($value);
+    }
     /**
      * Get the url to set for each row in the grid
      *

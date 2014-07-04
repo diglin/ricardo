@@ -124,4 +124,11 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
     {
 
     }
+    /**
+     * View logs of selected product listings
+     */
+    public function massViewLogsAction()
+    {
+
+    }
 }
