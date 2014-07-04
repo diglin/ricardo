@@ -10,8 +10,29 @@
  */
 
 /**
- * Products_Listing Model
+ * Products Listing Model
+ *
  * @package Diglin_Ricento
+ * @method string getTitle() getTitle()
+ * @method int    getTotalActiveProducts() getTotalActiveProducts()
+ * @method int    getTotalInActiveProducts() getTotalInActiveProducts()
+ * @method int    getTotalSoldProducts() getTotalSoldProducts()
+ * @method int    getTotalProducts() getTotalProducts()
+ * @method string getStatus() getStatus()
+ * @method int    getSalesOptionsId() getSalesOptionsId()
+ * @method int    getStoreId() getStoreId()
+ * @method DateTime getCreatedAt() getCreatedAt()
+ * @method DateTime getUpdatedAt() getUpdatedAt()
+ * @method Diglin_Ricento_Model_Products_Listing setTitle() setTitle(string $title)
+ * @method Diglin_Ricento_Model_Products_Listing setTotalActiveProducts() setTotalActiveProducts(int $totalActiveProducts)
+ * @method Diglin_Ricento_Model_Products_Listing setTotalInActiveProducts() setTotalInActiveProducts(int $totalInactiveProducts)
+ * @method Diglin_Ricento_Model_Products_Listing setTotalSoldProducts() setTotalSoldProducts(int $totalSoldProducts)
+ * @method Diglin_Ricento_Model_Products_Listing setTotalProducts() setTotalProducts(int $totalProducts)
+ * @method Diglin_Ricento_Model_Products_Listing setStatus() setStatus(string $status)
+ * @method Diglin_Ricento_Model_Products_Listing setSalesOptionsId() setSalesOptionsId(int $salesOptionsId)
+ * @method Diglin_Ricento_Model_Products_Listing setStoreId() setStoreId(int $storeId)
+ * @method Diglin_Ricento_Model_Products_Listing setCreatedAt() setCreatedAt(DateTime $createdAt)
+ * @method Diglin_Ricento_Model_Products_Listing setUpdatedAt() setUpdatedAt(DateTime $updatedAt)
  */
 class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
 {

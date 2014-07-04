@@ -12,6 +12,18 @@
 /**
  * Products_Listing_Item Model
  * @package Diglin_Ricento
+ * @method int    getProductId() getProductId()
+ * @method int    getProductsListingId() getProductsListingId()
+ * @method int    getSalesOptionsId() getSalesOptionsId()
+ * @method string getStatus() getStatus()
+ * @method DateTime getCreatedAt() getCreatedAt()
+ * @method DateTime getUpdatedAt() getUpdatedAt()
+ * @method Diglin_Ricento_Model_Products_Listing_Item setProductId() setProductId(int $productId)
+ * @method Diglin_Ricento_Model_Products_Listing_Item setProductsListingId() setProductsListingId(int $productListingId)
+ * @method Diglin_Ricento_Model_Products_Listing_Item setSalesOptionsId() setSalesOptionsId(int $salesOptionsId)
+ * @method Diglin_Ricento_Model_Products_Listing_Item setStatus() setStatus(string $status)
+ * @method Diglin_Ricento_Model_Products_Listing_Item setCreatedAt() setCreatedAt(DateTime $createdAt)
+ * @method Diglin_Ricento_Model_Products_Listing_Item setUpdatedAt() setUpdatedAt(DateTime $updatedAt)
  */
 class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstract
 {

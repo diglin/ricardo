@@ -12,6 +12,16 @@
 /**
  * Sync_Log Model
  * @package Diglin_Ricento
+ * @method string getJobMessage() getJobMessage()
+ * @method int    getProductsListingId() getProductsListingId()
+ * @method int    getStatus() getStatus()
+ * @method DateTime getCreatedAt() getCreatedAt()
+ * @method DateTime getUpdatedAt() getUpdatedAt()
+ * @method Diglin_Ricento_Model_Sync_Log setJobMessage() setJobMessage(string $message)
+ * @method Diglin_Ricento_Model_Sync_Log setProductsListingId() setProductsListingId(int $id)
+ * @method Diglin_Ricento_Model_Sync_Log setStatus() setStatus(int $status)
+ * @method Diglin_Ricento_Model_Sync_Log setCreatedAt() setCreatedAt(DateTime $createdAt)
+ * @method Diglin_Ricento_Model_Sync_Log setUpdatedAt() setUpdatedAt(DateTime $updatedAt)
  */
 class Diglin_Ricento_Model_Sync_Log extends Mage_Core_Model_Abstract
 {
