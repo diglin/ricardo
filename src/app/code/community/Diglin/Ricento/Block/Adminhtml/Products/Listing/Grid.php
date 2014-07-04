@@ -29,7 +29,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
      */
     protected function _prepareCollection()
     {
-        $collection = new Varien_Data_Collection(); // @todo
+        $collection = Mage::getModel('diglin_ricento/products_listing')->getCollection();
 
         $this->setCollection($collection);
         return parent::_prepareCollection();

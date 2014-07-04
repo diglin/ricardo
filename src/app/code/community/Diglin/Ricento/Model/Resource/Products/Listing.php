@@ -26,7 +26,7 @@ class Diglin_Ricento_Model_Resource_Products_Listing extends Mage_Core_Model_Res
      */
     protected function _construct()
     {
-        $this->_init('diglin_ricento/products_listing', 'listing_id');
+        $this->_init('diglin_ricento/products_listing', 'entity_id');
     }
 
 // Diglin GmbH Tag NEW_METHOD

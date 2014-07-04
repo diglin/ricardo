@@ -28,7 +28,7 @@ $tableApiTokens->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, ar
     ->setComment('Tokens for Ricardo API');
 $installer->getConnection()->createTable($tableApiTokens);
 
-$tableSalesOptions = $installer->getConnection()->newTable('ricardo_sales_options');
+$tableSalesOptions = $installer->getConnection()->newTable('ricento_sales_options');
 $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('ricardo_category', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
     ->addColumn('sales_type', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
