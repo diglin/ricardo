@@ -21,6 +21,13 @@ class Diglin_Ricento_Model_Resource_Products_Listing extends Mage_Core_Model_Res
 // Diglin GmbH Tag NEW_VAR
 
     /**
+     * "Aufbauart" option array
+     *
+     * @var string[]
+     */
+    protected $_statusOptions;
+
+    /**
      * Products_Listing Resource Constructor
      * @return void
      */
@@ -31,4 +38,22 @@ class Diglin_Ricento_Model_Resource_Products_Listing extends Mage_Core_Model_Res
 
 // Diglin GmbH Tag NEW_METHOD
 
+    /**
+     * Returns option array with all possible values for "status" (key=value)
+     *
+     * @return string[]
+     */
+    public function getStatusOptions()
+    {
+        if ($this->_statusOptions === null) {
+            $adapter = $this->_getReadAdapter();
+            $select = $adapter->select()
+                ->from($this->getTable('diglin_ricento/products_listing'), 'status')
+                ->group('status');
+            $options = $adapter->fetchCol($select);
+            $this->_statusOptions = array_combine($options, $options);
+            unset($this->_statusOptions['']); // empty values cannot be filtered (empty means "no filter" in grid)
+        }
+        return $this->_statusOptions;
+    }
 }

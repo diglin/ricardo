@@ -50,6 +50,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
             'align' => 'left',
             'width' => '50px',
             'index' => 'entity_id',
+            'type' => 'number',
         ));
 
         $this->addColumn('title', array(
@@ -73,23 +74,43 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
 
         $this->addColumn('total', array(
             'header' => $this->__('Total') ,
-            'align' => 'left',
+            'align' => 'right',
             'width' => '50px',
-            'index' => 'total',
+            'index' => 'total_products',
+            'type' => 'number',
         ));
 
         $this->addColumn('active', array(
             'header' => $this->__('Active') ,
-            'align' => 'left',
+            'align' => 'right',
             'width' => '50px',
-            'index' => 'status',
+            'index' => 'total_active_products',
+            'type' => 'number',
         ));
 
         $this->addColumn('inactive', array(
             'header' => $this->__('Inactive') ,
+            'align' => 'right',
+            'width' => '50px',
+            'index' => 'total_inactive_products',
+            'type' => 'number',
+        ));
+
+        $this->addColumn('sold', array(
+            'header' => $this->__('Sold') ,
+            'align' => 'right',
+            'width' => '50px',
+            'index' => 'total_sold_products',
+            'type' => 'number',
+        ));
+
+        $this->addColumn('status', array(
+            'header' => $this->__('Status') ,
             'align' => 'left',
             'width' => '50px',
-            'index' => 'inactive',
+            'index' => 'status',
+            'type' => 'options',
+            'options' => Mage::getResourceModel('diglin_ricento/products_listing')->getStatusOptions()
         ));
 
         $this->addColumn('action',
