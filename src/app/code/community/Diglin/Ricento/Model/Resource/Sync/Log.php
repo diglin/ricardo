@@ -26,7 +26,7 @@ class Diglin_Ricento_Model_Resource_Sync_Log extends Mage_Core_Model_Resource_Db
      */
     protected function _construct()
     {
-        $this->_init('diglin_ricento/sync_log', 'log_id');
+        $this->_init('diglin_ricento/sync_log', 'job_id');
     }
 
 // Diglin GmbH Tag NEW_METHOD
