@@ -5,7 +5,6 @@
             <version>0.0.1</version>
         </Diglin_Ricento>
     </modules>
-
     <default>
         <diglin_ricento>
             <config>
@@ -14,34 +13,46 @@
             </config>
         </diglin_ricento>
     </default>
-
     <global>
         <psr0_namespaces>
             <Diglin_Ricardo />
         </psr0_namespaces>
-
         <models>
             <diglin_ricento>
                 <class>Diglin_Ricento_Model</class>
-                <resourceModel>ricento_resource</resourceModel>
+                <resourceModel>diglin_ricento_resource</resourceModel>
             </diglin_ricento>
             <diglin_ricento_resource>
                 <class>Diglin_Ricento_Model_Resource</class>
+                <entities>
+                    <products_listing>
+                        <table>ricento_product_listings</table>
+                    </products_listing>
+                    <products_listing_item>
+                        <table>ricento_products_listing_items</table>
+                    </products_listing_item>
+                    <sales_options>
+                        <table>ricento_sales_options</table>
+                    </sales_options>
+                    <api_token>
+                        <table>ricento_api_tokens</table>
+                    </api_token>
+                    <sync_log>
+                        <table>ricento_sync_logs</table>
+                    </sync_log>
+                </entities>
             </diglin_ricento_resource>
         </models>
-
         <blocks>
             <diglin_ricento>
                 <class>Diglin_Ricento_Block</class>
             </diglin_ricento>
         </blocks>
-
         <helpers>
             <diglin_ricento>
                 <class>Diglin_Ricento_Helper</class>
             </diglin_ricento>
         </helpers>
-
         <resources>
             <diglin_ricento_resource_setup>
                 <setup>
@@ -49,14 +60,12 @@
                 </setup>
             </diglin_ricento_resource_setup>
         </resources>
-
         <models>
             <diglin_ricento>
                 <class>Diglin_Ricento_Model</class>
             </diglin_ricento>
         </models>
     </global>
-
     <adminhtml>
         <layout>
             <updates>
@@ -66,7 +75,6 @@
             </updates>
         </layout>
     </adminhtml>
-
     <admin>
         <routers>
             <ricento>
