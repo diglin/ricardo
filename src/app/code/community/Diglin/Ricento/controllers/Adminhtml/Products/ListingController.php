@@ -41,10 +41,13 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
     public function editAction()
     {
         $id = (int) $this->getRequest()->getParam('id');
-
-        if ($id) {
-            // load product listing else if a new one
+        if (!$id) {
+            $this->_getSession()->addError('Product Listing not found.');
+            $this->_redirect('*/*/index');
         }
+
+        $productsListing = Mage::getModel('diglin_ricento/products_listing')->load($id);
+        Mage::register('products_listing', $productsListing);
 
         $this->loadLayout();
         $this->renderLayout();

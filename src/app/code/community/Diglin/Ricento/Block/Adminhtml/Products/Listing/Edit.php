@@ -14,11 +14,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
 {
     public function __construct()
     {
-        parent::__construct();
-
         $this->_objectId = 'id';
-        $this->_blockGroup = 'product_listing';
-        $this->_controller = 'adminhtml_product_listing';
+        $this->_blockGroup = 'diglin_ricento';
+        $this->_controller = 'adminhtml_products_listing';
+
+        parent::__construct();
 
         $this->_updateButton('save', 'label', $this->__('Save Product Listing'));
         $this->_updateButton('delete', 'label', $this->__('Delete Product Listing'));
@@ -34,5 +34,21 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
                 editForm.submit($('edit_form').action+'back/edit/');
             }
         ";
+    }
+
+
+    /**
+     * Retrieve text for header element depending on loaded listing
+     *
+     * @return string
+     */
+    public function getHeaderText()
+    {
+        if (Mage::registry('products_listing')->getId()) {
+            return $this->__("Edit Product Listing '%s'", $this->escapeHtml(Mage::registry('products_listing')->getTitle()));
+        }
+        else {
+            return $this->__('New Product Listing');
+        }
     }
 }

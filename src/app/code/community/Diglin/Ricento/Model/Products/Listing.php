@@ -66,4 +66,22 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
 
 // Diglin GmbH Tag NEW_METHOD
 
+    /**
+     * Retrieve array of product id's for listing
+     *
+     * @return array
+     */
+    public function getProductIds()
+    {
+        if (!$this->getId()) {
+            return array();
+        }
+
+        $array = $this->getData('product_ids');
+        if (is_null($array)) {
+            $array = $this->getResource()->getProductIds($this);
+            $this->setData('product_ids', $array);
+        }
+        return $array;
+    }
 }

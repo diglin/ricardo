@@ -83,7 +83,7 @@
                     <module>Diglin_Ricento</module>
                     <frontName>ricento</frontName>
                     <modules>
-                        <diglin_ricento before="Mage_Adminhtml">Diglin_Ricento_Adminhtml</diglin_ricento>
+                        <diglin_ricento>Diglin_Ricento_Adminhtml</diglin_ricento>
                     </modules>
                 </args>
             </ricento>
