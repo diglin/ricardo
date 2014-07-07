@@ -51,35 +51,144 @@
                     <show_in_store>1</show_in_store>
                 </hint>
                 <config module="diglin_ricento" translate="label">
-                    <label>Global Configuration</label>
-                    <frontend_type>text</frontend_type>
+                    <label>API Token Configuration</label>
                     <sort_order>10</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>1</show_in_store>
-                    <comment><![CDATA[<a href="http://api.ricardo.ch" target="_blank" title="Go to API Ricardo Website">Sign Up to Ricardo to get a key</a>]]></comment>
+                    <show_in_store>0</show_in_store>
                     <fields>
-                        <enabled module="diglin_ricento" translate="label">
-                            <label>Enabled</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>10</sort_order>
+                        <ricardo_account>
+                            <label>Ricardo Account</label>
+                            <sort_order>1</sort_order>
+                            <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </enabled>
-                        <dev module="diglin_ricento" translate="label">
-                            <label>Dev Mode</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[Dev mode will set all API call to the Ricardo Sandbox]]></comment>
+                        </ricardo_account>
+                        <ricardo_username module="diglin_ricento" translate="label comment">
+                            <label>Ricardo Username</label>
+                            <sort_order>5</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Your ricardo.ch username. Create an account on <a href="http://www.ricardo.ch">http://www.ricardo.ch</a> if you don't have one.]]></comment>
+                        </ricardo_username>
+                        <ricardo_password module="diglin_ricento" translate="label comment">
+                            <label>Ricardo Password</label>
+                            <sort_order>15</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Your ricardo.ch password. Create an account on <a href="http://www.ricardo.ch">http://www.ricardo.ch</a> if you don't have one.]]></comment>
+                        </ricardo_password>
+
+                        <api_de module="diglin_ricento" translate="label comment">
+                            <label>German API Token</label>
                             <sort_order>20</sort_order>
+                            <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </dev>
+                        </api_de>
+                        <partner_id_de module="diglin_ricento" translate="label comment">
+                            <label>German Partner ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                        </partner_id_de>
+                        <partner_pass_de module="diglin_ricento" translate="label comment">
+                            <label>German Partner Password</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                        </partner_pass_de>
+
+                        <api_fr module="diglin_ricento" translate="label">
+                            <label>French API Token</label>
+                            <sort_order>35</sort_order>
+                            <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </api_fr>
+                        <partner_id_fr module="diglin_ricento" translate="label comment">
+                            <label>French Partner ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                        </partner_id_fr>
+                        <partner_pass_fr module="diglin_ricento" translate="label comment">
+                            <label>French Partner Password</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                        </partner_pass_fr>
+
+                        <general_api_config module="diglin_ricento" translate="label">
+                            <label>General API Config</label>
+                            <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </general_api_config>
+                        <dev_mode module="diglin_ricento" translate="label comment">
+                            <label>Development Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[If you enable tihs configuration, all API requests will be send to the Ricardo Sanbox instead to use the production servers]]></comment>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </dev_mode>
+                        <debug module="diglin_ricento" translate="label comment">
+                            <label>Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Write into the var/log/ricento.log file all requests sent to the Ricardo API. Enable it to help us to suppport you and send this file to us if you have an issue. Your passwords will be anonymized.]]></comment>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </debug>
                     </fields>
                 </config>
+
+                <global module="diglin_ricento" translate="label comment">
+                    <label>Global Configuration</label>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <shipping_calculation>
+                            <label>Shipping Calculation</label>
+                            <sort_order>10</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>diglin_ricento/config_source_shippingcalculation</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shipping_calculation>
+                    </fields>
+                </global>
             </groups>
         </ricento>
     </sections>

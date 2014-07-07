@@ -1,11 +1,8 @@
 <?php
 /**
  * Diglin GmbH - Switzerland
- * 
- * User: sylvainraye
- * Date: 07.05.14
- * Time: 00:00
  *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)

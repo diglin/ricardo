@@ -21,7 +21,7 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
     {
         $buttonSignUp = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
             'label'     => $this->__('Sign Up to Ricardo API'),
-            'onclick'   => "window.open('" . $this->getUrl('ricento/account/signup') . "', '_self');",
+            'onclick'   => "window.open('" . Mage::helper('diglin_ricento')->getRicardoSignupApiUrl() . "', '_self');",
             'class'     => 'add',
             'type'      => 'button',
             'id'        => 'ricardo-account',
@@ -30,7 +30,7 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
 
         $buttonDashboard  = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
             'label'     => $this->__('Ricardo Assistant'),
-            'onclick'   => "window.open('". Mage::getStoreConfig(Diglin_Ricento_Helper_Data::RICARDO_CONFIG_ASSISTANT_URL) ."', '_blank');",
+            'onclick'   => "window.open('". Mage::helper('diglin_ricento')->getRicardoAssistantUrl() ."', '_blank');",
             'class'     => 'go',
             'type'      => 'button',
             'id'        => 'ricardo-assistant',
