@@ -78,5 +78,4 @@ class Diglin_Ricento_Model_Config_Source_Status implements Mage_Eav_Model_Entity
         $map = $this->toOptionHash();
         return isset($map[$value]) ? $map[$value] : null;
     }
-    //public function
 }
