@@ -133,7 +133,6 @@ class Security extends ManagerAbstract
         }
 
         $result = $this->_serviceManager->proceed('security', 'AnonymousTokenCredential');
-
         if (isset($result['TokenExpirationDate']) && isset($result['TokenCredentialKey'])) {
             $this->_anonymousTokenExpirationDate = $result['TokenExpirationDate'];
             //$this->_anonymousTokenSessionDuration = $result['SessionDuration'];
@@ -252,8 +251,7 @@ class Security extends ManagerAbstract
      */
     public function isDateExpired($jsonExpirationDate)
     {
-        $datetime = $this->getHelper()->convertJsonDateToPhpDate($jsonExpirationDate, null);
-        $jsonDateTimestamp = $datetime->getTimestamp();
+        $jsonDateTimestamp = $this->getHelper()->convertJsonDateToPhpDate($jsonExpirationDate, null);
 
         if (time() < $jsonDateTimestamp) {
             return false;

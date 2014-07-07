@@ -41,26 +41,61 @@ class System extends ServiceAbstract
     }
 
     /**
+     * Gets the result article conditions list
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "GetAllErrorsCodesResult": {
+     *       "ErrorNamespaceResults": [{
+     *         "Errors": [{
+     *           "ErrorId": "INT",
+     *           "ErrorText": "TEXT"
+     *         }],
+     *         "NameSpace": "TEXT"
+     *       }]
+     *     }
+     *   }
+     * </pre>
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getAllErrorsCodesResult(array $data)
+    {
+        if (isset($data['GetAllErrorsCodesResult']) && isset($data['GetAllErrorsCodesResult']['ErrorNamespaceResults'])) {
+            return $data['GetAllErrorsCodesResult']['ErrorNamespaceResults'];
+        }
+        return array();
+    }
+
+    /**
      * Gets if on the current country the user is allowed to activate is account.
      *
      * @return array
      */
-    public function getAllowedToActivateAccount()
-    {
-        return array(
-            'method' => 'GetAllowedToActivateAccount',
-            'params' => array('getAllowedToActivateAccountParameter' => array())
-        );
-    }
+//    public function getAllowedToActivateAccount()
+//    {
+//        return array(
+//            'method' => 'GetAllowedToActivateAccount',
+//            'params' => array('getAllowedToActivateAccountParameter' => array())
+//        );
+//    }
 
     /**
      * Gets the article conditions list
      *
-     * @param bool $isGroup
      * @return array
      */
-    public function getArticleConditions($isGroup)
+    public function getArticleConditions()
     {
+        $isGroup = false;
+
+        $args = func_get_args();
+        if (!empty($args) && is_array($args[0])) {
+            (isset($args[0]['is_group'])) ? $isGroup = $args[0]['is_group'] : '';
+        };
+
         return array(
             'method' => 'GetArticleConditions',
             'params' => array('getArticleConditionsParameter' => array('IsGroup' => (bool) $isGroup))
@@ -927,14 +962,16 @@ class System extends ServiceAbstract
     public function getPromotions()
     {
         $articleStartDate = null;
-        $articleType = 0;
+        $articleType = 0; // All: 0, Auction: 1, BuyNow: 2, Classified: 3
         $categoryId = null;
         $displayMandatory = null;
 
         $args = func_get_args();
         if (!empty($args) && is_array($args[0])) {
-            (isset($args[0]['only_allow_to_sell'])) ? $onlyAllowToSell = $args[0]['only_allow_to_sell'] : '';
-            (isset($args[0]['payment_condition_id'])) ? $paymentConditionId = $args[0]['payment_condition_id'] : '';
+            (isset($args[0]['article_start_date'])) ? $articleStartDate = $args[0]['article_start_date'] : '';
+            (isset($args[0]['article_type'])) ? $articleType = $args[0]['article_type'] : '';
+            (isset($args[0]['category_id'])) ? $categoryId = $args[0]['category_id'] : '';
+            (isset($args[0]['display_mandatory'])) ? $displayMandatory = $args[0]['display_mandatory'] : '';
         }
 
         return array(
@@ -956,9 +993,11 @@ class System extends ServiceAbstract
      * <pre>
      * {
      *     "GetPromotionsResult": {
-     *       "AllTelCodes": [{
-     *         "PaymentMethodId": "INT",
-     *         "PaymentMethodText": "TEXT"
+     *       "Promotions": [{
+     *         "GroupId": "INT",
+     *         "IsMandatory": "BOOL"
+     *         "PromotionFee": "FLOAT"
+     *         "PromotionId": "INT"
      *         }]
      *      }
      *   }
@@ -983,10 +1022,46 @@ class System extends ServiceAbstract
      */
     public function getRegions()
     {
+        $countryId = null;
+        $args = func_get_args();
+        if (!empty($args) && is_array($args[0])) {
+            (isset($args[0]['country_id'])) ? $countryId = $args[0]['country_id'] : '';
+        }
+
         return array(
             'method' => 'GetRegions',
-            'params' => array('getRegionsParameter' => array())
+            'params' => array('getRegionsParameter' => array(
+                'CountryId' => $countryId
+
+            ))
         );
+    }
+
+    /**
+     * Gets the regions result
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "GetRegionsResult": {
+     *       "Regions": [{
+     *         "RegionId": "INT",
+     *         "RegionName": "TEXT"
+     *         }]
+     *      }
+     *   }
+     * </pre>
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getRegionsResult(array $data)
+    {
+        if (isset($data['GetRegionsResult']) && isset($data['GetRegionsResult']['Regions'])) {
+            return $data['GetRegionsResult']['Regions'];
+        }
+
+        return array();
     }
 
     /**
@@ -1003,6 +1078,36 @@ class System extends ServiceAbstract
     }
 
     /**
+     * Gets the template result
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "GetTemplatesResult": {
+     *       "Templates": [{
+     *         "BeginTemplateText": "TEXT",
+     *         "EndTemplateText": "TEXT"
+     *         "IsCustomerTemplate": "BOOL"
+     *         "TemplateId": "INT"
+     *         "TemplateName": "TEXT"
+     *         }]
+     *      }
+     *   }
+     * </pre>
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getTemplatesResult(array $data)
+    {
+        if (isset($data['GetTemplatesResult']) && isset($data['GetTemplatesResult']['Templates'])) {
+            return $data['GetTemplatesResult']['Templates'];
+        }
+
+        return array();
+    }
+
+    /**
      * Gets the warranties.
      *
      * @return array
@@ -1016,62 +1121,89 @@ class System extends ServiceAbstract
     }
 
     /**
+     * Gets the warranties result
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "GetWarrantiesResult": {
+     *       "Warranties": [{
+     *         "WarrantyConditionText": "TEXT",
+     *         "WarrantyId": "INT"
+     *         }]
+     *      }
+     *   }
+     * </pre>
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getWarrantiesResult(array $data)
+    {
+        if (isset($data['GetWarrantiesResult']) && isset($data['GetWarrantiesResult']['Warranties'])) {
+            return $data['GetWarrantiesResult']['Warranties'];
+        }
+
+        return array();
+    }
+
+    /**
      * Inserts the customer workstation mapping.
      *
      * @return array
      */
-    public function insertCustomerWorkstation()
-    {
-        return array(
-            'method' => 'InsertCustomerWorkstation',
-            'params' => array('insertCustomerWorkstationParameter' => array('CustomerId' => '', 'WorkstationId' => ''))
-        );
-    }
+//    public function insertCustomerWorkstation()
+//    {
+//        return array(
+//            'method' => 'InsertCustomerWorkstation',
+//            'params' => array('insertCustomerWorkstationParameter' => array('CustomerId' => '', 'WorkstationId' => ''))
+//        );
+//    }
 
     /**
      * Inserts the device log.
      *
      * @return array
      */
-    public function insertDeviceLog()
-    {
-        return array(
-            'method' => 'InsertDeviceLog',
-            'params' => array('insertDeviceLogParameter' => array())
-        );
-    }
+//    public function insertDeviceLog()
+//    {
+//        return array(
+//            'method' => 'InsertDeviceLog',
+//            'params' => array('insertDeviceLogParameter' => array())
+//        );
+//    }
 
     /**
      * Inserts Optimizely traffic logs
      *
      * @return array
      */
-    public function insertOptimizelyTrafficLog()
-    {
-        return array(
-            'method' => 'InsertOptimizelyTrafficLog',
-            'params' => array('insertOptimizelyTrafficLogParameter' => array())
-        );
-    }
+//    public function insertOptimizelyTrafficLog()
+//    {
+//        return array(
+//            'method' => 'InsertOptimizelyTrafficLog',
+//            'params' => array('insertOptimizelyTrafficLogParameter' => array())
+//        );
+//    }
 
     /**
      * Inserts the traffic log.
      *
      * @return array
      */
-    public function insertTrafficLog()
-    {
-        return array(
-            'method' => 'InsertTrafficLog',
-            'params' => array('insertTrafficLogParameter' => array())
-        );
-    }
+//    public function insertTrafficLog()
+//    {
+//        return array(
+//            'method' => 'InsertTrafficLog',
+//            'params' => array('insertTrafficLogParameter' => array())
+//        );
+//    }
 
-    public function webAlertCheck()
-    {
-        return array(
-            'method' => 'WebAlertCheck',
-            'params' => array()
-        );
-    }
+//    public function webAlertCheck()
+//    {
+//        return array(
+//            'method' => 'WebAlertCheck',
+//            'params' => array()
+//        );
+//    }
 }

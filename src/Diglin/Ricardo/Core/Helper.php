@@ -27,9 +27,19 @@ class Helper
         // Get the timestamp as the TS string
         $timestamp = (int) $matches[1];
 
+        if (is_null($format)) {
+            return $timestamp;
+        }
+
         return date($format, $timestamp);
     }
 
+    /**
+     * Convert PHP date like date('Y-m-d H:m:i') to .NET Json '/Date(123456789+0200)/'
+     *
+     * @param string $date
+     * @return string
+     */
     public static function convertPhpDateToJsonDate ($date/*, $timezone = 'Europe/Berlin'*/)
     {
         //$tz = new \DateTimeZone($timezone);
@@ -55,6 +65,6 @@ class Helper
         $datetimeReal = new \DateTime($date);
         //$datetimeReal->setTimezone($tz);
 
-        return '/Date[' . ($datetimeReal->getTimestamp()  * 1000) . date('O') . ']/';
+        return '/Date(' . ($datetimeReal->getTimestamp()  * 1000) . date('O') . ')/';
     }
 }

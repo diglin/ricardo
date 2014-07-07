@@ -22,9 +22,17 @@ class SystemTest extends TestAbstract
         parent::setUp();
     }
 
+    public function testGetAllErrorsCodes()
+    {
+        $result = $this->_systemManager->getAllErrorsCodes();
+        $error = array_pop($result);
+        $this->assertArrayHasKey('ErrorId', $error[0], 'GetAllErrorsCodes: no error ID found');
+        $this->assertArrayHasKey('ErrorText', $error[0], 'GetAllErrorsCodes: no error text found');
+    }
+
     public function testGetArticleConditions()
     {
-        $result = $this->_systemManager->getArticleConditions();
+        $result = $this->_systemManager->getArticleConditions(false);
 
         $this->assertGreaterThanOrEqual(1, count($result), 'Article Conditions are empty');
         $this->assertArrayHasKey('ArticleConditionText', $result[0], 'Data returned for the article conditions is not correct');
@@ -182,12 +190,56 @@ class SystemTest extends TestAbstract
 
     public function testGetPhonePrefixes()
     {
-        $result = $result = $this->_systemManager->getPhonePrefixes();
+        $result = $this->_systemManager->getPhonePrefixes();
 
         $this->assertGreaterThanOrEqual(10, count($result), 'No phone prefixes found');
         $this->assertArrayHasKey('Value', $result[0], 'Key "Value" not found for phone prefixes');
         $this->assertContains('+', $result[0]['Value'], 'No phone prefix value found');
-        print_r($this->_serviceManager->getApi()->getLastDebug());
+    }
 
+    /**
+     * @depends testGetCategories
+     */
+    public function testGetPromotions($categoryId)
+    {
+        $result = $this->_systemManager->getPromotions(
+            \Diglin\Ricardo\Core\Helper::convertPhpDateToJsonDate('now'), 1, $categoryId, 1
+        );
+
+        $this->assertArrayHasKey('GroupId', $result[0], 'Promotions: GroupId is missing');
+        $this->assertArrayHasKey('IsMandatory', $result[0], 'Promotions: IsMandatory is missing');
+        $this->assertArrayHasKey('PromotionFee', $result[0], 'Promotions: PromotionFee is missing');
+        $this->assertArrayHasKey('PromotionId', $result[0], 'Promotions: PromotionId is missing');
+    }
+
+    /**
+     * @depends testGetCountries
+     */
+    public function testGetRegions()
+    {
+        $countries = $this->_systemManager->getCountries();
+        $result = $this->_systemManager->getRegions($countries[0]['CountryId']);
+        $this->assertArrayHasKey('RegionId', $result[0], 'Regions: RegionId is missing');
+        $this->assertArrayHasKey('RegionName', $result[0], 'Regions: RegionName is missing');
+    }
+
+    public function testGetTemplates()
+    {
+        $result = $this->_systemManager->getTemplates();
+
+        if (count($result) == 0) {
+            echo 'No template found, Test testGetTemplates skipped';
+        } else {
+            $this->assertArrayHasKey('TemplateId', $result[0], 'Templates: TemplateId is missing');
+        }
+    }
+
+    public function testGetWarranties()
+    {
+        $result = $this->_systemManager->getWarranties();
+        $this->assertArrayHasKey('WarrantyConditionText', $result[0], 'Warranties: WarrantyConditionText is missing');
+        $this->assertArrayHasKey('WarrantyId', $result[0], 'Warranties: WarrantyId is missing');
+//        print_r($result);
+//        echo $this->getLastApiDebug();
     }
 }

@@ -1,23 +1,21 @@
-### Introduction
+# Introduction
 
 Diglin_Ricardo source code is a PHP Library to get access to the Ricardo.ch API which is a .NET Webservice sending Json or SOAP requests.
 With this library we handle only json requests as it is much more faster.
 
-### How to start
+## Installation
 
-## Install for custom framework
+### Install for custom framework
 
 To start you have to include in your PHP include path, the folder of your library folder where you are going to install this library and then set the autoloader as the following:
 
 ```
-set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(__DIR__) . '/src'));
-
 require_once __DIR__ . '/src/SplAutoloader.php';
 $autoload = new SplAutoloader(null, realpath(dirname(__DIR__) . '/src'));
 $autoload->register();
 ```
 
-## Install via Composer
+### Install via Composer
 
 ```
  {
@@ -27,13 +25,13 @@ $autoload->register();
     "repositories" : [
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:diglin/diglin_ricardo.git"
+            "url": "git@bitbucket.org:ricento/diglin_ricardo.git"
         }
     ]
  }
  ```
 
-## Magento Composer Installer
+### Magento Composer Installer
 
  In your `composer.json` at Magento project level, you will have to set the following informations:
 
@@ -50,7 +48,7 @@ $autoload->register();
         },
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:diglin/diglin_ricardo.git"
+            "url": "git@bitbucket.org:ricento/diglin_ricardo.git"
         }
     ],
     "extra" : {
@@ -70,6 +68,37 @@ $autoload->register();
  }
  ```
  
- ### How to use it
+ ## How to use it
  
  TODO
+
+ ## Tests
+
+ ### How to configure the test case
+
+To configure the test, please create an ini file in `tests/conf/config.ini` with the following content:
+Pay attention, you need two different configurations for each language. During the tests, only the German section is supported
+
+
+// Ricardo API Config for German version (for example)
+```
+[GERMAN]
+host = ws.betaqxl.com
+partnership_id = YOUR_PARTNER_ID
+partnership_passwd = YOUR_PARTNER_PASS
+partner_url = YOUR_WEBSITE_URL
+allow_authorization_simulation = true
+customer_username =
+customer_password = ''
+debug = true
+
+[FRENCH]
+host = ws.betaqxl.com
+partnership_id = YOUR_PARTNER_ID
+partnership_passwd = YOUR_PARTNER_PASS
+partner_url = YOUR_WEBSITE_URL
+allow_authorization_simulation = true
+customer_username =
+customer_password = ''
+debug = true
+```

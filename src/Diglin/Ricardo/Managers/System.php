@@ -27,6 +27,11 @@ class System extends ManagerAbstract
     /**
      * @var array
      */
+    protected $_errorCodes;
+
+    /**
+     * @var array
+     */
     protected $_articleConditions;
 
     /**
@@ -122,10 +127,27 @@ class System extends ManagerAbstract
     /**
      * @return array
      */
-    public function getArticleConditions()
+    public function getAllErrorsCodes()
+    {
+        if (empty($this->_errorCodes)) {
+            $errors =  $this->_proceed('AllErrorsCodes');
+            foreach ($errors as $error) {
+                if (isset($error['NameSpace'])) {
+                    $this->_errorCodes[$error['NameSpace']] = $error['Errors'];
+                }
+            }
+        }
+        return $this->_errorCodes;
+    }
+
+    /**
+     * @param bool $isGroup
+     * @return array
+     */
+    public function getArticleConditions($isGroup = false)
     {
         if (empty($this->_articleConditions)) {
-            $this->_articleConditions = $this->_proceed('ArticleConditions');
+            $this->_articleConditions = $this->_proceed('ArticleConditions', array('is_group' => $isGroup));
         }
         return $this->_articleConditions;
     }
@@ -305,23 +327,37 @@ class System extends ManagerAbstract
     }
 
     /**
-     * @return mixed
+     * @param string $articleStartDate
+     * @param $articleType
+     * @param int $categoryId
+     * @param bool $displayMandatory
+     * @return array
      */
-    public function getPromotions()
+    public function getPromotions($articleStartDate, $articleType, $categoryId, $displayMandatory)
     {
         if (empty($this->_promotions)) {
-            $this->_promotions = $this->_proceed('Promotions');
+            $this->_promotions = $this->_proceed('Promotions',
+                array(
+                    'article_start_date' => $articleStartDate,
+                    'article_type' => $articleType,
+                    'category_id' => $categoryId,
+                    'display_mandatory' => $displayMandatory
+                )
+            );
         }
         return $this->_promotions;
     }
 
     /**
-     * @return mixed
+     * @param int $countryId
+     * @return array
      */
-    public function getRegions()
+    public function getRegions($countryId)
     {
         if (empty($this->_regions)) {
-            $this->_regions = $this->_proceed('Regions');
+            $this->_regions = $this->_proceed('Regions', array(
+                'country_id' => $countryId
+            ));
         }
         return $this->_regions;
     }

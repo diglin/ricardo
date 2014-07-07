@@ -164,8 +164,11 @@ class Service
         if ($serviceInstance instanceof ServiceAbstract) {
             $service = array();
 
-            $serviceMethod = $this->_prepareServiceGetMethod($serviceMethod);
-            if (method_exists($serviceInstance, $serviceMethod)) {
+            $serviceMethodGet = $this->_prepareServiceGetMethod($serviceMethod);
+            if (method_exists($serviceInstance, $serviceMethodGet)) {
+                $service = $serviceInstance->$serviceMethodGet($arguments);
+                $serviceMethod = $serviceMethodGet;
+            } elseif (method_exists($serviceInstance, $serviceMethod)) {
                 $service = $serviceInstance->$serviceMethod($arguments);
             }
 

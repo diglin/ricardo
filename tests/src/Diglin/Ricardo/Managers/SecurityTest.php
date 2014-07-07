@@ -9,7 +9,7 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-class SecurityManagerTest extends TestAbstract
+class SecurityTest extends TestAbstract
 {
     /**
      * @var Security
@@ -97,20 +97,6 @@ class SecurityManagerTest extends TestAbstract
         return $token;
     }
 
-    /**
-     * @depends testGetTokenCredential
-     */
-    public function testRefreshTokenCredential($token)
-    {
-        $token = '53eeb15b-f81b-4662-bb9b-6c063ef3c4bd';
-
-        $result = $this->getServiceManager()->proceed('security', 'RefreshTokenCredential', $token);
-
-        //print_r($this->getServiceManager()->getApi()->getLastDebug());
-
-        $this->assertTrue(isset($result['TokenCredentialKey']), 'Refreshed TokenCredentialKey is missing ' . print_r($result, true));
-    }
-
     public function testGetAntiforgeryToken()
     {
         $result = $this->_serviceManager->proceed('security', 'AntiforgeryToken');
@@ -122,6 +108,20 @@ class SecurityManagerTest extends TestAbstract
         $this->assertTrue(isset($result['TokenExpirationDate']), 'TokenExpirationDate is missing');
 
         echo 'Antiforgery Key ' . $result['AntiforgeryTokenKey'];
+    }
+
+    /**
+     * @fixme Check with Ricardo Developers why it's not working
+     *
+     * @depends testGetTokenCredential
+     */
+    public function testRefreshTokenCredential($token)
+    {
+        $result = $this->getServiceManager()->proceed('security', 'RefreshTokenCredential', $token);
+
+        echo $this->getLastApiDebug();
+
+        $this->assertTrue(isset($result['TokenCredentialKey']), 'Refreshed TokenCredentialKey is missing ' . print_r($result, true));
     }
 
     protected function _matchToken($token)
