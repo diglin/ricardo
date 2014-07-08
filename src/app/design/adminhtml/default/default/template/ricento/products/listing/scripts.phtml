@@ -16,8 +16,12 @@
             __openDialog: Dialog._openDialog
         });
         AjaxDialog._openDialog = function(content, parameters) {
-           this.__openDialog(content, parameters);
+            this.__openDialog(content, parameters);
             content.evalScripts();
+            /*
+             * products_listing_add_massactionJsObject was declared in local scope, we need to make it global:
+             */
+            window.products_listing_add_massactionJsObject = products_listing_addJsObject.massaction;
         };
 
         var dialogWindow = AjaxDialog.info({url:url}, {
