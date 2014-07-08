@@ -1,0 +1,48 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+/* @see Diglin_Ricento_Adminhtml_AccountController */
+?>
+<div class="content-header" style="visibility: visible;">
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width: 50%;">
+                    <h3 class="icon-head head-categories"><?php echo $this->getTitle() ?></h3>
+                    <?php echo Mage::helper('diglin_ricento')->__('You may also access to the <a href="%s" target="_blank" onClick="javascript:document.getElementById(\'dashboarddiv\').innerHTML=\'\'; ">content of this page</a> in a new window.',
+                        $this->getIframeUrl()); ?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="dashboarddiv" style="margin-top: -18px">
+    <iframe style="border-bottom:3px solid #dfdfdf" id="dashboardiframe" frameborder="0"
+        src="<?php echo $this->getIframeUrl() ?>" height="960px" width="100%"></iframe>
+</div>
+<script>
+    function GetHeight() {
+        var y = 0;
+        if (self.innerHeight) {
+            y = self.innerHeight;
+        } else if (document.documentElement && document.documentElement.clientHeight) {
+            y = document.documentElement.clientHeight;
+        } else if (document.body) {
+            y = document.body.clientHeight;
+        }
+        return y;
+    }
+
+    function doResize() {
+        document.getElementById("dashboardiframe").style.height = (GetHeight() - 220) + "px";
+    }
+
+    window.onresize = doResize;
+    doResize();
+</script>

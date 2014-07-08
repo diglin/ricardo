@@ -13,6 +13,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const CFG_RICARDO_SIGNUP_API_URL = 'ricento/config/signup_url';
     const CFG_DEV_MODE = 'ricento/config/dev_mode';
     const CFG_DEBUG_MODE = 'ricento/config/debug';
+    const CFG_SIMULATE_AUTH = 'ricento/config/simulate_authorization';
     const CFG_SHIPPING_CALCULATION = 'ricento/global/shipping_calculation';
 
     const STATUS_PENDING = 'pending';
@@ -43,7 +44,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     public function getRicardoSignupApiUrl($intern = true)
     {
         if ($intern) {
-            return Mage::getUrl('ricento/account/signup');
+            return Mage::helper('adminhtml')->getUrl('ricento/account/signup');
         }
         return Mage::getStoreConfig(self::CFG_RICARDO_SIGNUP_API_URL);
     }
@@ -76,5 +77,15 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     public function getShippingCalculationMethod()
     {
         return MAge::getStoreConfig(self::CFG_SHIPPING_CALCULATION);
+    }
+
+    /**
+     * Can simulate authorization process
+     *
+     * @return bool
+     */
+    public function canSimulateAuthorization()
+    {
+        return Mage::getStoreConfigFlag(self::CFG_SIMULATE_AUTH);
     }
 }

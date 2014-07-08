@@ -11,13 +11,39 @@ class Diglin_Ricento_Adminhtml_AccountController extends Mage_Adminhtml_Controll
 {
     public function signupAction()
     {
-        $this->loadLayout();
-        $this->renderLayout();
+        $block = $this->getLayout()->createBlock('core/template');
+
+        $block->setTemplate('ricento/iframe.phtml')
+            ->setTitle($this->__('Ricardo API Signup'))
+            ->setIframeUrl(Mage::helper('diglin_ricento')->getRicardoSignupApiUrl(false));
+
+        $ricardoLabel = $this->__('Ricardo');
+        $signupLabel = $this->__('API Signup');
+
+        $this->loadLayout()
+            ->_setActiveMenu('ricento/signup')
+            ->_addBreadcrumb($ricardoLabel, $ricardoLabel)
+            ->_addBreadcrumb($signupLabel, $signupLabel)
+            ->_addContent($block)
+            ->renderLayout();
     }
 
     public function assistantAction()
     {
-        $this->loadLayout();
-        $this->renderLayout();
+        $block = $this->getLayout()->createBlock('core/template');
+
+        $block->setTemplate('ricento/iframe.phtml')
+            ->setTitle($this->__('Ricardo Assistant Portal'))
+            ->setIframeUrl(Mage::helper('diglin_ricento')->getRicardoAssistantUrl());
+
+        $ricardoLabel = $this->__('Ricardo');
+        $assistantLabel = $this->__('Assistant Portal');
+
+        $this->loadLayout()
+            ->_setActiveMenu('ricento/assistant')
+            ->_addBreadcrumb($ricardoLabel, $ricardoLabel)
+            ->_addBreadcrumb($assistantLabel, $assistantLabel)
+            ->_addContent($block)
+            ->renderLayout();
     }
 }
