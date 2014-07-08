@@ -20,7 +20,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
 
         $this->_addButton('add_product', array(
             'label' => $this->__('Add Product(s)'),
-            'onclick' => 'ricentoAddProductsPopup()'
+            'onclick' => 'Ricento.addProductsPopup()'
         ), 0, 0);
         parent::__construct();
 

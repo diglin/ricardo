@@ -2,11 +2,13 @@
 /**
  * Scripts for modal popups
  */
-/* @var $this Mage_Adminhtml_Block_Template */
+/* @var $this Diglin_Ricento_Block_Adminhtml_Products_Listing_Scripts */
 ?>
 <script type="text/javascript">
-    function ricentoAddProductsPopup() {
-        var url = '<?php echo $this->getUrl('ricento/products_listing/addProductsPopup', array('id' => Mage::registry('products_listing')->getId())) ?>?';
+    Ricento = window.Ricento || {};
+<?php if ($this->getListing()): ?>
+    Ricento.addProductsPopup = function() {
+        var url = '<?php echo $this->getAddProductsPopupUrl() ?>';
         if ($('ricento_popup') && typeof(Windows) != 'undefined') {
             Windows.focus('ricento_popup');
             return;
@@ -35,13 +37,15 @@
                  * products_listing_add_massactionJsObject was declared in local scope, we need to make it global:
                  */
                 window.products_listing_add_massactionJsObject = products_listing_addJsObject.massaction;
-            },
-            onClose:function (param, el) {
-                //TODO close event
             }
         });
-    }
-    function ricentoClosePopup() {
+    };
+<?php endif; ?>
+    Ricento.addListingPopup = function() {
+        alert('TODO');
+        //TODO IMPLEMENT
+    };
+    Ricento.closePopup = function() {
         Windows.close('ricento_popup');
-    }
+    };
 </script>

@@ -19,17 +19,7 @@
         </reference>
     </default>
 
-    <ricento_dashboard_index>
-        <reference name="root">
-            <block type="core/template" name="ricento_dashboard" as="ricento.dashboard"
-                   template="diglin_ricento/dashboard.phtml">
-                <block type="core/text_list" name="ricento_dashboard_left" as="ricento.dashboard.left"/>
-                <block type="core/text_list" name="ricento_dashboard_right" as="ricento.dashboard.right"/>
-            </block>
-        </reference>
-    </ricento_dashboard_index>
-
-    <ricento_products_listing_edit>
+    <ricento_scripts>
         <reference name="head">
             <action method="addItem">
                 <type>js_css</type>
@@ -40,7 +30,26 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="adminhtml/template" template="ricento/products/listing/scripts.phtml"></block>
+            <block type="diglin_ricento/adminhtml_products_listing_scripts" template="ricento/products/listing/scripts.phtml"></block>
+        </reference>
+    </ricento_scripts>
+
+    <ricento_dashboard_index>
+        <reference name="root">
+            <block type="core/template" name="ricento_dashboard" as="ricento.dashboard"
+                   template="diglin_ricento/dashboard.phtml">
+                <block type="core/text_list" name="ricento_dashboard_left" as="ricento.dashboard.left"/>
+                <block type="core/text_list" name="ricento_dashboard_right" as="ricento.dashboard.right"/>
+            </block>
+        </reference>
+    </ricento_dashboard_index>
+
+    <ricento_products_listing_index>
+
+    </ricento_products_listing_index>
+    <ricento_products_listing_edit>
+        <update handle="ricento_scripts"></update>
+        <reference name="content">
             <block type="diglin_ricento/adminhtml_products_listing_edit" name="products_listing_edit"></block>
         </reference>
         <reference name="left">
