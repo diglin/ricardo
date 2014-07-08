@@ -72,6 +72,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
                             <comment><![CDATA[Your ricardo.ch username. Create an account on <a href="http://www.ricardo.ch">http://www.ricardo.ch</a> if you don't have one.]]></comment>
                         </ricardo_username>
                         <ricardo_password module="diglin_ricento" translate="label comment">
@@ -81,6 +82,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
                             <comment><![CDATA[Your ricardo.ch password. Create an account on <a href="http://www.ricardo.ch">http://www.ricardo.ch</a> if you don't have one.]]></comment>
                         </ricardo_password>
 
@@ -99,6 +101,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
                         </partner_id_de>
                         <partner_pass_de module="diglin_ricento" translate="label comment">
@@ -109,6 +112,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
                         </partner_pass_de>
 
@@ -127,6 +131,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
                         </partner_id_fr>
                         <partner_pass_fr module="diglin_ricento" translate="label comment">
@@ -137,6 +142,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <frontend_class>required-entry</frontend_class>
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
                         </partner_pass_fr>
 

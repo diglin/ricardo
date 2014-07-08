@@ -14,6 +14,7 @@
                 <signup_url>http://api.ricardo.ch/request.php</signup_url>
                 <dev_mode>0</dev_mode>
                 <debug>0</debug>
+                <simulate_authorization>1</simulate_authorization>
             </config>
             <global>
                 <shipping_calculation>highest_price</shipping_calculation>
