@@ -84,4 +84,21 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
         }
         return $array;
     }
+
+    /**
+     * Adds new item by product id
+     *
+     * @param $productId
+     * @return bool true if product has been added
+     */
+    public function addProduct($productId)
+    {
+        if (Mage::getResourceModel('catalog/product_collection')->addFieldToFilter('entity_id', $productId)->getSize()) {
+            /** @var $productListingItem Diglin_Ricento_Model_Products_Listing_Item */
+            $productListingItem = Mage::getModel('diglin_ricento/products_listing_item');
+            $productListingItem->setProductsListingId($this->getId())->setProductId($productId)->save();
+            return true;
+        }
+        return false;
+    }
 }

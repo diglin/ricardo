@@ -33,6 +33,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
     }
 
     /**
+     * @return Diglin_Ricento_Model_Products_Listing
+     */
+    protected function _getListing()
+    {
+        return Mage::registry('products_listing');
+    }
+
+    /**
      * Show the products listing
      */
     public function indexAction()
@@ -112,7 +120,19 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
      */
     public function addProductAction()
     {
-
+        if (!$this->_initListing()) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+        $productIds = (array) $this->getRequest()->getPost('product', array());
+        $productsAdded = 0;
+        foreach ($productIds as $productId) {
+            if ($this->_getListing()->addProduct((int) $productId)) {
+                ++$productsAdded;
+            }
+        }
+        $this->_getSession()->addSuccess($this->__('%d products added to listing', $productsAdded));
+        $this->_redirect('*/*/edit', array('id' => $this->_getListing()->getId()));
     }
 
     /**
