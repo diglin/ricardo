@@ -21,7 +21,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('ASC');
         $this->setSaveParametersInSession(true);
-        //$this->setUseAjax(true); //TODO add JS to make AJAX grid work
+        $this->setUseAjax(true);
+    }
+    public function getGridUrl()
+    {
+        return $this->getUrl('*/*/productsGrid', array('id' => $this->getListing()->getId()));
     }
     /**
      * @return Diglin_Ricento_Model_Products_Listing

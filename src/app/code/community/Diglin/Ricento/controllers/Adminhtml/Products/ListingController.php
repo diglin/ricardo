@@ -18,6 +18,17 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
         // important to get appropriate translation from this module
         $this->setUsedModuleName('Diglin_Ricento');
     }
+    protected function _initListing()
+    {
+        $id = (int) $this->getRequest()->getParam('id');
+        if (!$id) {
+            $this->_getSession()->addError('Product Listing not found.');
+            $this->_redirect('*/*/index');
+        }
+
+        $productsListing = Mage::getModel('diglin_ricento/products_listing')->load($id);
+        Mage::register('products_listing', $productsListing);
+    }
 
     /**
      * Show the products listing
@@ -34,21 +45,20 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
         $this->_addContent($this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing', 'products_listing'));
         $this->renderLayout();
     }
-
+    public function productsGridAction()
+    {
+        $this->_initListing();
+        $this->loadLayout();
+        $this->getResponse()->setBody(
+            $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products')->toHtml()
+        );
+    }
     /**
      * Edit a product listing item
      */
     public function editAction()
     {
-        $id = (int) $this->getRequest()->getParam('id');
-        if (!$id) {
-            $this->_getSession()->addError('Product Listing not found.');
-            $this->_redirect('*/*/index');
-        }
-
-        $productsListing = Mage::getModel('diglin_ricento/products_listing')->load($id);
-        Mage::register('products_listing', $productsListing);
-
+        $this->_initListing();
         $this->loadLayout();
         $this->renderLayout();
     }
