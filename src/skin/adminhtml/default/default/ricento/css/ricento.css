@@ -1,0 +1,5 @@
+.dialog table.table_window .grid td,
+.dialog table.table_window .grid th
+{
+    padding: 2px 4px;
+}

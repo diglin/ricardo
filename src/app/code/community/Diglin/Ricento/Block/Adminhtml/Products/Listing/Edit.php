@@ -18,6 +18,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
         $this->_blockGroup = 'diglin_ricento';
         $this->_controller = 'adminhtml_products_listing';
 
+        $this->_addButton('add_product', array(
+            'label' => $this->__('Add Product(s)'),
+            'onclick' => 'ricentoAddProductsPopup()'
+        ), 0, 0);
         parent::__construct();
 
         $this->_updateButton('save', 'label', $this->__('Save Product Listing'));

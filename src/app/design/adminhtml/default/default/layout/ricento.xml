@@ -30,12 +30,29 @@
     </ricento_dashboard_index>
 
     <ricento_products_listing_edit>
-        <!-- update handle="editor"/ -->
+        <reference name="head">
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addCss">
+                <name>lib/prototype/windows/themes/magento.css</name>
+            </action>
+        </reference>
         <reference name="content">
+            <block type="adminhtml/template" template="ricento/products/listing/scripts.phtml"></block>
             <block type="diglin_ricento/adminhtml_products_listing_edit" name="products_listing_edit"></block>
         </reference>
         <reference name="left">
             <block type="diglin_ricento/adminhtml_products_listing_edit_tabs" name="products_listing_edit_tabs"></block>
         </reference>
     </ricento_products_listing_edit>
+    <ricento_adminhtml_products_listing_addproductsgrid>
+        <update handle="overlay_popup"></update>
+        <remove name="footer"></remove>
+        <reference name="content">
+            <block type="diglin_ricento/adminhtml_products_listing_edit_tabs_products_add"
+                   name="products_listing_add"></block>
+        </reference>
+    </ricento_adminhtml_products_listing_addproductsgrid>
 </layout>

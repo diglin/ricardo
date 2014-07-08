@@ -1,0 +1,48 @@
+<?php
+/**
+ * Scripts for modal popups
+ */
+/* @var $this Mage_Adminhtml_Block_Template */
+?>
+<script type="text/javascript">
+    function ricentoAddProductsPopup() {
+        var url = '<?php echo $this->getUrl('ricento/adminhtml_products_listing/addProductsGrid', array('id' => Mage::registry('products_listing')->getId())) ?>?';
+        if ($('ricento_popup') && typeof(Windows) != 'undefined') {
+            Windows.focus('ricento_popup');
+            return;
+        }
+
+        var AjaxDialog = Object.extend(Dialog, {
+            __openDialog: Dialog._openDialog
+        });
+        AjaxDialog._openDialog = function(content, parameters) {
+           this.__openDialog(content, parameters);
+            content.evalScripts();
+        };
+
+        var dialogWindow = AjaxDialog.info({url:url}, {
+            closable:true,
+            resizable:true,
+            maximizable: true,
+            draggable:true,
+            className:'magento',
+            windowClassName:'popup-window',
+            title:'Add Product',
+            top:50,
+            width:900,
+            height:600,
+            zIndex:1000,
+            recenterAuto:false,
+            hideEffect:Element.hide,
+            showEffect:Element.show,
+            id:'ricento_popup',
+            showProgress:true,
+            onClose:function (param, el) {
+                //TODO close event
+            }
+        });
+    }
+    function ricentoClosePopup() {
+        Windows.close('ricento_popup');
+    }
+</script>

@@ -53,6 +53,12 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
             $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products')->toHtml()
         );
     }
+    public function addProductsGridAction()
+    {
+        $this->_initListing();
+        $this->loadLayout();
+        $this->renderLayout();
+    }
     /**
      * Edit a product listing item
      */
