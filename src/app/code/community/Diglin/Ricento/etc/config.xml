@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.1</version>
+            <version>0.0.2</version>
         </Diglin_Ricento>
     </modules>
 
@@ -71,8 +71,20 @@
             <diglin_ricento_resource_setup>
                 <setup>
                     <module>Diglin_Ricento</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
                 </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
             </diglin_ricento_resource_setup>
+
+            <diglin_ricento_read>
+                <connection>core_read</connection>
+            </diglin_ricento_read>
+
+            <diglin_ricento_write>
+                <connection>core_write</connection>
+            </diglin_ricento_write>
         </resources>
 
         <models>
