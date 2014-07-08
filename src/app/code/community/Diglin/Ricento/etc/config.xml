@@ -78,13 +78,13 @@
                 </connection>
             </diglin_ricento_resource_setup>
 
-            <diglin_ricento_read>
+            <diglin_ricento_resource_read>
                 <connection>core_read</connection>
-            </diglin_ricento_read>
+            </diglin_ricento_resource_read>
 
-            <diglin_ricento_write>
+            <diglin_ricento_resource_write>
                 <connection>core_write</connection>
-            </diglin_ricento_write>
+            </diglin_ricento_resource_write>
         </resources>
 
         <models>
