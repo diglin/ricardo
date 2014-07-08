@@ -12,18 +12,7 @@
             return;
         }
 
-        var AjaxDialog = Object.clone(Dialog);
-        AjaxDialog.__openDialog = AjaxDialog._openDialog;
-        AjaxDialog._openDialog = function(content, parameters) {
-            this.__openDialog(content, parameters);
-            content.evalScripts();
-            /*
-             * products_listing_add_massactionJsObject was declared in local scope, we need to make it global:
-             */
-            window.products_listing_add_massactionJsObject = products_listing_addJsObject.massaction;
-        };
-
-        AjaxDialog.info({url:url}, {
+        Dialog.info({url:url}, {
             closable:true,
             resizable:true,
             maximizable: true,
@@ -40,6 +29,13 @@
             showEffect:Element.show,
             id:'ricento_popup',
             showProgress:true,
+            onShow:function(dialog) {
+                dialog.element.innerHTML.evalScripts();
+                /*
+                 * products_listing_add_massactionJsObject was declared in local scope, we need to make it global:
+                 */
+                window.products_listing_add_massactionJsObject = products_listing_addJsObject.massaction;
+            },
             onClose:function (param, el) {
                 //TODO close event
             }
