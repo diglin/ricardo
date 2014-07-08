@@ -47,12 +47,12 @@
             <block type="diglin_ricento/adminhtml_products_listing_edit_tabs" name="products_listing_edit_tabs"></block>
         </reference>
     </ricento_products_listing_edit>
-    <ricento_adminhtml_products_listing_addproductsgrid>
+    <ricento_adminhtml_products_listing_addproductspopup>
         <update handle="overlay_popup"></update>
         <remove name="footer"></remove>
         <reference name="content">
             <block type="diglin_ricento/adminhtml_products_listing_edit_tabs_products_add"
                    name="products_listing_add"></block>
         </reference>
-    </ricento_adminhtml_products_listing_addproductsgrid>
+    </ricento_adminhtml_products_listing_addproductspopup>
 </layout>

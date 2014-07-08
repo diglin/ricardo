@@ -15,7 +15,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('ASC');
         $this->setSaveParametersInSession(true);
-        //$this->setUseAjax(true);
+        $this->setUseAjax(true);
     }
     public function getGridUrl()
     {

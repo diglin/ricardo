@@ -58,7 +58,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
             $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products')->toHtml()
         );
     }
-    public function addProductsGridAction()
+    public function addProductsPopupAction()
     {
         if (!$this->_initListing()) {
             $this->_redirect('*/*/index');
@@ -66,6 +66,17 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
         }
         $this->loadLayout();
         $this->renderLayout();
+    }
+    public function addProductsGridAction()
+    {
+        if (!$this->_initListing()) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+        $this->loadLayout();
+        $this->getResponse()->setBody(
+            $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products_add')->toHtml()
+        );
     }
     /**
      * Edit a product listing item
