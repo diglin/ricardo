@@ -19,36 +19,16 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         parent::__construct();
         $this->setId('products_listing_items');
         $this->setDefaultSort('entity_id');
-        $this->setUseAjax(true);
+        $this->setDefaultDir('ASC');
+        $this->setSaveParametersInSession(true);
+        //$this->setUseAjax(true); //TODO add JS to make AJAX grid work
     }
-
     /**
      * @return Diglin_Ricento_Model_Products_Listing
      */
     public function getListing()
     {
         return Mage::registry('products_listing');
-    }
-
-    protected function _addColumnFilterToCollection($column)
-    {
-        // Set custom filter for in category flag
-        if ($column->getId() == 'in_category') {
-            $productIds = $this->_getSelectedProducts();
-            if (empty($productIds)) {
-                $productIds = 0;
-            }
-            if ($column->getFilter()->getValue()) {
-                $this->getCollection()->addFieldToFilter('entity_id', array('in'=>$productIds));
-            }
-            elseif(!empty($productIds)) {
-                $this->getCollection()->addFieldToFilter('entity_id', array('nin'=>$productIds));
-            }
-        }
-        else {
-            parent::_addColumnFilterToCollection($column);
-        }
-        return $this;
     }
 
     protected function _prepareCollection()
@@ -73,6 +53,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'product_id=entity_id',
                 'products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
                 'left');
+
+        $productIds = $this->_getSelectedProducts();
+        if (empty($productIds)) {
+            $productIds = 0;
+        }
+        $collection->addFieldToFilter('entity_id', array('in'=>$productIds));
+
         $this->setCollection($collection);
 
         return parent::_prepareCollection();
@@ -80,19 +67,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
 
     protected function _prepareColumns()
     {
-        $this->addColumn('in_category', array(
-            'header_css_class' => 'a-center',
-            'type'      => 'checkbox',
-            'name'      => 'in_category',
-            'values'    => $this->_getSelectedProducts(),
-            'align'     => 'center',
-            'index'     => 'entity_id'
-        ));
         $this->addColumn('entity_id', array(
             'header'    => Mage::helper('catalog')->__('ID'),
             'sortable'  => true,
             'width'     => '60',
-            'index'     => 'entity_id'
+            'index'     => 'entity_id',
+            'type'      => 'number'
         ));
         $this->addColumn('name', array(
             'header'    => Mage::helper('catalog')->__('Name'),
@@ -118,6 +98,25 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         //TODO add column "in other list?"
 
         return parent::_prepareColumns();
+    }
+
+    protected function _prepareMassaction()
+    {
+        $this->setMassactionIdField('entity_id');
+        $this->getMassactionBlock()->setFormFieldName('product');
+
+        $this->getMassactionBlock()->addItem('remove', array(
+            'label'=> $this->__('Remove from list'),
+            'url'  => $this->getUrl('*/adminhtml_products_listing_item/massRemove'), //TODO controller
+            'confirm' => $this->__('Are you sure?')
+        ));
+
+        $this->getMassactionBlock()->addItem('configure', array(
+            'label' => $this->__('Configure'),
+            'url'   => $this->getUrl('*/adminhtml_products_listing_item/massConfigure', array('_current'=>true))
+        ));
+
+        return $this;
     }
 
     protected function _getSelectedProducts()
