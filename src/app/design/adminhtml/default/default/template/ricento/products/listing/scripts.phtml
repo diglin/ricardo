@@ -12,9 +12,8 @@
             return;
         }
 
-        var AjaxDialog = Object.extend(Dialog, {
-            __openDialog: Dialog._openDialog
-        });
+        var AjaxDialog = Object.clone(Dialog);
+        AjaxDialog.__openDialog = AjaxDialog._openDialog;
         AjaxDialog._openDialog = function(content, parameters) {
             this.__openDialog(content, parameters);
             content.evalScripts();
@@ -24,7 +23,7 @@
             window.products_listing_add_massactionJsObject = products_listing_addJsObject.massaction;
         };
 
-        var dialogWindow = AjaxDialog.info({url:url}, {
+        AjaxDialog.info({url:url}, {
             closable:true,
             resizable:true,
             maximizable: true,
