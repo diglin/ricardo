@@ -21,4 +21,17 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_STOPPED = 'stopped';
 
     const STATUS_ERROR = 'error';
+
+    /**
+     * Returns product types that are available in Ricento
+     *
+     * @return array [ type_id => type_id ]
+     */
+    public function getAllowedProductTypes()
+    {
+        return array(
+            'simple'       => 'simple',
+            'configurable' => 'configurable',
+            'grouped'      => 'grouped');
+    }
 }

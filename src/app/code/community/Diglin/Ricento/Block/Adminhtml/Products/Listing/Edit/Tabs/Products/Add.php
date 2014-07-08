@@ -2,10 +2,15 @@
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
     extends Mage_Adminhtml_Block_Widget_Grid
 {
+    /**
+     * @var Diglin_Ricento_Helper_Data
+     */
+    protected $_helper;
 
     public function __construct()
     {
         parent::__construct();
+        $this->_helper = Mage::helper('diglin_ricento');
         $this->setId('products_listing_add');
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('ASC');
@@ -34,6 +39,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
             ->addAttributeToSelect('sku')
             ->addAttributeToSelect('type_id')
             ->addStoreFilter($this->getListing()->getStoreId())
+            ->addAttributeToFilter('type_id', array('in' => $this->_helper->getAllowedProductTypes()))
             ->joinField('stock_qty',
                 'cataloginventory/stock_item',
                 'qty',
@@ -75,7 +81,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
             'header'    => Mage::helper('catalog')->__('Type'),
             'index'     => 'type_id',
             'type'  => 'options',
-            'options' => Mage::getSingleton('catalog/product_type')->getOptionArray(),
+            'options' => array_intersect_key(Mage::getSingleton('catalog/product_type')->getOptionArray(), $this->_helper->getAllowedProductTypes()),
         ));
         $this->addColumn('sku', array(
             'header'    => Mage::helper('catalog')->__('SKU'),
