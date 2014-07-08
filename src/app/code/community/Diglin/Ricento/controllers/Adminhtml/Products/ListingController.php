@@ -23,11 +23,13 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
         $id = (int) $this->getRequest()->getParam('id');
         if (!$id) {
             $this->_getSession()->addError('Product Listing not found.');
-            $this->_redirect('*/*/index');
+            return false;
         }
 
         $productsListing = Mage::getModel('diglin_ricento/products_listing')->load($id);
         Mage::register('products_listing', $productsListing);
+
+        return $productsListing;
     }
 
     /**
@@ -47,7 +49,10 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
     }
     public function productsGridAction()
     {
-        $this->_initListing();
+        if (!$this->_initListing()) {
+            $this->_redirect('*/*/index');
+            return;
+        }
         $this->loadLayout();
         $this->getResponse()->setBody(
             $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products')->toHtml()
@@ -55,7 +60,10 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
     }
     public function addProductsGridAction()
     {
-        $this->_initListing();
+        if (!$this->_initListing()) {
+            $this->_redirect('*/*/index');
+            return;
+        }
         $this->loadLayout();
         $this->renderLayout();
     }
@@ -64,7 +72,10 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
      */
     public function editAction()
     {
-        $this->_initListing();
+        if (!$this->_initListing()) {
+            $this->_redirect('*/*/index');
+            return;
+        }
         $this->loadLayout();
         $this->renderLayout();
     }
