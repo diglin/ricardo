@@ -47,7 +47,7 @@
                     <sort_order>40</sort_order>
                 </log>
                 <assistant translate="title" module="diglin_ricento">
-                    <title>Ricardo Assistant (ext.)</title>
+                    <title>Ricardo Assistant</title>
                     <action>ricento/account/assistant</action>
                     <sort_order>50</sort_order>
                 </assistant>
