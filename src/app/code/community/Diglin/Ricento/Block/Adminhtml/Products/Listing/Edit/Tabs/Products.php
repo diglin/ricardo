@@ -109,13 +109,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
 
         $this->getMassactionBlock()->addItem('remove', array(
             'label'=> $this->__('Remove from list'),
-            'url'  => $this->getUrl('*/adminhtml_products_listing_item/massRemove'), //TODO controller
+            'url'  => $this->getUrl('*/products_listing/removeProduct', array('id' => $this->getListing()->getId())),
             'confirm' => $this->__('Are you sure?')
         ));
 
         $this->getMassactionBlock()->addItem('configure', array(
             'label' => $this->__('Configure'),
-            'url'   => $this->getUrl('*/adminhtml_products_listing_item/massConfigure', array('_current'=>true))
+            'url'   => $this->getUrl('*/products_listing/massConfigure', array('id' => $this->getListing()->getId()))
         ));
 
         return $this;

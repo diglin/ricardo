@@ -112,7 +112,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
 
         $this->getMassactionBlock()->addItem('add', array(
             'label'=> $this->__('Add selected product(s)'),
-            'url'  => $this->getUrl('*/adminhtml_products_listing/addProduct', array('id' => $this->getListing()->getId()))
+            'url'  => $this->getUrl('*/products_listing/addProduct', array('id' => $this->getListing()->getId()))
         ));
 
         return $this;
