@@ -6,7 +6,7 @@
 ?>
 <script type="text/javascript">
     function ricentoAddProductsPopup() {
-        var url = '<?php echo $this->getUrl('ricento/adminhtml_products_listing/addProductsPopup', array('id' => Mage::registry('products_listing')->getId())) ?>?';
+        var url = '<?php echo $this->getUrl('ricento/products_listing/addProductsPopup', array('id' => Mage::registry('products_listing')->getId())) ?>?';
         if ($('ricento_popup') && typeof(Windows) != 'undefined') {
             Windows.focus('ricento_popup');
             return;
