@@ -34,6 +34,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
         if ($this->getListing()->getId()) {
             $this->setDefaultFilter(array('in_category'=>1));
         }
+        /* @var $collection Mage_Catalog_Model_Resource_Product_Collection */
         $collection = Mage::getModel('catalog/product')->getCollection()
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('sku')
@@ -46,13 +47,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
                 'product_id=entity_id',
                 '{{table}}.stock_id=1',
                 'left'
-            )->joinField('status',
+            )->joinField('in_other_list',
                 'diglin_ricento/products_listing_item',
-                'status',
+                new Zend_Db_Expr('products_listing_id IS NOT NULL'),
                 'product_id=entity_id',
-                'products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'products_listing_id !='.(int) $this->getRequest()->getParam('id', 0),
                 'left');
-
         $productIds = $this->_getSelectedProducts();
         if (empty($productIds)) {
             $productIds = 0;
@@ -80,8 +80,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
         $this->addColumn('type', array(
             'header'    => Mage::helper('catalog')->__('Type'),
             'index'     => 'type_id',
-            'type'  => 'options',
-            'options' => array_intersect_key(Mage::getSingleton('catalog/product_type')->getOptionArray(), $this->_helper->getAllowedProductTypes()),
+            'type'      => 'options',
+            'options'   => array_intersect_key(Mage::getSingleton('catalog/product_type')->getOptionArray(), $this->_helper->getAllowedProductTypes()),
         ));
         $this->addColumn('sku', array(
             'header'    => Mage::helper('catalog')->__('SKU'),
@@ -90,11 +90,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
         ));
         $this->addColumn('qty', array(
             'header'    => Mage::helper('catalog')->__('Inventory'),
-            'type'  => 'number',
+            'type'      => 'number',
             'width'     => '1',
             'index'     => 'stock_qty'
         ));
-        //TODO add column "in other list?"
+        $this->addColumn('in_other_list', array(
+            'header'    => $this->__('In other list?'),
+            'type'      => 'options',
+            'options'   => Mage::getModel('eav/entity_attribute_source_boolean')->getOptionArray(),
+            'index'     => 'in_other_list',
+            'sortable'  => false
+        ));
 
         return parent::_prepareColumns();
     }
