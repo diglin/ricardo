@@ -4,7 +4,7 @@
  *
  * @author Sylvain Rayé <sylvain.raye at diglin.com>
  * @category    Diglin
- * @package     Diglin_Ricardo
+ * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 class Diglin_Ricento_Model_Config_Source_ShippingCalculation
