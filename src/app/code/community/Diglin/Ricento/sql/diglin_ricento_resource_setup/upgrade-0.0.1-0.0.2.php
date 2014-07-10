@@ -9,8 +9,6 @@
 /* @var $installer Mage_Catalog_Model_Resource_Setup */
 $installer = $this;
 
-$installer->startSetup();
-
 $entityTypeId = $installer->getEntityTypeId(Mage_Catalog_Model_Category::ENTITY);
 $attributeSetId   = $installer->getDefaultAttributeSetId($entityTypeId);
 $attributeGroupId = $installer->getAttributeGroupId($entityTypeId, $attributeSetId, 'General Information');
@@ -34,5 +32,3 @@ $installer->addAttributeToGroup(
     $attributeGroupId,
     'ricardo_category'
 );
-
-$installer->endSetup();
