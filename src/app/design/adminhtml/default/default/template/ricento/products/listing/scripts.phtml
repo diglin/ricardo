@@ -5,6 +5,7 @@
 /* @var $this Diglin_Ricento_Block_Adminhtml_Products_Listing_Scripts */
 ?>
 <script type="text/javascript">
+    //<![CDATA[
     Ricento = window.Ricento || {};
 <?php if ($this->getListing()): ?>
     Ricento.addProductsPopup = function() {
@@ -41,11 +42,38 @@
         });
     };
 <?php endif; ?>
-    Ricento.addListingPopup = function() {
-        alert('TODO');
-        //TODO IMPLEMENT
+    Ricento.newListingPopup = function() {
+        if ($('ricento_popup') && typeof(Windows) != 'undefined') {
+            Windows.focus('ricento_popup');
+            return;
+        }
+
+        Dialog.info(Ricento.htmlNewListingForm, {
+            closable:true,
+            resizable:true,
+            maximizable: true,
+            draggable:true,
+            className:'magento',
+            windowClassName:'popup-window',
+            title:'Create Product Listing',
+            top:50,
+            width:600,
+            height:'auto',
+            zIndex:1000,
+            recenterAuto:false,
+            resizeAuto:true,
+            hideEffect:Element.hide,
+            showEffect:Element.show,
+            id:'ricento_popup',
+            showProgress:true,
+            onShow:function(dialog) {
+                dialog.element.innerHTML.evalScripts();
+                Ricento.newListingForm = new varienForm('diglin_ricento_create_listing_form');
+            }
+        });
     };
     Ricento.closePopup = function() {
         Windows.close('ricento_popup');
     };
+    //]]>
 </script>

@@ -45,8 +45,13 @@
     </ricento_dashboard_index>
 
     <ricento_products_listing_index>
-
+        <update handle="ricento_scripts"></update>
+        <reference name="content">
+            <block type="diglin_ricento/adminhtml_products_listing_new"
+                   name="products_listing_new"></block>
+        </reference>
     </ricento_products_listing_index>
+
     <ricento_products_listing_edit>
         <update handle="ricento_scripts"></update>
         <reference name="content">
