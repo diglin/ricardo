@@ -19,11 +19,6 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
      */
     protected $_serviceManager;
 
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-
     protected function tearDown()
     {
         $this->_serviceManager = null;

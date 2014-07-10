@@ -32,7 +32,9 @@ class Config extends \Zend_Config implements ConfigInterface
 
         if (!$this->getHost() || !$this->getPartnershipId() || !$this->getPartnershipPasswd())
         {
-            throw new \Exception('Default Configuration values are missing: host, partnership ID or partnership Password. Please fix it!');
+            throw new \Exception(
+                sprintf('Default Configuration values are missing: host %s, partnership ID %s or partnership Password %s. Please fix it!', $this->getHost(), $this->getPartnershipId(), $this->getPartnershipPasswd())
+            );
         }
     }
     /**
