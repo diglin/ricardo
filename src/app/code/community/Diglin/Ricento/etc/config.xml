@@ -2,26 +2,37 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </Diglin_Ricento>
     </modules>
+
     <default>
-        <diglin_ricento>
+        <ricento>
             <config>
                 <assistant_url>https://assistant.ricardo.ch</assistant_url>
-                <dev>0</dev>
+                <assistant_url_dev>https://ra.betaqxl.com/</assistant_url_dev>
+                <signup_url>http://api.ricardo.ch/request.php</signup_url>
+                <dev_mode>0</dev_mode>
+                <debug>0</debug>
+                <simulate_authorization>1</simulate_authorization>
             </config>
-        </diglin_ricento>
+            <global>
+                <shipping_calculation>highest_price</shipping_calculation>
+            </global>
+        </ricento>
     </default>
+
     <global>
         <psr0_namespaces>
             <Diglin_Ricardo />
         </psr0_namespaces>
+
         <models>
             <diglin_ricento>
                 <class>Diglin_Ricento_Model</class>
                 <resourceModel>diglin_ricento_resource</resourceModel>
             </diglin_ricento>
+
             <diglin_ricento_resource>
                 <class>Diglin_Ricento_Model_Resource</class>
                 <entities>
@@ -43,29 +54,46 @@
                 </entities>
             </diglin_ricento_resource>
         </models>
+
         <blocks>
             <diglin_ricento>
                 <class>Diglin_Ricento_Block</class>
             </diglin_ricento>
         </blocks>
+
         <helpers>
             <diglin_ricento>
                 <class>Diglin_Ricento_Helper</class>
             </diglin_ricento>
         </helpers>
+
         <resources>
             <diglin_ricento_resource_setup>
                 <setup>
                     <module>Diglin_Ricento</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
                 </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
             </diglin_ricento_resource_setup>
+
+            <diglin_ricento_resource_read>
+                <connection>core_read</connection>
+            </diglin_ricento_resource_read>
+
+            <diglin_ricento_resource_write>
+                <connection>core_write</connection>
+            </diglin_ricento_resource_write>
         </resources>
+
         <models>
             <diglin_ricento>
                 <class>Diglin_Ricento_Model</class>
             </diglin_ricento>
         </models>
     </global>
+
     <adminhtml>
         <layout>
             <updates>
@@ -75,6 +103,7 @@
             </updates>
         </layout>
     </adminhtml>
+
     <admin>
         <routers>
             <ricento>

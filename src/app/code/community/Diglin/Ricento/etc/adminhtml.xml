@@ -46,6 +46,11 @@
                     <action>ricento/log</action>
                     <sort_order>40</sort_order>
                 </log>
+                <assistant translate="title" module="diglin_ricento">
+                    <title>Ricardo Assistant</title>
+                    <action>ricento/account/assistant</action>
+                    <sort_order>50</sort_order>
+                </assistant>
                 <config translate="title" module="diglin_ricento">
                     <title>Configuration</title>
                     <action>adminhtml/system_config/edit/section/ricento</action>
@@ -87,6 +92,9 @@
                             <log translate="title" module="diglin_ricento">
                                 <title>Synchronization log</title>
                             </log>
+                            <assistant translate="title" module="diglin_ricento">
+                                <title>Ricardo Assistant</title>
+                            </assistant>
                             <config translate="title" module="diglin_ricento">
                                 <title>Configuration</title>
                             </config>

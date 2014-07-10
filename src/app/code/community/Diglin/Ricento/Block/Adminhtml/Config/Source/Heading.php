@@ -1,19 +1,20 @@
 <?php
 /**
- * Diglin
+ * Diglin GmbH - Switzerland
  *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 
 class Diglin_Ricento_Block_Adminhtml_Config_Source_Heading
-    extends Mage_Adminhtml_Block_Abstract implements Varien_Data_Form_Element_Renderer_Interface
+    extends Mage_Adminhtml_Block_System_Config_Form_Field_Heading
 {
     /**
      * Render element html
      *
-     * Diglin: for compatibility with older Magento version < 1.5
+     * Diglin: for compatibility with older Magento version < 1.5 but also to support depends tag in system.xml
      *
      * @param Varien_Data_Form_Element_Abstract $element
      * @return string

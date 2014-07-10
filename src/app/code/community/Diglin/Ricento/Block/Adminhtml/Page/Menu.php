@@ -1,10 +1,6 @@
 <?php
 /**
  * Diglin GmbH - Switzerland
- * 
- * User: sylvainraye
- * Date: 11.05.14
- * Time: 14:24
  *
  * @category    Diglin
  * @package     Diglin_Ricento

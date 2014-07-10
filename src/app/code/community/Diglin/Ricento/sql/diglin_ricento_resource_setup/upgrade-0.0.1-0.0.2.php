@@ -5,26 +5,34 @@
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
- */
-/* @var $installer Mage_Core_Model_Resource_Setup */
+ */ 
+/* @var $installer Mage_Catalog_Model_Resource_Setup */
 $installer = $this;
 
 $installer->startSetup();
 
-$installer->getConnection()->changeColumn(
-    $installer->getTable('diglin_ricento/products_listing_item'), 'entity_id', 'item_id',
-        array('type' => Varien_Db_Ddl_Table::TYPE_INTEGER, 'primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true));
+$entityTypeId = $installer->getEntityTypeId(Mage_Catalog_Model_Category::ENTITY);
+$attributeSetId   = $installer->getDefaultAttributeSetId($entityTypeId);
+$attributeGroupId = $installer->getAttributeGroupId($entityTypeId, $attributeSetId, 'General Information');
 
-$installer->getConnection()->modifyColumn(
-    $installer->getTable('diglin_ricento/api_token'), 'store_id',
-        array('type' => Varien_Db_Ddl_Table::TYPE_SMALLINT, 'nullable' => false, 'unsigned' => true));
+$installer->addAttribute(Mage_Catalog_Model_Category::ENTITY, 'ricardo_category', array(
+    'input_renderer'    => 'diglin_ricento/adminhtml_catalog_category_form_renderer_mapping',
+    'type'              => 'int',
+    'label'             => 'Ricardo Category',
+    'note'              => 'Map this current Magento category with one of Ricardo. It will facilitate you the creation of product listing.',
+    'input'             => 'text',
+    'global'            => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+    'required'          => false,
+    'user_defined'      => false,
+    'unique'            => false,
+    'default'           => ''
+));
 
-$installer->getConnection()->modifyColumn(
-    $installer->getTable('diglin_ricento/products_listing'), 'store_id',
-        array('type' => Varien_Db_Ddl_Table::TYPE_SMALLINT, 'nullable' => false, 'unsigned' => true));
-
-$installer->getConnection()->modifyColumn(
-    $installer->getTable('diglin_ricento/sales_options'), 'schedule_cycle_multiple_products',
-        array('type' => Varien_Db_Ddl_Table::TYPE_SMALLINT, 'nullable' => true, 'default' => null));
+$installer->addAttributeToGroup(
+    $entityTypeId,
+    $attributeSetId,
+    $attributeGroupId,
+    'ricardo_category'
+);
 
 $installer->endSetup();
