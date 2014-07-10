@@ -97,19 +97,44 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
     }
 
     /**
-     * Save a product listing item
+     * Create empty product listing based on name and store_id
+     */
+    public function createAction()
+    {
+        $listingTitle = (string) $this->getRequest()->getPost('listing_title');
+        $storeId = (int) $this->getRequest()->getPost('store_id');
+        if (empty($listingTitle) || empty($storeId)) {
+            $this->_getSession()->addError($this->__('Listing name and store must be specified.'));
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        /* @var $salesOptions Diglin_Ricento_Model_Sales_Options */
+        $salesOptions = Mage::getModel('diglin_ricento/sales_options');
+        $salesOptions->setDataChanges(true)->save();
+
+        /* @var $listing Diglin_Ricento_Model_Products_Listing */
+        $listing = Mage::getModel('diglin_ricento/products_listing');
+        $listing->setTitle($listingTitle)
+            ->setStoreId($storeId)
+            ->setSalesOptionsId($salesOptions->getId())
+            ->save();
+        $this->_redirect('*/*/edit', array('id' => $listing->getId()));
+    }
+    /**
+     * Save a product listing
      */
     public function saveAction()
     {
-
+        //TODO save listing
     }
 
     /**
-     * Delete a product listing item
+     * Delete a product listing
      */
     public function deleteAction()
     {
-
+        //TODO delete listing
     }
 
     /**
@@ -146,9 +171,13 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
         $this->_getSession()->addSuccess($this->__('%d products removed from listing', $productsRemoved));
         $this->_redirect('*/*/edit', array('id' => $this->_getListing()->getId()));
     }
+
+    /**
+     * Configure multiple products at once
+     */
     public function massConfigureAction()
     {
-        //TODO implement
+        //TODO mass configure
     }
 
     /**

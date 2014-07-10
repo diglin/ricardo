@@ -3,7 +3,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_New_Form extends Mage_Admi
 {
     protected function _prepareForm()
     {
-        $actionUrl = $this->getUrl('*/*/save');
+        $actionUrl = $this->getUrl('*/*/create');
         $form = new Varien_Data_Form(
             array('id' => 'diglin_ricento_create_listing_form', 'action' => $actionUrl, 'method' => 'post')
         );
@@ -12,8 +12,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_New_Form extends Mage_Admi
 
         $fieldset = $form->addFieldset('create_listing_fieldset', array());
 
-        $fieldset->addField('name', 'text', array(
-            'name'     => 'name',
+        $fieldset->addField('listing_title', 'text', array(
+            'name'     => 'listing_title',
             'required' => true,
             'label'    => $this->__('Give a name'),
             'title'    => $this->__('Give a name'),
