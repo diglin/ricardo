@@ -16,7 +16,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
 
         $this->_addButton('add_product', array(
             'label' => $this->__('Add Product(s)'),
-            'onclick' => 'Ricento.addProductsPopup()'
+            'onclick' => "Ricento.addProductsPopup('{$this->getAddProductsPopupUrl()}')"
         ), 0, 0);
         parent::__construct();
 
@@ -36,7 +36,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
         ";
     }
 
-
     /**
      * Retrieve text for header element depending on loaded listing
      *
@@ -44,11 +43,35 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
      */
     public function getHeaderText()
     {
-        if (Mage::registry('products_listing')->getId()) {
+        if ($this->getListingId()) {
             return $this->__("Edit Product Listing '%s'", $this->escapeHtml(Mage::registry('products_listing')->getTitle()));
         }
         else {
             return $this->__('New Product Listing');
         }
+    }
+
+    /**
+     * Returns URL for AJAX popup
+     *
+     * @return string
+     */
+    public function getAddProductsPopupUrl()
+    {
+        return $this->getUrl('ricento/products_listing/addProductsPopup', array('id' => $this->getListingId()));
+    }
+
+    /**
+     * Returns product listing id if listing loaded, null otherwise
+     *
+     * @return int|null
+     */
+    public function getListingId()
+    {
+        $listing = Mage::registry('products_listing');
+        if ($listing) {
+            return $listing->getId();
+        }
+        return null;
     }
 }

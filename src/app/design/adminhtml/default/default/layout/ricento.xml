@@ -28,9 +28,9 @@
             <action method="addCss">
                 <name>lib/prototype/windows/themes/magento.css</name>
             </action>
-        </reference>
-        <reference name="content">
-            <block type="diglin_ricento/adminhtml_products_listing_scripts" template="ricento/products/listing/scripts.phtml"></block>
+            <action method="addJs">
+                <name>ricento/adminhtml.js</name>
+            </action>
         </reference>
     </ricento_scripts>
 

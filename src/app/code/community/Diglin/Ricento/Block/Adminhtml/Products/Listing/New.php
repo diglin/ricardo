@@ -20,7 +20,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_New extends Mage_Core_Bloc
     //<![CDATA[
         Ricento.htmlNewListingForm = '{$formAsString}';
     //]]>
-    </script>";
+    </script>
 HTML;
     }
     /**
