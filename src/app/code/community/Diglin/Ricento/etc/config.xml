@@ -24,7 +24,7 @@
 
     <global>
         <psr0_namespaces>
-            <Diglin_Ricardo />
+            <Diglin />
         </psr0_namespaces>
 
         <models>
@@ -92,6 +92,27 @@
                 <class>Diglin_Ricento_Model</class>
             </diglin_ricento>
         </models>
+
+        <events>
+            <resource_get_tablename>
+                <observers>
+                    <psr0autoloader>
+                        <class>Diglin_Ricento_Model_Observer</class>
+                        <method>addAutoloader</method>
+                    </psr0autoloader>
+                </observers>
+            </resource_get_tablename>
+
+            <!-- Not used at the moment but maybe in future-->
+            <!--<add_spl_autoloader>-->
+                <!--<observers>-->
+                    <!--<psr0autoloader>-->
+                        <!--<class>Diglin_Ricento_Model_Observer</class>-->
+                        <!--<method>addAutoloader</method>-->
+                    <!--</psr0autoloader>-->
+                <!--</observers>-->
+            <!--</add_spl_autoloader>-->
+        </events>
     </global>
 
     <adminhtml>
