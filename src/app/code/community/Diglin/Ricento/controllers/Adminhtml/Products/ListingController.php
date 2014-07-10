@@ -214,7 +214,19 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
      */
     public function listAction()
     {
-
+        if (!$this->_initListing()) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+        if ($this->_getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+            $this->_getSession()->addError($this->__('Listing is already listed. To list new items again, use "Relist"'));
+            $this->_redirect('*/*/index');
+            return;
+        }
+        $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_LISTED)->save();
+        //TODO set status for items as well if necessary
+        $this->_getSession()->addSuccess($this->__('Listing listed.'));
+        $this->_redirect('*/*/index');
     }
 
     /**
@@ -223,7 +235,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
      */
     public function relistAction()
     {
-
+        //TODO decide if "relist" is necessary. Worflow should be: stop => add products => list
     }
 
     /**
