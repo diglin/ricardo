@@ -11,6 +11,8 @@
             <config>
                 <assistant_url>https://assistant.ricardo.ch</assistant_url>
                 <assistant_url_dev>https://ra.betaqxl.com/</assistant_url_dev>
+                <api_host><!-- @todo To ask which one is used --></api_host>
+                <api_host_dev>ws.betaqxl.com</api_host_dev>
                 <signup_url>http://api.ricardo.ch/request.php</signup_url>
                 <dev_mode>0</dev_mode>
                 <debug>0</debug>
@@ -103,15 +105,15 @@
                 </observers>
             </resource_get_tablename>
 
-            <!-- Not used at the moment but maybe in future-->
-            <!--<add_spl_autoloader>-->
-                <!--<observers>-->
-                    <!--<psr0autoloader>-->
-                        <!--<class>Diglin_Ricento_Model_Observer</class>-->
-                        <!--<method>addAutoloader</method>-->
-                    <!--</psr0autoloader>-->
-                <!--</observers>-->
-            <!--</add_spl_autoloader>-->
+            <!-- Not used at the moment but could it be used in case of PHP Cli uses -->
+            <add_spl_autoloader>
+                <observers>
+                    <psr0autoloader>
+                        <class>Diglin_Ricento_Model_Observer</class>
+                        <method>addAutoloader</method>
+                    </psr0autoloader>
+                </observers>
+            </add_spl_autoloader>
         </events>
     </global>
 

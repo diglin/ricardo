@@ -10,9 +10,14 @@
 -->
 <layout>
     <default>
+        <reference name="notifications">
+            <block type="diglin_ricento/adminhtml_notifications" name="ricento_notifications" template="ricento/notifications.phtml" before="-" />
+        </reference>
+
         <reference name="head">
             <action method="addCss"><style>ricento/css/ricento.css</style></action>
         </reference>
+
         <reference name="root">
             <action method="unsetChild"><name>menu</name></action>
             <block type="diglin_ricento/adminhtml_page_menu" name="menu" as="menu" />

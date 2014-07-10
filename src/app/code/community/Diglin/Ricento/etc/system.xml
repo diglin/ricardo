@@ -78,7 +78,8 @@
                         <ricardo_password module="diglin_ricento" translate="label comment">
                             <label>Ricardo Password</label>
                             <sort_order>15</sort_order>
-                            <frontend_type>text</frontend_type>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -101,8 +102,8 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <frontend_class>required-entry</frontend_class>
-                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <!--<frontend_class>required-entry</frontend_class>-->
+                            <comment><![CDATA[Partner ID has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
                         </partner_id_de>
                         <partner_pass_de module="diglin_ricento" translate="label comment">
                             <label>German Partner Password</label>
@@ -112,7 +113,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <frontend_class>required-entry</frontend_class>
+                            <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
                         </partner_pass_de>
 
@@ -131,8 +132,8 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <frontend_class>required-entry</frontend_class>
-                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <!--<frontend_class>required-entry</frontend_class>-->
+                            <comment><![CDATA[Partner ID has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
                         </partner_id_fr>
                         <partner_pass_fr module="diglin_ricento" translate="label comment">
                             <label>French Partner Password</label>
@@ -142,7 +143,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <frontend_class>required-entry</frontend_class>
+                            <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
                         </partner_pass_fr>
 
@@ -158,7 +159,7 @@
                             <label>Development Mode</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[If you enable tihs configuration, all API requests will be send to the Ricardo Sanbox instead to use the production servers]]></comment>
+                            <comment><![CDATA[If you enable tihs configuration, all API requests will be send to the Ricardo Sanbox instead to use the production servers. Be aware, you have to provide others partner IDs and Passwords specific for dev environment.]]></comment>
                             <sort_order>55</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>

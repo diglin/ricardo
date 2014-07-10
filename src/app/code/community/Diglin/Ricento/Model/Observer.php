@@ -33,6 +33,10 @@ class Diglin_Ricento_Model_Observer
 
     /**
      * Add PSR-0 Autoloader for our Diglin_Ricardo library
+     *
+     * Event
+     * - resource_get_tablename
+     * - add_spl_autoloader
      */
     public function addAutoloader()
     {
