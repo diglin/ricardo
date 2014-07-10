@@ -130,11 +130,32 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
     }
 
     /**
+     * Save a product listing and set status to "listed"
+     */
+    public function saveAndListAction()
+    {
+        //TODO validation
+        $this->saveAction();
+        $this->listAction();
+    }
+
+    /**
      * Delete a product listing
      */
     public function deleteAction()
     {
-        //TODO delete listing
+        if (!$this->_initListing()) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+        if ($this->_getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+            $this->_getSession()->addError($this->__('Listed listings cannot be deleted. Stop the listing first.'));
+            $this->_redirect('*/*/index');
+            return;
+        }
+        $this->_getListing()->delete();
+        $this->_getSession()->addSuccess($this->__('Listing deleted'));
+        $this->_redirect('*/*/index');
     }
 
     /**
@@ -210,7 +231,19 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
      */
     public function stopAction()
     {
-
+        if (!$this->_initListing()) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+        if ($this->_getListing()->getStatus() !== Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+            $this->_getSession()->addError($this->__('Only listed listings can be stopped.'));
+            $this->_redirect('*/*/index');
+            return;
+        }
+        $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_STOPPED)->save();
+        //TODO set status for items as well if necessary
+        $this->_getSession()->addSuccess($this->__('Listing stopped.'));
+        $this->_redirect('*/*/index');
     }
 
     /**

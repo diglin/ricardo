@@ -13,27 +13,35 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
         $this->_objectId = 'id';
         $this->_blockGroup = 'diglin_ricento';
         $this->_controller = 'adminhtml_products_listing';
-
-        $this->_addButton('add_product', array(
-            'label' => $this->__('Add Product(s)'),
-            'onclick' => "Ricento.addProductsPopup('{$this->getAddProductsPopupUrl()}')"
-        ), 0, 0);
         parent::__construct();
 
-        $this->_updateButton('save', 'label', $this->__('Save Product Listing'));
-        $this->_updateButton('delete', 'label', $this->__('Delete Product Listing'));
-
-        $this->_addButton('saveandcontinue', array(
-            'label' => Mage::helper('adminhtml')->__('Save And Continue Edit') ,
-            'onclick' => 'saveAndContinueEdit()',
-            'class' => 'save'
-        ), - 100);
-
-        $this->_formScripts[] = "
-            function saveAndContinueEdit(){
-                editForm.submit($('edit_form').action+'back/edit/');
-            }
-        ";
+        $this->removeButton('reset');
+        $this->_addButton('add_product_from_category', array(
+            'label'   => $this->__('Add Product(s) from category'),
+            'onclick' => "alert('TODO')",
+            'class'   => 'add'
+        ), -1, -2);
+        $this->_addButton('add_product', array(
+            'label'   => $this->__('Add Product(s)'),
+            'onclick' => "Ricento.addProductsPopup('{$this->getAddProductsPopupUrl()}')",
+            'class'   => 'add'
+        ), -1, -1);
+        if ($this->getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+            $this->_updateButton('delete', 'disabled', true);
+            $this->_updateButton('delete', 'title', $this->__('Listed listings cannot be deleted. Stop the listing first.'));
+            $this->_removeButton('save');
+            $this->_addButton('stop', array(
+                'label'   => $this->__('Stop'),
+                'onclick' => 'setLocation(\'' . $this->getStopListingUrl() . '\')',
+                'class'   => 'cancel'
+            ));
+        } else {
+            $this->_addButton('save_and_list', array(
+                'label' => $this->__('Save and List'),
+                'onclick' => 'editForm.submit(\'' . $this->getSaveAndListUrl() . '\');',
+                'class' => 'save list'
+            ), 2);
+        }
     }
 
     /**
@@ -62,13 +70,42 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
     }
 
     /**
+     * Returns URL to stop listing
+     *
+     * @return string
+     */
+    public function getStopListingUrl()
+    {
+        return $this->getUrl('ricento/products_listing/stop', array('id' => $this->getListingId()));
+    }
+
+    /**
+     * Returns URL for "save and list" form action
+     *
+     * @return string
+     */
+    public function getSaveAndListUrl()
+    {
+        return $this->getUrl('ricento/products_listing/saveAndList', array('id' => $this->getListingId()));
+    }
+
+    /**
+     * Returns product listing
+     *
+     * @return Diglin_Ricento_Model_Products_Listing
+     */
+    public function getListing()
+    {
+        return Mage::registry('products_listing');
+    }
+    /**
      * Returns product listing id if listing loaded, null otherwise
      *
      * @return int|null
      */
     public function getListingId()
     {
-        $listing = Mage::registry('products_listing');
+        $listing = $this->getListing();
         if ($listing) {
             return $listing->getId();
         }
