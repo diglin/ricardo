@@ -14,7 +14,77 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form();
+        $htmlIdPrefix = 'diglin_ricento_';
+        $form->setHtmlIdPrefix($htmlIdPrefix);
 
+        $fieldsetCategory = $form->addFieldset('fieldset_category', array('legend' => Mage::helper('catalog')->__('Category')));
+        $fieldsetCategory->addField('ricardo_category_use_mapping', 'radios', array(
+            'name'      => 'ricardo_category_use_mapping',
+            'label'     => $this->__('Ricardo Category'),
+            'separator' => '<br>',
+            'values'    => array(
+                array('value' => 0, 'label' => $this->__('Use Magento / Ricardo Category mapping (if mapping does not exist, an error message will be triggered while preparing the synchronization to Ricardo)')),
+                array('value' => 1, 'label' => $this->__('Select Ricardo Category'))
+            )
+        ));
+        $fieldsetCategory->addType('ricardo_category', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_catalog_category_form_renderer_mapping'));
+        $fieldsetCategory->addField('ricardo_category', 'ricardo_category', array(
+            'name'  => 'ricardo_category',
+            'label' => $this->__('Select the category')
+        ));
+
+        $fieldsetType = $form->addFieldset('fieldset_type', array('legend' => $this->__('Type of sales')));
+        $fieldsetType->addField('sales_type', 'select', array(
+            'name'      => 'sales_type',
+            'required'  => true,
+            'label'     => $this->__('Type of sales'),
+            'options'   => Mage::getModel('diglin_ricento/attribute_sales_type')->getAllOptions(),
+            'onchange'  => '' //TODO toggle fieldset
+        ));
+        $fieldsetTypeFixPrice = $fieldsetType->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price')));
+        $fieldsetTypeFixPrice->addField('price_source_attribute_id', 'select', array(
+            'name'    => 'price_source_attribute_id',
+            'label'   => $this->__('Source'),
+            'options' => Mage::getModel('diglin_ricento/attribute_sales_price_source')->getAllOptions()
+        ));
+        $fieldsetTypeFixPrice->addType('fieldset_inline', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_fieldset_inline'));
+        $fieldsetPriceChange = $fieldsetTypeFixPrice->addField('fieldset_price_change', 'fieldset_inline', array(
+            'label'             => $this->__('Price Change'),
+        ));
+        $fieldsetPriceChange->addField('price_change_type', 'select', array(
+            'name'               => 'price_change_type',
+            'after_element_html' => ' +&nbsp;',
+            'no_span'            => true,
+            'options'            => Mage::getModel('diglin_ricento/attribute_sales_price_method')->getAllOptions()
+        ));
+        $fieldsetPriceChange->addField('price_change', 'text', array(
+            'name'    => 'price_change',
+            'no_span' => true
+        ));
+        $fieldsetTypeFixPrice->addField('sales_auction_direct_buy', 'checkbox', array(
+            'name'  => 'sales_auction_direct_buy',
+            'label' => $this->__('Allow Direct Buy (in case of auction type of sales)'),
+            'value' => '1'
+        ));
+        $fieldsetTypeFixPrice->addField('fix_currency', 'label', array(
+            'name'  => 'fix_currency',
+            'label' => $this->__('Currency'),
+            'value' => 'CHF'
+        ));
+        $fieldsetTypeAuction = $fieldsetType->addFieldset('fieldset_type_auction', array('legend' => $this->__('Auction')));
+        $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
+            'name'  => 'sales_auction_start_price',
+            'label' => $this->__('Start price')
+        ));
+        $fieldsetTypeAuction->addField('sales_auction_increment', 'text', array(
+            'name'  => 'sales_auction_increment',
+            'label' => $this->__('Increment')
+        ));
+        $fieldsetTypeAuction->addField('auction_currency', 'label', array(
+            'name'  => 'auction_currency',
+            'label' => $this->__('Currency'),
+            'value' => 'CHF'
+        ));
         $this->setForm($form);
 
         return parent::_prepareForm();
