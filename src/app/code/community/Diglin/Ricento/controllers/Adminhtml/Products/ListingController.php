@@ -235,7 +235,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
      */
     public function relistAction()
     {
-        //TODO decide if "relist" is necessary. Worflow should be: stop => add products => list
+        if ($this->_getListing()->getStatus() !== Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+            $this->_getSession()->addError($this->__('Listing is not listed. To list a new or stopped listing, use "List"'));
+            $this->_redirect('*/*/index');
+            return;
+        }
+        //TODO relist items
+        $this->_getSession()->addSuccess($this->__('Products relisted.'));
+        $this->_redirect('*/*/index');
     }
 
     /**
