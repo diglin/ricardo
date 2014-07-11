@@ -66,4 +66,59 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
 
 // Diglin GmbH Tag NEW_METHOD
 
+    /**
+     * Retrieve array of product id's for listing
+     *
+     * @return array
+     */
+    public function getProductIds()
+    {
+        if (!$this->getId()) {
+            return array();
+        }
+
+        $array = $this->getData('product_ids');
+        if (is_null($array)) {
+            $array = $this->getResource()->getProductIds($this);
+            $this->setData('product_ids', $array);
+        }
+        return $array;
+    }
+
+    /**
+     * Adds new item by product id
+     *
+     * @param $productId
+     * @return bool true if product has been added
+     */
+    public function addProduct($productId)
+    {
+        if (Mage::getResourceModel('catalog/product_collection')->addFieldToFilter('entity_id', $productId)->getSize()) {
+            /** @var $productListingItem Diglin_Ricento_Model_Products_Listing_Item */
+            $productListingItem = Mage::getModel('diglin_ricento/products_listing_item');
+            $productListingItem->setProductsListingId($this->getId())->setProductId($productId)->save();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Removes items by product id
+     *
+     * @param array $productId
+     * @return int number of removed products
+     */
+    public function removeProducts(array $productIds)
+    {
+        /** @var $items Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection */
+        $items = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
+        $items->addFieldToFilter('products_listing_id', $this->getId())
+            ->addFieldToFilter('product_id', array('in' => $productIds))
+            ->load();
+        $numberOfItems = count($items);
+        if ($numberOfItems) {
+            $items->walk('delete');
+        }
+        return $numberOfItems;
+    }
 }

@@ -25,6 +25,18 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const SUPPORTED_LANG_FR = 'fr';
 
     /**
+     * Returns product types that are available in Ricento
+     *
+     * @return array [ type_id => type_id ]
+     */
+    public function getAllowedProductTypes()
+    {
+        return array(
+            'simple'       => 'simple',
+            'configurable' => 'configurable',
+            'grouped'      => 'grouped');
+    }
+    /**
      * Get the Ricardo Assistant Url
      *
      * @return string

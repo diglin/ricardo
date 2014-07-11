@@ -24,6 +24,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing extends Mage_Adminhtml_Blo
             ,0,1);
 
         parent::__construct();
+        $this->_updateButton('add', 'onclick', 'Ricento.newListingPopup()');
     }
 
     public function getCategoryMapUrl()

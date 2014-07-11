@@ -57,7 +57,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
         ));
 
         if (!Mage::app()->isSingleStoreMode()) {
-            //TODO allow associaton of multiple stores
             $this->addColumn('stores',
                 array(
                     'header'        => Mage::helper('catalog')->__('Stores'),
@@ -180,7 +179,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
     /**
      * Prepare the mass action drop down menu
      *
-     * @return Rissip_Atelier_Block_Adminhtml_Atelier_Grid
+     * @return Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid
      */
     protected function _prepareMassaction()
     {

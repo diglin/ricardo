@@ -1,0 +1,17 @@
+.dialog table.table_window .grid td,
+.dialog table.table_window .grid th
+{
+    padding: 2px 4px;
+}
+#diglin_ricento_create_listing_fieldset {
+    margin-top: 20px;
+}
+#diglin_ricento_create_listing_fieldset > .hor-scroll {
+    position: relative;
+    height: 150px;
+}
+#diglin_ricento_buttons_container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

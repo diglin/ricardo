@@ -24,7 +24,22 @@
         </reference>
     </default>
 
-    <adminhtml_dashboard_index>
+    <ricento_scripts>
+        <reference name="head">
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addCss">
+                <name>lib/prototype/windows/themes/magento.css</name>
+            </action>
+            <action method="addJs">
+                <name>ricento/adminhtml.js</name>
+            </action>
+        </reference>
+    </ricento_scripts>
+
+    <ricento_dashboard_index>
         <reference name="root">
             <block type="core/template" name="ricento_dashboard" as="ricento.dashboard"
                    template="diglin_ricento/dashboard.phtml">
@@ -32,5 +47,31 @@
                 <block type="core/text_list" name="ricento_dashboard_right" as="ricento.dashboard.right"/>
             </block>
         </reference>
-    </adminhtml_dashboard_index>
+    </ricento_dashboard_index>
+
+    <ricento_products_listing_index>
+        <update handle="ricento_scripts"></update>
+        <reference name="content">
+            <block type="diglin_ricento/adminhtml_products_listing_new"
+                   name="products_listing_new"></block>
+        </reference>
+    </ricento_products_listing_index>
+
+    <ricento_products_listing_edit>
+        <update handle="ricento_scripts"></update>
+        <reference name="content">
+            <block type="diglin_ricento/adminhtml_products_listing_edit" name="products_listing_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="diglin_ricento/adminhtml_products_listing_edit_tabs" name="products_listing_edit_tabs"></block>
+        </reference>
+    </ricento_products_listing_edit>
+    <ricento_products_listing_addproductspopup>
+        <update handle="overlay_popup"></update>
+        <remove name="footer"></remove>
+        <reference name="content">
+            <block type="diglin_ricento/adminhtml_products_listing_edit_tabs_products_add"
+                   name="products_listing_add"></block>
+        </reference>
+    </ricento_products_listing_addproductspopup>
 </layout>

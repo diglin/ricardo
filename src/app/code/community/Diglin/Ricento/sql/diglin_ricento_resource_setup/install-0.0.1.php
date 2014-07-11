@@ -74,19 +74,7 @@ $tableSyncLogs->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array(
     ->addForeignKey('products_listing_id_idxfk', 'products_listing_id', 'ricento_product_listings', 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->setComment('Ricardo synchronization logs');
 $installer->getConnection()->createTable($tableSyncLogs);
-/*
-CREATE TABLE ricento_products_listing_items
-(
-entity_id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
-product_id INT(4) UNSIGNED NOT NULL,
-products_listing_id INT(4) UNSIGNED NOT NULL,
-sales_options_id INT(4) UNSIGNED NOT NULL,
-status VARCHAR(255) NOT NULL,
-created_at DATETIME,
-updated_at DATETIME,
-PRIMARY KEY (entity_id)
-) ENGINE=InnoDB COMMENT='Products belonging to the products list and which should be ' CHARACTER SET=utf8;
- */
+
 $tableProductListingItems = $installer->getConnection()->newTable('ricento_products_listing_items');
 $tableProductListingItems->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))

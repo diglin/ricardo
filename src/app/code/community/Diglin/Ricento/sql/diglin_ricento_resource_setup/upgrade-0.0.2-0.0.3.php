@@ -116,3 +116,25 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_condition'
     'used_in_product_listing' => true,
     'apply_to'	=> 'simple,grouped,configurable'
 ));
+
+$installer = $this;
+
+$installer->startSetup();
+
+$installer->getConnection()->changeColumn(
+    $installer->getTable('diglin_ricento/products_listing_item'), 'entity_id', 'item_id',
+    array('type' => Varien_Db_Ddl_Table::TYPE_INTEGER, 'primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true));
+
+$installer->getConnection()->modifyColumn(
+    $installer->getTable('diglin_ricento/api_token'), 'store_id',
+    array('type' => Varien_Db_Ddl_Table::TYPE_SMALLINT, 'nullable' => false, 'unsigned' => true));
+
+$installer->getConnection()->modifyColumn(
+    $installer->getTable('diglin_ricento/products_listing'), 'store_id',
+    array('type' => Varien_Db_Ddl_Table::TYPE_SMALLINT, 'nullable' => false, 'unsigned' => true));
+
+$installer->getConnection()->modifyColumn(
+    $installer->getTable('diglin_ricento/sales_options'), 'schedule_cycle_multiple_products',
+    array('type' => Varien_Db_Ddl_Table::TYPE_SMALLINT, 'nullable' => true, 'default' => null));
+
+$installer->endSetup();

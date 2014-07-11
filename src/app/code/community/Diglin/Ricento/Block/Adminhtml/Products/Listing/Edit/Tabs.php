@@ -11,7 +11,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs extends Mage_Adm
     public function __construct()
     {
         parent::__construct();
-        $this->setId('product_listing_tabs');
+        $this->setId('products_listing_tabs');
         $this->setDestElementId('edit_form');
         $this->setTitle($this->__('Product Listing'));
     }
@@ -22,7 +22,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs extends Mage_Adm
             'label' => $this->__('Products') ,
             'title' => $this->__('Products') ,
             'content' => $this->getLayout()
-                    ->createBlock('diglin_ricento/adminhtml_product_listing_edit_tabs_products')
+                    ->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products')
                     ->toHtml()
         ));
 
@@ -30,7 +30,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs extends Mage_Adm
             'label' => $this->__('Rules') ,
             'title' => $this->__('Rules') ,
             'content' => $this->getLayout()
-                    ->createBlock('diglin_ricento/adminhtml_product_listing_edit_tabs_rules')
+                    ->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_rules')
                     ->toHtml()
         ));
 
@@ -38,7 +38,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs extends Mage_Adm
             'label' => $this->__('Sell Options') ,
             'title' => $this->__('Sell Options') ,
             'content' => $this->getLayout()
-                    ->createBlock('diglin_ricento/adminhtml_product_listing_edit_tabs_selloptions')
+                    ->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_selloptions')
                     ->toHtml()
         ));
 
