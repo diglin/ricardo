@@ -11,6 +11,7 @@ namespace Diglin\Ricardo\Managers;
 
 use \Diglin\Ricardo\Config;
 use \Diglin\Ricardo\Api;
+use \Diglin\Ricardo\Service;
 
 abstract class TestAbstract extends \PHPUnit_Framework_TestCase
 {

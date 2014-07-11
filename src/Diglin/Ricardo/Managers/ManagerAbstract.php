@@ -10,6 +10,7 @@
 namespace Diglin\Ricardo\Managers;
 
 use \Diglin\Ricardo\Core\Helper;
+use \Diglin\Ricardo\Service;
 
 /**
  * Class ManagerAbstract

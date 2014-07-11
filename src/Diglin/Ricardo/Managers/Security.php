@@ -11,6 +11,7 @@ namespace Diglin\Ricardo\Managers;
 
 use \Diglin\Ricardo\Services\Security as SecurityService;
 use \Diglin\Ricardo\Services\ServiceAbstract;
+use \Diglin\Ricardo\Service;
 
 /**
  * Class Security
