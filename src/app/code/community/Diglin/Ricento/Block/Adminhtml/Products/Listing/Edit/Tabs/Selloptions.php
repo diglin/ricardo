@@ -11,6 +11,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 
 {
+    /**
+     * @var Diglin_Ricento_Model_Resource_Sales_Options
+     */
+    protected $_model;
+
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form();
@@ -69,8 +74,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
         $fieldsetTypeFixPrice->addField('fix_currency', 'label', array(
             'name'  => 'fix_currency',
-            'label' => $this->__('Currency'),
-            'value' => 'CHF'
+            'label' => $this->__('Currency')
         ));
         $fieldsetTypeAuction = $fieldsetType->addFieldset('fieldset_type_auction', array('legend' => $this->__('Auction')));
         $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
@@ -93,7 +97,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $dateFormatIso = Mage::app()->getLocale()->getDateFormat(
             Mage_Core_Model_Locale::FORMAT_TYPE_SHORT
         );
-        $fieldsetSchedule->addField('schedule_date_start_container', 'radios_extensible', array(
+        $fieldsetSchedule->addField('schedule_date_start_immediately', 'radios_extensible', array(
             'name'   => 'schedule_date_start_immediately',
             'label'  => $this->__('Start'),
             'values' => array(
@@ -108,7 +112,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 ))
             )
         ));
-        $fieldsetSchedule->addField('schedule_period_container', 'radios_extensible', array(
+        $fieldsetSchedule->addField('schedule_period_use_end_date', 'radios_extensible', array(
             'name'   => 'schedule_period_use_end_date',
             'label'  => $this->__('End'),
             'values' => array(
@@ -134,7 +138,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'label'   => $this->__('Reactivation'),
             'options' => $this->_getReactivationOptions()
         ));
-        $fieldsetSchedule->addField('schedule_cycle_multiple_products_container', 'radios_extensible', array(
+        $fieldsetSchedule->addField('schedule_cycle_multiple_products_random', 'radios_extensible', array(
             'name'  => 'schedule_cycle_multiple_products_random',
             'label' => $this->__('Cycle'),
             'values' => array(
@@ -156,7 +160,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         //TODO add product_warranty, product_condition and product_condition_source_attribute_id attributes to sales options table?
         $fieldsetCondition = $form->addFieldset('fieldset_condition', array('legend' => $this->__('Product Condition')));
         $fieldsetCondition->addType('checkboxes_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_checkboxes_extensible'));
-        $fieldsetCondition->addField('product_condition_attribute_container', 'checkboxes_extensible', array(
+        $fieldsetCondition->addField('product_condition_use_attribute', 'checkboxes_extensible', array(
             'name'   => 'product_condition_use_attribute',
             'label'  => $this->__('Condition Source'),
             'values' => array(
@@ -183,7 +187,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         $fieldsetStock = $form->addFieldset('fieldset_stock', array('legend' => $this->__('Stock Management')));
         $fieldsetStock->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
-        $fieldsetStock->addField('stock_management_container', 'radios_extensible', array(
+        $fieldsetStock->addField('stock_management_use_inventory', 'radios_extensible', array(
             'name'   => 'stock_management_use_inventory',
             'label'  => $this->__('Stock Management'),
             'values' => array(
@@ -216,6 +220,23 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         return parent::_prepareForm();
     }
+
+    protected function _initFormValues()
+    {
+        $this->getForm()->setValues($this->getSalesOptions());
+        $derivedValues = array();
+        $derivedValues['fix_currency'] = 'CHF';
+        if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
+            $derivedValues['schedule_cycle_multiple_products_random'] = '1';
+        }
+        if ((int) $this->getSalesOptions()->getStockManagement() === -1) {
+            $derivedValues['stock_management'] = '';
+            $derivedValues['stock_management_use_inventory'] = 1;
+        }
+        $this->getForm()->addValues($derivedValues);
+        return parent::_initFormValues();
+    }
+
     /**
      * Return Tab label
      *
@@ -281,4 +302,23 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             null => $this->__('Until sold')
         );
     }
+
+    /**
+     * Returns sales options model
+     *
+     * @return Diglin_Ricento_Model_Sales_Options
+     */
+    public function getSalesOptions()
+    {
+        if ($this->_model) {
+            return $this->_model;
+        }
+        $listing = Mage::registry('products_listing');
+        if (!$listing) {
+            Mage::throwException('Products listing not loaded');
+        }
+        $this->_model = $listing->getSalesOptions();
+        return $this->_model;
+    }
+
 }

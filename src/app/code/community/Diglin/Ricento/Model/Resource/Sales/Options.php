@@ -26,7 +26,7 @@ class Diglin_Ricento_Model_Resource_Sales_Options extends Mage_Core_Model_Resour
      */
     protected function _construct()
     {
-        $this->_init('diglin_ricento/sales_options', 'options_id');
+        $this->_init('diglin_ricento/sales_options', 'entity_id');
     }
 
 // Diglin GmbH Tag NEW_METHOD

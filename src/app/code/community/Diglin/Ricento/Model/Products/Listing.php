@@ -42,6 +42,11 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
 // Diglin GmbH Tag NEW_VAR
 
     /**
+     * @var Diglin_Ricento_Model_Sales_Options
+     */
+    protected $_salesOptions;
+
+    /**
      * Prefix of model events names
      * @var string
      */
@@ -83,6 +88,15 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
             $this->setData('product_ids', $array);
         }
         return $array;
+    }
+
+    public function getSalesOptions()
+    {
+        if (!$this->_salesOptions) {
+            $this->_salesOptions = Mage::getModel('diglin_ricento/sales_options');
+            $this->_salesOptions->load($this->getSalesOptionsId());
+        }
+        return $this->_salesOptions;
     }
 
     /**
