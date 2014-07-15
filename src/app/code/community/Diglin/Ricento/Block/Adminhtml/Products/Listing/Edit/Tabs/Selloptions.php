@@ -89,25 +89,63 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
 
         $fieldsetSchedule = $form->addFieldset('fieldset_schedule', array('legend' => $this->__('Schedule')));
-        $fieldsetSchedule->addType('start_date_picker', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_date_start'));
-        $fieldsetSchedule->addType('end_date_picker', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_date_end'));
-        $fieldsetSchedule->addType('cycle_products', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_cycleproducts'));
-        $fieldsetSchedule->addField('schedule_date_start', 'start_date_picker', array(
-            'name'  => 'schedule_date_start',
-            'label' => $this->__('Start')
+        $fieldsetSchedule->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
+        $dateFormatIso = Mage::app()->getLocale()->getDateFormat(
+            Mage_Core_Model_Locale::FORMAT_TYPE_SHORT
+        );
+        $fieldsetSchedule->addField('schedule_date_start_container', 'radios_extensible', array(
+            'name'   => 'schedule_date_start_immediately',
+            'label'  => $this->__('Start'),
+            'values' => array(
+                array('value' => 1, 'label' => $this->__('Start immediately')),
+                array('value' => 0, 'label' => $this->__('Start from'), 'field' => array(
+                    'schedule_date_start', 'date', array(
+                        'name'   => 'schedule_date_start',
+                        'image'  => $this->getSkinUrl('images/grid-cal.gif'),
+                        'format' => $dateFormatIso,
+                        'class'  => 'validate-date validate-date-range' //TODO concrete validation
+                    )
+                ))
+            )
         ));
-        $fieldsetSchedule->addField('schedule_period_days', 'end_date_picker', array(
-            'name'  => 'schedule_period_days',
-            'label' => $this->__('End')
+        $fieldsetSchedule->addField('schedule_period_container', 'radios_extensible', array(
+            'name'   => 'schedule_period_use_end_date',
+            'label'  => $this->__('End'),
+            'values' => array(
+                array('value' => 0, 'label' => $this->__('End after %s days'), 'field' => array(
+                    'schedule_period_days', 'select', array(
+                        'name'    => 'schedule_period_days',
+                        'options' => $this->_getDaysOptions(),
+                        'class'   => 'inline-select'
+                    )
+                )),
+                array('value' => 1, 'label' => $this->__('End on'), 'field' => array(
+                    'schedule_period_end_date', 'date', array(
+                        'name'   => 'schedule_period_end_date',
+                        'image'  => Mage::getDesign()->getSkinUrl('images/grid-cal.gif'),
+                        'format' => $dateFormatIso,
+                        'class'  => 'validate-date validate-date-range' //TODO concrete validation
+                    )
+                ))
+            )
         ));
         $fieldsetSchedule->addField('schedule_reactivation', 'select', array(
             'name'    => 'schedule_reactivation',
             'label'   => $this->__('Reactivation'),
             'options' => $this->_getReactivationOptions()
         ));
-        $fieldsetSchedule->addField('schedule_cycle_multiple_products', 'cycle_products', array(
-            'name'  => 'schedule_cycle_multiple_products',
-            'label' => $this->__('Cycle')
+        $fieldsetSchedule->addField('schedule_cycle_multiple_products_container', 'radios_extensible', array(
+            'name'  => 'schedule_cycle_multiple_products_random',
+            'label' => $this->__('Cycle'),
+            'values' => array(
+                array('value' => 0, 'label' => $this->__('Cycle to publish multiple products %s minutes after the first publish'), 'field' => array(
+                    'schedule_cycle_multiple_products', 'text', array(
+                        'name'    => 'schedule_cycle_multiple_products',
+                        'class'   => 'inline-number validate-number',
+                    )
+                )),
+                array('value' => 1, 'label' => $this->__('Randomly published'))
+            )
         ));
         $fieldsetSchedule->addField('schedule_overwrite_product_date_start', 'checkbox', array(
             'name'  => 'schedule_overwrite_product_date_start',
@@ -115,6 +153,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'value' => '1'
         ));
 
+        $fieldsetStock = $form->addFieldset('fieldset_stock', array('legend' => $this->__('Stock Management')));
+        //$fieldsetStock->addType()
 
         $this->setForm($form);
 
@@ -158,6 +198,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     public function isHidden()
     {
         return false;
+    }
+
+    protected function _getDaysOptions()
+    {
+        //TODO extract to source model or helper
+        return array(
+            2 => 2,
+            4 => 4,
+            6 => 6,
+            8 => 8,
+            10 => 10
+        );
     }
 
     protected function _getReactivationOptions()
