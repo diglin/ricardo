@@ -33,6 +33,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'label' => $this->__('Select the category')
         ));
 
+
         $fieldsetType = $form->addFieldset('fieldset_type', array('legend' => $this->__('Type of sales')));
         $fieldsetType->addField('sales_type', 'select', array(
             'name'      => 'sales_type',
@@ -85,6 +86,36 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'label' => $this->__('Currency'),
             'value' => 'CHF'
         ));
+
+
+        $fieldsetSchedule = $form->addFieldset('fieldset_schedule', array('legend' => $this->__('Schedule')));
+        $fieldsetSchedule->addType('start_date_picker', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_date_start'));
+        $fieldsetSchedule->addType('end_date_picker', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_date_end'));
+        $fieldsetSchedule->addType('cycle_products', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_cycleproducts'));
+        $fieldsetSchedule->addField('schedule_date_start', 'start_date_picker', array(
+            'name'  => 'schedule_date_start',
+            'label' => $this->__('Start')
+        ));
+        $fieldsetSchedule->addField('schedule_period_days', 'end_date_picker', array(
+            'name'  => 'schedule_period_days',
+            'label' => $this->__('End')
+        ));
+        $fieldsetSchedule->addField('schedule_reactivation', 'select', array(
+            'name'    => 'schedule_reactivation',
+            'label'   => $this->__('Reactivation'),
+            'options' => $this->_getReactivationOptions()
+        ));
+        $fieldsetSchedule->addField('schedule_cycle_multiple_products', 'cycle_products', array(
+            'name'  => 'schedule_cycle_multiple_products',
+            'label' => $this->__('Cycle')
+        ));
+        $fieldsetSchedule->addField('schedule_overwrite_product_date_start', 'checkbox', array(
+            'name'  => 'schedule_overwrite_product_date_start',
+            'label' => $this->__('Overwrite all products starting date'),
+            'value' => '1'
+        ));
+
+
         $this->setForm($form);
 
         return parent::_prepareForm();
@@ -129,4 +160,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         return false;
     }
 
+    protected function _getReactivationOptions()
+    {
+        //TODO extract to helper or source model
+        return array(
+            0 => 0,
+            1 => 1,
+            2 => 2,
+            3 => 3,
+            4 => 4,
+            5 => 5,
+            null => $this->__('Until sold')
+        );
+    }
 }
