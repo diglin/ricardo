@@ -153,6 +153,33 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'value' => '1'
         ));
 
+        //TODO add product_warranty, product_condition and product_condition_source_attribute_id attributes to sales options table?
+        $fieldsetCondition = $form->addFieldset('fieldset_condition', array('legend' => $this->__('Product Condition')));
+        $fieldsetCondition->addType('checkboxes_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_checkboxes_extensible'));
+        $fieldsetCondition->addField('product_condition_attribute_container', 'checkboxes_extensible', array(
+            'name'   => 'product_condition_use_attribute',
+            'label'  => $this->__('Condition Source'),
+            'values' => array(
+                array('value' => 1, 'label' => $this->__('If available use condition information from product'), 'field' => array(
+                    'product_condition_source_attribute_id', 'select', array(
+                        'name'  => 'product_condition_source',
+                        'class' => 'inline-select',
+                        'values' => Mage::getModel('diglin_ricento/config_source_sales_product_condition_source')->getAllOptions()
+                    )
+                ))
+            )
+        ));
+        $fieldsetCondition->addField('product_condition', 'select', array(
+            'name'   => 'product_condition',
+            'label'  => $this->__('Condition'),
+            'values' => Mage::getModel('diglin_ricento/config_source_sales_product_condition')->getAllOptions()
+        ));
+        $fieldsetCondition->addField('product_warranty', 'radios', array(
+            'name' => 'product_warranty',
+            'label' => $this->__('Warranty'),
+            'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
+        ));
+
 
         $fieldsetStock = $form->addFieldset('fieldset_stock', array('legend' => $this->__('Stock Management')));
         $fieldsetStock->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
