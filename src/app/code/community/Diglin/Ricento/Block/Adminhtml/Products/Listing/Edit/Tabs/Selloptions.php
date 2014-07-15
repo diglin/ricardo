@@ -67,10 +67,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name'    => 'price_change',
             'no_span' => true
         ));
-        $fieldsetTypeFixPrice->addField('sales_auction_direct_buy', 'checkbox', array(
-            'name'  => 'sales_auction_direct_buy',
-            'label' => $this->__('Allow Direct Buy (in case of auction type of sales)'),
-            'value' => '1'
+        $fieldsetTypeFixPrice->addField('sales_auction_direct_buy', 'select', array(
+            'name'   => 'sales_auction_direct_buy',
+            'label'  => $this->__('Allow Direct Buy (in case of auction type of sales)'),
+            'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
         ));
         $fieldsetTypeFixPrice->addField('fix_currency', 'label', array(
             'name'  => 'fix_currency',
@@ -151,10 +151,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 array('value' => 1, 'label' => $this->__('Randomly published'))
             )
         ));
-        $fieldsetSchedule->addField('schedule_overwrite_product_date_start', 'checkbox', array(
-            'name'  => 'schedule_overwrite_product_date_start',
-            'label' => $this->__('Overwrite all products starting date'),
-            'value' => '1'
+        $fieldsetSchedule->addField('schedule_overwrite_product_date_start', 'select', array(
+            'name'   => 'schedule_overwrite_product_date_start',
+            'label'  => $this->__('Overwrite all products starting date'),
+            'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
         ));
 
         //TODO add product_warranty, product_condition and product_condition_source_attribute_id attributes to sales options table?
@@ -178,7 +178,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'label'  => $this->__('Condition'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_product_condition')->getAllOptions()
         ));
-        $fieldsetCondition->addField('product_warranty', 'radios', array(
+        $fieldsetCondition->addField('product_warranty', 'select', array(
             'name' => 'product_warranty',
             'label' => $this->__('Warranty'),
             'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()

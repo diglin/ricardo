@@ -55,10 +55,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'name'     => 'shipping_price',
             'label'    => $this->__('Price'),
         ));
-        $fieldsetShipping->addField('free_shipping', 'checkbox', array(
+        $fieldsetShipping->addField('free_shipping', 'select', array(
             'name'    => 'free_shipping',
             'label'   => $this->__('Free shipping'),
-            'value'   => '1',
+            'values'  => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions(),
             'onclick' => '$(\'diglin_ricento_shipping_price\').disabled = this.checked'
         ));
         $this->setForm($form);
