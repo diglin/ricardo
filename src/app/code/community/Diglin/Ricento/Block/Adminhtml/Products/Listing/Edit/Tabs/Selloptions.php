@@ -21,10 +21,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $form = new Varien_Data_Form();
         $htmlIdPrefix = 'diglin_ricento_';
         $form->setHtmlIdPrefix($htmlIdPrefix);
+        $form->addField('options_id', 'hidden', array(
+            'name' => 'sales_options[entity_id]',
+        ));
 
         $fieldsetCategory = $form->addFieldset('fieldset_category', array('legend' => Mage::helper('catalog')->__('Category')));
         $fieldsetCategory->addField('ricardo_category_use_mapping', 'radios', array(
-            'name'      => 'ricardo_category_use_mapping',
+            'name'      => 'sales_options[ricardo_category_use_mapping]',
             'label'     => $this->__('Ricardo Category'),
             'separator' => '<br>',
             'values'    => array(
@@ -34,14 +37,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
         $fieldsetCategory->addType('ricardo_category', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_catalog_category_form_renderer_mapping'));
         $fieldsetCategory->addField('ricardo_category', 'ricardo_category', array(
-            'name'  => 'ricardo_category',
+            'name'  => 'sales_options[ricardo_category]',
             'label' => $this->__('Select the category')
         ));
 
 
         $fieldsetType = $form->addFieldset('fieldset_type', array('legend' => $this->__('Type of sales')));
         $fieldsetType->addField('sales_type', 'select', array(
-            'name'      => 'sales_type',
+            'name'      => 'sales_options[sales_type]',
             'required'  => true,
             'label'     => $this->__('Type of sales'),
             'values'    => Mage::getModel('diglin_ricento/config_source_sales_type')->getAllOptions(),
@@ -49,7 +52,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
         $fieldsetTypeFixPrice = $fieldsetType->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price')));
         $fieldsetTypeFixPrice->addField('price_source_attribute_id', 'select', array(
-            'name'    => 'price_source_attribute_id',
+            'name'    => 'sales_options[price_source_attribute_id]',
             'label'   => $this->__('Source'),
             'values'  => Mage::getModel('diglin_ricento/config_source_sales_price_source')->getAllOptions()
         ));
@@ -58,37 +61,37 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'label'             => $this->__('Price Change'),
         ));
         $fieldsetPriceChange->addField('price_change_type', 'select', array(
-            'name'               => 'price_change_type',
+            'name'               => 'sales_options[price_change_type]',
             'after_element_html' => ' +&nbsp;',
             'no_span'            => true,
             'values'             => Mage::getModel('diglin_ricento/config_source_sales_price_method')->getAllOptions()
         ));
         $fieldsetPriceChange->addField('price_change', 'text', array(
-            'name'    => 'price_change',
-            'no_span' => true
+            'name'    => 'sales_options[price_change]',
+            'no_span' => true,
+            'class'   => 'inline-number validate-number',
         ));
         $fieldsetTypeFixPrice->addField('sales_auction_direct_buy', 'select', array(
-            'name'   => 'sales_auction_direct_buy',
+            'name'   => 'sales_options[sales_auction_direct_buy]',
             'label'  => $this->__('Allow Direct Buy (in case of auction type of sales)'),
             'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
         ));
         $fieldsetTypeFixPrice->addField('fix_currency', 'label', array(
-            'name'  => 'fix_currency',
+            'name'  => 'sales_options[fix_currency]',
             'label' => $this->__('Currency')
         ));
         $fieldsetTypeAuction = $fieldsetType->addFieldset('fieldset_type_auction', array('legend' => $this->__('Auction')));
         $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
-            'name'  => 'sales_auction_start_price',
+            'name'  => 'sales_options[sales_auction_start_price]',
             'label' => $this->__('Start price')
         ));
         $fieldsetTypeAuction->addField('sales_auction_increment', 'text', array(
-            'name'  => 'sales_auction_increment',
+            'name'  => 'sales_options[sales_auction_increment]',
             'label' => $this->__('Increment')
         ));
         $fieldsetTypeAuction->addField('auction_currency', 'label', array(
-            'name'  => 'auction_currency',
+            'name'  => 'sales_options[auction_currency]',
             'label' => $this->__('Currency'),
-            'value' => 'CHF'
         ));
 
 
@@ -98,13 +101,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             Mage_Core_Model_Locale::FORMAT_TYPE_SHORT
         );
         $fieldsetSchedule->addField('schedule_date_start_immediately', 'radios_extensible', array(
-            'name'   => 'schedule_date_start_immediately',
+            'name'   => 'sales_options[schedule_date_start_immediately]',
             'label'  => $this->__('Start'),
             'values' => array(
                 array('value' => 1, 'label' => $this->__('Start immediately')),
                 array('value' => 0, 'label' => $this->__('Start from'), 'field' => array(
                     'schedule_date_start', 'date', array(
-                        'name'   => 'schedule_date_start',
+                        'name'   => 'sales_options[schedule_date_start]',
                         'image'  => $this->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
                         'class'  => 'validate-date validate-date-range' //TODO concrete validation
@@ -113,19 +116,19 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             )
         ));
         $fieldsetSchedule->addField('schedule_period_use_end_date', 'radios_extensible', array(
-            'name'   => 'schedule_period_use_end_date',
+            'name'   => 'sales_options[schedule_period_use_end_date]',
             'label'  => $this->__('End'),
             'values' => array(
                 array('value' => 0, 'label' => $this->__('End after %s days'), 'field' => array(
                     'schedule_period_days', 'select', array(
-                        'name'    => 'schedule_period_days',
+                        'name'    => 'sales_options[schedule_period_days]',
                         'options' => $this->_getDaysOptions(),
                         'class'   => 'inline-select'
                     )
                 )),
                 array('value' => 1, 'label' => $this->__('End on'), 'field' => array(
                     'schedule_period_end_date', 'date', array(
-                        'name'   => 'schedule_period_end_date',
+                        'name'   => 'sales_options[schedule_period_end_date]',
                         'image'  => Mage::getDesign()->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
                         'class'  => 'validate-date validate-date-range' //TODO concrete validation
@@ -134,17 +137,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             )
         ));
         $fieldsetSchedule->addField('schedule_reactivation', 'select', array(
-            'name'    => 'schedule_reactivation',
+            'name'    => 'sales_options[schedule_reactivation]',
             'label'   => $this->__('Reactivation'),
             'options' => $this->_getReactivationOptions()
         ));
         $fieldsetSchedule->addField('schedule_cycle_multiple_products_random', 'radios_extensible', array(
-            'name'  => 'schedule_cycle_multiple_products_random',
+            'name'  => 'sales_options[schedule_cycle_multiple_products_random]',
             'label' => $this->__('Cycle'),
             'values' => array(
                 array('value' => 0, 'label' => $this->__('Cycle to publish multiple products %s minutes after the first publish'), 'field' => array(
                     'schedule_cycle_multiple_products', 'text', array(
-                        'name'    => 'schedule_cycle_multiple_products',
+                        'name'    => 'sales_options[schedule_cycle_multiple_products]',
                         'class'   => 'inline-number validate-number',
                     )
                 )),
@@ -152,7 +155,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             )
         ));
         $fieldsetSchedule->addField('schedule_overwrite_product_date_start', 'select', array(
-            'name'   => 'schedule_overwrite_product_date_start',
+            'name'   => 'sales_options[schedule_overwrite_product_date_start]',
             'label'  => $this->__('Overwrite all products starting date'),
             'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
         ));
@@ -161,12 +164,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCondition = $form->addFieldset('fieldset_condition', array('legend' => $this->__('Product Condition')));
         $fieldsetCondition->addType('checkboxes_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_checkboxes_extensible'));
         $fieldsetCondition->addField('product_condition_use_attribute', 'checkboxes_extensible', array(
-            'name'   => 'product_condition_use_attribute',
+            'name'   => 'sales_options[product_condition_use_attribute]',
             'label'  => $this->__('Condition Source'),
             'values' => array(
                 array('value' => 1, 'label' => $this->__('If available use condition information from product'), 'field' => array(
                     'product_condition_source_attribute_id', 'select', array(
-                        'name'  => 'product_condition_source',
+                        'name'  => 'sales_options[product_condition_source]',
                         'class' => 'inline-select',
                         'values' => Mage::getModel('diglin_ricento/config_source_sales_product_condition_source')->getAllOptions()
                     )
@@ -174,12 +177,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             )
         ));
         $fieldsetCondition->addField('product_condition', 'select', array(
-            'name'   => 'product_condition',
+            'name'   => 'sales_options[product_condition]',
             'label'  => $this->__('Condition'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_product_condition')->getAllOptions()
         ));
         $fieldsetCondition->addField('product_warranty', 'select', array(
-            'name' => 'product_warranty',
+            'name' => 'sales_options[product_warranty]',
             'label' => $this->__('Warranty'),
             'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
         ));
@@ -188,13 +191,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetStock = $form->addFieldset('fieldset_stock', array('legend' => $this->__('Stock Management')));
         $fieldsetStock->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
         $fieldsetStock->addField('stock_management_use_inventory', 'radios_extensible', array(
-            'name'   => 'stock_management_use_inventory',
+            'name'   => 'sales_options[stock_management_use_inventory]',
             'label'  => $this->__('Stock Management'),
             'values' => array(
                 array('value' => 1, 'label' => $this->__('Use product inventory')),
                 array('value' => 0, 'label' => $this->__('Use custom qty'), 'field' => array(
                     'stock_management', 'text', array(
-                        'name'  => 'stock_management',
+                        'name'  => 'sales_options[stock_management]',
                         'class' => 'inline-number validate-number'
                     )
                 ))
@@ -204,7 +207,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         $fieldsetCustomization = $form->addFieldset('fieldset_customization', array('legend' => $this->__('Customization')));
         $fieldsetCustomization->addField('customization_template', 'select', array(
-            'name'    => 'customization_template',
+            'name'    => 'sales_options[customization_template]',
             'label'   => $this->__('Template'),
             'values'  => Mage::getModel('diglin_ricento/config_source_sales_template')->getAllOptions()
         ));
@@ -212,7 +215,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         $fieldsetPromotion = $form->addFieldset('fieldset_promotion', array('legend' => $this->__('Promotion')));
         $fieldsetPromotion->addField('promotion_space', 'radios', array(
-            'name'   => 'promotion_space',
+            'name'   => 'sales_options[promotion_space]',
             'label'  => $this->__('Privilege Space'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_promotion')->getAllOptions()
         ));
@@ -225,13 +228,22 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     {
         $this->getForm()->setValues($this->getSalesOptions());
         $derivedValues = array();
+        $derivedValues['options_id'] = $this->getSalesOptions()->getId();
         $derivedValues['fix_currency'] = 'CHF';
+        $derivedValues['auction_currency'] = 'CHF';
         if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
             $derivedValues['schedule_cycle_multiple_products_random'] = '1';
         }
         if ((int) $this->getSalesOptions()->getStockManagement() === -1) {
             $derivedValues['stock_management'] = '';
             $derivedValues['stock_management_use_inventory'] = 1;
+        }
+        if (!in_array($this->getSalesOptions()->getSchedulePeriodDays(), $this->_getDaysOptions())) {
+            $derivedValues['schedule_period_use_end_date'] = 1;
+            $derivedValues['schedule_period_end_date'] = date_add(
+                new DateTime($this->getSalesOptions()->getScheduleDateStart()),
+                DateInterval::createFromDateString($this->getSalesOptions()->getSchedulePeriodDays().' day')
+            )->format(Varien_Date::DATE_PHP_FORMAT);
         }
         $this->getForm()->addValues($derivedValues);
         return parent::_initFormValues();
