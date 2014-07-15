@@ -151,7 +151,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
             }
 
             try {
-                //$listing->save();
+                $listing->save();
                 $listing->getSalesOptions()->save();
 
                 $this->_getSession()->addSuccess($this->__('The listing has been saved.'));

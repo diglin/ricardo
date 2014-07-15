@@ -18,6 +18,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs extends Mage_Adm
 
     protected function _beforeToHtml()
     {
+        $this->addTab('general_section', array(
+            'label' => $this->__('General'),
+            'title' => $this->__('General'),
+            'content' => $this->getLayout()
+                    ->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_general')
+                    ->toHtml()
+        ));
         $this->addTab('products_section', array(
             'label' => $this->__('Products') ,
             'title' => $this->__('Products') ,

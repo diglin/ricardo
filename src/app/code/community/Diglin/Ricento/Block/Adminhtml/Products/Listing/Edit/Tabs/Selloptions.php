@@ -19,9 +19,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form();
-        $htmlIdPrefix = 'diglin_ricento_';
+        $htmlIdPrefix = 'sales_options_';
         $form->setHtmlIdPrefix($htmlIdPrefix);
-        $form->addField('options_id', 'hidden', array(
+        $form->addField('entity_id', 'hidden', array(
             'name' => 'sales_options[entity_id]',
         ));
 
@@ -228,7 +228,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     {
         $this->getForm()->setValues($this->getSalesOptions());
         $derivedValues = array();
-        $derivedValues['options_id'] = $this->getSalesOptions()->getId();
         $derivedValues['fix_currency'] = 'CHF';
         $derivedValues['auction_currency'] = 'CHF';
         if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
