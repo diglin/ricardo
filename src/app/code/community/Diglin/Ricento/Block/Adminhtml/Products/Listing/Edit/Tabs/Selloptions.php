@@ -153,9 +153,38 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'value' => '1'
         ));
 
-        $fieldsetStock = $form->addFieldset('fieldset_stock', array('legend' => $this->__('Stock Management')));
-        //$fieldsetStock->addType()
 
+        $fieldsetStock = $form->addFieldset('fieldset_stock', array('legend' => $this->__('Stock Management')));
+        $fieldsetStock->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
+        $fieldsetStock->addField('stock_management_container', 'radios_extensible', array(
+            'name'   => 'stock_management_use_inventory',
+            'label'  => $this->__('Stock Management'),
+            'values' => array(
+                array('value' => 1, 'label' => $this->__('Use product inventory')),
+                array('value' => 0, 'label' => $this->__('Use custom qty'), 'field' => array(
+                    'stock_management', 'text', array(
+                        'name'  => 'stock_management',
+                        'class' => 'inline-number validate-number'
+                    )
+                ))
+            )
+        ));
+
+
+        $fieldsetCustomization = $form->addFieldset('fieldset_customization', array('legend' => $this->__('Customization')));
+        $fieldsetCustomization->addField('customization_template', 'select', array(
+            'name'    => 'customization_template',
+            'label'   => $this->__('Template'),
+            'options' => Mage::getModel('diglin_ricento/attribute_sales_template')->getAllOptions()
+        ));
+
+
+        $fieldsetPromotion = $form->addFieldset('fieldset_promotion', array('legend' => $this->__('Promotion')));
+        $fieldsetPromotion->addField('promotion_space', 'radios', array(
+            'name'   => 'promotion_space',
+            'label'  => $this->__('Privilege Space'),
+            'values' => Mage::getModel('diglin_ricento/attribute_sales_promotion')->getAllOptions()
+        ));
         $this->setForm($form);
 
         return parent::_prepareForm();
