@@ -1,5 +1,8 @@
 <?php
-class Diglin_Ricento_Model_Attribute_Sales_Promotion implements Mage_Eav_Model_Entity_Attribute_Source_Interface
+/**
+ * Abstract base class for ricento attribute source models, used in edit form
+ */
+abstract class Diglin_Ricento_Model_Config_Source_Abstract implements Mage_Eav_Model_Entity_Attribute_Source_Interface
 {
     /**
      * Retrieve All options
@@ -9,7 +12,7 @@ class Diglin_Ricento_Model_Attribute_Sales_Promotion implements Mage_Eav_Model_E
     public function getAllOptions()
     {
         $options = array();
-        foreach ($this->getOptionHash() as $value => $label) {
+        foreach ($this->toOptionHash() as $value => $label) {
             $options[] = array('label' => $label, 'value' => $value);
         }
         return $options;
@@ -20,16 +23,7 @@ class Diglin_Ricento_Model_Attribute_Sales_Promotion implements Mage_Eav_Model_E
      *
      * @return array
      */
-    public function getOptionHash()
-    {
-        //TODO implement
-        return array(
-            '' => 'None',
-            1  => 'Small CHF 2.00',
-            2  => 'Medium CHF 5.00',
-            3  => 'Big CHF 12.00'
-        );
-    }
+    abstract public function toOptionHash();
 
     /**
      * Retrieve Option value text

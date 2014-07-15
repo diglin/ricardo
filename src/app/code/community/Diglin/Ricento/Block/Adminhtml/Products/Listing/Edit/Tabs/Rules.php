@@ -30,7 +30,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $fieldsetPayment->addField('payment_methods', 'checkboxes', array(
             'name'    => 'payment_methods',
             'label'   => $this->__('Select Payment Methods'),
-            'options' => Mage::getModel('diglin_ricento/attribute_payment')->getAllOptions()
+            'values' => Mage::getModel('diglin_ricento/config_source_rules_payment')->getAllOptions()
         ));
         $fieldsetPayment->addField('payment_methods_description', 'textarea', array(
             'name'  => 'payment_methods_description',
@@ -40,12 +40,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $fieldsetShipping->addField('shipping_methods', 'select', array(
             'name'    => 'shipping_methods',
             'label'   => $this->__('Shipping Methods'),
-            'options' => Mage::getModel('diglin_ricento/attribute_shipping')->getAllOptions()
+            'values'  => Mage::getModel('diglin_ricento/config_source_rules_shipping')->getAllOptions()
         ));
         $fieldsetShipping->addField('shipping_availability', 'select', array(
             'name'    => 'shipping_availability',
             'label'   => $this->__('Availability'),
-            'options' => Mage::getModel('diglin_ricento/attribute_shipping_availability')->getAllOptions()
+            'values'  => Mage::getModel('diglin_ricento/config_source_rules_shipping_availability')->getAllOptions()
         ));
         $fieldsetShipping->addField('shipping_description', 'textarea', array(
             'name'  => 'shipping_description',

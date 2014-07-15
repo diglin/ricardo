@@ -39,14 +39,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name'      => 'sales_type',
             'required'  => true,
             'label'     => $this->__('Type of sales'),
-            'options'   => Mage::getModel('diglin_ricento/attribute_sales_type')->getAllOptions(),
+            'values'    => Mage::getModel('diglin_ricento/config_source_sales_type')->getAllOptions(),
             'onchange'  => '' //TODO toggle fieldset
         ));
         $fieldsetTypeFixPrice = $fieldsetType->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price')));
         $fieldsetTypeFixPrice->addField('price_source_attribute_id', 'select', array(
             'name'    => 'price_source_attribute_id',
             'label'   => $this->__('Source'),
-            'options' => Mage::getModel('diglin_ricento/attribute_sales_price_source')->getAllOptions()
+            'values'  => Mage::getModel('diglin_ricento/config_source_sales_price_source')->getAllOptions()
         ));
         $fieldsetTypeFixPrice->addType('fieldset_inline', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_fieldset_inline'));
         $fieldsetPriceChange = $fieldsetTypeFixPrice->addField('fieldset_price_change', 'fieldset_inline', array(
@@ -56,7 +56,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name'               => 'price_change_type',
             'after_element_html' => ' +&nbsp;',
             'no_span'            => true,
-            'options'            => Mage::getModel('diglin_ricento/attribute_sales_price_method')->getAllOptions()
+            'values'             => Mage::getModel('diglin_ricento/config_source_sales_price_method')->getAllOptions()
         ));
         $fieldsetPriceChange->addField('price_change', 'text', array(
             'name'    => 'price_change',
@@ -175,7 +175,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCustomization->addField('customization_template', 'select', array(
             'name'    => 'customization_template',
             'label'   => $this->__('Template'),
-            'options' => Mage::getModel('diglin_ricento/attribute_sales_template')->getAllOptions()
+            'values'  => Mage::getModel('diglin_ricento/config_source_sales_template')->getAllOptions()
         ));
 
 
@@ -183,7 +183,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetPromotion->addField('promotion_space', 'radios', array(
             'name'   => 'promotion_space',
             'label'  => $this->__('Privilege Space'),
-            'values' => Mage::getModel('diglin_ricento/attribute_sales_promotion')->getAllOptions()
+            'values' => Mage::getModel('diglin_ricento/config_source_sales_promotion')->getAllOptions()
         ));
         $this->setForm($form);
 
