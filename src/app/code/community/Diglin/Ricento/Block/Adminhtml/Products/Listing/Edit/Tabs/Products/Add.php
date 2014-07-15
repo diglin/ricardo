@@ -52,7 +52,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
                 new Zend_Db_Expr('products_listing_id IS NOT NULL'),
                 'product_id=entity_id',
                 'products_listing_id !='.(int) $this->getRequest()->getParam('id', 0),
-                'left');
+                'left')
+            ->groupByAttribute('entity_id');
         $productIds = $this->_getSelectedProducts();
         if (empty($productIds)) {
             $productIds = 0;
