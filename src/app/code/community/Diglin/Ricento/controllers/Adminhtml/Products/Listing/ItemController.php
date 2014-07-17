@@ -64,11 +64,12 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
             $this->_initItems();
             try {
                 if ($this->saveConfiguration($data)) {
-                    //TODO delete "use default" items and set their id to 0
-                    foreach ($this->getSelectedItems() as $item) {
-                        /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
-                        $item->setSalesOptionsId($item->getSalesOptions()->getId());
-                        $item->save();
+                    if (!isset($data['sales_options']['use_products_list_settings'])) {
+                        foreach ($this->getSelectedItems() as $item) {
+                            /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
+                            $item->setSalesOptionsId($item->getSalesOptions()->getId());
+                            $item->save();
+                        }
                     }
                     $this->_getSession()->addSuccess($this->__('The configuration has been saved.'));
                 }
@@ -100,7 +101,6 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         if (!$this->_salesOptionsCollection) {
             $this->_salesOptionsCollection = new Varien_Data_Collection();
             foreach ($this->getSelectedItems() as $item) {
-                //TODO only add if not "use default"
                 /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
                 $this->_salesOptionsCollection->addItem($item->getSalesOptions());
             }

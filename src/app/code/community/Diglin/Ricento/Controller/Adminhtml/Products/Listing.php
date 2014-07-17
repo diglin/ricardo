@@ -108,7 +108,11 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
         }
 
         try {
-            $this->_getSalesOptions()->walk('save');
+            if (isset($data['sales_options']['use_products_list_settings'])) {
+                $this->_getSalesOptions()->walk('delete');
+            } else {
+                $this->_getSalesOptions()->walk('save');
+            }
 
             $this->_getSession()->setFormData(false);
             if ($this->getRequest()->getParam('back')) {

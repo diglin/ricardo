@@ -14,10 +14,27 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
     {
         parent::_prepareForm();
         $this->getForm()->addField('use_products_list_settings', 'checkbox', array(
-            'name'    => 'sales_options[use_product_list_settings]',
+            'name'    => 'sales_options[use_products_list_settings]',
             'label'   => 'Use Product List Settings',
             'onclick' => "var self = this; this.form.getElements().each(function(element) { if (element!=self && element.id.startsWith('{$this->getForm()->getHtmlIdPrefix()}')) element.disabled=self.checked; })"
         ), '^');
+        return $this;
+    }
+    protected function _initFormValues()
+    {
+        parent::_initFormValues();
+        $useDefaultCheckbox = $this->getForm()->getElement('use_products_list_settings');
+        $useDefaultCheckbox->setChecked(true);
+        foreach ($this->getSelectedItems() as $item) {
+            /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
+            if ($item->getSalesOptionsId()) {
+                $useDefaultCheckbox->setChecked(false);
+                break;
+            }
+        }
+        if ($useDefaultCheckbox->getChecked()) {
+            //TODO disable all elements (probably better via JS than here)
+        }
         return $this;
     }
     /**
