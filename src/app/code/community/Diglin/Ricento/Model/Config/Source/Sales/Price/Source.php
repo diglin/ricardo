@@ -6,7 +6,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Price_Source extends Diglin_Ricen
      */
     public function toOptionHash()
     {
-        // TODO: implement
+        // TODO: implement, use attribute id as key or save attribute name in db
         return array(
             ''              => '- Select Product Attribute -',
             'price'         => 'Price',

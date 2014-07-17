@@ -99,55 +99,45 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     public function saveAction()
     {
         if ($data = $this->getRequest()->getPost()) {
-            $data = $this->_filterPostData($data);
             $listing = $this->_initListing();
             if (!$listing) {
-                $this->_redirect('*/*/index');
+                $this->_redirect($this->_getIndexUrl());
                 return;
             }
-            if ($listing->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
-                $this->_getSession()->addError($this->__('Listed listings cannot be modified. Stop the listing first to make changes.'));
-                $this->_redirect('*/*/edit', array('id' => $listing->getId(), '_current' => true));
-                return;
-            }
-
-//            echo '<pre>';
-//            var_dump($this->getRequest()->getPost());
-//            exit;
-
             $listing->setData($data['product_listing']);
-            $listing->getSalesOptions()->setData($data['sales_options']);
-
-            if (!$this->_validatePostData($data)) {
-                $this->_redirect('*/*/edit', array('id' => $listing->getId(), '_current' => true));
-                return;
-            }
-
             try {
                 $listing->save();
-                $listing->getSalesOptions()->save();
-
-                $this->_getSession()->addSuccess($this->__('The listing has been saved.'));
-                $this->_getSession()->setFormData(false);
-                if ($this->getRequest()->getParam('back')) {
-                    $this->_redirect('*/*/edit', array('id' => $listing->getId(), '_current'=>true));
-                    return;
-                }
-                $this->_redirect('*/*/index');
+                $this->saveConfiguration($data);
                 return;
-
             } catch (Mage_Core_Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
             } catch (Exception $e) {
                 Mage::logException($e);
                 $this->_getSession()->addException($e, $this->__('An error occurred while saving the listing.'));
             }
-
-            $this->_getSession()->setFormData($data);
-            $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
-            return;
         }
-        $this->_redirect('*/*/');
+        $this->_redirectUrl($this->_getIndexUrl());
+    }
+
+    protected function _savingAllowed()
+    {
+        return $this->_getListing()->getStatus() !== Diglin_Ricento_Helper_Data::STATUS_LISTED;
+    }
+
+    protected function _getSalesOptions()
+    {
+        return $this->_getListing()->getSalesOptions();
+    }
+
+    protected function _getEditUrl()
+    {
+        return $this->getUrl('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+    }
+
+
+    protected function _getIndexUrl()
+    {
+        return $this->getUrl('*/*/index');
     }
 
     /**
@@ -306,48 +296,4 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
     }
 
-    /**
-     * Filtering posted data. Converting localized data if needed
-     *
-     * @param array
-     * @return array
-     */
-    protected function _filterPostData($data)
-    {
-        if (!isset($data['product_listing'])) {
-            $data['product_listing'] = array();
-        }
-
-        if (!isset($data['sales_options'])) {
-            $data['sales_options'] = array();
-        }
-        $data['sales_options'] = $this->_filterDates($data['sales_options'], array('schedule_date_start', 'schedule_period_end_date'));
-        if (!empty($data['sales_options']['schedule_cycle_multiple_products_random'])) {
-            $data['sales_options']['schedule_cycle_multiple_products'] = null;
-        }
-        if (!empty($data['sales_options']['stock_management_use_inventory'])) {
-            $data['sales_options']['stock_management'] = -1;
-        }
-        if (!empty($data['sales_options']['schedule_date_start_immediately'])) {
-            $data['sales_options']['schedule_date_start'] = date(Varien_Date::DATE_PHP_FORMAT);
-        }
-        if (!empty($data['sales_options']['schedule_period_use_end_date'])) {
-            $data['sales_options']['schedule_period_days'] = date_diff(
-                new DateTime($data['sales_options']['schedule_date_start']),
-                new DateTime($data['sales_options']['schedule_period_end_date']))->days;
-        }
-        return $data;
-    }
-
-    /**
-     * Validate post data
-     *
-     * @param array $data
-     * @return bool     Return FALSE if some item is invalid
-     */
-    protected function _validatePostData($data)
-    {
-        //TODO validation if necessary
-        return true;
-    }
 }

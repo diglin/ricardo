@@ -1,5 +1,5 @@
 <?php
-class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage_Adminhtml_Controller_Action
+abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage_Adminhtml_Controller_Action
 {
     protected function _construct()
     {
@@ -35,4 +35,97 @@ class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage_Adminhtm
     {
         return Mage::registry('products_listing');
     }
+
+    /**
+     * Filtering posted data (sales options and rules form). Converting localized data if needed
+     *
+     * @param array
+     * @return array
+     */
+    protected function _filterPostData($data)
+    {
+        if (!isset($data['product_listing'])) {
+            $data['product_listing'] = array();
+        }
+
+        if (!isset($data['sales_options'])) {
+            $data['sales_options'] = array();
+        }
+        $data['sales_options'] = $this->_filterDates($data['sales_options'], array('schedule_date_start', 'schedule_period_end_date'));
+        if (!empty($data['sales_options']['schedule_cycle_multiple_products_random'])) {
+            $data['sales_options']['schedule_cycle_multiple_products'] = null;
+        }
+        if (!empty($data['sales_options']['stock_management_use_inventory'])) {
+            $data['sales_options']['stock_management'] = -1;
+        }
+        if (!empty($data['sales_options']['schedule_date_start_immediately'])) {
+            $data['sales_options']['schedule_date_start'] = date(Varien_Date::DATE_PHP_FORMAT);
+        }
+        if (!empty($data['sales_options']['schedule_period_use_end_date'])) {
+            $data['sales_options']['schedule_period_days'] = date_diff(
+                new DateTime($data['sales_options']['schedule_date_start']),
+                new DateTime($data['sales_options']['schedule_period_end_date']))->days;
+        }
+        return $data;
+    }
+
+    /**
+     * Validate post data
+     *
+     * @param array $data
+     * @return bool     Return FALSE if some item is invalid
+     */
+    protected function _validatePostData($data)
+    {
+        //TODO validation if necessary
+        return true;
+    }
+
+
+    /**
+     * Save rules and sales options for listing or for items
+     */
+    public function saveConfiguration($data)
+    {
+        $data = $this->_filterPostData($data);
+        if (!$this->_savingAllowed()) {
+            $this->_getSession()->addError($this->__('Listed listings cannot be modified. Stop the listing first to make changes.'));
+            $this->_redirect($this->_getEditUrl());
+            return;
+        }
+
+        $this->_getSalesOptions()->setData($data['sales_options']); //TODO this->_getSalesOptions /!\ setData auf collections wie erwartet? was ist mit ids?
+
+        if (!$this->_validatePostData($data)) {
+            $this->_redirectUrl($this->_getEditUrl());
+            return;
+        }
+
+        try {
+            $this->_getSalesOptions()->save();
+
+            $this->_getSession()->addSuccess($this->__('The listing has been saved.')); //TODO message?
+            $this->_getSession()->setFormData(false);
+            if ($this->getRequest()->getParam('back')) {
+                $this->_redirectUrl($this->_getEditUrl());
+                return;
+            }
+            $this->_redirectUrl($this->_getIndexUrl());
+            return;
+
+        } catch (Mage_Core_Exception $e) {
+            $this->_getSession()->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::logException($e);
+            $this->_getSession()->addException($e, $this->__('An error occurred while saving the configuration.'));
+        }
+
+        $this->_getSession()->setFormData($data);
+        $this->_redirectUrl($this->_getEditUrl());
+        return;
+    }
+    abstract protected function _savingAllowed();
+    abstract protected function _getSalesOptions();
+    abstract protected function _getEditUrl();
+    abstract protected function _getIndexUrl();
 }
