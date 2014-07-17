@@ -7,7 +7,7 @@
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
-    extends Mage_Adminhtml_Block_Widget_Form
+    extends Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Abstract
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 
 {
@@ -324,11 +324,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         if ($this->_model) {
             return $this->_model;
         }
-        $listing = Mage::registry('products_listing');
-        if (!$listing) {
-            Mage::throwException('Products listing not loaded');
-        }
-        $this->_model = $listing->getSalesOptions();
+        $this->_model = $this->_getListing()->getSalesOptions();
         return $this->_model;
     }
 

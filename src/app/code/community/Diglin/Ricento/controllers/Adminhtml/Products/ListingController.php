@@ -137,6 +137,11 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
                 $this->_redirect('*/*/index');
                 return;
             }
+            if ($listing->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+                $this->_getSession()->addError($this->__('Listed listings cannot be modified. Stop the listing first to make changes.'));
+                $this->_redirect('*/*/edit', array('id' => $listing->getId(), '_current' => true));
+                return;
+            }
 
 //            echo '<pre>';
 //            var_dump($this->getRequest()->getPost());
