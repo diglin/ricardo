@@ -15,7 +15,7 @@ Ricento.addProductsPopup = function(url) {
         draggable:true,
         className:'magento',
         windowClassName:'popup-window',
-        title:'Add Product',
+        title:'Add Product', //TODO translate
         top:50,
         width:900,
         height:600,
@@ -34,6 +34,34 @@ Ricento.addProductsPopup = function(url) {
         }
     });
 };
+Ricento.configureItemPopup = function(url) {
+    if ($('ricento_popup') && typeof(Windows) != 'undefined') {
+        Windows.focus('ricento_popup');
+        return;
+    }
+
+    Dialog.info({url:url}, {
+        closable:true,
+        resizable:true,
+        maximizable: true,
+        draggable:true,
+        className:'magento',
+        windowClassName:'popup-window',
+        title:'Configure product XYZ (or all selected products)', //TODO determine title & translate
+        top:50,
+        width:900,
+        height:600,
+        zIndex:1000,
+        recenterAuto:false,
+        hideEffect:Element.hide,
+        showEffect:Element.show,
+        id:'ricento_popup',
+        showProgress:true,
+        onShow:function(dialog) {
+            dialog.element.innerHTML.evalScripts();
+        }
+    });
+};
 Ricento.newListingPopup = function() {
     if ($('ricento_popup') && typeof(Windows) != 'undefined') {
         Windows.focus('ricento_popup');
@@ -47,7 +75,7 @@ Ricento.newListingPopup = function() {
         draggable:true,
         className:'magento',
         windowClassName:'popup-window',
-        title:'Create Product Listing',
+        title:'Create Product Listing', //TODO translate
         top:50,
         width:600,
         height:'auto',

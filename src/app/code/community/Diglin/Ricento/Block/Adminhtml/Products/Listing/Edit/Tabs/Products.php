@@ -80,8 +80,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $this->addColumn('type', array(
             'header'    => Mage::helper('catalog')->__('Type'),
             'index'     => 'type_id',
-            'type'  => 'options',
-            'options' => Mage::getSingleton('catalog/product_type')->getOptionArray(),
+            'type'      => 'options',
+            'options'   => Mage::getSingleton('catalog/product_type')->getOptionArray(),
         ));
         $this->addColumn('sku', array(
             'header'    => Mage::helper('catalog')->__('SKU'),
@@ -90,10 +90,38 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         ));
         $this->addColumn('qty', array(
             'header'    => Mage::helper('catalog')->__('Inventory'),
-            'type'  => 'number',
+            'type'      => 'number',
             'width'     => '1',
             'index'     => 'stock_qty'
         ));
+        $this->addColumn('action',
+            array(
+                'header'    => $this->__('Action'),
+                'width'     => '50px',
+                'type'      => 'action',
+                'getter'     => 'getId',
+                'actions'   => array(
+                    array(
+                        'caption' => $this->__('Configure'),
+                        'url'     => array(
+                            'base'=>'*/products_listing_item/configure', //FIXME use configurePopup action if popup works
+                        ),
+                        'onclick' => 'Ricento.configureItemPopup(this.href); return false;', //FIXME "onclick" funktioniert nicht mit Magento Action Column Renderer und grid.js, "href=javascript:..." auch nicht, da href dynamisch erstellt wird
+                        'field'   => 'id'
+                    ),
+                    array(
+                        'caption' => $this->__('Remove'),
+                        'url'     => array(
+                            'base'   => '*/*/removeProduct',
+                            'params' => array('id' => $this->getListing()->getId()),
+                        ),
+                        'field'   => 'product',
+                        'confirm' => $this->__('Are you sure?'),
+                    ),
+                ),
+                'filter'    => false,
+                'sortable'  => false,
+            ));
 
         return parent::_prepareColumns();
     }
@@ -111,7 +139,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
 
         $this->getMassactionBlock()->addItem('configure', array(
             'label' => $this->__('Configure'),
-            'url'   => $this->getUrl('*/products_listing/massConfigure', array('id' => $this->getListing()->getId()))
+            'url'   => // "javascript:Ricento.configureItemPopup('" .
+                       $this->getUrl('*/products_listing_item/configure', array('id' => $this->getListing()->getId(), '_current' => true))
+                       //. "');"
+                       //FIXME URL in JavaScript bekommt die ausgewählten items nicht als Parameter angehängt
         ));
 
         return $this;

@@ -243,18 +243,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
             $this->_redirect('*/*/index');
             return;
         }
-        $productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
+        if ($this->getRequest()->isPost()) {
+            $productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
+        } else {
+            $productIds = array_map('intval', (array) $this->getRequest()->getParam('product', array()));
+        }
         $productsRemoved = $this->_getListing()->removeProducts($productIds);
         $this->_getSession()->addSuccess($this->__('%d products removed from listing', $productsRemoved));
         $this->_redirect('*/*/edit', array('id' => $this->_getListing()->getId()));
-    }
-
-    /**
-     * Configure multiple products at once
-     */
-    public function massConfigureAction()
-    {
-        //TODO mass configure
     }
 
     /**

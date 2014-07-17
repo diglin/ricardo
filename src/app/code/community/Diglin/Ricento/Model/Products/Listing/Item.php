@@ -46,6 +46,13 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     protected $_eventObject = 'products_listing_item';
 
     /**
+     * Associated product
+     *
+     * @var Mage_Catalog_Model_Product
+     */
+    protected $_product;
+
+    /**
      * Products_Listing_Item Constructor
      * @return void
      */
@@ -57,4 +64,11 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
 
 // Diglin GmbH Tag NEW_METHOD
 
+    public function getProduct()
+    {
+        if (!$this->_product) {
+            $this->_product = Mage::getModel('catalog/product')->load($this->getProductId());
+        }
+        return $this->_product;
+    }
 }

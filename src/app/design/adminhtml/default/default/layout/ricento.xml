@@ -69,4 +69,9 @@
                    name="products_listing_add"></block>
         </reference>
     </ricento_products_listing_addproductspopup>
+    <ricento_products_listing_item_configure>
+        <reference name="content">
+            <block type="diglin_ricento/adminhtml_products_listing_item_edit" name="products_listing_item_edit"></block>
+        </reference>
+    </ricento_products_listing_item_configure>
 </layout>

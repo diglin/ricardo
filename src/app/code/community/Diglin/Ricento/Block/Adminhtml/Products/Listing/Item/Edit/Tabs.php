@@ -1,0 +1,32 @@
+<?php
+class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setId('products_listing_item_tabs');
+        $this->setDestElementId('edit_form');
+        $this->setTemplate('widget/tabshoriz.phtml');
+    }
+
+    protected function _beforeToHtml()
+    {
+        $this->addTab('rules_section', array(
+            'label' => $this->__('Rules') ,
+            'title' => $this->__('Rules') ,
+            'content' => $this->getLayout()
+                    ->createBlock('diglin_ricento/adminhtml_products_listing_item_edit_tabs_rules')
+                    ->toHtml()
+        ));
+
+        $this->addTab('selloptions_section', array(
+            'label' => $this->__('Sell Options') ,
+            'title' => $this->__('Sell Options') ,
+            'content' => $this->getLayout()
+                    ->createBlock('diglin_ricento/adminhtml_products_listing_item_edit_tabs_selloptions')
+                    ->toHtml()
+        ));
+
+        return parent::_beforeToHtml();
+    }
+}
