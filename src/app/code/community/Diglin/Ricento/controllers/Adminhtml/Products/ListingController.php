@@ -21,6 +21,10 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
      */
     protected function _initListing()
     {
+        $registeredListing = Mage::registry('products_listing');
+        if ($registeredListing) {
+            return $registeredListing;
+        }
         $id = (int) $this->getRequest()->getParam('id');
         if (!$id) {
             $this->_getSession()->addError('Product Listing not found.');
@@ -187,7 +191,6 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
      */
     public function saveAndListAction()
     {
-        //TODO validation
         $this->saveAction();
         $this->listAction();
     }
@@ -278,7 +281,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Mage_Adminhtml
         }
         $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_LISTED)->save();
         //TODO set status for items as well if necessary
-        $this->_getSession()->addSuccess($this->__('Listing listed.'));
+        $this->_getSession()->addSuccess($this->__('The listing has been listed.'));
         $this->_redirect('*/*/index');
     }
 
