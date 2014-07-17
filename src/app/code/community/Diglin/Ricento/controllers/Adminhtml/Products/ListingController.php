@@ -107,7 +107,9 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $listing->setData($data['product_listing']);
             try {
                 $listing->save();
-                $this->saveConfiguration($data);
+                if ($this->saveConfiguration($data)) {
+                    $this->_getSession()->addSuccess($this->__('The listing has been saved.'));
+                }
                 return;
             } catch (Mage_Core_Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
@@ -126,7 +128,11 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
     protected function _getSalesOptions()
     {
-        return $this->_getListing()->getSalesOptions();
+        if (!$this->_salesOptionsCollection) {
+            $this->_salesOptionsCollection = new Varien_Data_Collection();
+            $this->_salesOptionsCollection->addItem($this->_getListing()->getSalesOptions());
+        }
+        return $this->_salesOptionsCollection;
     }
 
     protected function _getEditUrl()

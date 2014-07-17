@@ -1,6 +1,11 @@
 <?php
 abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage_Adminhtml_Controller_Action
 {
+    /**
+     * @var Varien_Data_Collection
+     */
+    protected $_salesOptionsCollection;
+
     protected function _construct()
     {
         // important to get appropriate translation from this module
@@ -91,27 +96,27 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
         if (!$this->_savingAllowed()) {
             $this->_getSession()->addError($this->__('Listed listings cannot be modified. Stop the listing first to make changes.'));
             $this->_redirect($this->_getEditUrl());
-            return;
+            return false;
         }
 
-        $this->_getSalesOptions()->setData($data['sales_options']); //TODO this->_getSalesOptions /!\ setData auf collections wie erwartet? was ist mit ids?
+        unset($data['sales_options']['entity_id']);
+        $this->_getSalesOptions()->setDataToAll($data['sales_options']);
 
         if (!$this->_validatePostData($data)) {
             $this->_redirectUrl($this->_getEditUrl());
-            return;
+            return false;
         }
 
         try {
-            $this->_getSalesOptions()->save();
+            $this->_getSalesOptions()->walk('save');
 
-            $this->_getSession()->addSuccess($this->__('The listing has been saved.')); //TODO message?
             $this->_getSession()->setFormData(false);
             if ($this->getRequest()->getParam('back')) {
                 $this->_redirectUrl($this->_getEditUrl());
-                return;
+                return false;
             }
             $this->_redirectUrl($this->_getIndexUrl());
-            return;
+            return true;
 
         } catch (Mage_Core_Exception $e) {
             $this->_getSession()->addError($e->getMessage());
@@ -122,10 +127,26 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
 
         $this->_getSession()->setFormData($data);
         $this->_redirectUrl($this->_getEditUrl());
-        return;
+        return false;
     }
+
+    /**
+     * @return boolean
+     */
     abstract protected function _savingAllowed();
+
+    /**
+     * @return Diglin_Ricento_Model_Resource_Sales_Options_Collection
+     */
     abstract protected function _getSalesOptions();
+
+    /**
+     * @return string
+     */
     abstract protected function _getEditUrl();
+
+    /**
+     * @return string
+     */
     abstract protected function _getIndexUrl();
 }
