@@ -20,7 +20,15 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         ), '^');
         return $this;
     }
-
+    /**
+     * Returns items that are selected to be configured
+     *
+     * @return Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection
+     */
+    public function getSelectedItems()
+    {
+        return Mage::registry('selected_items');
+    }
     /**
      * Returns sales options model
      *
@@ -31,9 +39,19 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         if ($this->_model) {
             return $this->_model;
         }
-        //TODO get sales options model for product(s) --- multiple???
-        $this->_model = $this->_getListing()->getSalesOptions();
+        if (count($this->getSelectedItems()) === 1) {
+            $this->_loadSalesOptionsFromItem($this->getSelectedItems()->getFirstItem());
+        }
+        if (!$this->_model) {
+            $this->_model = $this->_getListing()->getSalesOptions();
+        }
         return $this->_model;
     }
 
+    protected function _loadSalesOptionsFromItem(Diglin_Ricento_Model_Products_Listing_Item $item)
+    {
+        if ($item->getSalesOptionsId()) {
+            $this->_model = $item->getSalesOptions();
+        }
+    }
 }
