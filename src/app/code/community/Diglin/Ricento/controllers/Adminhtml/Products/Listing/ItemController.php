@@ -1,25 +1,11 @@
 <?php
-class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Mage_Adminhtml_Controller_Action
+class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ricento_Controller_Adminhtml_Products_Listing
 {
-    //TODO DRY
     /**
-     * @return bool|Diglin_Ricento_Model_Products_Listing
+     * @return Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection
      */
-    protected function _initListing()
+    protected function _initItems()
     {
-        $registeredListing = Mage::registry('products_listing');
-        if ($registeredListing) {
-            return $registeredListing;
-        }
-        $id = (int) $this->getRequest()->getParam('id');
-        if (!$id) {
-            $this->_getSession()->addError('Product Listing not found.');
-            return false;
-        }
-
-        $productsListing = Mage::getModel('diglin_ricento/products_listing')->load($id);
-        Mage::register('products_listing', $productsListing);
-
         if ($this->getRequest()->isPost()) {
             $productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
         } else {
@@ -27,17 +13,22 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Mage_Admi
         }
         /* @var $itemCollection Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection */
         $itemCollection = Mage::getModel('diglin_ricento/products_listing_item')->getCollection();
-        $itemCollection->addFieldToFilter('products_listing_id', $productsListing->getId())
+        $itemCollection->addFieldToFilter('products_listing_id', $this->_getListing()->getId())
                        ->addFieldToFilter('product_id', array('in' => $productIds));
         Mage::register('selected_items', $itemCollection->load());
 
-        return $productsListing;
+        return $itemCollection;
     }
 
     public function configureAction()
     {
         if (!$this->_initListing()) {
             $this->_redirect('*/products_listing/index');
+            return;
+        }
+        if ($this->_initItems()->count() == 0) {
+            $this->_getSession()->addError($this->__('No products selected.'));
+            $this->_redirect('*/products_listing/edit', array('id' => $this->_getListing()->getId()));
             return;
         }
         $this->loadLayout();

@@ -6,7 +6,7 @@
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
-class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Form extends Diglin_Ricento_Block_Adminhtml_Products_Listing_Form_Abstract
 {
     protected function _prepareForm()
     {
@@ -22,4 +22,5 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Form extends Mage_Adm
         $this->setForm($form);
         return parent::_prepareForm();
     }
+
 }

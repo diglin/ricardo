@@ -130,6 +130,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     {
         $this->setMassactionIdField('entity_id');
         $this->getMassactionBlock()->setFormFieldName('product');
+        $this->getMassactionBlock()->setHideFormElement(true);
 
         $this->getMassactionBlock()->addItem('remove', array(
             'label'=> $this->__('Remove from list'),

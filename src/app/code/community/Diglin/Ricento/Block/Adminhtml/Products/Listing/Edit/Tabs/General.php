@@ -1,8 +1,19 @@
 <?php
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
-    extends Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Abstract
+    extends Mage_Adminhtml_Block_Widget_Form
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
+    /**
+     * @return Diglin_Ricento_Model_Products_Listing
+     */
+    protected function _getListing()
+    {
+        $listing = Mage::registry('products_listing');
+        if (!$listing) {
+            Mage::throwException('Products listing not loaded');
+        }
+        return $listing;
+    }
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form();
