@@ -110,7 +110,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                         'name'   => 'sales_options[schedule_date_start]',
                         'image'  => $this->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
-                        'class'  => 'validate-date validate-date-range' //TODO concrete validation
+                        'class'  => '' //TODO concrete validation (validate-date only if radio button selected))
                     )
                 ))
             )
@@ -131,7 +131,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                         'name'   => 'sales_options[schedule_period_end_date]',
                         'image'  => Mage::getDesign()->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
-                        'class'  => 'validate-date validate-date-range' //TODO concrete validation
+                        'class'  => '' //TODO concrete validation (validate-date only if radio button selected))
                     )
                 ))
             )
