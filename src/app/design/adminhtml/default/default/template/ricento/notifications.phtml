@@ -1,0 +1,22 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+/**
+ * @var $this Diglin_Ricento_Block_Adminhtml_Notifications
+ */
+?>
+<?php if (!$this->isConfigured()): ?>
+    <div class="notification-global">
+<!--        <span class="f-right">-->
+<!--            <a href="--><?php //echo $this->getSkipUrl() ?><!--">--><?php //echo $this->__('Skip configuration') ?><!--</a>-->
+<!--        </span>-->
+        <strong><?php echo $this->__('The Official Ricardo Extension "Ricento" has been installed.') ?></strong>
+        <?php echo $this->__('Please, click <a href="%s">here to configure</a> the access to the Ricardo API.', $this->getConfigurationUrl()) ?>
+    </div>
+<?php endif ?>

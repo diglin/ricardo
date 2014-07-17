@@ -7,7 +7,7 @@
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
-class Diglin_Ricento_Model_Config_Source_ShippingCalculation
+class Diglin_Ricento_Model_Config_Source_Shipping_Calculation
 {
     /**
      * Create option array to display the list of possible options for shipping calculation

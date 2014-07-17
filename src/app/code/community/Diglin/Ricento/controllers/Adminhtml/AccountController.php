@@ -13,7 +13,8 @@ class Diglin_Ricento_Adminhtml_AccountController extends Mage_Adminhtml_Controll
     {
         $block = $this->getLayout()->createBlock('core/template');
 
-        $block->setTemplate('ricento/iframe.phtml')
+        $block
+            ->setTemplate('ricento/iframe.phtml')
             ->setTitle($this->__('Ricardo API Signup'))
             ->setIframeUrl(Mage::helper('diglin_ricento')->getRicardoSignupApiUrl(false));
 
@@ -32,7 +33,8 @@ class Diglin_Ricento_Adminhtml_AccountController extends Mage_Adminhtml_Controll
     {
         $block = $this->getLayout()->createBlock('core/template');
 
-        $block->setTemplate('ricento/iframe.phtml')
+        $block
+            ->setTemplate('ricento/iframe.phtml')
             ->setTitle($this->__('Ricardo Assistant Portal'))
             ->setIframeUrl(Mage::helper('diglin_ricento')->getRicardoAssistantUrl());
 
