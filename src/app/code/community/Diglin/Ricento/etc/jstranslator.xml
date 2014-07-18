@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+-->
+
+<jstranslator>
+    <diglin_ricento translate="add_product,create_product_listing" module="diglin_ricento">
+        <add_product>Add Product</add_product>
+        <create_product_listing>Create Product Listing</create_product_listing>
+    </diglin_ricento>
+</jstranslator>

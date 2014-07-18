@@ -4,3 +4,4 @@ src/app/design/adminhtml/default/default/layout/ricento.xml app/design/adminhtml
 src/app/design/adminhtml/default/default/template/ricento app/design/adminhtml/default/default/template/ricento
 src/skin/adminhtml/default/default/ricento skin/adminhtml/default/default/ricento
 src/js/ricento js/ricento
+src/app/locale/en_US/Diglin_Ricento.csv app/locale/en_US/Diglin_Ricento.csv

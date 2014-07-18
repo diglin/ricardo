@@ -15,7 +15,7 @@ Ricento.addProductsPopup = function(url) {
         draggable:true,
         className:'magento',
         windowClassName:'popup-window',
-        title:'Add Product', //TODO translate
+        title: Translator.translate('Add Product'),
         top:50,
         width:900,
         height:600,
@@ -47,7 +47,7 @@ Ricento.newListingPopup = function() {
         draggable:true,
         className:'magento',
         windowClassName:'popup-window',
-        title:'Create Product Listing', //TODO translate
+        title: Translator.translate('Create Product Listing'),
         top:50,
         width:600,
         height:'auto',
