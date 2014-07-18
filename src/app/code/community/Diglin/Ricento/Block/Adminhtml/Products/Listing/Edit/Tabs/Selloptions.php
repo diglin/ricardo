@@ -30,6 +30,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[entity_id]',
         ));
 
+        $storeCurrency = Mage::getStoreConfig('currency/options/base', $this->_getListing()->getStoreId());
+        if ($storeCurrency !== 'CHF') {
+            $currencyWarning = '<ul class="messages"><li class="warning-msg">' .
+                $this->__("The store's base currency is {$storeCurrency}. Only CHF is allowed as currency. No currency conversion will be proceed.") .
+                '</li></ul>';
+        }
+
         $fieldsetCategory = $form->addFieldset('fieldset_category', array('legend' => Mage::helper('catalog')->__('Category')));
         $fieldsetCategory->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
         $fieldsetCategory->addField('ricardo_category_use_mapping', 'radios_extensible', array(
@@ -88,10 +95,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
         $fieldsetTypeFixPrice->addField('fix_currency', 'label', array(
             'name'  => 'sales_options[fix_currency]',
-            'label' => $this->__('Currency')
+            'label' => $this->__('Currency'),
+            'after_element_html' => $currencyWarning,
         ));
 
-        $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
+$fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
             'legend'                => $this->__('Auction'),
             'fieldset_container_id' => 'fieldset_toggle_auction'));
         $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
@@ -107,6 +115,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetTypeAuction->addField('auction_currency', 'label', array(
             'name'  => 'sales_options[auction_currency]',
             'label' => $this->__('Currency'),
+            'after_element_html' => $currencyWarning,
         ));
 
 
