@@ -61,6 +61,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $fieldsetShipping->addField('shipping_price', 'text', array(
             'name'     => 'rules[shipping_price]',
             'label'    => $this->__('Price'),
+            'class'    => 'validate-number',
         ));
         $fieldsetShipping->addField('free_shipping', 'select', array(
             'name'    => 'rules[free_shipping]',

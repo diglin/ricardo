@@ -61,17 +61,20 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetTypeFixPrice->addField('price_source_attribute_id', 'select', array(
             'name'    => 'sales_options[price_source_attribute_id]',
             'label'   => $this->__('Source'),
-            'values'  => Mage::getModel('diglin_ricento/config_source_sales_price_source')->getAllOptions()
+            'values'  => Mage::getModel('diglin_ricento/config_source_sales_price_source')->getAllOptions(),
+            //'required' => true //TODO conditional validation
         ));
         $fieldsetTypeFixPrice->addType('fieldset_inline', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_fieldset_inline'));
         $fieldsetPriceChange = $fieldsetTypeFixPrice->addField('fieldset_price_change', 'fieldset_inline', array(
             'label'             => $this->__('Price Change'),
+            //'required'          => true, //TODO conditional validation
         ));
         $fieldsetPriceChange->addField('price_change_type', 'select', array(
             'name'               => 'sales_options[price_change_type]',
             'after_element_html' => ' +&nbsp;',
             'no_span'            => true,
-            'values'             => Mage::getModel('diglin_ricento/config_source_sales_price_method')->getAllOptions()
+            'values'             => Mage::getModel('diglin_ricento/config_source_sales_price_method')->getAllOptions(),
+            //'required'           => true //TODO conditional validation
         ));
         $fieldsetPriceChange->addField('price_change', 'text', array(
             'name'    => 'sales_options[price_change]',
@@ -93,11 +96,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'fieldset_container_id' => 'fieldset_toggle_auction'));
         $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
             'name'  => 'sales_options[sales_auction_start_price]',
-            'label' => $this->__('Start price')
+            'label' => $this->__('Start price'),
+            'class' => 'validate-number',
         ));
         $fieldsetTypeAuction->addField('sales_auction_increment', 'text', array(
             'name'  => 'sales_options[sales_auction_increment]',
-            'label' => $this->__('Increment')
+            'label' => $this->__('Increment'),
+            'class' => 'validate-number',
         ));
         $fieldsetTypeAuction->addField('auction_currency', 'label', array(
             'name'  => 'sales_options[auction_currency]',
@@ -187,9 +192,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             )
         ));
         $fieldsetCondition->addField('product_condition', 'select', array(
-            'name'   => 'sales_options[product_condition]',
-            'label'  => $this->__('Condition'),
-            'values' => Mage::getModel('diglin_ricento/config_source_sales_product_condition')->getAllOptions()
+            'name'     => 'sales_options[product_condition]',
+            'label'    => $this->__('Condition'),
+            'values'   => Mage::getModel('diglin_ricento/config_source_sales_product_condition')->getAllOptions(),
+            'required' => true
         ));
         $fieldsetCondition->addField('product_warranty', 'select', array(
             'name' => 'sales_options[product_warranty]',
