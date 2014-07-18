@@ -66,6 +66,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
                 new Zend_Db_Expr('products_listing_id IS NOT NULL'),
                 'product_id=entity_id',
                 'products_listing_id !='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->joinField('has_custom_options',
+                'catalog/product_option',
+                new Zend_Db_Expr('option_id IS NOT NULL'),
+                'product_id=entity_id',
+                null,
                 'left')
             ->groupByAttribute('entity_id');
         $productIds = $this->_getSelectedProducts();
@@ -97,6 +103,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
             'index'     => 'type_id',
             'type'      => 'options',
             'options'   => array_intersect_key(Mage::getSingleton('catalog/product_type')->getOptionArray(), $this->_helper->getAllowedProductTypes()),
+        ));
+        $this->addColumn('has_custom_options', array(
+            'header'    => '',
+            'width'     => 20,
+            'index'     => 'has_custom_options',
+            'sortable'  => false,
+            'filter'    => false,
+            'renderer'  => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_listing_edit_tabs_products_renderer_customoptions')
         ));
         $this->addColumn('sku', array(
             'header'    => Mage::helper('catalog')->__('SKU'),

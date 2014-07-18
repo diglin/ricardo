@@ -30,3 +30,8 @@
 #products_listing_tabs_selloptions_section_content td.value {
     width: auto !important;
 }
+.diglin_ricento_warning_icon {
+    min-width: 16px;
+    min-height: 16px;
+    background: url('images/warning_msg_icon.gif') center center no-repeat;
+}
