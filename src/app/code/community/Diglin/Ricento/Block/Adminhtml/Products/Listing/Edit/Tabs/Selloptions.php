@@ -54,9 +54,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'required'  => true,
             'label'     => $this->__('Type of sales'),
             'values'    => Mage::getModel('diglin_ricento/config_source_sales_type')->getAllOptions(),
-            'onchange'  => '' //TODO toggle fieldset
+            'onchange'  => "Ricento.toggleSalesTypeFieldset(this.value)"
         ));
-        $fieldsetTypeFixPrice = $fieldsetType->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price')));
+
+        $fieldsetTypeFixPrice = $form->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price'), 'fieldset_container_id' => 'fieldset_toggle_fixprice'));
         $fieldsetTypeFixPrice->addField('price_source_attribute_id', 'select', array(
             'name'    => 'sales_options[price_source_attribute_id]',
             'label'   => $this->__('Source'),
@@ -86,7 +87,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name'  => 'sales_options[fix_currency]',
             'label' => $this->__('Currency')
         ));
-        $fieldsetTypeAuction = $fieldsetType->addFieldset('fieldset_type_auction', array('legend' => $this->__('Auction')));
+
+        $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
+            'legend'                => $this->__('Auction'),
+            'fieldset_container_id' => 'fieldset_toggle_auction'));
         $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
             'name'  => 'sales_options[sales_auction_start_price]',
             'label' => $this->__('Start price')
@@ -253,6 +257,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         }
         $this->getForm()->addValues($derivedValues);
         return parent::_initFormValues();
+    }
+
+    protected function _afterToHtml($html)
+    {
+        $html .= '<script type="text/javascript">Ricento.toggleSalesTypeFieldset($("sales_options_sales_type").value);</script>';
+        return parent::_afterToHtml($html);
     }
 
     /**

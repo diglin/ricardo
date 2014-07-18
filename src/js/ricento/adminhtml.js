@@ -95,3 +95,8 @@ Ricento.newListingPopup = function() {
 Ricento.closePopup = function() {
     Windows.close('ricento_popup');
 };
+
+Ricento.toggleSalesTypeFieldset = function(value) {
+    $$('div[id^=fieldset_toggle_]').each(Element.hide);
+    $$('#fieldset_toggle_' + value).each(Element.show);
+}
