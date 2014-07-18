@@ -1,4 +1,18 @@
 <?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+
+/**
+ * Class Diglin_Ricento_Controller_Adminhtml_Products_Listing
+ *
+ * Abstract controller for controllers that save listing configuration
+ */
 abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage_Adminhtml_Controller_Action
 {
     /**

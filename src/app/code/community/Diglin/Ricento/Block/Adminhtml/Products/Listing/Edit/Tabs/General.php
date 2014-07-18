@@ -1,4 +1,16 @@
 <?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+
+/**
+ * Class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
+ */
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
     extends Diglin_Ricento_Block_Adminhtml_Products_Listing_Form_Abstract
     implements Mage_Adminhtml_Block_Widget_Tab_Interface

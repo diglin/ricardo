@@ -1,5 +1,16 @@
 <?php
 /**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+
+/**
+ * Class Diglin_Ricento_Block_Adminhtml_Form_Element_Radios_Extensible
+ *
  * Radio buttons that may contain additional elements beside them. Also allows disabling.
  */
 class Diglin_Ricento_Block_Adminhtml_Form_Element_Radios_Extensible extends Varien_Data_Form_Element_Radios

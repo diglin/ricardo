@@ -1,24 +1,19 @@
 <?php
 /**
- * This file is part of Diglin_Ricento for Magento.
+ * Diglin GmbH - Switzerland
  *
- * @license proprietary
- * @author Fabian Schmengler <fs@integer-net.de> <fschmengler>
- * @category Diglin
- * @package Diglin_Ricento
- * @copyright Copyright (c) 2014 Diglin GmbH (http://www.diglin.com/)
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricardo
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 
 /**
  * Collection of Sync_Log
- * @package Diglin_Ricento
  */
 class Diglin_Ricento_Model_Resource_Sync_Log_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
 
-// Diglin GmbH Tag NEW_CONST
-
-// Diglin GmbH Tag NEW_VAR
 
     /**
      * Sync_Log Collection Resource Constructor
@@ -30,6 +25,5 @@ class Diglin_Ricento_Model_Resource_Sync_Log_Collection extends Mage_Core_Model_
         $this->_init('diglin_ricento/sync_log');
     }
 
-// Diglin GmbH Tag NEW_METHOD
 
 }

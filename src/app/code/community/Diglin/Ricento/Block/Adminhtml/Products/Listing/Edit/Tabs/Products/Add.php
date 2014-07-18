@@ -1,4 +1,18 @@
 <?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+
+/**
+ * Class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
+ *
+ * "Add products" grid
+ */
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
     extends Mage_Adminhtml_Block_Widget_Grid
 {

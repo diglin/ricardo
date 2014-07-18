@@ -1,15 +1,16 @@
 <?php
 /**
  * Diglin GmbH - Switzerland
- * 
- * User: sylvainraye
- * Date: 16.05.14
- * Time: 01:18
  *
- * @category    Diglin Magento Demo
- * @package     Diglin_
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
- */ 
+ */
+
+/**
+ * Class Diglin_Ricento_Model_Config_Source_Status
+ */
 class Diglin_Ricento_Model_Config_Source_Status implements Mage_Eav_Model_Entity_Attribute_Source_Interface
 {
     /**

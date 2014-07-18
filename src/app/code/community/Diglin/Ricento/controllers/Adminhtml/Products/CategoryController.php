@@ -7,6 +7,10 @@
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
+
+/**
+ * Class Diglin_Ricento_Adminhtml_Products_CategoryController
+ */
 class Diglin_Ricento_Adminhtml_Products_CategoryController extends Mage_Adminhtml_Controller_Action
 {
 

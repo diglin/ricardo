@@ -1,17 +1,16 @@
 <?php
 /**
- * This file is part of Diglin_Ricento for Magento.
+ * Diglin GmbH - Switzerland
  *
- * @license proprietary
- * @author Fabian Schmengler <fs@integer-net.de> <fschmengler>
- * @category Diglin
- * @package Diglin_Ricento
- * @copyright Copyright (c) 2014 Diglin GmbH (http://www.diglin.com/)
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricardo
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 
 /**
  * Products_Listing_Item Model
- * @package Diglin_Ricento
+ *
  * @method int    getProductId() getProductId()
  * @method int    getProductsListingId() getProductsListingId()
  * @method int    getSalesOptionsId() getSalesOptionsId()
@@ -62,7 +61,6 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         $this->_init('diglin_ricento/products_listing_item');
     }
 
-// Diglin GmbH Tag NEW_METHOD
 
     public function getProduct()
     {

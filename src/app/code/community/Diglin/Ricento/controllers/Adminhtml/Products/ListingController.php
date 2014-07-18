@@ -6,7 +6,11 @@
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
- */ 
+ */
+
+/**
+ * Class Diglin_Ricento_Adminhtml_Products_ListingController
+ */
 class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento_Controller_Adminhtml_Products_Listing
 {
     /**

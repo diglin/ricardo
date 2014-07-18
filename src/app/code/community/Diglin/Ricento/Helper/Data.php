@@ -2,10 +2,15 @@
 /**
  * Diglin GmbH - Switzerland
  *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
- */ 
+ */
+
+/**
+ * Class Diglin_Ricento_Helper_Data
+ */
 class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const CFG_ASSISTANT_URL = 'ricento/config/assistant_url';

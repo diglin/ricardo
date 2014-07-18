@@ -6,7 +6,11 @@
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
- */ 
+ */
+
+/**
+ * Class Diglin_Ricento_Adminhtml_DashboardController
+ */
 class Diglin_Ricento_Adminhtml_DashboardController extends Mage_Adminhtml_Controller_Action
 {
 

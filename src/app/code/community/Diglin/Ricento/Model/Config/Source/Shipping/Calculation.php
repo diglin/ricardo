@@ -7,6 +7,10 @@
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
+
+/**
+ * Class Diglin_Ricento_Model_Config_Source_Shipping_Calculation
+ */
 class Diglin_Ricento_Model_Config_Source_Shipping_Calculation
 {
     /**

@@ -1,6 +1,18 @@
 <?php
 /**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+
+/**
+ * Class Diglin_Ricento_Block_Adminhtml_Form_Element_Checkboxes_Extensible
+ *
  * Checkboxes that may contain additional elements beside them. Also allows disabling of all checkboxes
+ *
  */
 class Diglin_Ricento_Block_Adminhtml_Form_Element_Checkboxes_Extensible extends Varien_Data_Form_Element_Checkboxes
 {
