@@ -7,21 +7,10 @@
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
-    extends Mage_Adminhtml_Block_Widget_Form
+    extends Diglin_Ricento_Block_Adminhtml_Products_Listing_Form_Abstract
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 
 {
-    /**
-     * @return Diglin_Ricento_Model_Products_Listing
-     */
-    protected function _getListing()
-    {
-        $listing = Mage::registry('products_listing');
-        if (!$listing) {
-            Mage::throwException('Products listing not loaded');
-        }
-        return $listing;
-    }
     /**
      * @var Diglin_Ricento_Model_Resource_Sales_Options
      */
@@ -37,7 +26,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
 
         $fieldsetCategory = $form->addFieldset('fieldset_category', array('legend' => Mage::helper('catalog')->__('Category')));
-        $fieldsetCategory->addField('ricardo_category_use_mapping', 'radios', array(
+        $fieldsetCategory->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
+        $fieldsetCategory->addField('ricardo_category_use_mapping', 'radios_extensible', array(
             'name'      => 'sales_options[ricardo_category_use_mapping]',
             'label'     => $this->__('Ricardo Category'),
             'separator' => '<br>',
@@ -225,7 +215,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
 
         $fieldsetPromotion = $form->addFieldset('fieldset_promotion', array('legend' => $this->__('Promotion')));
-        $fieldsetPromotion->addField('promotion_space', 'radios', array(
+        $fieldsetPromotion->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
+        $fieldsetPromotion->addField('promotion_space', 'radios_extensible', array(
             'name'   => 'sales_options[promotion_space]',
             'label'  => $this->__('Privilege Space'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_promotion')->getAllOptions()

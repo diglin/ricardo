@@ -10,6 +10,20 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
     extends Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
 {
+    public function isReadonlyForm()
+    {
+        foreach ($this->getSelectedItems() as $item) {
+            /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
+            if ($item->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public function getReadonlyNote()
+    {
+        return $this->__('Listed items cannot be modified. Stop the listing first to make changes.');
+    }
     protected function _prepareForm()
     {
         parent::_prepareForm();
@@ -20,6 +34,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         ), '^');
         return $this;
     }
+
+    /**
+     * If all items use the default list settings, check the "use default" checkbox
+     * and disable all elements but the checkbox
+     *
+     * @return $this|Mage_Adminhtml_Block_Widget_Form
+     */
     protected function _initFormValues()
     {
         parent::_initFormValues();
@@ -33,7 +54,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
             }
         }
         if ($useDefaultCheckbox->getChecked()) {
-            //TODO disable all elements (probably better via JS than here)
+            Mage::helper('diglin_ricento')->disableForm($this->getForm());
+            $useDefaultCheckbox->setDisabled(false);
         }
         return $this;
     }
@@ -47,7 +69,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         return Mage::registry('selected_items');
     }
     /**
-     * Returns sales options model
+     * Returns sales options model. Use sales options from single item if there is only one item
+     * and it has individual settings. Otherwise use sales options from listing
      *
      * @return Diglin_Ricento_Model_Sales_Options
      */

@@ -1,19 +1,6 @@
 <?php
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Form_Abstract extends Mage_Adminhtml_Block_Widget_Form
 {
-    protected function _afterToHtml($html)
-    {
-        //FIXME JavaScript greift nicht, vermutlich wegen verschachteltem Mass Action Formular
-        if ($this->isReadonlyForm()) {
-            $html .= <<<HTML
-<script type="text/javascript">
-    document.forms['edit_form'].disable();
-</script>
-HTML;
-        }
-        return parent::_afterToHtml($html);
-    }
-
     public function isReadonlyForm()
     {
         return $this->_getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED;
@@ -43,6 +30,7 @@ HTML;
                     $this->getReadonlyNote() .
                     '</span></li></ul>'
             ), '^');
+            Mage::helper('diglin_ricento')->disableForm($this->getForm());
         }
         return parent::_initFormValues();
     }

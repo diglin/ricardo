@@ -183,4 +183,18 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return Mage::getStoreConfig('ricento/config/ricardo_password', $storeId);
     }
+
+    /**
+     * Disable all elements in a form recursively
+     *
+     * @param Varien_Data_Form_Abstract $form
+     */
+    public function disableForm(Varien_Data_Form_Abstract $form)
+    {
+        foreach ($form->getElements() as $element) {
+            /* @var $element Varien_Data_Form_Element_Abstract */
+            $element->setDisabled(true);
+            $this->disableForm($element);
+        }
+    }
 }

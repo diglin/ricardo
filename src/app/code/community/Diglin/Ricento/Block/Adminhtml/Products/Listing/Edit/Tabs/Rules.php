@@ -7,21 +7,10 @@
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
-    extends Mage_Adminhtml_Block_Widget_Form
+    extends Diglin_Ricento_Block_Adminhtml_Products_Listing_Form_Abstract
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 
 {
-    /**
-     * @return Diglin_Ricento_Model_Products_Listing
-     */
-    protected function _getListing()
-    {
-        $listing = Mage::registry('products_listing');
-        if (!$listing) {
-            Mage::throwException('Products listing not loaded');
-        }
-        return $listing;
-    }
 
     protected function _initFormValues()
     {
@@ -39,7 +28,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $form->setHtmlIdPrefix($htmlIdPrefix);
 
         $fieldsetPayment = $form->addFieldset('fieldset_payment', array('legend' => $this->__('Payment Methods')));
-        $fieldsetPayment->addField('payment_methods', 'checkboxes', array(
+        $fieldsetPayment->addType('checkboxes_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_checkboxes_extensible'));
+        $fieldsetPayment->addField('payment_methods', 'checkboxes_extensible', array(
             'name'    => 'rules[payment_methods]',
             'label'   => $this->__('Select Payment Methods'),
             'values' => Mage::getModel('diglin_ricento/config_source_rules_payment')->getAllOptions()

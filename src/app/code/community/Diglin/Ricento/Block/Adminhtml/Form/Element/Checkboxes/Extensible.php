@@ -1,4 +1,7 @@
 <?php
+/**
+ * Checkboxes that may contain additional elements beside them. Also allows disabling of all checkboxes
+ */
 class Diglin_Ricento_Block_Adminhtml_Form_Element_Checkboxes_Extensible extends Varien_Data_Form_Element_Checkboxes
 {
     public function setForm($form)
@@ -48,4 +51,19 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Checkboxes_Extensible extends 
         }
         return $field;
     }
+
+    /**
+     * Allow disabling of all checkboxes with disabled=true
+     *
+     * @param $value
+     * @return string
+     */
+    public function getDisabled($value)
+    {
+        if ($this->getData('disabled') === true) {
+            return 'disabled';
+        }
+        return parent::getDisabled($value);
+    }
+
 }
