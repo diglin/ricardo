@@ -77,5 +77,16 @@ class Diglin_Ricento_Model_Sales_Options extends Mage_Core_Model_Abstract
         $this->_init('diglin_ricento/sales_options');
     }
 
+    /**
+     * Set date of last update
+     *
+     * @return Diglin_Ricento_Model_Sales_Options
+     */
+    protected function _beforeSave()
+    {
+        parent::_beforeSave();
+        $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
+        return $this;
+    }
 
 }

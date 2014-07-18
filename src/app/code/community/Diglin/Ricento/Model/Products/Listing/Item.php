@@ -61,6 +61,17 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         $this->_init('diglin_ricento/products_listing_item');
     }
 
+    /**
+     * Set date of last update
+     *
+     * @return Diglin_Ricento_Model_Products_Listing_Item
+     */
+    protected function _beforeSave()
+    {
+        parent::_beforeSave();
+        $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
+        return $this;
+    }
 
     public function getProduct()
     {

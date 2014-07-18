@@ -49,5 +49,16 @@ class Diglin_Ricento_Model_Sync_Log extends Mage_Core_Model_Abstract
         $this->_init('diglin_ricento/sync_log');
     }
 
+    /**
+     * Set date of last update
+     *
+     * @return Diglin_Ricento_Model_Sync_Log
+     */
+    protected function _beforeSave()
+    {
+        parent::_beforeSave();
+        $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
+        return $this;
+    }
 
 }
