@@ -31,7 +31,7 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
                 ->addFieldToFilter('product_id', array('in' => $this->_productIds));
         } else {
             $itemCollection->addFieldToFilter('item_id', array('in' => explode(',', $this->getRequest()->getPost('item_ids'))));
-            //TODO preserve product ids and listing ids for urls
+            $this->_productIds = $itemCollection->getColumnValues('product_id');
         }
         Mage::register('selected_items', $itemCollection->load());
 
@@ -122,7 +122,7 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
 
     protected function _getEditUrl()
     {
-        return $this->getUrl('*/*/configure', array('id' => $this->getRequest()->getParam('id'), 'products' => $this->_productIds()));
+        return $this->getUrl('*/*/configure', array('id' => $this->getRequest()->getParam('id'), 'products' => $this->_productIds));
     }
 
     protected function _getIndexUrl()
