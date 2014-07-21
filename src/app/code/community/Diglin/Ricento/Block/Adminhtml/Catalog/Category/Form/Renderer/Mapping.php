@@ -16,14 +16,14 @@ class Diglin_Ricento_Block_Adminhtml_Catalog_Category_Form_Renderer_Mapping exte
      */
     public function getElementHtml()
     {
-        $html = '<input id="'.$this->getHtmlId().'" name="'.$this->getName()
-            .'" value="' . Mage::helper('diglin_ricento')->__('Open Ricardo Category Window') . '" ' . $this->serialize($this->getHtmlAttributes())
-            . ' onclick="window.open(\'' . Mage::helper('adminhtml')->getUrl('ricento/products_category/mapping') . '\')"'
+        $html = '<input value="' . Mage::helper('diglin_ricento')->__('Open Ricardo Category Window') . '" ' . $this->serialize($this->getHtmlAttributes())
+            . ' onclick="Ricento.categoryMappingPopup(\'' . Mage::helper('adminhtml')->getUrl('ricento/products_category/mapping') . '\', $(\''. $this->getHtmlId() .'\'))"'
             . '/>'."\n";
 
         // Value to be filled via a javascript script when clicked on a linked in the popup window of the Ricardo Category
         // @todo finish the implementation here - add javascript control (Sylvain has a script for such situation if needed let me know)
-        $html .= ' <input type="hidden" name="general[ricardo_category]" id="group_4ricardo_category" value="'. $this->getEscapedValue() .'"/>';
+        $html .= ' <input id="'.$this->getHtmlId().'" name="'.$this->getName()
+            .'" type="hidden" value="'. $this->getEscapedValue() .'"/>';
         $html .= $this->getAfterElementHtml();
         return $html;
     }

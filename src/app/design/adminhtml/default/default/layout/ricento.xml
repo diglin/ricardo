@@ -82,10 +82,11 @@
     </ricento_products_listing_item_configure>
 
     <ricento_products_category_mapping>
-        <update handle="popup"></update>
+        <update handle="overlay_popup"></update>
         <remove name="footer"></remove>
         <reference name="content">
-            <block type="diglin_ricento/adminhtml_products_category_mapping" name="category_mapping" template="ricento/products/category/mapping.phtml" />
+            <block type="diglin_ricento/adminhtml_products_category_mapping" name="category_mapping"
+                   template="ricento/products/category/mapping.phtml"/>
         </reference>
     </ricento_products_category_mapping>
 
@@ -93,4 +94,8 @@
         <remove name="root"></remove>
         <block type="diglin_ricento/adminhtml_products_category_children" name="category_children" template="ricento/products/category/children.phtml" output="toHtml" />
     </ricento_products_category_children>
+
+    <adminhtml_catalog_category_edit>
+        <update handle="ricento_scripts"></update>
+    </adminhtml_catalog_category_edit>
 </layout>

@@ -64,6 +64,35 @@ Ricento.newListingPopup = function() {
         }
     });
 };
+Ricento.categoryMappingPopup = function(url, target) {
+    if ($('ricento_popup') && typeof(Windows) != 'undefined') {
+        Windows.focus('ricento_popup');
+        return;
+    }
+
+    Dialog.info({url:url}, {
+        closable:true,
+        resizable:true,
+        maximizable: true,
+        draggable:true,
+        className:'magento',
+        windowClassName:'popup-window',
+        title: Translator.translate('Choose Ricardo Category'),
+        top:50,
+        width:900,
+        height:600,
+        zIndex:400,
+        recenterAuto:false,
+        hideEffect:Element.hide,
+        showEffect:Element.show,
+        id:'ricento_popup',
+        showProgress:true,
+        onShow:function(dialog) {
+            dialog.element.innerHTML.evalScripts();
+        }
+    });
+    Ricento.categoryMappingTargetInput = target;
+};
 Ricento.closePopup = function() {
     Windows.close('ricento_popup');
 };

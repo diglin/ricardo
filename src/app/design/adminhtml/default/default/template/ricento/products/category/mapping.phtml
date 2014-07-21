@@ -2,17 +2,20 @@
 /* @var $this Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping */
 ?>
 <style>
+    #ricardo_categories {
+    }
     #ricardo_categories nav {
         width: 200px;
         float: left;
         margin-right: 10px;
+        background-color: rgba(255,255,255,0.7);
     }
     #ricardo_categories li > a {
         display: block;
         padding: 5px;
-        border-bottom: 1px solid #999;
+        border-bottom: 1px solid #333;
         text-decoration: none;
-        color: #999;
+        color: #333;
     }
     #ricardo_categories .selected a {
         background: darkorange;
@@ -35,16 +38,18 @@
     }
 </style>
 
-<form id="ricardo_categories">
+<div id="ricardo_categories">
+<form action="#" onsubmit="Ricento.categoryMappingTargetInput.value = this.serialize(true)['ricardo_category_id']; Ricento.closePopup(); return false;">
 <?php
     echo $this->getChildHtml();
 ?>
     <div id="ricardo_children"></div>
     <div class="form-buttons">
-        <button type="button" class="cancel button" id="ricardo_categories_button_cancel"><span><?php echo $this->__('Cancel'); ?></span></button>
+        <button type="button" onclick="Ricento.closePopup()" class="cancel button" id="ricardo_categories_button_cancel"><span><?php echo $this->__('Cancel'); ?></span></button>
         <button type="submit" class="save button" id="ricardo_categories_button_save"><span><?php echo $this->__('Confirm');?></span></button>
     </div>
 </form>
+</div>
 
 <script type="text/javascript">
     var Ricento = Ricento || {};
