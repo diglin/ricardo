@@ -20,6 +20,14 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Mage_Adminhtm
         $this->renderLayout();
     }
 
+    public function childrenAction()
+    {
+        $this->loadLayout();
+        $this->getLayout()->getBlock('category_children')
+            ->setCategoryId($this->getRequest()->getParam('id', 1))
+            ->setLevel($this->getRequest()->getParam('level', 0));
+        $this->renderLayout();
+    }
     /**
      * Save the mapping done of the categories between Magento & Ricardo
      */

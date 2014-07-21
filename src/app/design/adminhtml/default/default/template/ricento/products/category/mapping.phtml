@@ -1,0 +1,118 @@
+<?php
+/* @var $this Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping */
+?>
+<style>
+    #ricardo_categories nav {
+        width: 200px;
+        float: left;
+        margin-right: 10px;
+    }
+    #ricardo_categories li > a {
+        display: block;
+        padding: 5px;
+        border-bottom: 1px solid #999;
+        text-decoration: none;
+        color: #999;
+    }
+    #ricardo_categories .selected a {
+        background: darkorange;
+        color: white;
+        font-weight: bold;
+    }
+    #ricardo_categories input[type="radio"] {
+        float: right;
+    }
+    #ricardo_categories .icon-plus {
+        background: url('<?php echo $this->getSkinUrl('images/accordion_open.png')?>') no-repeat;
+        width: 16px;
+        height: 17px;
+        float: right;
+        text-indent: -9999px;
+    }
+    #ricardo_categories .form-buttons {
+        clear: both;
+        text-align: right;
+    }
+</style>
+
+<form id="ricardo_categories">
+<?php
+    echo $this->getChildHtml();
+?>
+    <div id="ricardo_children"></div>
+    <div class="form-buttons">
+        <button type="button" class="cancel button" id="ricardo_categories_button_cancel"><span><?php echo $this->__('Cancel'); ?></span></button>
+        <button type="submit" class="save button" id="ricardo_categories_button_save"><span><?php echo $this->__('Confirm');?></span></button>
+    </div>
+</form>
+
+<script type="text/javascript">
+    var Ricento = Ricento || {};
+    Ricento.categoriesLoading = false;
+    Ricento.hideLevel = function(prefix, levelToHide)
+    {
+        var elementToRemove;
+        while (elementToRemove = $(prefix + levelToHide)) {
+            elementToRemove.remove();
+            ++levelToHide;
+        }
+    };
+    Ricento.chooseCategory = function() {
+        $(this.parentNode.parentNode).select('li').each(function(item) {
+            $(item).removeClassName('selected');
+        });
+        $(this.parentNode).addClassName('selected');
+        $(this.parentNode).select('input').each(function(input) {
+            input.checked = true;
+        });
+        $('ricardo_categories_button_save').enable();
+        $('ricardo_categories_button_save').removeClassName('disabled');
+        var item = this;
+
+    };
+    Ricento.loadChildren = function() {
+        if (Ricento.categoriesLoading) {
+            return;
+        }
+        $$("input[type=radio][name='ricardo_category_id']").each(function(input) { input.checked = false; });
+        $('ricardo_categories_button_save').disable();
+        $('ricardo_categories_button_save').addClassName('disabled');
+        $(this.parentNode.parentNode).select('li').each(function(item) {
+            $(item).removeClassName('selected');
+        });
+        $(this.parentNode).addClassName('selected');
+        var item = this;
+        Ricento.categoriesLoading = true;
+        Element.show('loading-mask');
+        setLoaderPosition();
+        new Ajax.Updater(
+            'ricardo_children',
+            '<?php echo $this->getUrl('ricento/products_category/children', array('id' => '#ID#', 'level' => '#LVL#')); ?>'
+                .replace('#ID#', this.dataset.categoryId)
+                .replace('#LVL#', this.dataset.updateLevel),
+            {
+                insertion: 'bottom',
+                onComplete: function() {
+                    $$('#' + item.dataset.updatePrefix + item.dataset.updateLevel + ' a').each(function(item) {
+                        if (item.dataset.isFinal) {
+                            item.observe('click', Ricento.chooseCategory);
+                        } else {
+                            item.observe('click', Ricento.loadChildren);
+                        }
+                    });
+                    $$('#' + item.dataset.updatePrefix + item.dataset.updateLevel + ' a').each(function(item) {
+                        item.observe('click', function() {
+                            Ricento.hideLevel(this.dataset.updatePrefix, this.dataset.updateLevel);
+                        })
+                    });
+                    Ricento.categoriesLoading = false;
+                    Element.hide('loading-mask');
+                }
+            }
+        );
+    };
+    $$('#ricardo_categories a').each(function(item) {
+        item.observe('click', Ricento.loadChildren);
+    });
+
+</script>

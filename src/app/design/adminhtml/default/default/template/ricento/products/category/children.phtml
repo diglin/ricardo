@@ -1,0 +1,28 @@
+<?php
+/* @var $this Diglin_Ricento_Block_Adminhtml_Products_Category_Children */
+$level = $this->getLevel();
+?>
+<nav class="span<?php echo $level?> navCat" id=navCatLvl<?php echo $level?>>
+<ul class="nav nav-list">
+<?php foreach ($this->getCategories() as $category): ?>
+        <li class="hasSub">
+            <a href="#"
+               data-category-id="<?php echo $category['CategoryId']; ?>"
+               data-update-prefix = "navCatLvl"
+               data-level = "<?php echo $level; ?>"
+               data-update-level = "<?php echo $level + 1; ?>"
+               data-is-final = "<?php echo $category['IsFinal'] ?>"
+               data-text = "<?php echo $category['CategoryName']; ?>">
+                <div>
+                    <?php echo $category['CategoryName']; ?>
+                    <?php if (!$category['IsFinal']): ?>
+                        <strong class="icon-plus">&gt;</strong>
+                    <?php else: ?>
+                        <input type="radio" name="ricardo_category_id" id="ricardo_category_id<?php echo $category['CategoryId'] ?>" value="<?php echo $category['CategoryId']; ?>" />
+                    <?php endif; ?>
+                </div>
+            </a>
+        </li>
+<?php endforeach; ?>
+    </ul>
+</nav>
