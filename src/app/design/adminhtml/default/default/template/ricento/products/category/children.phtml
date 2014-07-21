@@ -7,18 +7,18 @@ $level = $this->getLevel();
 <?php foreach ($this->getCategories() as $category): ?>
         <li class="hasSub">
             <a href="#"
-               data-category-id="<?php echo $category['CategoryId']; ?>"
+               data-category-id="<?php echo $category->getId(); ?>"
                data-update-prefix = "navCatLvl"
                data-level = "<?php echo $level; ?>"
                data-update-level = "<?php echo $level + 1; ?>"
-               data-is-final = "<?php echo $category['IsFinal'] ?>"
-               data-text = "<?php echo $category['CategoryName']; ?>">
+               data-is-final = "<?php echo $category->getIsFinal(); ?>"
+               data-text = "<?php echo $category->getCategoryName(); ?>">
                 <div>
-                    <?php echo $category['CategoryName']; ?>
-                    <?php if (!$category['IsFinal']): ?>
+                    <?php echo $category->getCategoryName(); ?>
+                    <?php if (!$category->getIsFinal()): ?>
                         <strong class="icon-plus">&gt;</strong>
                     <?php else: ?>
-                        <input type="radio" name="ricardo_category_id" id="ricardo_category_id<?php echo $category['CategoryId'] ?>" value="<?php echo $category['CategoryId']; ?>" />
+                        <input type="radio" name="ricardo_category_id" id="ricardo_category_id<?php echo $category->getId(); ?>" value="<?php echo $category->getId(); ?>" />
                     <?php endif; ?>
                 </div>
             </a>
