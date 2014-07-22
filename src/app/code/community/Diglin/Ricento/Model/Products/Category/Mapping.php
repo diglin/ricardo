@@ -58,6 +58,9 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
      */
     public function getCategory($categoryId)
     {
+        if (empty($this->_categoryIndex)) {
+            $this->_buildRicardoCategoryTree();
+        }
         return $this->_categoryIndex[$categoryId];
     }
 

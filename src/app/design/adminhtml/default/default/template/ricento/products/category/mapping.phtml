@@ -41,9 +41,13 @@
 <div id="ricardo_categories">
 <form action="#" onsubmit="Ricento.categoryMappingTargetInput.value = this.serialize(true)['ricardo_category_id']; Ricento.closePopup(); return false;">
 <?php
-    echo $this->getChildHtml();
+    echo $this->getChildHtml('toplevel');
 ?>
-    <div id="ricardo_children"></div>
+    <div id="ricardo_children">
+<?php
+    echo $this->getChildHtml('sublevel');
+?>
+    </div>
     <div class="form-buttons">
         <button type="button" onclick="Ricento.closePopup()" class="cancel button" id="ricardo_categories_button_cancel"><span><?php echo $this->__('Cancel'); ?></span></button>
         <button type="submit" class="save button" id="ricardo_categories_button_save"><span><?php echo $this->__('Confirm');?></span></button>
@@ -60,6 +64,14 @@
         while (elementToRemove = $(prefix + levelToHide)) {
             elementToRemove.remove();
             ++levelToHide;
+        }
+    };
+    Ricento.onCategoryClick = function() {
+        Ricento.hideLevel(this.dataset.updatePrefix, this.dataset.updateLevel);
+        if (this.dataset.isFinal) {
+            Ricento.chooseCategory.bind(this)();
+        } else {
+            Ricento.loadChildren.bind(this)();
         }
     };
     Ricento.chooseCategory = function() {
@@ -99,16 +111,7 @@
                 insertion: 'bottom',
                 onComplete: function() {
                     $$('#' + item.dataset.updatePrefix + item.dataset.updateLevel + ' a').each(function(item) {
-                        if (item.dataset.isFinal) {
-                            item.observe('click', Ricento.chooseCategory);
-                        } else {
-                            item.observe('click', Ricento.loadChildren);
-                        }
-                    });
-                    $$('#' + item.dataset.updatePrefix + item.dataset.updateLevel + ' a').each(function(item) {
-                        item.observe('click', function() {
-                            Ricento.hideLevel(this.dataset.updatePrefix, this.dataset.updateLevel);
-                        })
+                        item.observe('click', Ricento.onCategoryClick);
                     });
                     Ricento.categoriesLoading = false;
                     Element.hide('loading-mask');
@@ -117,7 +120,7 @@
         );
     };
     $$('#ricardo_categories a').each(function(item) {
-        item.observe('click', Ricento.loadChildren);
+        item.observe('click', Ricento.onCategoryClick);
     });
 
 </script>

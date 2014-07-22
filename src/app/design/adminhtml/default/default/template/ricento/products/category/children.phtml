@@ -5,7 +5,7 @@ $level = $this->getLevel();
 <nav class="span<?php echo $level?> navCat" id=navCatLvl<?php echo $level?>>
 <ul class="nav nav-list">
 <?php foreach ($this->getCategories() as $category): ?>
-        <li class="hasSub">
+        <li class="<?php if ($category->getIsFinal()): ?>hasSub<?php endif; ?><?php if ($this->getSelectedCategoryId() == $category->getId()): ?> selected<?php endif; ?>" >
             <a href="#"
                data-category-id="<?php echo $category->getId(); ?>"
                data-update-prefix = "navCatLvl"
@@ -18,7 +18,9 @@ $level = $this->getLevel();
                     <?php if (!$category->getIsFinal()): ?>
                         <strong class="icon-plus">&gt;</strong>
                     <?php else: ?>
-                        <input type="radio" name="ricardo_category_id" id="ricardo_category_id<?php echo $category->getId(); ?>" value="<?php echo $category->getId(); ?>" />
+                        <input type="radio" name="ricardo_category_id" id="ricardo_category_id<?php echo $category->getId(); ?>"
+                               value="<?php echo $category->getId(); ?>"
+                               <?php if ($this->getSelectedCategoryId() == $category->getId()): ?>checked="checked"<?php endif; ?>/>
                     <?php endif; ?>
                 </div>
             </a>

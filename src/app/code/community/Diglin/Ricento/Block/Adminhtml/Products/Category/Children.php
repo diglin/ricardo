@@ -5,8 +5,10 @@
  *
  * @method int getLevel() getLevel()
  * @method int getCategoryId() getCategoryId()
+ * @method int getSelectedCategoryId() getSelectedCategoryId()
  * @method Diglin_Ricento_Block_Adminhtml_Products_Category_Children setLevel() setLevel(int $level)
  * @method Diglin_Ricento_Block_Adminhtml_Products_Category_Children setCategoryId() setCategoryId(int $categoryId)
+ * @method Diglin_Ricento_Block_Adminhtml_Products_Category_Children setSelectedCategoryId() setSelectedCategoryId(int $categoryId)
  */
 class Diglin_Ricento_Block_Adminhtml_Products_Category_Children extends Mage_Adminhtml_Block_Template
 {

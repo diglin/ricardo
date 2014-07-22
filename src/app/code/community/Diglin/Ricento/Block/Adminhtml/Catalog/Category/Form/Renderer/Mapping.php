@@ -17,7 +17,7 @@ class Diglin_Ricento_Block_Adminhtml_Catalog_Category_Form_Renderer_Mapping exte
     public function getElementHtml()
     {
         $html = '<input value="' . Mage::helper('diglin_ricento')->__('Open Ricardo Category Window') . '" ' . $this->serialize($this->getHtmlAttributes())
-            . ' onclick="Ricento.categoryMappingPopup(\'' . Mage::helper('adminhtml')->getUrl('ricento/products_category/mapping') . '\', $(\''. $this->getHtmlId() .'\'))"'
+            . ' onclick="Ricento.categoryMappingPopup(\'' . Mage::helper('adminhtml')->getUrl('ricento/products_category/mapping', array('id' => '#ID#')) . '\', $(\''. $this->getHtmlId() .'\'))"'
             . '/>'."\n";
 
         // Value to be filled via a javascript script when clicked on a linked in the popup window of the Ricardo Category

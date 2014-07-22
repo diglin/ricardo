@@ -17,6 +17,8 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Mage_Adminhtm
     public function mappingAction()
     {
         $this->loadLayout();
+        $this->getLayout()->getBlock('category_mapping')
+            ->setCategoryId($this->getRequest()->getParam('id', 1));
         $this->renderLayout();
     }
 

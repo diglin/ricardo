@@ -70,7 +70,7 @@ Ricento.categoryMappingPopup = function(url, target) {
         return;
     }
 
-    Dialog.info({url:url}, {
+    Dialog.info({url:url.replace('#ID#', target.getValue())}, {
         closable:true,
         resizable:true,
         maximizable: true,
