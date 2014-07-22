@@ -71,6 +71,9 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
             $data['sales_options'] = array();
         }
         $data['sales_options'] = $this->_filterDates($data['sales_options'], array('schedule_date_start', 'schedule_period_end_date'));
+        if (empty($data['sales_options']['entity_id'])) {
+            unset($data['sales_options']['entity_id']);
+        }
         if (!empty($data['sales_options']['schedule_cycle_multiple_products_random'])) {
             $data['sales_options']['schedule_cycle_multiple_products'] = null;
         }
@@ -113,7 +116,6 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
             return false;
         }
 
-        unset($data['sales_options']['entity_id']);
         $this->_getSalesOptions()->setDataToAll($data['sales_options']);
 
         if (!$this->_validatePostData($data)) {

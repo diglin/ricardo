@@ -75,7 +75,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
     }
     /**
      * Returns sales options model. Use sales options from single item if there is only one item
-     * and it has individual settings. Otherwise use sales options from listing
+     * and it has individual settings. Otherwise use a copy of the sales options from listing
      *
      * @return Diglin_Ricento_Model_Sales_Options
      */
@@ -89,6 +89,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         }
         if (!$this->_model) {
             $this->_model = $this->_getListing()->getSalesOptions();
+            $this->_model->unsetData('entity_id');
         }
         return $this->_model;
     }
