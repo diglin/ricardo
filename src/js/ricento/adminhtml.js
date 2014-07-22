@@ -79,7 +79,7 @@ Ricento.categoryMappingPopup = function(url, target) {
         windowClassName:'popup-window',
         title: Translator.translate('Choose Ricardo Category'),
         top:50,
-        width:900,
+        width:940,
         height:600,
         zIndex:400,
         recenterAuto:false,
@@ -105,6 +105,7 @@ Ricento.toggleSalesTypeFieldset = function(value) {
 Ricento.CategoryMappper = Class.create();
 Ricento.CategoryMappper.prototype = {
     categoriesLoading : false,
+    resizeAtLevel : 5,
 
     initialize: function(config) {
         Object.extend(this, config);
@@ -128,6 +129,9 @@ Ricento.CategoryMappper.prototype = {
     hideLevel: function(prefix, levelToHide)
     {
         var elementToRemove;
+        if (levelToHide < this.resizeAtLevel) {
+            $(this.wrapperElement).removeClassName('ricardo_categories_resized');
+        }
         while (elementToRemove = $(prefix + levelToHide)) {
             elementToRemove.remove();
             ++levelToHide;
@@ -170,6 +174,9 @@ Ricento.CategoryMappper.prototype = {
                 {
                     insertion: 'bottom',
                     onComplete: function() {
+                        if (link.dataset.updateLevel >= self.resizeAtLevel) {
+                            $(self.wrapperElement).addClassName('ricardo_categories_resized');
+                        }
                         $$('#' + link.dataset.updatePrefix + link.dataset.updateLevel + ' a').each(function(item) {
                             item.observe('click', self.onCategoryClick.bind(self));
                         });

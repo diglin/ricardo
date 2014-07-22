@@ -35,3 +35,44 @@
     min-height: 16px;
     background: url('images/warning_msg_icon.gif') center center no-repeat;
 }
+
+
+#ricardo_categories {
+}
+#ricardo_categories nav {
+    width: 200px;
+    float: left;
+    background-color: rgba(255,255,255,0.7);
+}
+.ricardo_categories_resized nav {
+    max-width: 160px;
+}
+#ricardo_children nav {
+    margin-left: 20px;
+}
+#ricardo_categories li > a {
+    display: block;
+    padding: 5px;
+    border-bottom: 1px solid #333;
+    text-decoration: none;
+    color: #333;
+}
+#ricardo_categories .selected a {
+    background: darkorange;
+    color: white;
+    font-weight: bold;
+}
+#ricardo_categories input[type="radio"] {
+    float: right;
+}
+#ricardo_categories .icon-plus {
+    background: url('../../images/accordion_open.png') no-repeat;
+    width: 16px;
+    height: 17px;
+    float: right;
+    text-indent: -9999px;
+}
+#ricardo_categories .form-buttons {
+    clear: both;
+    text-align: right;
+}

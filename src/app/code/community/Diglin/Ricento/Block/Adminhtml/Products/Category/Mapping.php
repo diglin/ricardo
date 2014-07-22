@@ -3,7 +3,9 @@
  * Class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping
  *
  * @method int getCategoryId() getCategoryId()
+ * @method int getLevels() getLevels()
  * @method Diglin_Ricento_Block_Adminhtml_Products_Category_Children setCategoryId() setCategoryId(int $categoryId)
+ * @method Diglin_Ricento_Block_Adminhtml_Products_Category_Children setLevels() setLevels(int $levels)
  *
  */
 class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping extends Mage_Adminhtml_Block_Template
@@ -24,6 +26,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping extends Mage_Admi
             /* @var $mapping Diglin_Ricento_Model_Products_Category_Mapping */
             $mapping = Mage::getModel('diglin_ricento/products_category_mapping');
             $category = $mapping->getCategory($this->getCategoryId());
+            $this->setLevels($category ? $category->getLevel() : 1);
             //TODO set radiobutton
             while ($category && $category->getParentId() != Diglin_Ricento_Model_Products_Category_Mapping::ROOT_CATEGORY_ID) {
                 $this->getChild('sublevel')->insert(
@@ -44,5 +47,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping extends Mage_Admi
         return parent::_beforeToHtml();
     }
 
+    public function shouldResize()
+    {
+        return $this->getLevels() >= 5;
+    }
 
 }
