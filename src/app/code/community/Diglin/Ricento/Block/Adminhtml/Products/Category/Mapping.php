@@ -27,7 +27,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping extends Mage_Admi
             $mapping = Mage::getModel('diglin_ricento/products_category_mapping');
             $category = $mapping->getCategory($this->getCategoryId());
             $this->setLevels($category ? $category->getLevel() : 1);
-            //TODO set radiobutton
             while ($category && $category->getParentId() != Diglin_Ricento_Model_Products_Category_Mapping::ROOT_CATEGORY_ID) {
                 $this->getChild('sublevel')->insert(
                     $this->getLayout()
@@ -47,6 +46,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping extends Mage_Admi
         return parent::_beforeToHtml();
     }
 
+    /**
+     * Determine if the columns have to be resized
+     *
+     * @return bool
+     */
     public function shouldResize()
     {
         return $this->getLevels() >= 5;

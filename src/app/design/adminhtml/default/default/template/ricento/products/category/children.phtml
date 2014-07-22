@@ -13,15 +13,15 @@ $level = $this->getLevel();
                data-update-level = "<?php echo $level + 1; ?>"
                data-is-final = "<?php echo $category->getIsFinal(); ?>"
                data-text = "<?php echo $category->getCategoryName(); ?>">
+                <?php if (!$category->getIsFinal()): ?>
+                    <strong class="icon-plus">&gt;</strong>
+                <?php else: ?>
+                    <input type="radio" name="ricardo_category_id" id="ricardo_category_id<?php echo $category->getId(); ?>"
+                           value="<?php echo $category->getId(); ?>"
+                           <?php if ($this->getSelectedCategoryId() == $category->getId()): ?>checked="checked"<?php endif; ?>/>
+                <?php endif; ?>
                 <div>
                     <?php echo $category->getCategoryName(); ?>
-                    <?php if (!$category->getIsFinal()): ?>
-                        <strong class="icon-plus">&gt;</strong>
-                    <?php else: ?>
-                        <input type="radio" name="ricardo_category_id" id="ricardo_category_id<?php echo $category->getId(); ?>"
-                               value="<?php echo $category->getId(); ?>"
-                               <?php if ($this->getSelectedCategoryId() == $category->getId()): ?>checked="checked"<?php endif; ?>/>
-                    <?php endif; ?>
                 </div>
             </a>
         </li>
