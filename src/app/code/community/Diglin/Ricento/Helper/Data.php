@@ -199,6 +199,9 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         foreach ($form->getElements() as $element) {
             /* @var $element Varien_Data_Form_Element_Abstract */
             $element->setDisabled(true);
+            if ($element->getType() === 'button') {
+                $element->addClass('disabled');
+            }
             $this->disableForm($element);
         }
     }

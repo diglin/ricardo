@@ -44,10 +44,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'label'     => $this->__('Ricardo Category'),
             'separator' => '<br>',
             'values'    => array(
-                array('value' => 0, 'label' => $this->__('Use Magento / Ricardo Category mapping (if mapping does not exist, an error message will be triggered while preparing the synchronization to Ricardo)')),
-                array('value' => 1, 'label' => $this->__('Select Ricardo Category'))
-            )
+                array('value' => 1, 'label' => $this->__('Use Magento / Ricardo Category mapping (if mapping does not exist, an error message will be triggered while preparing the synchronization to Ricardo)')),
+                array('value' => 0, 'label' => $this->__('Select Ricardo Category'))
+            ),
         ));
+        //TODO show/hide category button based on selection above
         $fieldsetCategory->addType('ricardo_category', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_catalog_category_form_renderer_mapping'));
         $fieldsetCategory->addField('ricardo_category', 'ricardo_category', array(
             'name'  => 'sales_options[ricardo_category]',
@@ -256,6 +257,9 @@ $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
         $derivedValues = array();
         $derivedValues['fix_currency'] = 'CHF';
         $derivedValues['auction_currency'] = 'CHF';
+        if ($this->getSalesOptions()->getRicardoCategory() == 0) {
+            $derivedValues['ricardo_category_use_mapping'] = 1;
+        }
         if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
             $derivedValues['schedule_cycle_multiple_products_random'] = '1';
         }

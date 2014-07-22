@@ -35,7 +35,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         $this->getForm()->addField('use_products_list_settings', 'checkbox', array(
             'name'    => 'sales_options[use_products_list_settings]',
             'label'   => 'Use Product List Settings',
-            'onclick' => "var self = this; this.form.getElements().each(function(element) { if (element!=self && element.id.startsWith('{$this->getForm()->getHtmlIdPrefix()}')) element.disabled=self.checked; })"
+            'onclick' => "var self = this; this.form.getElements().each(function(element) { if (element!=self && element.id.startsWith('{$this->getForm()->getHtmlIdPrefix()}')) { element.disabled=self.checked; element.toggleClassName('disabled', self.checked);} })"
         ), '^');
         return $this;
     }
