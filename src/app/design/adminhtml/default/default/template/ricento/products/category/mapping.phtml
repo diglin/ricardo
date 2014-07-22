@@ -56,71 +56,8 @@
 </div>
 
 <script type="text/javascript">
-    var Ricento = Ricento || {};
-    Ricento.categoriesLoading = false;
-    Ricento.hideLevel = function(prefix, levelToHide)
-    {
-        var elementToRemove;
-        while (elementToRemove = $(prefix + levelToHide)) {
-            elementToRemove.remove();
-            ++levelToHide;
-        }
-    };
-    Ricento.onCategoryClick = function() {
-        Ricento.hideLevel(this.dataset.updatePrefix, this.dataset.updateLevel);
-        if (this.dataset.isFinal) {
-            Ricento.chooseCategory.bind(this)();
-        } else {
-            Ricento.loadChildren.bind(this)();
-        }
-    };
-    Ricento.chooseCategory = function() {
-        $(this.parentNode.parentNode).select('li').each(function(item) {
-            $(item).removeClassName('selected');
-        });
-        $(this.parentNode).addClassName('selected');
-        $(this.parentNode).select('input').each(function(input) {
-            input.checked = true;
-        });
-        $('ricardo_categories_button_save').enable();
-        $('ricardo_categories_button_save').removeClassName('disabled');
-        var item = this;
-
-    };
-    Ricento.loadChildren = function() {
-        if (Ricento.categoriesLoading) {
-            return;
-        }
-        $$("input[type=radio][name='ricardo_category_id']").each(function(input) { input.checked = false; });
-        $('ricardo_categories_button_save').disable();
-        $('ricardo_categories_button_save').addClassName('disabled');
-        $(this.parentNode.parentNode).select('li').each(function(item) {
-            $(item).removeClassName('selected');
-        });
-        $(this.parentNode).addClassName('selected');
-        var item = this;
-        Ricento.categoriesLoading = true;
-        Element.show('loading-mask');
-        setLoaderPosition();
-        new Ajax.Updater(
-            'ricardo_children',
-            '<?php echo $this->getUrl('ricento/products_category/children', array('id' => '#ID#', 'level' => '#LVL#')); ?>'
-                .replace('#ID#', this.dataset.categoryId)
-                .replace('#LVL#', this.dataset.updateLevel),
-            {
-                insertion: 'bottom',
-                onComplete: function() {
-                    $$('#' + item.dataset.updatePrefix + item.dataset.updateLevel + ' a').each(function(item) {
-                        item.observe('click', Ricento.onCategoryClick);
-                    });
-                    Ricento.categoriesLoading = false;
-                    Element.hide('loading-mask');
-                }
-            }
-        );
-    };
-    $$('#ricardo_categories a').each(function(item) {
-        item.observe('click', Ricento.onCategoryClick);
+    new Ricento.CategoryMappper({
+        wrapperElement : 'ricardo_categories',
+        loadChildrenUrl : '<?php echo $this->getUrl('ricento/products_category/children', array('id' => '#ID#', 'level' => '#LVL#')); ?>'
     });
-
 </script>
