@@ -4,6 +4,7 @@
     "description": "Diglin Library to get access to the Ricardo.ch API",
     "keywords": ["Ricardo", "Library"],
     "homepage": "http://www.diglin.com",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.3.3"
     },
