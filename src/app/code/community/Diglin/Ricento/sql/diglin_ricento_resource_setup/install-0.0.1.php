@@ -12,7 +12,7 @@ $installer = $this;
 $installer->startSetup();
 
 
-$tableApiTokens = $installer->getConnection()->newTable('ricento_api_tokens');
+$tableApiTokens = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/ricento_api_tokens'));
 $tableApiTokens->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('token', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
     ->addColumn('token_type', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
@@ -24,7 +24,7 @@ $tableApiTokens->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, ar
     ->setComment('Tokens for Ricardo API');
 $installer->getConnection()->createTable($tableApiTokens);
 
-$tableSalesOptions = $installer->getConnection()->newTable('ricento_sales_options');
+$tableSalesOptions = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/ricento_sales_options'));
 $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('ricardo_category', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
     ->addColumn('sales_type', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
@@ -48,7 +48,7 @@ $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4,
     ->setComment('Sales options');
 $installer->getConnection()->createTable($tableSalesOptions);
 
-$tableProductListings = $installer->getConnection()->newTable('ricento_product_listings');
+$tableProductListings = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/ricento_product_listings'));
 $tableProductListings->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('title', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
     ->addColumn('total_active_products', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'default' => 0, 'nullable' => false))
@@ -60,22 +60,24 @@ $tableProductListings->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER,
     ->addColumn('store_id', Varien_Db_Ddl_Table::TYPE_INTEGER, array('unsigned' => true, 'nullable' => false))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
-    ->addForeignKey('sales_options_id_idxfk', 'sales_options_id', 'ricento_sales_options', 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+    ->addForeignKey($installer->getFkName('diglin_ricento/ricento_product_listings', 'sales_options_id', 'diglin_ricento/ricento_product_listings', 'entity_id'),
+        'sales_options_id', $installer->getTable('diglin_ricento/ricento_sales_options'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->setComment('List of products to be published on ricardo platform');
 $installer->getConnection()->createTable($tableProductListings);
 
-$tableSyncLogs = $installer->getConnection()->newTable('ricento_sync_logs');
+$tableSyncLogs = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/ricento_sync_logs'));
 $tableSyncLogs->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('job_message', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => false))
     ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
     ->addColumn('status', Varien_Db_Ddl_Table::TYPE_INTEGER, 4)
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
-    ->addForeignKey('products_listing_id_idxfk', 'products_listing_id', 'ricento_product_listings', 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+    ->addForeignKey($installer->getFkName('diglin_ricento/ricento_sync_logs', 'products_listing_id', 'diglin_ricento/ricento_product_listings', 'entity_id'),
+        'products_listing_id', $installer->getTable('diglin_ricento/ricento_product_listings'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->setComment('Ricardo synchronization logs');
 $installer->getConnection()->createTable($tableSyncLogs);
 
-$tableProductListingItems = $installer->getConnection()->newTable('ricento_products_listing_items');
+$tableProductListingItems = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/ricento_products_listing_items'));
 $tableProductListingItems->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
@@ -83,9 +85,12 @@ $tableProductListingItems->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTE
     ->addColumn('status', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
-    ->addForeignKey('product_id_idxfk', 'product_id', 'catalog_product_entity', 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
-    ->addForeignKey('products_listing_id_idxfk_1', 'products_listing_id', 'ricento_product_listings', 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
-    ->addIndex('ricento_products_listing_items_idx', array('product_id', 'products_listing_id'), array('type' => 'unique'))
+    ->addForeignKey($installer->getFkName('diglin_ricento/ricento_products_listing_items', 'product_id', 'diglin_ricento/ricento_product_listings', 'entity_id'),
+        'product_id', $installer->getTable('diglin_ricento/ricento_product_listings'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+    ->addForeignKey($installer->getFkName('diglin_ricento/ricento_products_listing_items', 'products_listing_id', 'diglin_ricento/ricento_product_listings', 'entity_id'),
+        'products_listing_id', $installer->getTable('diglin_ricento/ricento_product_listings'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+    ->addIndex($installer->getIdxName('diglin_ricento/ricento_products_listing_items', array('product_id', 'products_listing_id')),
+        array('product_id', 'products_listing_id'), array('type' => 'unique'))
     ->setComment('Associated products for product listings');
 $installer->getConnection()->createTable($tableProductListingItems);
 

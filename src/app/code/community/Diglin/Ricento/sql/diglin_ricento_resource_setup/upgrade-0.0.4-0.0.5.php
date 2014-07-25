@@ -13,6 +13,7 @@ $installer->startSetup();
 
 $itemTable = $installer->getTable('diglin_ricento/products_listing_item');
 $salesOptionsTable = $installer->getTable('diglin_ricento/sales_options');
+
 $installer->getConnection()->modifyColumn(
     $itemTable, 'sales_options_id',
     array('type' => Varien_Db_Ddl_Table::TYPE_INTEGER, 'nullable' => true, 'default' => null, 'unsigned' => true));
