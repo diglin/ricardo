@@ -4,6 +4,7 @@
     "license":"proprietary",
     "homepage":"http://www.ricento.ch",
     "description":"Ricardo.ch extension for Magento.",
+    "minimum-stability":"stable",
     "authors":[
         {
             "name":"Sylvain Rayé"
@@ -15,7 +16,7 @@
         "source": "https://bitbucket.org/ricento/diglin_ricento"
     },
     "require":{
-        "magento-hackathon/magento-composer-installer":"*",
+        "magento-hackathon/magento-composer-installer":"2.*",
         "diglin/ricardo": "*"
     },
     "repositories":[
