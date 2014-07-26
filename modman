@@ -5,3 +5,6 @@ src/app/design/adminhtml/default/default/template/ricento app/design/adminhtml/d
 src/skin/adminhtml/default/default/ricento skin/adminhtml/default/default/ricento
 src/js/ricento js/ricento
 src/app/locale/en_US/Diglin_Ricento.csv app/locale/en_US/Diglin_Ricento.csv
+
+# Import the ricardo PHP lib via modman
+@import git@bitbucket.org:ricento/diglin_ricento.git
