@@ -7,4 +7,4 @@ src/js/ricento js/ricento
 src/app/locale/en_US/Diglin_Ricento.csv app/locale/en_US/Diglin_Ricento.csv
 
 # Import the ricardo PHP lib via modman
-@import git@bitbucket.org:ricento/diglin_ricento.git
+@import ssh://git@bitbucket.org:ricento/diglin_ricento.git
