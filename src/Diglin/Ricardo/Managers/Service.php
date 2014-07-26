@@ -211,6 +211,9 @@ class Service
             $data = $this->getApi()->connect($serviceInstance->getService(), $service['method'], $service['params']);
 
             //@todo Manage errors
+            if (array_key_exists('ErrorCodes', $data)) {
+                throw new \Exception('Ricardo API Returned Errors . ' . print_r($data, true), (isset($data['ErrorCodes']) ? $data['ErrorCodes'] : null));
+            }
 
             $getResultServiceMethod = $this->_prepareServiceGetResultMethod($serviceMethod);
 
