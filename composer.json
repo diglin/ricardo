@@ -4,7 +4,6 @@
     "license":"proprietary",
     "homepage":"http://www.ricento.ch",
     "description":"Ricardo.ch extension for Magento.",
-    "minimum-stability":"stable",
     "authors":[
         {
             "name":"Sylvain Rayé"
