@@ -117,8 +117,6 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_condition'
     'apply_to'	=> 'simple,grouped,configurable'
 ));
 
-$installer = $this;
-
 $installer->startSetup();
 
 $installer->getConnection()->changeColumn(

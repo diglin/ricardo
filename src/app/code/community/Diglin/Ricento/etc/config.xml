@@ -47,19 +47,19 @@
                 <class>Diglin_Ricento_Model_Resource</class>
                 <entities>
                     <products_listing>
-                        <table>ricento_product_listings</table>
+                        <table>ricento_products_listing</table>
                     </products_listing>
                     <products_listing_item>
-                        <table>ricento_products_listing_items</table>
+                        <table>ricento_products_listing_item</table>
                     </products_listing_item>
                     <sales_options>
                         <table>ricento_sales_options</table>
                     </sales_options>
                     <api_token>
-                        <table>ricento_api_tokens</table>
+                        <table>ricento_api_token</table>
                     </api_token>
                     <sync_log>
-                        <table>ricento_sync_logs</table>
+                        <table>ricento_sync_log</table>
                     </sync_log>
                 </entities>
             </diglin_ricento_resource>

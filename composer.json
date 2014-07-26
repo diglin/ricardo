@@ -16,7 +16,7 @@
     },
     "require":{
         "magento-hackathon/magento-composer-installer":"2.*",
-        "diglin/ricardo": "*"
+        "diglin/ricardo": "dev-develop"
     },
     "repositories":[
         {
