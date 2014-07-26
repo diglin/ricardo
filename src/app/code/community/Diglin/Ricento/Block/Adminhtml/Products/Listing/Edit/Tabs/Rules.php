@@ -14,7 +14,6 @@
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
     extends Diglin_Ricento_Block_Adminhtml_Products_Listing_Form_Abstract
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
-
 {
 
     protected function _initFormValues()

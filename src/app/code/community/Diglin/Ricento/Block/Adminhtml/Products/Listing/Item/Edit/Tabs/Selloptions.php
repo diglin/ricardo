@@ -64,6 +64,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         }
         return $this;
     }
+
     /**
      * Returns items that are selected to be configured
      *
@@ -73,6 +74,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
     {
         return Mage::registry('selected_items');
     }
+
     /**
      * Returns sales options model. Use sales options from single item if there is only one item
      * and it has individual settings. Otherwise use a copy of the sales options from listing

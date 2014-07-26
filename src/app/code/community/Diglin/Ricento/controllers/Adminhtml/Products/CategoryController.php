@@ -13,7 +13,7 @@
  */
 class Diglin_Ricento_Adminhtml_Products_CategoryController extends Mage_Adminhtml_Controller_Action
 {
-//TODO verhalten bei session expire
+   //TODO verhalten bei session expire
     public function mappingAction()
     {
         $this->loadLayout();
