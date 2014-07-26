@@ -52,8 +52,6 @@
  */
 class Diglin_Ricento_Model_Sales_Options extends Mage_Core_Model_Abstract
 {
-
-
     /**
      * Prefix of model events names
      * @var string

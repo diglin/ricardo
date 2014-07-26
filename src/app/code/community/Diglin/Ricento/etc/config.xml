@@ -12,7 +12,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.7</version>
+            <version>0.0.8</version>
         </Diglin_Ricento>
     </modules>
 
@@ -61,6 +61,9 @@
                     <sync_log>
                         <table>ricento_sync_log</table>
                     </sync_log>
+                    <shipping_payment_rule>
+                        <table>ricento_shipping_payment_rule</table>
+                    </shipping_payment_rule>
                 </entities>
             </diglin_ricento_resource>
         </models>

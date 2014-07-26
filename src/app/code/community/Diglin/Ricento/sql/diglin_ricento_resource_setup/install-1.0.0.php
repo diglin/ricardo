@@ -15,6 +15,7 @@ $installer->startSetup();
 
 $apiTokenTable = $installer->getTable('diglin_ricento/api_token');
 $salesOptionsTable = $installer->getTable('diglin_ricento/sales_options');
+$shippingPaymentRuleTable = $installer->getTable('diglin_ricento/shipping_payment_rule');
 $productListingTable = $installer->getTable('diglin_ricento/products_listing');
 $productListingItemTable = $installer->getTable('diglin_ricento/products_listing_item');
 $syncLogTable = $installer->getTable('diglin_ricento/sync_log');
@@ -64,11 +65,14 @@ $tableProductListings->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER,
     ->addColumn('total_products', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'default' => 0, 'nullable' => false))
     ->addColumn('status', Varien_Db_Ddl_Table::TYPE_TEXT, 20, array('nullable' => false, 'default' => Diglin_Ricento_Helper_Data::STATUS_PENDING))
     ->addColumn('sales_options_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('store_id', Varien_Db_Ddl_Table::TYPE_SMALLINT, 5, array('unsigned' => true, 'nullable' => false))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
     ->addForeignKey($installer->getFkName('diglin_ricento/products_listing', 'sales_options_id', 'diglin_ricento/sales_options', 'entity_id'),
         'sales_options_id', $salesOptionsTable, 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+    ->addForeignKey($installer->getFkName('diglin_ricento/products_listing', 'rule_id', 'diglin_ricento/shipping_payment_rule', 'rule_id'),
+        'rule_id', $shippingPaymentRuleTable, 'rule_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->setComment('List of products to be published on ricardo platform');
 $installer->getConnection()->createTable($tableProductListings);
 
@@ -89,6 +93,7 @@ $tableProductListingItems->addColumn('item§', Varien_Db_Ddl_Table::TYPE_INTEGER
     ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('sales_options_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true, 'default' => null))
+    ->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true, 'default' => true))
     ->addColumn('status', Varien_Db_Ddl_Table::TYPE_TEXT, 20, array('nullable' => false, 'default' => Diglin_Ricento_Helper_Data::STATUS_PENDING))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
@@ -98,10 +103,42 @@ $tableProductListingItems->addColumn('item§', Varien_Db_Ddl_Table::TYPE_INTEGER
         'products_listing_id', $productListingTable, 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->addForeignKey($installer->getFkName('diglin_ricento/products_listing_item', 'sales_options_id', 'diglin_ricento/sales_options', 'entity_id'),
         'sales_options_id', $salesOptionsTable, 'entity_id', Varien_Db_Ddl_Table::ACTION_SET_NULL)
+    ->addForeignKey($installer->getFkName('diglin_ricento/products_listing_item', 'rule_id', 'diglin_ricento/shipping_payment_rule', 'rule_id'),
+        'rule_id', $shippingPaymentRuleTable, 'rule_id', Varien_Db_Ddl_Table::ACTION_SET_NULL)
     ->addIndex($installer->getIdxName('diglin_ricento/products_listing_item', array('product_id', 'products_listing_id')),
         array('product_id', 'products_listing_id'), array('type' => 'unique'))
     ->setComment('Associated products for product listings');
 $installer->getConnection()->createTable($tableProductListingItems);
+
+$tablePaymentRule = $installer->getConnection()->newTable($shippingPaymentRuleTable);
+$tablePaymentRule
+    ->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array(
+        'primary' => true,
+        'auto_increment' => true,
+        'nullable' => false,
+        'unsigned' => true
+    ), 'Rule ID')
+    ->addColumn('payment_methods', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
+        'nullable' => false
+    ), 'Payment Methods')
+    ->addColumn('payment_description', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+        'nullable' => false
+    ), 'Payment description')
+    ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
+        'nullable' => false
+    ), 'Shipping Method')
+    ->addColumn('shipping_description', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+        'nullable' => true
+    ), 'Shipping Description')
+    ->addColumn('shipping_availability', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
+        'nullable' => false
+    ), 'Shipping Availability')
+    ->addColumn('shipping_price', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array(
+        'nullable' => false,
+        'default' => '0.0000',
+    ), 'Selection Price Value')
+    ->setComment('Shipping & Payment Rule for product list or product item');
+$installer->getConnection()->createTable($tablePaymentRule);
 
 $installer->endSetup();
 
