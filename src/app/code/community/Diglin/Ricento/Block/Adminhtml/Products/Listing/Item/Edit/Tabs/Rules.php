@@ -24,10 +24,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Rules
         }
         return false;
     }
+
     public function getReadonlyNote()
     {
         return $this->__('Listed items cannot be modified. Stop the listing first to make changes.');
     }
+
     protected function _initFormValues()
     {
         parent::_initFormValues();
@@ -38,10 +40,20 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Rules
     {
         parent::_prepareForm();
         $this->getForm()->addField('use_products_list_settings', 'checkbox', array(
-            'name'    => 'rules[use_products_list_settings]',
-            'label'   => 'Use Product List Settings',
+            'name' => 'rules[use_products_list_settings]',
+            'label' => 'Use Product List Settings',
             'onclick' => "var self = this; this.form.getElements().each(function(element) { if (element!=self && element.id.startsWith('{$this->getForm()->getHtmlIdPrefix()}')) element.disabled=self.checked; })"
         ), '^');
         return $this;
+    }
+
+    /**
+     * Returns items that are selected to be configured
+     *
+     * @return Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection
+     */
+    public function getSelectedItems()
+    {
+        return Mage::registry('selected_items');
     }
 }
