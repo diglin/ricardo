@@ -59,7 +59,7 @@ $tableProductListings->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER,
     ->addColumn('store_id', Varien_Db_Ddl_Table::TYPE_INTEGER, array('unsigned' => true, 'nullable' => false))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
-    ->addForeignKey($installer->getFkName('diglin_ricento/products_listing', 'sales_options_id', 'diglin_ricento/products_listing', 'entity_id'),
+    ->addForeignKey($installer->getFkName('diglin_ricento/products_listing', 'sales_options_id', 'diglin_ricento/sales_options', 'entity_id'),
         'sales_options_id', $installer->getTable('diglin_ricento/sales_options'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->setComment('List of products to be published on ricardo platform');
 $installer->getConnection()->createTable($tableProductListings);
@@ -84,8 +84,8 @@ $tableProductListingItems->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTE
     ->addColumn('status', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
-    ->addForeignKey($installer->getFkName('diglin_ricento/products_listing_item', 'product_id', 'diglin_ricento/products_listing', 'entity_id'),
-        'product_id', $installer->getTable('diglin_ricento/products_listing'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+    ->addForeignKey($installer->getFkName('diglin_ricento/products_listing_item', 'product_id', 'catalog/product', 'entity_id'),
+        'product_id', $installer->getTable('catalog/product'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->addForeignKey($installer->getFkName('diglin_ricento/products_listing_item', 'products_listing_id', 'diglin_ricento/products_listing', 'entity_id'),
         'products_listing_id', $installer->getTable('diglin_ricento/products_listing'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->addIndex($installer->getIdxName('diglin_ricento/products_listing_item', array('product_id', 'products_listing_id')),
