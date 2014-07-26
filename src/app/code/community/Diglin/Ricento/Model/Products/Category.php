@@ -48,6 +48,7 @@ class Diglin_Ricento_Model_Products_Category extends Varien_Object
             $this->setDataUsingMethod($key, $value);
         }
     }
+
     /**
      * @return Diglin_Ricento_Model_Products_Category[]
      */
@@ -55,6 +56,7 @@ class Diglin_Ricento_Model_Products_Category extends Varien_Object
     {
         return $this->_children;
     }
+
     /**
      * @param Diglin_Ricento_Model_Products_Category $category
      */
