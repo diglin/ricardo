@@ -15,8 +15,8 @@
         "source": "https://bitbucket.org/ricento/diglin_ricento"
     },
     "require":{
-        "magento-hackathon/magento-composer-installer":"*",
-        "diglin/ricardo": "*"
+        "magento-hackathon/magento-composer-installer":"2.*",
+        "diglin/ricardo": "dev-develop"
     },
     "repositories":[
         {

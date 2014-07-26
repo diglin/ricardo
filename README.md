@@ -26,4 +26,32 @@ This README would normally document whatever steps are necessary to get your app
 ### Who do I talk to? ###
 
 * Repo owner or admin
-* Other community or team contact
+
+### Installation
+
+#### Via Composer
+
+```
+ {
+    "require" : {
+        "diglin/diglin_ricento": "1.*"
+    },
+    "repositories" : [
+        {
+            "type": "vcs",
+            "url": "git@bitbucket.org:ricento/diglin_ricardo.git"
+        }
+    ],
+     "scripts": {
+         "post-package-install": [
+             "Diglin\\Ricardo\\Composer\\Magento::postPackageAction"
+         ],
+         "post-package-update": [
+             "Diglin\\Ricardo\\Composer\\Magento::postPackageAction"
+         ],
+         "pre-package-uninstall": [
+             "Diglin\\Ricardo\\Composer\\Magento::cleanPackageAction"
+         ]
+     }
+ }
+ ```

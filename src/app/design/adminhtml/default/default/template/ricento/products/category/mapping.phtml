@@ -7,6 +7,10 @@
 
 <div id="ricardo_categories" <?php if ($this->shouldResize()): ?>class="ricardo_categories_resized"<?php endif; ?>>
 <form action="#" onsubmit="Ricento.categoryMappingTargetInput.value = this.serialize(true)['ricardo_category_id']; Ricento.closePopup(); return false;">
+    <div class="form-buttons">
+        <button type="button" onclick="Ricento.closePopup()" class="cancel button" id="ricardo_categories_button_cancel"><span><?php echo $this->__('Cancel'); ?></span></button>
+        <button type="submit" class="save button" id="ricardo_categories_button_save"><span><?php echo $this->__('Confirm');?></span></button>
+    </div>
 <?php
     echo $this->getChildHtml('toplevel');
 ?>

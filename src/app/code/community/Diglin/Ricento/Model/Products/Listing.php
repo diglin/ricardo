@@ -124,7 +124,7 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
     /**
      * Removes items by product id
      *
-     * @param array $productId
+     * @param array $productIds
      * @return int number of removed products
      */
     public function removeProducts(array $productIds)
