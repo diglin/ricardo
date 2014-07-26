@@ -31,6 +31,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
 
         $storeCurrency = Mage::getStoreConfig('currency/options/base', $this->_getListing()->getStoreId());
+        $currencyWarning = '';
         if ($storeCurrency !== 'CHF') {
             $currencyWarning = '<ul class="messages"><li class="warning-msg">' .
                 $this->__("The store's base currency is {$storeCurrency}. Only CHF is allowed as currency. No currency conversion will be proceed.") .
@@ -100,9 +101,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'after_element_html' => $currencyWarning,
         ));
 
-$fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
+        $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
             'legend'                => $this->__('Auction'),
             'fieldset_container_id' => 'fieldset_toggle_auction'));
+
         $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
             'name'  => 'sales_options[sales_auction_start_price]',
             'label' => $this->__('Start price'),
