@@ -79,3 +79,7 @@
     clear: both;
     text-align: right;
 }
+
+/* Add missing Magento core pictures */
+.magento_minimize { background:url('images/window_minimize.png') 0 0 no-repeat;}
+.magento_maximize { background:url('images/window_maximize.png')0 0 no-repeat;}
