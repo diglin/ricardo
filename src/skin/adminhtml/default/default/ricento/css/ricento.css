@@ -1,3 +1,8 @@
+/* Reset */
+input[type="radio"] {
+    margin-right: 7px;
+}
+
 .dialog table.table_window .grid td,
 .dialog table.table_window .grid th
 {
@@ -79,3 +84,7 @@
     clear: both;
     text-align: right;
 }
+
+/* Add missing Magento core pictures */
+.magento_minimize { background:url('images/window_minimize.png') 0 0 no-repeat;}
+.magento_maximize { background:url('images/window_maximize.png')0 0 no-repeat;}
