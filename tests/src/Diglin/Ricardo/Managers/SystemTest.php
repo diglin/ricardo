@@ -34,6 +34,8 @@ class SystemTest extends TestAbstract
     {
         $result = $this->_systemManager->getArticleConditions(false);
 
+        print_r($result);
+
         $this->assertGreaterThanOrEqual(1, count($result), 'Article Conditions are empty');
         $this->assertArrayHasKey('ArticleConditionText', $result[0], 'Data returned for the article conditions is not correct');
     }
@@ -239,7 +241,5 @@ class SystemTest extends TestAbstract
         $result = $this->_systemManager->getWarranties();
         $this->assertArrayHasKey('WarrantyConditionText', $result[0], 'Warranties: WarrantyConditionText is missing');
         $this->assertArrayHasKey('WarrantyId', $result[0], 'Warranties: WarrantyId is missing');
-//        print_r($result);
-//        echo $this->getLastApiDebug();
     }
 }
