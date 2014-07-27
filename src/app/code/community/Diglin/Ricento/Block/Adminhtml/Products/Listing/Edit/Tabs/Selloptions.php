@@ -149,7 +149,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 array('value' => 0, 'label' => $this->__('End after %s days'), 'field' => array(
                     'schedule_period_days', 'select', array(
                         'name'    => 'sales_options[schedule_period_days]',
-                        'options' => $this->_getDaysOptions(),
+                        'options' => $this->_getDaysOptions()->toOptionHash(),
                         'class'   => 'inline-select'
                     )
                 )),
@@ -269,7 +269,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             $derivedValues['stock_management'] = '';
             $derivedValues['stock_management_use_inventory'] = 1;
         }
-        if (!in_array($this->getSalesOptions()->getSchedulePeriodDays(), $this->_getDaysOptions())) {
+        if (!in_array($this->getSalesOptions()->getSchedulePeriodDays(), $this->_getDaysOptions()->toOptionHash())) {
             $derivedValues['schedule_period_use_end_date'] = 1;
             $derivedValues['schedule_period_end_date'] = date_add(
                 new DateTime($this->getSalesOptions()->getScheduleDateStart()),
@@ -326,30 +326,20 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         return false;
     }
 
+    /**
+     * @return Diglin_Ricento_Model_Config_Source_Sales_Days
+     */
     protected function _getDaysOptions()
     {
-        //TODO extract to source model or helper
-        return array(
-            2 => 2,
-            4 => 4,
-            6 => 6,
-            8 => 8,
-            10 => 10
-        );
+        return Mage::getModel('diglin_ricento/config_source_sales_days');
     }
 
+    /**
+     * @return Diglin_Ricento_Model_Config_Source_Sales_Reactivating
+     */
     protected function _getReactivationOptions()
     {
-        //TODO extract to helper or source model
-        return array(
-            0 => 0,
-            1 => 1,
-            2 => 2,
-            3 => 3,
-            4 => 4,
-            5 => 5,
-            null => $this->__('Until sold')
-        );
+        return Mage::getModel('diglin_ricento/config_source_sales_reactivating');
     }
 
     /**
