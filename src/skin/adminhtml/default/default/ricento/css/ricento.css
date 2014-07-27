@@ -96,6 +96,12 @@ input[type="radio"] {
     text-align: right;
 }
 
+.ricardo_categories_title {
+    float:left;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
 /********** Add missing Magento core pictures **********/
 
 .magento_minimize { background:url('images/window_minimize.png') 0 0 no-repeat;}

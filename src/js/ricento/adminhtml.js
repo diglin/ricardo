@@ -64,7 +64,7 @@ Ricento.newListingPopup = function() {
         }
     });
 };
-Ricento.categoryMappingPopup = function(url, target) {
+Ricento.categoryMappingPopup = function(url, target, targetTitle) {
     if ($('ricento_popup') && typeof(Windows) != 'undefined') {
         Windows.focus('ricento_popup');
         return;
@@ -92,6 +92,7 @@ Ricento.categoryMappingPopup = function(url, target) {
         }
     });
     Ricento.categoryMappingTargetInput = target;
+    Ricento.categoryMappingTargetTitle = targetTitle;
 };
 Ricento.closePopup = function() {
     Windows.close('ricento_popup');
@@ -146,6 +147,7 @@ Ricento.CategoryMappper.prototype = {
         $(link.parentNode).select('input').each(function(input) {
             input.checked = true;
         });
+        $('ricardo_category_selected_title').value = link.dataset.text;
         $('ricardo_categories_button_save').enable();
         $('ricardo_categories_button_save').removeClassName('disabled');
     },
@@ -190,5 +192,11 @@ Ricento.CategoryMappper.prototype = {
             this.categoriesLoading = false;
             Element.hide('loading-mask');
         }
+    },
+    submitForm: function (form) {
+        formSerialized = form.serialize(true);
+        Ricento.categoryMappingTargetInput.value = formSerialized['ricardo_category_id'];
+        Ricento.categoryMappingTargetTitle.innerHTML = formSerialized['ricardo_category_selected_title'];
+        Ricento.closePopup();
     }
 };
