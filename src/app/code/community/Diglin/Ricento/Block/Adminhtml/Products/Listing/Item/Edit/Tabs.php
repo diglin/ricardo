@@ -32,8 +32,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs extends Mag
         ));
 
         $this->addTab('selloptions_section', array(
-            'label' => $this->__('Sell Options') ,
-            'title' => $this->__('Sell Options') ,
+            'label' => $this->__('Sales Options') ,
+            'title' => $this->__('Sales Options') ,
             'content' => $this->getLayout()
                     ->createBlock('diglin_ricento/adminhtml_products_listing_item_edit_tabs_selloptions')
                     ->toHtml()
