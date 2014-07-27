@@ -42,21 +42,19 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
      */
     protected function _prepareColumns()
     {
-        
         $helper = Mage::helper('diglin_ricento');
         
         $this->addColumn('entity_id', array(
             'header' => $this->__('ID') ,
             'align' => 'left',
-            'width' => '50px',
             'index' => 'entity_id',
             'type' => 'number',
+            'width' => '50px',
         ));
 
         $this->addColumn('title', array(
             'header' => $this->__('Title') ,
             'align' => 'left',
-            'width' => '250px',
             'index' => 'title',
         ));
 
@@ -120,7 +118,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
         $this->addColumn('action',
             array(
                 'header'    => $helper->__('Action'),
-                'width'     => '50px',
+                'width'     => '90px',
                 'type'      => 'action',
                 'getter'     => 'getId',
                 'actions'   => array(

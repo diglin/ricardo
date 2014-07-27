@@ -55,8 +55,27 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'diglin_ricento/products_listing_item',
                 'status',
                 'product_id=entity_id',
-                'products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
-                'left');
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->joinField('sales_options_id',
+                'diglin_ricento/products_listing_item',
+                'sales_options_id',
+                'product_id=entity_id',
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->joinField('rule_id',
+                'diglin_ricento/products_listing_item',
+                'rule_id',
+                'product_id=entity_id',
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->joinField('has_custom_options',
+                'catalog/product_option',
+                new Zend_Db_Expr('option_id IS NOT NULL'),
+                'product_id=entity_id',
+                null,
+                'left'
+            );
 
         $productIds = $this->_getSelectedProducts();
         if (empty($productIds)) {
@@ -99,10 +118,26 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             'width'     => '1',
             'index'     => 'stock_qty'
         ));
+        $this->addColumn('has_custom_options', array(
+            'header'    => '',
+            'width'     => 20,
+            'index'     => 'has_custom_options',
+            'sortable'  => false,
+            'filter'    => false,
+            'renderer'  => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_listing_edit_tabs_products_renderer_customoptions')
+        ));
+        $this->addColumn('is_configured', array(
+            'header'    => '',
+            'width'     => 20,
+            'index'     => 'is_configured',
+            'sortable'  => false,
+            'filter'    => false,
+            'renderer'  => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_listing_edit_tabs_products_renderer_configured')
+        ));
         $this->addColumn('action',
             array(
                 'header'    => $this->__('Action'),
-                'width'     => '50px',
+                'width'     => '100px',
                 'type'      => 'action',
                 'getter'     => 'getId',
                 'actions'   => array(

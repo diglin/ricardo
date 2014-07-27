@@ -74,10 +74,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
                 null,
                 'left')
             ->groupByAttribute('entity_id');
+
         $productIds = $this->_getSelectedProducts();
         if (empty($productIds)) {
             $productIds = 0;
         }
+
         $collection->addFieldToFilter('entity_id', array('nin'=>$productIds));
 
         $this->setCollection($collection);
