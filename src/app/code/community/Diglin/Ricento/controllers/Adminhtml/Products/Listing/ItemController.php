@@ -76,10 +76,20 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
             $this->_initItems();
             try {
                 if ($this->saveConfiguration($data)) {
-                    if (!isset($data['sales_options']['use_products_list_settings'])) {
                         foreach ($this->getSelectedItems() as $item) {
                             /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
+                        if (!isset($data['sales_options']['use_products_list_settings'])) {
                             $item->setSalesOptionsId($item->getSalesOptions()->getId());
+                        } else {
+                            $item->setSalesOptionsId(new Zend_Db_Expr('null'));
+                        }
+                        if (!isset($data['rules']['use_products_list_settings'])) {
+                            $item->setRuleId($item->getShippingPaymentRule()->getId());
+                        } else {
+                            $item->setRuleId(new Zend_Db_Expr('null'));
+                        }
+
+                        if ($item->hasDataChanges()) {
                             $item->save();
                         }
                     }
@@ -118,6 +128,21 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
             }
         }
         return $this->_salesOptionsCollection;
+    }
+
+    /**
+     * @return Varien_Data_Collection
+     */
+    protected function _getShippingPaymentRule()
+    {
+        if (!$this->_shippingPaymentCollection) {
+            $this->_shippingPaymentCollection = new Varien_Data_Collection();
+            foreach ($this->getSelectedItems() as $item) {
+                /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
+                $this->_shippingPaymentCollection->addItem($item->getShippingPaymentRule());
+            }
+        }
+        return $this->_shippingPaymentCollection;
     }
 
     protected function _getEditUrl()

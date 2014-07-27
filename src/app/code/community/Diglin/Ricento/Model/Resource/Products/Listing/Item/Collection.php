@@ -13,8 +13,6 @@
  */
 class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
-
-
     /**
      * Products_Listing_Item Collection Resource Constructor
      * @return void

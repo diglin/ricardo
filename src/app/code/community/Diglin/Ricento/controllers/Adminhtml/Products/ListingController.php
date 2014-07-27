@@ -28,6 +28,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $this->_addContent($this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing', 'products_listing'));
         $this->renderLayout();
     }
+
     public function productsGridAction()
     {
         if (!$this->_initListing()) {
@@ -39,6 +40,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products')->toHtml()
         );
     }
+
     public function addProductsPopupAction()
     {
         if (!$this->_initListing()) {
@@ -48,6 +50,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $this->loadLayout();
         $this->renderLayout();
     }
+
     public function addProductsGridAction()
     {
         if (!$this->_initListing()) {
@@ -59,6 +62,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products_add')->toHtml()
         );
     }
+
     /**
      * Edit a product listing item
      */
@@ -77,8 +81,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function createAction()
     {
-        $listingTitle = (string) $this->getRequest()->getPost('listing_title');
-        $storeId = (int) $this->getRequest()->getPost('store_id');
+        $listingTitle = (string)$this->getRequest()->getPost('listing_title');
+        $storeId = (int)$this->getRequest()->getPost('store_id');
         if (empty($listingTitle) || empty($storeId)) {
             $this->_getSession()->addError($this->__('Listing name and store must be specified.'));
             $this->_redirect('*/*/index');
@@ -89,14 +93,20 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $salesOptions = Mage::getModel('diglin_ricento/sales_options');
         $salesOptions->setDataChanges(true)->save();
 
+        /* @var $rule Diglin_Ricento_Model_Rule */
+        $rule = Mage::getModel('diglin_ricento/rule');
+        $rule->setDataChanges(true)->save();
+
         /* @var $listing Diglin_Ricento_Model_Products_Listing */
         $listing = Mage::getModel('diglin_ricento/products_listing');
         $listing->setTitle($listingTitle)
             ->setStoreId($storeId)
             ->setSalesOptionsId($salesOptions->getId())
+            ->setRuleId($rule->getId())
             ->save();
         $this->_redirect('*/*/edit', array('id' => $listing->getId()));
     }
+
     /**
      * Save a product listing
      */
@@ -139,6 +149,15 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         return $this->_salesOptionsCollection;
     }
 
+    protected function _getShippingPaymentRule()
+    {
+        if (!$this->_shippingPaymentCollection) {
+            $this->_shippingPaymentCollection = new Varien_Data_Collection();
+            $this->_shippingPaymentCollection->addItem($this->_getListing()->getShippingPaymentRule());
+        }
+        return $this->_shippingPaymentCollection;
+    }
+
     protected function _getEditUrl()
     {
         return $this->getUrl('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
@@ -173,6 +192,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->_redirect('*/*/index');
             return;
         }
+
         $this->_getListing()->delete();
         $this->_getSession()->addSuccess($this->__('Listing deleted'));
         $this->_redirect('*/*/index');
@@ -187,10 +207,10 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->_redirect('*/*/index');
             return;
         }
-        $productIds = (array) $this->getRequest()->getPost('product', array());
+        $productIds = (array)$this->getRequest()->getPost('product', array());
         $productsAdded = 0;
         foreach ($productIds as $productId) {
-            if ($this->_getListing()->addProduct((int) $productId)) {
+            if ($this->_getListing()->addProduct((int)$productId)) {
                 ++$productsAdded;
             }
         }
@@ -208,9 +228,9 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             return;
         }
         if ($this->getRequest()->isPost()) {
-            $productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
+            $productIds = array_map('intval', (array)$this->getRequest()->getPost('product', array()));
         } else {
-            $productIds = array_map('intval', (array) $this->getRequest()->getParam('product', array()));
+            $productIds = array_map('intval', (array)$this->getRequest()->getParam('product', array()));
         }
         $productsRemoved = $this->_getListing()->removeProducts($productIds);
         $this->_getSession()->addSuccess($this->__('%d products removed from listing', $productsRemoved));
@@ -298,6 +318,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     {
 
     }
+
     /**
      * View logs of selected product listings
      */

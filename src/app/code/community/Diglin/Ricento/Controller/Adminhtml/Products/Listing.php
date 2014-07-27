@@ -20,6 +20,11 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
      */
     protected $_salesOptionsCollection;
 
+    /**
+     * @var Varien_Data_Collection
+     */
+    protected $_shippingPaymentCollection;
+
     protected function _construct()
     {
         // important to get appropriate translation from this module
@@ -31,7 +36,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
      */
     protected function _initListing()
     {
-        $registeredListing = Mage::registry('products_listing');
+        $registeredListing = $this->_getListing();
         if ($registeredListing) {
             return $registeredListing;
         }
@@ -91,6 +96,18 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
                 new DateTime($data['sales_options']['schedule_date_start']),
                 new DateTime($data['sales_options']['schedule_period_end_date']))->days;
         }
+
+        if (!isset($data['rules'])) {
+            $data['rules'] = array();
+        }
+        if (empty($data['rules']['rule_id'])) {
+            unset($data['rules']['rule_id']);
+        }
+
+        if (!empty($data['rules']['payment_methods'])) {
+            $data['rules']['payment_methods'] = implode(',', $data['rules']['payment_methods']);
+        }
+
         return $data;
     }
 
@@ -120,6 +137,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
         }
 
         $this->_getSalesOptions()->setDataToAll($data['sales_options']);
+        $this->_getShippingPaymentRule()->setDataToAll($data['rules']);
 
         if (!$this->_validatePostData($data)) {
             $this->_redirectUrl($this->_getEditUrl());
@@ -131,6 +149,12 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
                 $this->_getSalesOptions()->walk('delete');
             } else {
                 $this->_getSalesOptions()->walk('save');
+            }
+
+            if (isset($data['rules']['use_products_list_settings'])) {
+                $this->_getShippingPaymentRule()->walk('delete');
+            } else {
+                $this->_getShippingPaymentRule()->walk('save');
             }
 
             $this->_getSession()->setFormData(false);
@@ -159,9 +183,14 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
     abstract protected function _savingAllowed();
 
     /**
-     * @return Diglin_Ricento_Model_Resource_Sales_Options_Collection
+     * @return Varien_Data_Collection
      */
     abstract protected function _getSalesOptions();
+
+    /**
+     * @return Varien_Data_Collection
+     */
+    abstract protected function _getShippingPaymentRule();
 
     /**
      * @return string

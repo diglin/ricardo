@@ -11,26 +11,28 @@
 /**
  * Products Listing Model
  *
- * @method string getTitle() getTitle()
- * @method int    getTotalActiveProducts() getTotalActiveProducts()
- * @method int    getTotalInActiveProducts() getTotalInActiveProducts()
- * @method int    getTotalSoldProducts() getTotalSoldProducts()
- * @method int    getTotalProducts() getTotalProducts()
- * @method string getStatus() getStatus()
- * @method int    getSalesOptionsId() getSalesOptionsId()
- * @method int    getStoreId() getStoreId()
- * @method DateTime getCreatedAt() getCreatedAt()
- * @method DateTime getUpdatedAt() getUpdatedAt()
- * @method Diglin_Ricento_Model_Products_Listing setTitle() setTitle(string $title)
- * @method Diglin_Ricento_Model_Products_Listing setTotalActiveProducts() setTotalActiveProducts(int $totalActiveProducts)
- * @method Diglin_Ricento_Model_Products_Listing setTotalInActiveProducts() setTotalInActiveProducts(int $totalInactiveProducts)
- * @method Diglin_Ricento_Model_Products_Listing setTotalSoldProducts() setTotalSoldProducts(int $totalSoldProducts)
- * @method Diglin_Ricento_Model_Products_Listing setTotalProducts() setTotalProducts(int $totalProducts)
- * @method Diglin_Ricento_Model_Products_Listing setStatus() setStatus(string $status)
- * @method Diglin_Ricento_Model_Products_Listing setSalesOptionsId() setSalesOptionsId(int $salesOptionsId)
- * @method Diglin_Ricento_Model_Products_Listing setStoreId() setStoreId(int $storeId)
- * @method Diglin_Ricento_Model_Products_Listing setCreatedAt() setCreatedAt(DateTime $createdAt)
- * @method Diglin_Ricento_Model_Products_Listing setUpdatedAt() setUpdatedAt(DateTime $updatedAt)
+ * @method string getTitle()
+ * @method int    getTotalActiveProducts()
+ * @method int    getTotalInActiveProducts()
+ * @method int    getTotalSoldProducts()
+ * @method int    getTotalProducts()
+ * @method string getStatus()
+ * @method int    getSalesOptionsId()
+ * @method int    getStoreId()
+ * @method int    getRuleId()
+ * @method DateTime getCreatedAt()
+ * @method DateTime getUpdatedAt()
+ * @method Diglin_Ricento_Model_Products_Listing setTitle(string $title)
+ * @method Diglin_Ricento_Model_Products_Listing setTotalActiveProducts(int $totalActiveProducts)
+ * @method Diglin_Ricento_Model_Products_Listing setTotalInActiveProducts(int $totalInactiveProducts)
+ * @method Diglin_Ricento_Model_Products_Listing setTotalSoldProducts(int $totalSoldProducts)
+ * @method Diglin_Ricento_Model_Products_Listing setTotalProducts(int $totalProducts)
+ * @method Diglin_Ricento_Model_Products_Listing setStatus(string $status)
+ * @method Diglin_Ricento_Model_Products_Listing setSalesOptionsId(int $salesOptionsId)
+ * @method Diglin_Ricento_Model_Products_Listing setStoreId(int $storeId)
+ * @method Diglin_Ricento_Model_Products_Listing setRuleId(int $ruleId)
+ * @method Diglin_Ricento_Model_Products_Listing setCreatedAt(DateTime $createdAt)
+ * @method Diglin_Ricento_Model_Products_Listing setUpdatedAt(DateTime $updatedAt)
  */
 class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
 {
@@ -40,6 +42,11 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
      * @var Diglin_Ricento_Model_Sales_Options
      */
     protected $_salesOptions;
+
+    /**
+     * @var Diglin_Ricento_Model_Rule
+     */
+    protected $_shippingPaymentRule;
 
     /**
      * Prefix of model events names
@@ -76,6 +83,33 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
         return $this;
     }
 
+    protected function _beforeDelete()
+    {
+        parent::_beforeDelete();
+
+        // We do not use the FK constrains cause of deletion of other values at item level
+        $this->getProductsListingItemCollection()->walk('delete');
+        return $this;
+    }
+
+    protected function _afterDeleteCommit()
+    {
+        $this->getSalesOptions()->delete();
+        $this->getShippingPaymentRule()->delete();
+
+        parent::_afterDeleteCommit();
+        return $this;
+    }
+
+    /**
+     * @return Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection
+     */
+    public function getProductsListingItemCollection()
+    {
+        return Mage::getResourceModel('diglin_ricento/products_listing_item_collection')
+            ->addFieldToFilter('products_listing_id', array('eq' => $this->getId()));
+    }
+
     /**
      * Retrieve array of product id's for listing
      *
@@ -93,15 +127,6 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
             $this->setData('product_ids', $array);
         }
         return $array;
-    }
-
-    public function getSalesOptions()
-    {
-        if (!$this->_salesOptions) {
-            $this->_salesOptions = Mage::getModel('diglin_ricento/sales_options');
-            $this->_salesOptions->load($this->getSalesOptionsId());
-        }
-        return $this->_salesOptions;
     }
 
     /**
@@ -140,5 +165,29 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
             $items->walk('delete');
         }
         return $numberOfItems;
+    }
+
+    /**
+     * @return Diglin_Ricento_Model_Sales_Options
+     */
+    public function getSalesOptions()
+    {
+        if (!$this->_salesOptions) {
+            $this->_salesOptions = Mage::getModel('diglin_ricento/sales_options');
+            $this->_salesOptions->load($this->getSalesOptionsId());
+        }
+        return $this->_salesOptions;
+    }
+
+    /**
+     * @return Diglin_Ricento_Model_Rule
+     */
+    public function getShippingPaymentRule()
+    {
+        if (!$this->_shippingPaymentRule) {
+            $this->_shippingPaymentRule = Mage::getModel('diglin_ricento/rule');
+            $this->_shippingPaymentRule->load($this->getRuleId());
+        }
+        return $this->_shippingPaymentRule;
     }
 }

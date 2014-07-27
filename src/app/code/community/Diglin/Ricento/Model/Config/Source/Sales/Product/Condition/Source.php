@@ -18,8 +18,8 @@ class Diglin_Ricento_Model_Config_Source_Sales_Product_Condition_Source extends 
     {
         return array(
             array('label' => '- Please Select Attribute -', 'value' => '', ),
-            array('label' => 'Price',                       'value' => 'price'),
-            array('label' => 'Special Price',               'value' => 'special_price'),
+//            array('label' => 'Price',                       'value' => 'price'),
+//            array('label' => 'Special Price',               'value' => 'special_price'),
             array('label' => 'Ricardo',                     'value' => array(
                 array('label' => 'Condition',   'value' => 'ricardo_condition'),
                 array('label' => 'Description', 'value' => 'ricardo_description'),
