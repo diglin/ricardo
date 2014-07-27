@@ -34,8 +34,10 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Checkboxes_Extensible extends 
             $field = $this->getField($option['field']);
             if (strpos($option['label'], '%s') !== false) {
                 $option['label'] = sprintf($option['label'], $field->getElementHtml());
+                return parent::_optionToHtml($option);
             } else {
-                $option['label'] = $option['label'] . ' ' . $field->getElementHtml();
+                $html = parent::_optionToHtml($option);
+                return str_replace('</li>', ' ' . $field->getElementHtml() . '</li>',$html);
             }
         }
         return parent::_optionToHtml($option);
