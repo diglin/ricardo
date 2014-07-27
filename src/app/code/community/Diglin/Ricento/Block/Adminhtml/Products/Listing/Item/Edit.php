@@ -32,7 +32,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit extends Mage_Adm
             return $this->__("Configure product '%s'", $this->escapeHtml($this->getSelectedItems()->getFirstItem()->getProduct()->getName()));
         }
         else {
-            return $this->__('Configure all selected products');
+            return $this->__('Configure all %s selected products', count($this->getSelectedItems()));
         }
     }
     public function getBackUrl()
