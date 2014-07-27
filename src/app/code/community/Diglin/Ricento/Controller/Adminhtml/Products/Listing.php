@@ -68,6 +68,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
      */
     protected function _filterPostData($data)
     {
+        // @todo data filtering should not be at model level e.g. onBeforeSave method ? Sylvain
         if (!isset($data['product_listing'])) {
             $data['product_listing'] = array();
         }
@@ -106,6 +107,17 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
 
         if (!empty($data['rules']['payment_methods'])) {
             $data['rules']['payment_methods'] = implode(',', $data['rules']['payment_methods']);
+        }
+        if (!empty($data['rules']['payment_description'])) {
+            $data['rules']['payment_description'] = Mage::helper('core')->escapeHtml($data['rules']['payment_description']);
+        }
+
+        if (!empty($data['rules']['shipping_description'])) {
+            $data['rules']['shipping_description'] = Mage::helper('core')->escapeHtml($data['rules']['shipping_description']);
+        }
+
+        if (!empty($data['rules']['free_shipping'])) {
+            $data['rules']['shipping_price'] = 0;
         }
 
         return $data;
