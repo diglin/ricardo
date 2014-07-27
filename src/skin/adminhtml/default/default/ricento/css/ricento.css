@@ -110,8 +110,14 @@ input[type="radio"] {
 /********** Ricento pages **********/
 
 .ricento-products-listing-edit .form-list,
-.ricento-products-listing-item-configure .form-list,
+.ricento-products-listing-item-configure .form-list {
+}
+.ricento-products-listing-edit .form-list td.value,
+.ricento-products-listing-item-configure .form-list td.value {
+    width: auto !important;
+}
+
 .ricento-products-listing-edit .form-list td.value textarea,
 .ricento-products-listing-item-configure .form-list td.value textarea {
-    width: 90%;
+    width: 500px;
 }
