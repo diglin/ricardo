@@ -24,7 +24,7 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         if ($this->getRequest()->isPost()) {
             $this->_productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
         } else {
-            $this->_productIds = array_map('intval', (array) $this->getRequest()->getParam('product', array()));
+            $this->_productIds = array_map('intval', explode(',', $this->getRequest()->getParam('product')));
         }
         if ($this->_productIds) {
             $itemCollection->addFieldToFilter('products_listing_id', $this->_getListing()->getId())
@@ -61,11 +61,13 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         $this->loadLayout();
         $this->renderLayout();
     }
+
     public function configurePopupAction()
     {
         $this->loadLayout();
         $this->renderLayout();
     }
+
     public function saveAction()
     {
         if ($data = $this->getRequest()->getPost()) {
@@ -76,8 +78,8 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
             $this->_initItems();
             try {
                 if ($this->saveConfiguration($data)) {
-                        foreach ($this->getSelectedItems() as $item) {
-                            /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
+                    foreach ($this->getSelectedItems() as $item) {
+                        /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
                         if (!isset($data['sales_options']['use_products_list_settings'])) {
                             $item->setSalesOptionsId($item->getSalesOptions()->getId());
                         } else {
@@ -107,6 +109,9 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
 
     }
 
+    /**
+     * @return bool
+     */
     protected function _savingAllowed()
     {
         foreach ($this->getSelectedItems() as $item) {
@@ -118,6 +123,9 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         return true;
     }
 
+    /**
+     * @return Varien_Data_Collection
+     */
     protected function _getSalesOptions()
     {
         if (!$this->_salesOptionsCollection) {
@@ -147,12 +155,11 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
 
     protected function _getEditUrl()
     {
-        return $this->getUrl('*/*/configure', array('id' => $this->getRequest()->getParam('id'), 'products' => $this->_productIds));
+        return $this->getUrl('*/*/configure', array('id' => $this->getRequest()->getParam('id'), 'product' => implode(',', $this->_productIds)));
     }
 
     protected function _getIndexUrl()
     {
         return $this->getUrl('*/products_listing/edit', array('id' => $this->getRequest()->getParam('id')));
     }
-
 }
