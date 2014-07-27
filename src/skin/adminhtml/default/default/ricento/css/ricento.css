@@ -2,6 +2,13 @@ input[type="radio"] {
     margin-right: 7px;
 }
 
+#nav li.ricardo_logo > a {
+    background: url("images/ricardo_16x16.png") no-repeat 10px 5px !important
+}
+#nav li.ricardo_logo > a span {
+    padding-left: 20px;
+}
+
 .dialog table.table_window .grid td,
 .dialog table.table_window .grid th {
     padding: 2px 4px;
