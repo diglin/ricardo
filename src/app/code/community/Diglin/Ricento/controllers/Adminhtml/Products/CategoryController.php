@@ -13,7 +13,7 @@
  */
 class Diglin_Ricento_Adminhtml_Products_CategoryController extends Mage_Adminhtml_Controller_Action
 {
-   //TODO verhalten bei session expire
+    //TODO verhalten bei session expire
     public function mappingAction()
     {
         $this->loadLayout();
@@ -29,12 +29,5 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Mage_Adminhtm
             ->setCategoryId($this->getRequest()->getParam('id', 1))
             ->setLevel($this->getRequest()->getParam('level', 0));
         $this->renderLayout();
-    }
-    /**
-     * Save the mapping done of the categories between Magento & Ricardo
-     */
-    public function saveAction()
-    {
-
     }
 }

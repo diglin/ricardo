@@ -1,6 +1,9 @@
+input[type="radio"] {
+    margin-right: 7px;
+}
+
 .dialog table.table_window .grid td,
-.dialog table.table_window .grid th
-{
+.dialog table.table_window .grid th {
     padding: 2px 4px;
 }
 #diglin_ricento_create_listing_fieldset {
@@ -30,15 +33,21 @@
 #products_listing_tabs_selloptions_section_content td.value {
     width: auto !important;
 }
+
 .diglin_ricento_warning_icon {
     min-width: 16px;
     min-height: 16px;
     background: url('images/warning_msg_icon.gif') center center no-repeat;
 }
-
-
-#ricardo_categories {
+.diglin_ricento_settings_icon {
+    min-width: 16px;
+    min-height: 16px;
+    background: url('images/settings_icon.png') center center no-repeat;
 }
+
+/********** Category Mapping views **********/
+
+#ricardo_categories {}
 #ricardo_categories nav {
     width: 200px;
     float: left;
@@ -80,6 +89,16 @@
     text-align: right;
 }
 
-/* Add missing Magento core pictures */
+/********** Add missing Magento core pictures **********/
+
 .magento_minimize { background:url('images/window_minimize.png') 0 0 no-repeat;}
 .magento_maximize { background:url('images/window_maximize.png')0 0 no-repeat;}
+
+/********** Ricento pages **********/
+
+.ricento-products-listing-edit .form-list,
+.ricento-products-listing-item-configure .form-list,
+.ricento-products-listing-edit .form-list td.value textarea,
+.ricento-products-listing-item-configure .form-list td.value textarea {
+    width: 90%;
+}
