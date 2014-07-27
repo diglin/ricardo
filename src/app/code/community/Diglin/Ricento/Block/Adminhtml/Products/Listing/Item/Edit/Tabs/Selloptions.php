@@ -15,6 +15,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
     extends Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
 {
+    /**
+     * @return bool
+     */
     public function isReadonlyForm()
     {
         foreach ($this->getSelectedItems() as $item) {
@@ -25,10 +28,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         }
         return false;
     }
+
+    /**
+     * @return string
+     */
     public function getReadonlyNote()
     {
         return $this->__('Listed items cannot be modified. Stop the listing first to make changes.');
     }
+
+    /**
+     * @return $this|Mage_Adminhtml_Block_Widget_Form
+     */
     protected function _prepareForm()
     {
         parent::_prepareForm();
@@ -83,15 +94,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
      */
     public function getSalesOptions()
     {
-        if ($this->_model) {
-            return $this->_model;
-        }
-        if (count($this->getSelectedItems()) === 1) {
-            $this->_loadSalesOptionsFromItem($this->getSelectedItems()->getFirstItem());
-        }
         if (!$this->_model) {
-            $this->_model = $this->_getListing()->getSalesOptions();
-            $this->_model->unsetData('entity_id');
+            if (count($this->getSelectedItems()) === 1) {
+                $this->_loadSalesOptionsFromItem($this->getSelectedItems()->getFirstItem());
+            }
+            if (!$this->_model) {
+                $this->_model = $this->_getListing()->getSalesOptions();
+                $this->_model->unsetData('entity_id');
+            }
         }
         return $this->_model;
     }
