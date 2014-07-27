@@ -30,7 +30,7 @@ $tablePaymentRule->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, ar
         'nullable' => false
     ), 'Payment Methods')
     ->addColumn('payment_description', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
-        'nullable' => false
+        'nullable' => true
     ), 'Payment description')
     ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
         'nullable' => false

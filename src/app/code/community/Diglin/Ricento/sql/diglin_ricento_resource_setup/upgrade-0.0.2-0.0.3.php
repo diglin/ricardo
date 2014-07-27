@@ -28,7 +28,7 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_title', ar
     'global'            => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
     'visible'           => true,
     'required'          => false,
-    'user_defined'      => true,
+    'user_defined'      => false,
     'default'           => '',
     'searchable'        => false,
     'filterable'        => false,
