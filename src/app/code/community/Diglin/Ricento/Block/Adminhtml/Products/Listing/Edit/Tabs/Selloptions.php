@@ -31,9 +31,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         $storeCurrency = Mage::getStoreConfig('currency/options/base', $this->_getListing()->getStoreId());
         $currencyWarning = '';
-        if ($storeCurrency !== 'CHF') {
+        if ($storeCurrency !== Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY) {
             $currencyWarning = '<ul class="messages"><li class="warning-msg">' .
-                $this->__("The store's base currency is {$storeCurrency}. Only CHF is allowed as currency. No currency conversion will be proceed.") .
+                $this->__("The store's base currency is {$storeCurrency}. Only %s is allowed as currency. No currency conversion will be proceed.", Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY) .
                 '</li></ul>';
         }
 
@@ -165,7 +165,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetSchedule->addField('schedule_reactivation', 'select', array(
             'name' => 'sales_options[schedule_reactivation]',
             'label' => $this->__('Reactivation'),
-            'options' => $this->_getReactivationOptions()
+            'options' => $this->_getReactivationOptions()->toOptionHash()
         ));
         $fieldsetSchedule->addField('schedule_cycle_multiple_products_random', 'radios_extensible', array(
             'name' => 'sales_options[schedule_cycle_multiple_products_random]',
@@ -255,8 +255,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     {
         $this->getForm()->setValues($this->getSalesOptions());
         $derivedValues = array();
-        $derivedValues['fix_currency'] = 'CHF';
-        $derivedValues['auction_currency'] = 'CHF';
+        $derivedValues['fix_currency'] = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
+        $derivedValues['auction_currency'] = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
         if ($this->getSalesOptions()->getRicardoCategory() == 0) {
             $derivedValues['ricardo_category_use_mapping'] = 1;
         }

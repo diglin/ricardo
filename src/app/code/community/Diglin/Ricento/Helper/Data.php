@@ -29,6 +29,10 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const SUPPORTED_LANG_DE = 'de';
     const SUPPORTED_LANG_FR = 'fr';
 
+    const LOG_FILE = 'ricento.log';
+
+    const ALLOWED_CURRENCY = 'CHF';
+
     /**
      * Returns product types that are available in Ricento
      *

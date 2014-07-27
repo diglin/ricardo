@@ -77,7 +77,7 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
             $category = Mage::getModel('diglin_ricento/products_category');
             $category->setDataFromApi($_categoryData);
             if (!$this->getCategory($category->getParentId())) {
-                Mage::log("Ricardo parent category ID {$category->getParentId()} as parent for category {$category->getId()} not found.", Zend_Log::WARN, 'ricento.log');
+                Mage::log("Ricardo parent category ID {$category->getParentId()} as parent for category {$category->getId()} not found.", Zend_Log::WARN, Diglin_Ricento_Helper_Data::LOG_FILE);
                 continue;
             }
             $this->_addCategoryToIndex($category);
