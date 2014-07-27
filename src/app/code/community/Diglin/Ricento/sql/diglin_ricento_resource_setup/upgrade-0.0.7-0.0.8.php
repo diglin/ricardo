@@ -62,7 +62,7 @@ $installer->getConnection()->addColumn($productListingTable, 'rule_id', array('t
 $installer->getConnection()->addForeignKey(
     $installer->getFkName($productListingItemTable, 'rule_id', $shippingPaymentRuleTable, 'rule_id'),
     $productListingItemTable, 'rule_id', $shippingPaymentRuleTable, 'rule_id',
-    Varien_Db_Ddl_Table::ACTION_CASCADE
+    Varien_Db_Ddl_Table::ACTION_SET_NULL, Varien_Db_Ddl_Table::ACTION_CASCADE
 );
 
 $installer->getConnection()->addForeignKey(
