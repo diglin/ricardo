@@ -22,26 +22,6 @@ class Diglin_Ricento_Block_Adminhtml_Notifications extends Mage_Adminhtml_Block_
     }
 
     /**
-     * Indicates if the extension is configured.
-     *
-     * @return bool
-     */
-    public function isConfigured()
-    {
-        return $this->helper('diglin_ricento')->isConfigured();
-    }
-
-    /**
-     * Get the configuration url
-     *
-     * @return string URL for MageSetup form
-     */
-    public function getConfigurationUrl()
-    {
-        return $this->getUrl('adminhtml/system_config/edit/section/ricento');
-    }
-
-    /**
      * ACL validation before html generation
      *
      * @return string Notification content
