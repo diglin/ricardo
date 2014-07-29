@@ -389,14 +389,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             requiredClass = \'required-entry\';
 
             condition.disabled = this.checked;
+            conditionSource.toggleClassName(requiredClass, this.checked);
+            condition.toggleClassName(requiredClass, !this.checked);
+            
             if (this.checked) {
-                conditionSource.addClassName(requiredClass);
-                condition.removeClassName(requiredClass);
                 conditionSourceLabel.insert(requiredText);
                 conditionLabel.replace(\'<label for=\\\'sales_options_product_condition\\\'>'. $this->getConditionLabel() .'</label>\');
             } else {
-                condition.addClassName(requiredClass);
-                conditionSource.removeClassName(requiredClass);
                 conditionLabel.insert(requiredText);
                 conditionSourceLabel.replace(\'<label for=\\\'sales_options_product_condition_use_attribute\\\'>'. $this->getConditionSourceLabel() .'</label>\');
             }
