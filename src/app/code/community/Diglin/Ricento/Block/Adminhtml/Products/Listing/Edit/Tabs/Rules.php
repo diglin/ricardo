@@ -71,7 +71,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $fieldsetShipping->addField('shipping_method', 'select', array(
             'name'    => 'rules[shipping_method]',
             'label'   => $this->__('Shipping Methods'),
-            'values'  => Mage::getModel('diglin_ricento/config_source_rules_shipping')->getAllOptions()
+            'values'  => Mage::getModel('diglin_ricento/config_source_rules_shipping')->getAllOptions(),
+            'class'   => 'validate-payment-shipping-combination',
         ));
         $fieldsetShipping->addField('shipping_availability', 'select', array(
             'name'    => 'rules[shipping_availability]',

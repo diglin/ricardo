@@ -107,6 +107,12 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
         }
         return true;
     }
+
+    /**
+     * Returns JavaScript with form validation methods based on $_allowedPaymentCombinations and $disallowedPaymentShippingCombinations
+     *
+     * @return string
+     */
     public function getJavaScriptValidator()
     {
         $helper = Mage::helper('diglin_ricento');
@@ -115,6 +121,8 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
             '<ul class="messages"><li class="notice-msg">' . $helper->__('The following combinations are possible:') .
             $this->_htmlListOfAllowedPaymentCombinations() .
             '</li></ul>';
+        $jsonDisallowedPaymentShippingCombinations = Mage::helper('core')->jsonEncode($this->_disallowedPaymentShippingCombinations);
+        $paymentShippingValidationMessage = $helper->__('It is not possible to combine "Other" with "Credit Card" payment method');
         return
 <<<JS
 Validation.add('validate-payment-method-combination', '{$paymentValidationMessage}', function(fieldValue, field) {
@@ -136,11 +144,32 @@ Validation.add('validate-payment-method-combination', '{$paymentValidationMessag
     }
     return false;
 });
-
+var paymentFormFieldName = 'rules[payment_methods][]';
+Validation.add('validate-payment-shipping-combination', '{$paymentShippingValidationMessage}', function(fieldValue, field) {
+    var checkboxes = field.form[paymentFormFieldName]
+    var paymentValue = [];
+    for (var i = 0; i < checkboxes.length; ++i) {
+        if (checkboxes[i].checked) {
+            paymentValue.push(parseInt(checkboxes[i].value));
+        }
+    }
+    var disallowedPaymentShippingCombinations = {$jsonDisallowedPaymentShippingCombinations};
+    for (var i = 0; i < disallowedPaymentShippingCombinations.length; ++i) {
+        if (disallowedPaymentShippingCombinations[i].shipping == fieldValue && paymentValue.indexOf(disallowedPaymentShippingCombinations[i].payment) >= 0) {
+            return false;
+        }
+    }
+    return true;
+});
 JS;
 
     }
 
+    /**
+     * Returns HTML for message box with detailed validation info
+     *
+     * @return string one line of HTML
+     */
     protected function _htmlListOfAllowedPaymentCombinations()
     {
         /* @var $source Diglin_Ricento_Model_Config_Source_Rules_Payment */
