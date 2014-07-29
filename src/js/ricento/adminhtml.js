@@ -124,7 +124,7 @@ Ricento.CategoryMappper.prototype = {
         } else {
             this.loadChildren(link);
         }
-        Event.stop(event);
+        event.preventDefault();
     },
 
     hideLevel: function(prefix, levelToHide)

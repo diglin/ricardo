@@ -78,18 +78,30 @@ input[type="radio"] {
     color: white;
     font-weight: bold;
 }
+#ricardo_categories a:hover {
+    background: #FFBD69;
+}
+#ricardo_categories a:active {
+    outline: 1px dotted #000000;
+}
 #ricardo_categories a div {
     margin-right: 20px;
 }
 #ricardo_categories input[type="radio"] {
-    float: right;
+    position: absolute;
+    left: -9999px;
 }
-#ricardo_categories .icon-plus {
-    background: url('images/arrow_sans_right_32.gif') no-repeat;
+#ricardo_categories .icon {
     width: 16px;
     height: 16px;
     float: right;
     text-indent: -9999px;
+}
+#ricardo_categories .selected .icon-check {
+    background: url('images/monotone_check_yes_ok.png') no-repeat;
+}
+#ricardo_categories .icon-plus {
+    background: url('images/arrow_sans_right_32.gif') no-repeat;
 }
 #ricardo_categories .form-buttons {
     clear: both;
@@ -104,8 +116,8 @@ input[type="radio"] {
 
 /********** Add missing Magento core pictures **********/
 
-.magento_minimize { background:url('images/window_minimize.png') 0 0 no-repeat;}
-.magento_maximize { background:url('images/window_maximize.png')0 0 no-repeat;}
+.magento_minimize { background:url('images/window_minimize.png') 0 0 no-repeat !important;}
+.magento_maximize { background:url('images/window_maximize.png')0 0 no-repeat !important;}
 
 /********** Ricento pages **********/
 
