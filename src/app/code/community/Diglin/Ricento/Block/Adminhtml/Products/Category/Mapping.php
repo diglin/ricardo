@@ -31,7 +31,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping extends Mage_Admi
                 $this->getChild('sublevel')->insert(
                     $this->getLayout()
                         ->createBlock('diglin_ricento/adminhtml_products_category_children')
-                        ->setTemplate('ricento/products/category/children.phtml') //TODO move to block
                         ->setLevel($category->getLevel())
                         ->setCategoryId($category->getParentId())
                         ->setSelectedCategoryId($category->getId()),

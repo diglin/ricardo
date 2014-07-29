@@ -12,6 +12,8 @@
  */
 class Diglin_Ricento_Block_Adminhtml_Products_Category_Children extends Mage_Adminhtml_Block_Template
 {
+    protected $_template = 'ricento/products/category/children.phtml';
+
     /**
      * Returns child categories of current category
      *
