@@ -6,41 +6,95 @@
 # All allowed payment method combinations
 allowed_cc_bank:
   payment: [ 0, 2 ]
-  shipping: 0
+  shipping: 1
 allowed_cc_cash:
   payment: [ 1, 2 ]
-  shipping: 0
+  shipping: 1
 allowed_cc_other:
   payment: [ 2, 3 ]
-  shipping: 0
+  shipping: 1
 allowed_bank:
   payment: [ 0 ]
-  shipping: 0
+  shipping: 1
 allowed_cash:
   payment: [ 1 ]
-  shipping: 0
+  shipping: 1
 allowed_other:
   payment: [ 3 ]
-  shipping: 0
+  shipping: 1
 
 # Disallowed payment method combinations
+disallowed_cc:
+  payment: [ 2 ]
+  shipping: 1
 disallowed_cc_bank_cash:
   payment: [ 0, 1, 2]
-  shipping: 0
+  shipping: 1
 disallowed_cc_bank_cash_other:
   payment: [ 0, 1, 2, 3 ]
-  shipping: 0
+  shipping: 1
 disallowed_cash_other:
   payment: [ 1, 3 ]
-  shipping: 0
+  shipping: 1
 disallowed_bank_cash_other:
   payment: [ 0, 1, 3 ]
-  shipping: 0
+  shipping: 1
 
 # Test array normalization
-payment_normalize_allow:
+payment_normalize_allowed:
     payment: [ 2, 0 ]
-    shipping: 0
-payment_normalize_disallow:
+    shipping: 1
+payment_normalize_disallowed:
     payment: [ 2, 1, 0]
-    shipping: 0
+    shipping: 1
+
+# Test shipping method "Other" with credit card
+disallowed_shipping_other_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 11
+disallowed_shipping_other_payment_cc_cash:
+  payment: [ 1, 2 ]
+  shipping: 11
+disallowed_shipping_other_payment_cc_other:
+  payment: [ 2, 3 ]
+  shipping: 11
+
+# Test shipping method "Other" without credit card
+allowed_shipping_other_payment_bank:
+  payment: [ 0 ]
+  shipping: 11
+allowed_shipping_other_payment_cash:
+  payment: [ 1 ]
+  shipping: 11
+allowed_shipping_other_payment_other:
+  payment: [ 3 ]
+  shipping: 11
+
+# Test different shipping methods
+allowed_shipping_mail_apost_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 2
+allowed_shipping_mail_bpost_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 3
+allowed_shipping_package_apost_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 4
+allowed_shipping_package_bpost_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 5
+allowed_shipping_dhl_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 6
+allowed_shipping_dps_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 7
+allowed_shipping_ups_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 8
+allowed_shipping_tnt_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 9
+allowed_shipping_flat_payment_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 10

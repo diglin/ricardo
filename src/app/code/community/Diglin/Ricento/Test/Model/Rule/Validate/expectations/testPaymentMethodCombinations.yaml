@@ -1,38 +1,89 @@
-payment-0-2_shipping-0:
+payment-0-2_shipping-1:
   is_valid: 1
   messages: []
-payment-1-2_shipping-0:
+payment-1-2_shipping-1:
   is_valid: 1
   messages: []
-payment-2-3_shipping-0:
+payment-2-3_shipping-1:
   is_valid: 1
   messages: []
-payment-0_shipping-0:
+payment-0_shipping-1:
   is_valid: 1
   messages: []
-payment-1_shipping-0:
+payment-1_shipping-1:
   is_valid: 1
   messages: []
-payment-3_shipping-0:
+payment-3_shipping-1:
   is_valid: 1
   messages: []
 
-payment-0-1-2_shipping-0:
+payment-2_shipping-1:
   is_valid: 0
   messages: [invalidPaymentCombination]
-payment-0-1-2-3_shipping-0:
+payment-0-1-2_shipping-1:
   is_valid: 0
   messages: [invalidPaymentCombination]
-payment-1-3_shipping-0:
+payment-0-1-2-3_shipping-1:
   is_valid: 0
   messages: [invalidPaymentCombination]
-payment-0-1-3_shipping-0:
+payment-1-3_shipping-1:
+  is_valid: 0
+  messages: [invalidPaymentCombination]
+payment-0-1-3_shipping-1:
   is_valid: 0
   messages: [invalidPaymentCombination]
 
-payment-2-0_shipping-0:
+payment-2-0_shipping-1:
   is_valid: 1
   messages: []
-payment-2-1-0_shipping-0:
+payment-2-1-0_shipping-1:
   is_valid: 0
   messages: [invalidPaymentCombination]
+
+payment-0-2_shipping-11:
+  is_valid: 0
+  messages: [invalidPaymentShippingCombination]
+payment-1-2_shipping-11:
+  is_valid: 0
+  messages: [invalidPaymentShippingCombination]
+payment-2-3_shipping-11:
+  is_valid: 0
+  messages: [invalidPaymentShippingCombination]
+
+payment-0_shipping-11:
+  is_valid: 1
+  messages: []
+payment-1_shipping-11:
+  is_valid: 1
+  messages: []
+payment-3_shipping-11:
+  is_valid: 1
+  messages: []
+
+payment-0-2_shipping-2:
+  is_valid: 1
+  messages: []
+payment-0-2_shipping-3:
+  is_valid: 1
+  messages: []
+payment-0-2_shipping-4:
+  is_valid: 1
+  messages: []
+payment-0-2_shipping-5:
+  is_valid: 1
+  messages: []
+payment-0-2_shipping-6:
+  is_valid: 1
+  messages: []
+payment-0-2_shipping-7:
+  is_valid: 1
+  messages: []
+payment-0-2_shipping-8:
+  is_valid: 1
+  messages: []
+payment-0-2_shipping-9:
+  is_valid: 1
+  messages: []
+payment-0-2_shipping-10:
+  is_valid: 1
+  messages: []

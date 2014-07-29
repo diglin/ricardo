@@ -70,6 +70,7 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
         if (!is_array($value) || !isset($value['shipping']) || !isset($value['payment'])) {
             throw new Zend_Validate_Exception(__CLASS__ . ' expects array with keys "payment" and "shipping"');
         }
+        $this->_setValue($value);
         return $this->_isValidPaymentCombination($value) && $this->_isValidPaymentShippingCombination($value);
     }
 
@@ -91,13 +92,18 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
     }
     /**
      * Returns true if the selected shipping method is allowed together with the selected payment methods
-     * 
+     *
      * @param mixed $value [ 'shipping' => int, 'payment' => int[] ]
      * @return bool
      */
     protected function _isValidPaymentShippingCombination($value)
     {
-        //TODO validate
+        foreach ($this->_disallowedPaymentShippingCombinations as $disallowedCombination) {
+            if ($disallowedCombination['shipping'] === $value['shipping'] && in_array($disallowedCombination['payment'], $value['payment'])) {
+                $this->_error(self::ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION);
+                return false;
+            }
+        }
         return true;
     }
     public function getJavaScriptValidator()
