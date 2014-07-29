@@ -33,8 +33,11 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Checkboxes_Extensible extends 
         if (isset($option['field'])) {
             $field = $this->getField($option['field']);
             if (strpos($option['label'], '%s') !== false) {
-                $option['label'] = sprintf($option['label'], $field->getElementHtml());
-                return parent::_optionToHtml($option);
+                $html = parent::_optionToHtml($option);
+                return preg_replace_callback('#(<label [^>]*for="\w+"[^>]*>)(.*)</label>#', function($matches) use ($field) {
+                    $labelTag = $matches[1]; $labelText = $matches[2];
+                    return $labelTag . sprintf($labelText, '</label> ' . $field->getElementHtml() . ' ' . $labelTag) . '</label>';
+                }, $html);
             } else {
                 $html = parent::_optionToHtml($option);
                 return str_replace('</li>', ' ' . $field->getElementHtml() . '</li>',$html);

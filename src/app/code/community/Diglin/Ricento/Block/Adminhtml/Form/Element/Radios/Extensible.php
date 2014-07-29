@@ -41,15 +41,16 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Radios_Extensible extends Vari
         if (isset($option['field'])) {
             $field = $this->getField($option['field']);
             if (strpos($option['label'], '%s') !== false) {
-                $option['label'] = sprintf($option['label'], $field->getElementHtml());
+                $html = parent::_optionToHtml($option, $selected);
+                return '<li>' . preg_replace_callback('#(<label [^>]*for="\w+"[^>]*>)(.*)</label>#', function($matches) use ($field) {
+                    $labelTag = $matches[1]; $labelText = $matches[2];
+                    return $labelTag . sprintf($labelText, '</label> ' . $field->getElementHtml() . ' ' . $labelTag) . '</label>';
+                }, $html) . '</li>';
             } else {
-                $option['label'] = $option['label'] . ' ' . $field->getElementHtml();
+                return '<li>' . parent::_optionToHtml($option, $selected) . ' ' . $field->getElementHtml() . '</li>';
             }
         }
-        $html = '<li>';
-        $html .= parent::_optionToHtml($option, $selected);
-        $html .= '</li>';
-        return $html;
+        return '<li>' . parent::_optionToHtml($option, $selected) . '</li>';
     }
 
     /**
