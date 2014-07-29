@@ -1,0 +1,46 @@
+#
+# This file provided parameters for the testPaymentMethodCombinations test. All array keys are just for
+# better readability
+#
+
+# All allowed payment method combinations
+allowed_cc_bank:
+  payment: [ 0, 2 ]
+  shipping: 0
+allowed_cc_cash:
+  payment: [ 1, 2 ]
+  shipping: 0
+allowed_cc_other:
+  payment: [ 2, 3 ]
+  shipping: 0
+allowed_bank:
+  payment: [ 0 ]
+  shipping: 0
+allowed_cash:
+  payment: [ 1 ]
+  shipping: 0
+allowed_other:
+  payment: [ 3 ]
+  shipping: 0
+
+# Disallowed payment method combinations
+disallowed_cc_bank_cash:
+  payment: [ 0, 1, 2]
+  shipping: 0
+disallowed_cc_bank_cash_other:
+  payment: [ 0, 1, 2, 3 ]
+  shipping: 0
+disallowed_cash_other:
+  payment: [ 1, 3 ]
+  shipping: 0
+disallowed_bank_cash_other:
+  payment: [ 0, 1, 3 ]
+  shipping: 0
+
+# Test array normalization
+payment_normalize_allow:
+    payment: [ 2, 0 ]
+    shipping: 0
+payment_normalize_disallow:
+    payment: [ 2, 1, 0]
+    shipping: 0

@@ -18,6 +18,9 @@
         "magento-hackathon/magento-composer-installer":"2.*",
         "diglin/ricardo": "dev-develop"
     },
+    "require-dev": {
+        "ivanchepurnyi/ecomdev_phpunit": "0.3.*"
+    },
     "repositories":[
         {
             "type": "vcs",

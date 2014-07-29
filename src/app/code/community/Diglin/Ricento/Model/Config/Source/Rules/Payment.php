@@ -13,6 +13,10 @@
  */
 class Diglin_Ricento_Model_Config_Source_Rules_Payment extends Diglin_Ricento_Model_Config_Source_Abstract
 {
+    const TYPE_BANK_TRANSFER = 0;
+    const TYPE_CASH = 1;
+    const TYPE_CREDIT_CARD = 2;
+    const TYPE_OTHER = 3;
     /**
      * @return array
      */
@@ -20,10 +24,10 @@ class Diglin_Ricento_Model_Config_Source_Rules_Payment extends Diglin_Ricento_Mo
     {
         // TODO: implement
         return array(
-            0 => 'Bank Transfer',
-            1 => 'Cash',
-            2 => 'Credit Card (Payu - Ricardo service)',
-            3 => 'Other (fill the description)'
+            self::TYPE_BANK_TRANSFER => 'Bank Transfer',
+            self::TYPE_CASH          => 'Cash',
+            self::TYPE_CREDIT_CARD   => 'Credit Card (Payu - Ricardo service)',
+            self::TYPE_OTHER         => 'Other (fill the description)'
         );
     }
 

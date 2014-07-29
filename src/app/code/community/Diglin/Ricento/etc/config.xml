@@ -143,4 +143,12 @@
             </ricento>
         </routers>
     </admin>
+
+    <phpunit>
+        <suite>
+            <modules>
+                <Diglin_Ricento />
+            </modules>
+        </suite>
+    </phpunit>
 </config>

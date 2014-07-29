@@ -13,6 +13,7 @@
  */
 class Diglin_Ricento_Model_Config_Source_Rules_Shipping extends Diglin_Ricento_Model_Config_Source_Abstract
 {
+    const TYPE_OTHER = 11;
     /**
      * @return array
      */
@@ -31,7 +32,7 @@ class Diglin_Ricento_Model_Config_Source_Rules_Shipping extends Diglin_Ricento_M
             8  => 'UPS',
             9  => 'TNT',
             10 => 'Flat',
-            11 => 'Other (description)'
+            self::TYPE_OTHER => 'Other (description)'
         );
     }
 }
