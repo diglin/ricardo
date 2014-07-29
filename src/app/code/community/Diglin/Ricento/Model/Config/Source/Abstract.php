@@ -42,7 +42,7 @@ abstract class Diglin_Ricento_Model_Config_Source_Abstract implements Mage_Eav_M
      */
     public function getOptionText($value)
     {
-        $options = $this->getOptionHash();
+        $options = $this->toOptionHash();
         if (isset($options[$value])) {
             return $options[$value];
         }

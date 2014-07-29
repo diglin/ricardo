@@ -25,6 +25,23 @@ input[type="radio"] {
     bottom: 0;
     right: 0;
 }
+.validation-advice .messages {
+    margin-left: -16px;
+}
+.allowed-payment-combinations {
+    margin-top: 20px;
+    list-style: square outside;
+}
+.allowed-payment-combinations li {
+    min-height: auto!important;
+    font-weight: normal!important;
+    font-size: 1em!important;
+}
+.allowed-payment-combinations em {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: red;
+}
 #sales_options_price_change_type {
     width: auto;
 }

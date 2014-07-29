@@ -109,9 +109,12 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
     }
     public function getJavaScriptValidator()
     {
-        //TODO generate JavaScript for client side validation
+        $helper = Mage::helper('diglin_ricento');
         $jsonAllowedPaymentCombinations = Mage::helper('core')->jsonEncode($this->_allowedPaymentCombinations);
-        $paymentValidationMessage = Mage::helper('diglin_ricento')->__('This combination is not possible.');
+        $paymentValidationMessage = $helper->__('This combination is not possible.') .
+            '<ul class="messages"><li class="notice-msg">' . $helper->__('The following combinations are possible:') .
+            $this->_htmlListOfAllowedPaymentCombinations() .
+            '</li></ul>';
         return
 <<<JS
 Validation.add('validate-payment-method-combination', '{$paymentValidationMessage}', function(fieldValue, field) {
@@ -131,11 +134,25 @@ Validation.add('validate-payment-method-combination', '{$paymentValidationMessag
             return true;
         }
     }
-    //TODO show detailed message
     return false;
 });
 
 JS;
 
+    }
+
+    protected function _htmlListOfAllowedPaymentCombinations()
+    {
+        /* @var $source Diglin_Ricento_Model_Config_Source_Rules_Payment */
+        $source = Mage::getModel('diglin_ricento/config_source_rules_payment');
+
+        $html = '<ul class="allowed-payment-combinations">';
+        foreach ($this->_allowedPaymentCombinations as $paymentCombination) {
+            $html .= '<li>';
+            $html .= join(' <em>+</em> ', array_map(array($source, 'getOptionText'), $paymentCombination));
+            $html .= '</li>';
+        }
+        $html .= '</ul>';
+        return $html;
     }
 }
