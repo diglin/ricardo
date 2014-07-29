@@ -51,6 +51,9 @@ $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4,
     ->addColumn('customization_template', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true, 'default' => 0))
     ->addColumn('promotion_space', Varien_Db_Ddl_Table::TYPE_INTEGER, 2, array('nullable' => false, 'unsigned' => true, 'default' => 0))
     ->addColumn('promotion_start_page', Varien_Db_Ddl_Table::TYPE_INTEGER, 1, array('nullable' => false, 'default' => 0))
+    ->addColumn('product_warranty', Varien_Db_Ddl_Table::TYPE_SMALLINT, 2, array('default' => 0, 'unsigned' => true, 'nullable' => false))
+    ->addColumn('product_condition', Varien_Db_Ddl_Table::TYPE_VARCHAR, 50, array('nullable' => false))
+    ->addColumn('product_condition', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
     ->setComment('Sales options');

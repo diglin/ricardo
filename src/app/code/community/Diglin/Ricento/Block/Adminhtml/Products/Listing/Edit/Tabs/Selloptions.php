@@ -187,7 +187,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
         ));
 
-        //TODO add product_warranty, product_condition and product_condition_source_attribute_id attributes to sales options table?
         $fieldsetCondition = $form->addFieldset('fieldset_condition', array('legend' => $this->__('Product Condition')));
         $fieldsetCondition->addType('checkboxes_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_checkboxes_extensible'));
         $fieldsetCondition->addField('product_condition_use_attribute', 'checkboxes_extensible', array(
@@ -195,8 +194,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'label' => $this->getConditionSourceLabel(),
             'values' => array(
                 array('value' => 1, 'label' => $this->__('If available use condition information from product'), 'field' => array(
-                    'product_condition_source_attribute_id', 'select', array(
-                        'name' => 'sales_options[product_condition_source]',
+                    'product_condition_source_attribute_code', 'select', array(
+                        'name' => 'sales_options[product_condition_source_attribute_code]',
                         'class' => 'inline-select',
                         'values' => Mage::getModel('diglin_ricento/config_source_sales_product_condition_source')->getAllOptions()
                     )
