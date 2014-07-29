@@ -380,9 +380,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
      */
     public function getConditionSourceJs($htmlIdPrefix = '')
     {
-        return '
-            conditionSourceLabel = $$(\'label[for=sales_options_product_condition_use_attribute]\')[0];
-            conditionLabel = $$(\'label[for=sales_options_product_condition]\')[0];
+        return '(function(){
+            conditionSourceLabel = $$(\'label[for='.$htmlIdPrefix.'product_condition_use_attribute]\')[0];
+            conditionLabel = $$(\'label[for='.$htmlIdPrefix.'product_condition]\')[0];
+            conditionSourceValidation = $(\'advice-required-entry-'.$htmlIdPrefix.'product_condition_source_attribute_id\');
+            conditionValidation = $(\'advice-required-entry-'.$htmlIdPrefix.'product_condition\');
             conditionSource = $(\''.$htmlIdPrefix.'product_condition_source_attribute_id\');
             condition = $(\''.$htmlIdPrefix.'product_condition\');
             requiredText = \'&nbsp;<span class=\\\'required\\\'>*</span>\';
@@ -394,11 +396,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             
             if (this.checked) {
                 conditionSourceLabel.insert(requiredText);
-                conditionLabel.replace(\'<label for=\\\'sales_options_product_condition\\\'>'. $this->getConditionLabel() .'</label>\');
+                conditionLabel.replace(\'<label for=\\\''.$htmlIdPrefix.'product_condition\\\'>'. $this->getConditionLabel() .'</label>\');
+                if(conditionValidation) conditionValidation.replace(\'\');
             } else {
                 conditionLabel.insert(requiredText);
-                conditionSourceLabel.replace(\'<label for=\\\'sales_options_product_condition_use_attribute\\\'>'. $this->getConditionSourceLabel() .'</label>\');
+                conditionSourceLabel.replace(\'<label for=\\\''.$htmlIdPrefix.'product_condition_use_attribute\\\'>'. $this->getConditionSourceLabel() .'</label>\');
+                if (conditionSourceValidation) conditionSourceValidation.replace(\'\');
             }
-        ';
+        }).bind(this)();';
     }
 }
