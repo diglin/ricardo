@@ -39,10 +39,12 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
             'payment'  => Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_CREDIT_CARD)
     );
 
+    /*
+     * Message generation is overridden in getMessages()
+     */
     protected $_messageTemplates = array(
-        //TODO translatable error messages
-        self::ERROR_INVALID_PAYMENT_COMBINATION          => '',
-        self::ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION => ''
+        self::ERROR_INVALID_PAYMENT_COMBINATION          => self::ERROR_INVALID_PAYMENT_COMBINATION,
+        self::ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION => self::ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION
     );
 
     public function __construct()
@@ -100,7 +102,7 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
     protected function _isValidPaymentShippingCombination($value)
     {
         foreach ($this->_disallowedPaymentShippingCombinations as $disallowedCombination) {
-            if ($disallowedCombination['shipping'] === $value['shipping'] && in_array($disallowedCombination['payment'], $value['payment'])) {
+            if ($disallowedCombination['shipping'] == $value['shipping'] && in_array($disallowedCombination['payment'], $value['payment'])) {
                 $this->_error(self::ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION);
                 return false;
             }
@@ -115,14 +117,10 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
      */
     public function getJavaScriptValidator()
     {
-        $helper = Mage::helper('diglin_ricento');
         $jsonAllowedPaymentCombinations = Mage::helper('core')->jsonEncode($this->_allowedPaymentCombinations);
-        $paymentValidationMessage = $helper->__('This combination is not possible.') .
-            '<ul class="messages"><li class="notice-msg">' . $helper->__('The following combinations are possible:') .
-            $this->_htmlListOfAllowedPaymentCombinations() .
-            '</li></ul>';
+        $paymentValidationMessage = $this->getAllowedPaymentCombinationsMessage();
         $jsonDisallowedPaymentShippingCombinations = Mage::helper('core')->jsonEncode($this->_disallowedPaymentShippingCombinations);
-        $paymentShippingValidationMessage = $helper->__('It is not possible to combine "Other" with "Credit Card" payment method');
+        $paymentShippingValidationMessage = $this->getDisallowedPaymentShippingCombinationsMessage();
         return
 <<<JS
 Validation.add('validate-payment-method-combination', '{$paymentValidationMessage}', function(fieldValue, field) {
@@ -163,6 +161,42 @@ Validation.add('validate-payment-shipping-combination', '{$paymentShippingValida
 });
 JS;
 
+    }
+
+    /**
+     * Return translated error messages
+     *
+     * @return array
+     */
+    public function getMessages()
+    {
+        $messages = parent::getMessages();
+        foreach ($messages as $messageKey => $messageValue) {
+            switch ($messageKey) {
+                case self::ERROR_INVALID_PAYMENT_COMBINATION:
+                    $messages[$messageKey] = $this->getAllowedPaymentCombinationsMessage(false);
+                    break;
+                case self::ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION:
+                    $messages[$messageKey] = $this->getDisallowedPaymentShippingCombinationsMessage();
+                    break;
+            }
+        }
+        return $messages;
+    }
+
+    public function getAllowedPaymentCombinationsMessage($wrapNotice = true)
+    {
+        $helper = Mage::helper('diglin_ricento');
+        return $helper->__('This payment method combination is not possible.') .
+            ($wrapNotice ? '<ul class="messages"><li class="notice-msg">' : ' ') .
+            $helper->__('The following combinations are possible:') .
+            $this->_htmlListOfAllowedPaymentCombinations() .
+            ($wrapNotice ? '</li></ul>' : '');
+    }
+    public function getDisallowedPaymentShippingCombinationsMessage()
+    {
+        $helper = Mage::helper('diglin_ricento');
+        return $helper->__('It is not possible to combine "Other" with "Credit Card" payment method');
     }
 
     /**

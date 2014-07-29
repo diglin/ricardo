@@ -131,7 +131,18 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
      */
     protected function _validatePostData($data)
     {
-        //TODO validation if necessary
+        /* @var $rulesValidator Diglin_Ricento_Model_Rule_Validate */
+        $rulesValidator = Mage::getModel('diglin_ricento/rule_validate');
+        $methods = array(
+            'payment' => array_filter(explode(',', $data['rules']['payment_methods']), 'strlen'),
+            'shipping' => $data['rules']['shipping_method']
+        );
+        if (!$rulesValidator->isValid($methods)) {
+            foreach ($rulesValidator->getMessages() as $message) {
+                $this->_getSession()->addError($message);
+            }
+            return false;
+        }
         return true;
     }
 
