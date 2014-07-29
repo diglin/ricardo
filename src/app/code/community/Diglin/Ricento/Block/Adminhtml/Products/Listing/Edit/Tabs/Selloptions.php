@@ -62,7 +62,33 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'required' => true,
             'label' => $this->__('Type of sales'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_type')->getAllOptions(),
-            'onchange' => "Ricento.toggleSalesTypeFieldset(this.value)"
+            'onchange' => "Ricento.showSalesTypeFieldsets(this.value, $('sales_options_sales_auction_direct_buy').value == '1')"
+        ));
+
+        $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
+            'legend' => $this->__('Auction'),
+            'fieldset_container_id' => 'fieldset_toggle_auction'));
+
+        $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
+            'name' => 'sales_options[sales_auction_start_price]',
+            'label' => $this->__('Start price'),
+            'class' => 'validate-number',
+        ));
+        $fieldsetTypeAuction->addField('sales_auction_increment', 'text', array(
+            'name' => 'sales_options[sales_auction_increment]',
+            'label' => $this->__('Increment'),
+            'class' => 'validate-number',
+        ));
+        $fieldsetTypeAuction->addField('auction_currency', 'label', array(
+            'name' => 'sales_options[auction_currency]',
+            'label' => $this->__('Currency'),
+            'after_element_html' => $currencyWarning,
+        ));
+        $fieldsetTypeAuction->addField('sales_auction_direct_buy', 'select', array(
+            'name' => 'sales_options[sales_auction_direct_buy]',
+            'label' => $this->__('Allow Direct Buy (in case of auction type of sales)'),
+            'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions(),
+            'onchange' => "Ricento.showSalesTypeFieldsets('auction', this.value =='1')"
         ));
 
         $fieldsetTypeFixPrice = $form->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price'), 'fieldset_container_id' => 'fieldset_toggle_fixprice'));
@@ -89,33 +115,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'no_span' => true,
             'class' => 'inline-number validate-number',
         ));
-        $fieldsetTypeFixPrice->addField('sales_auction_direct_buy', 'select', array(
-            'name' => 'sales_options[sales_auction_direct_buy]',
-            'label' => $this->__('Allow Direct Buy (in case of auction type of sales)'),
-            'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
-        ));
         $fieldsetTypeFixPrice->addField('fix_currency', 'label', array(
             'name' => 'sales_options[fix_currency]',
-            'label' => $this->__('Currency'),
-            'after_element_html' => $currencyWarning,
-        ));
-
-        $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
-            'legend' => $this->__('Auction'),
-            'fieldset_container_id' => 'fieldset_toggle_auction'));
-
-        $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
-            'name' => 'sales_options[sales_auction_start_price]',
-            'label' => $this->__('Start price'),
-            'class' => 'validate-number',
-        ));
-        $fieldsetTypeAuction->addField('sales_auction_increment', 'text', array(
-            'name' => 'sales_options[sales_auction_increment]',
-            'label' => $this->__('Increment'),
-            'class' => 'validate-number',
-        ));
-        $fieldsetTypeAuction->addField('auction_currency', 'label', array(
-            'name' => 'sales_options[auction_currency]',
             'label' => $this->__('Currency'),
             'after_element_html' => $currencyWarning,
         ));
@@ -280,7 +281,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
     protected function _afterToHtml($html)
     {
-        $html .= '<script type="text/javascript">Ricento.toggleSalesTypeFieldset($("sales_options_sales_type").value);</script>';
+        $html .= '<script type="text/javascript">Ricento.showSalesTypeFieldsets($("sales_options_sales_type").value, $("sales_options_sales_auction_direct_buy").value == "1");</script>';
         return parent::_afterToHtml($html);
     }
 

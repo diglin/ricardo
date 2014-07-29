@@ -98,9 +98,12 @@ Ricento.closePopup = function() {
     Windows.close('ricento_popup');
 };
 
-Ricento.toggleSalesTypeFieldset = function(value) {
+Ricento.showSalesTypeFieldsets = function(salesType, allowDirectBuy) {
     $$('div[id^=fieldset_toggle_]').each(Element.hide);
-    $$('#fieldset_toggle_' + value).each(Element.show);
+    $('fieldset_toggle_' + salesType).show();
+    if (allowDirectBuy) {
+        $('fieldset_toggle_fixprice').show();
+    }
 }
 
 Ricento.CategoryMappper = Class.create();
