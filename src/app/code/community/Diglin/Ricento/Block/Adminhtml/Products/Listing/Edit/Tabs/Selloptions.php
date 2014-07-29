@@ -62,7 +62,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'required' => true,
             'label' => $this->__('Type of sales'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_type')->getAllOptions(),
-            'onchange' => "Ricento.showSalesTypeFieldsets(this.value, $('sales_options_sales_auction_direct_buy').value == '1')"
+            'onchange' => "salesOptionsForm.showSalesTypeFieldsets(this.value, $('sales_options_sales_auction_direct_buy').value == '1')"
         ));
 
         $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
@@ -72,12 +72,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
             'name' => 'sales_options[sales_auction_start_price]',
             'label' => $this->__('Start price'),
-            'class' => 'validate-number',
+            'class' => 'validate-number required-if-visible',
         ));
         $fieldsetTypeAuction->addField('sales_auction_increment', 'text', array(
             'name' => 'sales_options[sales_auction_increment]',
             'label' => $this->__('Increment'),
-            'class' => 'validate-number',
+            'class' => 'validate-number required-if-visible',
         ));
         $fieldsetTypeAuction->addField('auction_currency', 'label', array(
             'name' => 'sales_options[auction_currency]',
@@ -88,27 +88,27 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[sales_auction_direct_buy]',
             'label' => $this->__('Allow Direct Buy (in case of auction type of sales)'),
             'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions(),
-            'onchange' => "Ricento.showSalesTypeFieldsets('auction', this.value =='1')"
+            'onchange' => "salesOptionsForm.showSalesTypeFieldsets('auction', this.value =='1')"
         ));
 
         $fieldsetTypeFixPrice = $form->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price'), 'fieldset_container_id' => 'fieldset_toggle_fixprice'));
         $fieldsetTypeFixPrice->addField('price_source_attribute_id', 'select', array(
-            'name' => 'sales_options[price_source_attribute_id]',
-            'label' => $this->__('Source'),
+            'name'   => 'sales_options[price_source_attribute_id]',
+            'label'  => $this->__('Source'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_price_source')->getAllOptions(),
-            //'required' => true //TODO conditional validation
+            'class'  => 'required-if-visible'
         ));
         $fieldsetTypeFixPrice->addType('fieldset_inline', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_fieldset_inline'));
         $fieldsetPriceChange = $fieldsetTypeFixPrice->addField('fieldset_price_change', 'fieldset_inline', array(
             'label' => $this->__('Price Change'),
-            //'required'          => true, //TODO conditional validation
+            'class'  => 'required-if-visible'
         ));
         $fieldsetPriceChange->addField('price_change_type', 'select', array(
             'name' => 'sales_options[price_change_type]',
             'after_element_html' => ' +&nbsp;',
             'no_span' => true,
             'values' => Mage::getModel('diglin_ricento/config_source_sales_price_method')->getAllOptions(),
-            //'required'           => true //TODO conditional validation
+            'class'  => 'required-if-visible'
         ));
         $fieldsetPriceChange->addField('price_change', 'text', array(
             'name' => 'sales_options[price_change]',
@@ -202,7 +202,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                     )
                 ))
             ),
-            'onclick' => $this->getConditionSourceJs($htmlIdPrefix)
+            'onclick' => 'salesOptionsForm.toggleConditionSource(this)'
         ));
         $fieldsetCondition->addField('product_condition', 'select', array(
             'name' => 'sales_options[product_condition]',
@@ -281,7 +281,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
     protected function _afterToHtml($html)
     {
-        $html .= '<script type="text/javascript">Ricento.showSalesTypeFieldsets($("sales_options_sales_type").value, $("sales_options_sales_auction_direct_buy").value == "1");</script>';
+        $html .= '<script type="text/javascript">var salesOptionsForm = new Ricento.salesOptionsForm("' . $this->getForm()->getHtmlIdPrefix() . '");</script>';
         return parent::_afterToHtml($html);
     }
 
@@ -374,35 +374,4 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         return $this->__('Condition Source');
     }
 
-    /**
-     * @param string $htmlIdPrefix
-     * @return string
-     */
-    public function getConditionSourceJs($htmlIdPrefix = '')
-    {
-        return '(function(){
-            conditionSourceLabel = $$(\'label[for='.$htmlIdPrefix.'product_condition_use_attribute]\')[0];
-            conditionLabel = $$(\'label[for='.$htmlIdPrefix.'product_condition]\')[0];
-            conditionSourceValidation = $(\'advice-required-entry-'.$htmlIdPrefix.'product_condition_source_attribute_id\');
-            conditionValidation = $(\'advice-required-entry-'.$htmlIdPrefix.'product_condition\');
-            conditionSource = $(\''.$htmlIdPrefix.'product_condition_source_attribute_id\');
-            condition = $(\''.$htmlIdPrefix.'product_condition\');
-            requiredText = \'&nbsp;<span class=\\\'required\\\'>*</span>\';
-            requiredClass = \'required-entry\';
-
-            condition.disabled = this.checked;
-            conditionSource.toggleClassName(requiredClass, this.checked);
-            condition.toggleClassName(requiredClass, !this.checked);
-            
-            if (this.checked) {
-                conditionSourceLabel.insert(requiredText);
-                conditionLabel.replace(\'<label for=\\\''.$htmlIdPrefix.'product_condition\\\'>'. $this->getConditionLabel() .'</label>\');
-                if(conditionValidation) conditionValidation.replace(\'\');
-            } else {
-                conditionLabel.insert(requiredText);
-                conditionSourceLabel.replace(\'<label for=\\\''.$htmlIdPrefix.'product_condition_use_attribute\\\'>'. $this->getConditionSourceLabel() .'</label>\');
-                if (conditionSourceValidation) conditionSourceValidation.replace(\'\');
-            }
-        }).bind(this)();';
-    }
 }

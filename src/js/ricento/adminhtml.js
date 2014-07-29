@@ -98,13 +98,67 @@ Ricento.closePopup = function() {
     Windows.close('ricento_popup');
 };
 
-Ricento.showSalesTypeFieldsets = function(salesType, allowDirectBuy) {
-    $$('div[id^=fieldset_toggle_]').each(Element.hide);
-    $('fieldset_toggle_' + salesType).show();
-    if (allowDirectBuy) {
-        $('fieldset_toggle_fixprice').show();
+Ricento.salesOptionsForm = Class.create();
+Ricento.salesOptionsForm.prototype = {
+    initialize : function(htmlPrefix) {
+        this.htmlIdPrefix = htmlPrefix;
+        this.requiredText = '<span class="required">*</span>';
+        this.requiredClass = 'required-entry';
+        this.validationPassedClass = 'validation-passed';
+        this.requiredIfVisibleClass = 'required-if-visible';
+
+        this.showSalesTypeFieldsets($(this.htmlIdPrefix + "sales_type").value, $(this.htmlIdPrefix + "sales_auction_direct_buy").value == "1");
+    },
+    toggleRequired : function(field, required, label) {
+        field = $(field);
+        label = label || $$('label[for=' + field.id + ']')[0];
+        var validationAdvice = $('advice-required-entry-' + field.id);
+        if (label) {
+            label.select('.required').each(Element.remove);
+        }
+        if (label && required) {
+            label.insert(this.requiredText);
+        }
+        if (validationAdvice && !required) {
+            validationAdvice.replace('');
+        }
+        field.removeClassName(this.validationPassedClass);
+        field.toggleClassName(this.requiredClass, required);
+    },
+    showSalesTypeFieldsets : function(salesType, allowDirectBuy) {
+        $$('div[id^=fieldset_toggle_]').each(this._hideFieldset.bind(this));
+        this._showFieldset($('fieldset_toggle_' + salesType));
+        if (allowDirectBuy) {
+            this._showFieldset($('fieldset_toggle_fixprice'));
+        }
+    },
+    _hideFieldset : function(fieldset) {
+        var self = this;
+        fieldset.select('.' + this.requiredIfVisibleClass).each(function(field) {
+            self.toggleRequired(field, false);
+        });
+        fieldset.hide();
+    },
+    _showFieldset : function(fieldset) {
+        var self = this;
+        fieldset.select('.' + this.requiredIfVisibleClass).each(function(field) {
+            self.toggleRequired(field, true);
+        });
+        fieldset.show();
+    },
+    toggleConditionSource : function(field) {
+        conditionSourceLabel = $$('label[for='+ this.htmlIdPrefix + 'product_condition_use_attribute]')[0];
+        conditionSourceValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition_source_attribute_id');
+        conditionValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition');
+        conditionSource = $(this.htmlIdPrefix + 'product_condition_source_attribute_id');
+        condition = $(this.htmlIdPrefix + 'product_condition');
+
+        condition.disabled = field.checked;
+        this.toggleRequired(conditionSource, field.checked, conditionSourceLabel);
+        this.toggleRequired(condition, !field.checked);
+
     }
-}
+};
 
 Ricento.CategoryMappper = Class.create();
 Ricento.CategoryMappper.prototype = {
