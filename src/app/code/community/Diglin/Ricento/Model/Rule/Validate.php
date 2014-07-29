@@ -40,6 +40,7 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
     );
 
     protected $_messageTemplates = array(
+        //TODO translatable error messages
         self::ERROR_INVALID_PAYMENT_COMBINATION          => '',
         self::ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION => ''
     );
@@ -109,5 +110,32 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
     public function getJavaScriptValidator()
     {
         //TODO generate JavaScript for client side validation
+        $jsonAllowedPaymentCombinations = Mage::helper('core')->jsonEncode($this->_allowedPaymentCombinations);
+        $paymentValidationMessage = Mage::helper('diglin_ricento')->__('This combination is not possible.');
+        return
+<<<JS
+Validation.add('validate-payment-method-combination', '{$paymentValidationMessage}', function(fieldValue, field) {
+    var checkboxes = field.form[field.name];
+    var paymentValue = [];
+    for (var i = 0; i < checkboxes.length; ++i) {
+        if (checkboxes[i].checked) {
+            paymentValue.push(parseInt(checkboxes[i].value));
+        }
+    }
+    var allowedPaymentCombinations = {$jsonAllowedPaymentCombinations};
+    var arraysAreEqual = function(a1, a2) {
+        return a1.length==a2.length && a1.every(function(v,i) { return a2.indexOf(v) >= 0});
+    };
+    for (var i = 0; i < allowedPaymentCombinations.length; ++i) {
+        if (arraysAreEqual(allowedPaymentCombinations[i], paymentValue)) {
+            return true;
+        }
+    }
+    //TODO show detailed message
+    return false;
+});
+
+JS;
+
     }
 }

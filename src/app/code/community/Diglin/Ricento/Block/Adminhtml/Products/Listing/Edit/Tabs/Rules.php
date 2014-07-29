@@ -58,7 +58,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $fieldsetPayment->addField('payment_methods', 'checkboxes_extensible', array(
             'name'    => 'rules[payment_methods][]',
             'label'   => $this->__('Payment Methods'),
-            'values' => Mage::getModel('diglin_ricento/config_source_rules_payment')->getAllOptions()
+            'values'  => Mage::getModel('diglin_ricento/config_source_rules_payment')->getAllOptions(),
+            'class'   => 'validate-payment-method-combination',
         ));
         $fieldsetPayment->addField('payment_description', 'textarea', array(
             'name'  => 'rules[payment_description]',
@@ -117,6 +118,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             $fieldShippingPrice->setData('after_element_html', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY . ' - ' . $fieldFreeShipping->getLabelHtml() . $fieldFreeShipping->getElementHtml() );
             $fieldsetShipping->removeField('free_shipping');
         }
+    }
+
+    protected function _afterToHtml($html)
+    {
+        $html .= '<script type="text/javascript">' . Mage::getModel('diglin_ricento/rule_validate')->getJavaScriptValidator() . '</script>';
+        return parent::_afterToHtml($html);
     }
 
     /**
