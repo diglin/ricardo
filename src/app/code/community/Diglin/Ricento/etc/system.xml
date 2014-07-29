@@ -50,20 +50,33 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                 </hint>
-                <config module="diglin_ricento" translate="label">
+                <api_config module="diglin_ricento" translate="label">
                     <label>API Token Configuration</label>
                     <sort_order>10</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>0</show_in_store>
                     <fields>
-                        <ricardo_account>
-                            <label>Ricardo Account</label>
+                        <simulate_authorization module="diglin_ricento" translate="label comment">
+                            <label>Automatize API Authorization</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[After a certain period of time, your API token credentials are not anymore valid and you have to authorize to create a new one. This option allows you to do the process completely automatically without any action of you. However, by enabling this feature, you agree that your ricardo user credentials are stored securely into your own shop database.]]></comment>
                             <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </simulate_authorization>
+                        <ricardo_account module="diglin_ricento" translate="label">
+                            <label>Ricardo Account</label>
+                            <sort_order>3</sort_order>
                             <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends>
+                                <simulate_authorization>1</simulate_authorization>
+                            </depends>
                         </ricardo_account>
                         <ricardo_username module="diglin_ricento" translate="label comment">
                             <label>Ricardo Username</label>
@@ -74,6 +87,9 @@
                             <show_in_store>0</show_in_store>
                             <frontend_class>required-entry</frontend_class>
                             <comment><![CDATA[Your ricardo.ch username. Create an account on <a href="http://www.ricardo.ch">http://www.ricardo.ch</a> if you don't have one.]]></comment>
+                            <depends>
+                                <simulate_authorization>1</simulate_authorization>
+                            </depends>
                         </ricardo_username>
                         <ricardo_password module="diglin_ricento" translate="label comment">
                             <label>Ricardo Password</label>
@@ -85,6 +101,9 @@
                             <show_in_store>0</show_in_store>
                             <frontend_class>required-entry</frontend_class>
                             <comment><![CDATA[Your ricardo.ch password. Create an account on <a href="http://www.ricardo.ch">http://www.ricardo.ch</a> if you don't have one.]]></comment>
+                            <depends>
+                                <simulate_authorization>1</simulate_authorization>
+                            </depends>
                         </ricardo_password>
 
                         <api_de module="diglin_ricento" translate="label comment">
@@ -176,7 +195,7 @@
                             <show_in_store>0</show_in_store>
                         </debug>
                     </fields>
-                </config>
+                </api_config>
 
                 <global module="diglin_ricento" translate="label comment">
                     <label>Global Configuration</label>

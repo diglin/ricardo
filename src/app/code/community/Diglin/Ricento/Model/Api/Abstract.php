@@ -12,8 +12,8 @@ use \Diglin\Ricardo\Config;
 
 abstract class Diglin_Ricento_Model_Api_Abstract
 {
-    const CFG_API_HOST = 'ricento/config/api_host';
-    const CFG_API_HOST_DEV = 'ricento/config/api_host_dev';
+    const CFG_API_HOST = 'ricento/api_config/api_host';
+    const CFG_API_HOST_DEV = 'ricento/api_config/api_host_dev';
 
     public function getApi($locale = Diglin_Ricento_Helper_Data::SUPPORTED_LANG_DE)
     {

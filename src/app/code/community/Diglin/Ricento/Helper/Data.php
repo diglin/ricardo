@@ -13,12 +13,18 @@
  */
 class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    const CFG_ASSISTANT_URL = 'ricento/config/assistant_url';
-    const CFG_ASSISTANT_URL_DEV = 'ricento/config/assistant_url_dev';
-    const CFG_RICARDO_SIGNUP_API_URL = 'ricento/config/signup_url';
-    const CFG_DEV_MODE = 'ricento/config/dev_mode';
-    const CFG_DEBUG_MODE = 'ricento/config/debug';
-    const CFG_SIMULATE_AUTH = 'ricento/config/simulate_authorization';
+    const CFG_ASSISTANT_URL = 'ricento/api_config/assistant_url';
+    const CFG_ASSISTANT_URL_DEV = 'ricento/api_config/assistant_url_dev';
+    const CFG_RICARDO_SIGNUP_API_URL = 'ricento/api_config/signup_url';
+    const CFG_DEV_MODE = 'ricento/api_config/dev_mode';
+    const CFG_DEBUG_MODE = 'ricento/api_config/debug';
+    const CFG_SIMULATE_AUTH = 'ricento/api_config/simulate_authorization';
+    const CFG_RICARDO_USERNAME = 'ricento/api_config/ricardo_username';
+    const CFG_RICARDO_PASSWORD = 'ricento/api_config/ricardo_password';
+    const CFG_RICARDO_PARTNERID = 'ricento/api_config/partner_id_';
+    const CFG_RICARDO_PARTNERPASS = 'ricento/api_config/partner_pass_';
+    const CFG_EXPIRATION_NOTIFICATION_DELAY = 'ricento/api_config/expiration_notification_delay';
+
     const CFG_SHIPPING_CALCULATION = 'ricento/global/shipping_calculation';
 
     const STATUS_PENDING = 'pending';
@@ -45,6 +51,17 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
             'configurable' => 'configurable',
             'grouped'      => 'grouped');
     }
+
+    /**
+     * Get the configuration Ricardo url
+     *
+     * @return string
+     */
+    public function getConfigurationUrl()
+    {
+        return Mage::getUrl('adminhtml/system_config/edit/section/ricento');
+    }
+
     /**
      * Get the Ricardo Assistant Url
      *
@@ -132,7 +149,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     public function getPartnerId($locale = null, $storeId = null)
     {
         $locale = $this->_getLocaleCodeForApiConfig($locale);
-        return Mage::getStoreConfig('ricento/config/partner_id_' . $locale, $storeId);
+        return Mage::getStoreConfig(self::CFG_RICARDO_PARTNERID . $locale, $storeId);
     }
 
     /**
@@ -145,7 +162,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     public function getPartnerPass($locale = null, $storeId = null)
     {
         $locale = $this->_getLocaleCodeForApiConfig($locale);
-        return Mage::getStoreConfig('ricento/config/partner_pass_' . $locale, $storeId);
+        return Mage::getStoreConfig(self::CFG_RICARDO_PARTNERPASS . $locale, $storeId);
     }
 
     /**
@@ -179,7 +196,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getRicardoUsername($storeId = null)
     {
-        return Mage::getStoreConfig('ricento/config/ricardo_username', $storeId);
+        return Mage::getStoreConfig(self::CFG_RICARDO_USERNAME, $storeId);
     }
 
     /**
@@ -190,7 +207,17 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getRicardoPass($storeId = null)
     {
-        return Mage::getStoreConfig('ricento/config/ricardo_password', $storeId);
+        return Mage::getStoreConfig(self::CFG_RICARDO_PASSWORD, $storeId);
+    }
+
+    /**
+     * Get the delay in days to notify the owner that the API credentials will expire
+     *
+     * @return int
+     */
+    public function getExpirationNotificationDelay()
+    {
+        return Mage::getStoreConfig(self::CFG_EXPIRATION_NOTIFICATION_DELAY);
     }
 
     /**
