@@ -2,3 +2,4 @@
 .idea
 
 tests/conf/config.ini
+atlassian-ide-plugin.xml

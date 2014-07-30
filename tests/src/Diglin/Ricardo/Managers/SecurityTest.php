@@ -62,18 +62,21 @@ class SecurityTest extends TestAbstract
 
     /**
      * @depends testSimulateValidationUrl
+     * @expectedException \Exception
      */
     public function testGetTokenCredential()
     {
         $temporaryToken = $this->_securityManager->getTemporaryToken();
 
+        // @todo set the correct expected exception for the first case, it should not be \Exception but something like SecurityException
+        //$this->setExpectedException()
+
+        // Exception should be thrown, it's ok
         $result = $this->getServiceManager()
             ->proceed('security', 'TokenCredential', $temporaryToken);
 
         $this->assertTrue(!isset($result['TokenExpirationDate']), 'TokenExpirationDate is NOT missing');
         $this->assertTrue(!isset($result['TokenCredentialKey']), 'TokenCredentialKey is NOT missing');
-
-        //print_r($this->getServiceManager()->getApi()->getLastDebug(true));
 
         $this->_securityManager->simulateValidationUrl();
 
@@ -82,8 +85,6 @@ class SecurityTest extends TestAbstract
 
         $this->assertTrue(isset($result['TokenExpirationDate']), 'TokenExpirationDate is missing');
         $this->assertTrue(isset($result['TokenCredentialKey']), 'TokenCredentialKey is missing');
-
-        //print_r($this->getServiceManager()->getApi()->getLastDebug(true));
 
         $token =  (isset($result['TokenCredentialKey'])) ? $result['TokenCredentialKey'] :  '';
 
@@ -101,8 +102,6 @@ class SecurityTest extends TestAbstract
     {
         $result = $this->_serviceManager->proceed('security', 'AntiforgeryToken');
 
-        //print_r($this->getServiceManager()->getApi()->getLastDebug());
-
         $this->assertTrue(isset($result['AntiforgeryTokenKey']), 'Antiforgery Token Key is missing');
         $this->assertCount(1, $this->_matchToken($result['AntiforgeryTokenKey']), 'Antiforgery Token is ' . $result['AntiforgeryTokenKey']);
         $this->assertTrue(isset($result['TokenExpirationDate']), 'TokenExpirationDate is missing');
@@ -111,7 +110,7 @@ class SecurityTest extends TestAbstract
     }
 
     /**
-     * @fixme Check with Ricardo Developers why it's not working
+     * @todo Check with Ricardo Developers why it's not working
      *
      * @depends testGetTokenCredential
      */

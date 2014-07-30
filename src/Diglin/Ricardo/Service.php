@@ -7,16 +7,15 @@
  * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
-namespace Diglin\Ricardo;
+namespace Diglin\Ricardo\Managers;
 
 use \Diglin\Ricardo\Services\ServiceAbstract;
 use \Diglin\Ricardo\Core\ApiInterface;
-use \Diglin\Ricardo\Managers\Security;
 
 /**
  * Class Service
  *
- * @package Diglin\Ricardo
+ * @package Diglin\Ricardo\Managers
  */
 class Service
 {
@@ -69,19 +68,6 @@ class Service
     public function getServices()
     {
         return $this->_services;
-    }
-
-    /**
-     * Get the current Security Manager
-     *
-     * @return Security
-     */
-    public function getSecurityManager()
-    {
-        if (!$this->_securityManager) {
-            $this->_securityManager = new Security($this, $this->getConfig()->getAllowValidationUrl());
-        }
-        return $this->_securityManager;
     }
 
     /**
@@ -190,22 +176,26 @@ class Service
                 throw new \Exception(printf('Method "%s" of the service "%s" cannot be empty', $service['method'], $serviceName));
             }
 
+            if (!$this->_securityManager) {
+                $this->_securityManager = new Security($this, $this->getConfig()->getAllowValidationUrl());
+            }
+
             switch ($serviceInstance->getTypeOfToken())
             {
                 case ServiceAbstract::TOKEN_TYPE_IDENTIFIED:
-                    $token = $this->getSecurityManager()->getToken(ServiceAbstract::TOKEN_TYPE_IDENTIFIED);
+                    $token = $this->_securityManager->getToken(ServiceAbstract::TOKEN_TYPE_IDENTIFIED);
                     $this->getApi()
                         ->setUsername($token)
                         ->setShouldSetPass(false);
                     break;
                 case ServiceAbstract::TOKEN_TYPE_ANTIFORGERY:
-                    $token = $this->getSecurityManager()->getToken(ServiceAbstract::TOKEN_TYPE_ANTIFORGERY);
+                    $token = $this->_securityManager->getToken(ServiceAbstract::TOKEN_TYPE_ANTIFORGERY);
                     $this->getApi()
                         ->setUsername($token)
                         ->setShouldSetPass(false);
                     break;
                 case ServiceAbstract::TOKEN_TYPE_ANONYMOUS:
-                    $token = $this->getSecurityManager()->getToken(ServiceAbstract::TOKEN_TYPE_ANONYMOUS);
+                    $token = $this->_securityManager->getToken(ServiceAbstract::TOKEN_TYPE_ANONYMOUS);
                     $this->getApi()
                         ->setUsername($token)
                         ->setShouldSetPass(false);
@@ -220,7 +210,10 @@ class Service
 
             $data = $this->getApi()->connect($serviceInstance->getService(), $service['method'], $service['params']);
 
-            //@todo Manage errors
+            //@todo Manage errors - provide exception related to the service and its error code
+            if ($data && array_key_exists('ErrorCodes', $data)) {
+                throw new \Exception('Ricardo API Returned Errors . ' . print_r($data, true), (isset($data['ErrorCodes']) ? $data['ErrorCodes'][0]['Key'] : array()));
+            }
 
             $getResultServiceMethod = $this->_prepareServiceGetResultMethod($serviceMethod);
 
