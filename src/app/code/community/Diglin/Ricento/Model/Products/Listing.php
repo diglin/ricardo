@@ -83,15 +83,21 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
         return $this;
     }
 
+    /**
+     * @return $this|Mage_Core_Model_Abstract
+     */
     protected function _beforeDelete()
     {
         parent::_beforeDelete();
 
-        // We do not use the FK constrains cause of deletion of other values at item level
+        // We must not use the FK constrains cause of deletion of other values at item level
         $this->getProductsListingItemCollection()->walk('delete');
         return $this;
     }
 
+    /**
+     * @return $this|Mage_Core_Model_Abstract
+     */
     protected function _afterDeleteCommit()
     {
         $this->getSalesOptions()->delete();
@@ -158,7 +164,7 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
         $items = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
         $items->addFieldToFilter('products_listing_id', $this->getId())
             ->addFieldToFilter('product_id', array('in' => $productIds))
-            ->addFieldToFilter('status', array('neq' => Diglin_Ricento_Helper_Data::STATUS_LISTED)) //TODO inform user about not deleted listed items?
+            ->addFieldToFilter('status', array('neq' => Diglin_Ricento_Helper_Data::STATUS_LISTED)) //TODO inform user about not deleted listed items? Response: yes, other question how?
             ->load();
         $numberOfItems = count($items);
         if ($numberOfItems) {

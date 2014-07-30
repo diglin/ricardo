@@ -28,8 +28,6 @@
  */
 class Diglin_Ricento_Model_Api_Token extends Mage_Core_Model_Abstract
 {
-
-
     /**
      * Prefix of model events names
      * @var string
@@ -52,6 +50,4 @@ class Diglin_Ricento_Model_Api_Token extends Mage_Core_Model_Abstract
         parent::_construct();
         $this->_init('diglin_ricento/api_token');
     }
-
-
 }
