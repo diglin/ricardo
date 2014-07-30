@@ -182,14 +182,14 @@ class SellerAccount extends ServiceAbstract
         $articleTypes = ArticlesTypes::All;
         $closeStatus = CloseStatus::Closed;
         $isPlannedArticles = true;
-        $lastModificationDate = Helper::convertPhpDateToJsonDate('now');
+        $lastModificationDate = Helper::getJsonDate();
 
         $args = func_get_args();
         if (!empty($args) && is_array($args[0])) {
             (isset($args[0]['article_types'])) ? $articleTypes = (int) $args[0]['article_types'] : '';
             (isset($args[0]['close_status'])) ? $closeStatus = (int) $args[0]['close_status'] : '';
             (isset($args[0]['is_planned_articles'])) ? $isPlannedArticles = (int) $args[0]['is_planned_articles'] : '';
-            (isset($args[0]['last_modification_date'])) ? $lastModificationDate = $args[0]['last_modification_date'] : '';
+            (!empty($args[0]['last_modification_date'])) ? $lastModificationDate = $args[0]['last_modification_date'] : '';
         };
 
         return array(
