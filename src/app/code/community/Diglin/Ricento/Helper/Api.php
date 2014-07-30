@@ -14,13 +14,21 @@ use \Diglin\Ricardo\Services\Security;
  */
 class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
 {
+    /**
+     * Define if the token credential is going to expire
+     *
+     * @return bool
+     */
     public function isApiTokenCredentialGoingToExpire()
     {
-        // @todo to implement the logic with the API
         $identifiedToken = Mage::getResourceModel('diglin_ricento/api_token')->getSpecificTokenType(Security::TOKEN_TYPE_IDENTIFIED);
+        $dayDelay = Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_EXPIRATION_NOTIFICATION_DELAY);
 
+        if (isset($identifiedToken['expiration_date'])
+            && time() >= Mage::getSingleton('core/date')->timestamp($identifiedToken['expiration_date']) - ($dayDelay * 24 * 3600)) {
+            return true;
+        };
 
-
-        return true;
+        return false;
     }
 }

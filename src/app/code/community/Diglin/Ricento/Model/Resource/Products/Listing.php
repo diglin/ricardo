@@ -33,11 +33,13 @@ class Diglin_Ricento_Model_Resource_Products_Listing extends Mage_Core_Model_Res
      */
     public function getProductIds($listing)
     {
-        $select = $this->_getWriteAdapter()->select() //@todo replace with _getReadAdapter
+        $readerConnection = $this->_getReadAdapter();
+
+        $select = $readerConnection->select()
             ->from($this->getTable('diglin_ricento/products_listing_item'), 'product_id')
             ->where('products_listing_id = :listing_id');
         $bind = array('listing_id' => (int)$listing->getId());
 
-        return $this->_getWriteAdapter()->fetchCol($select, $bind);
+        return $readerConnection->fetchCol($select, $bind);
     }
 }
