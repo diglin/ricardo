@@ -30,6 +30,11 @@ abstract class ManagerAbstract
     protected $_serviceManager;
 
     /**
+     * @var Helper
+     */
+    protected $_helper;
+
+    /**
      * @param Service $serviceManager
      */
     public function __construct(Service $serviceManager)
@@ -42,7 +47,10 @@ abstract class ManagerAbstract
      */
     public function getHelper()
     {
-        return new Helper();
+        if (!$this->_helper) {
+           $this->_helper = new Helper();
+        }
+        return $this->_helper;
     }
 
     /**

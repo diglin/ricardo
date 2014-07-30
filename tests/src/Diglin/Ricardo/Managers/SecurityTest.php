@@ -51,6 +51,23 @@ class SecurityTest extends TestAbstract
     }
 
     /**
+     * @expectedException \Exception
+     */
+    public function testGetTokenCredentialException()
+    {
+        $temporaryToken = $this->_securityManager->getTemporaryToken();
+
+        // @todo set the correct expected exception for the first case, it should not be \Exception but something like SecurityException
+
+        // Exception should be thrown, it's ok because the simulate url is necessary
+        $result = $this->getServiceManager()
+            ->proceed('security', 'TokenCredential', $temporaryToken);
+
+        $this->assertTrue(!isset($result['TokenExpirationDate']), 'TokenExpirationDate is NOT missing');
+        $this->assertTrue(!isset($result['TokenCredentialKey']), 'TokenCredentialKey is NOT missing');
+    }
+
+    /**
      * @depends testGetTemporaryToken
      */
     public function testSimulateValidationUrl()
@@ -62,21 +79,10 @@ class SecurityTest extends TestAbstract
 
     /**
      * @depends testSimulateValidationUrl
-     * @expectedException \Exception
      */
     public function testGetTokenCredential()
     {
         $temporaryToken = $this->_securityManager->getTemporaryToken();
-
-        // @todo set the correct expected exception for the first case, it should not be \Exception but something like SecurityException
-        //$this->setExpectedException()
-
-        // Exception should be thrown, it's ok
-        $result = $this->getServiceManager()
-            ->proceed('security', 'TokenCredential', $temporaryToken);
-
-        $this->assertTrue(!isset($result['TokenExpirationDate']), 'TokenExpirationDate is NOT missing');
-        $this->assertTrue(!isset($result['TokenCredentialKey']), 'TokenCredentialKey is NOT missing');
 
         $this->_securityManager->simulateValidationUrl();
 

@@ -479,7 +479,7 @@ class Security extends ManagerAbstract
         $return = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            throw new \Exception ('Error to save the form into Ricardo Authorization page: ' . curl_errno($ch));
+            throw new \Exception ('Error while saving the form into Ricardo Authorization page: ' . curl_errno($ch));
         }
 
         curl_close($ch);

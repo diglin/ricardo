@@ -9,8 +9,10 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-use Diglin\Ricardo\Core\Helper;
-
+/**
+ * Class SellerAccount
+ * @package Diglin\Ricardo\Managers
+ */
 class SellerAccount extends ManagerAbstract
 {
     /**

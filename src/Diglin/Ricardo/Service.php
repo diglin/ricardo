@@ -7,10 +7,11 @@
  * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
-namespace Diglin\Ricardo\Managers;
+namespace Diglin\Ricardo;
 
 use \Diglin\Ricardo\Services\ServiceAbstract;
 use \Diglin\Ricardo\Core\ApiInterface;
+use \Diglin\Ricardo\Managers\Security;
 
 /**
  * Class Service
@@ -81,6 +82,8 @@ class Service
     {
         if (!($service instanceof ServiceAbstract)) {
             $serviceName = $this->_getServiceName($service);
+        } else {
+            $serviceName = $service->getService();
         }
 
         if (!($service instanceof ServiceAbstract) && !isset($this->_services[$serviceName])) {
