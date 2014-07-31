@@ -41,9 +41,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             $config = parse_ini_file(__DIR__ . '/../../../../conf/config.ini', true);
 
             if (isset($config['GERMAN'])) {
-                $ricardoConfig = new Config($config['GERMAN']);
-                $api = new Api($ricardoConfig);
-                $this->_serviceManager = new Service($api);
+                $this->_serviceManager = new Service(new Api(new Config($config['GERMAN'])));
             } else {
                 throw new \Exception('Missing GERMAN section in the ini file');
             }
