@@ -123,7 +123,11 @@ Ricento.salesOptionsForm.prototype = {
             validationAdvice.replace('');
         }
         field.removeClassName(this.validationPassedClass);
-        field.toggleClassName(this.requiredClass, required);
+        if (required) {
+            field.addClassName(this.requiredClass);
+        } else {
+            field.removeClassName(this.requiredClass);
+        }
     },
     showSalesTypeFieldsets : function(salesType, allowDirectBuy) {
         $$('div[id^=fieldset_toggle_]').each(this._hideFieldset.bind(this));
