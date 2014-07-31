@@ -26,6 +26,7 @@
                 <debug>0</debug>
                 <simulate_authorization>0</simulate_authorization>
                 <expiration_notification_delay>3</expiration_notification_delay><!-- in day -->
+                <lang>fr,de</lang>
             </api_config>
             <global>
                 <shipping_calculation>highest_price</shipping_calculation>

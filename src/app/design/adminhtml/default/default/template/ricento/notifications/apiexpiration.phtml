@@ -18,7 +18,7 @@ $validationUrl = '#';
 <?php if ($helperData->isConfigured() && $this->helper('diglin_ricento/api')->isApiTokenCredentialGoingToExpire()): ?>
 <div class="notification-global">
     <strong><?php echo $this->__('Your Ricardo API token credentials are going to expire in %s days.', $helperData->getExpirationNotificationDelay());?></strong>
-    <?php echo $this->__(' You have to authorize your account to get access to the Ricardo API thanks to the <a href="%s">Ricardo Authorization Page</a>. If you don\'t do it, your Ricardo extension and all related transactions to Ricardo will be blocked. If you want to change this behavior, please <a href="%s">configure</a> the option \'Automatize API Authorization\'',
+    <?php echo $this->__(' You have to authorize your account to get access to the Ricardo API thanks to the <a href="%s">Ricardo Authorization Page</a>. If you don\'t do it, your Ricardo extension and all related transactions with Ricardo will be blocked. If you want to change this behavior, please <a href="%s">configure</a> the option \'Automatize API Authorization\'',
             $validationUrl,
             $helperData->getConfigurationUrl()); ?>
 </div>

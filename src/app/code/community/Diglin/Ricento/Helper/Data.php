@@ -24,6 +24,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const CFG_RICARDO_PARTNERID = 'ricento/api_config/partner_id_';
     const CFG_RICARDO_PARTNERPASS = 'ricento/api_config/partner_pass_';
     const CFG_EXPIRATION_NOTIFICATION_DELAY = 'ricento/api_config/expiration_notification_delay'; // in day
+    const CFG_SUPPORTED_LANG = 'ricento/api_config/lang';
 
     const CFG_SHIPPING_CALCULATION = 'ricento/global/shipping_calculation';
 
@@ -31,9 +32,6 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_LISTED = 'listed';
     const STATUS_STOPPED = 'stopped';
     const STATUS_ERROR = 'error';
-
-    const SUPPORTED_LANG_DE = 'de';
-    const SUPPORTED_LANG_FR = 'fr';
 
     const LOG_FILE = 'ricento.log';
 
@@ -59,7 +57,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getConfigurationUrl()
     {
-        return Mage::getUrl('adminhtml/system_config/edit/section/ricento');
+        return Mage::helper('adminhtml')->getUrl('adminhtml/system_config/edit/section/ricento');
     }
 
     /**
@@ -102,11 +100,28 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfigFlag(self::CFG_DEV_MODE);
     }
 
+    /**
+     * Check if Ricardo API is configured correctly
+     *
+     * @return bool
+     */
     public function isConfigured()
     {
-        return ((($this->getPartnerId(self::SUPPORTED_LANG_DE) && $this->getPartnerPass(self::SUPPORTED_LANG_DE))
-            || ($this->getPartnerId(self::SUPPORTED_LANG_FR) && $this->getPartnerPass(self::SUPPORTED_LANG_FR)))
-            && ($this->getRicardoUsername() && $this->getRicardoPass()));
+        $configured = false;
+        $configuredAccount = (!$this->canSimulateAuthorization() || ($this->canSimulateAuthorization() && $this->getRicardoUsername() && $this->getRicardoPass())) ? true : false;
+
+        foreach ($this->getSupportedLang() as $lang) {
+            if ($this->getPartnerId($lang) && $this->getPartnerPass($lang)) {
+                $configured = true;
+                break;
+            }
+        }
+
+        if ($configured && $configuredAccount) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -142,50 +157,60 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Get the Ricardo API Partner ID Configuration
      *
-     * @param string|null $locale
+     * @param string|null $lang
      * @param int|null|Mage_Core_Model_Store $storeId
      * @return string
      */
-    public function getPartnerId($locale = null, $storeId = null)
+    public function getPartnerId($lang = null, $storeId = null)
     {
-        $locale = $this->_getLocaleCodeForApiConfig($locale);
-        return Mage::getStoreConfig(self::CFG_RICARDO_PARTNERID . $locale, $storeId);
+        $lang = $this->_getLocaleCodeForApiConfig($lang);
+        return Mage::getStoreConfig(self::CFG_RICARDO_PARTNERID . $lang, $storeId);
     }
 
     /**
      * Get the Ricardo API Partner Pass Configuration
      *
-     * @param string|null $locale
+     * @param string|null $lang
      * @param int|null|Mage_Core_Model_Store $storeId
      * @return string
      */
-    public function getPartnerPass($locale = null, $storeId = null)
+    public function getPartnerPass($lang = null, $storeId = null)
     {
-        $locale = $this->_getLocaleCodeForApiConfig($locale);
-        return Mage::getStoreConfig(self::CFG_RICARDO_PARTNERPASS . $locale, $storeId);
+        $lang = $this->_getLocaleCodeForApiConfig($lang);
+        return Mage::helper('core')->decrypt(Mage::getStoreConfig(self::CFG_RICARDO_PARTNERPASS . $lang, $storeId));
     }
 
     /**
      * Normalize the locale to get only two first letters code or the Germand default
      *
-     * @param string $locale
+     * @param string $lang
      * @return string
      */
-    protected function _getLocaleCodeForApiConfig($locale = null)
+    protected function _getLocaleCodeForApiConfig($lang = null)
     {
-        if (empty($locale)) {
-            $locale = Mage::app()->getLocale()->getLocaleCode();
+        if (empty($lang)) {
+            $lang = Mage::app()->getLocale()->getLocaleCode();
         }
 
-        if ($locale) {
-            $locale = substr(strtolower($locale), 0, 2);
+        if ($lang) {
+            $lang = substr(strtolower($lang), 0, 2);
         }
 
-        if ($locale != self::SUPPORTED_LANG_DE && $locale != self::SUPPORTED_LANG_FR) {
-            $locale = self::SUPPORTED_LANG_DE;
+        if (in_array($lang, $this->getSupportedLang())) {
+            $lang = 'de';
         }
 
-        return $locale;
+        return $lang;
+    }
+
+    /**
+     * Get the list of supported API language
+     *
+     * @return array
+     */
+    public function getSupportedLang()
+    {
+        return explode(',', strtolower(Mage::getStoreConfig(self::CFG_SUPPORTED_LANG)));
     }
 
     /**
@@ -207,7 +232,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getRicardoPass($storeId = null)
     {
-        return Mage::getStoreConfig(self::CFG_RICARDO_PASSWORD, $storeId);
+        return Mage::helper('core')->decrypt(Mage::getStoreConfig(self::CFG_RICARDO_PASSWORD, $storeId));
     }
 
     /**
