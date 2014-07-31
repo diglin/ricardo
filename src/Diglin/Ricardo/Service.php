@@ -212,7 +212,7 @@ class Service
 
             //@todo Manage errors - provide exception related to the service and its error code
             if ($data && array_key_exists('ErrorCodes', $data)) {
-                throw new \Exception('Ricardo API Returned Errors . ' . print_r($data, true), (isset($data['ErrorCodes']) ? $data['ErrorCodes'][0]['Key'] : array()));
+                //throw new \Exception('Ricardo API Returned Errors . ' . print_r($data, true), (isset($data['ErrorCodes']) ? $data['ErrorCodes'][0]['Key'] : array()));
             }
 
             $getResultServiceMethod = $this->_prepareServiceGetResultMethod($serviceMethod);
