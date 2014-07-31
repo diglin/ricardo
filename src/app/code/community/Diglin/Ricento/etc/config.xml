@@ -36,7 +36,7 @@
 
     <global>
         <psr0_namespaces>
-            <Diglin_Ricardo />
+            <Diglin_Ricardo/>
         </psr0_namespaces>
 
         <models>
@@ -107,6 +107,28 @@
                 <class>Diglin_Ricento_Model</class>
             </diglin_ricento>
         </models>
+
+        <events>
+            <resource_get_tablename>
+                <observers>
+                    <diglin_ricento>
+                        <type>singleton</type>
+                        <class>diglin_ricento/observer</class>
+                        <method>addAutoloader</method>
+                    </diglin_ricento>
+                </observers>
+            </resource_get_tablename>
+
+            <add_spl_autoloader>
+                <observers>
+                    <diglin_ricento>
+                        <type>singleton</type>
+                        <class>diglin_ricento/observer</class>
+                        <method>addAutoloader</method>
+                    </diglin_ricento>
+                </observers>
+            </add_spl_autoloader>
+        </events>
     </global>
 
     <adminhtml>
