@@ -13,6 +13,8 @@
  */
 class Diglin_Ricento_Model_Config_Source_Sales_Type extends Diglin_Ricento_Model_Config_Source_Abstract
 {
+    const AUCTION = 'auction';
+    const FIX_PRICE = 'fixprice';
     /**
      * @return array
      */
@@ -21,8 +23,8 @@ class Diglin_Ricento_Model_Config_Source_Sales_Type extends Diglin_Ricento_Model
         // TODO: implement
         return array(
             ''         => '- Please Select -',
-            'auction'  => 'Auction',
-            'fixprice' => 'Fix price'
+            self::AUCTION  => 'Auction',
+            self::FIX_PRICE => 'Fix price'
         );
     }
 

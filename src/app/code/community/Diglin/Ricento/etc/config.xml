@@ -36,7 +36,8 @@
 
     <global>
         <psr0_namespaces>
-            <Diglin_Ricardo/>
+            <!-- We want to load the Ricardo library -->
+            <Diglin_Ricardo />
         </psr0_namespaces>
 
         <models>

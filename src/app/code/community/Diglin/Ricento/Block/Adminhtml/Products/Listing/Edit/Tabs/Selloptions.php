@@ -137,7 +137,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                         'name' => 'sales_options[schedule_date_start]',
                         'image' => $this->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
-                        'class' => '' //TODO concrete validation (validate-date only if radio button selected))
+                        //'class' => 'validate-date validate-date-range date-range-end_date-from' // Prototype's date validation does not work with localized dates, so we don't use it
                     )
                 ))
             )
@@ -158,7 +158,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                         'name' => 'sales_options[schedule_period_end_date]',
                         'image' => Mage::getDesign()->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
-                        'class' => '' //TODO concrete validation (validate-date only if radio button selected))
+                        //'class' => 'validate-date validate-date-range date-range-end_date-to'  // Prototype's date validation does not work with localized dates, so we don't use it
                     )
                 ))
             )
@@ -349,6 +349,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     {
         if (!$this->_model) {
             $this->_model = $this->_getListing()->getSalesOptions();
+            $data = Mage::getSingleton('adminhtml/session')->getSalesOptionsFormData(true);
+            if (!empty($data)) {
+                $this->_model->setData($data);
+            }
         }
         return $this->_model;
     }
