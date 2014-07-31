@@ -48,13 +48,13 @@ input[type="radio"] {
 #diglin_ricento_price_change {
     width: 30px;
 }
-#products_listing_tabs_selloptions_section_content .inline-select {
+.ricento-form .inline-select {
     width: auto !important;
 }
-#products_listing_tabs_selloptions_section_content  .inline-number {
+.ricento-form .inline-number {
     width: 50px;
 }
-#products_listing_tabs_selloptions_section_content td.value {
+.ricento-form td.value {
     width: auto !important;
 }
 
