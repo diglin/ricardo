@@ -92,9 +92,15 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
             $data['sales_options']['schedule_date_start'] = date(Varien_Date::DATE_PHP_FORMAT);
         }
         if (!empty($data['sales_options']['schedule_period_use_end_date'])) {
-            $data['sales_options']['schedule_period_days'] = date_diff(
-                new DateTime($data['sales_options']['schedule_date_start']),
-                new DateTime($data['sales_options']['schedule_period_end_date']))->days;
+            try {
+                $interval = date_diff(
+                    new DateTime($data['sales_options']['schedule_date_start']),
+                    new DateTime($data['sales_options']['schedule_period_end_date']));
+                $data['sales_options']['schedule_period_days'] = ($interval->invert ? -1 : 1) * $interval->days;
+            } catch (Exception $e) {
+                // Invalid date => period of 0 will fail the validation
+                $data['sales_options']['schedule_period_days'] = 0;
+            }
         }
         if (empty($data['sales_options']['product_condition_use_attribute'])) {
             $data['sales_options']['product_condition_source_attribute_code'] = null;
@@ -144,6 +150,18 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
             }
             return false;
         }
+        if ($data['sales_options']['sales_type'] == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
+            $startDateInfo = date_parse_from_format(Varien_Date::DATE_PHP_FORMAT, $data['sales_options']['schedule_date_start']);
+            if ($startDateInfo['error_count']) {
+                $this->_getSession()->addError($this->__('Invalid start date.') . '<br>' . join ('<br>', $startDateInfo['errors']));
+                return false;
+            }
+            if ($data['sales_options']['schedule_period_days'] <= 0) {
+                $this->_getSession()->addError($this->__('The end date must be in the future.'));
+                return false;
+            }
+        }
+
         return true;
     }
 
