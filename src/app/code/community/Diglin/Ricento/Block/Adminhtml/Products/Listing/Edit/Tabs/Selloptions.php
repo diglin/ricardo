@@ -349,6 +349,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     {
         if (!$this->_model) {
             $this->_model = $this->_getListing()->getSalesOptions();
+            $data = Mage::getSingleton('adminhtml/session')->getSalesOptionsFormData(true);
+            if (!empty($data)) {
+                $this->_model->setData($data);
+            }
         }
         return $this->_model;
     }

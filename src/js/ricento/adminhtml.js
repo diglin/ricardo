@@ -98,10 +98,30 @@ Ricento.closePopup = function() {
     Windows.close('ricento_popup');
 };
 
+Ricento.useProductListSettings = function(checkbox, htmlIdPrefix) {
+    checkbox.form.getElements().each(function(element) {
+        if (element!=checkbox && element.id.startsWith(htmlIdPrefix)) {
+            element.disabled=checkbox.checked;
+            if (checkbox.checked) {
+                element.addClassName('disabled');
+            } else {
+                element.removeClassName('disabled');
+            }
+        }
+    });
+    checkbox.form.select('img[id$=_trig]').each(function(calendar) {
+        if (checkbox.checked) {
+            calendar.hide();
+        } else {
+            calendar.show();
+        }
+    })
+}
+
 Ricento.salesOptionsForm = Class.create();
 Ricento.salesOptionsForm.prototype = {
-    initialize : function(htmlPrefix) {
-        this.htmlIdPrefix = htmlPrefix;
+    initialize : function(htmlIdPrefix) {
+        this.htmlIdPrefix = htmlIdPrefix;
         this.requiredText = '<span class="required">*</span>';
         this.requiredClass = 'required-entry';
         this.validationPassedClass = 'validation-passed';

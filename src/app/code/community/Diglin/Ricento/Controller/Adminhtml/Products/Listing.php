@@ -182,6 +182,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
         $this->_getShippingPaymentRule()->setDataToAll($data['rules']);
 
         if (!$this->_validatePostData($data)) {
+            $this->_saveFormDataInSession($data);
             $this->_redirectUrl($this->_getEditUrl());
             return false;
         }
@@ -199,7 +200,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
                 $this->_getShippingPaymentRule()->walk('save');
             }
 
-            $this->_getSession()->setFormData(false);
+            $this->_saveFormDataInSession(null);
             if ($this->getRequest()->getParam('back')) {
                 $this->_redirectUrl($this->_getEditUrl());
                 return false;
@@ -214,9 +215,18 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
             $this->_getSession()->addException($e, $this->__('An error occurred while saving the configuration.'));
         }
 
-        $this->_getSession()->setFormData($data);
+        $this->_saveFormDataInSession($data);
         $this->_redirectUrl($this->_getEditUrl());
         return false;
+    }
+
+    protected function _saveFormDataInSession($data)
+    {
+        if ($data === null) {
+            $data = array('rules' => null, 'sales_options' => null);
+        }
+        $this->_getSession()->setRulesFormData($data['rules']);
+        $this->_getSession()->setSalesOptionsFormData($data['sales_options']);
     }
 
     /**
