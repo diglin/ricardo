@@ -73,6 +73,7 @@ class SellerAccountTest extends TestAbstract
 
         $result = $this->_sellerAccountManager->getArticles(ArticlesTypes::All, CloseStatus::Open);
 
+        $this->assertGreaterThanOrEqual(0, count($result), 'No result found');
         $this->assertArrayHasKey('ArticleId', $result[0], 'No article ID found');
         $this->assertArrayHasKey('ArticleInformationLimit', $result[0], 'Get Articles has no article information limit');
     }
@@ -81,6 +82,6 @@ class SellerAccountTest extends TestAbstract
     {
         // @fixme precondition for the test, templates must exist
         $result = $this->_sellerAccountManager->getTemplates();
-        //$this->assertGreaterThanOrEqual(1, count($result), 'Number of templates found is not greater than 1');
+        $this->assertGreaterThanOrEqual(1, count($result), 'Number of templates found is not greater than 1');
     }
 }
