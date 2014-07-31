@@ -150,16 +150,14 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
             }
             return false;
         }
-        if ($data['sales_options']['sales_type'] == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
-            $startDateInfo = date_parse_from_format(Varien_Date::DATE_PHP_FORMAT, $data['sales_options']['schedule_date_start']);
-            if ($startDateInfo['error_count']) {
-                $this->_getSession()->addError($this->__('Invalid start date.') . '<br>' . join ('<br>', $startDateInfo['errors']));
-                return false;
-            }
-            if ($data['sales_options']['schedule_period_days'] <= 0) {
-                $this->_getSession()->addError($this->__('The end date must be in the future.'));
-                return false;
-            }
+        $startDateInfo = date_parse_from_format(Varien_Date::DATE_PHP_FORMAT, $data['sales_options']['schedule_date_start']);
+        if ($startDateInfo['error_count']) {
+            $this->_getSession()->addError($this->__('Invalid start date.') . '<br>' . join ('<br>', $startDateInfo['errors']));
+            return false;
+        }
+        if ($data['sales_options']['schedule_period_days'] <= 0) {
+            $this->_getSession()->addError($this->__('The end date must be in the future.'));
+            return false;
         }
 
         return true;
