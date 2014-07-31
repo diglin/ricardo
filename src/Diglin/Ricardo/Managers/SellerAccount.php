@@ -9,8 +9,10 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-use Diglin\Ricardo\Core\Helper;
-
+/**
+ * Class SellerAccount
+ * @package Diglin\Ricardo\Managers
+ */
 class SellerAccount extends ManagerAbstract
 {
     /**
@@ -65,12 +67,8 @@ class SellerAccount extends ManagerAbstract
      * @param string $lastModificationDate
      * @return array
      */
-    public function getArticles($articleTypes, $closeStatus, $isPlannedArticles = false, $lastModificationDate = 'now')
+    public function getArticles($articleTypes, $closeStatus, $isPlannedArticles = false, $lastModificationDate = null)
     {
-        if ($lastModificationDate == 'now') {
-            $lastModificationDate = Helper::convertPhpDateToJsonDate($lastModificationDate);
-        }
-
         return $this->_proceed('Articles', array(
             'article_types' => $articleTypes,
             'close_status' => $closeStatus,

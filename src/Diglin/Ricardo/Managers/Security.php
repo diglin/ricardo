@@ -192,6 +192,9 @@ class Security extends ManagerAbstract
         //@todo if we CANNOT simulate the validation url process, raise an error and ask to the user to validate manually, send him the correct url
         if ($this->_allowSimulateValidation || $allowSimulateValidation) {
             $this->simulateValidationUrl();
+        } else {
+            //@todo raise exception
+            //$this->getValidationUrl();
         }
 
         $result = $this->_serviceManager
@@ -247,13 +250,13 @@ class Security extends ManagerAbstract
      * Check if the date in parameter is expired or not
      * The parameter must be a json date
      *
-     * @param string $jsonExpirationDate
+     * @param string $jsonExpirationDate '/Date(123456789+0200)/'
      * @return bool
      */
     public function isDateExpired($jsonExpirationDate)
     {
-        $jsonDateTimestamp = $this->getHelper()->convertJsonDateToPhpDate($jsonExpirationDate, null);
-
+        $jsonDateTimestamp = $this->getHelper()->getJsonTimestamp($jsonExpirationDate, null);
+        
         if (time() < $jsonDateTimestamp) {
             return false;
         }
@@ -476,7 +479,7 @@ class Security extends ManagerAbstract
         $return = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            throw new \Exception ('Error to save the form into Ricardo Authorization page: ' . curl_errno($ch));
+            throw new \Exception ('Error while saving the form into Ricardo Authorization page: ' . curl_errno($ch));
         }
 
         curl_close($ch);

@@ -13,36 +13,21 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 {
     public function testConvertJsonDateToPhpDate()
     {
-        $defaultTimezone = date_default_timezone_get();
-        date_default_timezone_set('Europe/Berlin');
-
         /* Date is 2079-06-06 22:59:00 GMT+2 */
-        $phpDate = Helper::convertJsonDateToPhpDate('/Date(3453314340000+0200)/');
+        $timestamp = Helper::getJsonTimestamp('/Date(3453314340000+0200)/');
 
-        preg_match('/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/', $phpDate, $matches);
-        $this->assertSame('2079', $matches[1], 'Year in the date not found');
-        $this->assertSame('06', $matches[2], 'Month in the date not found');
-        $this->assertSame('06', $matches[3], 'Day in the date not found');
-        $this->assertSame('22', $matches[4], 'Hour in the date not found');
-        $this->assertSame('59', $matches[5], 'Minutes in the date not found');
-        $this->assertSame('00', $matches[6], 'Second in the date not found');
-
-        date_default_timezone_set($defaultTimezone);
-        return $phpDate;
+        $this->assertEquals('3453314340', $timestamp, 'Get the timestamp not correct. Expected 3453314340');
+        return $timestamp;
     }
 
     /**
      * @depends testConvertJsonDateToPhpDate
-     * @param $phpDate
+     * @param $timestamp
      */
-    public function testConvertPhpDateToJsonDate($phpDate)
+    public function testConvertPhpDateToJsonDate($timestamp)
     {
-        $defaultTimezone = date_default_timezone_get();
-        date_default_timezone_set('Europe/Berlin');
-
-        $jsonDate = Helper::convertPhpDateToJsonDate($phpDate);
-        $this->assertSame('/Date(3453314340000+0200)/', $jsonDate, 'Conversion from PHP to .NET Json not successful');
-
-        date_default_timezone_set($defaultTimezone);
+        $jsonDate = Helper::getJsonDate($timestamp);
+        $this->assertSame('/Date(3453314340000+0200)/', $jsonDate, 'Conversion from PHP timestamp to .NET Json not successful');
+        $this->assertSame('2079-06-06 22:59:00', date('Y-m-d H:i:s', $timestamp), 'Date is not equal to 2079-06-06 22:59:00');
     }
 }
