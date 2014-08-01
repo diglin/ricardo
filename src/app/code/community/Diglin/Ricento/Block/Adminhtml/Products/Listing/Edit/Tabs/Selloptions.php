@@ -92,8 +92,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
 
         $fieldsetTypeFixPrice = $form->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price'), 'fieldset_container_id' => 'fieldset_toggle_fixprice'));
-        $fieldsetTypeFixPrice->addField('price_source_attribute_id', 'select', array(
-            'name'   => 'sales_options[price_source_attribute_id]',
+        $fieldsetTypeFixPrice->addField('price_source_attribute_code', 'select', array(
+            'name'   => 'sales_options[price_source_attribute_code]',
             'label'  => $this->__('Source'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_price_source')->getAllOptions(),
             'class'  => 'required-if-visible'
