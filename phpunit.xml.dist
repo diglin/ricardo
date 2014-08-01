@@ -14,7 +14,7 @@
     <testsuites>
         <testsuite name="Diglin Ricardo PHP Library API Test Suite">
             <directory>./tests/src</directory>
-            <exclude>./tests/src/Managers/TestAbstract.php</exclude>
+            <exclude>tests/src/Managers/TestAbstract.php</exclude>
         </testsuite>
     </testsuites>
 

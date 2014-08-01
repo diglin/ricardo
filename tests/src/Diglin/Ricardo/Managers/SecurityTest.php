@@ -18,7 +18,7 @@ class SecurityTest extends TestAbstract
 
     protected function setUp()
     {
-        $this->_securityManager = new Security($this->getServiceManager());
+        $this->_securityManager = $this->getServiceManager()->getSecurityManager();
         parent::setUp();
     }
 
@@ -46,25 +46,18 @@ class SecurityTest extends TestAbstract
         $this->assertAttributeContains('Date', '_temporaryTokenExpirationDate', $this->_securityManager);
         $this->assertAttributeContains('http', '_validationUrl', $this->_securityManager);
 
-        echo 'Temporary token: ' . $token  . "\n";
-        echo 'Validation url: ' . $this->_securityManager->getValidationUrl()  . "\n";
+        echo 'Temporary token: ' . $token . "\n";
+        echo 'Validation url: ' . $this->_securityManager->getValidationUrl() . "\n";
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \Diglin\Ricardo\Exceptions\SecurityErrors
      */
     public function testGetTokenCredentialException()
     {
-        $temporaryToken = $this->_securityManager->getTemporaryToken();
-
-        // @todo set the correct expected exception for the first case, it should not be \Exception but something like SecurityException
-
-        // Exception should be thrown, it's ok because the simulate url is necessary
-        $result = $this->getServiceManager()
-            ->proceed('security', 'TokenCredential', $temporaryToken);
-
-        $this->assertTrue(!isset($result['TokenExpirationDate']), 'TokenExpirationDate is NOT missing');
-        $this->assertTrue(!isset($result['TokenCredentialKey']), 'TokenCredentialKey is NOT missing');
+        // Exception is expected because we do not simulate the authorization process when we ask a new token credential
+        $this->_securityManager->setAllowSimulateAuthorization(false);
+        $this->_securityManager->getTokenCredential();
     }
 
     /**
@@ -82,47 +75,36 @@ class SecurityTest extends TestAbstract
      */
     public function testGetTokenCredential()
     {
-        $temporaryToken = $this->_securityManager->getTemporaryToken();
+        $this->_securityManager->setAllowSimulateAuthorization(true);
+        $result = $this->_securityManager->getTokenCredential();
 
-        $this->_securityManager->simulateValidationUrl();
+        $this->assertCount(1, $this->_matchToken($result), 'Credential Token is ' . $result);
+        echo 'Credential token: ' . $result . "\n";
+        echo 'Credential token Expiration Date: ' . $this->_securityManager->getTokenCredentialExpirationDate()  . "\n";
+        echo 'Credential token Session Duration: ' . $this->_securityManager->getTokenCredentialSessionDuration()  . "\n";
 
-        $result = $this->getServiceManager()
-            ->proceed('security', 'TokenCredential', $temporaryToken);
-
-        $this->assertTrue(isset($result['TokenExpirationDate']), 'TokenExpirationDate is missing');
-        $this->assertTrue(isset($result['TokenCredentialKey']), 'TokenCredentialKey is missing');
-
-        $token =  (isset($result['TokenCredentialKey'])) ? $result['TokenCredentialKey'] :  '';
-
-        $this->assertCount(1, $this->_matchToken($token), 'Credential Token is ' . $token);
-        $this->assertContains('Date', $result['TokenExpirationDate']);
-
-        echo 'Credential token: ' . $token  . "\n";
-        echo 'Credential token Expiration Date: ' . $result['TokenExpirationDate']  . "\n";
-        echo 'Credential token Session Duration: ' . $result['SessionDuration']  . "\n";
-
-        return $token;
+        return $result;
     }
 
     public function testGetAntiforgeryToken()
     {
-        $result = $this->_serviceManager->proceed('security', 'AntiforgeryToken');
+        $result = $this->_securityManager->getAntiforgeryToken();
 
-        $this->assertTrue(isset($result['AntiforgeryTokenKey']), 'Antiforgery Token Key is missing');
-        $this->assertCount(1, $this->_matchToken($result['AntiforgeryTokenKey']), 'Antiforgery Token is ' . $result['AntiforgeryTokenKey']);
-        $this->assertTrue(isset($result['TokenExpirationDate']), 'TokenExpirationDate is missing');
+        $this->assertCount(1, $this->_matchToken($result), 'Antiforgery Token is ' . $result);
+        $this->assertTrue(isset($result), 'TokenExpirationDate is missing');
 
-        echo 'Antiforgery Key ' . $result['AntiforgeryTokenKey'];
+        echo 'Antiforgery Key ' . $result;
     }
 
     /**
      * @todo Check with Ricardo Developers why it's not working
+     * deactivated at the moment
      *
      * @depends testGetTokenCredential
      */
-    public function testRefreshTokenCredential($token)
+    public function RefreshTokenCredential($token)
     {
-        $result = $this->getServiceManager()->proceed('security', 'RefreshTokenCredential', $token);
+        $result = $this->_securityManager->refreshToken($token);
 
         echo $this->getLastApiDebug();
 

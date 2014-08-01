@@ -152,6 +152,17 @@ class Service
     }
 
     /**
+     * @return \Diglin\Ricardo\Managers\Security
+     */
+    public function getSecurityManager()
+    {
+        if (!$this->_securityManager) {
+            $this->_securityManager = new Security($this, $this->getConfig()->getAllowValidationUrl());
+        }
+        return $this->_securityManager;
+    }
+
+    /**
      * Execute a method on the service and return an array
      *
      * @param string $serviceName
@@ -180,7 +191,7 @@ class Service
             }
 
             if (!$this->_securityManager) {
-                $this->_securityManager = new Security($this, $this->getConfig()->getAllowValidationUrl());
+                $this->_securityManager = $this->getSecurityManager();
             }
 
             switch ($serviceInstance->getTypeOfToken())
@@ -215,6 +226,7 @@ class Service
 
             //@todo Manage errors - provide exception related to the service and its error code
             if ($data && array_key_exists('ErrorCodes', $data)) {
+                return $data;
                 //throw new \Exception('Ricardo API Returned Errors . ' . print_r($data, true), (isset($data['ErrorCodes']) ? $data['ErrorCodes'][0]['Key'] : array()));
             }
 

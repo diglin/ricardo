@@ -25,7 +25,12 @@ class Security extends ManagerAbstract
     /**
      * @var string
      */
-    protected $_allowSimulateValidation;
+    protected $_serviceName = 'security';
+
+    /**
+     * @var string
+     */
+    protected $_allowSimulateAuthorization;
 
     /**
      * @var string
@@ -60,22 +65,22 @@ class Security extends ManagerAbstract
     /**
      * @var string
      */
-    protected $_credentialToken;
+    protected $_tokenCredential;
 
     /**
      * @var string
      */
-    protected $_credentialTokenExpirationDate;
+    protected $_tokenCredentialExpirationDate;
 
     /**
      * @var int
      */
-    protected $_credentialTokenSessionDuration;
+    protected $_tokenCredentialSessionDuration;
 
     /**
      * @var int
      */
-    protected $_credentialTokenSessionStart;
+    protected $_tokenCredentialSessionStart;
 
     /**
      * @var string
@@ -89,11 +94,11 @@ class Security extends ManagerAbstract
 
     /**
      * @param Service $serviceManager
-     * @param bool $allowSimulateValidation
+     * @param bool $allowSimulateAuthorization
      */
-    public function __construct(Service $serviceManager, $allowSimulateValidation = false)
+    public function __construct(Service $serviceManager, $allowSimulateAuthorization = false)
     {
-        $this->_allowSimulateValidation = $allowSimulateValidation;
+        $this->_allowSimulateAuthorization = $allowSimulateAuthorization;
         parent::__construct($serviceManager);
     }
 
@@ -133,7 +138,7 @@ class Security extends ManagerAbstract
             return $this->_anonymousToken;
         }
 
-        $result = $this->_serviceManager->proceed('security', 'AnonymousTokenCredential');
+        $result = $this->_proceed('AnonymousTokenCredential');
         if (isset($result['TokenExpirationDate']) && isset($result['TokenCredentialKey'])) {
             $this->_anonymousTokenExpirationDate = $result['TokenExpirationDate'];
             //$this->_anonymousTokenSessionDuration = $result['SessionDuration'];
@@ -155,7 +160,7 @@ class Security extends ManagerAbstract
             return $this->_temporaryToken;
         }
 
-        $result = $this->_serviceManager->proceed('security', 'TemporaryCredential');
+        $result = $this->_proceed('TemporaryCredential');
 
         if (isset($result['ExpirationDate']) && isset($result['TemporaryCredentialKey'])) {
             $this->_temporaryTokenExpirationDate = $result['ExpirationDate'];
@@ -168,44 +173,38 @@ class Security extends ManagerAbstract
     }
 
     /**
-     * Get the token credential, set internally expirate date and session duration
+     * Get the token credential, set internally expiration date and session duration
      * Refresh the token if necessary
      *
-     * @param bool $allowSimulateValidation
      * @return string|array
      */
-    public function getTokenCredential($allowSimulateValidation = false)
+    public function getTokenCredential()
     {
-        if ($this->_credentialToken && !$this->isDateExpired($this->_credentialTokenExpirationDate)
-            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) < time()) {
-            return $this->_credentialToken;
+        if ($this->_tokenCredential && !$this->isDateExpired($this->_tokenCredentialExpirationDate)
+            && ($this->_tokenCredentialSessionStart + ($this->_tokenCredentialSessionDuration * 60)) < time()) {
+            return $this->_tokenCredential;
         }
 
-        if ($this->_credentialToken && $this->_credentialTokenSessionDuration
-            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) > time() ) {
-            return $this->refreshToken($this->_credentialToken);
+        if ($this->_tokenCredential && $this->_tokenCredentialSessionDuration
+            && ($this->_tokenCredentialSessionStart + ($this->_tokenCredentialSessionDuration * 60)) > time() ) {
+            return $this->refreshToken($this->_tokenCredential);
         }
 
-        // Temporary Token must be created before to simulate the validation
+        // Temporary Token must be created before to simulate the authorization
         $temporaryToken = $this->getTemporaryToken();
 
-        //@todo if we CANNOT simulate the validation url process, raise an error and ask to the user to validate manually, send him the correct url
-        if ($this->_allowSimulateValidation || $allowSimulateValidation) {
+        if ($this->_allowSimulateAuthorization) {
             $this->simulateValidationUrl();
-        } else {
-            //@todo raise exception
-            //$this->getValidationUrl();
         }
 
-        $result = $this->_serviceManager
-            ->proceed('security', 'TokenCredential', $temporaryToken);
+        $result = $this->_proceed('TokenCredential', $temporaryToken);
 
         if (isset($result['TokenExpirationDate']) && isset($result['TokenCredentialKey'])) {
-            $this->_credentialTokenExpirationDate = $result['TokenExpirationDate'];
-            $this->_credentialTokenSessionDuration = $result['SessionDuration']; // in minutes
-            $this->_credentialTokenSessionStart = time(); // in seconds
+            $this->_tokenCredentialExpirationDate = $result['TokenExpirationDate'];
+            $this->_tokenCredentialSessionDuration = $result['SessionDuration']; // in minutes
+            $this->_tokenCredentialSessionStart = time(); // in seconds
             $this->_temporaryToken = null;
-            return $this->_credentialToken = $result['TokenCredentialKey'];
+            return $this->_tokenCredential = $result['TokenCredentialKey'];
         }
 
         return $result;
@@ -216,12 +215,11 @@ class Security extends ManagerAbstract
      */
     public function getAntiforgeryToken()
     {
-        $result = $this->_serviceManager
-            ->proceed('security', 'AntiforgeryToken');
+        $result = $this->_proceed('AntiforgeryToken');
 
         if (isset($result['AntiforgeryTokenKey']) && isset($result['TokenExpirationDate'])) {
-            $this->_antiforgeryToken = $result['AntiforgeryTokenKey'];
-            return $this->_antiforgeryTokenExpirationDate = $result['TokenExpirationDate'];
+            $this->_antiforgeryTokenExpirationDate = $result['TokenExpirationDate'];
+            return $this->_antiforgeryToken = $result['AntiforgeryTokenKey'];
         }
 
         return $result;
@@ -235,12 +233,11 @@ class Security extends ManagerAbstract
      */
     public function refreshToken($token)
     {
-        $result = $this->_serviceManager
-            ->proceed('security', 'RefreshTokenCredential', $token);
+        $result = $this->_proceed('RefreshTokenCredential', $token);
 
         if (isset($result['TokenCredentialKey'])) {
-            $this->_credentialTokenSessionStart = time();
-            return $this->_credentialToken = $result['TokenCredentialKey'];
+            $this->_tokenCredentialSessionStart = time();
+            return $this->_tokenCredential = $result['TokenCredentialKey'];
         }
 
         return $result;
@@ -277,38 +274,14 @@ class Security extends ManagerAbstract
     }
 
     /**
-     * Set the anonymous token expiration date, useful in case of data coming from saved DB
-     *
-     * @param mixed $anonymousTokenExpirationDate
-     * @return $this
-     */
-    public function setAnonymousTokenExpirationDate($anonymousTokenExpirationDate)
-    {
-        $this->_anonymousTokenExpirationDate = $anonymousTokenExpirationDate;
-        return $this;
-    }
-
-    /**
      * Set the credential token, useful in case of data coming from saved DB
      *
-     * @param mixed $credentialToken
+     * @param mixed $tokenCredential
      * @return $this
      */
-    public function setCredentialToken($credentialToken)
+    public function setTokenCredential($tokenCredential)
     {
-        $this->_credentialToken = $credentialToken;
-        return $this;
-    }
-
-    /**
-     * Set the credential token expiration date, useful in case of data coming from saved DB
-     *
-     * @param mixed $credentialTokenExpirationDate
-     * @return $this
-     */
-    public function setCredentialTokenExpirationDate($credentialTokenExpirationDate)
-    {
-        $this->_credentialTokenExpirationDate = $credentialTokenExpirationDate;
+        $this->_tokenCredential = $tokenCredential;
         return $this;
     }
 
@@ -325,6 +298,75 @@ class Security extends ManagerAbstract
     }
 
     /**
+     * Set the antiforgery token, useful in case of data coming from saved DB
+     *
+     * @param string $antiforgeryToken
+     */
+    public function setAntiforgeryToken($antiforgeryToken)
+    {
+        $this->_antiforgeryToken = $antiforgeryToken;
+    }
+
+    /**
+     * Allow or not to simulate the authorization process
+     *
+     * @param bool $allow
+     */
+    public function setAllowSimulateAuthorization($allow)
+    {
+        $this->_allowSimulateAuthorization = (bool) $allow;
+    }
+
+    /**
+     * Get if allow or not to simulate the authorization process
+     *
+     * @return bool
+     */
+    public function getAllowSimulateAuthorization()
+    {
+        return (bool) $this->_allowSimulateAuthorization;
+    }
+
+    /**
+     * Set the anonymous token expiration date, useful in case of data coming from saved DB
+     *
+     * @param mixed $anonymousTokenExpirationDate
+     * @return $this
+     */
+    public function setAnonymousTokenExpirationDate($anonymousTokenExpirationDate)
+    {
+        $this->_anonymousTokenExpirationDate = $anonymousTokenExpirationDate;
+        return $this;
+    }
+
+    public function getAnonymousTokenExpirationDate()
+    {
+        return $this->_anonymousTokenExpirationDate;
+    }
+
+    /**
+     * Set the credential token expiration date, useful in case of data coming from saved DB
+     *
+     * @param mixed $tokenCredentialExpirationDate
+     * @return $this
+     */
+    public function setTokenCredentialExpirationDate($tokenCredentialExpirationDate)
+    {
+        $this->_tokenCredentialExpirationDate = $tokenCredentialExpirationDate;
+        return $this;
+    }
+
+    /**
+     * Get the credential token expiration date
+     *
+     * @return string
+     */
+    public function getTokenCredentialExpirationDate()
+    {
+        return $this->_tokenCredentialExpirationDate;
+    }
+
+    /**
      * Set the temporary token expiration date, useful in case of data coming from saved DB
      *
      * @param mixed $temporaryTokenExpirationDate
@@ -337,13 +379,13 @@ class Security extends ManagerAbstract
     }
 
     /**
-     * Set the antiforgery token, useful in case of data coming from saved DB
+     * Get the temporary token expiration date
      *
-     * @param string $antiforgeryToken
+     * @return string
      */
-    public function setAntiforgeryToken($antiforgeryToken)
+    public function getTemporaryTokenExpirationDate()
     {
-        $this->_antiforgeryToken = $antiforgeryToken;
+        return $this->_temporaryTokenExpirationDate;
     }
 
     /**
@@ -357,35 +399,45 @@ class Security extends ManagerAbstract
     }
 
     /**
-     * @param int $credentialTokenSessionDuration
+     * Get the antiforgery token expiration date
+     *
+     * @return string
      */
-    public function setCredentialTokenSessionDuration($credentialTokenSessionDuration)
+    public function getAntiforgeryTokenExpirationDate()
     {
-        $this->_credentialTokenSessionDuration = $credentialTokenSessionDuration;
+        return $this->_antiforgeryTokenExpirationDate;
+    }
+
+    /**
+     * @param int $tokenCredentialSessionDuration
+     */
+    public function setTokenCredentialSessionDuration($tokenCredentialSessionDuration)
+    {
+        $this->_tokenCredentialSessionDuration = $tokenCredentialSessionDuration;
     }
 
     /**
      * @return int
      */
-    public function getCredentialTokenSessionDuration()
+    public function getTokenCredentialSessionDuration()
     {
-        return $this->_credentialTokenSessionDuration;
+        return $this->_tokenCredentialSessionDuration;
     }
 
     /**
-     * @param int $credentialTokenSessionStart
+     * @param int $tokenCredentialSessionStart
      */
-    public function setCredentialTokenSessionStart($credentialTokenSessionStart)
+    public function setTokenCredentialSessionStart($tokenCredentialSessionStart)
     {
-        $this->_credentialTokenSessionStart = $credentialTokenSessionStart;
+        $this->_tokenCredentialSessionStart = $tokenCredentialSessionStart;
     }
 
     /**
      * @return int
      */
-    public function getCredentialTokenSessionStart()
+    public function getTokenCredentialSessionStart()
     {
-        return $this->_credentialTokenSessionStart;
+        return $this->_tokenCredentialSessionStart;
     }
 
     /**
@@ -411,6 +463,8 @@ class Security extends ManagerAbstract
     }
 
     /**
+     * The simulation of the authorization process is for development purpose
+     *
      * @param string $url
      * @return bool|mixed
      * @throws \Exception
@@ -486,4 +540,6 @@ class Security extends ManagerAbstract
 
         return json_decode($return, true);
     }
+
+
 }
