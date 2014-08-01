@@ -15,6 +15,16 @@
  */
 class Diglin_Ricento_Block_Adminhtml_Form_Element_Radios_Extensible extends Varien_Data_Form_Element_Radios
 {
+    public function __construct($attributes = array())
+    {
+        if (!empty($attributes['types'])) {
+            foreach($attributes['types'] as $type => $className) {
+                $this->addType($type, $className);
+            }
+        }
+        parent::__construct($attributes);
+    }
+
     public function setForm($form)
     {
         parent::setForm($form);

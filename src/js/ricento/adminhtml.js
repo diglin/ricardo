@@ -172,9 +172,9 @@ Ricento.salesOptionsForm.prototype = {
     },
     toggleConditionSource : function(field) {
         conditionSourceLabel = $$('label[for='+ this.htmlIdPrefix + 'product_condition_use_attribute]')[0];
-        conditionSourceValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition_source_attribute_id');
+        conditionSourceValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition_source_attribute_code');
         conditionValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition');
-        conditionSource = $(this.htmlIdPrefix + 'product_condition_source_attribute_id');
+        conditionSource = $(this.htmlIdPrefix + 'product_condition_source_attribute_code');
         condition = $(this.htmlIdPrefix + 'product_condition');
 
         condition.disabled = field.checked;

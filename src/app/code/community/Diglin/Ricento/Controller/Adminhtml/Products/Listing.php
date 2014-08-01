@@ -114,9 +114,6 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
         if (empty($data['rules']['rule_id'])) {
             unset($data['rules']['rule_id']);
         }
-        if (!empty($data['rules']['payment_methods'])) {
-            $data['rules']['payment_methods'] = implode(',', $data['rules']['payment_methods']);
-        }
         if (!empty($data['rules']['payment_description'])) {
             $data['rules']['payment_description'] = Mage::helper('core')->escapeHtml($data['rules']['payment_description']);
         }
@@ -141,7 +138,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
         /* @var $rulesValidator Diglin_Ricento_Model_Rule_Validate */
         $rulesValidator = Mage::getModel('diglin_ricento/rule_validate');
         $methods = array(
-            'payment' => array_filter(explode(',', $data['rules']['payment_methods']), 'strlen'),
+            'payment' => array_filter((array)$data['rules']['payment_methods'], 'strlen'),
             'shipping' => $data['rules']['shipping_method']
         );
         if (!$rulesValidator->isValid($methods)) {

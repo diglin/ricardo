@@ -126,8 +126,8 @@ input[type="radio"] {
 }
 
 .ricardo_categories_title {
-    float:left;
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
     font-weight: bold;
 }
 
