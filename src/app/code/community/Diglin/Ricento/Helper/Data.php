@@ -25,6 +25,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const CFG_RICARDO_PARTNERPASS = 'ricento/api_config/partner_pass_';
     const CFG_EXPIRATION_NOTIFICATION_DELAY = 'ricento/api_config/expiration_notification_delay'; // in day
     const CFG_SUPPORTED_LANG = 'ricento/api_config/lang';
+    const DEFAULT_SUPPORTED_LANG = 'de';
 
     const CFG_SHIPPING_CALCULATION = 'ricento/global/shipping_calculation';
 

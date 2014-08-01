@@ -17,29 +17,39 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     const CFG_API_HOST_DEV = 'ricento/api_config/api_host_dev';
 
     /**
-     * @var Service
+     * @var string
      */
-    protected $_serviceManager;
+    protected $_registryKey =  'serviceManager';
 
+    /**
+     * @todo lang parameter is probably not the best place, find an other way to set lang (session, configuration or similar)
+     *
+     * @param string $lang
+     * @return Service
+     */
     public function getServiceManager($lang = 'de')
     {
-        $helper = Mage::helper('diglin_ricento');
-
-        if (!$helper->isConfigured()) {
-            Mage::throwException($helper->__('Ricardo API Credentials are not configured. Please, configure the extension before to proceed.'));
+        if (!Mage::registry('ricardo_api_lang')) {
+            $lang = Diglin_Ricento_Helper_Data::DEFAULT_SUPPORTED_LANG;
         }
 
-        if (!in_array($lang, $helper->getSupportedLang())) {
-            Mage::throwException($helper->__('API lang provided for the Service Manager is not supported'));
-        }
+        if (!Mage::registry($this->_registryKey . ucwords($lang))) {
+            $helper = Mage::helper('diglin_ricento');
 
-        if (empty($this->_serviceManager)) {
+            if (!$helper->isConfigured()) {
+                Mage::throwException($helper->__('Ricardo API Credentials are not configured. Please, configure the extension before to proceed.'));
+            }
+
+            if (!in_array($lang, $helper->getSupportedLang())) {
+                Mage::throwException($helper->__('API lang provided for the Service Manager is not supported'));
+            }
 
             if ($helper->isDevMode()) {
                 $host = Mage::getStoreConfig(self::CFG_API_HOST_DEV);
             } else {
                 $host = Mage::getStoreConfig(self::CFG_API_HOST);
             }
+
 
             $config = array(
                 'host' => $host,
@@ -51,10 +61,11 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                 'customer_password' => $helper->getRicardoPass(),
                 'debug' => ($helper->isDebugEnabled()) ? true : false
             );
-            $this->_serviceManager = new Service(new Api(new Config($config)));
+
+            Mage::register($this->_registryKey . ucwords($lang), new Service(new Api(new Config($config))), false);
         }
 
-        return $this->_serviceManager;
+        return Mage::registry($this->_registryKey . ucwords($lang));
     }
 
     /**
