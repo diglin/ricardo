@@ -42,19 +42,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCategory->addField('ricardo_category_use_mapping', 'radios_extensible', array(
             'name' => 'sales_options[ricardo_category_use_mapping]',
             'label' => $this->__('Ricardo Category'),
-            'separator' => '<br>',
+            'separator' => ' ',
             'values' => array(
                 array('value' => 1, 'label' => $this->__('Use Magento / Ricardo Category mapping (if mapping does not exist, an error message will be triggered while preparing the synchronization to Ricardo)')),
-                array('value' => 0, 'label' => $this->__('Select Ricardo Category'))
+                array('value' => 0, 'label' => $this->__('Select Ricardo Category'), 'field' => array(
+                    'ricardo_category', 'ricardo_category', array(
+                        'name' => 'sales_options[ricardo_category]',
+                        'label' => $this->__('Select the category')
+                    )
+                ))
             ),
+            'types' => array('ricardo_category' => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_catalog_category_form_renderer_mapping'))
         ));
-        //TODO show/hide category button based on selection above
-        $fieldsetCategory->addType('ricardo_category', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_catalog_category_form_renderer_mapping'));
-        $fieldsetCategory->addField('ricardo_category', 'ricardo_category', array(
-            'name' => 'sales_options[ricardo_category]',
-            'label' => $this->__('Select the category')
-        ));
-
 
         $fieldsetType = $form->addFieldset('fieldset_type', array('legend' => $this->__('Type of sales')));
         $fieldsetType->addField('sales_type', 'select', array(
