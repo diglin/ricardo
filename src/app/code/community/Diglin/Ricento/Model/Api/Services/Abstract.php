@@ -13,32 +13,40 @@ use \Diglin\Ricardo\Service;
 
 abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
 {
-    const CFG_API_HOST = 'ricento/api_config/api_host';
-    const CFG_API_HOST_DEV = 'ricento/api_config/api_host_dev';
+    /**
+     * @var string
+     */
+    protected $_registryKey =  'serviceManager';
 
     /**
-     * @var Service
+     * Get the Service Manager of the Ricardo PHP lib
+     *
+     * @return Service
      */
-    protected $_serviceManager;
-
-    public function getServiceManager($lang = 'de')
+    public function getServiceManager()
     {
-        $helper = Mage::helper('diglin_ricento');
-
-        if (!$helper->isConfigured()) {
-            Mage::throwException($helper->__('Ricardo API Credentials are not configured. Please, configure the extension before to proceed.'));
+        if (!Mage::registry('ricardo_api_lang')) {
+            Mage::register('ricardo_api_lang', Diglin_Ricento_Helper_Data::DEFAULT_SUPPORTED_LANG);
         }
 
-        if (!in_array($lang, $helper->getSupportedLang())) {
-            Mage::throwException($helper->__('API lang provided for the Service Manager is not supported'));
-        }
+        $lang = Mage::registry('ricardo_api_lang');
+        $registryKey = $this->_registryKey . ucwords($lang);
 
-        if (empty($this->_serviceManager)) {
+        if (!Mage::registry($registryKey)) {
+            $helper = Mage::helper('diglin_ricento');
+
+            if (!$helper->isConfigured()) {
+                Mage::throwException($helper->__('Ricardo API Credentials are not configured. Please, configure the extension before to proceed.'));
+            }
+
+            if (!in_array($lang, $helper->getSupportedLang())) {
+                Mage::throwException($helper->__('API language provided for the Service Manager is not supported.'));
+            }
 
             if ($helper->isDevMode()) {
-                $host = Mage::getStoreConfig(self::CFG_API_HOST_DEV);
+                $host = Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_API_HOST_DEV);
             } else {
-                $host = Mage::getStoreConfig(self::CFG_API_HOST);
+                $host = Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_API_HOST);
             }
 
             $config = array(
@@ -51,20 +59,21 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                 'customer_password' => $helper->getRicardoPass(),
                 'debug' => ($helper->isDebugEnabled()) ? true : false
             );
-            $this->_serviceManager = new Service(new Api(new Config($config)));
+
+            Mage::register($registryKey, new Service(new Api(new Config($config))), false);
         }
 
-        return $this->_serviceManager;
+        return Mage::registry($registryKey);
     }
 
     /**
      * Get last API call information
      *
      * @param bool $flush
-     * @return mixed
+     * @return array
      */
     protected function getLastApiDebug($flush = true)
     {
-        return print_r($this->getServiceManager()->getApi()->getLastDebug($flush), true);
+        return $this->getServiceManager()->getApi()->getLastDebug($flush);
     }
 }
