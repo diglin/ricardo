@@ -73,7 +73,7 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
         if (!is_array($value) || !isset($value['shipping']) || !isset($value['payment'])) {
             throw new Zend_Validate_Exception(__CLASS__ . ' expects array with keys "payment" and "shipping"');
         }
-        $this->_setValue($value);
+        $this->_setValue(print_r($value, true)); // string expected to display error message
         return $this->_isValidPaymentCombination($value) && $this->_isValidPaymentShippingCombination($value);
     }
 
