@@ -48,7 +48,7 @@ abstract class ManagerAbstract
     public function getHelper()
     {
         if (!$this->_helper) {
-           $this->_helper = new Helper();
+            $this->_helper = new Helper();
         }
         return $this->_helper;
     }
@@ -65,6 +65,21 @@ abstract class ManagerAbstract
             throw new \Exception('Service Name missing to proceed from Manager');
         }
 
-        return $this->_serviceManager->proceed($this->_serviceName, $method, $parameters);
+        $result = $this->_serviceManager->proceed($this->_serviceName, $method, $parameters);
+        $this->extractError($result);
+
+        return $result;
+    }
+
+    /**
+     * @param array $result
+     */
+    protected function extractError(array $result)
+    {
+        if (!empty($result['ErrorCodes']) && isset($result['ErrorCodesType'])) {
+            $classname = '\\Diglin\\Ricardo\\Exceptions\\' . $result['ErrorCodesType'];
+            $errorCode =  array_shift($result['ErrorCodes']);
+            throw new $classname($errorCode['Value'], $errorCode['Key']);
+        }
     }
 }
