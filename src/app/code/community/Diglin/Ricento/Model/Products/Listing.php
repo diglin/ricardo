@@ -156,21 +156,33 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
      * Removes items by product id
      *
      * @param array $productIds
-     * @return int number of removed products
+     * @return int[] Returns two values: [number of removed products, number of not removed listed products]
      */
     public function removeProducts(array $productIds)
     {
         /** @var $items Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection */
         $items = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
-        $items->addFieldToFilter('products_listing_id', $this->getId())
+
+        /** @var $itemResource Diglin_Ricento_Model_Resource_Products_Listing_Item */
+        $itemResource = Mage::getResourceModel('diglin_ricento/products_listing_item');
+        $itemResource->beginTransaction();
+
+        $numberOfListedItems = $items->addFieldToFilter('products_listing_id', $this->getId())
             ->addFieldToFilter('product_id', array('in' => $productIds))
-            ->addFieldToFilter('status', array('neq' => Diglin_Ricento_Helper_Data::STATUS_LISTED)) //TODO inform user about not deleted listed items? Response: yes, other question how?
-            ->load();
-        $numberOfItems = count($items);
-        if ($numberOfItems) {
+            ->addFieldToFilter('status', Diglin_Ricento_Helper_Data::STATUS_LISTED)
+            ->getSize();
+
+        $items = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
+        $numberOfItemsToDelete = $items->addFieldToFilter('products_listing_id', $this->getId())
+            ->addFieldToFilter('product_id', array('in' => $productIds))
+            ->addFieldToFilter('status', array('neq' => Diglin_Ricento_Helper_Data::STATUS_LISTED))
+            ->count();
+        if ($numberOfItemsToDelete) {
             $items->walk('delete');
         }
-        return $numberOfItems;
+
+        $itemResource->commit();
+        return array($numberOfItemsToDelete, $numberOfListedItems);
     }
 
     /**
