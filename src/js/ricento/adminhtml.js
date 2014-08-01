@@ -70,27 +70,48 @@ Ricento.categoryMappingPopup = function(url, target, targetTitle) {
         return;
     }
 
-    Dialog.info({url:url.replace('#ID#', target.getValue())}, {
-        closable:true,
-        resizable:true,
-        maximizable: true,
-        draggable:true,
-        className:'magento',
-        windowClassName:'popup-window',
-        title: Translator.translate('Choose Ricardo Category'),
-        top:50,
-        width:940,
-        height:600,
-        zIndex:400,
-        recenterAuto:false,
-        hideEffect:Element.hide,
-        showEffect:Element.show,
-        id:'ricento_popup',
-        showProgress:true,
-        onShow:function(dialog) {
-            dialog.element.innerHTML.evalScripts();
+    Dialog.info(
+        {
+            url : url.replace('#ID#', target.getValue()),
+            options : {
+                /*
+                 * onSuccess is called before onComplete. If the response is a JSON string with error message,
+                 * the dialog opening gets prevented with unsetting Dialog.callFunc
+                 */
+                onSuccess : function(response) {
+                    try {
+                        var jsonResponse = response.responseText.evalJSON();
+                        if (jsonResponse && jsonResponse.error) {
+                            alert(jsonResponse.message);
+                            Dialog.callFunc = function() {};
+                        }
+                    } catch (e) {
+                        // if it's not JSON, everything is fine.
+                    }
+                }
+            }
+        }, {
+            closable:true,
+            resizable:true,
+            maximizable: true,
+            draggable:true,
+            className:'magento',
+            windowClassName:'popup-window',
+            title: Translator.translate('Choose Ricardo Category'),
+            top:50,
+            width:940,
+            height:600,
+            zIndex:400,
+            recenterAuto:false,
+            hideEffect:Element.hide,
+            showEffect:Element.show,
+            id:'ricento_popup',
+            showProgress:true,
+            onShow:function(dialog) {
+                dialog.element.innerHTML.evalScripts();
+            }
         }
-    });
+    );
     Ricento.categoryMappingTargetInput = target;
     Ricento.categoryMappingTargetTitle = targetTitle;
 };
