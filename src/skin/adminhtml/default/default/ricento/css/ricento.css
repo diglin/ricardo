@@ -68,6 +68,13 @@ input[type="radio"] {
     min-height: 16px;
     background: url('images/settings_icon.png') center center no-repeat;
 }
+.diglin_ricento_status_info dt {
+    clear: both;
+    float: left;
+}
+.diglin_ricento_status_info dd {
+    float: right;
+}
 
 /********** Category Mapping views **********/
 

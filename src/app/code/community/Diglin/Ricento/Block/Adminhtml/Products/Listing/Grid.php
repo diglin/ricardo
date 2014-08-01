@@ -62,7 +62,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
             $this->addColumn('stores',
                 array(
                     'header'        => Mage::helper('catalog')->__('Stores'),
-                    'width'         => '100px',
+                    'width'         => '150px',
                     'sortable'      => false,
                     'index'         => 'store_id',
                     'type'          => 'store',
@@ -82,22 +82,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
             'type' => 'number',
         ));
 
-        $this->addColumn('active', array(
-            'header' => $this->__('Active') ,
-            'align' => 'right',
-            'width' => '50px',
-            'index' => 'total_active_products',
-            'type' => 'number',
-        ));
-
-        $this->addColumn('inactive', array(
-            'header' => $this->__('Inactive') ,
-            'align' => 'right',
-            'width' => '50px',
-            'index' => 'total_inactive_products',
-            'type' => 'number',
-        ));
-
         $this->addColumn('sold', array(
             'header' => $this->__('Sold') ,
             'align' => 'right',
@@ -107,12 +91,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
         ));
 
         $this->addColumn('status', array(
-            'header' => $this->__('Status') ,
-            'align' => 'left',
-            'width' => '50px',
-            'index' => 'status',
-            'type' => 'options',
-            'options' => Mage::getModel('diglin_ricento/config_source_status')->toOptionHash()
+            'header'   => $this->__('Status') ,
+            'align'    => 'left',
+            'width'    => '150px',
+            'index'    => 'status',
+            'type'     => 'options',
+            'options'  => Mage::getModel('diglin_ricento/config_source_status')->toOptionHash(),
+            'renderer' => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_listing_grid_renderer_status')
         ));
 
         $this->addColumn('action',
