@@ -28,6 +28,8 @@
  * @method int      getCustomizationTemplate() getCustomizationTemplate()
  * @method int      getPromotionSpace() getPromotionSpace()
  * @method int      getPromotionStartPage() getPromotionStartPage()
+ * @method string   getProductConditionSource() getProductConditionSource()
+ * @method string   getProductConditionSourceAttributeCode() getProductConditionSourceAttributeCode()
  * @method string   getCreatedAt() getCreatedAt()
  * @method string   getUpdatedAt() getUpdatedAt()
  * @method Diglin_Ricento_Model_Sales_Options setRicardoCategory() setRicardoCategory(int $ricardoCategory)
@@ -47,6 +49,8 @@
  * @method Diglin_Ricento_Model_Sales_Options setCustomizationTemplate() setCustomizationTemplate(int $customizationTemplate)
  * @method Diglin_Ricento_Model_Sales_Options setPromotionSpace() setPromotionSpace(int $promotionSpace)
  * @method Diglin_Ricento_Model_Sales_Options setPromotionStartPage() setPromotionStartPage(int $promotionStartPage)
+ * @method Diglin_Ricento_Model_Sales_Options setProductConditionSource() setProductConditionSource(string $productConditionSource)
+ * @method Diglin_Ricento_Model_Sales_Options setProductConditionSourceAttributeCode() setProductConditionSourceAttributeCode(string $productConditionSourceAttributeCode)
  * @method Diglin_Ricento_Model_Sales_Options setCreatedAt() setCreatedAt(string $createdAt)
  * @method Diglin_Ricento_Model_Sales_Options setUpdatedAt() setUpdatedAt(string $updatedAt)
  */

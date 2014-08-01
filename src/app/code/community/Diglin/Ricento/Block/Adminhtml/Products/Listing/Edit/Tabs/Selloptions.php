@@ -260,6 +260,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         if ($this->getSalesOptions()->getRicardoCategory() == 0) {
             $derivedValues['ricardo_category_use_mapping'] = 1;
         }
+        if ($this->getSalesOptions()->getProductConditionSourceAttributeCode()) {
+            $derivedValues['product_condition_use_attribute'] = 1;
+        }
         if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
             $derivedValues['schedule_cycle_multiple_products_random'] = '1';
         }
