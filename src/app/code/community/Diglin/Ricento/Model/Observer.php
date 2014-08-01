@@ -45,6 +45,7 @@ class Diglin_Ricento_Model_Observer
         }
 
         foreach ($this->getNamespacesToRegister() as $namespace) {
+            $namespace = str_replace('_', '/', $namespace);
             if (is_dir(Mage::getBaseDir('lib') . DS . $namespace)) {
                 $args = array($namespace, Mage::getBaseDir('lib') . DS . $namespace);
                 $autoloader = Mage::getModel("diglin_ricento/splAutoloader", $args);

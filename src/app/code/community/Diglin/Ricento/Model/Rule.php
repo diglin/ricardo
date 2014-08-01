@@ -22,6 +22,7 @@
  * @method float getShippingPrice()
  * @method string getShippingAvailaibility()
  * @method string getPaymentDescription()
+ * @method string[] getPaymentMethods()
  *
  */
 class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
@@ -45,7 +46,7 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
     }
 
     /**
-     * Set date of last update
+     * Set date of last update, convert payment method array to string
      *
      * @return Diglin_Ricento_Model_Rule
      */
@@ -53,17 +54,40 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
     {
         parent::_beforeSave();
         $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
+        if (is_array($this->_data['payment_methods'])) {
+            $this->_data['payment_methods'] = implode(',', $this->_data['payment_methods']);
+        }
         return $this;
     }
 
     /**
-     * @return string
+     * Convert payment method string to array
+     *
+     * @return Diglin_Ricento_Model_Rule
      */
-    public function getPaymentMethods()
+    protected function _afterLoad()
     {
-        if ($this->_data['payment_methods']) {
+        if (!empty($this->_data['payment_methods'])) {
             $this->_data['payment_methods'] = explode(',', $this->_data['payment_methods']);
+        } else {
+            $this->_data['payment_methods'] = array();
         }
-        return $this->_data['payment_methods'];
+        return parent::_afterLoad();
     }
+
+    /**
+     * Convert payment method string to array
+     *
+     * @return Diglin_Ricento_Model_Rule
+     */
+    protected function _afterSave()
+    {
+        if (!empty($this->_data['payment_methods'])) {
+            $this->_data['payment_methods'] = explode(',', $this->_data['payment_methods']);
+        } else {
+            $this->_data['payment_methods'] = array();
+        }
+        return parent::_afterSave();
+    }
+
 }

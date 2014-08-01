@@ -42,19 +42,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCategory->addField('ricardo_category_use_mapping', 'radios_extensible', array(
             'name' => 'sales_options[ricardo_category_use_mapping]',
             'label' => $this->__('Ricardo Category'),
-            'separator' => '<br>',
+            'separator' => ' ',
             'values' => array(
                 array('value' => 1, 'label' => $this->__('Use Magento / Ricardo Category mapping (if mapping does not exist, an error message will be triggered while preparing the synchronization to Ricardo)')),
-                array('value' => 0, 'label' => $this->__('Select Ricardo Category'))
+                array('value' => 0, 'label' => $this->__('Select Ricardo Category'), 'field' => array(
+                    'ricardo_category', 'ricardo_category', array(
+                        'name' => 'sales_options[ricardo_category]',
+                        'label' => $this->__('Select the category')
+                    )
+                ))
             ),
+            'types' => array('ricardo_category' => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_catalog_category_form_renderer_mapping'))
         ));
-        //TODO show/hide category button based on selection above
-        $fieldsetCategory->addType('ricardo_category', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_catalog_category_form_renderer_mapping'));
-        $fieldsetCategory->addField('ricardo_category', 'ricardo_category', array(
-            'name' => 'sales_options[ricardo_category]',
-            'label' => $this->__('Select the category')
-        ));
-
 
         $fieldsetType = $form->addFieldset('fieldset_type', array('legend' => $this->__('Type of sales')));
         $fieldsetType->addField('sales_type', 'select', array(
@@ -92,8 +91,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
 
         $fieldsetTypeFixPrice = $form->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price'), 'fieldset_container_id' => 'fieldset_toggle_fixprice'));
-        $fieldsetTypeFixPrice->addField('price_source_attribute_id', 'select', array(
-            'name'   => 'sales_options[price_source_attribute_id]',
+        $fieldsetTypeFixPrice->addField('price_source_attribute_code', 'select', array(
+            'name'   => 'sales_options[price_source_attribute_code]',
             'label'  => $this->__('Source'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_price_source')->getAllOptions(),
             'class'  => 'required-if-visible'
@@ -137,7 +136,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                         'name' => 'sales_options[schedule_date_start]',
                         'image' => $this->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
-                        'class' => '' //TODO concrete validation (validate-date only if radio button selected))
+                        //'class' => 'validate-date validate-date-range date-range-end_date-from' // Prototype's date validation does not work with localized dates, so we don't use it
                     )
                 ))
             )
@@ -158,7 +157,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                         'name' => 'sales_options[schedule_period_end_date]',
                         'image' => Mage::getDesign()->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
-                        'class' => '' //TODO concrete validation (validate-date only if radio button selected))
+                        //'class' => 'validate-date validate-date-range date-range-end_date-to'  // Prototype's date validation does not work with localized dates, so we don't use it
                     )
                 ))
             )
@@ -260,6 +259,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         if ($this->getSalesOptions()->getRicardoCategory() == 0) {
             $derivedValues['ricardo_category_use_mapping'] = 1;
         }
+        if ($this->getSalesOptions()->getProductConditionSourceAttributeCode()) {
+            $derivedValues['product_condition_use_attribute'] = 1;
+        }
         if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
             $derivedValues['schedule_cycle_multiple_products_random'] = '1';
         }
@@ -349,6 +351,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     {
         if (!$this->_model) {
             $this->_model = $this->_getListing()->getSalesOptions();
+            $data = Mage::getSingleton('adminhtml/session')->getSalesOptionsFormData(true);
+            if (!empty($data)) {
+                $this->_model->setData($data);
+            }
         }
         return $this->_model;
     }

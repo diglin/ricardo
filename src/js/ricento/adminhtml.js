@@ -70,27 +70,48 @@ Ricento.categoryMappingPopup = function(url, target, targetTitle) {
         return;
     }
 
-    Dialog.info({url:url.replace('#ID#', target.getValue())}, {
-        closable:true,
-        resizable:true,
-        maximizable: true,
-        draggable:true,
-        className:'magento',
-        windowClassName:'popup-window',
-        title: Translator.translate('Choose Ricardo Category'),
-        top:50,
-        width:940,
-        height:600,
-        zIndex:400,
-        recenterAuto:false,
-        hideEffect:Element.hide,
-        showEffect:Element.show,
-        id:'ricento_popup',
-        showProgress:true,
-        onShow:function(dialog) {
-            dialog.element.innerHTML.evalScripts();
+    Dialog.info(
+        {
+            url : url.replace('#ID#', target.getValue()),
+            options : {
+                /*
+                 * onSuccess is called before onComplete. If the response is a JSON string with error message,
+                 * the dialog opening gets prevented with unsetting Dialog.callFunc
+                 */
+                onSuccess : function(response) {
+                    try {
+                        var jsonResponse = response.responseText.evalJSON();
+                        if (jsonResponse && jsonResponse.error) {
+                            alert(jsonResponse.message);
+                            Dialog.callFunc = function() {};
+                        }
+                    } catch (e) {
+                        // if it's not JSON, everything is fine.
+                    }
+                }
+            }
+        }, {
+            closable:true,
+            resizable:true,
+            maximizable: true,
+            draggable:true,
+            className:'magento',
+            windowClassName:'popup-window',
+            title: Translator.translate('Choose Ricardo Category'),
+            top:50,
+            width:940,
+            height:600,
+            zIndex:400,
+            recenterAuto:false,
+            hideEffect:Element.hide,
+            showEffect:Element.show,
+            id:'ricento_popup',
+            showProgress:true,
+            onShow:function(dialog) {
+                dialog.element.innerHTML.evalScripts();
+            }
         }
-    });
+    );
     Ricento.categoryMappingTargetInput = target;
     Ricento.categoryMappingTargetTitle = targetTitle;
 };
@@ -98,10 +119,30 @@ Ricento.closePopup = function() {
     Windows.close('ricento_popup');
 };
 
+Ricento.useProductListSettings = function(checkbox, htmlIdPrefix) {
+    checkbox.form.getElements().each(function(element) {
+        if (element!=checkbox && element.id.startsWith(htmlIdPrefix)) {
+            element.disabled=checkbox.checked;
+            if (checkbox.checked) {
+                element.addClassName('disabled');
+            } else {
+                element.removeClassName('disabled');
+            }
+        }
+    });
+    checkbox.form.select('img[id$=_trig]').each(function(calendar) {
+        if (checkbox.checked) {
+            calendar.hide();
+        } else {
+            calendar.show();
+        }
+    })
+}
+
 Ricento.salesOptionsForm = Class.create();
 Ricento.salesOptionsForm.prototype = {
-    initialize : function(htmlPrefix) {
-        this.htmlIdPrefix = htmlPrefix;
+    initialize : function(htmlIdPrefix) {
+        this.htmlIdPrefix = htmlIdPrefix;
         this.requiredText = '<span class="required">*</span>';
         this.requiredClass = 'required-entry';
         this.validationPassedClass = 'validation-passed';
@@ -123,7 +164,11 @@ Ricento.salesOptionsForm.prototype = {
             validationAdvice.replace('');
         }
         field.removeClassName(this.validationPassedClass);
-        field.toggleClassName(this.requiredClass, required);
+        if (required) {
+            field.addClassName(this.requiredClass);
+        } else {
+            field.removeClassName(this.requiredClass);
+        }
     },
     showSalesTypeFieldsets : function(salesType, allowDirectBuy) {
         $$('div[id^=fieldset_toggle_]').each(this._hideFieldset.bind(this));
@@ -148,9 +193,9 @@ Ricento.salesOptionsForm.prototype = {
     },
     toggleConditionSource : function(field) {
         conditionSourceLabel = $$('label[for='+ this.htmlIdPrefix + 'product_condition_use_attribute]')[0];
-        conditionSourceValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition_source_attribute_id');
+        conditionSourceValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition_source_attribute_code');
         conditionValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition');
-        conditionSource = $(this.htmlIdPrefix + 'product_condition_source_attribute_id');
+        conditionSource = $(this.htmlIdPrefix + 'product_condition_source_attribute_code');
         condition = $(this.htmlIdPrefix + 'product_condition');
 
         condition.disabled = field.checked;

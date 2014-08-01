@@ -48,13 +48,13 @@ input[type="radio"] {
 #diglin_ricento_price_change {
     width: 30px;
 }
-#products_listing_tabs_selloptions_section_content .inline-select {
+.ricento-form .inline-select {
     width: auto !important;
 }
-#products_listing_tabs_selloptions_section_content  .inline-number {
+.ricento-form .inline-number {
     width: 50px;
 }
-#products_listing_tabs_selloptions_section_content td.value {
+.ricento-form td.value {
     width: auto !important;
 }
 
@@ -67,6 +67,13 @@ input[type="radio"] {
     min-width: 16px;
     min-height: 16px;
     background: url('images/settings_icon.png') center center no-repeat;
+}
+.diglin_ricento_status_info dt {
+    clear: both;
+    float: left;
+}
+.diglin_ricento_status_info dd {
+    float: right;
 }
 
 /********** Category Mapping views **********/
@@ -126,8 +133,8 @@ input[type="radio"] {
 }
 
 .ricardo_categories_title {
-    float:left;
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
     font-weight: bold;
 }
 

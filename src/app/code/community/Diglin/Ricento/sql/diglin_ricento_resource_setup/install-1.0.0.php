@@ -36,7 +36,7 @@ $tableSalesOptions = $installer->getConnection()->newTable($salesOptionsTable);
 $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('ricardo_category', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
     ->addColumn('sales_type', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
-    ->addColumn('price_source_attribute_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
+    ->addColumn('price_source_attribute_code', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
     ->addColumn('price_change', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('default' => 0))
     ->addColumn('price_change_type', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255)
     ->addColumn('sales_auction_direct_buy', Varien_Db_Ddl_Table::TYPE_INTEGER, 1, array('unsigned' => 1))
@@ -53,7 +53,7 @@ $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4,
     ->addColumn('promotion_start_page', Varien_Db_Ddl_Table::TYPE_INTEGER, 1, array('nullable' => false, 'default' => 0))
     ->addColumn('product_warranty', Varien_Db_Ddl_Table::TYPE_SMALLINT, 2, array('default' => 0, 'unsigned' => true, 'nullable' => false))
     ->addColumn('product_condition', Varien_Db_Ddl_Table::TYPE_VARCHAR, 50, array('nullable' => false))
-    ->addColumn('product_condition', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
+    ->addColumn('product_condition_source_attribute_code', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
     ->setComment('Sales options');

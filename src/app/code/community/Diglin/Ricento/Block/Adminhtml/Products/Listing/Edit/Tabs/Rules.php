@@ -29,6 +29,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
     {
         if (!$this->_model) {
             $this->_model = $this->_getListing()->getShippingPaymentRule();
+            $data = Mage::getSingleton('adminhtml/session')->getRulesFormData(true);
+            if (!empty($data)) {
+                $this->_model->setData($data);
+            }
         }
         return $this->_model;
     }
