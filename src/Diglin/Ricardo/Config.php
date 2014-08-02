@@ -95,4 +95,14 @@ class Config extends \Zend_Config implements ConfigInterface
     {
         return $this->get('customer_password');
     }
+
+    /**
+     * Get the partner url
+     *
+     * @return mixed
+     */
+    public function getPartnerUrl()
+    {
+        return $this->get('partner_url');
+    }
 }
