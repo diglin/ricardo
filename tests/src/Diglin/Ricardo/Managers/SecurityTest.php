@@ -33,7 +33,6 @@ class SecurityTest extends TestAbstract
         $token = $this->_securityManager->getAnonymousToken();
 
         $this->assertCount(1, $this->_matchToken($token), 'Anonymous Token is ' . $token);
-        $this->assertAttributeContains('Date', '_anonymousTokenExpirationDate', $this->_securityManager);
 
         echo 'Anonymous token: ' . $token . "\n";
     }
@@ -43,7 +42,6 @@ class SecurityTest extends TestAbstract
         $token = $this->_securityManager->getTemporaryToken();
 
         $this->assertCount(1, $this->_matchToken($token), 'Temporary Token is ' . $token);
-        $this->assertAttributeContains('Date', '_temporaryTokenExpirationDate', $this->_securityManager);
         $this->assertAttributeContains('http', '_validationUrl', $this->_securityManager);
 
         echo 'Temporary token: ' . $token . "\n";

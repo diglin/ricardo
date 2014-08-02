@@ -78,8 +78,21 @@ abstract class ManagerAbstract
     {
         if (!empty($result['ErrorCodes']) && isset($result['ErrorCodesType'])) {
             $classname = '\\Diglin\\Ricardo\\Exceptions\\' . $result['ErrorCodesType'];
-            $errorCode =  array_shift($result['ErrorCodes']);
-            throw new $classname($errorCode['Value'], $errorCode['Key']);
+            $tmp = $result;
+            $errorCode =  array_shift($tmp['ErrorCodes']);
+
+            if (!class_exists($classname)) {
+                $classname = '\Exception';
+            }
+            throw new $classname(print_r($result, true), $errorCode['Key']);
         }
+    }
+
+    /**
+     * @return Service
+     */
+    public function getServiceManager()
+    {
+        return $this->_serviceManager;
     }
 }

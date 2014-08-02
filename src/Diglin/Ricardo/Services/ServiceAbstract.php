@@ -19,6 +19,7 @@ abstract class ServiceAbstract
     const TOKEN_TYPE_ANONYMOUS = 'anonymous';
     const TOKEN_TYPE_IDENTIFIED = 'identified';
     const TOKEN_TYPE_ANTIFORGERY = 'antiforgery';
+    const TOKEN_TYPE_TEMPORARY = 'temporary';
     const TOKEN_TYPE_DEFAULT = '';
 
     /**
