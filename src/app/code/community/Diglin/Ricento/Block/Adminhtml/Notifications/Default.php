@@ -11,7 +11,7 @@
 /**
  * Class Diglin_Ricento_Block_Adminhtml_Notifications
  */
-class Diglin_Ricento_Block_Adminhtml_Notifications extends Mage_Adminhtml_Block_Template
+class Diglin_Ricento_Block_Adminhtml_Notifications_Default extends Mage_Adminhtml_Block_Template
 {
     /**
      * Disable the block caching for this block

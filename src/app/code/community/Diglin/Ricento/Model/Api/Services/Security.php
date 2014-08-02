@@ -9,54 +9,59 @@
  */
 
 use \Diglin\Ricardo\Managers\Security;
-use \Diglin\Ricardo\Exceptions\SecurityErrors;
+use \Diglin\Ricardo\Services\ServiceAbstract;
 
+/**
+ * Class Diglin_Ricento_Model_Api_Services_Security
+ */
 class Diglin_Ricento_Model_Api_Services_Security extends Diglin_Ricento_Model_Api_Services_Abstract
 {
     /**
      * @var Security
      */
-    protected $_securityServiceModel;
+    protected $_securityServiceModel = array();
 
     /**
+     * @param int|Mage_Core_Model_Website $website
      * @return Security
      */
-    public function getSecurityServiceModel()
+    public function getSecurityServiceModel($website = 0)
     {
-        if (!$this->_securityServiceModel) {
-            $object = $this->getServiceManager()->getSecurityManager();
-            $this->_securityServiceModel = Mage::objects()->save($object);
+        if (!is_numeric($website) && !($website instanceof Mage_Core_Model_Website)) {
+            Mage::throwException(Mage::helper('diglin_ricento')->__('Website ID is not an integer'));
+        } elseif ($website instanceof Mage_Core_Model_Website) {
+            $websiteId = $website->getId();
+        } else {
+            $websiteId = $website;
         }
-        return Mage::objects()->load($this->_securityServiceModel);
-    }
 
-    /**
-     * Get the token credential used to be saved in DB
-     *
-     * @return bool|string
-     */
-    public function getTokenCredential()
-    {
-        try {
-            return $this->getSecurityServiceModel()->getTokenCredential();
-        } catch (SecurityErrors $e) {
-            if ($e->getCode() == 11) {
-
-            }
-
+        if (!isset($this->_securityServiceModel[$websiteId])) {
+            $object = $this->getServiceManager($website)->getSecurityManager();
+            $this->_securityServiceModel[$websiteId] = Mage::objects()->save($object);
         }
-        return false;
+        return Mage::objects()->load($this->_securityServiceModel[$websiteId]);
     }
 
     /**
      * Get the validation Url necessary if simulation of authorization process is not allowed
      *
+     * @param Mage_Core_Model_Store $store
      * @return string
      */
-    public function getValidationUrl()
+    public function getValidationUrl(Mage_Core_Model_Store $store)
     {
-        // it will initialize the validation url
-        $this->getSecurityServiceModel()->getTemporaryToken();
-        return $this->getSecurityServiceModel()->getValidationUrl();
+        $websiteId = $store->getWebsiteId();
+        $validationUrl = $this->getSecurityServiceModel($websiteId)->getValidationUrl();
+
+        // Refresh the database cause of new data after getting validation url
+        $apiToken = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $websiteId);
+        $apiToken
+            ->setWebsiteId($websiteId)
+            ->setToken($this->getSecurityServiceModel()->getTemporaryToken())
+            ->setExpirationDate($this->getSecurityServiceModel()->getTemporaryTokenExpirationDate())
+            ->setTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY)
+            ->save();
+
+        return $validationUrl;
     }
 }
