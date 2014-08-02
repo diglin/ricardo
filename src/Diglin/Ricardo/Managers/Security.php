@@ -12,6 +12,7 @@ namespace Diglin\Ricardo\Managers;
 use \Diglin\Ricardo\Services\Security as SecurityService;
 use \Diglin\Ricardo\Services\ServiceAbstract;
 use \Diglin\Ricardo\Service;
+use \Diglin\Ricardo\Core\Helper;
 
 /**
  * Class Security
@@ -152,11 +153,12 @@ class Security extends ManagerAbstract
     /**
      * Get the temporary token, set internally the expiration date for this temporary token and the validation url
      *
+     * @param bool $refresh
      * @return string|array
      */
-    public function getTemporaryToken()
+    public function getTemporaryToken($refresh = false)
     {
-        if ($this->_temporaryToken && !$this->isDateExpired($this->_temporaryTokenExpirationDate)) {
+        if ($this->_temporaryToken && !$this->isDateExpired($this->_temporaryTokenExpirationDate) && !$refresh) {
             return $this->_temporaryToken;
         }
 
@@ -165,11 +167,46 @@ class Security extends ManagerAbstract
         if (isset($result['ExpirationDate']) && isset($result['TemporaryCredentialKey'])) {
             $this->_temporaryTokenExpirationDate = $result['ExpirationDate'];
             $this->_temporaryToken = $result['TemporaryCredentialKey'];
-            $this->_validationUrl = $result['ValidationUrl'];
+            $this->_validationUrl = $this->parseValidationUrl($result['ValidationUrl']);
             return $this->_temporaryToken;
         }
 
         return $result;
+    }
+
+    /**
+     * Example: https://www.ch.betaqxl.com/apiconnect/login/index?token=XXXXX-XXXX-XXXX-XXXX-XXXXXXX&countryId=2&partnershipId=XXXX&partnerurl=
+     *
+     * @param string $url
+     * @return string
+     */
+    public function parseValidationUrl($url)
+    {
+        $parsed_url = parse_url($url);
+        $outQuery = array();
+
+        if (isset($parsed_url['query'])){
+            $query = explode('&', $parsed_url['query']);
+            foreach ($query as &$item) {
+                list($key, $value) = explode('=', $item);
+                if ($key == 'partnerurl') {
+                    $value = $this->_serviceManager->getConfig()->getPartnerUrl();
+                }
+                $outQuery[$key] = $value;
+            }
+            $parsed_url['query'] = http_build_query($outQuery);
+        }
+
+        $scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
+        $host     = isset($parsed_url['host']) ? $parsed_url['host'] : '';
+        $port     = isset($parsed_url['port']) ? ':' . $parsed_url['port'] : '';
+        $user     = isset($parsed_url['user']) ? $parsed_url['user'] : '';
+        $pass     = isset($parsed_url['pass']) ? ':' . $parsed_url['pass']  : '';
+        $pass     = ($user || $pass) ? "$pass@" : '';
+        $path     = isset($parsed_url['path']) ? $parsed_url['path'] : '';
+        $query    = isset($parsed_url['query']) ? '?' . $parsed_url['query'] : '';
+        $fragment = isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '';
+        return "$scheme$user$pass$host$port$path$query$fragment";
     }
 
     /**
@@ -455,10 +492,14 @@ class Security extends ManagerAbstract
     /**
      * Get the validation Url
      *
+     * @param bool $refresh
      * @return string
      */
-    public function getValidationUrl()
+    public function getValidationUrl($refresh = false)
     {
+        if (empty($this->_validationUrl) || $refresh) {
+            $this->getTemporaryToken($refresh);
+        }
         return $this->_validationUrl;
     }
 
