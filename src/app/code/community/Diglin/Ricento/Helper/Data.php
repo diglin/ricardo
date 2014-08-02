@@ -13,11 +13,14 @@
  */
 class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const CFG_ENABLED = 'ricento/api_config/enabled';
     const CFG_ASSISTANT_URL = 'ricento/api_config/assistant_url';
     const CFG_ASSISTANT_URL_DEV = 'ricento/api_config/assistant_url_dev';
     const CFG_RICARDO_SIGNUP_API_URL = 'ricento/api_config/signup_url';
     const CFG_DEV_MODE = 'ricento/api_config/dev_mode';
     const CFG_DEBUG_MODE = 'ricento/api_config/debug';
+    const CFG_API_HOST = 'ricento/api_config/host';
+    const CFG_API_HOST_DEV = 'ricento/api_config/host_dev';
     const CFG_SIMULATE_AUTH = 'ricento/api_config/simulate_authorization';
     const CFG_RICARDO_USERNAME = 'ricento/api_config/ricardo_username';
     const CFG_RICARDO_PASSWORD = 'ricento/api_config/ricardo_password';
@@ -39,6 +42,17 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const ALLOWED_CURRENCY = 'CHF';
 
     /**
+     * Is the extension enabled for the current website
+     *
+     * @param null|string|bool|int|Mage_Core_Model_Store $storeId
+     * @return bool
+     */
+    public function isEnabled($storeId = null)
+    {
+        return Mage::getStoreConfigFlag(self::CFG_ENABLED, $storeId);
+    }
+
+    /**
      * Returns product types that are available in Ricento
      *
      * @return array [ type_id => type_id ]
@@ -46,9 +60,9 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     public function getAllowedProductTypes()
     {
         return array(
-            'simple'       => 'simple',
-            'configurable' => 'configurable',
-            'grouped'      => 'grouped');
+            'simple'       => Mage_Catalog_Model_Product_Type::DEFAULT_TYPE,
+            'configurable' => Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE,
+            'grouped'      => Mage_Catalog_Model_Product_Type::TYPE_GROUPED);
     }
 
     /**
@@ -94,25 +108,27 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Is Development Mode enabled
      *
+     * @param int|null|Mage_Core_Model_Store $storeId
      * @return bool
      */
-    public function isDevMode()
+    public function isDevMode($storeId = null)
     {
-        return Mage::getStoreConfigFlag(self::CFG_DEV_MODE);
+        return Mage::getStoreConfigFlag(self::CFG_DEV_MODE, $storeId);
     }
 
     /**
      * Check if Ricardo API is configured correctly
      *
+     * @param int|null|Mage_Core_Model_Store $storeId
      * @return bool
      */
-    public function isConfigured()
+    public function isConfigured($storeId = null)
     {
         $configured = false;
-        $configuredAccount = (!$this->canSimulateAuthorization() || ($this->canSimulateAuthorization() && $this->getRicardoUsername() && $this->getRicardoPass())) ? true : false;
+        $configuredAccount = (!$this->canSimulateAuthorization() || ($this->canSimulateAuthorization() && $this->getRicardoUsername($storeId) && $this->getRicardoPass($storeId))) ? true : false;
 
         foreach ($this->getSupportedLang() as $lang) {
-            if ($this->getPartnerId($lang) && $this->getPartnerPass($lang)) {
+            if ($this->getPartnerId($lang, $storeId) && $this->getPartnerPass($lang, $storeId)) {
                 $configured = true;
                 break;
             }
@@ -128,21 +144,23 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Is Debug Enabled
      *
+     * @param int|null|Mage_Core_Model_Store $storeId
      * @return bool
      */
-    public function isDebugEnabled()
+    public function isDebugEnabled($storeId = null)
     {
-        return Mage::getStoreConfigFlag(self::CFG_DEBUG_MODE);
+        return Mage::getStoreConfigFlag(self::CFG_DEBUG_MODE, $storeId);
     }
 
     /**
      * Get which method to use to calculate the shipping costs
      *
+     * @param int|null|Mage_Core_Model_Store $storeId
      * @return mixed
      */
-    public function getShippingCalculationMethod()
+    public function getShippingCalculationMethod($storeId = null)
     {
-        return MAge::getStoreConfig(self::CFG_SHIPPING_CALCULATION);
+        return MAge::getStoreConfig(self::CFG_SHIPPING_CALCULATION, $storeId);
     }
 
     /**
@@ -179,6 +197,17 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     {
         $lang = $this->_getLocaleCodeForApiConfig($lang);
         return Mage::helper('core')->decrypt(Mage::getStoreConfig(self::CFG_RICARDO_PARTNERPASS . $lang, $storeId));
+    }
+
+    /**
+     * Get the partner url to get the confirmation
+     *
+     * @param int $storeId
+     * @return string
+     */
+    public function getPartnerUrl($storeId = 0)
+    {
+        return Mage::helper('adminhtml')->getUrl('ricento/api/confirmation', array('store' => $storeId));
     }
 
     /**
@@ -272,5 +301,30 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     {
         //TODO real implementation, should return the array from cache
         return unserialize(file_get_contents(Mage::getModuleDir('etc', 'Diglin_Ricento') . DS . 'categories_ricardo.txt'));
+    }
+
+    /**
+     * @param $path
+     * @param null|int|string|MAge_Core_Model_Website $website
+     * @return mixed
+     */
+    public static function getWebsiteConfig($path, $website = null)
+    {
+        return Mage::app()->getWebsite($website)->getConfig($path);
+    }
+
+    /**
+     * @param $path
+     * @param null|int|string|MAge_Core_Model_Website $website
+     * @return mixed
+     */
+    public static function getWebsiteConfigFlag($path, $website = null)
+    {
+        $flag = strtolower(self::getWebsiteConfig($path, $website));
+        if (!empty($flag) && 'false' !== $flag) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

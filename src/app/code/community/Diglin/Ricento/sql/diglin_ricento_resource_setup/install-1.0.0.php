@@ -24,7 +24,7 @@ $tableApiTokens = $installer->getConnection()->newTable($apiTokenTable);
 $tableApiTokens->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('token', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
     ->addColumn('token_type', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
-    ->addColumn('store_id', Varien_Db_Ddl_Table::TYPE_SMALLINT, 5, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('website_id', Varien_Db_Ddl_Table::TYPE_SMALLINT, 5, array('unsigned' => true, 'nullable' => false))
     ->addColumn('expiration_date', Varien_Db_Ddl_Table::TYPE_DATETIME, null, array('nullable' => false))
     ->addColumn('session_duration', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false))
     ->addColumn('session_expiration_date', Varien_Db_Ddl_Table::TYPE_DATETIME, null, array('nullable' => false))
@@ -69,7 +69,7 @@ $tableProductListings->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER,
     ->addColumn('status', Varien_Db_Ddl_Table::TYPE_TEXT, 20, array('nullable' => false, 'default' => Diglin_Ricento_Helper_Data::STATUS_PENDING))
     ->addColumn('sales_options_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
-    ->addColumn('store_id', Varien_Db_Ddl_Table::TYPE_SMALLINT, 5, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('website_id', Varien_Db_Ddl_Table::TYPE_SMALLINT, 5, array('unsigned' => true, 'nullable' => false))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
     ->addForeignKey($installer->getFkName('diglin_ricento/products_listing', 'sales_options_id', 'diglin_ricento/sales_options', 'entity_id'),

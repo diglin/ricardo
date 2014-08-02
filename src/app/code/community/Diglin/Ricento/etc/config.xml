@@ -12,13 +12,14 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.11</version>
+            <version>0.0.12</version>
         </Diglin_Ricento>
     </modules>
 
     <default>
         <ricento>
             <api_config>
+                <enabled>1</enabled>
                 <assistant_url>https://assistant.ricardo.ch</assistant_url>
                 <assistant_url_dev>https://ra.betaqxl.com/</assistant_url_dev>
                 <signup_url>http://api.ricardo.ch/request.php</signup_url>
@@ -27,6 +28,8 @@
                 <simulate_authorization>0</simulate_authorization>
                 <expiration_notification_delay>3</expiration_notification_delay><!-- in day -->
                 <lang>fr,de</lang>
+                <host>ws.betaqxl.com</host><!-- @todo change with the production host -->
+                <host_dev>ws.betaqxl.com</host_dev>
             </api_config>
             <global>
                 <shipping_calculation>highest_price</shipping_calculation>
