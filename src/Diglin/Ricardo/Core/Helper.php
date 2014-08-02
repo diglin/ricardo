@@ -23,6 +23,10 @@ class Helper
      */
     public static function getJsonTimestamp($date)
     {
+        if (strpos($date, '/Date') === false) {
+            return $date;
+        }
+
         preg_match('/(\d{10})(\d{3})([\+\-]\d{4})/', $date, $matches);
         return (int) $matches[1];
     }

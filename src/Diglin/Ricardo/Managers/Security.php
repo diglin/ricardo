@@ -141,7 +141,7 @@ class Security extends ManagerAbstract
 
         $result = $this->_proceed('AnonymousTokenCredential');
         if (isset($result['TokenExpirationDate']) && isset($result['TokenCredentialKey'])) {
-            $this->_anonymousTokenExpirationDate = $result['TokenExpirationDate'];
+            $this->_anonymousTokenExpirationDate = Helper::getJsonTimestamp($result['TokenExpirationDate']);
             //$this->_anonymousTokenSessionDuration = $result['SessionDuration'];
             $this->_anonymousToken = $result['TokenCredentialKey'];
             return $this->_anonymousToken;
@@ -165,7 +165,7 @@ class Security extends ManagerAbstract
         $result = $this->_proceed('TemporaryCredential');
 
         if (isset($result['ExpirationDate']) && isset($result['TemporaryCredentialKey'])) {
-            $this->_temporaryTokenExpirationDate = $result['ExpirationDate'];
+            $this->_temporaryTokenExpirationDate = Helper::getJsonTimestamp($result['ExpirationDate']);
             $this->_temporaryToken = $result['TemporaryCredentialKey'];
             $this->_validationUrl = $this->parseValidationUrl($result['ValidationUrl']);
             return $this->_temporaryToken;
@@ -237,7 +237,7 @@ class Security extends ManagerAbstract
         $result = $this->_proceed('TokenCredential', $temporaryToken);
 
         if (isset($result['TokenExpirationDate']) && isset($result['TokenCredentialKey'])) {
-            $this->_tokenCredentialExpirationDate = $result['TokenExpirationDate'];
+            $this->_tokenCredentialExpirationDate = Helper::getJsonTimestamp($result['TokenExpirationDate']);
             $this->_tokenCredentialSessionDuration = $result['SessionDuration']; // in minutes
             $this->_tokenCredentialSessionStart = time(); // in seconds
             $this->_temporaryToken = null;
@@ -255,7 +255,7 @@ class Security extends ManagerAbstract
         $result = $this->_proceed('AntiforgeryToken');
 
         if (isset($result['AntiforgeryTokenKey']) && isset($result['TokenExpirationDate'])) {
-            $this->_antiforgeryTokenExpirationDate = $result['TokenExpirationDate'];
+            $this->_antiforgeryTokenExpirationDate = Helper::getJsonTimestamp($result['TokenExpirationDate']);
             return $this->_antiforgeryToken = $result['AntiforgeryTokenKey'];
         }
 
@@ -429,10 +429,12 @@ class Security extends ManagerAbstract
      * Set the antiforgery token expiration date, useful in case of data coming from saved DB
      *
      * @param string $antiforgeryTokenExpirationDate
+     * @return $this
      */
     public function setAntiforgeryTokenExpirationDate($antiforgeryTokenExpirationDate)
     {
         $this->_antiforgeryTokenExpirationDate = $antiforgeryTokenExpirationDate;
+        return $this;
     }
 
     /**
@@ -447,10 +449,12 @@ class Security extends ManagerAbstract
 
     /**
      * @param int $tokenCredentialSessionDuration
+     * @return $this
      */
     public function setTokenCredentialSessionDuration($tokenCredentialSessionDuration)
     {
         $this->_tokenCredentialSessionDuration = $tokenCredentialSessionDuration;
+        return $this;
     }
 
     /**
@@ -463,10 +467,12 @@ class Security extends ManagerAbstract
 
     /**
      * @param int $tokenCredentialSessionStart
+     * @return $this
      */
     public function setTokenCredentialSessionStart($tokenCredentialSessionStart)
     {
         $this->_tokenCredentialSessionStart = $tokenCredentialSessionStart;
+        return $this;
     }
 
     /**
