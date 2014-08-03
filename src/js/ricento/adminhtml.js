@@ -174,7 +174,7 @@ Ricento.salesOptionsForm.prototype = {
         $$('div[id^=fieldset_toggle_]').each(this._hideFieldset.bind(this));
         this._showFieldset($('fieldset_toggle_' + salesType));
         if (allowDirectBuy) {
-            this._showFieldset($('fieldset_toggle_fixprice'));
+            this._showFieldset($('fieldset_toggle_buynow'));
         }
     },
     _hideFieldset : function(fieldset) {

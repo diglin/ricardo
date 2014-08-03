@@ -85,26 +85,27 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
         $fieldsetTypeAuction->addField('sales_auction_direct_buy', 'select', array(
             'name' => 'sales_options[sales_auction_direct_buy]',
-            'label' => $this->__('Allow Direct Buy (in case of auction type of sales)'),
+            'label' => $this->__('Allow Direct Buy'),
             'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions(),
-            'onchange' => "salesOptionsForm.showSalesTypeFieldsets('auction', this.value =='1')"
+            'onchange' => "salesOptionsForm.showSalesTypeFieldsets('auction', this.value =='1')",
+            'note' => $this->__('Fill in the fieldset "Buy now" below to define the direct price setting.')
         ));
 
-        $fieldsetTypeFixPrice = $form->addFieldset('fieldset_type_fixprice', array('legend' => $this->__('Fix price'), 'fieldset_container_id' => 'fieldset_toggle_fixprice'));
-        $fieldsetTypeFixPrice->addField('price_source_attribute_code', 'select', array(
+        $fieldsetTypeBuynow = $form->addFieldset('fieldset_type_buynow', array('legend' => $this->__('Buy now'), 'fieldset_container_id' => 'fieldset_toggle_buynow'));
+        $fieldsetTypeBuynow->addField('price_source_attribute_code', 'select', array(
             'name'   => 'sales_options[price_source_attribute_code]',
             'label'  => $this->__('Source'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_price_source')->getAllOptions(),
             'class'  => 'required-if-visible'
         ));
-        $fieldsetTypeFixPrice->addType('fieldset_inline', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_fieldset_inline'));
-        $fieldsetPriceChange = $fieldsetTypeFixPrice->addField('fieldset_price_change', 'fieldset_inline', array(
+        $fieldsetTypeBuynow->addType('fieldset_inline', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_fieldset_inline'));
+        $fieldsetPriceChange = $fieldsetTypeBuynow->addField('fieldset_price_change', 'fieldset_inline', array(
             'label' => $this->__('Price Change'),
             'class'  => 'required-if-visible'
         ));
         $fieldsetPriceChange->addField('price_change_type', 'select', array(
             'name' => 'sales_options[price_change_type]',
-            'after_element_html' => ' +&nbsp;',
+            'after_element_html' => ' &nbsp;',
             'no_span' => true,
             'values' => Mage::getModel('diglin_ricento/config_source_sales_price_method')->getAllOptions(),
             'class'  => 'required-if-visible'
@@ -114,7 +115,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'no_span' => true,
             'class' => 'inline-number validate-number',
         ));
-        $fieldsetTypeFixPrice->addField('fix_currency', 'label', array(
+        $fieldsetTypeBuynow->addField('fix_currency', 'label', array(
             'name' => 'sales_options[fix_currency]',
             'label' => $this->__('Currency'),
             'after_element_html' => $currencyWarning,
@@ -123,16 +124,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         $fieldsetSchedule = $form->addFieldset('fieldset_schedule', array('legend' => $this->__('Schedule')));
         $fieldsetSchedule->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
-        $dateFormatIso = Mage::app()->getLocale()->getDateFormat(
+        $dateFormatIso = Mage::app()->getLocale()->getDateTimeFormat(
             Mage_Core_Model_Locale::FORMAT_TYPE_SHORT
         );
         $fieldsetSchedule->addField('schedule_date_start_immediately', 'radios_extensible', array(
             'name' => 'sales_options[schedule_date_start_immediately]',
             'label' => $this->__('Start'),
+            'note' => $this->__('Starting date must start minimum in one hour and maximum 30 days in the future.'),
             'values' => array(
                 array('value' => 1, 'label' => $this->__('Start immediately')),
                 array('value' => 0, 'label' => $this->__('Start from'), 'field' => array(
                     'schedule_date_start', 'date', array(
+                        'time'      => true,
                         'name' => 'sales_options[schedule_date_start]',
                         'image' => $this->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
@@ -144,6 +147,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetSchedule->addField('schedule_period_use_end_date', 'radios_extensible', array(
             'name' => 'sales_options[schedule_period_use_end_date]',
             'label' => $this->__('End'),
+            'note' => $this->__('Ending date must finish at the minimum in 24 hours and maximum 10 days from the starting date.'),
             'values' => array(
                 array('value' => 0, 'label' => $this->__('End after %s days'), 'field' => array(
                     'schedule_period_days', 'select', array(
@@ -154,6 +158,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 )),
                 array('value' => 1, 'label' => $this->__('End on'), 'field' => array(
                     'schedule_period_end_date', 'date', array(
+                        'time'      => true,
                         'name' => 'sales_options[schedule_period_end_date]',
                         'image' => Mage::getDesign()->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
@@ -219,6 +224,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetStock->addField('stock_management_use_inventory', 'radios_extensible', array(
             'name' => 'sales_options[stock_management_use_inventory]',
             'label' => $this->__('Stock Management'),
+            'note' => $this->__('If you use the product inventory option, the amount of items will be taken from the field "Qty" defined in the product inventory.'),
             'values' => array(
                 array('value' => 1, 'label' => $this->__('Use product inventory')),
                 array('value' => 0, 'label' => $this->__('Use custom qty'), 'field' => array(
@@ -234,9 +240,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCustomization->addField('customization_template', 'select', array(
             'name' => 'sales_options[customization_template]',
             'label' => $this->__('Template'),
-            'values' => Mage::getModel('diglin_ricento/config_source_sales_template')->getAllOptions()
+            'values' => Mage::getModel('diglin_ricento/config_source_sales_template')->getAllOptions(),
+            'note' => $this->__('To create one go to the <a href="%s">Ricardo Assistant</a>.', Mage::helper('diglin_ricento')->getRicardoAssistantUrl())
         ));
-
 
         $fieldsetPromotion = $form->addFieldset('fieldset_promotion', array('legend' => $this->__('Promotion')));
         $fieldsetPromotion->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
