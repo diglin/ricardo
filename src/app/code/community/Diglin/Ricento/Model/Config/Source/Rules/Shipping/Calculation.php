@@ -11,7 +11,7 @@
 /**
  * Class Diglin_Ricento_Model_Config_Source_Shipping_Calculation
  */
-class Diglin_Ricento_Model_Config_Source_Shipping_Calculation
+class Diglin_Ricento_Model_Config_Source_Rules_Shipping_Calculation
 {
     /**
      * Create option array to display the list of possible options for shipping calculation

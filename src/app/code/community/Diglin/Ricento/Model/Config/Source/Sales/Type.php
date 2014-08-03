@@ -15,6 +15,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Type extends Diglin_Ricento_Model
 {
     const AUCTION = 'auction';
     const FIX_PRICE = 'fixprice';
+
     /**
      * @return array
      */
@@ -27,5 +28,4 @@ class Diglin_Ricento_Model_Config_Source_Sales_Type extends Diglin_Ricento_Model
             self::FIX_PRICE => 'Fix price'
         );
     }
-
 }

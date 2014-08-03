@@ -31,7 +31,7 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
             }
 
             $securityService = Mage::getSingleton('diglin_ricento/api_services_security');
-            $securityServiceModel = $securityService->getSecurityServiceModel($websiteId);
+            $securityServiceModel = $securityService->getServiceModel($websiteId);
 
             try {
                 // Save the temporary token
