@@ -216,7 +216,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCondition->addField('product_warranty', 'select', array(
             'name' => 'sales_options[product_warranty]',
             'label' => $this->__('Warranty'),
-            'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
+            'values' => Mage::getModel('diglin_ricento/config_source_sales_warranty')->getAllOptions()
+        ));
+        $fieldsetCondition->addField('product_warranty_condition', 'textarea', array(
+            'name' => 'sales_options[product_warranty_condition]',
+            'label' => $this->__('Warranty condition')
         ));
 
         $fieldsetStock = $form->addFieldset('fieldset_stock', array('legend' => $this->__('Stock Management')));
