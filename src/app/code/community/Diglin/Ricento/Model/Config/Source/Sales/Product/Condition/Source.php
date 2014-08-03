@@ -16,14 +16,15 @@ class Diglin_Ricento_Model_Config_Source_Sales_Product_Condition_Source extends 
 
     public function getAllOptions()
     {
+        $helper = Mage::helper('diglin_ricento');
+
         return array(
-            array('label' => '- Please Select Attribute -', 'value' => '', ),
-//            array('label' => 'Price',                       'value' => 'price'),
-//            array('label' => 'Special Price',               'value' => 'special_price'),
-            array('label' => 'Ricardo',                     'value' => array(
-                array('label' => 'Condition',   'value' => 'ricardo_condition'),
-                array('label' => 'Description', 'value' => 'ricardo_description'),
-                array('label' => 'Subtitle',    'value' => 'ricardo_subtitle'),
+            array('label' => $helper->__('-- Please Select Attribute --'), 'value' => '', ),
+            array('label' => $helper->__('Ricardo'),                     'value' => array(
+                array('label' => $helper->__('Title'),       'value' => 'ricardo_title'),
+                array('label' => $helper->__('Subtitle'),    'value' => 'ricardo_subtitle'),
+                array('label' => $helper->__('Condition'),   'value' => 'ricardo_condition'),
+                array('label' => $helper->__('Description'), 'value' => 'ricardo_description'),
             ))
         );
     }

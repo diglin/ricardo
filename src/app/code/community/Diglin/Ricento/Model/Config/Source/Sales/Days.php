@@ -11,13 +11,18 @@ class Diglin_Ricento_Model_Config_Source_Sales_Days extends Diglin_Ricento_Model
 {
     public function toOptionHash()
     {
-        // @todo extract from Ricardo API ?
-        return array(
-            2 => 2,
-            4 => 4,
-            6 => 6,
-            8 => 8,
-            10 => 10
-        );
+        $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
+
+        $duration = array(2);
+
+        if (isset($partnerConfiguration['MaxSellingDuration'])) {
+            if ($partnerConfiguration['MinSellingDuration'] == 1) {
+                $minDuration = $partnerConfiguration['MinSellingDuration'] + 1;
+            } else {
+                $minDuration = $partnerConfiguration['MinSellingDuration'];
+            }
+            $duration = range($minDuration, $partnerConfiguration['MaxSellingDuration'], 2);
+        }
+        return $duration;
     }
 }

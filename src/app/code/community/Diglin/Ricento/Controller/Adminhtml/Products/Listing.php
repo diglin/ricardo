@@ -107,6 +107,9 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Mage
         } else {
             $data['sales_options']['product_condition'] = null;
         }
+        if (empty($data['sales_options']['product_warranty_condition']) || $data['sales_options']['product_warranty'] == Diglin_Ricento_Model_Config_Source_Sales_Warranty::NONE) {
+            unset($data['sales_options']['product_warranty_condition']);
+        }
 
         if (!isset($data['rules'])) {
             $data['rules'] = array();

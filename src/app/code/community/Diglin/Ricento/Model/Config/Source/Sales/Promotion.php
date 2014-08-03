@@ -20,6 +20,8 @@ class Diglin_Ricento_Model_Config_Source_Sales_Promotion extends Diglin_Ricento_
      */
     public function toOptionHash()
     {
+        //$promotions = Mage::getSingleton('diglin_ricento/api_services_system')->getPromotions();
+
         //TODO implement
         return array(
             '' => 'None',

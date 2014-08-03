@@ -20,15 +20,13 @@ class Diglin_Ricento_Model_Config_Source_Sales_Product_Condition extends Diglin_
      */
     public function toOptionHash()
     {
-        // TODO: implement
-        return array(
-            '' => '- Please Select -',
-            1  => 'New',
-            2  => 'Refurbished',
-            3  => 'Antic',
-            4  => 'Secondhand',
-            5  => 'Defect'
-        );
-    }
+        $articleConditions = Mage::getSingleton('diglin_ricento/api_services_system')->getArticleConditions();
 
+        $result = array(null => MAge::helper('diglin_ricento')->__('-- Please Select --'));
+        foreach ($articleConditions as $condition) {
+            $result[$condition['ArticleConditionId']] = $condition['ArticleConditionText'];
+        }
+
+        return $result;
+    }
 }

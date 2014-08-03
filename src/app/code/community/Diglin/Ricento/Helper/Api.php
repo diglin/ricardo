@@ -16,6 +16,21 @@ use \Diglin\Ricardo\Services\Security;
 class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
 {
     /**
+     * Cache type for ricardo API
+     */
+    const CACHE_TYPE        = 'ricardo_api';
+
+    /**
+     * Cache tag for ricardo API
+     */
+    const CACHE_TAG         = 'RICARDO_API';
+
+    /**
+     * Cache lifetime
+     */
+    const CACHE_LIFETIME    = 86400;
+
+    /**
      * Get if the token credential is going to expire or even not exist
      *
      * @param int|string|null|Mage_Core_Model_Store $store

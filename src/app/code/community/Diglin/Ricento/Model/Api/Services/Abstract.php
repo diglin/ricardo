@@ -34,6 +34,11 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     protected $_model = '';
 
     /**
+     * @var string
+     */
+    protected $_profilerPrefix = 'RICARDO_API_';
+
+    /**
      * @param int|Mage_Core_Model_Website $website
      * @return ServiceAbstract
      */
@@ -137,5 +142,46 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     public function getLastApiDebug($website, $flush = true)
     {
         return $this->getServiceManager($website)->getApi()->getLastDebug($flush);
+    }
+
+
+    /**
+     * @param string $method
+     * @param array $args
+     * @return mixed|Varien_Object
+     */
+    public function __call($method, $args)
+    {
+        switch (substr($method, 0, 3)) {
+            case 'get' :
+
+                if (method_exists($this->getServiceModel(), $method)) {
+                    $key = $this->_underscore(substr($method,3));
+                    $profilerName = $this->_profilerPrefix . strtoupper($key);
+                    $canUseCacheRicardoApi = Mage::app()->useCache(Diglin_Ricento_Helper_Api::CACHE_TYPE);
+
+                    Varien_Profiler::start($profilerName);
+
+                    if ($canUseCacheRicardoApi) {
+                        $data = unserialize(Mage::app()->loadCache($key));
+                    }
+
+                    if (empty($data) || !$canUseCacheRicardoApi) {
+                        $data = $this->getServiceModel()->$method();
+                    }
+
+                    $this->setData($key, $data);
+
+                    if ($canUseCacheRicardoApi) {
+                        Mage::app()->saveCache(serialize($data), $key, array(Diglin_Ricento_Helper_Api::CACHE_TAG), Diglin_Ricento_Helper_Api::CACHE_LIFETIME);
+                    }
+
+                    Varien_Profiler::stop($profilerName);
+
+                    return $data;
+                }
+        }
+//        throw new Varien_Exception("Invalid method ".get_class($this)."::".$method."(".print_r($args,1).")");
+        return parent::__call($method, $args);
     }
 }

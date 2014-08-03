@@ -40,9 +40,19 @@
 
     <global>
         <psr0_namespaces>
-            <!-- We want to load the Ricardo library -->
+            <!-- To load the Ricardo library -->
             <Diglin_Ricardo />
         </psr0_namespaces>
+
+        <cache>
+            <types>
+                <ricardo_api translate="label,description" module="diglin_ricento">
+                    <label>Ricardo API</label>
+                    <description>Cached content when Ricardo API called</description>
+                    <tags>RICARDO_API</tags>
+                </ricardo_api>
+            </types>
+        </cache>
 
         <models>
             <diglin_ricento>

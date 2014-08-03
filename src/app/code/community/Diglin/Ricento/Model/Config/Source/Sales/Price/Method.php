@@ -13,19 +13,30 @@
  */
 class Diglin_Ricento_Model_Config_Source_Sales_Price_Method extends Diglin_Ricento_Model_Config_Source_Abstract
 {
+    const PRICE_TYPE_NOCHANGE = 0;
+
+    const PRICE_TYPE_FIXED_POS = 1;
+
+    const PRICE_TYPE_FIXED_NEG = 2;
+
+    const PRICE_TYPE_DYNAMIC_POS = 3;
+
+    const PRICE_TYPE_DYNAMIC_NEG = 4;
+
     /**
      * @return array
      */
     public function toOptionHash()
     {
-        // TODO: implement
+        $helper = Mage::helper('diglin_ricento');
+
         return array(
-            '' => '- Select Method -',
-            1  => 'No change',
-            2  => 'Relative increase',
-            3  => 'Relative decrease',
-            4  => 'Absolute increase',
-            5  => 'Absolute decrease'
+            '' => $helper->__('-- Select Method --'),
+            self::PRICE_TYPE_NOCHANGE  => $helper->__('No change'),
+            self::PRICE_TYPE_FIXED_POS  => $helper->__('Relative increase (+ %)'),
+            self::PRICE_TYPE_FIXED_NEG  => $helper->__('Relative decrease (- %)'),
+            self::PRICE_TYPE_DYNAMIC_POS  => $helper->__('Absolute increase (+)'),
+            self::PRICE_TYPE_DYNAMIC_NEG  => $helper->__('Absolute decrease (-)')
         );
     }
 
