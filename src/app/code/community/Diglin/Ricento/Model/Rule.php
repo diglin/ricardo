@@ -54,7 +54,7 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
     {
         parent::_beforeSave();
         $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
-        if (is_array($this->_data['payment_methods'])) {
+        if (isset($this->_data['payment_methods']) && is_array($this->_data['payment_methods'])) {
             $this->_data['payment_methods'] = implode(',', $this->_data['payment_methods']);
         }
         return $this;
