@@ -17,29 +17,25 @@ use \Diglin\Ricardo\Services\ServiceAbstract;
 class Diglin_Ricento_Model_Api_Services_Security extends Diglin_Ricento_Model_Api_Services_Abstract
 {
     /**
-     * @var Security
+     * @var string
      */
-    protected $_securityServiceModel = array();
+    protected $_serviceName = 'Security';
 
     /**
      * @param int|Mage_Core_Model_Website $website
      * @return Security
      */
-    public function getSecurityServiceModel($website = 0)
+    public function getServiceModel($website = 0)
     {
-        if (!is_numeric($website) && !($website instanceof Mage_Core_Model_Website)) {
-            Mage::throwException(Mage::helper('diglin_ricento')->__('Website ID is not an integer'));
-        } elseif ($website instanceof Mage_Core_Model_Website) {
-            $websiteId = $website->getId();
-        } else {
-            $websiteId = $website;
+        $websiteId = $this->_getWebsiteId($website);
+        $key = $this->_serviceName . $websiteId;
+
+        if (!Mage::registry($key))
+        {
+            Mage::register($key, $this->getServiceManager($websiteId)->getSecurityManager());
         }
 
-        if (!isset($this->_securityServiceModel[$websiteId])) {
-            $object = $this->getServiceManager($website)->getSecurityManager();
-            $this->_securityServiceModel[$websiteId] = Mage::objects()->save($object);
-        }
-        return Mage::objects()->load($this->_securityServiceModel[$websiteId]);
+        return Mage::registry($key);
     }
 
     /**
@@ -51,14 +47,14 @@ class Diglin_Ricento_Model_Api_Services_Security extends Diglin_Ricento_Model_Ap
     public function getValidationUrl(Mage_Core_Model_Store $store)
     {
         $websiteId = $store->getWebsiteId();
-        $validationUrl = $this->getSecurityServiceModel($websiteId)->getValidationUrl();
+        $validationUrl = $this->getServiceModel($websiteId)->getValidationUrl();
 
         // Refresh the database cause of new data after getting validation url
         $apiToken = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $websiteId);
         $apiToken
             ->setWebsiteId($websiteId)
-            ->setToken($this->getSecurityServiceModel()->getTemporaryToken())
-            ->setExpirationDate($this->getSecurityServiceModel()->getTemporaryTokenExpirationDate())
+            ->setToken($this->getServiceModel()->getTemporaryToken())
+            ->setExpirationDate($this->getServiceModel()->getTemporaryTokenExpirationDate())
             ->setTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY)
             ->save();
 

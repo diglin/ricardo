@@ -18,32 +18,9 @@ class Diglin_Ricento_Model_Entity_Attribute_Source_Conditions extends Mage_Eav_M
      */
     public function getAllOptions()
     {
-        // TODO: Implement getArticleConditions() method from Ricardo API. Here it's just temporary returned array
         if (is_null($this->_options)) {
-            $helper = Mage::helper('diglin_ricento');
 
-            $this->_options = array(
-                array(
-                    'label' => $helper->__('Neu und originalverpackt'),
-                    'value' => 'new'
-                ),
-                array(
-                    'label' => $helper->__('Neu (gemäss Beschreibung)'),
-                    'value' => 'refurbished'
-                ),
-                array(
-                    'label' => $helper->__('Gebraucht'),
-                    'value' => 'second_hand'
-                ),
-                array(
-                    'label' => $helper->__('Antik'),
-                    'value' => 'antic'
-                ),
-                array(
-                    'label' => $helper->__('Defekt'),
-                    'value' => 'defect'
-                ),
-            );
+            $this->_options = Mage::getSingleton('diglin_ricento/config_source_sales_product_condition')->getAllOptions();
         }
         return $this->_options;
     }

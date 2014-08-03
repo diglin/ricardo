@@ -11,7 +11,7 @@
 /**
  * Class Diglin_Ricento_Model_Config_Source_Status
  */
-class Diglin_Ricento_Model_Config_Source_Status implements Mage_Eav_Model_Entity_Attribute_Source_Interface
+class Diglin_Ricento_Model_Config_Source_Status extends Diglin_Ricento_Model_Config_Source_Abstract
 {
     /**
      * Create option array to display in a form the status of a product listing
@@ -68,15 +68,5 @@ class Diglin_Ricento_Model_Config_Source_Status implements Mage_Eav_Model_Entity
         }
         unset($hash['']);
         return $hash;
-    }
-
-    /**
-     * @param string $value
-     * @return mixed|void
-     */
-    public function getOptionText($value)
-    {
-        $map = $this->toOptionHash();
-        return isset($map[$value]) ? $map[$value] : null;
     }
 }

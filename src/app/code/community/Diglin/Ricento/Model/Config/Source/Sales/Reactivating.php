@@ -16,17 +16,14 @@ class Diglin_Ricento_Model_Config_Source_Sales_Reactivating extends Diglin_Ricen
      */
     public function toOptionHash()
     {
-        // @todo extract from Ricardo API ?
-        return array(
-            0 => 0,
-            1 => 1,
-            2 => 2,
-            3 => 3,
-            4 => 4,
-            5 => 5,
-            null => Mage::helper('diglin_ricento')->__('Until sold')
-        );
+        $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
 
+        if (isset($partnerConfiguration['MaxRelistCount'])) {
+            return range(0, $partnerConfiguration['MaxRelistCount']);
+        }
+
+        //@todo how to handle 'until sold'? null => Mage::helper('diglin_ricento')->__('Until sold')
+        return array(1);
     }
 
 }

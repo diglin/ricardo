@@ -68,7 +68,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $fieldsetPayment->addField('payment_description', 'textarea', array(
             'name'  => 'rules[payment_description]',
             'label' => $this->__('Payment description'),
-            'note' => $this->__('Payment information to display to customers')
+            'note' => $this->__('Payment information to display to customers. Will be send to ricardo only if you select the method "Other"')
         ));
 
         $fieldsetShipping = $form->addFieldset('fieldset_shipping', array('legend' => $this->__('Shipping Methods')));

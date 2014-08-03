@@ -14,18 +14,19 @@
 class Diglin_Ricento_Model_Config_Source_Sales_Type extends Diglin_Ricento_Model_Config_Source_Abstract
 {
     const AUCTION = 'auction';
-    const FIX_PRICE = 'fixprice';
+    const BUY_NOW = 'buynow';
+
     /**
      * @return array
      */
     public function toOptionHash()
     {
-        // TODO: implement
+        $helper = Mage::helper('diglin_ricento');
+
         return array(
-            ''         => '- Please Select -',
-            self::AUCTION  => 'Auction',
-            self::FIX_PRICE => 'Fix price'
+            '' => $helper->__('-- Please Select --'),
+            self::AUCTION  => $helper->__('Auction'),
+            self::BUY_NOW => $helper->__('Buy now')
         );
     }
-
 }
