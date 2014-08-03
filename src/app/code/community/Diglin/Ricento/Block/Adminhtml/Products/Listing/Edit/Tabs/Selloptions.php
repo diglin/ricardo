@@ -139,6 +139,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                         'name' => 'sales_options[schedule_date_start]',
                         'image' => $this->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
+                        'class' => 'validate-date'
                         //'class' => 'validate-date validate-date-range date-range-end_date-from' // Prototype's date validation does not work with localized dates, so we don't use it
                     )
                 ))
@@ -279,12 +280,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             $derivedValues['stock_management'] = '';
             $derivedValues['stock_management_use_inventory'] = 1;
         }
+        if ($this->getSalesOptions()->getScheduleDateStart() == null) {
+            $derivedValues['schedule_date_start_immediately'] = 1;
+            $dateStart = new DateTime();
+            $derivedValues['schedule_date_start'] = $dateStart->format(Varien_Date::DATETIME_PHP_FORMAT);
+        }
         if (!in_array($this->getSalesOptions()->getSchedulePeriodDays(), $this->_getDaysOptions()->toOptionHash())) {
             $derivedValues['schedule_period_use_end_date'] = 1;
             $derivedValues['schedule_period_end_date'] = date_add(
                 new DateTime($this->getSalesOptions()->getScheduleDateStart()),
                 DateInterval::createFromDateString($this->getSalesOptions()->getSchedulePeriodDays() . ' day')
-            )->format(Varien_Date::DATE_PHP_FORMAT);
+            )->format(Varien_Date::DATETIME_PHP_FORMAT);
         }
         $this->getForm()->addValues($derivedValues);
         return parent::_initFormValues();

@@ -155,7 +155,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
         switch (substr($method, 0, 3)) {
             case 'get' :
 
-                if (method_exists($this->getServiceModel(), $method)) {
+                if (method_exists($this->getServiceModel(), $method) && is_callable(array($this->getServiceModel(), $method), true)) {
                     $key = $this->_underscore(substr($method,3));
                     $profilerName = $this->_profilerPrefix . strtoupper($key);
                     $canUseCacheRicardoApi = Mage::app()->useCache(Diglin_Ricento_Helper_Api::CACHE_TYPE);
@@ -167,7 +167,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                     }
 
                     if (empty($data) || !$canUseCacheRicardoApi) {
-                        $data = $this->getServiceModel()->$method();
+                        $data = call_user_func_array(array($this->getServiceModel(), $method), $args);
                     }
 
                     $this->setData($key, $data);
