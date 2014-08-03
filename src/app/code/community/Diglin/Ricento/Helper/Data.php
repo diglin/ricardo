@@ -293,17 +293,6 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Returns array of categories as returned from Ricardo API
-     *
-     * @return mixed
-     */
-    public function getRicardoCategoriesFromApi()
-    {
-        //TODO real implementation, should return the array from cache
-        return unserialize(file_get_contents(Mage::getModuleDir('etc', 'Diglin_Ricento') . DS . 'categories_ricardo.txt'));
-    }
-
-    /**
      * @param $path
      * @param null|int|string|MAge_Core_Model_Website $website
      * @return mixed
