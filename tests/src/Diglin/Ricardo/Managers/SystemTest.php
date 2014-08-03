@@ -87,6 +87,8 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('DeliveryConditionId', $result[0], 'Delivery condition data structure is wrong');
         $this->assertArrayHasKey('PackageSizes', $result[0], 'PackageSizes is missing');
         $this->assertArrayHasKey('PackageSizeCost', $result[0]['PackageSizes'][0], 'Delivery Package Size data structure is wrong');
+
+        echo 'Delivery Conditions ' . print_r($result, true);
     }
 
     /**
@@ -154,6 +156,8 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition PaymentConditionText missing');
         $this->assertArrayHasKey('PaymentMethods', $result[0], 'Payment Condition PaymentMethods missing');
 
+        echo 'Payment Conditions ' . print_r($result, true);
+
         return $result[0]['PaymentConditionId'];
     }
 
@@ -167,6 +171,8 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('PaymentConditionId', $result[0], 'Payment Condition & Methods PaymentConditionId missing');
         $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition & Methods PaymentConditionText missing');
         $this->assertArrayHasKey('PaymentMethods', $result[0], 'Payment Condition & Methods PaymentMethods missing');
+
+        echo 'Payment Conditions & Methods' . print_r($result, true);
 
         return $result[0]['PaymentConditionId'];
     }
@@ -186,6 +192,8 @@ class SystemTest extends TestAbstract
         $result = $this->_systemManager->getPaymentMethods(false);
 
         $this->assertGreaterThanOrEqual(5, count($result), 'Payment Methods does not get the whole list of methods, even those which are not allow to sell');
+
+        echo 'Payment Methods ' . print_r($result, true);
     }
 
     public function testGetPhonePrefixes()
@@ -203,7 +211,7 @@ class SystemTest extends TestAbstract
     public function testGetPromotions($categoryId)
     {
         $result = $this->_systemManager->getPromotions(
-            \Diglin\Ricardo\Core\Helper::convertPhpDateToJsonDate('now'), 1, $categoryId, 1
+            \Diglin\Ricardo\Core\Helper::getJsonDate(), 1, $categoryId, 1
         );
 
         $this->assertArrayHasKey('GroupId', $result[0], 'Promotions: GroupId is missing');
@@ -239,5 +247,7 @@ class SystemTest extends TestAbstract
         $result = $this->_systemManager->getWarranties();
         $this->assertArrayHasKey('WarrantyConditionText', $result[0], 'Warranties: WarrantyConditionText is missing');
         $this->assertArrayHasKey('WarrantyId', $result[0], 'Warranties: WarrantyId is missing');
+
+        echo 'Warranties ' . print_r($result, true);
     }
 }
