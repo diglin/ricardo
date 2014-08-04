@@ -57,10 +57,10 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Radios_Extensible extends Vari
                     return $labelTag . sprintf($labelText, '</label> ' . $field->getElementHtml() . ' ' . $labelTag) . '</label>';
                 }, $html) . '</li>';
             } else {
-                return '<li>' . parent::_optionToHtml($option, $selected) . ' ' . $field->getElementHtml() . '</li>';
+                return '<li>' . $this->_UpdatedOptionToHtml($option, $selected) . ' ' . $field->getElementHtml() . '</li>';
             }
         }
-        return '<li>' . parent::_optionToHtml($option, $selected) . '</li>';
+        return '<li>' . $this->_UpdatedOptionToHtml($option, $selected) . '</li>';
     }
 
     /**
@@ -93,4 +93,26 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Radios_Extensible extends Vari
         return parent::serialize($attributes, $valueSeparator, $fieldSeparator, $quote);
     }
 
+    protected function _UpdatedOptionToHtml($option, $selected)
+    {
+        $html = '<input type="radio" '.$this->serialize(array('name', 'class', 'style'));
+        if (is_array($option)) {
+            $html.= ' value="'.$this->_escape($option['value']).'" id="'.$this->getHtmlId().$option['value'].'"';
+            if ($option['value'] == $selected) {
+                $html.= ' checked="checked"';
+            }
+            $html.= ' />';
+            $html.= '<label class="inline" for="'.$this->getHtmlId().$option['value'].'">'.$option['label'].'</label>';
+        }
+        elseif ($option instanceof Varien_Object) {
+            $html.= 'id="'.$this->getHtmlId().$option->getValue().'"'.$option->serialize(array('label', 'title', 'value', 'class', 'style'));
+            if (in_array($option->getValue(), $selected)) {
+                $html.= ' checked="checked"';
+            }
+            $html.= ' />';
+            $html.= '<label class="inline" for="'.$this->getHtmlId().$option->getValue().'">'.$option->getLabel().'</label>';
+        }
+        $html.= $this->getSeparator() . "\n";
+        return $html;
+    }
 }

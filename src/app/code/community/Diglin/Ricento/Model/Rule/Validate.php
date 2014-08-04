@@ -184,6 +184,10 @@ JS;
         return $messages;
     }
 
+    /**
+     * @param bool $wrapNotice
+     * @return string
+     */
     public function getAllowedPaymentCombinationsMessage($wrapNotice = true)
     {
         $helper = Mage::helper('diglin_ricento');
@@ -193,10 +197,14 @@ JS;
             $this->_htmlListOfAllowedPaymentCombinations() .
             ($wrapNotice ? '</li></ul>' : '');
     }
+
+    /**
+     * @return string
+     */
     public function getDisallowedPaymentShippingCombinationsMessage()
     {
         $helper = Mage::helper('diglin_ricento');
-        return $helper->__('It is not possible to combine "Other" with "Credit Card" payment method');
+        return $helper->__('It is not possible to combine "Other" shipping method with "Credit Card" payment method');
     }
 
     /**
