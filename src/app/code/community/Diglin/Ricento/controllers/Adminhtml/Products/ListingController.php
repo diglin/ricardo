@@ -300,8 +300,10 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->_redirect('*/*/index');
             return;
         }
-        $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_STOPPED)->save();
         //TODO set status for items as well if necessary
+        // @todo stop list items on ricardo side, if an item cannot be stopped, prevent the user
+
+        $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_STOPPED)->save();
         $this->_getSession()->addSuccess($this->__('Listing stopped.'));
         $this->_redirect('*/*/index');
     }
@@ -312,7 +314,32 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function massDeleteAction()
     {
+        $productListings = $this->getRequest()->getParam('products_listing');
 
+        try {
+            if (is_array($productListings)) {
+                $productListingsCollection = Mage::getResourceModel('diglin_ricento/products_listing_collection');
+                $productListingsCollection
+                    ->addFieldToFilter('entity_id', array('in' => $productListings))
+                    ->addFieldToFilter('status', array('neq' => Diglin_Ricento_Helper_Data::STATUS_LISTED));
+
+                $goingToBeDeleted = $productListingsCollection->getAllIds();
+
+                $productListingsCollection->walk('delete');
+                $this->_getSession()->addSuccess($this->__('Products listing(s) is/are successfully deleted.'));
+
+                // @todo to test if everything is fine at this level
+                $notDeleted = array_diff($productListings, $goingToBeDeleted);
+                if ($notDeleted) {
+                    $this->_getSession()->addNotice($this->__('The following products listings IDs have not been deleted because they are still listed in Ricardo: ' . explode(',', $notDeleted)));
+                }
+            }
+        } catch (Exception $e) {
+            Mage::logException($e);
+            $this->_getSession()->addError($this->__('An error occurred while trying to delete the products listing(s). Check your log for more information.'));
+        }
+
+        $this->_redirect('*/*/index');
     }
 
     /**
@@ -331,5 +358,4 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     {
 
     }
-
 }

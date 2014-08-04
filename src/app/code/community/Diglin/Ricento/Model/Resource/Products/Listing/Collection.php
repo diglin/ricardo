@@ -13,8 +13,6 @@
  */
 class Diglin_Ricento_Model_Resource_Products_Listing_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
-
-
     /**
      * Products_Listing Collection Resource Constructor
      * @return void
@@ -24,6 +22,4 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Collection extends Mage_Cor
         parent::_construct();
         $this->_init('diglin_ricento/products_listing');
     }
-
-
 }
