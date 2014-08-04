@@ -61,7 +61,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'required' => true,
             'label' => $this->__('Type of sales'),
             'values' => Mage::getModel('diglin_ricento/config_source_sales_type')->getAllOptions(),
-            'onchange' => "salesOptionsForm.showSalesTypeFieldsets(this.value, $('sales_options_sales_auction_direct_buy').value == '1')"
+            'onchange' => "salesOptionsForm.showSalesTypeFieldsets(this.value, $('" . $htmlIdPrefix . "sales_auction_direct_buy').value == '1')"
         ));
 
         $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
@@ -267,6 +267,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $derivedValues = array();
         $derivedValues['fix_currency'] = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
         $derivedValues['auction_currency'] = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
+        if ($this->getSalesOptions()->getSalesType() == null) {
+            $derivedValues['sales_type'] = Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION;
+        }
         if ($this->getSalesOptions()->getRicardoCategory() == 0) {
             $derivedValues['ricardo_category_use_mapping'] = 1;
         }
