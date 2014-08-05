@@ -23,7 +23,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
         $this->removeButton('reset');
         $this->_addButton('add_product_from_category', array(
             'label'   => $this->__('Add Product(s) from category'),
-            'onclick' => "alert('TODO')",
+            'onclick' => "Ricento.showCategoryTreePopup('{$this->getShowCategoryTree()}')",
             'class'   => 'add'
         ), -1, -2);
         $this->_addButton('add_product', array(
@@ -72,6 +72,16 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
     public function getAddProductsPopupUrl()
     {
         return $this->getUrl('ricento/products_listing/addProductsPopup', array('id' => $this->getListingId()));
+    }
+
+    /**
+     * Returns URL
+     *
+     * @return string
+     */
+    public function getShowCategoryTree()
+    {
+        return $this->getUrl('ricento/products_category/showcategoriestree', array('id' => $this->getListingId()));
     }
 
     /**

@@ -163,7 +163,6 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         return $this->getUrl('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
     }
 
-
     protected function _getIndexUrl()
     {
         return $this->getUrl('*/*/index');
@@ -240,14 +239,6 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->_getSession()->addNotice($this->__('%d products are listed and could not be removed', $productsNotRemoved));
         }
         $this->_redirect('*/*/edit', array('id' => $this->_getListing()->getId()));
-    }
-
-    /**
-     * Add product(s) from a selected category into a product listing item
-     */
-    public function addProductFromCategoryAction()
-    {
-
     }
 
     /**

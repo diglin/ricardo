@@ -14,5 +14,6 @@
     <diglin_ricento translate="add_product,create_product_listing" module="diglin_ricento">
         <add_product>Add Product</add_product>
         <create_product_listing>Create Product Listing</create_product_listing>
+        <add_product_from_selected_categories>Add Products from selected categories</add_product_from_selected_categories>
     </diglin_ricento>
 </jstranslator>

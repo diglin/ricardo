@@ -53,40 +53,43 @@
     </ricento_dashboard_index>
 
     <ricento_products_listing_index>
-        <update handle="ricento_scripts"></update>
+        <update handle="ricento_scripts" />
         <reference name="content">
             <block type="diglin_ricento/adminhtml_products_listing_new"
-                   name="products_listing_new"></block>
+                   name="products_listing_new" />
         </reference>
     </ricento_products_listing_index>
 
     <ricento_products_listing_edit>
-        <update handle="ricento_scripts"></update>
+        <update handle="ricento_scripts" />
+        <update handle="editor"/>
         <reference name="content">
-            <block type="diglin_ricento/adminhtml_products_listing_edit" name="products_listing_edit"></block>
+            <block type="diglin_ricento/adminhtml_products_listing_edit" name="products_listing_edit" />
         </reference>
         <reference name="left">
-            <block type="diglin_ricento/adminhtml_products_listing_edit_tabs" name="products_listing_edit_tabs"></block>
+            <block type="diglin_ricento/adminhtml_products_listing_edit_tabs" name="products_listing_edit_tabs" />
         </reference>
     </ricento_products_listing_edit>
+    
     <ricento_products_listing_addproductspopup>
-        <update handle="overlay_popup"></update>
-        <remove name="footer"></remove>
+        <update handle="overlay_popup" />
+        <remove name="footer" />
         <reference name="content">
             <block type="diglin_ricento/adminhtml_products_listing_edit_tabs_products_add"
-                   name="products_listing_add"></block>
+                   name="products_listing_add" />
         </reference>
     </ricento_products_listing_addproductspopup>
+    
     <ricento_products_listing_item_configure>
-        <update handle="ricento_scripts"></update>
+        <update handle="ricento_scripts" />
         <reference name="content">
-            <block type="diglin_ricento/adminhtml_products_listing_item_edit" name="products_listing_item_edit"></block>
+            <block type="diglin_ricento/adminhtml_products_listing_item_edit" name="products_listing_item_edit" />
         </reference>
     </ricento_products_listing_item_configure>
 
     <ricento_products_category_mapping>
-        <update handle="overlay_popup"></update>
-        <remove name="footer"></remove>
+        <update handle="overlay_popup" />
+        <remove name="footer" />
         <reference name="content">
             <block type="diglin_ricento/adminhtml_products_category_mapping" name="category_mapping"
                    template="ricento/products/category/mapping.phtml"/>
@@ -94,11 +97,20 @@
     </ricento_products_category_mapping>
 
     <ricento_products_category_children>
-        <remove name="root"></remove>
+        <remove name="root" />
         <block type="diglin_ricento/adminhtml_products_category_children" name="category_children" template="ricento/products/category/children.phtml" output="toHtml" />
     </ricento_products_category_children>
 
     <adminhtml_catalog_category_edit>
-        <update handle="ricento_scripts"></update>
+        <update handle="ricento_scripts" />
     </adminhtml_catalog_category_edit>
+    
+    <ricento_products_category_showcategoriestree>
+        <update handle="overlay_popup" />
+        <remove name="footer" />
+        <reference name="content">
+            <block type="diglin_ricento/adminhtml_products_category_tree"
+                   name="products_listing_tree" as="products_listing_tree" />
+        </reference>
+    </ricento_products_category_showcategoriestree>
 </layout>
