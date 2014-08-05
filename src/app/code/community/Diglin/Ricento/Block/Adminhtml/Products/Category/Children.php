@@ -1,7 +1,16 @@
 <?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricardo
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
 
 /**
  * Class Diglin_Ricento_Block_Adminhtml_Products_Category_Children
+ * Children of the Ricardo categories
  *
  * @method int getLevel() getLevel()
  * @method int getCategoryId() getCategoryId()

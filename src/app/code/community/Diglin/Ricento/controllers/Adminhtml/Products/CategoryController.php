@@ -20,6 +20,7 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Mage_Adminhtm
             ->setCategoryId($this->getRequest()->getParam('id', 1));
         $this->renderLayout();
     }
+
     public function childrenAction()
     {
         $this->loadLayout();

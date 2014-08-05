@@ -62,12 +62,6 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         $this->renderLayout();
     }
 
-    public function configurePopupAction()
-    {
-        $this->loadLayout();
-        $this->renderLayout();
-    }
-
     public function saveAction()
     {
         if ($data = $this->getRequest()->getPost()) {

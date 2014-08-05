@@ -31,10 +31,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
         $this->setSaveParametersInSession(true);
         $this->setUseAjax(true);
     }
+
     public function getGridUrl()
     {
         return $this->getUrl('*/*/addProductsGrid', array('id' => $this->getListing()->getId()));
     }
+
     /**
      * @return Diglin_Ricento_Model_Products_Listing
      */

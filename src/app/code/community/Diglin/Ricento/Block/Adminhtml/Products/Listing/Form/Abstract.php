@@ -17,6 +17,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Form_Abstract extends Mage
     {
         return $this->_getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED;
     }
+
     public function getReadonlyNote()
     {
         return $this->__('Listed listings cannot be modified. Stop the listing first to make changes.');
