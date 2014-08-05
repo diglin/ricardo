@@ -144,6 +144,14 @@
                 </observers>
             </add_spl_autoloader>
         </events>
+
+        <ricento>
+            <allow_product_types>
+                <simple />
+                <configurable />
+                <grouped />
+            </allow_product_types>
+        </ricento>
     </global>
 
     <adminhtml>

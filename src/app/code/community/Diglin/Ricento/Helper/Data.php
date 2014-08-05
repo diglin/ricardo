@@ -59,10 +59,12 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getAllowedProductTypes()
     {
-        return array(
-            'simple'       => Mage_Catalog_Model_Product_Type::DEFAULT_TYPE,
-            'configurable' => Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE,
-            'grouped'      => Mage_Catalog_Model_Product_Type::TYPE_GROUPED);
+        $allowProductTypes = array();
+        foreach (Mage::getConfig()
+                     ->getNode('global/ricento/allow_product_types')->children() as $type) {
+            $allowProductTypes[$type->getName()] = $type->getName();
+        }
+        return $allowProductTypes;
     }
 
     /**
