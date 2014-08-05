@@ -14,7 +14,7 @@ $attributeSetId   = $installer->getDefaultAttributeSetId($entityTypeId);
 $attributeGroupId = $installer->getAttributeGroupId($entityTypeId, $attributeSetId, 'General Information');
 
 $installer->addAttribute(Mage_Catalog_Model_Category::ENTITY, 'ricardo_category', array(
-    'input_renderer'    => 'diglin_ricento/adminhtml_catalog_category_form_renderer_mapping',
+    'input_renderer'    => 'diglin_ricento/adminhtml_products_category_form_renderer_mapping',
     'type'              => 'int',
     'label'             => 'Ricardo Category',
     'note'              => 'Map this current Magento category with one of Ricardo. It will facilitate you the creation of product listing.',

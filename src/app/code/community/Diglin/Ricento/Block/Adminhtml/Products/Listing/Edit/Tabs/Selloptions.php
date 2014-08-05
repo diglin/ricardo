@@ -52,7 +52,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                     )
                 ))
             ),
-            'types' => array('ricardo_category' => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_catalog_category_form_renderer_mapping'))
+            'types' => array('ricardo_category' => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_category_form_renderer_mapping'))
         ));
 
         $fieldsetType = $form->addFieldset('fieldset_type', array('legend' => $this->__('Type of sales')));
