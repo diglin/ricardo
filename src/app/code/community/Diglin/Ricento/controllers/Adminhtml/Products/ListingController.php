@@ -29,38 +29,56 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $this->renderLayout();
     }
 
+    /**
+     * Used for Ajax call
+     */
     public function productsGridAction()
     {
+        $noRender = false;
         if (!$this->_initListing()) {
-            $this->_redirect('*/*/index');
-            return;
+            $noRender = true;
         }
-        $this->loadLayout();
-        $this->getResponse()->setBody(
-            $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products')->toHtml()
-        );
+
+
+        if ($noRender) {
+            $content = json_encode(array('success' => false));
+        } else {
+            $content = $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products_add')->toHtml();
+        }
+
+        $this->getResponse()->setBody($content);
     }
 
     public function addProductsPopupAction()
     {
         if (!$this->_initListing()) {
-            $this->_redirect('*/*/index');
+            $this->_redirect($this->_getIndexUrl());
             return;
         }
+
         $this->loadLayout();
         $this->renderLayout();
     }
 
+    /**
+     * Used for ajax version of the action addProductsPopupAction
+     */
     public function addProductsGridAction()
     {
+        $noRender = false;
         if (!$this->_initListing()) {
-            $this->_redirect('*/*/index');
-            return;
+            $noRender = true;
         }
+
         $this->loadLayout();
-        $this->getResponse()->setBody(
-            $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products_add')->toHtml()
-        );
+
+        if ($noRender) {
+            $content = json_encode(array('success' => false));
+        } else {
+            $content = $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products_add')->toHtml();
+        }
+
+        $this->getResponse()->setBody($content);
     }
 
     /**
@@ -319,7 +337,6 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
                 $productListingsCollection->walk('delete');
                 $this->_getSession()->addSuccess($this->__('Products listing(s) is/are successfully deleted.'));
 
-                // @todo to test if everything is fine at this level
                 $notDeleted = array_diff($productListings, $goingToBeDeleted);
                 if ($notDeleted) {
                     $this->_getSession()->addNotice($this->__('The following products listings IDs have not been deleted because they are still listed in Ricardo: ' . explode(',', $notDeleted)));
@@ -327,7 +344,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             }
         } catch (Exception $e) {
             Mage::logException($e);
-            $this->_getSession()->addError($this->__('An error occurred while trying to delete the products listing(s). Check your log for more information.'));
+            $this->_getSession()->addError($this->__('An error occurred while trying to delete the products listing(s). Please, check your exception log.'));
         }
 
         $this->_redirect('*/*/index');

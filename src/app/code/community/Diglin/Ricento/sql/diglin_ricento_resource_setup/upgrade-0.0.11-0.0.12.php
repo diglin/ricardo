@@ -21,10 +21,4 @@ $installer->getConnection()->changeColumn($apiTokenTable, 'store_id', 'website_i
     'nullable' => false,
     'comment' => 'Website ID'));
 
-$installer->getConnection()->changeColumn($productsListingTable, 'store_id', 'website_id', array(
-    'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
-    'length' => 5,
-    'nullable' => false,
-    'comment' => 'Website ID'));
-
 $installer->endSetup();
