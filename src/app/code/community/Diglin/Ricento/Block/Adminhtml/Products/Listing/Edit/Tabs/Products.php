@@ -104,12 +104,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $this->addColumn('type', array(
             'header'    => Mage::helper('catalog')->__('Type'),
             'index'     => 'type_id',
+            'width'     => '120',
             'type'      => 'options',
             'options'   => Mage::getSingleton('catalog/product_type')->getOptionArray(),
         ));
         $this->addColumn('sku', array(
             'header'    => Mage::helper('catalog')->__('SKU'),
-            'width'     => '80',
+            'width'     => '120',
             'index'     => 'sku'
         ));
         $this->addColumn('qty', array(
@@ -117,6 +118,15 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             'type'      => 'number',
             'width'     => '1',
             'index'     => 'stock_qty'
+        ));
+        $this->addColumn('status', array(
+            'header'    => Mage::helper('catalog')->__('Status'),
+            'width'     => '80',
+            'index'     => 'status',
+            'type'     => 'text',
+            'sortable' => false,
+            'filter'    => false,
+//            'options'  => Mage::getModel('diglin_ricento/config_source_status')->toOptionHash(),
         ));
         $this->addColumn('has_custom_options', array(
             'header'    => '',
@@ -156,7 +166,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                             'params' => array('id' => $this->getListing()->getId()),
                         ),
                         'field'   => 'product',
-                        'confirm' => $this->__('Are you sure?'),
+                        'confirm' => $this->__('Are you sure to remove this/these product(s)?'),
                     ),
                 ),
                 'filter'    => false,
@@ -175,7 +185,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $this->getMassactionBlock()->addItem('remove', array(
             'label'=> $this->__('Remove from list'),
             'url'  => $this->getUrl('*/products_listing/removeProduct', array('id' => $this->getListing()->getId())),
-            'confirm' => $this->__('Are you sure?')
+            'confirm' => $this->__('Are you sure to remove this/these product(s)?')
         ));
 
         $this->getMassactionBlock()->addItem('configure', array(
