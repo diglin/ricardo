@@ -88,16 +88,34 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Diglin_Ricent
             $categoryIds = array_unique(explode(',', $categoryIds));
             if (!empty($categoryIds)) {
                 $supportedTypes = Mage::helper('diglin_ricento')->getAllowedProductTypes();
-                $productsListingItemIds = (array) $this->_getListing()->getProductsListingItemCollection()->getColumnValues('product_id');
+
+                $productsListingItemIds = (array) $this->_getListing()
+                    ->getProductsListingItemCollection()
+                    ->getColumnValues('product_id');
+
                 $categories = Mage::getResourceModel('catalog/category_collection')
                     ->addFieldToFilter('entity_id', array('in' => $categoryIds));
 
                 foreach ($categories->getItems() as $category) {
+                    /* Only supported products type, not already in the current & other list */
                     $productCollection = Mage::getResourceModel('catalog/product_collection')
                         ->setStoreId($this->_getListing()->getStoreId())
-                        ->addCategoryFilter($category)
                         ->addFieldToFilter('type_id', array('in' => $supportedTypes))
-                        ->addFieldToFilter('entity_id', array('nin' => $productsListingItemIds));
+                        ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
+                        ->joinField('in_other_list',
+                            'diglin_ricento/products_listing_item',
+                            new Zend_Db_Expr('products_listing_id IS NOT NULL'),
+                            'product_id=entity_id',
+                            'products_listing_id !=' . (int) $this->_getListing()->getId(),
+                            'left'
+                        )
+                        ->addFieldToFilter('in_other_list', array('eq' => 0))
+                        ->groupByAttribute('entity_id')
+                        ->addCategoryFilter($category);
+
+                    if (!empty($productsListingItemIds)) {
+                        $productCollection->addFieldToFilter('entity_id', array('nin' => $productsListingItemIds));
+                    }
 
                     $productIds = $productCollection->getAllIds();
                     $productsListingItemIds = array_merge($productsListingItemIds, $productIds);
