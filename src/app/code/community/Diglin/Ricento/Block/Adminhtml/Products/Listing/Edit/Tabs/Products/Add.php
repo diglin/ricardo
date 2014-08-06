@@ -57,6 +57,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
             ->addAttributeToSelect('type_id')
             ->addStoreFilter($this->getListing()->getStoreId())
             ->addAttributeToFilter('type_id', array('in' => $this->_helper->getAllowedProductTypes()))
+            ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
             ->joinField('stock_qty',
                 'cataloginventory/stock_item',
                 'qty',
@@ -75,6 +76,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
                 'product_id=entity_id',
                 null,
                 'left')
+            ->addFieldToFilter('in_other_list', array('eq' => 0))
             ->groupByAttribute('entity_id');
 
         $productIds = $this->_getSelectedProducts();
@@ -127,13 +129,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
             'width'     => '1',
             'index'     => 'stock_qty'
         ));
-        $this->addColumn('in_other_list', array(
-            'header'    => $this->__('In other list?'),
-            'type'      => 'options',
-            'options'   => Mage::getModel('eav/entity_attribute_source_boolean')->getOptionArray(),
-            'index'     => 'in_other_list',
-            'sortable'  => false
-        ));
+//        $this->addColumn('in_other_list', array(
+//            'header'    => $this->__('In other list?'),
+//            'type'      => 'options',
+//            'options'   => Mage::getModel('eav/entity_attribute_source_boolean')->getOptionArray(),
+//            'index'     => 'in_other_list',
+//            'sortable'  => false
+//        ));
 
         return parent::_prepareColumns();
     }
