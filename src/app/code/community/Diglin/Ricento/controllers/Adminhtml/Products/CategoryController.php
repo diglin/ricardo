@@ -75,32 +75,44 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Diglin_Ricent
             return;
         }
 
+        if (!$this->_savingAllowed()) {
+            $this->_getSession()->addError($this->__('You are not allowed to save the products listing, so you cannot add products from a category.'));
+            $this->_redirect('*/products_listing/index');
+            return;
+        }
+
         $categoryIds = $this->getRequest()->getParam('category_ids', array());
 
         try {
-            //@todo save the products of selected categories into the products list
+            $productsAdded = 0;
             $categoryIds = array_unique(explode(',', $categoryIds));
             if (!empty($categoryIds)) {
-//                /* @var $productCollection Mage_Catalog_Model_Resource_Product_Collection */
-//                $productCollection = Mage::getResourceModel('catalog/product_collection');
-//                $productCollection->addCategoryFilter()
+                $supportedTypes = Mage::helper('diglin_ricento')->getAllowedProductTypes();
+                $productsListingItemIds = (array) $this->_getListing()->getProductsListingItemCollection()->getColumnValues('product_id');
+                $categories = Mage::getResourceModel('catalog/category_collection')
+                    ->addFieldToFilter('entity_id', array('in' => $categoryIds));
 
-                /* @var $categoryCollection Mage_Catalog_Model_Resource_Category_Collection */
-                //$categoryCollection = Mage::getResourceModel('catalog/category_collection');
+                foreach ($categories->getItems() as $category) {
+                    $productCollection = Mage::getResourceModel('catalog/product_collection')
+                        ->setStoreId($this->_getListing()->getStoreId())
+                        ->addCategoryFilter($category)
+                        ->addFieldToFilter('type_id', array('in' => $supportedTypes))
+                        ->addFieldToFilter('entity_id', array('nin' => $productsListingItemIds));
 
-                $layer = Mage::getSingleton('catalog/layer');
-
-                foreach ($categoryIds as $categoryId) {
-                    $layer->setCurrentCategory($categoryId);
-                    $productCollection = $layer->getProductCollection();
+                    $productIds = $productCollection->getAllIds();
+                    $productsListingItemIds = array_merge($productsListingItemIds, $productIds);
+                    foreach ($productIds as $productId) {
+                        if ($this->_getListing()->addProduct((int) $productId)) {
+                            ++$productsAdded;
+                        }
+                    }
                 }
             }
 
-
-            $this->_getSession()->addSuccess('Products from the selected categories have been added to your products listing.');
+            $this->_getSession()->addSuccess($this->__('%d product(s) added to the listing', $productsAdded));
         } catch (Exception $e) {
             Mage::logException($e);
-            $this->_getSession()->addError($this->__('Error occured while saving the product(s) from the selected categories. Please check your exception log.'));
+            $this->_getSession()->addError($this->__('Error occurred while saving the product(s) from the selected categories. Please check your exception log.'));
         }
         $this->_redirect('*/products_listing/edit', array('id' => $this->_getListing()->getId()));
     }
