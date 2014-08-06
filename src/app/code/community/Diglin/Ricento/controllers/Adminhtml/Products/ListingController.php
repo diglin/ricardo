@@ -43,7 +43,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         if ($noRender) {
             $content = json_encode(array('success' => false));
         } else {
-            $content = $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products_add')->toHtml();
+            $content = $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_products')->toHtml();
         }
 
         $this->getResponse()->setBody($content);
@@ -231,7 +231,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
                 ++$productsAdded;
             }
         }
-        $this->_getSession()->addSuccess($this->__('%d products added to listing', $productsAdded));
+        $this->_getSession()->addSuccess($this->__('%d product(s) added to the listing', $productsAdded));
         $this->_redirect('*/*/edit', array('id' => $this->_getListing()->getId()));
     }
 
