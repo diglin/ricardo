@@ -59,18 +59,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
         ));
 
         if (!Mage::app()->isSingleStoreMode()) {
-            $this->addColumn('stores',
+            $this->addColumn('websites',
                 array(
-                    'header'        => Mage::helper('catalog')->__('Stores'),
-                    'width'         => '150px',
-                    'sortable'      => false,
-                    'index'         => 'store_id',
-                    'type'          => 'store',
-                    'store_all'     => true,
-                    'store_view'    => true,
-                    'sortable'      => false,
-                    'filter_condition_callback'
-                                    => array($this, '_filterStoreCondition'),
+                    'header'=> Mage::helper('catalog')->__('Websites'),
+                    'width' => '100px',
+                    'sortable'  => false,
+                    'index'     => 'website_id',
+                    'type'      => 'options',
+                    'options'   => Mage::getModel('core/website')->getCollection()->toOptionHash(),
                 ));
         }
 
@@ -135,14 +131,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
                         'caption' => $helper->__('Stop List'),
                         'url'     => array(
                             'base'=>'*/*/stop',
-                            'params'=>array('store'=>$this->getRequest()->getParam('store'))
-                        ),
-                        'field'   => 'id'
-                    ),
-                    array(
-                        'caption' => $helper->__('Delete'),
-                        'url'     => array(
-                            'base'=>'*/*/delete',
                             'params'=>array('store'=>$this->getRequest()->getParam('store'))
                         ),
                         'field'   => 'id'

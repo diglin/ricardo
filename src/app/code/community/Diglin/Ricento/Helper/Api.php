@@ -33,14 +33,12 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
     /**
      * Get if the token credential is going to expire or even not exist
      *
-     * @param int|string|null|Mage_Core_Model_Store $store
+     * @param int|string|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isApiTokenCredentialGoingToExpire($store = null)
+    public function isApiTokenCredentialGoingToExpire($website = 0)
     {
-        $websiteId = $this->_getWebsiteId($store);
-
-        $token = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, $websiteId);
+        $token = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, Mage::app()->getWebsite($website)->getId());
         $expirationDate = $token->getExpirationDate();
         $dayDelay = Mage::helper('diglin_ricento')->getExpirationNotificationDelay();
 
@@ -56,29 +54,13 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
     /**
      * Get if the token credential exists
      *
-     * @param int|string|null|Mage_Core_Model_Store $store
+     * @param int|string|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isApiTokenCredentialExists($store = null)
+    public function isApiTokenCredentialExists($website = 0)
     {
-        $token = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, $this->_getWebsiteId($store));
+        $token = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, Mage::app()->getWebsite($website)->getId());
         return ($token->getId()) ? true : false;
-    }
-
-    /**
-     * @param int|string|null|Mage_Core_Model_Store $store
-     * @return int|null|string
-     */
-    protected function _getWebsiteId ($store)
-    {
-        if ($store instanceof Mage_Core_Model_Store) {
-            $websiteId = $store->getWebsiteId();
-        } else if (is_numeric($store)) {
-            $websiteId = Mage::app()->getStore($store)->getWebsiteId();
-        } else {
-            $websiteId = Mage::app()->getStore()->getWebsiteId();
-        }
-        return $websiteId;
     }
 
     /**

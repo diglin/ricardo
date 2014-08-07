@@ -12,9 +12,9 @@ $installer = $this;
 
 $installer->startSetup();
 
-$apiTokenTable = $installer->getTable('diglin_ricento/api_token');
+$productsListingTable = $installer->getTable('diglin_ricento/products_listing');
 
-$installer->getConnection()->changeColumn($apiTokenTable, 'store_id', 'website_id', array(
+$installer->getConnection()->changeColumn($productsListingTable, 'store_id', 'website_id', array(
     'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
     'length' => 5,
     'nullable' => false,

@@ -35,11 +35,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
             'disabled' => true,
             'values'   => Mage::getModel('diglin_ricento/config_source_status')->getAllOptions()
         ));
-        $fieldsetMain->addField('store_id', 'select', array(
-            'label'    => $this->__('Store View'),
+        $fieldsetMain->addField('website_id', 'select', array(
+            'label'    => $this->__('Website'),
             'disabled' => true,
-            'values'   => Mage::getSingleton('adminhtml/system_store')
-                    ->getStoreValuesForForm(true, false)
+            'values'   => Mage::getSingleton('adminhtml/system_store')->getWebsiteValuesForForm(true, false)
         ));
 
         $this->setForm($form);

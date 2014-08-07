@@ -27,11 +27,10 @@ class Diglin_Ricento_Model_Api_Services_Security extends Diglin_Ricento_Model_Ap
      */
     public function getServiceModel($website = 0)
     {
-        $websiteId = $this->_getWebsiteId($website);
+        $websiteId = Mage::app()->getWebsite($website)->getId();
         $key = $this->_serviceName . $websiteId;
 
-        if (!Mage::registry($key))
-        {
+        if (!Mage::registry($key)) {
             Mage::register($key, $this->getServiceManager($websiteId)->getSecurityManager());
         }
 
@@ -41,12 +40,12 @@ class Diglin_Ricento_Model_Api_Services_Security extends Diglin_Ricento_Model_Ap
     /**
      * Get the validation Url necessary if simulation of authorization process is not allowed
      *
-     * @param Mage_Core_Model_Store $store
+     * @param Mage_Core_Model_Website $website
      * @return string
      */
-    public function getValidationUrl(Mage_Core_Model_Store $store)
+    public function getValidationUrl($website)
     {
-        $websiteId = $store->getWebsiteId();
+        $websiteId = Mage::app()->getWebsite($website)->getId();
         $validationUrl = $this->getServiceModel($websiteId)->getValidationUrl();
 
         // Refresh the database cause of new data after getting validation url

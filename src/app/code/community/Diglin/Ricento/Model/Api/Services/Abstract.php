@@ -44,11 +44,10 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
      */
     public function getServiceModel($website = 0)
     {
-        $websiteId = $this->_getWebsiteId($website);
+        $websiteId = Mage::app()->getWebsite($website)->getId();
         $key = $this->_registryKey . $this->_serviceName . $websiteId;
 
-        if (!Mage::registry($key))
-        {
+        if (!Mage::registry($key)) {
             if (!class_exists($this->_model)) {
                 Mage::throwException(Mage::helper('diglin_ricento')->__('Ricardo Service Model doesn\'t exists.'));
             }
@@ -57,21 +56,6 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
         }
 
         return Mage::registry($key);
-    }
-
-    /**
-     * @param int|Mage_Core_Model_Website $websiteId
-     * @return int
-     */
-    protected function _getWebsiteId($websiteId = 0)
-    {
-        if ($websiteId instanceof Mage_Core_Model_Website) {
-            $websiteId = $websiteId->getId();
-        } else if (!is_numeric($websiteId) && !($websiteId instanceof Mage_Core_Model_Website)) {
-            Mage::throwException(Mage::helper('diglin_ricento')->__('Website ID is not an integer'));
-        }
-
-        return $websiteId;
     }
 
     /**
@@ -86,22 +70,16 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
             Mage::register('ricardo_api_lang', Diglin_Ricento_Helper_Data::DEFAULT_SUPPORTED_LANG);
         }
 
-        if (is_numeric($website)) {
-            $storeId = Mage::app()->getWebsite($website)->getDefaultStore()->getId();
-        } else if ($website instanceof Mage_Core_Model_Website) {
-            $storeId = $website->getDefaultStore()->getId();
-            $website = $website->getId();
-        } else {
-            $storeId = Mage_Core_Model_Store::DEFAULT_CODE;
-        }
+        $website = Mage::app()->getWebsite($website);
+        $websiteId = $website->getId();
 
         $lang = Mage::registry('ricardo_api_lang');
-        $registryKey = $this->_registryKey . ucwords($lang) . $website;
+        $registryKey = $this->_registryKey . ucwords($lang) . $websiteId;
 
         if (!Mage::registry($registryKey)) {
             $helper = Mage::helper('diglin_ricento');
 
-            if (!$helper->isConfigured()) {
+            if (!$helper->isConfigured($website)) {
                 Mage::throwException($helper->__('Ricardo API Credentials are not configured. Please, configure the extension before to proceed.'));
             }
 
@@ -109,7 +87,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                 Mage::throwException($helper->__('API language provided for the Service Manager is not supported.'));
             }
 
-            if ($helper->isDevMode()) {
+            if ($helper->isDevMode($website)) {
                 $host = Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_API_HOST_DEV);
             } else {
                 $host = Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_API_HOST);
@@ -117,13 +95,13 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
 
             $config = array(
                 'host' => $host,
-                'partnership_id' => $helper->getPartnerId($lang, $storeId),
-                'partnership_passwd' => $helper->getPartnerPass($lang, $storeId),
-                'partner_url' => $helper->getPartnerUrl($storeId),
+                'partnership_id' => $helper->getPartnerId($lang, $website),
+                'partnership_passwd' => $helper->getPartnerPass($lang, $website),
+                'partner_url' => $helper->getPartnerUrl($websiteId),
                 'allow_authorization_simulation' => ($helper->canSimulateAuthorization()) ? true : false,
-                'customer_username' => $helper->getRicardoUsername($storeId),
-                'customer_password' => $helper->getRicardoPass($storeId),
-                'debug' => ($helper->isDebugEnabled($storeId)) ? true : false
+                'customer_username' => $helper->getRicardoUsername($website),
+                'customer_password' => $helper->getRicardoPass($website),
+                'debug' => ($helper->isDebugEnabled($website)) ? true : false
             );
 
             Mage::register($registryKey, new Service(new Api(new Config($config))), false);
@@ -146,6 +124,8 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
 
 
     /**
+     * Magic method to getter/setter methods from Ricardo API library, save in cache the getter
+     *
      * @param string $method
      * @param array $args
      * @return mixed|Varien_Object
@@ -154,7 +134,6 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     {
         switch (substr($method, 0, 3)) {
             case 'get' :
-
                 if (method_exists($this->getServiceModel(), $method) && is_callable(array($this->getServiceModel(), $method), true)) {
                     $key = $this->_underscore(substr($method,3));
                     $profilerName = $this->_profilerPrefix . strtoupper($key);
@@ -180,6 +159,10 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
 
                     return $data;
                 }
+                break;
+            case 'set':
+                //@todo to implement
+                break;
         }
 //        throw new Varien_Exception("Invalid method ".get_class($this)."::".$method."(".print_r($args,1).")");
         return parent::__call($method, $args);

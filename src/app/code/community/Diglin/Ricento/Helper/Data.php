@@ -44,12 +44,12 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Is the extension enabled for the current website
      *
-     * @param null|string|bool|int|Mage_Core_Model_Store $storeId
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isEnabled($storeId = null)
+    public function isEnabled($website = 0)
     {
-        return Mage::getStoreConfigFlag(self::CFG_ENABLED, $storeId);
+        return self::getWebsiteConfigFlag(self::CFG_ENABLED, $website);
     }
 
     /**
@@ -110,27 +110,27 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Is Development Mode enabled
      *
-     * @param int|null|Mage_Core_Model_Store $storeId
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isDevMode($storeId = null)
+    public function isDevMode($website = 0)
     {
-        return Mage::getStoreConfigFlag(self::CFG_DEV_MODE, $storeId);
+        return self::getWebsiteConfigFlag(self::CFG_DEV_MODE, $website);
     }
 
     /**
      * Check if Ricardo API is configured correctly
      *
-     * @param int|null|Mage_Core_Model_Store $storeId
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isConfigured($storeId = null)
+    public function isConfigured($website = 0)
     {
         $configured = false;
-        $configuredAccount = (!$this->canSimulateAuthorization() || ($this->canSimulateAuthorization() && $this->getRicardoUsername($storeId) && $this->getRicardoPass($storeId))) ? true : false;
+        $configuredAccount = (!$this->canSimulateAuthorization() || ($this->canSimulateAuthorization() && $this->getRicardoUsername($website) && $this->getRicardoPass($website))) ? true : false;
 
         foreach ($this->getSupportedLang() as $lang) {
-            if ($this->getPartnerId($lang, $storeId) && $this->getPartnerPass($lang, $storeId)) {
+            if ($this->getPartnerId($lang, $website) && $this->getPartnerPass($lang, $website)) {
                 $configured = true;
                 break;
             }
@@ -146,12 +146,12 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Is Debug Enabled
      *
-     * @param int|null|Mage_Core_Model_Store $storeId
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isDebugEnabled($storeId = null)
+    public function isDebugEnabled($website = 0)
     {
-        return Mage::getStoreConfigFlag(self::CFG_DEBUG_MODE, $storeId);
+        return self::getWebsiteConfigFlag(self::CFG_DEBUG_MODE, $website);
     }
 
     /**
@@ -168,48 +168,49 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Can simulate authorization process
      *
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function canSimulateAuthorization()
+    public function canSimulateAuthorization($website = 0)
     {
-        return Mage::getStoreConfigFlag(self::CFG_SIMULATE_AUTH);
+        return self::getWebsiteConfigFlag(self::CFG_SIMULATE_AUTH, $website);
     }
 
     /**
      * Get the Ricardo API Partner ID Configuration
      *
      * @param string|null $lang
-     * @param int|null|Mage_Core_Model_Store $storeId
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getPartnerId($lang = null, $storeId = null)
+    public function getPartnerId($lang = null, $website = 0)
     {
         $lang = $this->_getLocaleCodeForApiConfig($lang);
-        return Mage::getStoreConfig(self::CFG_RICARDO_PARTNERID . $lang, $storeId);
+        return self::getWebsiteConfig(self::CFG_RICARDO_PARTNERID . $lang, $website);
     }
 
     /**
      * Get the Ricardo API Partner Pass Configuration
      *
      * @param string|null $lang
-     * @param int|null|Mage_Core_Model_Store $storeId
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getPartnerPass($lang = null, $storeId = null)
+    public function getPartnerPass($lang = null, $website = 0)
     {
         $lang = $this->_getLocaleCodeForApiConfig($lang);
-        return Mage::helper('core')->decrypt(Mage::getStoreConfig(self::CFG_RICARDO_PARTNERPASS . $lang, $storeId));
+        return Mage::helper('core')->decrypt(self::getWebsiteConfig(self::CFG_RICARDO_PARTNERPASS . $lang, $website));
     }
 
     /**
      * Get the partner url to get the confirmation
      *
-     * @param int $storeId
+     * @param int $websiteId
      * @return string
      */
-    public function getPartnerUrl($storeId = 0)
+    public function getPartnerUrl($websiteId = 0)
     {
-        return Mage::helper('adminhtml')->getUrl('ricento/api/confirmation', array('store' => $storeId));
+        return Mage::helper('adminhtml')->getUrl('ricento/api/confirmation', array('website' => (int) $websiteId));
     }
 
     /**
@@ -248,33 +249,34 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Get the Ricardo customer username
      *
-     * @param null $storeId
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getRicardoUsername($storeId = null)
+    public function getRicardoUsername($website = 0)
     {
-        return Mage::getStoreConfig(self::CFG_RICARDO_USERNAME, $storeId);
+        return self::getWebsiteConfig(self::CFG_RICARDO_USERNAME, $website);
     }
 
     /**
      * Get the Ricardo customer username
      *
-     * @param null $storeId
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getRicardoPass($storeId = null)
+    public function getRicardoPass($website = 0)
     {
-        return Mage::helper('core')->decrypt(Mage::getStoreConfig(self::CFG_RICARDO_PASSWORD, $storeId));
+        return Mage::helper('core')->decrypt(self::getWebsiteConfig(self::CFG_RICARDO_PASSWORD, $website));
     }
 
     /**
      * Get the delay in days to notify the owner that the API credentials will expire
      *
+     * @param null|string|bool|int|Mage_Core_Model_Store $store
      * @return int
      */
-    public function getExpirationNotificationDelay()
+    public function getExpirationNotificationDelay($store = 0)
     {
-        return Mage::getStoreConfig(self::CFG_EXPIRATION_NOTIFICATION_DELAY);
+        return Mage::getStoreConfig(self::CFG_EXPIRATION_NOTIFICATION_DELAY, $store);
     }
 
     /**

@@ -55,7 +55,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('sku')
             ->addAttributeToSelect('type_id')
-            ->addStoreFilter($this->getListing()->getStoreId())
+            ->addWebsiteFilter($this->getListing()->getWebsiteId())
             ->addAttributeToFilter('type_id', array('in' => $this->_helper->getAllowedProductTypes()))
             ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
             ->joinField('stock_qty',

@@ -17,15 +17,10 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
 
         if ($success) {
             $temporaryToken = $this->getRequest()->getParam('temporarytoken');
-            $store = $this->getRequest()->getParam('store');
+            $websiteId = (int) $this->getRequest()->getParam('website');
 
-            $websiteId = null;
-            if (is_numeric($store)) {
-                $websiteId = Mage::app()->getStore($store)->getWebsiteId();
-            }
-
-            if (!is_numeric($store) || is_null($websiteId)) {
-                $this->_getSession()->addError($this->__('The store code returned from Ricardo is not correct! Your authorization has not been saved on our side.'));
+            if (!is_numeric($websiteId) || is_null($websiteId)) {
+                $this->_getSession()->addError($this->__('The website code returned from Ricardo is not correct! Your authorization has not been saved on our side.'));
                 $this->_redirect('adminhtml');
                 return;
             }

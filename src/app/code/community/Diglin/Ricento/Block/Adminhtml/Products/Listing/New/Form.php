@@ -25,19 +25,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_New_Form extends Mage_Admi
         $fieldset = $form->addFieldset('create_listing_fieldset', array());
 
         $fieldset->addField('listing_title', 'text', array(
-            'name'     => 'listing_title',
+            'name' => 'listing_title',
             'required' => true,
-            'label'    => $this->__('Give a name'),
-            'title'    => $this->__('Give a name'),
+            'label' => $this->__('Give a name'),
+            'title' => $this->__('Give a name'),
         ));
 
-        $fieldset->addField('store_id', 'select', array(
-            'name'     => 'store_id',
+        $fieldset->addField('website_id', 'select', array(
+            'name' => 'website_id',
             'required' => true,
-            'label'    => $this->__('Select a store'),
-            'title'    => $this->__('Select a store'),
-            'values'   => Mage::getSingleton('adminhtml/system_store')
-                    ->getStoreValuesForForm(true, false),
+            'label' => $this->__('Select a website'),
+            'title' => $this->__('Select a website'),
+            'values' => Mage::getSingleton('adminhtml/system_store')->getWebsiteValuesForForm(true, false),
         ));
 
         $cancelButton = $this->getButtonHtml(
@@ -52,7 +51,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_New_Form extends Mage_Admi
         );
         $fieldset->addField('buttons', 'note', array(
             'container_id' => $htmlIdPrefix . 'buttons_container',
-            'text'         => "{$cancelButton} {$submitButton}"
+            'text' => "{$cancelButton} {$submitButton}"
         ));
 
         $form->setUseContainer(true);

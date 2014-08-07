@@ -16,21 +16,21 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Expiration extends Diglin_Ric
     protected $_template = 'ricento/notifications/expiration.phtml';
 
     /**
-     * @param null|string|bool|int|Mage_Core_Model_Store $store
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isEnabled($store = null)
+    public function isEnabled($website = 0)
     {
-        return Mage::helper('diglin_ricento')->isEnabled($store);
+        return Mage::helper('diglin_ricento')->isEnabled($website);
     }
 
     /**
-     * @param null|string|bool|int|Mage_Core_Model_Store $store
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isApiConfigured($store = null)
+    public function isApiConfigured($website = 0)
     {
-        return (bool) Mage::helper('diglin_ricento')->isConfigured($store);
+        return (bool) Mage::helper('diglin_ricento')->isConfigured($website);
     }
 
     /**
@@ -42,38 +42,39 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Expiration extends Diglin_Ric
     }
 
     /**
-     * @param Mage_Core_Model_Store $store
+     * @param string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getValidationUrl(Mage_Core_Model_Store $store)
+    public function getValidationUrl($website)
     {
-        return Mage::getSingleton('diglin_ricento/api_services_security')->getValidationUrl($store);
+        return Mage::getSingleton('diglin_ricento/api_services_security')->getValidationUrl($website);
     }
 
     /**
-     * @param null|string|bool|int|Mage_Core_Model_Store $store
+     * @param string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isApiGoExpire($store = null)
+    public function isApiGoExpire($website = 0)
     {
-        return (bool) Mage::helper('diglin_ricento/api')->isApiTokenCredentialGoingToExpire($store);
+        return (bool) Mage::helper('diglin_ricento/api')->isApiTokenCredentialGoingToExpire($website);
     }
 
     /**
-     * @param null|string|bool|int|Mage_Core_Model_Store $store
+     * @param string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isApiCredentialTokenExist($store = null)
+    public function isApiCredentialTokenExist($website = 0)
     {
-        return (bool) Mage::helper('diglin_ricento/api')->isApiTokenCredentialExists($store);
+        return (bool) Mage::helper('diglin_ricento/api')->isApiTokenCredentialExists($website);
     }
 
     /**
+     * @param int $storeId
      * @return int
      */
-    public function getExpirationNotificationDelay()
+    public function getExpirationNotificationDelay($storeId = 0)
     {
-        return (int) Mage::helper('diglin_ricento')->getExpirationNotificationDelay();
+        return (int) Mage::helper('diglin_ricento')->getExpirationNotificationDelay($storeId);
     }
 
     /**

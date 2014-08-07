@@ -95,14 +95,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     }
 
     /**
-     * Create empty product listing based on name and store_id
+     * Create empty product listing based on name and website_id
      */
     public function createAction()
     {
         $listingTitle = (string)$this->getRequest()->getPost('listing_title');
-        $storeId = (int)$this->getRequest()->getPost('store_id');
-        if (empty($listingTitle) || empty($storeId)) {
-            $this->_getSession()->addError($this->__('Listing name and store must be specified.'));
+        $websiteId = (int)$this->getRequest()->getPost('website_id');
+        if (empty($listingTitle) || empty($websiteId)) {
+            $this->_getSession()->addError($this->__('Listing name and website must be specified.'));
             $this->_redirect('*/*/index');
             return;
         }
@@ -118,7 +118,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         /* @var $listing Diglin_Ricento_Model_Products_Listing */
         $listing = Mage::getModel('diglin_ricento/products_listing');
         $listing->setTitle($listingTitle)
-            ->setStoreId($storeId)
+            ->setWebsiteId($websiteId)
             ->setSalesOptionsId($salesOptions->getId())
             ->setRuleId($rule->getId())
             ->save();

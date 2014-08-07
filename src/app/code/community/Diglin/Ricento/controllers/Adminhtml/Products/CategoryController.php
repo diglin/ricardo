@@ -99,7 +99,7 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Diglin_Ricent
                 foreach ($categories->getItems() as $category) {
                     /* Only supported products type, not already in the current & other list */
                     $productCollection = Mage::getResourceModel('catalog/product_collection')
-                        ->setStoreId($this->_getListing()->getStoreId())
+                        ->addWebsiteFilter($this->_getListing()->getWebsiteId())
                         ->addFieldToFilter('type_id', array('in' => $supportedTypes))
                         ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
                         ->joinField('in_other_list',

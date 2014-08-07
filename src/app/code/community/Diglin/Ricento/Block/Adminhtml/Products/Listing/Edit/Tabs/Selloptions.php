@@ -29,7 +29,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[entity_id]',
         ));
 
-        $storeCurrency = Mage::getStoreConfig('currency/options/base', $this->_getListing()->getStoreId());
+        $storeCurrency = Mage::getStoreConfig('currency/options/base', $this->_getListing()->getWebsiteId());
         $currencyWarning = '';
         if ($storeCurrency !== Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY) {
             $currencyWarning = '<ul class="messages"><li class="warning-msg">' .
