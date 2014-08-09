@@ -12,7 +12,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.14</version>
+            <version>0.0.15</version>
         </Diglin_Ricento>
     </modules>
 
@@ -98,7 +98,7 @@
         </helpers>
 
         <resources>
-            <diglin_ricento_resource_setup>
+            <ricento_setup>
                 <setup>
                     <module>Diglin_Ricento</module>
                     <class>Mage_Catalog_Model_Resource_Setup</class>
@@ -106,7 +106,7 @@
                 <connection>
                     <use>core_setup</use>
                 </connection>
-            </diglin_ricento_resource_setup>
+            </ricento_setup>
 
             <diglin_ricento_resource_read>
                 <connection>core_read</connection>

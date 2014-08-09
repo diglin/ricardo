@@ -334,3 +334,30 @@ Ricento.CategoryMappper.prototype = {
         Ricento.closePopup();
     }
 };
+Ricento.PublishLanguagesSelection = Class.create();
+Ricento.PublishLanguagesSelection.prototype = {
+    initialize: function(htmlIdPrefix) {
+        this.htmlIdPrefix = htmlIdPrefix;
+    },
+    onChangeInput: function(source, target, languages) {
+        var e = source;
+        var t = target;
+        var self = this;
+
+        $(this.htmlIdPrefix + 'default_language').disabled = !(e.value == 'all');
+
+        languages.each(function(lang) {
+            if (e.value == lang) {
+                t.each(function(item) {
+                    item.disabled = true;
+                });
+                $(self.htmlIdPrefix + 'lang_' + lang + '_store_id').disabled = false;
+            };
+        });
+        if (e.value == 'all') {
+            t.each(function(item) {
+                item.disabled = false;
+            });
+        };
+    }
+}

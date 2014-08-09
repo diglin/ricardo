@@ -41,6 +41,40 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
             'values'   => Mage::getSingleton('adminhtml/system_store')->getWebsiteValuesForForm(true, false)
         ));
 
+        $languages = Mage::helper('diglin_ricento')->getSupportedLang();
+        $js = 'publishLang = new Ricento.PublishLanguagesSelection(\'' . $htmlIdPrefix . '\'); publishLang.onChangeInput(this, $$(\'.lang_store_id\'), [\''. implode('\',\'', $languages) .'\']);';
+
+        $fieldsetLang = $form->addFieldset('fieldset_lang', array('legend' => $this->__('Language')));
+        $fieldsetLang->addField('publish_languages', 'select', array(
+            'label'    => $this->__('Product languages to sync to Ricardo.ch'),
+            'note'     => $this->__('Ricardo.ch supports only two languages at the moment: German and French. You can set in which language you want to publish your product content (title, subtitle, description, etc).'),
+            'values'   => Mage::getModel('diglin_ricento/config_source_languages')->getAllOptions(),
+            'onchange' => $js,
+            'required' => true
+
+        ));
+        $fieldsetLang->addField('default_language', 'select', array(
+            'label'    => $this->__('Default language to publish'),
+            'note'     => $this->__('Which language to publish by default to Ricardo.ch when the product content is not available in a language'),
+            'values'   => Mage::getModel('diglin_ricento/config_source_languages')->getAllOptions(false),
+            'required' => true
+        ));
+
+        foreach ($languages as $lang) {
+            $title = Mage::helper('catalog')->__('Store View for ' . ucwords(Mage::app()->getLocale()->getTranslation($lang, 'language')));
+            $fieldsetLang->addField('lang_'. $lang .'_store_id', 'select', array(
+                'name'      => 'lang_'. $lang .'_store_id',
+                'label'     => $title,
+                'title'     => $title,
+                'class'     => 'lang_store_id',
+                'values'    => Mage::getModel('diglin_ricento/config_source_websites')
+                        ->setWebsiteId($this->_getListing()->getWebsiteId())
+                        ->getStoreValuesForForm(false, true),
+                'required'  => true,
+            ));
+        }
+
+
         $this->setForm($form);
 
         return parent::_prepareForm();
@@ -91,5 +125,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
     public function isHidden()
     {
         return false;
+    }
+
+    protected function _getListing()
+    {
+        return Mage::registry('products_listing');
     }
 }

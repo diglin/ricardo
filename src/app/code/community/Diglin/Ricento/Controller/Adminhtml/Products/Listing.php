@@ -33,9 +33,22 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
      */
     protected function _filterPostData($data)
     {
+        /* Product Listing part */
+
         if (!isset($data['product_listing'])) {
             $data['product_listing'] = array();
         }
+
+        if (isset($data['product_listing']['publish_languages']) && $data['product_listing']['publish_languages'] != 'all') {
+            $data['product_listing']['default_language'] = $data['product_listing']['publish_languages'];
+            foreach (Mage::helper('diglin_ricento')->getSupportedLang() as $lang) {
+                if ($data['product_listing']['publish_languages'] != $lang) {
+                    $data['product_listing']['lang_'. $lang .'_store_id'] = null;
+                }
+            }
+        }
+
+        /* Sales Option part */
 
         if (!isset($data['sales_options'])) {
             $data['sales_options'] = array();
@@ -75,6 +88,8 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
         if (empty($data['sales_options']['product_warranty_condition']) || $data['sales_options']['product_warranty'] == Diglin_Ricento_Model_Config_Source_Sales_Warranty::NONE) {
             unset($data['sales_options']['product_warranty_condition']);
         }
+
+        /* Rules part */
 
         if (!isset($data['rules'])) {
             $data['rules'] = array();
