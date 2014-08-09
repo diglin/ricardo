@@ -44,7 +44,7 @@ class SellerAccount extends ManagerAbstract
      */
     public function getArticleModificationAllowed($articleId)
     {
-        return (bool)$this->_proceed('AssertArticleModification', array('article_id' => $articleId));
+        return (bool) $this->_proceed('AssertArticleModification', array('article_id' => $articleId));
     }
 
     /**
@@ -154,9 +154,12 @@ class SellerAccount extends ManagerAbstract
 
     /**
      * Gets list of customer's listing packages(normally should be just one item)
+     *
+     * @return array
      */
     public function getSellerPackages()
     {
+        return $this->_proceed('SellerPackages');
     }
 
     /**

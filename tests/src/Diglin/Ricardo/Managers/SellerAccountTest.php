@@ -84,4 +84,11 @@ class SellerAccountTest extends TestAbstract
         $result = $this->_sellerAccountManager->getTemplates();
         $this->assertGreaterThanOrEqual(1, count($result), 'Number of templates found is not greater than 1');
     }
+
+    public function testGetSellerPackages()
+    {
+        $result = $this->_sellerAccountManager->getSellerPackages();
+//        echo $this->getLastApiDebug();
+//        print_r($result);
+    }
 }

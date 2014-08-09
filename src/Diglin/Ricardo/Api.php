@@ -99,7 +99,7 @@ class Api implements ApiInterface
         }
 
         if (curl_errno($ch)) {
-            throw new \Exception('Error while trying to connect with the API - Curl Error Number: ' . curl_errno . ' - Curl Error Message: ' . curl_error($ch));
+            throw new \Exception('Error while trying to connect with the API - Curl Error Number: ' . curl_errno($ch) . ' - Curl Error Message: ' . curl_error($ch));
         }
 
         curl_close($ch);

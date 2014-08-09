@@ -34,6 +34,8 @@ class SystemTest extends TestAbstract
     {
         $result = $this->_systemManager->getArticleConditions(false);
 
+        //print_r($result);
+
         $this->assertGreaterThanOrEqual(1, count($result), 'Article Conditions are empty');
         $this->assertArrayHasKey('ArticleConditionText', $result[0], 'Data returned for the article conditions is not correct');
     }
@@ -44,6 +46,8 @@ class SystemTest extends TestAbstract
 
         $this->assertGreaterThanOrEqual(1, count($result), 'Article availabilities are empty');
         $this->assertArrayHasKey('AvailabilityText', $result[0], 'Data returned for the article availabilities is not correct');
+
+        echo 'Shipping Availabilities: ' . print_r($result, true);
     }
 
     public function testGetCategories()
@@ -88,7 +92,7 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('PackageSizes', $result[0], 'PackageSizes is missing');
         $this->assertArrayHasKey('PackageSizeCost', $result[0]['PackageSizes'][0], 'Delivery Package Size data structure is wrong');
 
-        echo 'Delivery Conditions ' . print_r($result, true);
+        //echo 'Delivery Conditions ' . print_r($result, true);
     }
 
     /**
@@ -122,6 +126,8 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('PackageId', $result[0], 'Packages data structure does not have PackageId');
         $this->assertArrayHasKey('PackagePrice', $result[0], 'Packages data structure does not have PackagePrice');
         $this->assertArrayHasKey('PackageSize', $result[0], 'Packages data structure does not have PackageSize');
+
+        //print_r($result);
     }
 
     /**
@@ -145,6 +151,8 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('DataProtectionUrl', $result, 'Configuration DataProtectionUrl missing');
         $this->assertArrayHasKey('DomainName', $result, 'Configuration DomainName missing');
         $this->assertArrayHasKey('MaxSellingDuration', $result, 'Configuration MaxSellingDuration missing');
+
+        //print_r($result);
     }
 
     public function testGetPaymentConditions()
@@ -156,7 +164,7 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition PaymentConditionText missing');
         $this->assertArrayHasKey('PaymentMethods', $result[0], 'Payment Condition PaymentMethods missing');
 
-        echo 'Payment Conditions ' . print_r($result, true);
+        //echo 'Payment Conditions ' . print_r($result, true);
 
         return $result[0]['PaymentConditionId'];
     }
@@ -172,7 +180,7 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition & Methods PaymentConditionText missing');
         $this->assertArrayHasKey('PaymentMethods', $result[0], 'Payment Condition & Methods PaymentMethods missing');
 
-        echo 'Payment Conditions & Methods' . print_r($result, true);
+        //echo 'Payment Conditions & Methods' . print_r($result, true);
 
         return $result[0]['PaymentConditionId'];
     }
@@ -193,7 +201,7 @@ class SystemTest extends TestAbstract
 
         $this->assertGreaterThanOrEqual(5, count($result), 'Payment Methods does not get the whole list of methods, even those which are not allow to sell');
 
-        echo 'Payment Methods ' . print_r($result, true);
+        //echo 'Payment Methods ' . print_r($result, true);
     }
 
     public function testGetPhonePrefixes()
@@ -211,13 +219,15 @@ class SystemTest extends TestAbstract
     public function testGetPromotions($categoryId)
     {
         $result = $this->_systemManager->getPromotions(
-            \Diglin\Ricardo\Core\Helper::getJsonDate(), 1, $categoryId, 1
+            \Diglin\Ricardo\Core\Helper::getJsonDate(), \Diglin\Ricardo\Enums\CategoryArticleType::All, $categoryId, 1
         );
 
         $this->assertArrayHasKey('GroupId', $result[0], 'Promotions: GroupId is missing');
         $this->assertArrayHasKey('IsMandatory', $result[0], 'Promotions: IsMandatory is missing');
         $this->assertArrayHasKey('PromotionFee', $result[0], 'Promotions: PromotionFee is missing');
         $this->assertArrayHasKey('PromotionId', $result[0], 'Promotions: PromotionId is missing');
+
+        //print_r($result);
     }
 
     /**
@@ -248,6 +258,6 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('WarrantyConditionText', $result[0], 'Warranties: WarrantyConditionText is missing');
         $this->assertArrayHasKey('WarrantyId', $result[0], 'Warranties: WarrantyId is missing');
 
-        echo 'Warranties ' . print_r($result, true);
+        //echo 'Warranties ' . print_r($result, true);
     }
 }

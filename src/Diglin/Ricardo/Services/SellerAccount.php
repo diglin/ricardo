@@ -340,9 +340,18 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetSellerPackages',
-            'params' => array('GetSellerPackagesParameter')
+            'params' => array('getSellerPackagesParameter' => array(
+                'PackageType' => 0
+            ))
         );
+    }
 
+    public function getSellerPackagesResult(array $data)
+    {
+        if (isset($data['GetSellerPackagesResult'])) {
+            return $data['GetSellerPackagesResult'];
+        }
+        return array();
     }
 
     /**
