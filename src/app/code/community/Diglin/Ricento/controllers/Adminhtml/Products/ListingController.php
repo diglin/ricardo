@@ -173,7 +173,6 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
                 if ($this->saveConfiguration($data)) {
                     $this->_getSession()->addSuccess($this->__('The listing has been saved.'));
                 }
-                return;
             } catch (Mage_Core_Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
             } catch (Exception $e) {

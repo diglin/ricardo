@@ -53,7 +53,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
         if (!isset($data['sales_options'])) {
             $data['sales_options'] = array();
         }
-        $data['sales_options'] = $this->_filterDates($data['sales_options'], array('schedule_date_start', 'schedule_period_end_date'));
+        $data['sales_options'] = $this->_filterDateTime($data['sales_options'], array('schedule_date_start', 'schedule_period_end_date'));
         if (empty($data['sales_options']['entity_id'])) {
             unset($data['sales_options']['entity_id']);
         }
@@ -102,6 +102,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
         }
         if (!empty($data['rules']['shipping_description'])) {
             $data['rules']['shipping_description'] = Mage::helper('core')->escapeHtml($data['rules']['shipping_description']);
+        } else {
             $data['rules']['shipping_description'] = null;
         }
         if (!empty($data['rules']['free_shipping'])) {
