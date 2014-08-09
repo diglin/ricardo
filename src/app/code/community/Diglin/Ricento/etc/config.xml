@@ -30,7 +30,7 @@
                 <expiration_notification_delay>3</expiration_notification_delay><!-- in day -->
                 <host>ws.betaqxl.com</host><!-- @todo change with the production host -->
                 <host_dev>ws.betaqxl.com</host_dev>
-                <lang>fr,de</lang>
+                <lang>de,fr</lang>
             </api_config>
             <global>
                 <shipping_calculation>highest_price</shipping_calculation>

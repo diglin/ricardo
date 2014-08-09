@@ -84,6 +84,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
     {
         $this->getForm()->setValues($this->_getListing());
 
+        $publishLanguages = $this->_getListing()->getPublishLanguages();
+
+        if ($publishLanguages != 'all') {
+            $this->getForm()->getElement('default_language')->setDisabled(true);
+            $languages = Mage::helper('diglin_ricento')->getSupportedLang();
+            foreach ($languages as $lang) {
+                if ($publishLanguages != $lang) {
+                    $this->getForm()->getElement('lang_'. strtolower($lang) .'_store_id')->setDisabled(true);
+                }
+            }
+        }
+
         return parent::_initFormValues();
     }
 

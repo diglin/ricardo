@@ -107,6 +107,29 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             return;
         }
 
+        /* Detect Language settings */
+
+        $helper = Mage::helper('diglin_ricento');
+        $languages = $helper->getSupportedLang();
+        $baseLanguage = $languages[0]; // We set per default german language
+        $storeLanguages = array();
+        $websiteLocale = explode('_', $helper->getWebsiteConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_LOCALE, $websiteId));
+        $websiteLang = strtolower($websiteLocale[0]);
+        if (in_array($websiteLang, $languages)) {
+            $baseLanguage = $websiteLang;
+        }
+
+        $storeIds = Mage::app()->getWebsite($websiteId)->getStoreIds();
+        foreach ($storeIds as $store) {
+            $locale = explode('_', Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_LOCALE, $store));
+            $storeLang = strtolower($locale[0]);
+            if (in_array($storeLang, $languages) && $websiteLang != $storeLang) {
+                $storeLanguages[$storeLang] = $store;
+            }
+        }
+
+        $this->_getSession()->addNotice($this->__('We detect and set for you the language configuration. Please, review it before to go further.'));
+
         /* @var $salesOptions Diglin_Ricento_Model_Sales_Options */
         $salesOptions = Mage::getModel('diglin_ricento/sales_options');
         $salesOptions->setDataChanges(true)->save();
@@ -121,7 +144,15 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             ->setWebsiteId($websiteId)
             ->setSalesOptionsId($salesOptions->getId())
             ->setRuleId($rule->getId())
-            ->save();
+            ->setPublishLanguages((!empty($storeLanguages)) ? 'all' : $baseLanguage)
+            ->setDefaultLanguage($baseLanguage);
+
+        foreach ($storeLanguages as $storeLang => $storeId) {
+            call_user_func(array($listing, 'setLang' . ucwords($storeLang) . 'StoreId'), $storeId);
+        }
+
+        $listing->save();
+
         $this->_redirect('*/*/edit', array('id' => $listing->getId()));
     }
 
