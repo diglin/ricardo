@@ -37,17 +37,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         return $this->_model;
     }
 
-    protected function _initFormValues()
-    {
-        $this->getForm()->setValues($this->getShippingPaymentRule());
-
-        $isFreeShipping = ($this->getShippingPaymentRule()->getShippingPrice() == 0) ? true : false;
-        $this->getForm()->getElement('shipping_price')->setDisabled($isFreeShipping);
-        $this->getForm()->getElement('free_shipping')->setChecked($isFreeShipping);
-
-        return parent::_initFormValues();
-    }
-
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form();
@@ -64,6 +53,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'label'   => $this->__('Payment Methods'),
             'values'  => Mage::getModel('diglin_ricento/config_source_rules_payment')->getAllOptions(),
             'class'   => 'validate-payment-method-combination',
+            'onchange' => 'rulesForm.togglePaymentDescription($(\'' . $htmlIdPrefix . 'payment_methods_0\'));'
         ));
         $fieldsetPayment->addField('payment_description', 'textarea', array(
             'name'  => 'rules[payment_description]',
@@ -77,6 +67,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'label'   => $this->__('Shipping Methods'),
             'values'  => Mage::getModel('diglin_ricento/config_source_rules_shipping')->getAllOptions(),
             'class'   => 'validate-payment-shipping-combination',
+            'onchange' => 'rulesForm.toggleShippingDescription(this);'
         ));
         $fieldsetShipping->addField('shipping_availability', 'select', array(
             'name'    => 'rules[shipping_availability]',
@@ -85,21 +76,49 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         ));
         $fieldsetShipping->addField('shipping_description', 'textarea', array(
             'name'  => 'rules[shipping_description]',
-            'label' => $this->__('Shipping Description')
+            'label' => $this->__('Shipping Description'),
+            'required' => true
         ));
         $fieldsetShipping->addField('shipping_price', 'text', array(
             'name'     => 'rules[shipping_price]',
             'label'    => $this->__('Shipping Price'),
-            'class'    => 'validate-number'
+            'class'    => 'validate-number',
+            'required' => true
         ));
         $fieldsetShipping->addField('free_shipping', 'checkbox', array(
             'name'    => 'rules[free_shipping]',
             'label'   => $this->__('Free shipping'),
-            'onclick' => '$(\'rules_shipping_price\').value = \'0.00\';$(\'rules_shipping_price\').disabled = this.checked;'
+            'onclick' => 'rulesForm.switchShippingPrice(this);'
         ));
         $this->setForm($form);
 
         return parent::_prepareForm();
+    }
+
+    protected function _initFormValues()
+    {
+        $this->getForm()->setValues($this->getShippingPaymentRule());
+
+        $shippingPrice = $this->getShippingPaymentRule()->getShippingPrice();
+        $isFreeShipping = (!is_null($shippingPrice) && $shippingPrice == 0) ? true : false;
+        $this->getForm()->getElement('shipping_price')->setDisabled($isFreeShipping);
+        $this->getForm()->getElement('free_shipping')->setChecked($isFreeShipping);
+
+        $disableDescription = (!$this->getShippingPaymentRule()->getShippingMethod()) ? false : true;
+        $this->getForm()->getElement('shipping_description')
+            ->setDisabled($disableDescription)
+            ->setRequired(!$disableDescription);
+
+        $disablePaymentDescription = (!$this->getShippingPaymentRule()->getPaymentMethods()) ? false : true;
+        $this->getForm()->getElement('payment_description')
+            ->setDisabled($disablePaymentDescription)
+            ->setRequired(!$disablePaymentDescription);
+
+        $derivedValues = array();
+        $derivedValues['free_shipping'] = 1;
+
+        $this->getForm()->addValues($derivedValues);
+        return parent::_initFormValues();
     }
 
     /**
@@ -127,7 +146,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
 
     protected function _afterToHtml($html)
     {
-        $html .= '<script type="text/javascript">' . Mage::getModel('diglin_ricento/rule_validate')->getJavaScriptValidator() . '</script>';
+        $html .= '<script type="text/javascript">var rulesForm = new Ricento.RulesForm("' . $this->getForm()->getHtmlIdPrefix() . '");' . Mage::getModel('diglin_ricento/rule_validate')->getJavaScriptValidator() . '</script>';
         return parent::_afterToHtml($html);
     }
 

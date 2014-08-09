@@ -233,7 +233,14 @@ Ricento.salesOptionsForm.prototype = {
         condition.disabled = field.checked;
         this.toggleRequired(conditionSource, field.checked, conditionSourceLabel);
         this.toggleRequired(condition, !field.checked);
+    },
+    toggleWarrantyCondition: function (field) {
+        warrantyCondition = $(this.htmlIdPrefix + 'product_warranty_condition');
+        warrantyeConditionLabel = $$('label[for='+ this.htmlIdPrefix + 'product_warranty_condition]')[0];
 
+        required = (field.value == '0') ? 1 : 0;
+        warrantyCondition.disabled = !required;
+        this.toggleRequired(warrantyCondition, required, warrantyeConditionLabel);
     }
 };
 
@@ -334,14 +341,14 @@ Ricento.CategoryMappper.prototype = {
         Ricento.closePopup();
     }
 };
-Ricento.PublishLanguagesSelection = Class.create();
-Ricento.PublishLanguagesSelection.prototype = {
+Ricento.GeneralForm = Class.create();
+Ricento.GeneralForm.prototype = {
     initialize: function(htmlIdPrefix) {
         this.htmlIdPrefix = htmlIdPrefix;
     },
-    onChangeInput: function(source, target, languages) {
+    onChangeInput: function(source, languages) {
         var e = source;
-        var t = target;
+        var t = $$('.lang_store_id');
         var self = this;
 
         $(this.htmlIdPrefix + 'default_language').disabled = !(e.value == 'all');
@@ -360,4 +367,34 @@ Ricento.PublishLanguagesSelection.prototype = {
             });
         };
     }
-}
+};
+Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
+    initialize: function(htmlIdPrefix) {
+        this.htmlIdPrefix = htmlIdPrefix;
+        this.requiredText = '<span class="required">*</span>';
+        this.requiredClass = 'required-entry';
+        this.validationPassedClass = 'validation-passed';
+        this.requiredIfVisibleClass = 'required-if-visible';
+    },
+    togglePaymentDescription: function (field) {
+        paymentDescription = $(this.htmlIdPrefix + 'payment_description');
+        paymentDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'payment_description]')[0];
+
+        required = field.checked;
+        paymentDescription.disabled = !required;
+        this.toggleRequired(paymentDescription, required, paymentDescriptionLabel);
+    },
+    toggleShippingDescription: function (field) {
+        shippingDescription = $(this.htmlIdPrefix + 'shipping_description');
+        shippingDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'shipping_description]')[0];
+
+        required = (field.value == '0') ? 1 : 0;
+        shippingDescription.disabled = !required;
+        this.toggleRequired(shippingDescription, required, shippingDescriptionLabel);
+    },
+    switchShippingPrice: function(field) {
+        shippingPrice = $('rules_shipping_price');
+        shippingPrice.value = '0.00';
+        shippingPrice.disabled = field.checked;
+    }
+});

@@ -42,14 +42,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
         ));
 
         $languages = Mage::helper('diglin_ricento')->getSupportedLang();
-        $js = 'publishLang = new Ricento.PublishLanguagesSelection(\'' . $htmlIdPrefix . '\'); publishLang.onChangeInput(this, $$(\'.lang_store_id\'), [\''. implode('\',\'', $languages) .'\']);';
 
         $fieldsetLang = $form->addFieldset('fieldset_lang', array('legend' => $this->__('Language')));
         $fieldsetLang->addField('publish_languages', 'select', array(
-            'label'    => $this->__('Product languages to sync to Ricardo.ch'),
+            'label'    => $this->__('Product languages to synchronize to Ricardo.ch'),
             'note'     => $this->__('Ricardo.ch supports only two languages at the moment: German and French. You can set in which language you want to publish your product content (title, subtitle, description, etc).'),
             'values'   => Mage::getModel('diglin_ricento/config_source_languages')->getAllOptions(),
-            'onchange' => $js,
+            'onchange' => 'generalForm.onChangeInput(this, [\''. implode('\',\'', $languages) .'\']);',
             'required' => true
 
         ));
@@ -97,6 +96,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
         }
 
         return parent::_initFormValues();
+    }
+
+    protected function _afterToHtml($html)
+    {
+        $html .= '<script type="text/javascript">var generalForm = new Ricento.GeneralForm("' . $this->getForm()->getHtmlIdPrefix() . '");</script>';
+        return parent::_afterToHtml($html);
     }
 
     /**
