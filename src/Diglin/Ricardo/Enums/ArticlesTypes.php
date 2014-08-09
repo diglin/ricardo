@@ -9,32 +9,50 @@
  */
 namespace Diglin\Ricardo\Enums;
 
-abstract class ArticlesTypes
+class ArticlesTypes extends AbstractEnums
 {
     // All articles
-    const All = 0;
+    const ALL = 0;
 
     // All vehicle articles, that means cars bikes others and utilities type. Could be the same result than "All" type if we search only classified articles
-    const Vehicles = 1;
+    const VEHICLES = 1;
 
     // Only core articles
-    const Core = 2;
+    const CORE = 2;
 
     // Accessories articles
-    const Accessories = 3;
+    const ACCESSORIES = 3;
 
     // Cars articles
-    const Cars = 4;
+    const CARS = 4;
 
     // Bikes articles
-    const Bikes = 5;
+    const BIKES = 5;
 
     // Others articles
-    const Others = 6;
+    const OTHERS = 6;
 
     // Utilities articles
-    const Utilities = 7;
+    const UTILITIES = 7;
 
     // CarsAndBikes articles [Accessory, Car, Bike, Utilities, Other]
-    const CarsAndBikes = 8;
+    const CARSANDBIKES = 8;
+
+    /**
+     * @return array
+     */
+    public static function getEnums()
+    {
+        return array(
+            array('label' => 'All', 'value' => self::ALL),
+            array('label' => 'Vehicles', 'value' => self::VEHICLES),
+            array('label' => 'Core', 'value' => self::CORE),
+            array('label' => 'Accessories', 'value' => self::ACCESSORIES),
+            array('label' => 'Cars', 'value' => self::CARS),
+            array('label' => 'Bikes', 'value' => self::BIKES),
+            array('label' => 'Others', 'value' => self::OTHERS),
+            array('label' => 'Utilities', 'value' => self::UTILITIES),
+            array('label' => 'Cars and Bikes', 'value' => self::CARSANDBIKES)
+        );
+    }
 }

@@ -9,14 +9,26 @@
  */
 namespace Diglin\Ricardo\Enums;
 
-abstract class CloseStatus
+class CloseStatus extends AbstractEnums
 {
     // Open article
-    const Open = 0;
+    const OPEN = 0;
 
     // Closed article
-    const Closed = 1;
+    const CLOSED = 1;
 
     // Closed by customer
-    const ClosedByCustomer = 2;
+    const CLOSED_BY_CUSTOMER = 2;
+
+    /**
+     * @return array
+     */
+    public static function getEnums()
+    {
+        return array(
+            array('label' => 'Open', 'value' => self::OPEN),
+            array('label' => 'Closed', 'value' => self::CLOSED),
+            array('label' => 'Closed by customer', 'value' => self::CLOSED_BY_CUSTOMER)
+        );
+    }
 }
