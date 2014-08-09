@@ -277,6 +277,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         }
         if ($this->getSalesOptions()->getProductConditionSourceAttributeCode()) {
             $derivedValues['product_condition_use_attribute'] = 1;
+            $this->getForm()->getElement('product_condition')->setDisabled(true);
+            $this->getForm()->getElement('product_condition')->setRequired(false);
+            $this->getForm()->getElement('product_condition_use_attribute')->setRequired(true);
         }
         if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
             $derivedValues['schedule_cycle_multiple_products_random'] = '1';
@@ -296,6 +299,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 new DateTime($this->getSalesOptions()->getScheduleDateStart()),
                 DateInterval::createFromDateString($this->getSalesOptions()->getSchedulePeriodDays() . ' day')
             )->format(Varien_Date::DATETIME_PHP_FORMAT);
+        }
+        if ($this->getSalesOptions()->getProductWarranty()) {
+            $derivedValues['product_warranty_condition'] = '';
+            $this->getForm()->getElement('product_warranty_condition')->setDisabled(true);
+            $this->getForm()->getElement('product_warranty_condition')->setRequired(false);
         }
         $this->getForm()->addValues($derivedValues);
         return parent::_initFormValues();

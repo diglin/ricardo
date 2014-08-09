@@ -137,8 +137,7 @@ $tablePaymentRule
         'nullable' => false
     ), 'Shipping Availability')
     ->addColumn('shipping_price', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array(
-        'nullable' => false,
-        'default' => '0.0000',
+        'nullable' => true,
     ), 'Selection Price Value')
     ->setComment('Shipping & Payment Rule for product list or product item');
 $installer->getConnection()->createTable($tablePaymentRule);

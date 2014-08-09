@@ -42,8 +42,7 @@ $tablePaymentRule->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, ar
         'nullable' => false
     ), 'Shipping Availability')
     ->addColumn('shipping_price', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array(
-        'nullable' => false,
-        'default' => '0.0000',
+        'nullable' => true,
     ), 'Selection Price Value')
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
         'nullable' => true,

@@ -23,6 +23,11 @@ class Diglin_Ricento_Model_Config_Source_Sales_Days extends Diglin_Ricento_Model
             }
             $duration = range($minDuration, $partnerConfiguration['MaxSellingDuration'], 2);
         }
-        return $duration;
+
+        foreach ($duration as $day) {
+            $return[$day] = $day;
+        }
+
+        return $return;
     }
 }

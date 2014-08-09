@@ -102,6 +102,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
         }
         if (!empty($data['rules']['shipping_description'])) {
             $data['rules']['shipping_description'] = Mage::helper('core')->escapeHtml($data['rules']['shipping_description']);
+            $data['rules']['shipping_description'] = null;
         }
         if (!empty($data['rules']['free_shipping'])) {
             $data['rules']['shipping_price'] = 0;
