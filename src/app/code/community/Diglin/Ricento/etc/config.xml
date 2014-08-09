@@ -48,7 +48,7 @@
             <types>
                 <ricardo_api translate="label,description" module="diglin_ricento">
                     <label>Ricardo API</label>
-                    <description>Cached content when Ricardo API called</description>
+                    <description>Cache content when Ricardo API is called</description>
                     <tags>RICARDO_API</tags>
                 </ricardo_api>
             </types>
