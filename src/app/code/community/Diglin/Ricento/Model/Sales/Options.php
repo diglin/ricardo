@@ -13,7 +13,7 @@
  *
  * @method int      getRicardoCategory() getRicardoCategory()
  * @method string   getSalesType() getSalesType()
- * @method int      getPriceSourceAttributeId() getPriceSourceAttributeId()
+ * @method string      getPriceSourceAttributeCode() getPriceSourceAttributeCode()
  * @method float    getPriceChange() getPriceChange()
  * @method string   getPriceChangeType() getPriceChangeType()
  * @method int      getSalesAuctionDirectBuy() getSalesAuctionDirectBuy()
@@ -34,7 +34,7 @@
  * @method string   getUpdatedAt() getUpdatedAt()
  * @method Diglin_Ricento_Model_Sales_Options setRicardoCategory() setRicardoCategory(int $ricardoCategory)
  * @method Diglin_Ricento_Model_Sales_Options setSalesType() setSalesType(string $salesType)
- * @method Diglin_Ricento_Model_Sales_Options setPriceSourceAttributeId() setPriceSourceAttributeId(int $priceSourceAttributeId)
+ * @method Diglin_Ricento_Model_Sales_Options setPriceSourceAttributeCode() setPriceSourceAttributeCode(string $priceSourceAttributeCode)
  * @method Diglin_Ricento_Model_Sales_Options setPriceChange() setPriceChange(float $priceChange)
  * @method Diglin_Ricento_Model_Sales_Options setPriceChangeType() setPriceChangeType(string $priceChangeType)
  * @method Diglin_Ricento_Model_Sales_Options setSalesAuctionDirectBuy() setSalesAuctionDirectBuy(int $salesAuctionDirectBuy)

@@ -20,7 +20,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Template extends Diglin_Ricento_M
     {
         $templates = Mage::getSingleton('diglin_ricento/api_services_selleraccount')->getTemplates();
 
-        $result = array();
+        $result = array('-1' => Mage::helper('diglin_ricento')->__('None'));
         foreach ($templates as $template) {
             $result[$template['TemplateId']] = $template['TemplateName'];
         }

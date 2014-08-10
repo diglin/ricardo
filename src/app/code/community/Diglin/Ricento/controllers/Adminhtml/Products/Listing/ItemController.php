@@ -96,10 +96,10 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
                 $this->_getSession()->addError($e->getMessage());
             } catch (Exception $e) {
                 Mage::logException($e);
-                $this->_getSession()->addException($e, $this->__('An error occurred while saving the listing.'));
+                $this->_getSession()->addException($e, $this->__('An error occurred while saving the configuration.'));
             }
         }
-        $this->_redirectUrl($this->_getIndexUrl());
+        $this->_redirectUrl($this->_getEditUrl());
 
     }
 

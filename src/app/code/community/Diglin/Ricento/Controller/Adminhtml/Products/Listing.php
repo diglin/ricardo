@@ -97,13 +97,17 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
         if (empty($data['rules']['rule_id'])) {
             unset($data['rules']['rule_id']);
         }
+//        if ($data['rules']['payment_methods'] !== 0) {
+//            $data['rules']['payment_description'] = null;
+//        }
         if (!empty($data['rules']['payment_description'])) {
             $data['rules']['payment_description'] = Mage::helper('core')->escapeHtml($data['rules']['payment_description']);
         }
+        if ($data['rules']['shipping_method'] !== 0) {
+            $data['rules']['shipping_description'] = null;
+        }
         if (!empty($data['rules']['shipping_description'])) {
             $data['rules']['shipping_description'] = Mage::helper('core')->escapeHtml($data['rules']['shipping_description']);
-        } else {
-            $data['rules']['shipping_description'] = null;
         }
         if (!empty($data['rules']['free_shipping'])) {
             $data['rules']['shipping_price'] = 0;
@@ -120,18 +124,21 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
      */
     protected function _validatePostData($data)
     {
-        /* @var $rulesValidator Diglin_Ricento_Model_Rule_Validate */
-        $rulesValidator = Mage::getModel('diglin_ricento/rule_validate');
-        $methods = array(
-            'payment' => array_filter((array)$data['rules']['payment_methods'], 'strlen'),
-            'shipping' => $data['rules']['shipping_method']
-        );
-        if (!$rulesValidator->isValid($methods)) {
-            foreach ($rulesValidator->getMessages() as $message) {
-                $this->_getSession()->addError($message);
+        if (empty($data['rules']['use_products_list_settings'])) {
+            /* @var $rulesValidator Diglin_Ricento_Model_Rule_Validate */
+            $rulesValidator = Mage::getModel('diglin_ricento/rule_validate');
+            $methods = array(
+                'payment' => array_filter((array)$data['rules']['payment_methods'], 'strlen'),
+                'shipping' => $data['rules']['shipping_method']
+            );
+            if (!$rulesValidator->isValid($methods)) {
+                foreach ($rulesValidator->getMessages() as $message) {
+                    $this->_getSession()->addError($message);
+                }
+                return false;
             }
-            return false;
         }
+
         $startDateInfo = date_parse_from_format(Varien_Date::DATETIME_PHP_FORMAT, $data['sales_options']['schedule_date_start']);
         if ($startDateInfo['error_count']) {
             $this->_getSession()->addError($this->__('Invalid start date.') . '<br>' . join ('<br>', $startDateInfo['errors']));

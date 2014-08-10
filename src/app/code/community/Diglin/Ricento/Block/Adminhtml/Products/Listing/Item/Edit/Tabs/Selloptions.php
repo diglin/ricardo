@@ -62,6 +62,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         parent::_initFormValues();
         $useDefaultCheckbox = $this->getForm()->getElement('use_products_list_settings');
         $useDefaultCheckbox->setChecked(true);
+        $useDefaultCheckbox->setValue(1);
+
         foreach ($this->getSelectedItems() as $item) {
             /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
             if ($item->getSalesOptionsId()) {

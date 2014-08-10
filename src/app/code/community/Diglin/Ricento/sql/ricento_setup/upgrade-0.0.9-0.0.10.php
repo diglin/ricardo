@@ -23,14 +23,14 @@ $installer->getConnection()->addColumn($salesOptionsTable, 'product_warranty', a
     'comment' => 'Product Warranty'));
 
 $installer->getConnection()->addColumn($salesOptionsTable, 'product_condition', array(
-    'type' => Varien_Db_Ddl_Table::TYPE_VARBINARY,
+    'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
     'length' => 50,
     'nullable' => true,
     'after' => 'product_warranty',
     'comment' => 'Product Condition'));
 
 $installer->getConnection()->addColumn($salesOptionsTable, 'product_condition_source_attribute_code', array(
-    'type' => Varien_Db_Ddl_Table::TYPE_VARBINARY,
+    'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
     'length' => 255,
     'nullable' => true,
     'after' => 'product_condition',

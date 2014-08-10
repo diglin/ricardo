@@ -27,7 +27,7 @@ $installer->getConnection()->addColumn($productsListingTable, 'default_language'
     'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
     'length' => 50,
     'nullable' => true,
-    'after' => 'publish_language',
+    'after' => 'publish_languages',
     'comment' => 'Which default language to publish on ricardo.ch'));
 
 $installer->endSetup();

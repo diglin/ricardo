@@ -22,7 +22,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Product_Condition extends Diglin_
     {
         $articleConditions = Mage::getSingleton('diglin_ricento/api_services_system')->getArticleConditions();
 
-        $result = array(null => MAge::helper('diglin_ricento')->__('-- Please Select --'));
+        $result = array(null => Mage::helper('diglin_ricento')->__('-- Please Select --'));
         foreach ($articleConditions as $condition) {
             $result[$condition['ArticleConditionId']] = $condition['ArticleConditionText'];
         }

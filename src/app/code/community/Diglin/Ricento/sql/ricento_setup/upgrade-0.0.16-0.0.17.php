@@ -12,12 +12,13 @@ $installer = $this;
 
 $installer->startSetup();
 
-$salesOptionsTable = $installer->getTable('diglin_ricento/sales_options');
+$salesOptions = $installer->getTable('diglin_ricento/sales_options');
 
-$installer->getConnection()->changeColumn($salesOptionsTable, 'price_source_attribute_id', 'price_source_attribute_code', array(
-    'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-    'length' => 255,
+$installer->getConnection()->changeColumn($salesOptions, 'customization_template', 'customization_template', array(
+    'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
+    'length' => 10,
     'nullable' => true,
-    'comment' => 'Price Attribute Code'));
+    'default' => null,
+    'comment' => 'Custom Template Id'));
 
 $installer->endSetup();
