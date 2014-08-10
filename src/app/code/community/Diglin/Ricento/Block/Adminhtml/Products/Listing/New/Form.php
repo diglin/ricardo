@@ -36,7 +36,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_New_Form extends Mage_Admi
             'required' => true,
             'label' => $this->__('Select a website'),
             'title' => $this->__('Select a website'),
-            'values' => Mage::getSingleton('adminhtml/system_store')->getWebsiteValuesForForm(true, false),
+            'note' => $this->__('The website(s) must be configured and enabled for this extension. If this field is empty or some are missing please <a href="%s">configure</a> the extension.', Mage::helper('diglin_ricento')->getConfigurationUrl()),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_website')->getWebsiteValuesForForm(true, false),
         ));
 
         $cancelButton = $this->getButtonHtml(

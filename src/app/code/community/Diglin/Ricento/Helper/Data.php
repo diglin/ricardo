@@ -70,11 +70,16 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Get the configuration Ricardo url
      *
+     * @param int|null|Mage_Core_Model_Website
      * @return string
      */
-    public function getConfigurationUrl()
+    public function getConfigurationUrl($website = null)
     {
-        return Mage::helper('adminhtml')->getUrl('adminhtml/system_config/edit/section/ricento');
+        $params = array();
+        if (!is_null($website)) {
+            $params = array('website' => Mage::app()->getWebsite($website)->getCode());
+        }
+        return Mage::helper('adminhtml')->getUrl('adminhtml/system_config/edit/section/ricento', $params);
     }
 
     /**
