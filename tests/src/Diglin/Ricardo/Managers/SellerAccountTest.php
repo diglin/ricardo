@@ -80,9 +80,9 @@ class SellerAccountTest extends TestAbstract
 
     public function testGetTemplates()
     {
-        // @fixme precondition for the test, templates must exist
         $result = $this->_sellerAccountManager->getTemplates();
-        $this->assertGreaterThanOrEqual(1, count($result), 'Number of templates found is not greater than 1');
+        $this->assertGreaterThanOrEqual(1, count($result), 'Number of templates found is not greater than 1. Create one on ricardo.ch or the sandbox, not into the ricardo Assistant');
+        print_r($result);
     }
 
     public function testGetSellerPackages()

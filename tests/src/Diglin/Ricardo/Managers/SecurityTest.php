@@ -51,11 +51,11 @@ class SecurityTest extends TestAbstract
     /**
      * @expectedException \Diglin\Ricardo\Exceptions\SecurityErrors
      */
-    public function testGetTokenCredentialException()
+    public function testgetCredentialTokenException()
     {
         // Exception is expected because we do not simulate the authorization process when we ask a new token credential
         $this->_securityManager->setAllowSimulateAuthorization(false);
-        $this->_securityManager->getTokenCredential();
+        $this->_securityManager->getCredentialToken();
     }
 
     /**
@@ -71,15 +71,15 @@ class SecurityTest extends TestAbstract
     /**
      * @depends testSimulateValidationUrl
      */
-    public function testGetTokenCredential()
+    public function testGetCredentialToken()
     {
         $this->_securityManager->setAllowSimulateAuthorization(true);
-        $result = $this->_securityManager->getTokenCredential();
+        $result = $this->_securityManager->getCredentialToken();
 
         $this->assertCount(1, $this->_matchToken($result), 'Credential Token is ' . $result);
         echo 'Credential token: ' . $result . "\n";
-        echo 'Credential token Expiration Date: ' . $this->_securityManager->getTokenCredentialExpirationDate()  . "\n";
-        echo 'Credential token Session Duration: ' . $this->_securityManager->getTokenCredentialSessionDuration()  . "\n";
+        echo 'Credential token Expiration Date: ' . $this->_securityManager->getCredentialTokenExpirationDate()  . "\n";
+        echo 'Credential token Session Duration: ' . $this->_securityManager->getCredentialTokenSessionDuration()  . "\n";
 
         return $result;
     }
@@ -95,19 +95,16 @@ class SecurityTest extends TestAbstract
     }
 
     /**
-     * @todo Check with Ricardo Developers why it's not working
-     * deactivated at the moment
-     *
-     * @depends testGetTokenCredential
+     * Cannot be tested :(
      */
-    public function RefreshTokenCredential($token)
-    {
-        $result = $this->_securityManager->refreshToken($token);
-
-        echo $this->getLastApiDebug();
-
-        $this->assertTrue(isset($result['TokenCredentialKey']), 'Refreshed TokenCredentialKey is missing ' . print_r($result, true));
-    }
+//    public function testRefreshTokenCredential()
+//    {
+//        $result = $this->_securityManager->refreshToken('9dc9914e-d0c6-4162-9374-05fe5809df89');
+//
+//        echo $this->getLastApiDebug();
+//
+//        $this->assertTrue(isset($result['TokenCredentialKey']), 'Refreshed TokenCredentialKey is missing ' . print_r($result, true));
+//    }
 
     protected function _matchToken($token)
     {
