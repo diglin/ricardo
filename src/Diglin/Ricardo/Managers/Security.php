@@ -225,13 +225,13 @@ class Security extends ManagerAbstract
     public function getCredentialToken()
     {
         if ($this->_credentialToken && !$this->isDateExpired($this->_credentialTokenExpirationDate)
-            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) < time()
+            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) > time()
         ) {
             return $this->_credentialToken;
         }
 
         if ($this->_credentialToken && $this->_credentialTokenSessionDuration
-            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) > time()
+            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) < time()
         ) {
             return $this->refreshToken($this->_credentialToken);
         }
