@@ -68,22 +68,27 @@ class Security extends ManagerAbstract
     /**
      * @var string
      */
-    protected $_tokenCredential;
+    protected $_credentialToken;
 
     /**
      * @var string
      */
-    protected $_tokenCredentialExpirationDate;
+    protected $_credentialTokenExpirationDate;
 
     /**
      * @var int
      */
-    protected $_tokenCredentialSessionDuration;
+    protected $_credentialTokenSessionDuration;
 
     /**
      * @var int
      */
-    protected $_tokenCredentialSessionStart;
+    protected $_credentialTokenSessionStart;
+
+    /**
+     * @var bool
+     */
+    protected $_credentialTokenRefreshed = false;
 
     /**
      * @var string
@@ -113,10 +118,9 @@ class Security extends ManagerAbstract
      */
     public function getToken($typeOfToken)
     {
-        switch ($typeOfToken)
-        {
+        switch ($typeOfToken) {
             case ServiceAbstract::TOKEN_TYPE_IDENTIFIED:
-                return $this->getTokenCredential();
+                return $this->getCredentialToken();
                 break;
             case ServiceAbstract::TOKEN_TYPE_ANONYMOUS:
                 return $this->getAnonymousToken();
@@ -187,7 +191,7 @@ class Security extends ManagerAbstract
         $parsed_url = parse_url($url);
         $outQuery = array();
 
-        if (isset($parsed_url['query'])){
+        if (isset($parsed_url['query'])) {
             $query = explode('&', $parsed_url['query']);
             foreach ($query as &$item) {
                 list($key, $value) = explode('=', $item);
@@ -199,14 +203,14 @@ class Security extends ManagerAbstract
             $parsed_url['query'] = http_build_query($outQuery);
         }
 
-        $scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
-        $host     = isset($parsed_url['host']) ? $parsed_url['host'] : '';
-        $port     = isset($parsed_url['port']) ? ':' . $parsed_url['port'] : '';
-        $user     = isset($parsed_url['user']) ? $parsed_url['user'] : '';
-        $pass     = isset($parsed_url['pass']) ? ':' . $parsed_url['pass']  : '';
-        $pass     = ($user || $pass) ? "$pass@" : '';
-        $path     = isset($parsed_url['path']) ? $parsed_url['path'] : '';
-        $query    = isset($parsed_url['query']) ? '?' . $parsed_url['query'] : '';
+        $scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
+        $host = isset($parsed_url['host']) ? $parsed_url['host'] : '';
+        $port = isset($parsed_url['port']) ? ':' . $parsed_url['port'] : '';
+        $user = isset($parsed_url['user']) ? $parsed_url['user'] : '';
+        $pass = isset($parsed_url['pass']) ? ':' . $parsed_url['pass'] : '';
+        $pass = ($user || $pass) ? "$pass@" : '';
+        $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
+        $query = isset($parsed_url['query']) ? '?' . $parsed_url['query'] : '';
         $fragment = isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '';
         return "$scheme$user$pass$host$port$path$query$fragment";
     }
@@ -216,17 +220,20 @@ class Security extends ManagerAbstract
      * Refresh the token if necessary
      *
      * @return string|array
+     * @throws SecurityErrors
      */
-    public function getTokenCredential()
+    public function getCredentialToken()
     {
-        if ($this->_tokenCredential && !$this->isDateExpired($this->_tokenCredentialExpirationDate)
-            && ($this->_tokenCredentialSessionStart + ($this->_tokenCredentialSessionDuration * 60)) < time()) {
-            return $this->_tokenCredential;
+        if ($this->_credentialToken && !$this->isDateExpired($this->_credentialTokenExpirationDate)
+            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) < time()
+        ) {
+            return $this->_credentialToken;
         }
 
-        if ($this->_tokenCredential && $this->_tokenCredentialSessionDuration
-            && ($this->_tokenCredentialSessionStart + ($this->_tokenCredentialSessionDuration * 60)) > time() ) {
-            return $this->refreshToken($this->_tokenCredential);
+        if ($this->_credentialToken && $this->_credentialTokenSessionDuration
+            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) > time()
+        ) {
+            return $this->refreshToken($this->_credentialToken);
         }
 
         // Temporary Token must be created before to simulate the authorization
@@ -239,11 +246,11 @@ class Security extends ManagerAbstract
         $result = $this->_proceed('TokenCredential', $temporaryToken);
 
         if (isset($result['TokenExpirationDate']) && isset($result['TokenCredentialKey'])) {
-            $this->_tokenCredentialExpirationDate = Helper::getJsonTimestamp($result['TokenExpirationDate']);
-            $this->_tokenCredentialSessionDuration = $result['SessionDuration']; // in minutes
-            $this->_tokenCredentialSessionStart = time(); // in seconds
+            $this->_credentialTokenExpirationDate = Helper::getJsonTimestamp($result['TokenExpirationDate']);
+            $this->_credentialTokenSessionDuration = $result['SessionDuration']; // in minutes
+            $this->_credentialTokenSessionStart = time(); // in seconds
             $this->_temporaryToken = null;
-            return $this->_tokenCredential = $result['TokenCredentialKey'];
+            return $this->_credentialToken = $result['TokenCredentialKey'];
         }
 
         return $result;
@@ -267,16 +274,21 @@ class Security extends ManagerAbstract
     /**
      * If the session duration period has expired, the token must be refreshed
      *
-     * @param string $token
+     * @param string|null $token
      * @return string | array
      */
-    public function refreshToken($token)
+    public function refreshToken($token = null)
     {
+        if (is_null($token)) {
+            $token = $this->_credentialToken;
+        }
+
         $result = $this->_proceed('RefreshTokenCredential', $token);
 
         if (isset($result['TokenCredentialKey'])) {
-            $this->_tokenCredentialSessionStart = time();
-            return $this->_tokenCredential = $result['TokenCredentialKey'];
+            $this->_credentialTokenRefreshed = true;
+            $this->_credentialTokenSessionStart = time();
+            return $this->_credentialToken = $result['TokenCredentialKey'];
         }
 
         return $result;
@@ -292,223 +304,12 @@ class Security extends ManagerAbstract
     public function isDateExpired($jsonExpirationDate)
     {
         $jsonDateTimestamp = $this->getHelper()->getJsonTimestamp($jsonExpirationDate, null);
-        
+
         if (time() < $jsonDateTimestamp) {
             return false;
         }
 
         return true;
-    }
-
-    /**
-     * Set the anonymous token, useful in case of data coming from saved DB
-     *
-     * @param $token
-     * @return $this
-     */
-    public function setAnonymousToken($token)
-    {
-        $this->_anonymousToken = $token;
-        return $this;
-    }
-
-    /**
-     * Set the credential token, useful in case of data coming from saved DB
-     *
-     * @param mixed $tokenCredential
-     * @return $this
-     */
-    public function setTokenCredential($tokenCredential)
-    {
-        $this->_tokenCredential = $tokenCredential;
-        return $this;
-    }
-
-    /**
-     * Set the temporary token, useful in case of data coming from saved DB
-     *
-     * @param mixed $temporaryToken
-     * @return $this
-     */
-    public function setTemporaryToken($temporaryToken)
-    {
-        $this->_temporaryToken = $temporaryToken;
-        return $this;
-    }
-
-    /**
-     * Set the antiforgery token, useful in case of data coming from saved DB
-     *
-     * @param string $antiforgeryToken
-     */
-    public function setAntiforgeryToken($antiforgeryToken)
-    {
-        $this->_antiforgeryToken = $antiforgeryToken;
-    }
-
-    /**
-     * Allow or not to simulate the authorization process
-     *
-     * @param bool $allow
-     */
-    public function setAllowSimulateAuthorization($allow)
-    {
-        $this->_allowSimulateAuthorization = (bool) $allow;
-    }
-
-    /**
-     * Get if allow or not to simulate the authorization process
-     *
-     * @return bool
-     */
-    public function getAllowSimulateAuthorization()
-    {
-        return (bool) $this->_allowSimulateAuthorization;
-    }
-
-    /**
-     * Set the anonymous token expiration date, useful in case of data coming from saved DB
-     *
-     * @param mixed $anonymousTokenExpirationDate
-     * @return $this
-     */
-    public function setAnonymousTokenExpirationDate($anonymousTokenExpirationDate)
-    {
-        $this->_anonymousTokenExpirationDate = $anonymousTokenExpirationDate;
-        return $this;
-    }
-
-    public function getAnonymousTokenExpirationDate()
-    {
-        return $this->_anonymousTokenExpirationDate;
-    }
-
-    /**
-     * Set the credential token expiration date, useful in case of data coming from saved DB
-     *
-     * @param mixed $tokenCredentialExpirationDate
-     * @return $this
-     */
-    public function setTokenCredentialExpirationDate($tokenCredentialExpirationDate)
-    {
-        $this->_tokenCredentialExpirationDate = $tokenCredentialExpirationDate;
-        return $this;
-    }
-
-    /**
-     * Get the credential token expiration date
-     *
-     * @return string
-     */
-    public function getTokenCredentialExpirationDate()
-    {
-        return $this->_tokenCredentialExpirationDate;
-    }
-
-    /**
-     * Set the temporary token expiration date, useful in case of data coming from saved DB
-     *
-     * @param mixed $temporaryTokenExpirationDate
-     * @return $this
-     */
-    public function setTemporaryTokenExpirationDate($temporaryTokenExpirationDate)
-    {
-        $this->_temporaryTokenExpirationDate = $temporaryTokenExpirationDate;
-        return $this;
-    }
-
-    /**
-     * Get the temporary token expiration date
-     *
-     * @return string
-     */
-    public function getTemporaryTokenExpirationDate()
-    {
-        return $this->_temporaryTokenExpirationDate;
-    }
-
-    /**
-     * Set the antiforgery token expiration date, useful in case of data coming from saved DB
-     *
-     * @param string $antiforgeryTokenExpirationDate
-     * @return $this
-     */
-    public function setAntiforgeryTokenExpirationDate($antiforgeryTokenExpirationDate)
-    {
-        $this->_antiforgeryTokenExpirationDate = $antiforgeryTokenExpirationDate;
-        return $this;
-    }
-
-    /**
-     * Get the antiforgery token expiration date
-     *
-     * @return string
-     */
-    public function getAntiforgeryTokenExpirationDate()
-    {
-        return $this->_antiforgeryTokenExpirationDate;
-    }
-
-    /**
-     * @param int $tokenCredentialSessionDuration
-     * @return $this
-     */
-    public function setTokenCredentialSessionDuration($tokenCredentialSessionDuration)
-    {
-        $this->_tokenCredentialSessionDuration = $tokenCredentialSessionDuration;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTokenCredentialSessionDuration()
-    {
-        return $this->_tokenCredentialSessionDuration;
-    }
-
-    /**
-     * @param int $tokenCredentialSessionStart
-     * @return $this
-     */
-    public function setTokenCredentialSessionStart($tokenCredentialSessionStart)
-    {
-        $this->_tokenCredentialSessionStart = $tokenCredentialSessionStart;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTokenCredentialSessionStart()
-    {
-        return $this->_tokenCredentialSessionStart;
-    }
-
-    /**
-     * Set the validation url, useful in case of data coming from saved DB
-     *
-     * @param null $validationUrl
-     * @return $this
-     */
-    public function setValidationUrl($validationUrl)
-    {
-        $this->_validationUrl = $validationUrl;
-        return $this;
-    }
-
-    /**
-     * Get the validation Url
-     *
-     * @param bool $refresh
-     * @return string
-     */
-    public function getValidationUrl($refresh = false)
-    {
-        if (empty($this->_validationUrl) || $refresh) {
-            $this->getTemporaryToken($refresh);
-        }
-        return $this->_validationUrl;
     }
 
     /**
@@ -588,6 +389,235 @@ class Security extends ManagerAbstract
         curl_close($ch);
 
         return json_decode($return, true);
+    }
+
+    /**
+     * Set the anonymous token, useful in case of data coming from saved DB
+     *
+     * @param $token
+     * @return $this
+     */
+    public function setAnonymousToken($token)
+    {
+        $this->_anonymousToken = $token;
+        return $this;
+    }
+
+    /**
+     * Set the credential token, useful in case of data coming from saved DB
+     *
+     * @param mixed $tokenCredential
+     * @return $this
+     */
+    public function setCredentialToken($tokenCredential)
+    {
+        $this->_credentialToken = $tokenCredential;
+        return $this;
+    }
+
+    /**
+     * Set the temporary token, useful in case of data coming from saved DB
+     *
+     * @param mixed $temporaryToken
+     * @return $this
+     */
+    public function setTemporaryToken($temporaryToken)
+    {
+        $this->_temporaryToken = $temporaryToken;
+        return $this;
+    }
+
+    /**
+     * Set the antiforgery token, useful in case of data coming from saved DB
+     *
+     * @param string $antiforgeryToken
+     */
+    public function setAntiforgeryToken($antiforgeryToken)
+    {
+        $this->_antiforgeryToken = $antiforgeryToken;
+    }
+
+    /**
+     * Allow or not to simulate the authorization process
+     *
+     * @param bool $allow
+     */
+    public function setAllowSimulateAuthorization($allow)
+    {
+        $this->_allowSimulateAuthorization = (bool)$allow;
+    }
+
+    /**
+     * Get if allow or not to simulate the authorization process
+     *
+     * @return bool
+     */
+    public function getAllowSimulateAuthorization()
+    {
+        return (bool)$this->_allowSimulateAuthorization;
+    }
+
+    /**
+     * Set the anonymous token expiration date, useful in case of data coming from saved DB
+     *
+     * @param mixed $anonymousTokenExpirationDate
+     * @return $this
+     */
+    public function setAnonymousTokenExpirationDate($anonymousTokenExpirationDate)
+    {
+        $this->_anonymousTokenExpirationDate = $anonymousTokenExpirationDate;
+        return $this;
+    }
+
+    public function getAnonymousTokenExpirationDate()
+    {
+        return $this->_anonymousTokenExpirationDate;
+    }
+
+    /**
+     * Set the credential token expiration date, useful in case of data coming from saved DB
+     *
+     * @param mixed $tokenCredentialExpirationDate
+     * @return $this
+     */
+    public function setCredentialTokenExpirationDate($tokenCredentialExpirationDate)
+    {
+        $this->_credentialTokenExpirationDate = $tokenCredentialExpirationDate;
+        return $this;
+    }
+
+    /**
+     * Get the credential token expiration date
+     *
+     * @return string
+     */
+    public function getCredentialTokenExpirationDate()
+    {
+        return $this->_credentialTokenExpirationDate;
+    }
+
+    /**
+     * Set the temporary token expiration date, useful in case of data coming from saved DB
+     *
+     * @param mixed $temporaryTokenExpirationDate
+     * @return $this
+     */
+    public function setTemporaryTokenExpirationDate($temporaryTokenExpirationDate)
+    {
+        $this->_temporaryTokenExpirationDate = $temporaryTokenExpirationDate;
+        return $this;
+    }
+
+    /**
+     * Get the temporary token expiration date
+     *
+     * @return string
+     */
+    public function getTemporaryTokenExpirationDate()
+    {
+        return $this->_temporaryTokenExpirationDate;
+    }
+
+    /**
+     * Set the antiforgery token expiration date, useful in case of data coming from saved DB
+     *
+     * @param string $antiforgeryTokenExpirationDate
+     * @return $this
+     */
+    public function setAntiforgeryTokenExpirationDate($antiforgeryTokenExpirationDate)
+    {
+        $this->_antiforgeryTokenExpirationDate = $antiforgeryTokenExpirationDate;
+        return $this;
+    }
+
+    /**
+     * Get the antiforgery token expiration date
+     *
+     * @return string
+     */
+    public function getAntiforgeryTokenExpirationDate()
+    {
+        return $this->_antiforgeryTokenExpirationDate;
+    }
+
+    /**
+     * @param int $tokenCredentialSessionDuration
+     * @return $this
+     */
+    public function setCredentialTokenSessionDuration($tokenCredentialSessionDuration)
+    {
+        $this->_credentialTokenSessionDuration = $tokenCredentialSessionDuration;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCredentialTokenSessionDuration()
+    {
+        return $this->_credentialTokenSessionDuration;
+    }
+
+    /**
+     * @param int $tokenCredentialSessionStart
+     * @return $this
+     */
+    public function setCredentialTokenSessionStart($tokenCredentialSessionStart)
+    {
+        $this->_credentialTokenSessionStart = $tokenCredentialSessionStart;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCredentialTokenSessionStart()
+    {
+        return $this->_credentialTokenSessionStart;
+    }
+
+    /**
+     * Set the validation url, useful in case of data coming from saved DB
+     *
+     * @param null $validationUrl
+     * @return $this
+     */
+//    public function setValidationUrl($validationUrl)
+//    {
+//        $this->_validationUrl = $validationUrl;
+//        return $this;
+//    }
+
+    /**
+     * Get the validation Url
+     *
+     * @param bool $refresh
+     * @return string
+     */
+    public function getValidationUrl($refresh = false)
+    {
+        if (empty($this->_validationUrl) || $refresh) {
+            $this->getTemporaryToken($refresh);
+        }
+        return $this->_validationUrl;
+    }
+
+    /**
+     * @param boolean $credentialTokenRefreshed
+     * @return $this
+     */
+    public function setIsCredentialTokenRefreshed($credentialTokenRefreshed)
+    {
+        $this->_credentialTokenRefreshed = $credentialTokenRefreshed;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsCredentialTokenRefreshed()
+    {
+        return (bool) $this->_credentialTokenRefreshed;
     }
 
 
