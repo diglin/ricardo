@@ -20,6 +20,7 @@ use Diglin\Ricardo\Enums\CloseStatus;
  * get all open articles, get sold articles, get articles that haven't been sold
  *
  * @package Diglin\Ricardo\Services
+ * @link https://ws.ricardo.ch/RicardoApi/documentation/html/Methods_T_Ricardo_Contracts_ISellerAccountService.htm
  */
 class SellerAccount extends ServiceAbstract
 {

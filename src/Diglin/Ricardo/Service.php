@@ -9,9 +9,9 @@
  */
 namespace Diglin\Ricardo;
 
-use \Diglin\Ricardo\Services\ServiceAbstract;
-use \Diglin\Ricardo\Core\ApiInterface;
-use \Diglin\Ricardo\Managers\Security;
+use Diglin\Ricardo\Services\ServiceAbstract;
+use Diglin\Ricardo\Core\ApiInterface;
+use Diglin\Ricardo\Managers\Security;
 
 /**
  * Class Service

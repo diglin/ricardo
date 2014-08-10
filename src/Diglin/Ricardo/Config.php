@@ -9,7 +9,7 @@
  */
 namespace Diglin\Ricardo;
 
-use \Diglin\Ricardo\Core\ConfigInterface;
+use Diglin\Ricardo\Core\ConfigInterface;
 
 /**
  * Class Config

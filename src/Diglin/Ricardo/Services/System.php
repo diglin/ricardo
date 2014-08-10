@@ -14,6 +14,7 @@ namespace Diglin\Ricardo\Services;
  * This service exposes referential data about the ricardo's system, for example available languages, list of categories, list of possible packages
  *
  * @package Diglin\Ricardo\Services
+ * @link https://ws.ricardo.ch/RicardoApi/documentation/html/Methods_T_Ricardo_Contracts_ISystemService.htm
  */
 class System extends ServiceAbstract
 {

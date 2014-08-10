@@ -16,6 +16,7 @@ namespace Diglin\Ricardo\Services;
  * Manage Token generation
  *
  * @package Diglin\Ricardo\Services
+ * @link https://ws.ricardo.ch/RicardoApi/documentation/html/Methods_T_Ricardo_Contracts_ISecurityService.htm
  */
 class Security extends ServiceAbstract
 {

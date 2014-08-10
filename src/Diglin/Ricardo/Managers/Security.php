@@ -9,10 +9,12 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-use \Diglin\Ricardo\Services\Security as SecurityService;
-use \Diglin\Ricardo\Services\ServiceAbstract;
-use \Diglin\Ricardo\Service;
-use \Diglin\Ricardo\Core\Helper;
+use Diglin\Ricardo\Exceptions\SecurityErrors;
+use Diglin\Ricardo\Enums\SecurityErrors as SecurityErrorsEnum;
+use Diglin\Ricardo\Services\Security as SecurityService;
+use Diglin\Ricardo\Services\ServiceAbstract;
+use Diglin\Ricardo\Service;
+use Diglin\Ricardo\Core\Helper;
 
 /**
  * Class Security
