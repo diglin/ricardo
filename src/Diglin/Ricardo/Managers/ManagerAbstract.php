@@ -61,33 +61,60 @@ abstract class ManagerAbstract
      * @param string|null|array $parameters
      * @return array
      * @throws \Exception
+     * @throws SecurityErrors
      */
     protected function _proceed($method, $parameters = null)
     {
         if (!$this->_serviceName) {
-            throw new \Exception('Service Name missing to proceed from Manager');
+            throw new ExceptionAbstract('Service Name missing to proceed from Manager');
         }
 
         $result = $this->_serviceManager->proceed($this->_serviceName, $method, $parameters);
-        $this->extractError($result);
+
+        try {
+            $this->extractError($result);
+        } catch (SecurityErrors $e) {
+            switch ($e->getCode()) {
+                case SecurityErrorsEnum::SESSIONEXPIRED:
+                    $this->_serviceManager->getSecurityManager()->refreshToken();
+                    self::_proceed($method, $parameters);
+                    break;
+                case SecurityErrorsEnum::TOKENERROR:
+                case SecurityErrorsEnum::TOKENEXPIRED:
+                case SecurityErrorsEnum::TEMPORAYCREDENTIALEXPIRED:
+                case SecurityErrorsEnum::TEMPORAYCREDENTIALUNVALIDATED:
+                    // We init the validation url to be used later in any process (e.g. re-authorization)
+                    $this->_serviceManager->getSecurityManager()->getValidationUrl(true);
+                    throw new SecurityErrors('Token Credential must be recreated! Please, authorize again the access to the Ricardo API', SecurityErrorsEnum::TOKEN_AUTHORIZATION);
+                    break;
+                default:
+                    throw $e;
+                    break;
+            }
+        }
 
         return $result;
     }
 
     /**
+     * Extract code error and type from API call
+     *
      * @param array $result
+     * @throw \Exception
      */
     protected function extractError(array $result)
     {
         if (!empty($result['ErrorCodes']) && isset($result['ErrorCodesType'])) {
-            $classname = '\\Diglin\\Ricardo\\Exceptions\\' . $result['ErrorCodesType'];
-            $tmp = $result;
-            $errorCode =  array_shift($tmp['ErrorCodes']);
 
+            $errorCodeType = $result['ErrorCodesType'];
+            $errorCode = array_shift($result['ErrorCodes']);
+
+            $classname = '\Diglin\Ricardo\Exceptions\\' . $errorCodeType;
             if (!class_exists($classname)) {
                 $classname = '\Exception';
             }
-            throw new $classname(print_r($result, true), $errorCode['Key']);
+
+            throw new $classname($errorCodeType, $errorCode['Key']);
         }
     }
 
@@ -97,5 +124,13 @@ abstract class ManagerAbstract
     public function getServiceManager()
     {
         return $this->_serviceManager;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeOfToken()
+    {
+        return $this->_serviceManager->get($this->_serviceName)->getTypeOfToken();
     }
 }

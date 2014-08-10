@@ -112,16 +112,12 @@ class Service
      */
     public function get($serviceName)
     {
-        $serviceName = $this->_getServiceName($serviceName);
-
-        if (isset($this->_services[$serviceName]) && $this->_services[$serviceName] instanceof ServiceAbstract) {
-            return $this->_services[$serviceName];
-        }
-        return false;
+        return self::add($serviceName, true);
     }
 
     /**
      * Update the service into the service manager in case of properties changes for example
+     * @fixme Is it really useful?
      *
      * @param ServiceAbstract $service
      * @return $this
@@ -224,20 +220,16 @@ class Service
 
             $data = $this->getApi()->connect($serviceInstance->getService(), $service['method'], $service['params']);
 
-            if ($data && array_key_exists('ErrorCodes', $data)) {
-                return $data;
-            }
-
             $getResultServiceMethod = $this->_prepareServiceGetResultMethod($serviceMethod);
 
-            if (method_exists($serviceInstance, $getResultServiceMethod)) {
+            if (method_exists($serviceInstance, $getResultServiceMethod) && !array_key_exists('ErrorCodes', $data)) {
                 return $serviceInstance->$getResultServiceMethod( (array) $data);
             } else {
                 return $data;
             }
 
         } else {
-            throw new \Exception(printf('%s is not an instance of ServiceAbstract or does not exists.', $serviceName));
+            throw new \Exception(printf('%s is not an instance of ServiceAbstract or doesn\'t exists.', $serviceName));
         }
     }
 
