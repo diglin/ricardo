@@ -18,6 +18,7 @@
  * @method int      getSessionDuration()
  * @method DateTime getSessionExpirationDate()
  * @method DateTime getCreatedAt()
+ * @method DateTime getUpdatedAt()
  * @method Diglin_Ricento_Model_Api_Token setToken() setToken(string $token)
  * @method Diglin_Ricento_Model_Api_Token setTokenType(string $tokenType)
  * @method Diglin_Ricento_Model_Api_Token setWebsiteId(int $websiteId)
@@ -25,6 +26,7 @@
  * @method Diglin_Ricento_Model_Api_Token setExpirationDate(DateTime $expirationDate)
  * @method Diglin_Ricento_Model_Api_Token setSessionExpirationDate(DateTime $expirationDate)
  * @method Diglin_Ricento_Model_Api_Token setCreatedAt(DateTime $createdAt)
+ * @method Diglin_Ricento_Model_Api_Token setUpdatedAt(DateTime $updateAt)
  */
 
 use \Diglin\Ricardo\Services\Security;
@@ -96,6 +98,7 @@ class Diglin_Ricento_Model_Api_Token extends Mage_Core_Model_Abstract
     protected function _beforeSave()
     {
         $this->_validate();
+        $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
         return parent::_beforeSave();
     }
 }
