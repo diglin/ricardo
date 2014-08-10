@@ -34,20 +34,14 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Expiration extends Diglin_Ric
     }
 
     /**
-     * @return string
-     */
-    public function getConfigurationUrl()
-    {
-        return Mage::helper('diglin_ricento')->getConfigurationUrl();
-    }
-
-    /**
      * @param string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
     public function getValidationUrl($website)
     {
-        return Mage::getSingleton('diglin_ricento/api_services_security')->getValidationUrl($website);
+        return Mage::getSingleton('diglin_ricento/api_services_security')
+            ->setCurrentWebsite($website)
+            ->getValidationUrl();
     }
 
     /**

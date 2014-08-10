@@ -8,7 +8,7 @@
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 
-class Diglin_Ricento_Model_Config_Source_Websites extends Mage_Adminhtml_Model_System_Store
+class Diglin_Ricento_Model_Config_Source_Store extends Mage_Adminhtml_Model_System_Store
 {
     /**
      * Retrieve store values for form
@@ -21,7 +21,7 @@ class Diglin_Ricento_Model_Config_Source_Websites extends Mage_Adminhtml_Model_S
     {
         $websites = $this->_websiteCollection;
         $websiteId = $this->getWebsiteId();
-        if ($websiteId) {
+        if ($websiteId && isset($websites[$websiteId])) {
             $this->_websiteCollection = array($websites[$websiteId]);
         }
 

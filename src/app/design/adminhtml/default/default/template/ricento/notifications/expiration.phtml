@@ -23,7 +23,7 @@ foreach ($this->getWebsiteCollection() as $website) :
         <?php endif; ?>
         <?php echo $this->__(' You have to authorize your account to get access to the Ricardo API thanks to the <a href="%s">Ricardo Authorization Page</a>. If you don\'t do it, your Ricardo extension and all related transactions with Ricardo will be blocked.',
                 $this->getValidationUrl($website)); ?>
-        <?php echo $this->__('To hide this message, you have to <a href="%s">disable the extension</a> for this website.', Mage::helper('diglin_ricento')->getConfigurationUrl()); ?>
+        <?php echo $this->__('To hide this message, you have to <a href="%s">disable the extension</a> for this website.', Mage::helper('diglin_ricento')->getConfigurationUrl($website)); ?>
     </div>
     <?php endif ?>
 <?php endforeach; ?>

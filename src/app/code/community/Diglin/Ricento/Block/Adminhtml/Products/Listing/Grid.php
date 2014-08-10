@@ -92,7 +92,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
             'width'    => '150px',
             'index'    => 'status',
             'type'     => 'options',
-            'options'  => Mage::getModel('diglin_ricento/config_source_status')->toOptionHash(),
+            'options'  => Mage::getSingleton('diglin_ricento/config_source_status')->toOptionHash(),
             'renderer' => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_listing_grid_renderer_status')
         ));
 

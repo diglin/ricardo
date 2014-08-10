@@ -60,7 +60,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[sales_type]',
             'required' => true,
             'label' => $this->__('Type of sales'),
-            'values' => Mage::getModel('diglin_ricento/config_source_sales_type')->getAllOptions(),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_sales_type')->getAllOptions(),
             'onchange' => "salesOptionsForm.showSalesTypeFieldsets(this.value, $('" . $htmlIdPrefix . "sales_auction_direct_buy').value == '1')"
         ));
 
@@ -86,7 +86,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetTypeAuction->addField('sales_auction_direct_buy', 'select', array(
             'name' => 'sales_options[sales_auction_direct_buy]',
             'label' => $this->__('Allow Direct Buy'),
-            'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions(),
+            'values' => Mage::getSingleton('eav/entity_attribute_source_boolean')->getAllOptions(),
             'onchange' => "salesOptionsForm.showSalesTypeFieldsets('auction', this.value =='1')",
             'note' => $this->__('Fill in the fieldset "Buy now" below to define the direct price setting.')
         ));
@@ -95,7 +95,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetTypeBuynow->addField('price_source_attribute_code', 'select', array(
             'name'   => 'sales_options[price_source_attribute_code]',
             'label'  => $this->__('Source'),
-            'values' => Mage::getModel('diglin_ricento/config_source_sales_price_source')->getAllOptions(),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_sales_price_source')->getAllOptions(),
             'class'  => 'required-if-visible'
         ));
         $fieldsetTypeBuynow->addType('fieldset_inline', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_fieldset_inline'));
@@ -107,7 +107,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[price_change_type]',
             'after_element_html' => ' &nbsp;',
             'no_span' => true,
-            'values' => Mage::getModel('diglin_ricento/config_source_sales_price_method')->getAllOptions(),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_sales_price_method')->getAllOptions(),
             'class'  => 'required-if-visible'
         ));
         $fieldsetPriceChange->addField('price_change', 'text', array(
@@ -189,7 +189,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetSchedule->addField('schedule_overwrite_product_date_start', 'select', array(
             'name' => 'sales_options[schedule_overwrite_product_date_start]',
             'label' => $this->__('Overwrite all products starting date'),
-            'values' => Mage::getModel('eav/entity_attribute_source_boolean')->getAllOptions()
+            'values' => Mage::getSingleton('eav/entity_attribute_source_boolean')->getAllOptions()
         ));
 
         $fieldsetCondition = $form->addFieldset('fieldset_condition', array('legend' => $this->__('Product Condition')));
@@ -202,7 +202,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                     'product_condition_source_attribute_code', 'select', array(
                         'name' => 'sales_options[product_condition_source_attribute_code]',
                         'class' => 'inline-select',
-                        'values' => Mage::getModel('diglin_ricento/config_source_sales_product_condition_source')->getAllOptions()
+                        'values' => Mage::getSingleton('diglin_ricento/config_source_sales_product_condition_source')->getAllOptions()
                     )
                 ))
             ),
@@ -211,13 +211,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCondition->addField('product_condition', 'select', array(
             'name' => 'sales_options[product_condition]',
             'label' => $this->getConditionLabel(),
-            'values' => Mage::getModel('diglin_ricento/config_source_sales_product_condition')->getAllOptions(),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_sales_product_condition')->getAllOptions(),
             'required' => true
         ));
         $fieldsetCondition->addField('product_warranty', 'select', array(
             'name' => 'sales_options[product_warranty]',
             'label' => $this->__('Warranty'),
-            'values' => Mage::getModel('diglin_ricento/config_source_sales_warranty')->getAllOptions(),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_sales_warranty')->getAllOptions(),
             'onchange' => 'salesOptionsForm.toggleWarrantyCondition(this);'
         ));
         $fieldsetCondition->addField('product_warranty_condition', 'textarea', array(
@@ -247,7 +247,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCustomization->addField('customization_template', 'select', array(
             'name' => 'sales_options[customization_template]',
             'label' => $this->__('Template'),
-            'values' => Mage::getModel('diglin_ricento/config_source_sales_template')->getAllOptions(),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_sales_template')->getAllOptions(),
             'note' => $this->__('To create one go to the <a href="%s">Ricardo Assistant</a>.', Mage::helper('diglin_ricento')->getRicardoAssistantUrl())
         ));
 
@@ -256,7 +256,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetPromotion->addField('promotion_space', 'radios_extensible', array(
             'name' => 'sales_options[promotion_space]',
             'label' => $this->__('Privilege Space'),
-            'values' => Mage::getModel('diglin_ricento/config_source_sales_promotion')->getAllOptions()
+            'values' => Mage::getSingleton('diglin_ricento/config_source_sales_promotion')->getAllOptions()
         ));
         $this->setForm($form);
 
@@ -360,7 +360,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
      */
     protected function _getDaysOptions()
     {
-        return Mage::getModel('diglin_ricento/config_source_sales_days');
+        return Mage::getSingleton('diglin_ricento/config_source_sales_days');
     }
 
     /**
@@ -368,7 +368,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
      */
     protected function _getReactivationOptions()
     {
-        return Mage::getModel('diglin_ricento/config_source_sales_reactivating');
+        return Mage::getSingleton('diglin_ricento/config_source_sales_reactivating');
     }
 
     /**
