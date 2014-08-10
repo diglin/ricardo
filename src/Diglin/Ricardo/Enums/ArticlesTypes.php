@@ -11,6 +11,8 @@ namespace Diglin\Ricardo\Enums;
 
 class ArticlesTypes extends AbstractEnums
 {
+    /* Ricardo API Enum article types */
+
     // All articles
     const ALL = 0;
 
@@ -44,15 +46,15 @@ class ArticlesTypes extends AbstractEnums
     public static function getEnums()
     {
         return array(
-            array('label' => 'All', 'value' => self::ALL),
-            array('label' => 'Vehicles', 'value' => self::VEHICLES),
-            array('label' => 'Core', 'value' => self::CORE),
-            array('label' => 'Accessories', 'value' => self::ACCESSORIES),
-            array('label' => 'Cars', 'value' => self::CARS),
-            array('label' => 'Bikes', 'value' => self::BIKES),
-            array('label' => 'Others', 'value' => self::OTHERS),
-            array('label' => 'Utilities', 'value' => self::UTILITIES),
-            array('label' => 'Cars and Bikes', 'value' => self::CARSANDBIKES)
+            array('label' => 'ALL', 'value' => self::ALL),
+            array('label' => 'VEHICLES', 'value' => self::VEHICLES),
+            array('label' => 'CORE', 'value' => self::CORE),
+            array('label' => 'ACCESSORIES', 'value' => self::ACCESSORIES),
+            array('label' => 'CARS', 'value' => self::CARS),
+            array('label' => 'BIKES', 'value' => self::BIKES),
+            array('label' => 'OTHERS', 'value' => self::OTHERS),
+            array('label' => 'UTILITIES', 'value' => self::UTILITIES),
+            array('label' => 'CARS_AND_BIKES', 'value' => self::CARSANDBIKES)
         );
     }
 }

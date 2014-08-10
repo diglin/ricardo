@@ -180,8 +180,8 @@ class SellerAccount extends ServiceAbstract
      */
     public function getArticles()
     {
-        $articleTypes = ArticlesTypes::All;
-        $closeStatus = CloseStatus::Closed;
+        $articleTypes = ArticlesTypes::ALL;
+        $closeStatus = CloseStatus::CLOSED;
         $isPlannedArticles = true;
         $lastModificationDate = Helper::getJsonDate();
 

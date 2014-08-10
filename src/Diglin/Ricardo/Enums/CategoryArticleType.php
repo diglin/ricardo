@@ -11,6 +11,8 @@ namespace Diglin\Ricardo\Enums;
 
 class CategoryArticleType extends AbstractEnums
 {
+    /* Ricardo API Enum category article type */
+
     // All articles
     const All = 0;
 
@@ -26,10 +28,10 @@ class CategoryArticleType extends AbstractEnums
     public static function getEnums()
     {
         return array(
-            array('label' => 'All', 'value' => self::ALL),
-            array('label' => 'Auction', 'value' => self::AUCTION),
-            array('label' => 'Buynow', 'value' => self::BUYNOW),
-            array('label' => 'Classified', 'value' => self::CLASSIFIED),
+            array('label' => 'ALL', 'value' => self::ALL),
+            array('label' => 'AUCTION', 'value' => self::AUCTION),
+            array('label' => 'BUYNOW', 'value' => self::BUYNOW),
+            array('label' => 'CLASSIFIED', 'value' => self::CLASSIFIED),
         );
     }
 }

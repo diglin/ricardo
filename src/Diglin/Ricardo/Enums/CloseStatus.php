@@ -11,6 +11,8 @@ namespace Diglin\Ricardo\Enums;
 
 class CloseStatus extends AbstractEnums
 {
+    /* Ricardo API Enum Close Status */
+
     // Open article
     const OPEN = 0;
 
@@ -26,9 +28,9 @@ class CloseStatus extends AbstractEnums
     public static function getEnums()
     {
         return array(
-            array('label' => 'Open', 'value' => self::OPEN),
-            array('label' => 'Closed', 'value' => self::CLOSED),
-            array('label' => 'Closed by customer', 'value' => self::CLOSED_BY_CUSTOMER)
+            array('label' => 'OPEN', 'value' => self::OPEN),
+            array('label' => 'CLOSED', 'value' => self::CLOSED),
+            array('label' => 'CLOSED_BY_CUSTOMER', 'value' => self::CLOSED_BY_CUSTOMER)
         );
     }
 }

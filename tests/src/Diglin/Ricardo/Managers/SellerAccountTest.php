@@ -71,7 +71,7 @@ class SellerAccountTest extends TestAbstract
     {
         //@todo create at least one or more article ids to do the test
 
-        $result = $this->_sellerAccountManager->getArticles(ArticlesTypes::All, CloseStatus::Open);
+        $result = $this->_sellerAccountManager->getArticles(ArticlesTypes::ALL, CloseStatus::OPEN);
 
         $this->assertGreaterThanOrEqual(0, count($result), 'No result found');
         $this->assertArrayHasKey('ArticleId', $result[0], 'No article ID found');
