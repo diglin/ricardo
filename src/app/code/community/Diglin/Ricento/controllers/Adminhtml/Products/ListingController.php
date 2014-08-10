@@ -90,8 +90,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->_redirect('*/*/index');
             return;
         }
-        $this->loadLayout();
-        $this->renderLayout();
+
+        try {
+            $this->loadLayout();
+            $this->renderLayout();
+        } catch (Diglin_Ricento_Exception $e) {
+            $this->_getSession()->addError($this->__('The action you try to do, is not possible. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
+            $this->_redirectUrl($this->_getIndexUrl());
+        }
     }
 
     /**
@@ -223,6 +229,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     {
         $this->saveAction();
         $this->listAction();
+
     }
 
     /**
@@ -303,9 +310,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->_redirect('*/*/index');
             return;
         }
-        $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_LISTED)->save();
-        //TODO set status for items as well if necessary
-        $this->_getSession()->addSuccess($this->__('The listing has been listed.'));
+
+        try {
+            $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_LISTED)->save();
+            //TODO set status for items as well if necessary
+            $this->_getSession()->addSuccess($this->__('The listing has been listed.'));
+        } catch (Diglin_Ricento_Exception $e) {
+            $this->_getSession()->addError($this->__('It\'s s not possible to list the product listing. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
+        }
         $this->_redirect('*/*/index');
     }
 
@@ -321,7 +333,11 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             return;
         }
         //TODO relist items
-        $this->_getSession()->addSuccess($this->__('Products relisted.'));
+        try {
+            $this->_getSession()->addSuccess($this->__('Products relisted.'));
+        } catch (Diglin_Ricento_Exception $e) {
+            $this->_getSession()->addError($this->__('It\'s s not possible to list the product listing. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
+        }
         $this->_redirect('*/*/index');
     }
 
@@ -342,8 +358,12 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         //TODO set status for items as well if necessary
         // @todo stop list items on ricardo side, if an item cannot be stopped, prevent the user
 
-        $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_STOPPED)->save();
-        $this->_getSession()->addSuccess($this->__('Listing stopped.'));
+        try {
+            $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_STOPPED)->save();
+            $this->_getSession()->addSuccess($this->__('Listing stopped.'));
+        } catch (Diglin_Ricento_Exception $e) {
+            $this->_getSession()->addError($this->__('It\'s s not possible to list the product listing. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
+        }
         $this->_redirect('*/*/index');
     }
 

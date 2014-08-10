@@ -26,10 +26,11 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
             }
 
             $securityService = Mage::getSingleton('diglin_ricento/api_services_security');
-            $securityServiceModel = $securityService->getServiceModel($websiteId);
+            /* @var $securityServiceModel Diglin\Ricardo\Managers\Security */
+            $securityServiceModel = $securityService->setCurrentWebsite($websiteId);
 
             try {
-                // Save the temporary token
+                // Save the temporary token created after to got the validation url from Diglin_Ricento_Model_Api_Services_Security
                 $apiToken = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $websiteId);
                 $apiToken
                     ->setWebsiteId($websiteId)
@@ -59,7 +60,7 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
             } catch (Exception $e) {
                 Mage::logException($e);
                 Mage::log($securityService->getLastApiDebug($websiteId), Zend_Log::DEBUG);
-                $this->_getSession()->addError($this->__('An error occurred while saving the token. Please, check your exception log.'));
+                $this->_getSession()->addError($this->__('An error occurred while saving the token. Please, check your log files.'));
             }
         } else {
             $this->_getSession()->addError($this->__('Authorization was not successful on Ricardo side. Please, contact Ricardo to find out the reason.'));

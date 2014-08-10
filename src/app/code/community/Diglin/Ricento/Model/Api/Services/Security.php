@@ -8,7 +8,6 @@
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 
-use \Diglin\Ricardo\Managers\Security;
 use \Diglin\Ricardo\Services\ServiceAbstract;
 
 /**
@@ -22,16 +21,19 @@ class Diglin_Ricento_Model_Api_Services_Security extends Diglin_Ricento_Model_Ap
     protected $_serviceName = 'Security';
 
     /**
-     * @param int|Mage_Core_Model_Website $website
-     * @return Security
+     * Overwritten because the Service Manager has already instanciated the Security Manager model
+     *
+     * Be aware that using directly this method to use the methods of the object instead of using
+     * the magic methods of the abstract (__call, __get, __set) will prevent to use the cache of Magento
+     *
+     * @return \Diglin\Ricardo\Managers\Security
      */
-    public function getServiceModel($website = 0)
+    public function getServiceModel()
     {
-        $websiteId = Mage::app()->getWebsite($website)->getId();
-        $key = $this->_serviceName . $websiteId;
+        $key = $this->_serviceName . $this->getCurrentWebsite()->getId();
 
         if (!Mage::registry($key)) {
-            Mage::register($key, $this->getServiceManager($websiteId)->getSecurityManager());
+            Mage::register($key, $this->getServiceManager()->getSecurityManager());
         }
 
         return Mage::registry($key);
@@ -40,20 +42,20 @@ class Diglin_Ricento_Model_Api_Services_Security extends Diglin_Ricento_Model_Ap
     /**
      * Get the validation Url necessary if simulation of authorization process is not allowed
      *
-     * @param Mage_Core_Model_Website $website
      * @return string
      */
-    public function getValidationUrl($website)
+    public function getValidationUrl()
     {
-        $websiteId = Mage::app()->getWebsite($website)->getId();
-        $validationUrl = $this->getServiceModel($websiteId)->getValidationUrl();
+        $websiteId = $this->getCurrentWebsite()->getId();
+        $serviceModel = $this->getServiceModel();
+        $validationUrl = $serviceModel->getValidationUrl();
 
         // Refresh the database cause of new data after getting validation url
         $apiToken = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $websiteId);
         $apiToken
             ->setWebsiteId($websiteId)
-            ->setToken($this->getServiceModel()->getTemporaryToken())
-            ->setExpirationDate($this->getServiceModel()->getTemporaryTokenExpirationDate())
+            ->setToken($serviceModel->getTemporaryToken())
+            ->setExpirationDate($serviceModel->getTemporaryTokenExpirationDate())
             ->setTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY)
             ->save();
 

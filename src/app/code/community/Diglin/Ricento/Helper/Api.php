@@ -38,7 +38,9 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
      */
     public function isApiTokenCredentialGoingToExpire($website = 0)
     {
-        $token = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, Mage::app()->getWebsite($website)->getId());
+        $token = Mage::getModel('diglin_ricento/api_token')
+            ->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, Mage::app()->getWebsite($website)->getId());
+
         $expirationDate = $token->getExpirationDate();
         $dayDelay = Mage::helper('diglin_ricento')->getExpirationNotificationDelay();
 
@@ -59,7 +61,8 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
      */
     public function isApiTokenCredentialExists($website = 0)
     {
-        $token = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, Mage::app()->getWebsite($website)->getId());
+        $token = Mage::getModel('diglin_ricento/api_token')
+            ->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, Mage::app()->getWebsite($website)->getId());
         return ($token->getId()) ? true : false;
     }
 
@@ -77,5 +80,17 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
         }
 
         return $time + $sessionDuration;
+    }
+
+    /**
+     * Calculate the session start time
+     *
+     * @param int $sessionDuration in minutes
+     * @param null $time
+     * @return int|null
+     */
+    public function calculateSessionStart($sessionDuration, $time)
+    {
+        return strtotime($time) - ($sessionDuration * 60);
     }
 }

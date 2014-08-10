@@ -25,12 +25,13 @@ class Diglin_Ricento_Model_Api_Services_System extends Diglin_Ricento_Model_Api_
 
     /**
      * Overwritten just to get the class/method auto completion
+     * Be aware that using directly this method to use the methods of the object instead of using
+     * the magic methods of the abstract (__call, __get, __set) will prevent to use the cache of Magento
      *
-     * @param int|Mage_Core_Model_Website $website
      * @return \Diglin\Ricardo\Managers\System
      */
-    public function getServiceModel($website = 0)
+    public function getServiceModel()
     {
-        return parent::getServiceModel($website);
+        return parent::getServiceModel();
     }
 }
