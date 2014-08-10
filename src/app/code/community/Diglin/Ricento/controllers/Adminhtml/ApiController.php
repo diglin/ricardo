@@ -27,11 +27,14 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
 
             $securityService = Mage::getSingleton('diglin_ricento/api_services_security');
             /* @var $securityServiceModel Diglin\Ricardo\Managers\Security */
-            $securityServiceModel = $securityService->setCurrentWebsite($websiteId);
+            $securityServiceModel = $securityService
+                ->setCurrentWebsite($websiteId)
+                ->getServiceModel(); // Get Service Model instead to use __call method, prevent caching but also some logic
 
             try {
                 // Save the temporary token created after to got the validation url from Diglin_Ricento_Model_Api_Services_Security
-                $apiToken = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $websiteId);
+                $apiToken = Mage::getModel('diglin_ricento/api_token')
+                    ->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $websiteId);
                 $apiToken
                     ->setWebsiteId($websiteId)
                     ->setToken($temporaryToken)
@@ -46,15 +49,17 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
                     ->setTemporaryToken($temporaryToken);
 
                 // Save the credential token for future use
-                $apiToken = Mage::getModel('diglin_ricento/api_token');
+                $apiToken = Mage::getModel('diglin_ricento/api_token')
+                    ->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_IDENTIFIED, $websiteId);
+
                 $apiToken
                     ->setWebsiteId($websiteId)
-                    ->setToken($securityServiceModel->getTokenCredential())
+                    ->setToken($securityServiceModel->getCredentialToken())
                     ->setTokenType(ServiceAbstract::TOKEN_TYPE_IDENTIFIED)
-                    ->setExpirationDate($securityServiceModel->getTokenCredentialExpirationDate())
-                    ->setSessionDuration($securityServiceModel->getTokenCredentialSessionDuration())
+                    ->setExpirationDate($securityServiceModel->getCredentialTokenExpirationDate())
+                    ->setSessionDuration($securityServiceModel->getCredentialTokenSessionDuration())
                     ->setSessionExpirationDate(
-                        Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($securityServiceModel->getTokenCredentialSessionDuration(), $securityServiceModel->getTokenCredentialSessionStart()))
+                        Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($securityServiceModel->getCredentialTokenSessionDuration(), $securityServiceModel->getCredentialTokenSessionStart()))
                     ->save();
 
             } catch (Exception $e) {
@@ -65,6 +70,7 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
         } else {
             $this->_getSession()->addError($this->__('Authorization was not successful on Ricardo side. Please, contact Ricardo to find out the reason.'));
         }
+
         $this->_redirect('adminhtml');
     }
 }

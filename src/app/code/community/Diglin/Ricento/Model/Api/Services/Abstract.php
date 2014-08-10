@@ -150,7 +150,6 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
             ->getLastDebug($flush);
     }
 
-
     /**
      * Magic method to getter/setter methods from Ricardo API library, save in cache the getter
      *
@@ -320,7 +319,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                 ->setToken($security->getCredentialToken())
                 ->setTokenType(ServiceAbstract::TOKEN_TYPE_IDENTIFIED)
                 ->setSessionExpirationDate(
-                    Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($security->getTokenCredentialSessionDuration(), $security->getTokenCredentialSessionStart())
+                    Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($security->getCredentialTokenSessionDuration(), $security->getCredentialTokenSessionStart())
                 )
                 ->save();
 
@@ -344,14 +343,15 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
             $token->delete();
         }
 
-        $security = Mage::getSingleton('diglin_ricento/api_services_security');
+        $security = Mage::getSingleton('diglin_ricento/api_services_security')->getServiceModel();
+
         Mage::getModel('diglin_ricento/api_token')
             ->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $this->getCurrentWebsite()->getId())
             ->setToken($security->getTemporaryToken())
             ->setWebsiteId($this->getCurrentWebsite()->getId())
             ->setTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY)
             ->setExpirationDate(
-                    Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($security->getTokenCredentialSessionDuration(), $security->getTokenCredentialSessionStart())
+                    Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($security->getCredentialTokenSessionDuration(), $security->getCredentialTokenSessionStart())
                 )
             ->save();
 
