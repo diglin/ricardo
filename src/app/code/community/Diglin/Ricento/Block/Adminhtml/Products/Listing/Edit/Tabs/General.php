@@ -45,6 +45,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
 
         $fieldsetLang = $form->addFieldset('fieldset_lang', array('legend' => $this->__('Language')));
         $fieldsetLang->addField('publish_languages', 'select', array(
+            'name'      => 'publish_languages',
             'label'    => $this->__('Product languages to synchronize to Ricardo.ch'),
             'note'     => $this->__('Ricardo.ch supports only two languages at the moment: German and French. You can set in which language you want to publish your product content (title, subtitle, description, etc).'),
             'values'   => Mage::getSingleton('diglin_ricento/config_source_languages')->getAllOptions(),
@@ -53,6 +54,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
 
         ));
         $fieldsetLang->addField('default_language', 'select', array(
+            'name'     => 'default_language',
             'label'    => $this->__('Default language to publish'),
             'note'     => $this->__('Which language to publish by default to Ricardo.ch when the product content is not available in a language'),
             'values'   => Mage::getSingleton('diglin_ricento/config_source_languages')->getAllOptions(false),

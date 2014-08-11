@@ -18,7 +18,7 @@ $installer->getConnection()->changeColumn($salesOptions, 'customization_template
     'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
     'length' => 10,
     'nullable' => true,
-    'default' => null,
+    'default' => '-1',
     'comment' => 'Custom Template Id'));
 
 $installer->endSetup();
