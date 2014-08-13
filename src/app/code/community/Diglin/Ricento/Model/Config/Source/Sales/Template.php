@@ -14,21 +14,24 @@
 class Diglin_Ricento_Model_Config_Source_Sales_Template extends Diglin_Ricento_Model_Config_Source_Abstract
 {
     /**
+     * @var array
+     */
+    protected $_templates = array();
+
+    /**
      * @return array
      */
     public function toOptionHash()
     {
-        $templates = Mage::getSingleton('diglin_ricento/api_services_selleraccount')->getTemplates();
+        if (empty($this->_templates)) {
+            $templates = Mage::getSingleton('diglin_ricento/api_services_selleraccount')->getTemplates();
 
-        $result = array('-1' => Mage::helper('diglin_ricento')->__('None'));
-        foreach ($templates as $template) {
-            $result[$template['TemplateId']] = $template['TemplateName'];
+            $this->_templates = array('-1' => Mage::helper('diglin_ricento')->__('None'));
+            foreach ($templates as $template) {
+                $this->_templates[$template['TemplateId']] = $template['TemplateName'];
+            }
         }
 
-        if (empty($result)) {
-            $result[''] = Mage::helper('diglin_ricento')->__('No Template found');
-        }
-
-        return $result;
+        return $this->_templates;
     }
 }

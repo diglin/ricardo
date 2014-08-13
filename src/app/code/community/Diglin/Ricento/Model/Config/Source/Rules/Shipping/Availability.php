@@ -13,31 +13,18 @@
  */
 class Diglin_Ricento_Model_Config_Source_Rules_Shipping_Availability extends Diglin_Ricento_Model_Config_Source_Abstract
 {
-    /**
-     * @return array
-     */
-//    public function toOptionHash()
-//    {
-//        // TODO: implement
-//        return array(
-//            '' => '- Select Availability -',
-//            1  => '1 business day',
-//            2  => '2 business days',
-//            3  => '3 business days',
-//            4  => 'None (description)',
-//        );
-//    }
+    protected $_availabilities = array();
 
     public function toOptionHash()
     {
-        $availabilities = Mage::getSingleton('diglin_ricento/api_services_system')->getAvailabilities();
+        if (empty($this->_availabilities)) {
+            $availabilities = Mage::getSingleton('diglin_ricento/api_services_system')->getAvailabilities();
 
-        $availabilitiiesReturn = array();
-
-        foreach ($availabilities as $availabilitiy)
-            if (isset($availabilitiy['AvailabilityId'])) {
-                $availabilitiiesReturn[$availabilitiy['AvailabilityId']] = $availabilitiy['AvailabilityText'];
-            }
-        return $availabilitiiesReturn;
+            foreach ($availabilities as $availabilitiy)
+                if (isset($availabilitiy['AvailabilityId'])) {
+                    $this->_availabilities[$availabilitiy['AvailabilityId']] = $availabilitiy['AvailabilityText'];
+                }
+        }
+        return $this->_availabilities;
     }
 }

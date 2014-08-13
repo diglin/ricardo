@@ -14,19 +14,26 @@
 class Diglin_Ricento_Model_Config_Source_Sales_Product_Condition extends Diglin_Ricento_Model_Config_Source_Abstract
 {
     /**
+     * @var array
+     */
+    protected $_articleConditions = array();
+
+    /**
      * Return options as value => label array
      *
      * @return array
      */
     public function toOptionHash()
     {
-        $articleConditions = Mage::getSingleton('diglin_ricento/api_services_system')->getArticleConditions();
+        if (empty($this->_articleConditions)) {
+            $articleConditions = Mage::getSingleton('diglin_ricento/api_services_system')->getArticleConditions();
 
-        $result = array(null => Mage::helper('diglin_ricento')->__('-- Please Select --'));
-        foreach ($articleConditions as $condition) {
-            $result[$condition['ArticleConditionId']] = $condition['ArticleConditionText'];
+            $this->_articleConditions = array(null => Mage::helper('diglin_ricento')->__('-- Please Select --'));
+            foreach ($articleConditions as $condition) {
+                $this->_articleConditions[$condition['ArticleConditionId']] = $condition['ArticleConditionText'];
+            }
         }
 
-        return $result;
+        return $this->_articleConditions;
     }
 }

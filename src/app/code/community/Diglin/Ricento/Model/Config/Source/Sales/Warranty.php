@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Diglin GmbH - Switzerland
  *
@@ -12,18 +13,21 @@ class Diglin_Ricento_Model_Config_Source_Sales_Warranty extends Diglin_Ricento_M
     const FOLLOW_CONDITION = 0;
     const NONE = 1;
 
+    protected $_warranties = array();
+
     /**
      * @return array
      */
     public function toOptionHash()
     {
-        $warranties = Mage::getSingleton('diglin_ricento/api_services_system')->getWarranties();
+        if (empty($this->_warranties)) {
+            $warranties = Mage::getSingleton('diglin_ricento/api_services_system')->getWarranties();
 
-        $result = array();
-        foreach ($warranties as $warranty) {
-            $result[$warranty['WarrantyId']] = $warranty['WarrantyConditionText'];
+            foreach ($warranties as $warranty) {
+                $this->_warranties[$warranty['WarrantyId']] = $warranty['WarrantyConditionText'];
+            }
         }
 
-        return $result;
+        return $this->_warranties;
     }
 }

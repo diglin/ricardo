@@ -14,6 +14,7 @@
 class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ricento_Controller_Adminhtml_Products_Listing
 {
     protected $_productIds = array();
+
     /**
      * @return Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection
      */
@@ -22,7 +23,7 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         /* @var $itemCollection Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection */
         $itemCollection = Mage::getModel('diglin_ricento/products_listing_item')->getCollection();
         if ($this->getRequest()->isPost()) {
-            $this->_productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
+            $this->_productIds = array_map('intval', (array)$this->getRequest()->getPost('product', array()));
         } else {
             $this->_productIds = array_map('intval', explode(',', $this->getRequest()->getParam('product')));
         }
@@ -37,6 +38,7 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
 
         return $itemCollection;
     }
+
     /**
      * Returns items that are selected to be configured
      *

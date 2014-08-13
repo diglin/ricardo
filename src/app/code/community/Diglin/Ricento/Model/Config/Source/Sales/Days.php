@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Diglin GmbH - Switzerland
  *
@@ -9,25 +10,36 @@
  */
 class Diglin_Ricento_Model_Config_Source_Sales_Days extends Diglin_Ricento_Model_Config_Source_Abstract
 {
+    /**
+     * @var array
+     */
+    protected $_days = array();
+
+    /**
+     * @return array
+     */
     public function toOptionHash()
     {
-        $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
+        if (empty($this->_days)) {
+            $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
 
-        $duration = array(2);
+            // Default duration
+            $duration = array(2);
 
-        if (isset($partnerConfiguration['MaxSellingDuration'])) {
-            if ($partnerConfiguration['MinSellingDuration'] == 1) {
-                $minDuration = $partnerConfiguration['MinSellingDuration'] + 1;
-            } else {
-                $minDuration = $partnerConfiguration['MinSellingDuration'];
+            if (isset($partnerConfiguration['MaxSellingDuration'])) {
+                if ($partnerConfiguration['MinSellingDuration'] == 1) {
+                    $minDuration = $partnerConfiguration['MinSellingDuration'] + 1;
+                } else {
+                    $minDuration = $partnerConfiguration['MinSellingDuration'];
+                }
+                $duration = range($minDuration, $partnerConfiguration['MaxSellingDuration'], 2);
             }
-            $duration = range($minDuration, $partnerConfiguration['MaxSellingDuration'], 2);
+
+            foreach ($duration as $day) {
+                $this->_days[$day] = $day;
+            }
         }
 
-        foreach ($duration as $day) {
-            $return[$day] = $day;
-        }
-
-        return $return;
+        return $this->_days;
     }
 }
