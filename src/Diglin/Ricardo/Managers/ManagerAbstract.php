@@ -79,18 +79,22 @@ abstract class ManagerAbstract
                     $this->_serviceManager->getSecurityManager()->refreshToken();
                     self::_proceed($method, $parameters);
                     break;
-                case SecurityErrorsEnum::TOKENERROR:
+                case SecurityErrorsEnum::TOKENERROR: // @todo token error = 7 can also be due after a refresh token with an unecessary refresh
                 case SecurityErrorsEnum::TOKENEXPIRED:
-                case SecurityErrorsEnum::TEMPORAYCREDENTIALEXPIRED:
                 case SecurityErrorsEnum::TEMPORAYCREDENTIALUNVALIDATED:
                     // We init the validation url to be used later in any process (e.g. re-authorization)
                     $this->_serviceManager->getSecurityManager()->getValidationUrl(true);
                     throw new SecurityErrors('Token Credential must be recreated! Please, authorize again the access to the Ricardo API', SecurityErrorsEnum::TOKEN_AUTHORIZATION);
                     break;
+                case SecurityErrorsEnum::TEMPORAYCREDENTIALEXPIRED:
+                    $this->_serviceManager->getSecurityManager()->getTemporaryToken(true);
+                    $result = self::_proceed($method, $parameters);
+                    break;
                 default:
                     throw $e;
                     break;
             }
+            // @todo detect ErrorCodesType Technical and throw Exception to the user (happened when trying to get anonymous token at 8:17 12.08.2014)
         }
 
         return $result;

@@ -225,21 +225,23 @@ class Security extends ManagerAbstract
     public function getCredentialToken()
     {
         if ($this->_credentialToken && !$this->isDateExpired($this->_credentialTokenExpirationDate)
-            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) > time()
+//            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) > time()
         ) {
             return $this->_credentialToken;
         }
 
-        if ($this->_credentialToken && $this->_credentialTokenSessionDuration
-            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) < time()
-        ) {
-            return $this->refreshToken($this->_credentialToken);
-        }
+//        if ($this->_credentialToken && $this->_credentialTokenSessionDuration
+//            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) < time()
+//        ) {
+//            return $this->refreshToken($this->_credentialToken);
+//        }
 
         // Temporary Token must be created before to simulate the authorization
+        // @todo move this line of code into the allow simulate part and set the temporary token with setter when needed to minimize API call
         $temporaryToken = $this->getTemporaryToken();
 
         if ($this->_allowSimulateAuthorization) {
+            $this->getTemporaryToken();
             $this->simulateValidationUrl();
         }
 
