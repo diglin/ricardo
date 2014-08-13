@@ -24,10 +24,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $this->setSaveParametersInSession(true);
         $this->setUseAjax(true);
     }
+
     public function getGridUrl()
     {
         return $this->getUrl('*/*/productsGrid', array('id' => $this->getListing()->getId()));
     }
+
+    public function getRowUrl($item)
+    {
+        return $this->getUrl('*/products_listing_item/configure', array('id' => $this->getListing()->getId(), 'product' => $item->getId()));
+    }
+
     /**
      * @return Diglin_Ricento_Model_Products_Listing
      */
@@ -45,6 +52,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('sku')
             ->addAttributeToSelect('type_id')
+            ->addAttributeToSelect('price')
             ->joinField('stock_qty',
                 'cataloginventory/stock_item',
                 'qty',
@@ -100,6 +108,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $this->addColumn('name', array(
             'header'    => Mage::helper('catalog')->__('Name'),
             'index'     => 'name'
+        ));
+
+        $store = Mage::app()->getWebsite($this->getListing()->getWebsiteId())->getDefaultStore();
+        $this->addColumn('price', array(
+            'header'=> Mage::helper('catalog')->__('Price'),
+            'type'  => 'price',
+            'currency_code' => $store->getBaseCurrency()->getCode(),
+            'index' => 'price'
         ));
         $this->addColumn('type', array(
             'header'    => Mage::helper('catalog')->__('Type'),
