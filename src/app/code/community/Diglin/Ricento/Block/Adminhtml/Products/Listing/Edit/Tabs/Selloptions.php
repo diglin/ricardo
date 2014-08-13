@@ -364,11 +364,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     }
 
     /**
-     * @return Diglin_Ricento_Model_Config_Source_Sales_Reactivating
+     * @return Diglin_Ricento_Model_Config_Source_Sales_Reactivation
      */
     protected function _getReactivationOptions()
     {
-        return Mage::getSingleton('diglin_ricento/config_source_sales_reactivating');
+        return Mage::getSingleton('diglin_ricento/config_source_sales_reactivation');
     }
 
     /**
