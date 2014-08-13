@@ -44,7 +44,7 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
             $this->_buildRicardoCategoryTree();
         }
         if (!$this->getCategory($parentId)) {
-            Mage::log("Ricardo category ID {$parentId} not found.", Zend_Log::WARN, 'ricento.log');
+            Mage::log("Ricardo category ID {$parentId} not found.", Zend_Log::WARN, Diglin_Ricento_Helper_Data::LOG_FILE);
             return array();
         }
         return $this->getCategory($parentId)->getChildren();

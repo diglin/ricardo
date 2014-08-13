@@ -62,9 +62,10 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
                         Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($securityServiceModel->getCredentialTokenSessionDuration(), $securityServiceModel->getCredentialTokenSessionStart()))
                     ->save();
 
+                // @todo add catch for security authorization exception
             } catch (Exception $e) {
                 Mage::logException($e);
-                Mage::log($securityService->getLastApiDebug($websiteId), Zend_Log::DEBUG);
+                Mage::log($securityService->getLastApiDebug($websiteId), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
                 $this->_getSession()->addError($this->__('An error occurred while saving the token. Please, check your log files.'));
             }
         } else {
