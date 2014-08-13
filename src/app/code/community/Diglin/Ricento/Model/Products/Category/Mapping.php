@@ -105,7 +105,7 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
      */
     protected function _getRicardoCategoryData()
     {
-        $categories = Mage::getSingleton('diglin_ricento/api_services_system')->getCategories();
+        $categories = Mage::getSingleton('diglin_ricento/config_source_categories')->toOptionHash();
         usort($categories, array(__CLASS__, 'sortByLevelAndName'));
         return $categories;
     }
