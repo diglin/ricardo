@@ -67,7 +67,7 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
      */
     protected function _afterLoad()
     {
-        if (!empty($this->_data['payment_methods'])) {
+        if (isset($this->_data['payment_methods']) && !is_null($this->_data['payment_methods'])) {
             $this->_data['payment_methods'] = explode(',', $this->_data['payment_methods']);
         } else {
             $this->_data['payment_methods'] = array();
@@ -82,7 +82,7 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
      */
     protected function _afterSave()
     {
-        if (!empty($this->_data['payment_methods'])) {
+        if (isset($this->_data['payment_methods']) && !is_null($this->_data['payment_methods'])) {
             $this->_data['payment_methods'] = explode(',', $this->_data['payment_methods']);
         } else {
             $this->_data['payment_methods'] = array();
