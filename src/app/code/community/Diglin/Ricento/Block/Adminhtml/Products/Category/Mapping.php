@@ -29,9 +29,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping extends Mage_Admi
                 ->setLevel(1)
                 ->setCategoryId(1)
         );
+
         $this->setChild('sublevel',
             $this->getLayout()->createBlock('core/text_list')
         );
+
         if ($this->getCategoryId() != Diglin_Ricento_Model_Products_Category_Mapping::ROOT_CATEGORY_ID) {
             /* @var $mapping Diglin_Ricento_Model_Products_Category_Mapping */
             $mapping = Mage::getModel('diglin_ricento/products_category_mapping');
@@ -48,6 +50,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping extends Mage_Admi
                 );
                 $category = $mapping->getCategory($category->getParentId()); //TODO reference parent from child
             }
+
             if ($category) {
                 $this->getChild('toplevel')->setSelectedCategoryId($category->getId());
             }

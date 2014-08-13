@@ -17,9 +17,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Form_Renderer_Mapping
      */
     public function getElementHtml()
     {
+        $value = $this->getEscapedValue();
+        if (!empty($value)) {
+            // @fixme maybe better to save the category name into the DB for performance reason
+            $categoryName = Mage::getSingleton('diglin_ricento/products_category_mapping')->getCategory($value)->getCategoryName();
+            $text = $categoryName;
+        } else {
+            $text = Mage::helper('diglin_ricento')->__('No Selection');
+        }
+
         $this->addClass('button');
         $html = '';
-        $html .= '<span id="'.$this->getHtmlId().'_title" class="ricardo_categories_title">' . Mage::helper('diglin_ricento')->__('No Selection') . '</span>';
+        $html .= '<span id="'.$this->getHtmlId().'_title" class="ricardo_categories_title">' . $text . '</span>';
         $html .= '<button type="button"' . $this->serialize($this->getHtmlAttributes())
             . ' onclick="Ricento.categoryMappingPopup(\'' . Mage::helper('adminhtml')->getUrl('ricento/products_category/mapping', array('id' => '#ID#')) . '\', $(\''. $this->getHtmlId() .'\'),  $(\''. $this->getHtmlId() .'_title\'))"'
             . ' id="'. $this->getHtmlId() .'_button">' . Mage::helper('diglin_ricento')->__('Open Ricardo Category Window') . '</button>'."\n";
