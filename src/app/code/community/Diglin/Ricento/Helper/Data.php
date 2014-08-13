@@ -10,6 +10,8 @@
 
 /**
  * Class Diglin_Ricento_Helper_Data
+ *
+ * @todo remove almost all $website and getWebsiteConfig as the configuration is not anymore on website base but default values configuration
  */
 class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 {

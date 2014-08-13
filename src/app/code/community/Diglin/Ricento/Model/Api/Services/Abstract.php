@@ -63,10 +63,10 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
      */
     public function getCurrentWebsite()
     {
-        $registryProductListing = Mage::registry('products_listing');
-        if ($registryProductListing instanceof Diglin_Ricento_Model_Products_Listing && $registryProductListing->getWebsiteId()) {
-            $this->_currentWebsite = $registryProductListing->getWebsiteId();
-        }
+//        $registryProductListing = Mage::registry('products_listing');
+//        if ($registryProductListing instanceof Diglin_Ricento_Model_Products_Listing && $registryProductListing->getWebsiteId()) {
+//            $this->_currentWebsite = $registryProductListing->getWebsiteId();
+//        }
         return Mage::app()->getWebsite($this->_currentWebsite);
     }
 

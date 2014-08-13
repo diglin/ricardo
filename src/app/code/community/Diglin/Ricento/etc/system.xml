@@ -63,7 +63,7 @@
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>1</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </enabled>
 
@@ -121,7 +121,7 @@
                             <sort_order>20</sort_order>
                             <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </api_de>
                         <partner_id_de module="diglin_ricento" translate="label comment">
@@ -129,7 +129,7 @@
                             <frontend_type>text</frontend_type>
                             <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[Partner ID has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -140,7 +140,7 @@
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -151,7 +151,7 @@
                             <sort_order>35</sort_order>
                             <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </api_fr>
                         <partner_id_fr module="diglin_ricento" translate="label comment">
@@ -159,7 +159,7 @@
                             <frontend_type>text</frontend_type>
                             <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[Partner ID has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -170,7 +170,7 @@
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
                             <sort_order>45</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -181,7 +181,7 @@
                             <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
                             <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </general_api_config>
                         <dev_mode module="diglin_ricento" translate="label comment">
@@ -191,7 +191,7 @@
                             <comment><![CDATA[If you enable tihs configuration, all API requests will be send to the Ricardo Sandbox instead to use the production servers. Be aware, you have to provide others partner IDs and Passwords specific for dev environment.]]></comment>
                             <sort_order>55</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </dev_mode>
                         <debug module="diglin_ricento" translate="label comment">
@@ -201,7 +201,7 @@
                             <comment><![CDATA[Write into the var/log/ricento.log file all requests sent to the Ricardo API. Enable it to help us to suppport you and send this file to us if you have an issue. Your passwords will be anonymized.]]></comment>
                             <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </debug>
                     </fields>
