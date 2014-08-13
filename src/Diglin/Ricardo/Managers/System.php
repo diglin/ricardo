@@ -276,12 +276,13 @@ class System extends ManagerAbstract
     }
 
     /**
+     * @param int|null $paymentMethodId
      * @return array
      */
-    public function getPaymentConditions()
+    public function getPaymentConditions($paymentMethodId = null)
     {
         if (empty($this->_paymentConditions)) {
-            $this->_paymentConditions = $this->_proceed('PaymentConditions');
+            $this->_paymentConditions = $this->_proceed('PaymentConditions', $paymentMethodId);
         }
         return $this->_paymentConditions;
     }

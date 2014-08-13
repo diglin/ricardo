@@ -292,13 +292,42 @@ class SellerAccount extends ServiceAbstract
 
     /**
      * Gets the payment options for a seller.
+     *
+     * @param int $customerId
+     * @return array
      */
-    public function getPaymentOptions()
+    public function getPaymentOptions($customerId = null)
     {
         return array(
             'method' => 'GetPaymentOptions',
-            'params' => array('GetPaymentOptionsParameter')
+            'params' => array('GetPaymentOptionsParameter' => array('CustomerId' => $customerId))
         );
+    }
+
+    /**
+     *  Gets the payment conditions and payment function associated result
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "GetPaymentOptionsResult": {
+     *       "CardPaymentActiveOnAllProducts": BOOL
+     *       "CardPaymentOptionAvailable": BOOL
+     *       "CustomerId": INT
+     *       "LastPaymentOptionUpdateDate": DATETIME
+     *      }
+     *   }
+     * </pre>
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getPaymentOptionsResult($data)
+    {
+        if (isset($data['GetPaymentOptionsResult'])) {
+            return $data['GetPaymentOptionsResult'];
+        }
+        return array();
     }
 
     /**

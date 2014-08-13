@@ -785,13 +785,14 @@ class System extends ServiceAbstract
     /**
      * Gets the payment conditions.
      *
+     * @param int $paymentMethodId
      * @return array
      */
-    public function getPaymentConditions()
+    public function getPaymentConditions($paymentMethodId = null)
     {
         return array(
             'method' => 'GetPaymentConditions',
-            'params' => array('getPaymentConditionsParameter' => array())
+            'params' => array('getPaymentConditionsParameter' => array('PaymentMethodId' => $paymentMethodId))
         );
     }
 
@@ -826,13 +827,14 @@ class System extends ServiceAbstract
     /**
      * Gets the payment conditions and payment function associated.
      *
+     * @param int $paymentMethodId
      * @return array
      */
-    public function getPaymentConditionsAndMethods()
+    public function getPaymentConditionsAndMethods($paymentMethodId = null)
     {
         return array(
             'method' => 'GetPaymentConditionsAndMethods',
-            'params' => array('getPaymentConditionsParameter' => array())
+            'params' => array('getPaymentConditionsParameter' => array('PaymentMethodId' => $paymentMethodId))
         );
     }
 

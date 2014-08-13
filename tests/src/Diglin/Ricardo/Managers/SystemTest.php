@@ -92,7 +92,7 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('PackageSizes', $result[0], 'PackageSizes is missing');
         $this->assertArrayHasKey('PackageSizeCost', $result[0]['PackageSizes'][0], 'Delivery Package Size data structure is wrong');
 
-        //echo 'Delivery Conditions ' . print_r($result, true);
+        echo 'Delivery Conditions ' . print_r($result, true);
     }
 
     /**
@@ -152,7 +152,7 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('DomainName', $result, 'Configuration DomainName missing');
         $this->assertArrayHasKey('MaxSellingDuration', $result, 'Configuration MaxSellingDuration missing');
 
-        //print_r($result);
+        echo 'PArtner Configuration: ' . print_r($result, true);
     }
 
     public function testGetPaymentConditions()
@@ -164,7 +164,7 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition PaymentConditionText missing');
         $this->assertArrayHasKey('PaymentMethods', $result[0], 'Payment Condition PaymentMethods missing');
 
-        //echo 'Payment Conditions ' . print_r($result, true);
+        echo 'Payment Conditions ' . print_r($result, true);
 
         return $result[0]['PaymentConditionId'];
     }
@@ -180,7 +180,7 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition & Methods PaymentConditionText missing');
         $this->assertArrayHasKey('PaymentMethods', $result[0], 'Payment Condition & Methods PaymentMethods missing');
 
-        //echo 'Payment Conditions & Methods' . print_r($result, true);
+        echo 'Payment Conditions & Methods' . print_r($result, true);
 
         return $result[0]['PaymentConditionId'];
     }
@@ -201,7 +201,7 @@ class SystemTest extends TestAbstract
 
         $this->assertGreaterThanOrEqual(5, count($result), 'Payment Methods does not get the whole list of methods, even those which are not allow to sell');
 
-        //echo 'Payment Methods ' . print_r($result, true);
+        echo 'Payment Methods ' . print_r($result, true);
     }
 
     public function testGetPhonePrefixes()

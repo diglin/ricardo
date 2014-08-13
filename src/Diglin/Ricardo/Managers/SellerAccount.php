@@ -126,9 +126,14 @@ class SellerAccount extends ManagerAbstract
 
     /**
      * Gets the payment options for a seller.
+     *
+     * @param int $customerId
+     * @return array
      */
-    public function getPaymentOptions()
+    public function getPaymentOptions($customerId = null)
     {
+        return $this->_proceed('PaymentOptions', $customerId);
+
     }
 
     /**
