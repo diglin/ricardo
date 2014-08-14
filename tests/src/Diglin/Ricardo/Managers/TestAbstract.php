@@ -27,6 +27,8 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Init the Service Manager to allow mapping between class managers and API services
+     *
      * @return Service
      * @throws \Exception
      */
@@ -50,8 +52,32 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
         return $this->_serviceManager;
     }
 
+    /**
+     * Get the last API Curl request for debug purpose
+     *
+     * @param bool $flush
+     * @return mixed
+     */
     protected function getLastApiDebug($flush = true)
     {
         return print_r($this->getServiceManager()->getApi()->getLastDebug($flush), true);
+    }
+
+    /**
+     * Get the content of some test variable
+     *
+     * @param array|int|string $output
+     * @param string $testName
+     * @param bool $debug
+     */
+    protected function outputContent($output, $testName = '', $debug = false)
+    {
+        if ($this->getServiceManager()->getConfig()->get('display_test_content')) {
+            echo $testName . ' ' . print_r($output, true);
+        }
+        if ($debug) {
+            echo $this->getLastApiDebug();
+        }
+        return;
     }
 }

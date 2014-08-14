@@ -1,19 +1,23 @@
 [GERMAN]
 host = ws.betaqxl.com
 partnership_id = YOUR_PARTNER_ID
-partnership_passwd = YOUR_PARTNER_PASS
+partnership_passwd = 'YOUR_PARTNER_PASS'
 partner_url = YOUR_WEBSITE_URL
 allow_authorization_simulation = true
-customer_username =
-customer_password = ''
+# Only if you need to simulate the authorization process
+customer_username = YOUR_RICARDO_USERNAME
+customer_password = 'YOUR_RICARDO_PASSWORD'
 debug = true
+display_test_content = true
 
 [FRENCH]
 host = ws.betaqxl.com
 partnership_id = YOUR_PARTNER_ID
-partnership_passwd = YOUR_PARTNER_PASS
+partnership_passwd = 'YOUR_PARTNER_PASS'
 partner_url = YOUR_WEBSITE_URL
 allow_authorization_simulation = true
-customer_username =
-customer_password = ''
+# Only if you need to simulate the authorization process
+customer_username = YOUR_RICARDO_USERNAME
+customer_password = 'YOUR_RICARDO_PASSWORD'
 debug = true
+display_test_content = true
