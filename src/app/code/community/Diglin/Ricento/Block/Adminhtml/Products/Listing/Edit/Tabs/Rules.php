@@ -112,7 +112,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             ->setDisabled($disableDescription)
             ->setRequired(!$disableDescription);
 
-        $disablePaymentDescription = (!$this->getShippingPaymentRule()->getPaymentMethods()) ? false : true;
+        $disablePaymentDescription = true;
+        foreach ($this->getShippingPaymentRule()->getPaymentMethods() as $method) {
+            if ((int)$method === 0) {
+                $disablePaymentDescription = false;
+                break;
+            }
+        }
         $this->getForm()->getElement('payment_description')
             ->setDisabled($disablePaymentDescription)
             ->setRequired(!$disablePaymentDescription);
