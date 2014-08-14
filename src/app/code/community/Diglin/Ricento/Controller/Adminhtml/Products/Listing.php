@@ -66,6 +66,9 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
         if (!empty($data['sales_options']['stock_management_use_inventory'])) {
             $data['sales_options']['stock_management'] = -1;
         }
+        if (!empty($data['sales_options']['sales_auction_direct_buy'])) {
+            $data['sales_options']['stock_management'] = 1;
+        }
         if (!empty($data['sales_options']['schedule_date_start_immediately'])) {
             $data['sales_options']['schedule_date_start'] = date(Varien_Date::DATETIME_PHP_FORMAT);
         }
@@ -80,13 +83,18 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
                 $data['sales_options']['schedule_period_days'] = 0;
             }
         }
-        if (empty($data['sales_options']['product_condition_use_attribute'])) {
-            $data['sales_options']['product_condition_source_attribute_code'] = null;
-        } else {
-            $data['sales_options']['product_condition'] = null;
-        }
-        if (empty($data['sales_options']['product_warranty_condition']) || $data['sales_options']['product_warranty'] == Diglin_Ricento_Model_Config_Source_Sales_Warranty::NONE) {
+//        if (empty($data['sales_options']['product_condition_use_attribute'])) {
+//            $data['sales_options']['product_condition_source_attribute_code'] = null;
+//        } else {
+//            $data['sales_options']['product_condition'] = null;
+//        }
+        if ($data['sales_options']['product_warranty'] == Diglin_Ricento_Model_Config_Source_Sales_Warranty::NONE) {
             unset($data['sales_options']['product_warranty_condition']);
+        } else {
+            $data['sales_options']['product_warranty_condition'] = substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_condition']), 0, 5000);
+        }
+        if (!empty($data['sales_options']['promotion_start_page'])) {
+            $data['sales_options']['promotion_start_page'] = \Diglin\Ricardo\Enums\PromotionCode::PREMIUMHOMEPAGE;
         }
 
         /* Rules part */
@@ -97,17 +105,25 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
         if (empty($data['rules']['rule_id'])) {
             unset($data['rules']['rule_id']);
         }
-//        if ($data['rules']['payment_methods'] !== 0) {
-//            $data['rules']['payment_description'] = null;
-//        }
-        if (!empty($data['rules']['payment_description'])) {
-            $data['rules']['payment_description'] = Mage::helper('core')->escapeHtml($data['rules']['payment_description']);
+
+        $initDescription = true;
+        foreach ($data['rules']['payment_methods'] as $method) {
+            if ((int) $method === 0) {
+                $initDescription = false;
+            }
         }
-        if ($data['rules']['shipping_method'] !== 0) {
+        if ($initDescription) {
+            $data['rules']['payment_description'] = null;
+        }
+
+        if (!empty($data['rules']['payment_description'])) {
+            $data['rules']['payment_description'] = substr(Mage::helper('core')->escapeHtml($data['rules']['payment_description']), 0, 5000);
+        }
+        if ((int) $data['rules']['shipping_method'] !== 0) {
             $data['rules']['shipping_description'] = null;
         }
         if (!empty($data['rules']['shipping_description'])) {
-            $data['rules']['shipping_description'] = Mage::helper('core')->escapeHtml($data['rules']['shipping_description']);
+            $data['rules']['shipping_description'] = substr(Mage::helper('core')->escapeHtml($data['rules']['shipping_description']), 0, 5000);
         }
         if (!empty($data['rules']['free_shipping'])) {
             $data['rules']['shipping_price'] = 0;

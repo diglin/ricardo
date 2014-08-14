@@ -71,12 +71,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
             'name' => 'sales_options[sales_auction_start_price]',
             'label' => $this->__('Start price'),
-            'class' => 'validate-number required-if-visible',
+            'class' => 'validate-number required-if-visible validate-number-range number-range-0.05-1000000',
+            'onchange' => 'salesOptionsForm.toggleStartPrice(this, \''. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD .'\');',
+            'note' => $this->__('Range from Fr. 0.05 to Fr. 1 000 000. If Credit card payment method available and enabled, the range is from Fr. 0.05 to Fr. 2 999.95.')
         ));
         $fieldsetTypeAuction->addField('sales_auction_increment', 'text', array(
             'name' => 'sales_options[sales_auction_increment]',
             'label' => $this->__('Increment'),
-            'class' => 'validate-number required-if-visible',
+            'class' => 'validate-number required-if-visible validate-number-range number-range-0.05-1000000',
         ));
         $fieldsetTypeAuction->addField('auction_currency', 'label', array(
             'name' => 'sales_options[auction_currency]',
@@ -87,16 +89,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[sales_auction_direct_buy]',
             'label' => $this->__('Allow Direct Buy'),
             'values' => Mage::getSingleton('eav/entity_attribute_source_boolean')->getAllOptions(),
-            'onchange' => "salesOptionsForm.showSalesTypeFieldsets('auction', this.value =='1')",
-            'note' => $this->__('Fill in the fieldset "Buy now" below to define the direct price setting.')
+            'onchange' => "salesOptionsForm.showSalesTypeFieldsets('auction', this.value =='1'); salesOptionsForm.toggleStockManagement(this)",
+            'note' => $this->__('Fill in the fieldset "Buy now" below to define the direct price settings. <strong>Note</strong>: if set to "Yes", the stock management will be set to "Custom Qty" with a value of 1.')
         ));
 
         $fieldsetTypeBuynow = $form->addFieldset('fieldset_type_buynow', array('legend' => $this->__('Buy now'), 'fieldset_container_id' => 'fieldset_toggle_buynow'));
+
         $fieldsetTypeBuynow->addField('price_source_attribute_code', 'select', array(
             'name'   => 'sales_options[price_source_attribute_code]',
             'label'  => $this->__('Source'),
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_price_source')->getAllOptions(),
-            'class'  => 'required-if-visible'
+            'class'  => 'required-if-visible',
         ));
         $fieldsetTypeBuynow->addType('fieldset_inline', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_fieldset_inline'));
         $fieldsetPriceChange = $fieldsetTypeBuynow->addField('fieldset_price_change', 'fieldset_inline', array(
@@ -108,17 +111,24 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'after_element_html' => ' &nbsp;',
             'no_span' => true,
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_price_method')->getAllOptions(),
-            'class'  => 'required-if-visible'
+            'class'  => 'required-if-visible',
         ));
         $fieldsetPriceChange->addField('price_change', 'text', array(
             'name' => 'sales_options[price_change]',
             'no_span' => true,
             'class' => 'inline-number validate-number',
         ));
+
         $fieldsetTypeBuynow->addField('fix_currency', 'label', array(
             'name' => 'sales_options[fix_currency]',
             'label' => $this->__('Currency'),
             'after_element_html' => $currencyWarning,
+        ));
+
+        $fieldsetTypeBuynow->addField('price_note', 'note', array(
+            'text' => '<ul class="messages"><li class="notice-msg">'
+                . $this->__('For Fixed Price articles, the minimum price is Fr. 0.05 and maximum Fr. 2 999.95 if the Credit Card payment method is used.<br>For Auction articles, the minimum amount is Fr. 0.1 and must be greater than the Start Price.<br>If not correctly defined, the minimum and maximum values will be automatically set.')
+                . '</li></ul>'
         ));
 
 
@@ -139,7 +149,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                         'name' => 'sales_options[schedule_date_start]',
                         'image' => $this->getSkinUrl('images/grid-cal.gif'),
                         'format' => $dateFormatIso,
-                        'class' => 'validate-date'
                         //'class' => 'validate-date validate-date-range date-range-end_date-from' // Prototype's date validation does not work with localized dates, so we don't use it
                     )
                 ))
@@ -223,6 +232,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCondition->addField('product_warranty_condition', 'textarea', array(
             'name' => 'sales_options[product_warranty_condition]',
             'label' => $this->__('Warranty condition'),
+            'class' => 'validate-length maximum-length-5000',
+            'note' => $this->__('Characters %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'product_warranty_condition')),
             'required' => true
         ));
 
@@ -231,13 +242,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetStock->addField('stock_management_use_inventory', 'radios_extensible', array(
             'name' => 'sales_options[stock_management_use_inventory]',
             'label' => $this->__('Stock Management'),
-            'note' => $this->__('If you use the product inventory option, the amount of items will be taken from the field "Qty" defined in the product inventory.'),
+            'note' => $this->__('Range  1...999. If you use the product inventory option, the amount of items will be taken from the field "Qty" defined in the product inventory and limited to 999 if you have a quantity above this value.'),
             'values' => array(
                 array('value' => 1, 'label' => $this->__('Use product inventory')),
                 array('value' => 0, 'label' => $this->__('Use custom qty'), 'field' => array(
                     'stock_management', 'text', array(
                         'name' => 'sales_options[stock_management]',
-                        'class' => 'inline-number validate-number'
+                        'class' => 'inline-number validate-number validate-number-range number-range-1-999'
                     )
                 ))
             )

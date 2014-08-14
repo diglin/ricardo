@@ -53,12 +53,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'label'   => $this->__('Payment Methods'),
             'values'  => Mage::getSingleton('diglin_ricento/config_source_rules_payment')->getAllOptions(),
             'class'   => 'validate-payment-method-combination',
-            'onchange' => 'rulesForm.togglePaymentDescription($(\'' . $htmlIdPrefix . 'payment_methods_0\'));'
+            'onchange' => 'rulesForm.togglePaymentDescription($(\'' . $htmlIdPrefix . 'payment_methods_'. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER .'\')); rulesForm.toggleStartPrice($(\'sales_options_sales_auction_start_price\'), \''. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD .'\');'
         ));
         $fieldsetPayment->addField('payment_description', 'textarea', array(
             'name'  => 'rules[payment_description]',
-            'label' => $this->__('Payment description'),
-            'note' => $this->__('Payment information to display to customers. Will be send to ricardo only if you select the method "Other"')
+            'label' => $this->__('Payment Description'),
+            'note' => $this->__('Characters: %s. Max. 5 000 characters. Payment information to display to customers. Will be send to ricardo only if you select the method "Other"', $this->getCountableText($htmlIdPrefix . 'payment_description')),
+            'class' => 'validate-length maximum-length-5000'
         ));
 
         $fieldsetShipping = $form->addFieldset('fieldset_shipping', array('legend' => $this->__('Shipping Methods')));
@@ -77,7 +78,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $fieldsetShipping->addField('shipping_description', 'textarea', array(
             'name'  => 'rules[shipping_description]',
             'label' => $this->__('Shipping Description'),
-            'required' => true
+            'required' => true,
+            'class' => 'validate-length maximum-length-5000',
+            'note' => $this->__('Characters: %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'shipping_description'))
         ));
         $fieldsetShipping->addField('shipping_price', 'text', array(
             'name'     => 'rules[shipping_price]',

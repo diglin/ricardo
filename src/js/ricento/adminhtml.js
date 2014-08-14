@@ -179,8 +179,13 @@ Ricento.salesOptionsForm.prototype = {
         this.requiredClass = 'required-entry';
         this.validationPassedClass = 'validation-passed';
         this.requiredIfVisibleClass = 'required-if-visible';
+        var self = this;
 
         this.showSalesTypeFieldsets($(this.htmlIdPrefix + "sales_type").value, $(this.htmlIdPrefix + "sales_auction_direct_buy").value == "1");
+        Countable.live($(this.htmlIdPrefix + 'product_warranty_condition'), function (counter){
+            $(self.htmlIdPrefix + 'product_warranty_condition_result__all').update(counter.characters);
+        });
+
     },
     toggleRequired : function(field, required, label) {
         field = $(field);
@@ -223,17 +228,17 @@ Ricento.salesOptionsForm.prototype = {
         });
         fieldset.show();
     },
-    toggleConditionSource : function(field) {
-        conditionSourceLabel = $$('label[for='+ this.htmlIdPrefix + 'product_condition_use_attribute]')[0];
-        conditionSourceValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition_source_attribute_code');
-        conditionValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition');
-        conditionSource = $(this.htmlIdPrefix + 'product_condition_source_attribute_code');
-        condition = $(this.htmlIdPrefix + 'product_condition');
-
-        condition.disabled = field.checked;
-        this.toggleRequired(conditionSource, field.checked, conditionSourceLabel);
-        this.toggleRequired(condition, !field.checked);
-    },
+//    toggleConditionSource : function(field) {
+//        conditionSourceLabel = $$('label[for='+ this.htmlIdPrefix + 'product_condition_use_attribute]')[0];
+//        conditionSourceValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition_source_attribute_code');
+//        conditionValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition');
+//        conditionSource = $(this.htmlIdPrefix + 'product_condition_source_attribute_code');
+//        condition = $(this.htmlIdPrefix + 'product_condition');
+//
+//        condition.disabled = field.checked;
+//        this.toggleRequired(conditionSource, field.checked, conditionSourceLabel);
+//        this.toggleRequired(condition, !field.checked);
+//    },
     toggleWarrantyCondition: function (field) {
         warrantyCondition = $(this.htmlIdPrefix + 'product_warranty_condition');
         warrantyeConditionLabel = $$('label[for='+ this.htmlIdPrefix + 'product_warranty_condition]')[0];
@@ -241,6 +246,25 @@ Ricento.salesOptionsForm.prototype = {
         required = (field.value == '0') ? 1 : 0;
         warrantyCondition.disabled = !required;
         this.toggleRequired(warrantyCondition, required, warrantyeConditionLabel);
+    },
+    toggleStartPrice: function (field, methodId) {
+            if ($('rules_payment_methods_' + methodId).checked) {
+                field.removeClassName('number-range-0.05-1000000');
+                field.addClassName('number-range-0.05-2999.95');
+            } else {
+                field.addClassName('number-range-0.05-1000000');
+                field.removeClassName('number-range-0.05-2999.95');
+            }
+    },
+    toggleStockManagement: function (field) {
+        if (field.value == 1) {
+            $(this.htmlIdPrefix + 'stock_management').value = 1;
+            $(this.htmlIdPrefix + 'stock_management_use_inventory0').checked = true;
+            $(this.htmlIdPrefix + 'stock_management_use_inventory1').disable();
+        } else {
+            $(this.htmlIdPrefix + 'stock_management_use_inventory1').enable();
+
+        }
     }
 };
 
@@ -375,6 +399,14 @@ Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
         this.requiredClass = 'required-entry';
         this.validationPassedClass = 'validation-passed';
         this.requiredIfVisibleClass = 'required-if-visible';
+
+        var self = this;
+        Countable.live($(this.htmlIdPrefix + 'payment_description'), function (counter){
+            $(self.htmlIdPrefix + 'payment_description_result__all').update(counter.characters);
+        });
+        Countable.live($(this.htmlIdPrefix + 'shipping_description'), function (counter){
+            $(self.htmlIdPrefix + 'shipping_description_result__all').update(counter.characters);
+        });
     },
     togglePaymentDescription: function (field) {
         paymentDescription = $(this.htmlIdPrefix + 'payment_description');

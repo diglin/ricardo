@@ -47,4 +47,15 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Form_Abstract extends Mage
         }
         return parent::_initFormValues();
     }
+
+    /**
+     * Get countable text for js event
+     *
+     * @param string $prefix
+     * @return string
+     */
+    public function getCountableText($prefix)
+    {
+        return '<strong><span id="' . $prefix . '_result__all">0</span></strong>';
+    }
 }
