@@ -9,6 +9,8 @@
  */
 namespace Diglin\Ricardo\Managers;
 
+use Diglin\Ricardo\Enums\PromotionCode;
+
 /**
  * Class System
  * @package Diglin\Ricardo\Managers
@@ -345,6 +347,10 @@ class System extends ManagerAbstract
                     'display_mandatory' => $displayMandatory
                 )
             );
+
+            foreach ($this->_promotions as &$promotion) {
+                $promotion['PromotionLabel'] = PromotionCode::getLabel($promotion['PromotionId']);
+            }
         }
         return $this->_promotions;
     }
