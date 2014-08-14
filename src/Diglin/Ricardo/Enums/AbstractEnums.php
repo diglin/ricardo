@@ -18,4 +18,18 @@ abstract class AbstractEnums
     {
         return array();
     }
+
+    /**
+     * @param $value
+     * @return bool
+     */
+    public static function getLabel($value)
+    {
+        foreach (static::getEnums() as $enum) {
+            if ($enum['value'] == $value) {
+                return $enum['label'];
+            }
+        }
+        return false;
+    }
 }

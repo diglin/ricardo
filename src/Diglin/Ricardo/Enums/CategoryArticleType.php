@@ -14,7 +14,7 @@ class CategoryArticleType extends AbstractEnums
     /* Ricardo API Enum category article type */
 
     // All articles
-    const All = 0;
+    const ALL = 0;
 
     const AUCTION = 1;
 
