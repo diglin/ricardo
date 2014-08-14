@@ -186,14 +186,14 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                         }
 
                         Mage::dispatchEvent('ricardo_api_call_get_before', $arguments);
-                        if (empty($data) || !$this->getCanUseCache()) {
+                        if (empty($data) || !$this->getCanUseCache() || array_key_exists('ErrorCodes', $data)) {
                             $data = call_user_func_array(array($this->getServiceModel(), $method), $args);
                         }
                         Mage::dispatchEvent('ricardo_api_call_get_after', array_merge($arguments, array('data' => $data)));
 
                         $this->setData($key, $data);
 
-                        if ($this->getCanUseCache()) {
+                        if ($this->getCanUseCache() && !array_key_exists('ErrorCodes', $data)) {
                             Mage::app()->saveCache(serialize($data), $key, array(Diglin_Ricento_Helper_Api::CACHE_TAG), Diglin_Ricento_Helper_Api::CACHE_LIFETIME);
                         }
 

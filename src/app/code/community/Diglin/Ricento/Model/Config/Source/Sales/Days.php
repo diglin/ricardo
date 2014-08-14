@@ -24,15 +24,10 @@ class Diglin_Ricento_Model_Config_Source_Sales_Days extends Diglin_Ricento_Model
             $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
 
             // Default duration
-            $duration = array(2);
+            $duration = array(1);
 
             if (isset($partnerConfiguration['MaxSellingDuration'])) {
-                if ($partnerConfiguration['MinSellingDuration'] == 1) {
-                    $minDuration = $partnerConfiguration['MinSellingDuration'] + 1;
-                } else {
-                    $minDuration = $partnerConfiguration['MinSellingDuration'];
-                }
-                $duration = range($minDuration, $partnerConfiguration['MaxSellingDuration'], 2);
+                $duration = range($partnerConfiguration['MinSellingDuration'], $partnerConfiguration['MaxSellingDuration'], 1);
             }
 
             foreach ($duration as $day) {

@@ -13,11 +13,6 @@
  */
 class Diglin_Ricento_Model_Config_Source_Rules_Payment extends Diglin_Ricento_Model_Config_Source_Abstract
 {
-    const TYPE_BANK_TRANSFER = 8192;
-    const TYPE_CASH = 1073741824;
-    const TYPE_CREDIT_CARD = 262144;
-    const TYPE_OTHER = 0;
-
     protected $_paymentMethodsConditions = array();
 
     /**

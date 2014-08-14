@@ -71,6 +71,8 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
      */
     protected function _buildRicardoCategoryTree()
     {
+        Varien_Profiler::start('RICARDO_API_BUILD_CATEGORIES');
+
         $this->_addCategoryToIndex($this->_categoryTree);
         foreach ($this->_getRicardoCategoryData() as $_categoryData) {
             /* @var $category Diglin_Ricento_Model_Products_Category */
@@ -82,6 +84,9 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
             }
             $this->_addCategoryToIndex($category);
         }
+
+        Varien_Profiler::stop('RICARDO_API_BUILD_CATEGORIES');
+
         return $this->_categoryTree;
     }
 

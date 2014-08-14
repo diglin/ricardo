@@ -233,7 +233,7 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_descriptio
     'type'              => 'text',
     'backend'           => '',
     'frontend'          => '',
-    'label'             => 'Product Description',
+    'label'             => 'Ricardo Description',
     'note'              => 'Description of the product for Ricardo page. If empty, the default Magento description of your product will be taken.',
     'input'             => 'textarea',
     'class'             => '',
