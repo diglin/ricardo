@@ -1,0 +1,27 @@
+startprice-5_increment-3.00:
+  is_valid: 1
+  messages: []
+startprice-49.99_increment-10.00:
+  is_valid: 1
+  messages: []
+startprice-50_increment-15.00:
+  is_valid: 1
+  messages: []
+startprice-120_increment-45.00:
+  is_valid: 1
+  messages: []
+startprice-450_increment-48.00:
+  is_valid: 1
+  messages: []
+startprice-555_increment-100.00:
+  is_valid: 1
+  messages: []
+startprice-1000.00_increment-150.00:
+  is_valid: 1
+  messages: []
+startprice-2200_increment-450.00:
+  is_valid: 1
+  messages: []
+startprice-1000.00_increment-1000.00:
+  is_valid: 1
+  messages: []

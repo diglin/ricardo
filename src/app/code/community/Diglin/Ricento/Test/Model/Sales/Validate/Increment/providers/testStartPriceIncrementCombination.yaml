@@ -1,0 +1,35 @@
+#
+# This file provided parameters for the testStartPriceIncrementCombination test. All array keys are just for
+# better readability
+#
+
+# All allowed payment method combinations
+allowed_1:
+  startprice: 5
+  increment: 3.00
+allowed_2:
+  startprice: 49.99
+  increment: 10.00
+allowed_3:
+  startprice: 50
+  increment: 15.00
+allowed_4:
+  startprice: 120
+  increment: 45.00
+allowed_5:
+  startprice: 450
+  increment: 48.00
+allowed_6:
+  startprice: 555
+  increment: 100.00
+allowed_7:
+  startprice: 1000.00
+  increment: 150.00
+allowed_8:
+  startprice: 2200
+  increment: 450.00
+allowed_9:
+  startprice: 10000.00
+  increment: 1000.00
+
+
