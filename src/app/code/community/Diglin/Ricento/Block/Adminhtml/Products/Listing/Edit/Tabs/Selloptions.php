@@ -202,27 +202,36 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         ));
 
         $fieldsetCondition = $form->addFieldset('fieldset_condition', array('legend' => $this->__('Product Condition')));
-        $fieldsetCondition->addType('checkboxes_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_checkboxes_extensible'));
-        $fieldsetCondition->addField('product_condition_use_attribute', 'checkboxes_extensible', array(
-            'name' => 'sales_options[product_condition_use_attribute]',
-            'label' => $this->getConditionSourceLabel(),
-            'values' => array(
-                array('value' => 1, 'label' => $this->__('If available use condition information from product'), 'field' => array(
-                    'product_condition_source_attribute_code', 'select', array(
-                        'name' => 'sales_options[product_condition_source_attribute_code]',
-                        'class' => 'inline-select',
-                        'values' => Mage::getSingleton('diglin_ricento/config_source_sales_product_condition_source')->getAllOptions()
-                    )
-                ))
-            ),
-            'onclick' => 'salesOptionsForm.toggleConditionSource(this)'
-        ));
+
+//        $fieldsetCondition->addType('checkboxes_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_checkboxes_extensible'));
+//        $fieldsetCondition->addField('product_condition_use_attribute', 'checkboxes_extensible', array(
+//            'name' => 'sales_options[product_condition_use_attribute]',
+//            'label' => $this->getConditionSourceLabel(),
+//            'values' => array(
+//                array('value' => 1, 'label' => $this->__('If available use condition information from product'), 'field' => array(
+//                    'product_condition_source_attribute_code', 'select', array(
+//                        'name' => 'sales_options[product_condition_source_attribute_code]',
+//                        'class' => 'inline-select',
+//                        'values' => Mage::getSingleton('diglin_ricento/config_source_sales_product_condition_source')->getAllOptions()
+//                    )
+//                ))
+//            ),
+//            'onclick' => 'salesOptionsForm.toggleConditionSource(this)'
+//        ));
+
         $fieldsetCondition->addField('product_condition', 'select', array(
             'name' => 'sales_options[product_condition]',
-            'label' => $this->getConditionLabel(),
+            'label' => $this->__('Default Condition'),
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_product_condition')->getAllOptions(),
             'required' => true
         ));
+        $fieldsetCondition->addField('product_condition_use_attribute', 'select', array(
+            'name' => 'sales_options[product_condition_use_attribute]',
+            'label' => $this->__('Condition Product Source'),
+            'note'  => $this->__('Do you want to define the condition source from the Ricardo Condition Attribute if you defined it on product basis? Otherwise, if not found or you set here to "No", the default condition set above will be defined.'),
+            'values' => Mage::getSingleton('adminhtml/system_config_source_yesno')->toOptionArray()
+        ));
+
         $fieldsetCondition->addField('product_warranty', 'select', array(
             'name' => 'sales_options[product_warranty]',
             'label' => $this->__('Warranty'),
@@ -283,15 +292,15 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         if ($this->getSalesOptions()->getSalesType() == null) {
             $derivedValues['sales_type'] = Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION;
         }
-        if ($this->getSalesOptions()->getRicardoCategory() == 0) {
+        if ((int) $this->getSalesOptions()->getRicardoCategory() == 0) {
             $derivedValues['ricardo_category_use_mapping'] = 1;
         }
-        if ($this->getSalesOptions()->getProductConditionSourceAttributeCode()) {
-            $derivedValues['product_condition_use_attribute'] = 1;
-            $this->getForm()->getElement('product_condition')->setDisabled(true);
-            $this->getForm()->getElement('product_condition')->setRequired(false);
-            $this->getForm()->getElement('product_condition_use_attribute')->setRequired(true);
-        }
+//        if ($this->getSalesOptions()->getProductConditionSourceAttributeCode()) {
+//            $derivedValues['product_condition_use_attribute'] = 1;
+//            $this->getForm()->getElement('product_condition')->setDisabled(true);
+//            $this->getForm()->getElement('product_condition')->setRequired(false);
+//            $this->getForm()->getElement('product_condition_use_attribute')->setRequired(true);
+//        }
         if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
             $derivedValues['schedule_cycle_multiple_products_random'] = '1';
         }
@@ -398,25 +407,4 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         }
         return $this->_model;
     }
-
-    /**
-     * Get the label for Condition
-     *
-     * @return string
-     */
-    public function getConditionLabel()
-    {
-        return $this->__('Condition');
-    }
-
-    /**
-     * Get label for Condition Source
-     *
-     * @return string
-     */
-    public function getConditionSourceLabel()
-    {
-        return $this->__('Condition Source');
-    }
-
 }

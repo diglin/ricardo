@@ -43,7 +43,8 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 
     const ALLOWED_CURRENCY = 'CHF';
 
-    CONST RICARDO_URL = 'http://www.ricardo.ch';
+    const RICARDO_URL = 'http://www.ricardo.ch';
+    const RICARDO_URL_HELP_PROMOTION = 'http://www.ricardo.ch/ueber-uns/gebühren/einstelloptionen'; //@todo make it for french too
 
     /**
      * Is the extension enabled for the current website
