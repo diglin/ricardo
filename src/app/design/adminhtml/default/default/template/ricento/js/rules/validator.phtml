@@ -1,0 +1,52 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricardo
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+$paymentValidationMessage = $this->getPaymentValidationMessage();
+$jsonAllowedPaymentCombinations = $this->getJsonAllowedPaymentCombinations();
+$paymentShippingValidationMessage = $this->getPaymentShippingValidationMessage();
+$jsonDisallowedPaymentShippingCombinations = $this->getJsonDisallowedPaymentShippingCombinations();
+?>
+<script>
+    Validation.add('validate-payment-method-combination', '<?php echo $paymentValidationMessage ?>', function(fieldValue, field) {
+        var checkboxes = field.form[field.name];
+        var paymentValue = [];
+        for (var i = 0; i < checkboxes.length; ++i) {
+            if (checkboxes[i].checked) {
+                paymentValue.push(parseInt(checkboxes[i].value));
+            }
+        }
+        allowedPaymentCombinations = <?php echo $jsonAllowedPaymentCombinations ?>;
+        var arraysAreEqual = function(a1, a2) {
+            return a1.length==a2.length && a1.every(function(v,i) { return a2.indexOf(v) >= 0});
+        };
+        for (var i = 0; i < allowedPaymentCombinations.length; ++i) {
+            if (arraysAreEqual(allowedPaymentCombinations[i], paymentValue)) {
+                return true;
+            }
+        }
+        return false;
+    });
+    var paymentFormFieldName = 'rules[payment_methods][]';
+    Validation.add('validate-payment-shipping-combination', '<?php echo $paymentShippingValidationMessage ?>', function(fieldValue, field) {
+        var checkboxes = field.form[paymentFormFieldName]
+        var paymentValue = [];
+        for (var i = 0; i < checkboxes.length; ++i) {
+            if (checkboxes[i].checked) {
+                paymentValue.push(parseInt(checkboxes[i].value));
+            }
+        }
+        disallowedPaymentShippingCombinations = <?php echo $jsonDisallowedPaymentShippingCombinations ?>;
+        for (var i = 0; i < disallowedPaymentShippingCombinations.length; ++i) {
+            if (disallowedPaymentShippingCombinations[i].shipping == fieldValue && paymentValue.indexOf(disallowedPaymentShippingCombinations[i].payment) >= 0) {
+                return false;
+            }
+        }
+        return true;
+    });
+</script>

@@ -149,7 +149,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
 
     protected function _afterToHtml($html)
     {
-        $html .= '<script type="text/javascript">var rulesForm = new Ricento.RulesForm("' . $this->getForm()->getHtmlIdPrefix() . '");' . Mage::getModel('diglin_ricento/rule_validate')->getJavaScriptValidator() . '</script>';
+        $html .= '<script>var rulesForm = new Ricento.RulesForm("' . $this->getForm()->getHtmlIdPrefix() . '");</script>';
+        $html .= Mage::getModel('diglin_ricento/rule_validate')->getJavaScriptValidator();
         return parent::_afterToHtml($html);
     }
 
@@ -192,5 +193,4 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
     {
         return false;
     }
-
 }

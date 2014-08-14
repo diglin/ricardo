@@ -18,25 +18,26 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
 
     protected $_allowedPaymentCombinations = array(
         array(
-            Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_CREDIT_CARD,
-            Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_BANK_TRANSFER),
+            \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD,
+            \Diglin\Ricardo\Enums\PaymentMethods::TYPE_BANK_TRANSFER),
         array(
-            Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_CREDIT_CARD,
-            Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_CASH),
+            \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD,
+            \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CASH),
         array(
-            Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_CREDIT_CARD,
-            Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_OTHER),
+            \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD,
+            \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER),
         array(
-            Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_BANK_TRANSFER),
+            \Diglin\Ricardo\Enums\PaymentMethods::TYPE_BANK_TRANSFER),
         array(
-            Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_CASH),
+            \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CASH),
         array(
-            Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_OTHER)
+            \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER)
     );
+
     protected $_disallowedPaymentShippingCombinations = array(
         array(
             'shipping' => Diglin_Ricento_Model_Config_Source_Rules_Shipping::TYPE_OTHER,
-            'payment'  => Diglin_Ricento_Model_Config_Source_Rules_Payment::TYPE_CREDIT_CARD)
+            'payment'  => \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD)
     );
 
     /*
@@ -117,50 +118,16 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
      */
     public function getJavaScriptValidator()
     {
-        $jsonAllowedPaymentCombinations = Mage::helper('core')->jsonEncode($this->_allowedPaymentCombinations);
-        $paymentValidationMessage = $this->getAllowedPaymentCombinationsMessage();
-        $jsonDisallowedPaymentShippingCombinations = Mage::helper('core')->jsonEncode($this->_disallowedPaymentShippingCombinations);
-        $paymentShippingValidationMessage = $this->getDisallowedPaymentShippingCombinationsMessage();
-        return
-<<<JS
-Validation.add('validate-payment-method-combination', '{$paymentValidationMessage}', function(fieldValue, field) {
-    var checkboxes = field.form[field.name];
-    var paymentValue = [];
-    for (var i = 0; i < checkboxes.length; ++i) {
-        if (checkboxes[i].checked) {
-            paymentValue.push(parseInt(checkboxes[i].value));
-        }
-    }
-    var allowedPaymentCombinations = {$jsonAllowedPaymentCombinations};
-    var arraysAreEqual = function(a1, a2) {
-        return a1.length==a2.length && a1.every(function(v,i) { return a2.indexOf(v) >= 0});
-    };
-    for (var i = 0; i < allowedPaymentCombinations.length; ++i) {
-        if (arraysAreEqual(allowedPaymentCombinations[i], paymentValue)) {
-            return true;
-        }
-    }
-    return false;
-});
-var paymentFormFieldName = 'rules[payment_methods][]';
-Validation.add('validate-payment-shipping-combination', '{$paymentShippingValidationMessage}', function(fieldValue, field) {
-    var checkboxes = field.form[paymentFormFieldName]
-    var paymentValue = [];
-    for (var i = 0; i < checkboxes.length; ++i) {
-        if (checkboxes[i].checked) {
-            paymentValue.push(parseInt(checkboxes[i].value));
-        }
-    }
-    var disallowedPaymentShippingCombinations = {$jsonDisallowedPaymentShippingCombinations};
-    for (var i = 0; i < disallowedPaymentShippingCombinations.length; ++i) {
-        if (disallowedPaymentShippingCombinations[i].shipping == fieldValue && paymentValue.indexOf(disallowedPaymentShippingCombinations[i].payment) >= 0) {
-            return false;
-        }
-    }
-    return true;
-});
-JS;
+        /* @var $block Mage_Adminhtml_Block_Template */
+        $block = Mage::getBlockSingleton('adminhtml/template');
+        $block
+            ->setTemplate('ricento/js/rules/validator.phtml')
+            ->setPaymentValidationMessage($this->getAllowedPaymentCombinationsMessage())
+            ->setJsonAllowedPaymentCombinations(Mage::helper('core')->jsonEncode($this->_allowedPaymentCombinations))
+            ->setPaymentShippingValidationMessage($this->getDisallowedPaymentShippingCombinationsMessage())
+            ->setJsonDisallowedPaymentShippingCombinations(Mage::helper('core')->jsonEncode($this->_disallowedPaymentShippingCombinations));
 
+        return $block->toHtml();
     }
 
     /**
