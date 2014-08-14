@@ -77,9 +77,9 @@ abstract class ManagerAbstract
             switch ($e->getCode()) {
                 case SecurityErrorsEnum::SESSIONEXPIRED:
                     $this->_serviceManager->getSecurityManager()->refreshToken();
-                    self::_proceed($method, $parameters);
+                    $result = self::_proceed($method, $parameters);
                     break;
-                case SecurityErrorsEnum::TOKENERROR: // @todo token error = 7 can also be due after a refresh token with an unecessary refresh
+                case SecurityErrorsEnum::TOKENERROR:
                 case SecurityErrorsEnum::TOKENEXPIRED:
                 case SecurityErrorsEnum::TEMPORAYCREDENTIALUNVALIDATED:
                     // We init the validation url to be used later in any process (e.g. re-authorization)
