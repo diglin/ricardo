@@ -27,7 +27,7 @@
                 <assistant_url_dev>https://ra.betaqxl.com/</assistant_url_dev>
                 <signup_url>http://api.ricardo.ch/request.php</signup_url>
                 <simulate_authorization>0</simulate_authorization>
-                <expiration_notification_delay>3</expiration_notification_delay><!-- in day -->
+                <expiration_notification_delay>1</expiration_notification_delay><!-- it's only possible one day before -->
                 <host>ws.betaqxl.com</host><!-- @todo change with the production host -->
                 <host_dev>ws.betaqxl.com</host_dev>
                 <lang>de,fr</lang>
