@@ -78,7 +78,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetTypeAuction->addField('sales_auction_increment', 'text', array(
             'name' => 'sales_options[sales_auction_increment]',
             'label' => $this->__('Increment'),
-            'class' => 'validate-number required-if-visible validate-number-range number-range-0.05-1000000',
+            'class' => 'validate-number required-if-visible validate-startprice-increment',
         ));
         $fieldsetTypeAuction->addField('auction_currency', 'label', array(
             'name' => 'sales_options[auction_currency]',
@@ -287,6 +287,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'values' => Mage::getSingleton('adminhtml/system_config_source_yesno')->toOptionArray()
         ));
 
+        $fieldsetPromotion->addField('note_promotion', 'note', array(
+            'text' => '<ul class="messages"><li class="notice-msg">'
+                . $this->__('These options will be not activated for products having no picture.')
+                . '</li></ul>'
+        ));
+
 
         $this->setForm($form);
         return parent::_prepareForm();
@@ -341,6 +347,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     protected function _afterToHtml($html)
     {
         $html .= '<script type="text/javascript">var salesOptionsForm = new Ricento.salesOptionsForm("' . $this->getForm()->getHtmlIdPrefix() . '");</script>';
+        $html .= Mage::getSingleton('diglin_ricento/sales_validate_increment')->getJavaScriptValidator();
         return parent::_afterToHtml($html);
     }
 

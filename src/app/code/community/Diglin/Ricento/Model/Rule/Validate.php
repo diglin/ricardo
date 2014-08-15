@@ -121,7 +121,7 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
         /* @var $block Mage_Adminhtml_Block_Template */
         $block = Mage::getBlockSingleton('adminhtml/template');
         $block
-            ->setTemplate('ricento/js/rules/validator.phtml')
+            ->setTemplate('ricento/js/rules/validate/paymentshipping.phtml')
             ->setPaymentValidationMessage($this->getAllowedPaymentCombinationsMessage())
             ->setJsonAllowedPaymentCombinations(Mage::helper('core')->jsonEncode($this->_allowedPaymentCombinations))
             ->setPaymentShippingValidationMessage($this->getDisallowedPaymentShippingCombinationsMessage())

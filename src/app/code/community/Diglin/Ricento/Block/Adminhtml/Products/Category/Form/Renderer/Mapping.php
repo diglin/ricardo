@@ -19,7 +19,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Form_Renderer_Mapping
     {
         $value = $this->getEscapedValue();
         if (!empty($value)) {
-            // @fixme maybe better to save the category name into the DB for performance reason
+            // @fixme probably better to save the category name into the DB for performance reason instead to call the API
             $categoryName = Mage::getSingleton('diglin_ricento/products_category_mapping')->getCategory($value)->getCategoryName();
             $text = $categoryName;
         } else {

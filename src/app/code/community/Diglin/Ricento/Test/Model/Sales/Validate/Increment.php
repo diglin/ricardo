@@ -29,7 +29,7 @@ class Diglin_Ricento_Test_Model_Rule_Validate extends EcomDev_PHPUnit_Test_Case
      * @loadExpectations
      * @dataProvider dataProvider
      */
-    public function testPaymentMethodCombinations($increment, $startPrice)
+    public function testStartPriceIncrementCombination($startPrice, $increment)
     {
         $expectedResults = $this->expected(sprintf('startprice-%s_increment-%s', $startPrice, $increment));
         $this->assertEquals(

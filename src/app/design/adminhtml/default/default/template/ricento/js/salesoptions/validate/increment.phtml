@@ -1,0 +1,29 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricardo
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+$incrementValidationMessage = $this->getErrorMessage();
+$jsonAllowedCombinations = $this->getJsonAllowedCombinations();
+?>
+<script>
+    Validation.add('validate-startprice-increment', '<?php echo $incrementValidationMessage ?>', function(fieldValue, field) {
+
+        startPriceValue = $('sales_options_sales_auction_start_price').value;
+
+        allowedCombinations = <?php echo $jsonAllowedCombinations ?>;
+        for (i = 0; i < allowedCombinations.length; ++i) {
+            if (allowedCombinations[i].start_price.min <= startPriceValue && allowedCombinations[i].start_price.max >= startPriceValue ) {
+                if (allowedCombinations[i].increment.min <= fieldValue && allowedCombinations[i].increment.max >= fieldValue) {
+                    return true
+                }
+            }
+
+        }
+        return false;
+    });
+</script>

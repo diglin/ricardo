@@ -10,18 +10,40 @@ startprice-50_increment-15.00:
 startprice-120_increment-45.00:
   is_valid: 1
   messages: []
-startprice-450_increment-48.00:
+startprice-550_increment-48.00:
   is_valid: 1
   messages: []
-startprice-555_increment-100.00:
+startprice-1200_increment-100.00:
   is_valid: 1
   messages: []
-startprice-1000.00_increment-150.00:
+startprice-2300.00_increment-150.00:
   is_valid: 1
   messages: []
-startprice-2200_increment-450.00:
+startprice-5500_increment-450.00:
   is_valid: 1
   messages: []
-startprice-1000.00_increment-1000.00:
-  is_valid: 1
+
+startprice-5_increment-10.00:
+  is_valid: 0
+  messages: []
+startprice-49.99_increment-20.00:
+  is_valid: 0
+  messages: []
+startprice-50_increment-50.00:
+  is_valid: 0
+  messages: []
+startprice-120_increment-100.00:
+  is_valid: 0
+  messages: []
+startprice-550_increment-200.00:
+  is_valid: 0
+  messages: []
+startprice-1200_increment-400.00:
+  is_valid: 0
+  messages: []
+startprice-2300.00_increment-600.00:
+  is_valid: 0
+  messages: []
+startprice-5500_increment-2000.00:
+  is_valid: 0
   messages: []
