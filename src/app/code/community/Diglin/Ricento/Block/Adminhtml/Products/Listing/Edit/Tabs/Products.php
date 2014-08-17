@@ -115,7 +115,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             'header'=> Mage::helper('catalog')->__('Price'),
             'type'  => 'price',
             'currency_code' => $store->getBaseCurrency()->getCode(),
-            'index' => 'price'
+            'index' => 'price',
+            'sortable' => false,
+            'filter'    => false,
         ));
         $this->addColumn('type', array(
             'header'    => Mage::helper('catalog')->__('Type'),
