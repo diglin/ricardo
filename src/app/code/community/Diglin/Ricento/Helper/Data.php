@@ -37,6 +37,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_PENDING = 'pending';
     const STATUS_LISTED = 'listed';
     const STATUS_STOPPED = 'stopped';
+    const STATUS_READY = 'ready'; // ready to list
     const STATUS_ERROR = 'error';
 
     const LOG_FILE = 'ricento.log';

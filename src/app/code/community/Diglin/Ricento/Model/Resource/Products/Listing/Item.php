@@ -23,6 +23,4 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
     {
         $this->_init('diglin_ricento/products_listing_item', 'item_id');
     }
-
-
 }

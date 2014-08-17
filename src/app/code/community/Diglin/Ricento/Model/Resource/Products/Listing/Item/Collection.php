@@ -23,5 +23,15 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mag
         $this->_init('diglin_ricento/products_listing_item');
     }
 
+    public function updateStatusToAll($status)
+    {
+        $connection = $this->getConnection();
+        $connection->update(
+            $this->getTable('diglin_ricento/products_listing_item'),
+                array('status' => $status),
+                array('item_id IN (?)' => $this->getAllIds())
+        );
 
+        return $this;
+    }
 }
