@@ -171,7 +171,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     public function getProductDescription()
     {
         if (!$this->getProduct()->getRicardoDescription()) {
-            $description $this->getProduct()->getDescription();
+            $description = $this->getProduct()->getDescription();
         } else {
         	$description = $this->getProduct()->getRicardoDescription();
         }
