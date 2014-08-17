@@ -1,3 +1,5 @@
+/* @override http://dev.ricento.local/skin/adminhtml/default/default/ricento/css/ricento.css */
+
 input[type="radio"] {
     margin-right: 7px;
 }
@@ -143,7 +145,7 @@ input[type="radio"] {
 .magento_minimize { background:url('images/window_minimize.png') 0 0 no-repeat !important;}
 .magento_maximize { background:url('images/window_maximize.png')0 0 no-repeat !important;}
 
-/********** Ricento Product Listing pages **********/
+/********** Ricento pages **********/
 
 .ricento-products-listing-edit .form-list,
 .ricento-products-listing-item-configure .form-list {
@@ -158,12 +160,195 @@ input[type="radio"] {
     width: 500px;
 }
 
-/********** Input Validator **********/
+/********** Product Preview Page **********/
 
-.allowed-combinations.table {  display: table;margin: 0px;padding: 0px;}
-.allowed-combinations .table-row {display: table-row;}
-.allowed-combinations .table-row > span {list-style:none;display: table-cell;border: 1px solid #cccccc;padding: 2px 6px;}
-.allowed-combinations .table-header {display: table-header-group;}
-.allowed-combinations .table-header span {background-color: #ddd;}
-.allowed-combinations .table-body {display: table-row-group;}
+.product_item_preview, .product_item_preview .container {
+	padding: 20px;
+	min-width: 960px;
+}
+
+.product_item_preview .messages {
+	text-align: center;
+	font-size: 18px;
+}
+
+.product_item_preview .breadcrumb {
+	background-color: #eee;
+	width: 100%;
+	padding: 4px;
+	text-indent: 20px;
+}
+
+.product_item_preview h1 {
+	font-size: 28px;
+	font-weight: bold;
+	color:  rgb(25, 70, 160);
+}
+.product_item_preview h2 {
+	font-size: 16px;
+	color: #888;
+	margin-bottom: 15px;
+}
+
+.product_item_preview span.label {
+	font-weight: bold;
+	line-height: 25px;
+	display: inline-block;
+	width: 180px;
+}
+
+.product_item_preview button {
+	height: 40px;
+	width: 130px;
+	padding: 10px;
+}
+
+.product_item_preview .product_image {
+	float: left;
+	margin-right: 20px;
+	width: 300px;
+}
+.product_item_preview .product_image img {
+	border: 1px solid #ccc;
+	padding: 10px;
+}
+.product_item_preview .product_image .more-views ul li{
+	float: left;
+	margin-right: 10px;
+}
+
+.product_item_preview .schedule {
+	margin-left: 300px;;
+	margin-bottom:20px;
+	border-bottom: 5px solid #ddd;	
+	
+}
+
+.product_item_preview .remaining_time {
+	font-size: 16px;
+	font-weight: bold;
+	float: left;
+	margin-right: 20px;
+}
+.product_item_preview .starting_date {
+	font-size: 16px;
+	padding-bottom: 10px;
+}
+.product_item_preview .product_auction_buynow {
+	margin-left: 300px;
+	position: relative;
+}
+
+.product_item_preview .product_auction_buynow .row {
+	height: 80px;
+	width: 500px;
+}
+
+.product_item_preview .product_auction_buynow .auction_box {
+	float: left;
+	width: 140px;
+	padding: 10px;
+}
+
+.product_item_preview .product_auction_buynow .auction_container .auction_price {
+	background-color: #eee;
+	padding: 5px;
+	color: rgb(246, 146, 28);
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.product_item_preview .product_auction_buynow .increment_container input#increment {
+	height: 25px;
+	padding: 0 5px;
+	font-size: 16px;
+	width: 130px;
+}
+
+.product_item_preview .product_auction_buynow .button_bit {
+	margin-top: 10px;
+}
+
+.product_item_preview .product_auction_buynow .button_bit button {
+	background: rgb(246, 146, 28);
+	border: 1px solid #f5ac00;
+}
+
+.product_item_preview .product_auction_buynow .quantity {
+	width: 150px;
+	float: left;
+	margin-top: 5px;
+}
+.product_item_preview .product_auction_buynow .quantity input{
+	height: 25px;
+	padding: 0 5px;
+	font-size: 16px;
+	width: 40px;
+	margin-right: 10px;
+}
+
+.product_item_preview .product_auction_buynow .buy_now .label {
+	font-size: 24px;
+	font-weight: bold;
+	color: rgb(166, 184, 38);
+	float: left;
+	line-height: 38px;
+	text-align: right;
+	margin-right: 20px;
+	margin-left: 25px;
+}
+.product_item_preview .product_auction_buynow .buy_now button {
+	background: rgb(166, 184, 38);
+	border: 1px solid rgb(166, 184, 38);
+	float: right;
+	margin-right: 20px;
+}
+
+.product_item_preview .description h2 {
+	margin-top: 20px;
+	color:  rgb(25, 70, 160);
+}
+
+.product_item_preview .additional h2 {
+	background: rgb(246, 146, 28);
+	border-radius: 5px;
+	padding: 5px 10px;
+	color: #FFF;
+	margin-top: 20px;
+}
+
+.product_item_preview .additional h3 {
+	background: #eee;
+	padding: 10px;
+	margin: 10px 0;
+	border-top: 1px solid #888;
+	font-size: 14px;
+}
+
+.product_item_preview .additional ul {
+	padding: 0 20px;
+}
+
+.product_item_preview ul.navigation {
+	margin-top: 20px;
+	border-bottom: 1px solid rgb(246, 146, 28);
+	padding-bottom: 8px;
+}
+.product_item_preview ul.navigation a {
+	text-decoration: none;
+	color: #000;
+	font-weight: bold;
+	padding: 10px 20px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background: #ddd;
+}
+.product_item_preview ul.navigation a:hover, 
+.product_item_preview ul.navigation a.nav-description {
+	color: #fff;
+	background: rgb(246, 146, 28);
+}
+.product_item_preview ul.navigation li.tab {
+	display: inline-block;
+}
 

@@ -1,0 +1,127 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricardo
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+
+/* @var $this Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview */
+?>
+<div class="product_item_preview">
+    <div id="messages">
+        <?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+    </div>
+    <div class="breadcrumb"><?php echo implode(' > ', $this->getBreadcrumb()); ?></div>
+    <div class="container">
+        <div class="ricardo_title"><h1><?php echo $this->getProductItem()->getProductName(); ?></h1></div>
+        <div class="ricardo_subtitle"><h2><?php echo $this->getProduct()->getRicardoSubtitle(); ?></h2></div>
+        <div class="product_container1">
+            <div class="product_image">
+                <img src="<?php echo Mage::helper('catalog/image')->init($this->getProduct(), 'image')->resize(265); ?>" />
+                <?php if (count($this->getGalleryImages()) > 0): ?>
+                    <div class="more-views">
+                        <h2><?php echo $this->__('More Views') ?></h2>
+                        <ul>
+                            <?php foreach ($this->getGalleryImages() as $_image): ?>
+                                <li>
+                                    <a href="#" onclick="popWin('<?php echo $this->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>">
+                                        <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(56); ?>" width="56" height="56" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="schedule">
+                <div class="remaining_time"><?php echo $this->__('%s days 0:0:0', $this->getSalesOptions()->getSchedulePeriodDays()); ?></div>
+                <div class="starting_date"><?php echo $this->getStartingDate(); ?></div>
+            </div>
+            <div class="product_auction_buynow">
+                <?php if ($this->getSalesOptions()->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) { ?>
+                    <div class="row">
+                        <div class="auction_box auction_container">
+                            <div class="label"><?php echo $this->__('Starting price'); ?></div>
+                            <div class="auction_price"><?php echo $this->getSalesAuctionStartPrice(); ?></div>
+                        </div>
+                        <div class="auction_box increment_container">
+                            <div class="label"><?php echo $this->__('Increment'); ?></div>
+                            <div class="increment_price"><input type="text" value="<?php echo round($this->getSalesOptions()->getSalesAuctionIncrement(), 2); ?>" id="increment" /></div>
+                        </div>
+                        <div class="auction_box button_bit">
+                            <button type="button" class="scalable" title="<?php echo $this->__('Place a bit'); ?>"><span><span><?php echo $this->__('Place a bit'); ?></span></span></button>
+                        </div>
+                    </div>
+                <?php } ?>
+                <div class="row">
+                    <div class="quantity">
+                    <?php if ($this->getSalesOptions()->getStockManagement() > 1): ?>
+                        <label for="quantity"><?php echo $this->__('Quantity'); ?></label>
+                        <input type="text" id="quantity" name="quantity" value="1" /><?php echo $this->__('of %s', $this->getSalesOptions()->getStockManagement()); ?>
+                    <?php endif; ?>
+                    </div>
+                <?php if ($this->getSalesOptions()->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUY_NOW || $this->getSalesOptions()->getSalesAuctionDirectBuy()): ?>
+                    <?php $price = $this->getProductPrice(); ?>
+                    <?php if ($price): ?>
+                        <div class="buy_now">
+                            <div class="label"><?php echo $price; ?></div>
+                            <div class="button"><button type="button" class="scalable save" title="<?php echo $this->__('Buy now'); ?>"><span><span><?php echo $this->__('Buy now'); ?></span></span></button></div>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
+                </div>
+            </div>
+            <div class="product_options">
+                <h2><?php echo $this->__('Details'); ?></h2>
+                <ul>
+                    <li><span class="label"><?php echo $this->__('Ending date:'); ?></span><span class="option"><?php echo $this->getEndingDate(); ?></span></li>
+                    <li><span class="label"><?php echo $this->__('Availability:'); ?></span><span class="option"><?php echo $this->getShippingAvailability(); ?></span></li>
+                    <li><span class="label"><?php echo $this->__('Product condition:'); ?></span><span class="option"><?php echo $this->getProductCondition(); ?></span></li>
+                    <li><span class="label"><?php echo $this->__('Payment information:'); ?></span><span class="option"><?php echo implode(', ', $this->getPaymentMethods()); ?></span></li>
+                    <li><span class="label"><?php echo $this->__('Shipping Method (CH):'); ?></span><span class="option"><?php echo $this->getShippingMethod(); ?></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="product_container2">
+            <ul class="navigation">
+                <li class="tab"><a href="#description" class="nav-description"><?php echo $this->__('Description'); ?></a></li>
+                <li class="tab"><a href="#additional" class="nav-additional"><?php echo $this->__('Payment, Shipping, Warranty'); ?></a></li>
+            </ul>
+
+            <div class="description">
+                <a name="description"></a>
+                <h2><?php echo $this->getProductItem()->getProductName(); ?></h2>
+                <p><?php echo $this->getProductItem()->getProductDescription(); ?></p>
+            </div>
+            <div class="additional">
+                <a name="additional"></a>
+                <h2><?php echo $this->__('Payment, Shipping, Warranty'); ?></h2>
+
+                <h3><?php echo $this->__('Payment information'); ?></h3>
+                <ul class="payment_methods">
+                    <li><span class="label"><?php echo $this->__('Payment Methods:'); ?></span><?php echo implode(', ', $this->getPaymentMethods()); ?></li>
+                    <?php if ($this->getOtherPaymentMethod()) {?>
+                    <li><span class="label"><?php echo $this->__('Payment Description:'); ?></span></li>
+                    <li><span class="option"><?php echo $this->getOtherPaymentMethodText(); ?></span></li>
+                    <?php }; ?>
+                </ul>
+                <h3><?php echo $this->__('Shipping'); ?></h3>
+                <ul class="shipping_method">
+                    <li><span class="label"><?php echo $this->__('Shipping Price:', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY); ?></span><span class="option"><?php echo $this->getShippingPrice(); ?></span></li>
+                    <li><span class="label"><?php echo $this->__('Shipping Availability:'); ?></span><span class="option"><?php echo $this->getShippingAvailability(); ?></span></li>
+                    <li><span class="label"><?php echo $this->__('Shipping Method (CH):'); ?></span><span class="option"><?php echo $this->getShippingMethod(); ?></span></li>
+                    <?php if ($this->getOtherShippingMethodText()) { ?>
+                    <li><span class="label"><?php echo $this->__('Shipping Description (CH):'); ?></span></li>
+                    <li><span class="option"><?php echo $this->getOtherShippingMethodText(); ?></span></li>
+                    <?php }; ?>
+                </ul>
+                <h3><?php echo $this->__('Warranty'); ?></h3>
+                <ul><li><?php echo $this->getWarranty(); ?></li></ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,9 +10,6 @@
  */
 class Diglin_Ricento_Model_Config_Source_Sales_Warranty extends Diglin_Ricento_Model_Config_Source_Abstract
 {
-    const FOLLOW_CONDITION = 0;
-    const NONE = 1;
-
     protected $_warranties = array();
 
     /**
