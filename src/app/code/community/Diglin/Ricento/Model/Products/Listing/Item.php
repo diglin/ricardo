@@ -18,6 +18,7 @@
  * @method string getStatus()
  * @method DateTime getCreatedAt()
  * @method DateTime getUpdatedAt()
+ * @method bool getLoadFallbackOptions()
  * @method Diglin_Ricento_Model_Products_Listing_Item setProductId(int $productId)
  * @method Diglin_Ricento_Model_Products_Listing_Item setProductsListingId(int $productListingId)
  * @method Diglin_Ricento_Model_Products_Listing_Item setSalesOptionsId(int $salesOptionsId)
@@ -25,10 +26,10 @@
  * @method Diglin_Ricento_Model_Products_Listing_Item setStatus(string $status)
  * @method Diglin_Ricento_Model_Products_Listing_Item setCreatedAt(DateTime $createdAt)
  * @method Diglin_Ricento_Model_Products_Listing_Item setUpdatedAt(DateTime $updatedAt)
+ * @method Diglin_Ricento_Model_Products_Listing_Item setLoadFallbackOptions(bool $loadFallbackOptions)
  */
 class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstract
 {
-
     /**
      * @var Diglin_Ricento_Model_Sales_Options
      */
@@ -114,6 +115,8 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             $this->_salesOptions = Mage::getModel('diglin_ricento/sales_options');
             if ($this->getSalesOptionsId()) {
                 $this->_salesOptions->load($this->getSalesOptionsId());
+            } elseif ($this->getLoadFallbackOptions()) {
+                $this->_salesOptions = $this->getProductsListing()->getSalesOptions();
             }
         }
         return $this->_salesOptions;
@@ -128,8 +131,46 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             $this->_shippingPaymentRule = Mage::getModel('diglin_ricento/rule');
             if ($this->getRuleId()) {
                 $this->_shippingPaymentRule->load($this->getRuleId());
+            } elseif ($this->getLoadFallbackOptions()) {
+                $this->_shippingPaymentRule = $this->getProductsListing()->getShippingPaymentRule();
             }
         }
         return $this->_shippingPaymentRule;
+    }
+
+    /**
+     * @return Diglin_Ricento_Model_Products_Listing
+     */
+    public function getProductsListing()
+    {
+        return Mage::getModel('diglin_ricento/products_listing')->load($this->getProductsListingId());
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductName()
+    {
+        if (!$this->getProduct()->getRicardoTitle()) {
+            $title = $this->getProduct()->getName();
+        } else {
+        	$title = $this->getProduct()->getRicardoTitle();
+        }
+
+        return mb_substr($title, 0, 40);
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductDescription()
+    {
+        if (!$this->getProduct()->getRicardoDescription()) {
+            $description $this->getProduct()->getDescription();
+        } else {
+        	$description = $this->getProduct()->getRicardoDescription();
+        }
+
+        return Mage::helper('core')->escapeHtml($description);
     }
 }
