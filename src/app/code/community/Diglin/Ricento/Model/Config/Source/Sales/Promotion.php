@@ -26,18 +26,10 @@ class Diglin_Ricento_Model_Config_Source_Sales_Promotion extends Diglin_Ricento_
                 \Diglin\Ricardo\Core\Helper::getJsonDate(), \Diglin\Ricardo\Enums\CategoryArticleType::ALL, 1, 1
             );
 
-            $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
-
-            if (isset($partnerConfiguration['CurrencyPrefix'])) {
-                $ricardoCurrency = $partnerConfiguration['CurrencyPrefix'];
-            } else {
-                $ricardoCurrency = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
-            }
-
             $helper = Mage::helper('diglin_ricento');
             $store = Mage::app()->getStore();
-            $oldCurrency = $store->getCurrentCurrency();
-            $store->setCurrentCurrency(Mage::getModel('directory/currency')->load($ricardoCurrency));
+
+            $helper->startCurrencyEmulation();
 
             $this->_promotions = array(0 => $helper->__('No package'));
 
@@ -47,8 +39,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Promotion extends Diglin_Ricento_
                 }
             }
 
-            // Revert currency changes
-            $store->setCurrentCurrency($oldCurrency);
+            $helper->stopCurrencyEmulation();
         }
 
         return $this->_promotions;

@@ -47,6 +47,11 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const RICARDO_URL_HELP_PROMOTION = 'http://www.ricardo.ch/ueber-uns/gebühren/einstelloptionen'; //@todo make it for french too
 
     /**
+     * @var Mage_Directory_Model_Currency
+     */
+    protected $_oldCurrency;
+
+    /**
      * Is the extension enabled for the current website
      *
      * @param null|string|bool|int|Mage_Core_Model_Website $website
@@ -329,5 +334,87 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         } else {
             return false;
         }
+    }
+
+    /**
+     * Format the price with the ricardo supported currencies
+     *
+     * @param $value
+     * @return string
+     */
+    public function formatPrice($value)
+    {
+        $this->startCurrencyEmulation();
+
+        $value = Mage::app()->getStore()->formatPrice($value);
+
+        $this->stopCurrencyEmulation();
+
+        return $value;
+    }
+
+    /**
+     * Emulate CHF currency in case the current store settings is different as the allowed currency/ies
+     *
+     * @return $this
+     */
+    public function startCurrencyEmulation()
+    {
+        $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
+
+        if (isset($partnerConfiguration['CurrencyPrefix'])) {
+            $ricardoCurrency = $partnerConfiguration['CurrencyPrefix'];
+        } else {
+            $ricardoCurrency = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
+        }
+
+        $store = Mage::app()->getStore();
+        $this->_oldCurrency = $store->getCurrentCurrency();
+        $store->setCurrentCurrency(Mage::getModel('directory/currency')->load($ricardoCurrency));
+
+        return $this;
+    }
+
+    /**
+     * Revert the changes done regarding the currency of the current store
+     *
+     * @return $this
+     */
+    public function stopCurrencyEmulation()
+    {
+        Mage::app()->getStore()->setCurrentCurrency($this->_oldCurrency);
+
+        return $this;
+    }
+
+    /**
+     * Calculate the price change depending on the type and value of the change to apply
+     *
+     * @param float|int $price
+     * @param string $priceChangeType
+     * @param float|int $priceChange
+     * @return float
+     */
+    public function calculatePriceChange($price, $priceChangeType, $priceChange)
+    {
+        switch ($priceChangeType) {
+            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_DYNAMIC_NEG:
+                $price -= ($price * $priceChange / 100);
+                break;
+            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_DYNAMIC_POS:
+                $price += ($price * $priceChange / 100);
+                break;
+            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_FIXED_NEG:
+                $price -= $priceChange;
+                break;
+            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_FIXED_POS:
+                $price += $priceChange;
+                break;
+            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_NOCHANGE:
+            default:
+                break;
+        }
+
+        return $price;
     }
 }
