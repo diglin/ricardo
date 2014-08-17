@@ -17,12 +17,16 @@
  * @method Diglin_Ricento_Model_Rule setShippingAvailability(string $shippingAvailability)
  * @method Diglin_Ricento_Model_Rule setPaymentMethods(string $paymentMethods)
  * @method Diglin_Ricento_Model_Rule setPaymentDescription(string $paymentDescription)
+ * @method Diglin_Ricento_Model_Rule setShippingPackage(int $shippingPackage)
+ * @method Diglin_Ricento_Model_Rule setShippingCumulativeFee(int $shippingCumulativeFee)
  * @method string getShippingMethod()
  * @method string getShippingDescription()
  * @method float getShippingPrice()
  * @method string getShippingAvailaibility()
  * @method string getPaymentDescription()
  * @method string[] getPaymentMethods()
+ * @method string getShippingPackage()
+ * @method int getShippingCumulativeFee()
  *
  */
 class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract

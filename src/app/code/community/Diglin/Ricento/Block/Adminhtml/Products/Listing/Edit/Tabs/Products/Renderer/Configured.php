@@ -28,13 +28,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Rendere
             $append = $salesOptionsTxt = $ruleTxt = '';
             if ($row->getSalesOptionsId()) {
                 $salesOptionsTxt = $this->__('the sales options');
-                $append = '&';
+                $append = '& ';
             }
             if ($row->getRuleId()) {
                 $ruleTxt = $append . $this->__('the shipping and payment rules');
             }
 
-            $warningMessage = $this->__('This product has been configured for %s %s in this listing', $salesOptionsTxt, $ruleTxt);
+            $warningMessage = $this->__('This product has been configured for %s %s', $salesOptionsTxt, $ruleTxt);
             return
 <<<HTML
     <div class="diglin_ricento_settings_icon" title="{$warningMessage}">&nbsp;</div>

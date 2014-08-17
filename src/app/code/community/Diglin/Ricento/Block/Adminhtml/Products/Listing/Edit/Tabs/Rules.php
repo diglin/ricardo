@@ -68,12 +68,28 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'label'   => $this->__('Shipping Methods'),
             'values'  => Mage::getSingleton('diglin_ricento/config_source_rules_shipping')->getAllOptions(),
             'class'   => 'validate-payment-shipping-combination',
-            'onchange' => 'rulesForm.toggleShippingDescription(this);'
+            'onchange' => 'rulesForm.toggleShippingDescription(this); rulesForm.initPackages(this);'
         ));
-        $fieldsetShipping->addField('shipping_availability', 'select', array(
-            'name'    => 'rules[shipping_availability]',
-            'label'   => $this->__('Shipping Availability'),
-            'values'  => Mage::getSingleton('diglin_ricento/config_source_rules_shipping_availability')->getAllOptions()
+        $fieldsetShipping->addField('shipping_package', 'select', array(
+            'name'    => 'rules[shipping_package]',
+            'class'   => '',
+            'onchange' => 'rulesForm.setShippingFee(this);'
+        ));
+        $fieldsetShipping->addField('shipping_price', 'text', array(
+            'name'     => 'rules[shipping_price]',
+            'label'    => $this->__('Shipping Price'),
+            'class'    => 'validate-number',
+            'required' => true
+        ));
+//        $fieldsetShipping->addField('free_shipping', 'checkbox', array(
+//            'name'    => 'rules[free_shipping]',
+//            'label'   => $this->__('Free shipping'),
+//            'onclick' => 'rulesForm.switchShippingPrice(this);'
+//        ));
+        $fieldsetShipping->addField('shipping_cumulative_fee', 'checkbox', array(
+            'name'    => 'rules[shipping_cumulative_fee]',
+            'label'   => $this->__('Split Shipping fee'),
+            'note'  => $this->__('If you select this option, the shipping fee will be calculate for each sold product. Let it empty if you don\'t such an option.')
         ));
         $fieldsetShipping->addField('shipping_description', 'textarea', array(
             'name'  => 'rules[shipping_description]',
@@ -82,16 +98,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'class' => 'validate-length maximum-length-5000',
             'note' => $this->__('Characters: %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'shipping_description'))
         ));
-        $fieldsetShipping->addField('shipping_price', 'text', array(
-            'name'     => 'rules[shipping_price]',
-            'label'    => $this->__('Shipping Price'),
-            'class'    => 'validate-number',
-            'required' => true
-        ));
-        $fieldsetShipping->addField('free_shipping', 'checkbox', array(
-            'name'    => 'rules[free_shipping]',
-            'label'   => $this->__('Free shipping'),
-            'onclick' => 'rulesForm.switchShippingPrice(this);'
+        $fieldsetShipping->addField('shipping_availability', 'select', array(
+            'name'    => 'rules[shipping_availability]',
+            'label'   => $this->__('Shipping Availability'),
+            'values'  => Mage::getSingleton('diglin_ricento/config_source_rules_shipping_availability')->getAllOptions()
         ));
         $this->setForm($form);
 
@@ -102,10 +112,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
     {
         $this->getForm()->setValues($this->getShippingPaymentRule());
 
-        $shippingPrice = $this->getShippingPaymentRule()->getShippingPrice();
-        $isFreeShipping = (!is_null($shippingPrice) && $shippingPrice == 0) ? true : false;
-        $this->getForm()->getElement('shipping_price')->setDisabled($isFreeShipping);
-        $this->getForm()->getElement('free_shipping')->setChecked($isFreeShipping);
+//        $shippingPrice = $this->getShippingPaymentRule()->getShippingPrice();
+//        $isFreeShipping = (!is_null($shippingPrice) && $shippingPrice == 0) ? true : false;
+//        $this->getForm()->getElement('shipping_price')->setDisabled($isFreeShipping);
+        $this->getForm()->getElement('shipping_cumulative_fee')->setChecked((bool) $this->getShippingPaymentRule()->getShippingCumulativeFee());
 
         $disableDescription = (!$this->getShippingPaymentRule()->getShippingMethod()) ? false : true;
         $this->getForm()->getElement('shipping_description')
@@ -113,7 +123,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             ->setRequired(!$disableDescription);
 
         $disablePaymentDescription = true;
-        foreach ($this->getShippingPaymentRule()->getPaymentMethods() as $method) {
+        $methods = (array) $this->getShippingPaymentRule()->getPaymentMethods();
+        foreach ($methods as $method) {
             if ((int)$method === 0) {
                 $disablePaymentDescription = false;
                 break;
@@ -124,7 +135,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             ->setRequired(!$disablePaymentDescription);
 
         $derivedValues = array();
-        $derivedValues['free_shipping'] = 1;
+        $derivedValues['shipping_cumulative_fee'] = 1;
 
         $this->getForm()->addValues($derivedValues);
         return parent::_initFormValues();
@@ -145,17 +156,21 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $elements = $fieldsetShipping->getElements();
 
         $fieldShippingPrice = $elements->searchById('shipping_price');
-        $fieldFreeShipping = $elements->searchById('free_shipping');
+        $fieldShippingPrice->setData('after_element_html', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY);
 
-        if($fieldFreeShipping){
-            $fieldShippingPrice->setData('after_element_html', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY . ' - ' . $fieldFreeShipping->getLabelHtml() . $fieldFreeShipping->getElementHtml() );
-            $fieldsetShipping->removeField('free_shipping');
-        }
+        $fieldPackages = $elements->searchById('shipping_package');
+        $fieldMethod = $elements->searchById('shipping_method');
+
+        $fieldMethod->setData('after_element_html', $fieldPackages->getElementHtml());
+        $fieldsetShipping->removeField('shipping_package');
     }
 
     protected function _afterToHtml($html)
     {
-        $html .= '<script>var rulesForm = new Ricento.RulesForm("' . $this->getForm()->getHtmlIdPrefix() . '");</script>';
+        $shippingPackage = ($this->getShippingPaymentRule()->getShippingPackage()) ? ',' . $this->getShippingPaymentRule()->getShippingPackage() : '';
+        $html .= '<script>var rulesForm = new Ricento.RulesForm("' . $this->getForm()->getHtmlIdPrefix() . '", "' . Mage::helper('core')->jsQuoteEscape(json_encode(Mage::getSingleton('diglin_ricento/config_source_rules_shipping_packages')->toOptionHash()), "\"") . '");';
+        $html .= 'rulesForm.initPackages($(\''. $this->getForm()->getHtmlIdPrefix() .'shipping_method\') '. $shippingPackage .');';
+        $html .= '</script>';
         $html .= Mage::getModel('diglin_ricento/rule_validate')->getJavaScriptValidator();
         return parent::_afterToHtml($html);
     }

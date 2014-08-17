@@ -59,7 +59,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Rules
         if ($useDefaultCheckbox->getChecked()) {
             Mage::helper('diglin_ricento')->disableForm($this->getForm());
             $useDefaultCheckbox->setDisabled(false);
-            $this->getForm()->getElement('free_shipping')->setChecked(false);
+//            $this->getForm()->getElement('free_shipping')->setChecked(false);
         }
         return $this;
     }

@@ -393,18 +393,19 @@ Ricento.GeneralForm.prototype = {
     }
 };
 Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
-    initialize: function(htmlIdPrefix) {
+    initialize: function(htmlIdPrefix, packageSizes) {
         this.htmlIdPrefix = htmlIdPrefix;
         this.requiredText = '<span class="required">*</span>';
         this.requiredClass = 'required-entry';
         this.validationPassedClass = 'validation-passed';
         this.requiredIfVisibleClass = 'required-if-visible';
+        this.packageSizes = packageSizes;
 
         var self = this;
-        Countable.live($(this.htmlIdPrefix + 'payment_description'), function (counter){
+        Countable.live($(this.htmlIdPrefix + 'payment_description'), function (counter) {
             $(self.htmlIdPrefix + 'payment_description_result__all').update(counter.characters);
         });
-        Countable.live($(this.htmlIdPrefix + 'shipping_description'), function (counter){
+        Countable.live($(this.htmlIdPrefix + 'shipping_description'), function (counter) {
             $(self.htmlIdPrefix + 'shipping_description_result__all').update(counter.characters);
         });
     },
@@ -424,9 +425,52 @@ Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
         shippingDescription.disabled = !required;
         this.toggleRequired(shippingDescription, required, shippingDescriptionLabel);
     },
-    switchShippingPrice: function(field) {
-        shippingPrice = $('rules_shipping_price');
-        shippingPrice.value = '0.00';
-        shippingPrice.disabled = field.checked;
+//    switchShippingPrice: function(field) {
+//        shippingPrice = $('rules_shipping_price');
+//        shippingPrice.value = '0.00';
+//        shippingPrice.disabled = field.checked;
+//    },
+    initPackages: function(field, selected) {
+        var deliveryId = field.value;
+        var packages = JSON.parse(this.packageSizes);
+        var package = packages[deliveryId];
+        var select = $(this.htmlIdPrefix + 'shipping_package');
+        select.removeClassName('hidden');
+
+        while (select.firstChild) {
+            select.removeChild(select.firstChild);
+        }
+
+        if (package != undefined && package != null && package.length > 0) {
+            for (i = 0; i < package.length; ++i) {
+                var opt = document.createElement('option');
+
+                if (selected != undefined && selected == package[i].PackageSizeId) {
+                    opt.selected = true;
+                }
+                opt.value = package[i].PackageSizeId;
+                opt.innerHTML = package[i].PackageSizeText;
+                var attribute = document.createAttribute('data-package-cost');
+                attribute.value = package[i].PackageSizeCost;
+                opt.setAttributeNode(attribute);
+                select.appendChild(opt);
+                if (i == 0 && selected == undefined ) {
+                    this._changePrice(package[i].PackageSizeCost);
+                }
+            }
+        } else if (package > 0) {
+            this._changePrice(package);
+            select.addClassName('hidden');
+        } else {
+            this._changePrice(0);
+            select.addClassName('hidden');
+        }
+    },
+    setShippingFee: function(field) {
+        selected = field.options[field.selectedIndex];
+        this._changePrice(selected.getAttribute('data-package-cost'));
+    },
+    _changePrice: function(price) {
+        $(this.htmlIdPrefix + 'shipping_price').value = (price > 0) ? Math.round(price*100)/100 : 0;
     }
 });
