@@ -88,10 +88,12 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
 //        } else {
 //            $data['sales_options']['product_condition'] = null;
 //        }
-        if ($data['sales_options']['product_warranty'] == Diglin_Ricento_Model_Config_Source_Sales_Warranty::NONE) {
-            unset($data['sales_options']['product_warranty_condition']);
-        } else {
-            $data['sales_options']['product_warranty_condition'] = substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_condition']), 0, 5000);
+        if (isset($data['sales_options']['product_warranty'])) {
+            if ($data['sales_options']['product_warranty'] == \Diglin\Ricardo\Enums\Warranty::NONE) {
+                unset($data['sales_options']['product_warranty_condition']);
+            } else {
+                $data['sales_options']['product_warranty_condition'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_condition']), 0, 5000);
+            }
         }
         if (!empty($data['sales_options']['promotion_start_page'])) {
             $data['sales_options']['promotion_start_page'] = \Diglin\Ricardo\Enums\PromotionCode::PREMIUMHOMEPAGE;
@@ -106,24 +108,26 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
             unset($data['rules']['rule_id']);
         }
 
-        $initDescription = true;
-        foreach ($data['rules']['payment_methods'] as $method) {
-            if ((int) $method === 0) {
-                $initDescription = false;
+        if (isset($data['rules']['payment_methods'])) {
+            $initDescription = true;
+            foreach ($data['rules']['payment_methods'] as $method) {
+                if ((int) $method === 0) {
+                    $initDescription = false;
+                }
             }
-        }
-        if ($initDescription) {
-            $data['rules']['payment_description'] = null;
+            if ($initDescription) {
+                $data['rules']['payment_description'] = null;
+            }
         }
 
         if (!empty($data['rules']['payment_description'])) {
-            $data['rules']['payment_description'] = substr(Mage::helper('core')->escapeHtml($data['rules']['payment_description']), 0, 5000);
+            $data['rules']['payment_description'] = mb_substr(Mage::helper('core')->escapeHtml($data['rules']['payment_description']), 0, 5000);
         }
-        if ((int) $data['rules']['shipping_method'] !== 0) {
+        if (isset($data['rules']['shipping_method']) && (int) $data['rules']['shipping_method'] !== 0) {
             $data['rules']['shipping_description'] = null;
         }
         if (!empty($data['rules']['shipping_description'])) {
-            $data['rules']['shipping_description'] = substr(Mage::helper('core')->escapeHtml($data['rules']['shipping_description']), 0, 5000);
+            $data['rules']['shipping_description'] = mb_substr(Mage::helper('core')->escapeHtml($data['rules']['shipping_description']), 0, 5000);
         }
         if (!empty($data['rules']['free_shipping'])) {
             $data['rules']['shipping_price'] = 0;
