@@ -15,12 +15,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit extends Mage_Adm
 {
     public function __construct()
     {
-        $this->_objectId   = 'entity_id';
+        $this->_objectId = 'entity_id';
         $this->_blockGroup = 'diglin_ricento';
         $this->_controller = 'adminhtml_products_listing_item';
 
         parent::__construct();
     }
+
     /**
      * Retrieve text for header element depending on loaded listing
      *
@@ -30,11 +31,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit extends Mage_Adm
     {
         if (count($this->getSelectedItems()) == 1) {
             return $this->__("Configure product '%s'", $this->escapeHtml($this->getSelectedItems()->getFirstItem()->getProduct()->getName()));
-        }
-        else {
+        } else {
             return $this->__('Configure all %s selected products', count($this->getSelectedItems()));
         }
     }
+
     public function getBackUrl()
     {
         return $this->getUrl('*/products_listing/edit', array('id' => $this->getListingId()));
@@ -49,6 +50,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit extends Mage_Adm
     {
         return Mage::registry('selected_items');
     }
+
     /**
      * Returns product listing
      *
@@ -58,6 +60,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit extends Mage_Adm
     {
         return Mage::registry('products_listing');
     }
+
     /**
      * Returns product listing id if listing loaded, null otherwise
      *

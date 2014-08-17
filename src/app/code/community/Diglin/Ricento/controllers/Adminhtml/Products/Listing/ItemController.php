@@ -49,6 +49,9 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         return Mage::registry('selected_items');
     }
 
+    /**
+     * Configure individually or a group of products belonging to a products listing
+     */
     public function configureAction()
     {
         if (!$this->_initListing()) {
@@ -64,6 +67,9 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         $this->renderLayout();
     }
 
+    /**
+     * Save the configuration of sales options and rules
+     */
     public function saveAction()
     {
         if ($data = $this->getRequest()->getPost()) {
@@ -91,14 +97,13 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
                             $item->save();
                         }
                     }
-                    $this->_getSession()->addSuccess($this->__('The configuration has been saved.'));
+                    $this->_getSession()->addSuccess($this->__('The configuration has been saved successfully.'));
                 }
-                return;
             } catch (Mage_Core_Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
             } catch (Exception $e) {
                 Mage::logException($e);
-                $this->_getSession()->addException($e, $this->__('An error occurred while saving the configuration.'));
+                $this->_getSession()->addException($e, $this->__('An error occurred while saving the configuration. Please, check your log files for more details.'));
             }
         }
         $this->_redirectUrl($this->_getEditUrl());
@@ -149,13 +154,40 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         return $this->_shippingPaymentCollection;
     }
 
+    /**
+     * @return string
+     */
     protected function _getEditUrl()
     {
         return $this->getUrl('*/*/configure', array('id' => $this->getRequest()->getParam('id'), 'product' => implode(',', $this->_productIds)));
     }
 
+    /**
+     * @return string
+     */
     protected function _getIndexUrl()
     {
         return $this->getUrl('*/products_listing/edit', array('id' => $this->getRequest()->getParam('id')));
+    }
+
+    /**
+     * Show preview page of the product published on ricardo.ch
+     */
+    public function previewAction()
+    {
+        if (!$this->_initListing()) {
+            $this->_redirect('*/products_listing/index');
+            return;
+        }
+        if ($this->_initItems()->count() == 0) {
+            $this->_getSession()->addError($this->__('No products selected.'));
+            $this->_redirect('*/products_listing/edit', array('id' => $this->_getListing()->getId()));
+            return;
+        }
+
+        $this->_getSession()->addNotice($this->__('It\'s just a preview. Please, be aware that the display on ricardo.ch might be slightly different.'));
+
+        $this->loadLayout();
+        $this->renderLayout();
     }
 }

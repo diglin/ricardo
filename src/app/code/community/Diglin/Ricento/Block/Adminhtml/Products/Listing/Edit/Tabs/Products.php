@@ -168,6 +168,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'getter'     => 'getId',
                 'actions'   => array(
                     array(
+                        'caption' => $this->__('Preview'),
+                        'url'     => array(
+                            'base'=>'*/products_listing_item/preview',
+                            'params' => array('id' => $this->getListing()->getId())
+                        ),
+                        'field'   => 'product'
+                    ),
+                    array(
                         'caption' => $this->__('Configure'),
                         'url'     => array(
                             'base'=>'*/products_listing_item/configure',

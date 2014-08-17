@@ -81,6 +81,18 @@
         </reference>
     </ricento_products_listing_item_configure>
 
+    <ricento_products_listing_item_preview>
+        <update handle="ricento_scripts" />
+        <reference name="root">
+            <action method="setTemplate">
+                <template>empty.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="diglin_ricento/adminhtml_products_listing_item_preview" name="products_listing_item_preview" />
+        </reference>
+    </ricento_products_listing_item_preview>
+
     <ricento_products_category_mapping>
         <update handle="overlay_popup" />
         <remove name="footer" />
