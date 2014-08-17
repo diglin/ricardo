@@ -4,6 +4,10 @@ input[type="radio"] {
     margin-right: 7px;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 #nav li.ricardo_logo > a {
     background: url("images/ricardo_16x16.png") no-repeat 10px 5px !important
 }
@@ -206,6 +210,7 @@ input[type="radio"] {
 .product_item_preview .product_image {
 	float: left;
 	margin-right: 20px;
+    min-height: 400px;
 	width: 300px;
 }
 .product_item_preview .product_image img {
@@ -220,8 +225,7 @@ input[type="radio"] {
 .product_item_preview .schedule {
 	margin-left: 300px;;
 	margin-bottom:20px;
-	border-bottom: 5px solid #ddd;	
-	
+	border-bottom: 5px solid #ddd;
 }
 
 .product_item_preview .remaining_time {

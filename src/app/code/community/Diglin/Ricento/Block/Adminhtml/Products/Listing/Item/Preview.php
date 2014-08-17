@@ -123,6 +123,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
     public function getStartingDate()
     {
         return $this->_getLocalizedDate($this->getSalesOptions()->getScheduleDateStart());
+
     }
 
     /**
@@ -146,11 +147,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
      */
     protected function _getLocalizedDate($date)
     {
-        $dateFormatIso = Mage::app()->getLocale()->getDateTimeFormat(
-            Mage_Core_Model_Locale::FORMAT_TYPE_SHORT
-        );
-
-        $date = new Zend_Date($date, $dateFormatIso, Mage::app()->getLocale()->getLocale());
+        $date = new Zend_Date($date, Varien_Date::DATETIME_INTERNAL_FORMAT, Mage::app()->getLocale()->getLocale());
         return $date->toString();
     }
 

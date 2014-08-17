@@ -171,6 +171,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'actions'   => array(
                     array(
                         'caption' => $this->__('Preview'),
+                        'popup'   => true,
                         'url'     => array(
                             'base'=>'*/products_listing_item/preview',
                             'params' => array('id' => $this->getListing()->getId())
