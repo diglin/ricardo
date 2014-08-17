@@ -32,11 +32,11 @@ class Diglin_Ricento_Model_Config_Source_Sales_Price_Method extends Diglin_Ricen
 
         return array(
             '' => $helper->__('-- Select Method --'),
-            self::PRICE_TYPE_NOCHANGE  => $helper->__('No change'),
-            self::PRICE_TYPE_FIXED_POS  => $helper->__('Relative increase (+ %)'),
-            self::PRICE_TYPE_FIXED_NEG  => $helper->__('Relative decrease (- %)'),
-            self::PRICE_TYPE_DYNAMIC_POS  => $helper->__('Absolute increase (+)'),
-            self::PRICE_TYPE_DYNAMIC_NEG  => $helper->__('Absolute decrease (-)')
+            self::PRICE_TYPE_NOCHANGE => $helper->__('No change'),
+            self::PRICE_TYPE_DYNAMIC_POS => $helper->__('Relative increase (+ %)'),
+            self::PRICE_TYPE_DYNAMIC_NEG => $helper->__('Relative decrease (- %)'),
+            self::PRICE_TYPE_FIXED_POS => $helper->__('Absolute increase (+)'),
+            self::PRICE_TYPE_FIXED_NEG => $helper->__('Absolute decrease (-)')
         );
     }
 
