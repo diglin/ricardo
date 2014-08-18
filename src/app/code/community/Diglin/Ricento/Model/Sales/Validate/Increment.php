@@ -100,18 +100,20 @@ class Diglin_Ricento_Model_Sales_Validate_Increment extends Zend_Validate_Abstra
     {
         $helper = Mage::helper('diglin_ricento');
 
-        $html = '<ul class="allowed-combinations table">';
-        $html .= '<div class="table-header">';
-        $html .= '<li class="table-row"><span>'. $helper->__('Start price is between') . '</span>';
-        $html .= '<span>'. $helper->__('Increment must be between') .'</span></li>';
-        $html .= '</div>';
+        $html = '<table class="allowed-combinations">';
+        $html .= '<thead><tr>';
+        $html .= '<th><span>'. $helper->__('Start price is between') . '</span></th>';
+        $html .= '<th><span>'. $helper->__('Increment must be between') .'</span></th>';
+        $html .= '</tr></thead>';
+        $html .= '<tbody>';
         foreach ($this->_getAllowedCombination() as $combination) {
-            $html .= '<div class="table-body">';
-            $html .= '<li class="table-row"><span>' . $combination['start_price']['min'] . '...' . $combination['start_price']['max'] . '</span>';
-            $html .= '<span>' . $combination['increment']['min'] . '...' . $combination['increment']['max'] . '</span></li>';
-            $html .= '</div>';
+            $html .= '<tr>';
+            $html .= '<td><span>' . $combination['start_price']['min'] . '...' . $combination['start_price']['max'] . '</span></td>';
+            $html .= '<td><span>' . $combination['increment']['min'] . '...' . $combination['increment']['max'] . '</span></td>';
+            $html .= '</tr>';
         }
-        $html .= '</ul>';
+        $html .= '</tbody>';
+        $html .= '</table>';
         return $html;
     }
 }

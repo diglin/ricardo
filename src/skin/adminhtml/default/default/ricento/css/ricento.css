@@ -164,6 +164,11 @@ input[type="radio"] {
     width: 500px;
 }
 
+/*********** Increment ***********/
+table.allowed-combinations {border: 1px solid #ccc}
+table.allowed-combinations th {background-color: #eee; font-weight: bold; font-size: 1.1em; padding: 5px;}
+table.allowed-combinations td {width: 50%; padding: 5px;}
+
 /********** Product Preview Page **********/
 
 .product_item_preview, .product_item_preview .container {
