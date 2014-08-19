@@ -48,7 +48,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 array('value' => 0, 'label' => $this->__('Select Ricardo Category'), 'field' => array(
                     'ricardo_category', 'ricardo_category', array(
                         'name' => 'sales_options[ricardo_category]',
-                        'label' => $this->__('Select the category')
+                        'label' => $this->__('Select the category'),
+                        'class' => 'validate-ricardo-category',
                     )
                 ))
             ),
@@ -118,7 +119,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'no_span' => true,
             'class' => 'inline-number validate-number',
         ));
-
         $fieldsetTypeBuynow->addField('fix_currency', 'label', array(
             'name' => 'sales_options[fix_currency]',
             'label' => $this->__('Currency'),
@@ -307,8 +307,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         if ($this->getSalesOptions()->getSalesType() == null) {
             $derivedValues['sales_type'] = Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION;
         }
-        if ((int) $this->getSalesOptions()->getRicardoCategory() == 0) {
+        if ((int) $this->getSalesOptions()->getRicardoCategory() == -1) {
             $derivedValues['ricardo_category_use_mapping'] = 1;
+        } else {
+            $derivedValues['ricardo_category_use_mapping'] = 0;
         }
 //        if ($this->getSalesOptions()->getProductConditionSourceAttributeCode()) {
 //            $derivedValues['product_condition_use_attribute'] = 1;

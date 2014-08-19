@@ -58,7 +58,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
             unset($data['sales_options']['entity_id']);
         }
         if (!empty($data['sales_options']['ricardo_category_use_mapping'])) {
-            $data['sales_options']['ricardo_category'] = 0;
+            $data['sales_options']['ricardo_category'] = -1;
         }
         if (!empty($data['sales_options']['schedule_cycle_multiple_products_random'])) {
             $data['sales_options']['schedule_cycle_multiple_products'] = null;

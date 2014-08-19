@@ -93,13 +93,28 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
     public function getBreadcrumb()
     {
         $categoryItem = $this->getProductItem()->getSalesOptions()->getRicardoCategory();
+
+        if ($categoryItem < 0) {
+            $catIds = $this->getProduct()->getCategoryIds();
+            foreach ($catIds as $id) {
+                $category = Mage::getModel('catalog/category')->load($id);
+                $ricardoCategory = $category->getRicardoCategory();
+                if ($ricardoCategory) {
+                    $categoryItem = $ricardoCategory;
+                    break;
+                }
+            }
+        }
+
+        if ($categoryItem && $categoryItem != -1) {
         $this->_getCategoriesPath($categoryItem);
 
         if (is_array($this->_categoriesPath)) {
             return array_reverse($this->_categoriesPath);
-        } else {
-            return array();
         }
+    }
+
+        return array($this->__('No Ricardo category found'));
     }
 
     protected function _getCategoriesPath($category)
