@@ -21,16 +21,19 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
         parent::__construct();
 
         $this->removeButton('reset');
+
         $this->_addButton('add_product_from_category', array(
             'label'   => $this->__('Add Product(s) from category'),
             'onclick' => "Ricento.showCategoryTreePopup('{$this->getShowCategoryTree()}')",
             'class'   => 'add'
         ), -1, -2);
+
         $this->_addButton('add_product', array(
             'label'   => $this->__('Add Product(s)'),
             'onclick' => "Ricento.addProductsPopup('{$this->getAddProductsPopupUrl()}')",
             'class'   => 'add'
         ), -1, -1);
+
         if ($this->getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
             $this->_updateButton('delete', 'disabled', true);
             $this->_updateButton('delete', 'title', $this->__('Listed listings cannot be deleted. Stop the listing first.'));
@@ -41,9 +44,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
                 'class'   => 'cancel'
             ));
         } else {
-            $this->_addButton('save_and_list', array(
-                'label' => $this->__('Save and List'),
-                'onclick' => 'editForm.submit(\'' . $this->getSaveAndListUrl() . '\');',
+            $this->_addButton('save_and_check', array(
+                'label' => $this->__('Save & Check before to Sync'),
+                'onclick' => 'editForm.submit(\'' . $this->getCheckUrl() . '\');',
                 'class' => 'save list'
             ), 2);
         }
@@ -102,6 +105,16 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
     public function getSaveAndListUrl()
     {
         return $this->getUrl('ricento/products_listing/saveAndList', array('id' => $this->getListingId()));
+    }
+
+    /**
+     * Get check Url to control data products before to sync
+     *
+     * @return string
+     */
+    public function getCheckUrl()
+    {
+        return $this->getUrl('ricento/products_listing/saveAndCheck', array('id' => $this->getListingId()));
     }
 
     /**

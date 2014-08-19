@@ -225,10 +225,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     /**
      * Save a product listing and set status to "listed"
      */
-    public function saveAndListAction()
+    public function saveAndCheckAction()
     {
         $this->saveAction();
-        $this->listAction();
+//        $this->listAction();
+
+        $collection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
+
+        $collection->walk();
 
     }
 
