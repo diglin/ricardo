@@ -95,19 +95,26 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
         $categoryItem = $this->getProductItem()->getSalesOptions()->getRicardoCategory();
         $this->_getCategoriesPath($categoryItem);
 
-        return array_reverse($this->_categoriesPath);
+        if (is_array($this->_categoriesPath)) {
+            return array_reverse($this->_categoriesPath);
+        } else {
+            return array();
+        }
     }
 
     protected function _getCategoriesPath($category)
     {
+        $parentId = false;
+
         $categoryObject = Mage::getSingleton('diglin_ricento/products_category_mapping')
             ->getCategory($category);
 
-        if ($categoryObject->getCategoryName()) {
+
+        if ($categoryObject && $categoryObject->getCategoryName()) {
             $this->_categoriesPath[] = '<a href="#">' . $categoryObject->getCategoryName() . '</a>';
+            $parentId = $categoryObject->getParentId();
         }
 
-        $parentId = $categoryObject->getParentId();
         if (!empty($parentId)) {
             $categoryObject = $this->_getCategoriesPath($parentId);
         }
