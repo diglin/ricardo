@@ -23,19 +23,19 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs extends Mag
 
     protected function _beforeToHtml()
     {
-        $this->addTab('rules_section', array(
-            'label' => $this->__('Rules') ,
-            'title' => $this->__('Rules') ,
-            'content' => $this->getLayout()
-                    ->createBlock('diglin_ricento/adminhtml_products_listing_item_edit_tabs_rules')
-                    ->toHtml()
-        ));
-
         $this->addTab('selloptions_section', array(
             'label' => $this->__('Sales Options') ,
             'title' => $this->__('Sales Options') ,
             'content' => $this->getLayout()
                     ->createBlock('diglin_ricento/adminhtml_products_listing_item_edit_tabs_selloptions')
+                    ->toHtml()
+        ));
+
+        $this->addTab('rules_section', array(
+            'label' => $this->__('Rules') ,
+            'title' => $this->__('Rules') ,
+            'content' => $this->getLayout()
+                    ->createBlock('diglin_ricento/adminhtml_products_listing_item_edit_tabs_rules')
                     ->toHtml()
         ));
 

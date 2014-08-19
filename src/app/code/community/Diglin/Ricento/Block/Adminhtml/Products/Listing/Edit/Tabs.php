@@ -38,19 +38,19 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs extends Mage_Adm
                     ->toHtml()
         ));
 
-        $this->addTab('rules_section', array(
-            'label' => $this->__('Rules') ,
-            'title' => $this->__('Rules') ,
-            'content' => $this->getLayout()
-                    ->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_rules')
-                    ->toHtml()
-        ));
-
         $this->addTab('selloptions_section', array(
             'label' => $this->__('Sales Options') ,
             'title' => $this->__('Sales Options') ,
             'content' => $this->getLayout()
                     ->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_selloptions')
+                    ->toHtml()
+        ));
+
+        $this->addTab('rules_section', array(
+            'label' => $this->__('Rules') ,
+            'title' => $this->__('Rules') ,
+            'content' => $this->getLayout()
+                    ->createBlock('diglin_ricento/adminhtml_products_listing_edit_tabs_rules')
                     ->toHtml()
         ));
 
