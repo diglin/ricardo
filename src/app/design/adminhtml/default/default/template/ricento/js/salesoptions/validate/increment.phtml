@@ -10,20 +10,34 @@
 $incrementValidationMessage = $this->getErrorMessage();
 $jsonAllowedCombinations = $this->getJsonAllowedCombinations();
 ?>
-<script>
-    Validation.add('validate-startprice-increment', '<?php echo $incrementValidationMessage ?>', function(fieldValue, field) {
+<script type="text/javascript">
+Validation.addAllThese([
+    ['validate-startprice-increment', '<?php echo $incrementValidationMessage ?>', function(fieldValue, field) {
 
-        startPriceValue = $('sales_options_sales_auction_start_price').value;
+        var startPriceValue = $('sales_options_sales_auction_start_price').value;
 
-        allowedCombinations = <?php echo $jsonAllowedCombinations ?>;
+        var allowedCombinations = <?php echo $jsonAllowedCombinations ?>;
         for (i = 0; i < allowedCombinations.length; ++i) {
             if (allowedCombinations[i].start_price.min <= startPriceValue && allowedCombinations[i].start_price.max >= startPriceValue ) {
                 if (allowedCombinations[i].increment.min <= fieldValue && allowedCombinations[i].increment.max >= fieldValue) {
-                    return true
+                    return true;
                 }
             }
 
         }
         return false;
-    });
+    }],
+    ['validate-ricardo-category', '<?php echo $this->__('You must select a Ricardo Category if you set this option'); ?>', function(fieldValue) {
+
+        var useMappingValue = Form.getInputs('edit_form','radio','sales_options[ricardo_category_use_mapping]').find(function(radio) {
+            return radio.checked;
+        }).value;
+
+        if (useMappingValue == 0 && fieldValue <= 0) {
+            return false;
+        }
+
+        return true;
+    }]
+]);
 </script>

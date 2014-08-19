@@ -107,12 +107,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
         }
 
         if ($categoryItem && $categoryItem != -1) {
-        $this->_getCategoriesPath($categoryItem);
+            $this->_getCategoriesPath($categoryItem);
 
-        if (is_array($this->_categoriesPath)) {
-            return array_reverse($this->_categoriesPath);
+            if (is_array($this->_categoriesPath)) {
+                return array_reverse($this->_categoriesPath);
+            }
         }
-    }
 
         return array($this->__('No Ricardo category found'));
     }

@@ -280,11 +280,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_promotion')->getAllOptions()
         ));
 
-        $fieldsetPromotion->addField('promotion_start_page', 'select', array(
+        $fieldsetPromotion->addField('promotion_start_page', 'checkbox', array(
             'name' => 'sales_options[promotion_start_page]',
             'label' => $this->__('Home Privilege Space'),
             'note' => $this->__('Privilege space on the homepage. More information about this feature <a onclick="window.open(\'%s\');">here</a>', Diglin_Ricento_Helper_Data::RICARDO_URL_HELP_PROMOTION),
-            'values' => Mage::getSingleton('adminhtml/system_config_source_yesno')->toOptionArray()
+            'after_element_html' => $this->__('Home Space') . ' ' .  $this->_getPromotionHomeFee()
         ));
 
         $fieldsetPromotion->addField('note_promotion', 'note', array(
@@ -342,6 +342,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             $this->getForm()->getElement('product_warranty_condition')->setDisabled(true);
             $this->getForm()->getElement('product_warranty_condition')->setRequired(false);
         }
+
+        if ($this->getSalesOptions()->getPromotionStartPage() == \Diglin\Ricardo\Enums\PromotionCode::PREMIUMHOMEPAGE) {
+            $this->getForm()->getElement('promotion_start_page')->setChecked(true);
+        }
+        $derivedValues['promotion_start_page'] = \Diglin\Ricardo\Enums\PromotionCode::PREMIUMHOMEPAGE;
+
+
         $this->getForm()->addValues($derivedValues);
         return parent::_initFormValues();
     }
@@ -424,5 +431,34 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             }
         }
         return $this->_model;
+    }
+
+    /**
+     * @return string
+     */
+    protected function _getPromotionHomeFee()
+    {
+        $price = 0;
+        $promotions = Mage::getSingleton('diglin_ricento/api_services_system')->getPromotions(
+            \Diglin\Ricardo\Core\Helper::getJsonDate(), \Diglin\Ricardo\Enums\CategoryArticleType::ALL, 1, 1
+        );
+
+        $helper = Mage::helper('diglin_ricento');
+        $store = Mage::app()->getStore();
+
+        $helper->startCurrencyEmulation();
+
+        foreach ($promotions as $promotion) {
+            if ($promotion['PromotionId'] == \Diglin\Ricardo\Enums\PromotionCode::PREMIUMHOMEPAGE) {
+                $price = $promotion['PromotionFee'];
+                break;
+            }
+        }
+
+        $price = $store->formatPrice($price);
+
+        $helper->stopCurrencyEmulation();
+
+        return $price;
     }
 }

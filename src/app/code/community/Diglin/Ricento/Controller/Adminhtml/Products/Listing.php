@@ -95,8 +95,8 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
                 $data['sales_options']['product_warranty_condition'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_condition']), 0, 5000);
             }
         }
-        if (!empty($data['sales_options']['promotion_start_page'])) {
-            $data['sales_options']['promotion_start_page'] = \Diglin\Ricardo\Enums\PromotionCode::PREMIUMHOMEPAGE;
+        if (!isset($data['sales_options']['promotion_start_page']) || empty($data['sales_options']['promotion_start_page'])) {
+            $data['sales_options']['promotion_start_page'] = 0;
         }
 
         /* Rules part */
