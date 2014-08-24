@@ -1,0 +1,25 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricardo
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+
+$messages = $this->getMessages();
+?>
+<div class="sync_job_popup">
+    <?php if (count($messages)) {?>
+
+        <?php //@todo display the list of messages ?>
+
+    <?php } else { ?>
+    <div id="messages">
+        <ul class="messages">
+            <li class="notice-msg"><ul><li><span><?php echo $this->__('No message found.')?></span></li></ul></li>
+        </ul>
+    </div>
+    <?php } ?>
+</div>

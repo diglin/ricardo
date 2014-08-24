@@ -12,7 +12,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.20</version>
+            <version>0.0.21</version>
         </Diglin_Ricento>
     </modules>
 
@@ -40,9 +40,16 @@
 
     <global>
         <psr0_namespaces>
-            <!-- To load the Ricardo library -->
-            <Diglin_Ricardo />
+            <Diglin_Ricardo /><!-- Required to load the Ricardo PHP library -->
         </psr0_namespaces>
+
+        <phpunit>
+            <suite>
+                <modules>
+                    <Diglin_Ricento />
+                </modules>
+            </suite>
+        </phpunit>
 
         <cache>
             <types>
@@ -75,6 +82,9 @@
                     <api_token>
                         <table>ricento_api_token</table>
                     </api_token>
+                    <sync_job>
+                        <table>ricento_sync_job</table>
+                    </sync_job>
                     <sync_log>
                         <table>ricento_sync_log</table>
                     </sync_log>
@@ -191,11 +201,16 @@
         </routers>
     </admin>
 
-    <phpunit>
-        <suite>
-            <modules>
-                <Diglin_Ricento />
-            </modules>
-        </suite>
-    </phpunit>
+    <crontab>
+        <jobs>
+            <ricento_sync_jobs>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>diglin_ricento/cron::process</model>
+                </run>
+            </ricento_sync_jobs>
+        </jobs>
+    </crontab>
 </config>

@@ -147,6 +147,34 @@ Ricento.showCategoryTreePopup = function(url) {
         }
     });
 };
+Ricento.checkPopup = function(url) {
+    if ($('ricento_popup') && typeof(Windows) != 'undefined') {
+        Windows.focus('ricento_popup');
+        return;
+    }
+
+    Dialog.info({url:url}, {
+        closable:true,
+        resizable:true,
+        maximizable: true,
+        draggable:true,
+        className:'magento',
+        windowClassName:'popup-window',
+        title: Translator.translate('Product Items Data Control'),
+        top:50,
+        width:900,
+        height:600,
+        zIndex:1000,
+        recenterAuto:false,
+        hideEffect:Element.hide,
+        showEffect:Element.show,
+        id:'ricento_popup',
+        showProgress:true,
+        onShow:function(dialog) {
+            dialog.element.innerHTML.evalScripts();
+        }
+    });
+};
 Ricento.closePopup = function() {
     Windows.close('ricento_popup');
 };
@@ -169,6 +197,57 @@ Ricento.useProductListSettings = function(checkbox, htmlIdPrefix) {
             calendar.show();
         }
     })
+}
+
+// Used in Synchronization Jobs Grid Page to display the progress of the check
+Ricento.checkInterval = function (url, prefix) {
+
+    var progress_bar = new Control.ProgressBar('progress_bar' + prefix, {interval: 0.15});
+
+    var u = new Ajax.PeriodicalUpdater('debug' + prefix, url, {
+        method:     'get',
+        frequency:  3,
+        loaderArea: false,
+
+        onSuccess: function(transport) {
+            var response;
+            var progressBarElement = $('progress_bar' + prefix);
+            var checkElement = $('check' + prefix);
+            var adviceElement = $('advice' + prefix);
+
+            try {
+                response = eval('(' + transport.responseText + ')');
+                progress_bar.setProgress(response.percentage);
+                checkElement.innerHTML = response.percentage + '%';
+
+                if (response.status == 'running') {
+                    checkElement.addClassName('sync-indicator');
+                    adviceElement.innerHTML = '';
+                } else if (response.status == 'completed') {
+                    u.stop();
+
+                    checkElement.removeClassName('sync-indicator');
+
+                    switch (response.state ) {
+                        case 'ok':
+                            progressBarElement.setStyle({backgroundColor :'green'});
+                            break;
+                        case 'warning':
+                            progressBarElement.setStyle({backgroundColor :'orange'});
+                            break;
+                        case 'error':
+                            progressBarElement.setStyle({backgroundColor :'red'});
+                            break;
+                    }
+
+                    adviceElement.innerHTML = response.message;
+                }
+
+            } catch (e) {
+                response = {};
+            }
+        }
+    });
 }
 
 Ricento.salesOptionsForm = Class.create();

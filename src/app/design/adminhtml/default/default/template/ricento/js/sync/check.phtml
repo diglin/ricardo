@@ -1,0 +1,30 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricardo
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+
+/* @var $this Mage_Adminhtml_Block_Template */
+if($this->getRunCheck()) {
+    $checkUrl = $this->getCheckAjaxUrl();
+    $checkPopupUrl = $this->getCheckPopupUrl();
+    $prefix = $this->getPrefix();
+?>
+<div id="check<?php echo $prefix ?>" class="sync-indicator-text"></div>
+<div id="progress_bar<?php echo $prefix ?>" class="sync-progress-bar"></div>
+<a onclick="Ricento.checkPopup('<?php echo $checkPopupUrl ?>')">
+    <div id="advice<?php echo $prefix ?>" class="sync-advice">
+    <?php if ($this->getJobWillStart()) { ?>
+        <div class="sync-advice"><?php echo $this->__('The task will start soon');?></div>
+    <?php } ?>
+    </div>
+</a>
+<div id="debug<?php echo $prefix ?>" style="display: none"></div><?php // Keep it to prevent, warning js messages ?>
+<script>Ricento.checkInterval('<?php echo $checkUrl ?>', '<?php echo $prefix ?>');</script>
+<?php } else { ?>
+<div class="sync-advice"><?php echo $this->__('Nothing to check');?></div>
+<?php } ?>

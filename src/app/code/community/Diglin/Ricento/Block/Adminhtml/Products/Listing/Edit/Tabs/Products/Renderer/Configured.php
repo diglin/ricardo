@@ -11,7 +11,7 @@
 /**
  * Class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Renderer_Customoptions
  *
- * Renderer for column with warning about custom options
+ * Renderer for column with configured rules or sales
  */
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Renderer_Configured
     extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract

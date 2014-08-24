@@ -38,7 +38,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
     /**
      * Prepare the columns to generate the column
      *
-     * @return Rissip_Atelier_Block_Adminhtml_Atelier_Grid
+     * @return Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid
      */
     protected function _prepareColumns()
     {

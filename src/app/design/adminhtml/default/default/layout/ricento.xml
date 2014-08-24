@@ -49,8 +49,7 @@
     <ricento_products_listing_index>
         <update handle="ricento_scripts" />
         <reference name="content">
-            <block type="diglin_ricento/adminhtml_products_listing_new"
-                   name="products_listing_new" />
+            <block type="diglin_ricento/adminhtml_products_listing_new" name="products_listing_new" />
         </reference>
     </ricento_products_listing_index>
 
@@ -97,8 +96,7 @@
         <update handle="overlay_popup" />
         <remove name="footer" />
         <reference name="content">
-            <block type="diglin_ricento/adminhtml_products_category_mapping" name="category_mapping"
-                   template="ricento/products/category/mapping.phtml"/>
+            <block type="diglin_ricento/adminhtml_products_category_mapping" name="category_mapping" template="ricento/products/category/mapping.phtml"/>
         </reference>
     </ricento_products_category_mapping>
 
@@ -115,8 +113,26 @@
         <update handle="overlay_popup" />
         <remove name="footer" />
         <reference name="content">
-            <block type="diglin_ricento/adminhtml_products_category_tree"
-                   name="products_listing_tree" as="products_listing_tree" />
+            <block type="diglin_ricento/adminhtml_products_category_tree" name="products_listing_tree" as="products_listing_tree" />
         </reference>
     </ricento_products_category_showcategoriestree>
+
+    <ricento_sync_index>
+        <update handle="ricento_scripts" />
+        <reference name="head">
+            <action method="addJs"><name>ricento/livepipe-ui/livepipe.js</name></action>
+            <action method="addJs"><name>ricento/livepipe-ui/progressbar.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="diglin_ricento/adminhtml_sync_job" name="sync_job" as="sync_job"/>
+        </reference>
+    </ricento_sync_index>
+
+    <ricento_sync_checkajaxpopup>
+        <update handle="overlay_popup" />
+        <remove name="footer" />
+        <reference name="content">
+            <block type="adminhtml/template" name="sync_ajax_popup" as="sync_ajax_popup" template="ricento/sync/check/popup.phtml" />
+        </reference>
+    </ricento_sync_checkajaxpopup>
 </layout>

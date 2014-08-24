@@ -167,6 +167,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function saveAction()
     {
+        $error = false;
+
         if ($data = $this->getRequest()->getPost()) {
             $listing = $this->_initListing();
             if (!$listing) {
@@ -178,15 +180,24 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
                 $listing->save();
                 if ($this->saveConfiguration($data)) {
                     $this->_getSession()->addSuccess($this->__('The listing has been saved.'));
+                } else {
+                    $error = true;
                 }
             } catch (Mage_Core_Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
+                $error = true;
             } catch (Exception $e) {
                 Mage::logException($e);
                 $this->_getSession()->addException($e, $this->__('An error occurred while saving the listing.'));
+                $error = true;
             }
         }
         $this->_redirectUrl($this->_getEditUrl());
+
+        // To block chaining, we return
+        if ($error) {
+            return $error;
+        }
     }
 
     protected function _savingAllowed()
@@ -223,17 +234,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     }
 
     /**
-     * Save a product listing and set status to "listed"
+     * Save a product listing and check the product listing items
      */
     public function saveAndCheckAction()
     {
-        $this->saveAction();
-//        $this->listAction();
-
-        $collection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
-
-        $collection->walk();
-
+        $error = $this->saveAction();
+        if (!$error) {
+            $this->_forward('check', 'sync', null, array('id' => $this->_getListing()->getId()));
+        }
     }
 
     /**

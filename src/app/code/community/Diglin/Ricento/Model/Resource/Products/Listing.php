@@ -13,8 +13,6 @@
  */
 class Diglin_Ricento_Model_Resource_Products_Listing extends Mage_Core_Model_Resource_Db_Abstract
 {
-
-
     /**
      * Products_Listing Resource Constructor
      * @return void
@@ -23,7 +21,6 @@ class Diglin_Ricento_Model_Resource_Products_Listing extends Mage_Core_Model_Res
     {
         $this->_init('diglin_ricento/products_listing', 'entity_id');
     }
-
 
     /**
      * Get product ids of listing items

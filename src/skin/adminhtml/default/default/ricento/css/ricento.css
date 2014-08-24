@@ -149,7 +149,7 @@ input[type="radio"] {
 .magento_minimize { background:url('images/window_minimize.png') 0 0 no-repeat !important;}
 .magento_maximize { background:url('images/window_maximize.png')0 0 no-repeat !important;}
 
-/********** Ricento pages **********/
+/********** Products Listing Page **********/
 
 .ricento-products-listing-edit .form-list,
 .ricento-products-listing-item-configure .form-list {
@@ -165,6 +165,7 @@ input[type="radio"] {
 }
 
 /*********** Increment ***********/
+
 table.allowed-combinations {border: 1px solid #ccc}
 table.allowed-combinations th {background-color: #eee; font-weight: bold; font-size: 1.1em; padding: 5px;}
 table.allowed-combinations td {width: 50%; padding: 5px;}
@@ -361,3 +362,29 @@ table.allowed-combinations td {width: 50%; padding: 5px;}
 	display: inline-block;
 }
 
+/********** Synchronization Job Page **********/
+
+.sync-progress-bar {
+    width:100%;
+    height:15px;
+    border:1px solid #ccc;
+    padding:0;
+    margin:0;
+    position:relative;
+    background-color: #000055;
+}
+
+.sync-progress-bar div {
+    background-color:#fff;
+}
+.sync-indicator-text, .sync-advice {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    min-height: 16px;
+}
+.sync-indicator {
+    background: url(images/ajax-loader.gif) no-repeat;
+    background-position: 10px 0;
+    text-indent: 15px;
+}
