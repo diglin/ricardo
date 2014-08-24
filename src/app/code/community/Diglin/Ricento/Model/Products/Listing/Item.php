@@ -77,6 +77,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     protected function _beforeSave()
     {
         parent::_beforeSave();
+
         $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
 
         if ($this->hasDataChanges() && $this->getStatus() == Diglin_Ricento_Helper_Data::STATUS_READY) {
@@ -106,7 +107,9 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     public function getProduct()
     {
         if (!$this->_product) {
-            $this->_product = Mage::getModel('catalog/product')->load($this->getProductId());
+            $this->_product = Mage::getModel('diglin_ricento/products_listing_item_product')
+                ->setProductId($this->getProductId())
+                ->getProduct();
         }
         return $this->_product;
     }
@@ -152,30 +155,22 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getProductName()
+    public function getCategory()
     {
-        if (!$this->getProduct()->getRicardoTitle()) {
-            $title = $this->getProduct()->getName();
-        } else {
-        	$title = $this->getProduct()->getRicardoTitle();
+        $ricardoCategoryId = $this->getSalesOptions()->getRicardoCategory();
+        if ($ricardoCategoryId < 0) {
+            $catIds = $this->getProduct()->getCategoryIds();
+            foreach ($catIds as $id) {
+                $category = Mage::getModel('catalog/category')->load($id);
+                $ricardoCategoryId = $category->getRicardoCategory();
+                if ($ricardoCategoryId) {
+                    break;
+                }
+            }
         }
 
-        return mb_substr($title, 0, 40);
-    }
-
-    /**
-     * @return string
-     */
-    public function getProductDescription()
-    {
-        if (!$this->getProduct()->getRicardoDescription()) {
-            $description = $this->getProduct()->getDescription();
-        } else {
-        	$description = $this->getProduct()->getRicardoDescription();
-        }
-
-        return Mage::helper('core')->escapeHtml($description);
+        return (int) $ricardoCategoryId;
     }
 }

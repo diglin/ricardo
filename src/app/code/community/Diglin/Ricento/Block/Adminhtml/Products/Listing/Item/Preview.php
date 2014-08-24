@@ -92,19 +92,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
      */
     public function getBreadcrumb()
     {
-        $categoryItem = $this->getProductItem()->getSalesOptions()->getRicardoCategory();
-
-        if ($categoryItem < 0) {
-            $catIds = $this->getProduct()->getCategoryIds();
-            foreach ($catIds as $id) {
-                $category = Mage::getModel('catalog/category')->load($id);
-                $ricardoCategory = $category->getRicardoCategory();
-                if ($ricardoCategory) {
-                    $categoryItem = $ricardoCategory;
-                    break;
-                }
-            }
-        }
+        $categoryItem = $this->getProductItem()->getCategory();
 
         if ($categoryItem && $categoryItem != -1) {
             $this->_getCategoriesPath($categoryItem);
@@ -305,18 +293,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
      */
     public function getProductPrice()
     {
-        $helper = Mage::helper('diglin_ricento');
-
-        $priceSourceAttributeCode = $this->getSalesOptions()->getPriceSourceAttributeCode();
-        $priceChange = $this->getSalesOptions()->getPriceChange();
-        $priceChangeType = $this->getSalesOptions()->getPriceChangeType();
-
-        $price = $this->getProduct()->getData($priceSourceAttributeCode);
-        $price = $helper->calculatePriceChange($price, $priceChangeType, $priceChange);
-
-        $price = $helper->formatPrice($price);
-
-        return $price;
+        return Mage::helper('diglin_ricento')->formatPrice($this->getProductItem()->getPrice());
     }
 
     /**

@@ -145,8 +145,8 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
     protected function _validatePostData($data)
     {
         if (empty($data['rules']['use_products_list_settings'])) {
-            /* @var $rulesValidator Diglin_Ricento_Model_Rule_Validate */
-            $rulesValidator = Mage::getModel('diglin_ricento/rule_validate');
+            /* @var $rulesValidator Diglin_Ricento_Model_Validate_Rules_Methods */
+            $rulesValidator = Mage::getModel('diglin_ricento/validate_rules_methods');
             $methods = array(
                 'payment' => array_filter((array)$data['rules']['payment_methods'], 'strlen'),
                 'shipping' => $data['rules']['shipping_method']
