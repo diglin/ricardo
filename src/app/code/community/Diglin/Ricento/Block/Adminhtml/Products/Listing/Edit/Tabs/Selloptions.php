@@ -356,7 +356,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     protected function _afterToHtml($html)
     {
         $html .= '<script type="text/javascript">var salesOptionsForm = new Ricento.salesOptionsForm("' . $this->getForm()->getHtmlIdPrefix() . '");</script>';
-        $html .= Mage::getSingleton('diglin_ricento/sales_validate_increment')->getJavaScriptValidator();
+        $html .= Mage::getSingleton('diglin_ricento/validate_sales_increment')->getJavaScriptValidator();
         return parent::_afterToHtml($html);
     }
 

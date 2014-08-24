@@ -14,13 +14,13 @@
 class Diglin_Ricento_Test_Model_Rule_Validate extends EcomDev_PHPUnit_Test_Case
 {
     /**
-     * @var Diglin_Ricento_Model_Rule_Validate
+     * @var Diglin_Ricento_Model_Validate_Rules_Methods
      */
     protected $_subject;
 
     protected function setUp()
     {
-        $this->_subject = Mage::getModel('diglin_ricento/rule_validate');
+        $this->_subject = Mage::getModel('diglin_ricento/validate_rules_methods');
         return parent::setUp();
     }
 

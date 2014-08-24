@@ -11,7 +11,7 @@
 /**
  * Class Diglin_Ricento_Model_Sales_Validate
  */
-class Diglin_Ricento_Model_Sales_Validate_Increment extends Zend_Validate_Abstract
+class Diglin_Ricento_Model_Validate_Sales_Increment extends Zend_Validate_Abstract
 {
     /**
      * @var array

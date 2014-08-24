@@ -9,9 +9,9 @@
  */
 
 /**
- * Class Diglin_Ricento_Model_Rule_Validate
+ * Class Diglin_Ricento_Model_Validate_Rules_Methods
  */
-class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
+class Diglin_Ricento_Model_Validate_Rules_Methods extends Zend_Validate_Abstract
 {
     const ERROR_INVALID_PAYMENT_COMBINATION = 'invalidPaymentCombination';
     const ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION = 'invalidPaymentShippingCombination';
@@ -37,14 +37,14 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
     protected $_disallowedPaymentShippingCombinations = array(
         array(
             'shipping' => Diglin_Ricento_Model_Config_Source_Rules_Shipping::TYPE_OTHER,
-            'payment'  => \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD)
+            'payment' => \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD)
     );
 
     /*
      * Message generation is overridden in getMessages()
      */
     protected $_messageTemplates = array(
-        self::ERROR_INVALID_PAYMENT_COMBINATION          => self::ERROR_INVALID_PAYMENT_COMBINATION,
+        self::ERROR_INVALID_PAYMENT_COMBINATION => self::ERROR_INVALID_PAYMENT_COMBINATION,
         self::ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION => self::ERROR_INVALID_PAYMENT_SHIPPING_COMBINATION
     );
 
@@ -52,12 +52,14 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
     {
         $this->_normalizeAllowedPaymentCombinations();
     }
+
     protected function _normalizeAllowedPaymentCombinations()
     {
         foreach ($this->_allowedPaymentCombinations as &$paymentArray) {
             sort($paymentArray);
         }
     }
+
     /**
      * Returns true if and only if $value meets the validation requirements
      *
@@ -86,7 +88,7 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
      */
     protected function _isValidPaymentCombination($value)
     {
-        $normalizedPaymentArray = array_values((array) $value['payment']);
+        $normalizedPaymentArray = array_values((array)$value['payment']);
         sort($normalizedPaymentArray);
         if (!in_array($normalizedPaymentArray, $this->_allowedPaymentCombinations)) {
             $this->_error(self::ERROR_INVALID_PAYMENT_COMBINATION);
@@ -94,6 +96,7 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
         }
         return true;
     }
+
     /**
      * Returns true if the selected shipping method is allowed together with the selected payment methods
      *
@@ -159,10 +162,10 @@ class Diglin_Ricento_Model_Rule_Validate extends Zend_Validate_Abstract
     {
         $helper = Mage::helper('diglin_ricento');
         return $helper->__('This payment method combination is not possible.') .
-            ($wrapNotice ? '<ul class="messages"><li class="notice-msg">' : ' ') .
-            $helper->__('The following combinations are possible:') .
-            $this->_htmlListOfAllowedPaymentCombinations() .
-            ($wrapNotice ? '</li></ul>' : '');
+        ($wrapNotice ? '<ul class="messages"><li class="notice-msg">' : ' ') .
+        $helper->__('The following combinations are possible:') .
+        $this->_htmlListOfAllowedPaymentCombinations() .
+        ($wrapNotice ? '</li></ul>' : '');
     }
 
     /**

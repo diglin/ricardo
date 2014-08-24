@@ -34,6 +34,9 @@ class Diglin_Ricento_Model_Config_Source_Sales_Price_Source extends Diglin_Ricen
 
             $this->_options = array('' => Mage::helper('diglin_ricento')->__('-- Select Product Attribute --'));
             foreach ($items as $item) {
+                if ($item->getAttributeCode() != 'price' && $item->getAttributeCode() != 'special_price') {
+                    continue;
+                }
                 $this->_options[$item->getAttributeCode()] = $item->getFrontendLabel();
             }
         }

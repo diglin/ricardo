@@ -171,7 +171,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $html .= '<script>var rulesForm = new Ricento.RulesForm("' . $this->getForm()->getHtmlIdPrefix() . '", "' . Mage::helper('core')->jsQuoteEscape(json_encode(Mage::getSingleton('diglin_ricento/config_source_rules_shipping_packages')->toOptionHash()), "\"") . '");';
         $html .= 'rulesForm.initPackages($(\''. $this->getForm()->getHtmlIdPrefix() .'shipping_method\') '. $shippingPackage .');';
         $html .= '</script>';
-        $html .= Mage::getModel('diglin_ricento/rule_validate')->getJavaScriptValidator();
+        $html .= Mage::getModel('diglin_ricento/validate_rules_methods')->getJavaScriptValidator();
         return parent::_afterToHtml($html);
     }
 

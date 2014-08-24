@@ -20,7 +20,7 @@ class Diglin_Ricento_Test_Model_Rule_Validate extends EcomDev_PHPUnit_Test_Case
 
     protected function setUp()
     {
-        $this->_subject = Mage::getModel('diglin_ricento/sales_validate_increment');
+        $this->_subject = Mage::getModel('diglin_ricento/validate_sales_increment');
         return parent::setUp();
     }
 
