@@ -57,10 +57,11 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
     protected function _beforeSave()
     {
         parent::_beforeSave();
+
         $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
-        if (isset($this->_data['payment_methods']) && is_array($this->_data['payment_methods'])) {
-            $this->_data['payment_methods'] = implode(',', $this->_data['payment_methods']);
-        }
+
+        $this->_preparePaymentMethods(false);
+
         return $this;
     }
 
@@ -71,11 +72,8 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
      */
     protected function _afterLoad()
     {
-        if (isset($this->_data['payment_methods']) && !is_null($this->_data['payment_methods'])) {
-            $this->_data['payment_methods'] = explode(',', $this->_data['payment_methods']);
-        } else {
-            $this->_data['payment_methods'] = array();
-        }
+        $this->_preparePaymentMethods();
+
         return parent::_afterLoad();
     }
 
@@ -86,12 +84,29 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
      */
     protected function _afterSave()
     {
-        if (isset($this->_data['payment_methods']) && !is_null($this->_data['payment_methods'])) {
-            $this->_data['payment_methods'] = explode(',', $this->_data['payment_methods']);
-        } else {
-            $this->_data['payment_methods'] = array();
-        }
+        $this->_preparePaymentMethods();
+
         return parent::_afterSave();
     }
 
+    /**
+     * Prepare Payment Methods
+     */
+    protected function _preparePaymentMethods($explode = true)
+    {
+        if ($explode){
+            if (isset($this->_data['payment_methods']) && !is_null($this->_data['payment_methods'])) {
+                $this->_data['payment_methods'] = explode(',', $this->_data['payment_methods']);
+            } else {
+                $this->_data['payment_methods'] = array();
+            }
+        } else {
+            if (isset($this->_data['payment_methods']) && is_array($this->_data['payment_methods'])) {
+                $this->_data['payment_methods'] = implode(',', $this->_data['payment_methods']);
+            } else {
+                $this->_data['payment_methods'] = array();
+            }
+        }
+        return $this;
+    }
 }

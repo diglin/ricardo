@@ -38,7 +38,7 @@
                 </listing>
                 <synchronization translate="title" module="diglin_ricento">
                     <title>Synchronization</title>
-                    <action>ricento/synchronization</action>
+                    <action>ricento/sync</action>
                     <sort_order>30</sort_order>
                 </synchronization>
                 <log translate="title" module="diglin_ricento">
