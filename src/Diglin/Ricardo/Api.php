@@ -11,6 +11,7 @@ namespace Diglin\Ricardo;
 
 use Diglin\Ricardo\Core\ApiInterface;
 use Diglin\Ricardo\Core\ConfigInterface;
+use Diglin\Ricardo\Exceptions\CurlException;
 
 /**
  * Class Api
@@ -99,7 +100,7 @@ class Api implements ApiInterface
         }
 
         if (curl_errno($ch)) {
-            throw new \Exception('Error while trying to connect with the API - Curl Error Number: ' . curl_errno($ch) . ' - Curl Error Message: ' . curl_error($ch));
+            throw new CurlException('Error while trying to connect with the API - Curl Error Number: ' . curl_errno($ch) . ' - Curl Error Message: ' . curl_error($ch), curl_errno($ch));
         }
 
         curl_close($ch);
