@@ -15,34 +15,41 @@
             <version>0.0.21</version>
         </Diglin_Ricento>
     </modules>
-
     <default>
         <ricento>
             <api_config>
                 <enabled>1</enabled>
                 <dev_mode>0</dev_mode>
                 <debug>0</debug>
-
                 <assistant_url>https://assistant.ricardo.ch</assistant_url>
                 <assistant_url_dev>https://ra.betaqxl.com/</assistant_url_dev>
                 <signup_url>http://api.ricardo.ch/request.php</signup_url>
                 <simulate_authorization>0</simulate_authorization>
-                <expiration_notification_delay>1</expiration_notification_delay><!-- it's only possible one day before -->
-                <host>ws.betaqxl.com</host><!-- @todo change with the production host -->
+                <expiration_notification_delay>1</expiration_notification_delay>
+                <!-- it's only possible one day before -->
+                <host>ws.betaqxl.com</host>
+                <!-- @todo change with the production host -->
                 <host_dev>ws.betaqxl.com</host_dev>
                 <lang>de,fr</lang>
             </api_config>
             <global>
                 <shipping_calculation>highest_price</shipping_calculation>
             </global>
+            <cleanup_jobs>
+                <enabled>1</enabled>
+                <keep_days>30</keep_days>
+            </cleanup_jobs>
+            <listing_logs>
+                <enabled>1</enabled>
+                <keep_days>30</keep_days>
+            </listing_logs>
         </ricento>
     </default>
-
     <global>
         <psr0_namespaces>
-            <Diglin_Ricardo /><!-- Required to load the Ricardo PHP library -->
+            <Diglin_Ricardo />
+            <!-- Required to load the Ricardo PHP library -->
         </psr0_namespaces>
-
         <phpunit>
             <suite>
                 <modules>
@@ -50,7 +57,6 @@
                 </modules>
             </suite>
         </phpunit>
-
         <cache>
             <types>
                 <ricardo_api translate="label,description" module="diglin_ricento">
@@ -60,13 +66,11 @@
                 </ricardo_api>
             </types>
         </cache>
-
         <models>
             <diglin_ricento>
                 <class>Diglin_Ricento_Model</class>
                 <resourceModel>diglin_ricento_resource</resourceModel>
             </diglin_ricento>
-
             <diglin_ricento_resource>
                 <class>Diglin_Ricento_Model_Resource</class>
                 <entities>
@@ -85,9 +89,17 @@
                     <sync_job>
                         <table>ricento_sync_job</table>
                     </sync_job>
+                    <!-- at 0.0.21 Remove this table -->
                     <sync_log>
                         <table>ricento_sync_log</table>
                     </sync_log>
+                    <!-- EOF -->
+                    <sync_job_listing>
+                        <table>ricento_sync_job_listing</table>
+                    </sync_job_listing>
+                    <listing_log>
+                        <table>ricento_products_listing_log</table>
+                    </listing_log>
                     <shipping_payment_rule>
                         <table>ricento_shipping_payment_rule</table>
                     </shipping_payment_rule>
@@ -118,20 +130,14 @@
                 </connection>
             </ricento_setup>
 
-            <diglin_ricento_resource_read>
+            <ricento_resource_read>
                 <connection>core_read</connection>
-            </diglin_ricento_resource_read>
+            </ricento_resource_read>
 
-            <diglin_ricento_resource_write>
+            <ricento_resource_write>
                 <connection>core_write</connection>
-            </diglin_ricento_resource_write>
+            </ricento_resource_write>
         </resources>
-
-        <models>
-            <diglin_ricento>
-                <class>Diglin_Ricento_Model</class>
-            </diglin_ricento>
-        </models>
 
         <events>
             <resource_get_tablename>
@@ -205,7 +211,7 @@
         <jobs>
             <ricento_sync_jobs>
                 <schedule>
-                    <cron_expr>*/5 * * * *</cron_expr>
+                    <cron_expr>*/1 * * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>diglin_ricento/cron::process</model>

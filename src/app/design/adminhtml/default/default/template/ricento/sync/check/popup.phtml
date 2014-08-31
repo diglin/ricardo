@@ -9,17 +9,45 @@
  */
 
 $messages = $this->getMessages();
+$helper = Mage::helper('diglin_ricento');
 ?>
 <div class="sync_job_popup">
-    <?php if (count($messages)) {?>
-
-        <?php //@todo display the list of messages ?>
-
-    <?php } else { ?>
+    <h1><?php echo $helper->__('Latest message for the selected job'); ?></h1>
+    <p><?php echo $helper->__('<a href="%s">Edit</a> your products listing if needed', $this->getUrl('*/products_listing/edit', array('id' => $this->getProductsListingId()))); ?></p>
     <div id="messages">
         <ul class="messages">
-            <li class="notice-msg"><ul><li><span><?php echo $this->__('No message found.')?></span></li></ul></li>
+            <?php if (count($messages)) { ?>
+                <?php  foreach ($messages as $message) { ?>
+
+                    <?php if (isset($message['name'])) { ?>
+                    <h2><?php echo $message['name'] ?></h2>
+                    <?php } ?>
+                    <?php if (isset($message['errors'])) { ?>
+                        <li class="error-msg">
+                            <ul>
+                                <?php foreach ($message['errors'] as $error) { ?>
+                                <li><span><?php echo $error ?></span></li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if (isset($message['warnings'])) { ?>
+                        <li class="notice-msg">
+                            <ul>
+                                <?php foreach ($message['warnings'] as $warning) { ?>
+                                    <li><span><?php echo $warning ?></span></li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                <?php } ?>
+            <?php } else { ?>
+                <li class="notice-msg">
+                    <ul>
+                        <li><span><?php echo $this->__('No message found.') ?></span></li>
+                    </ul>
+                </li>
+            <?php } ?>
         </ul>
     </div>
-    <?php } ?>
 </div>
