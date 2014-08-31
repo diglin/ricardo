@@ -42,10 +42,9 @@ class Diglin_Ricento_Model_Config_Source_Languages extends Diglin_Ricento_Model_
         }
 
         if ($all) {
-            $return['all'] = $helper->__('All languages');
+            $return[Diglin_Ricento_Helper_Data::LANG_ALL] = $helper->__('All languages');
         }
 
         return $return;
     }
-
 }

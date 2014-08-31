@@ -75,6 +75,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
             'frame_callback' => array($this, 'addConfigureUrl')
         ));
 
+        $this->addColumn('message', array(
+            'header' => $this->__('Message') ,
+            'align' => 'left',
+            'index' => 'message',
+//            'frame_callback' => array($this, 'prepareMessage') //@todo
+        ));
+
         $this->addColumn('log_status', array(
             'header' => $this->__('Status') ,
             'align' => 'left',

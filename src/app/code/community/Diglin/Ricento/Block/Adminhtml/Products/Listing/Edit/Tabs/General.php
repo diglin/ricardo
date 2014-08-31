@@ -87,7 +87,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
 
         $publishLanguages = $this->_getListing()->getPublishLanguages();
 
-        if ($publishLanguages != 'all') {
+        if ($publishLanguages != Diglin_Ricento_Helper_Data::LANG_ALL) {
             $this->getForm()->getElement('default_language')->setDisabled(true);
             $languages = Mage::helper('diglin_ricento')->getSupportedLang();
             foreach ($languages as $lang) {

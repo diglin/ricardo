@@ -150,7 +150,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             ->setWebsiteId($websiteId)
             ->setSalesOptionsId($salesOptions->getId())
             ->setRuleId($rule->getId())
-            ->setPublishLanguages((!empty($storeLanguages)) ? 'all' : $baseLanguage)
+            ->setPublishLanguages((!empty($storeLanguages)) ? Diglin_Ricento_Helper_Data::LANG_ALL : $baseLanguage)
             ->setDefaultLanguage($baseLanguage);
 
         foreach ($storeLanguages as $storeLang => $storeId) {

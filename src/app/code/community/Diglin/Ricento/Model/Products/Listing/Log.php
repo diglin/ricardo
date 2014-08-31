@@ -12,6 +12,7 @@
  * Class Diglin_Ricento_Model_Products_Listing_Log
  *
  * @method string getMessage()
+ * @method int    getJobId()
  * @method int    getProductsListingId()
  * @method int    getProductId()
  * @method string getProductTitle()
@@ -20,6 +21,7 @@
  * @method DateTime getCreatedAt()
  * @method DateTime getUpdatedAt()
  * @method Diglin_Ricento_Model_Products_Listing_Log setMessage(string $message)
+ * @method Diglin_Ricento_Model_Products_Listing_Log setJobId(int $id)
  * @method Diglin_Ricento_Model_Products_Listing_Log setProductsListingId(int $id)
  * @method Diglin_Ricento_Model_Products_Listing_Log setProductId(int $id)
  * @method Diglin_Ricento_Model_Products_Listing_Log setProductTitle(string $title)
