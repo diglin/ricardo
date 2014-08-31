@@ -13,8 +13,6 @@
  */
 class Diglin_Ricento_Block_Adminhtml_Notifications_Expiration extends Diglin_Ricento_Block_Adminhtml_Notifications_Default
 {
-    protected $_template = 'ricento/notifications/expiration.phtml';
-
     /**
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool

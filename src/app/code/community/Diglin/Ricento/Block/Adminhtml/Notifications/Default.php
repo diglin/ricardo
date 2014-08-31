@@ -28,8 +28,13 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Default extends Mage_Adminhtm
      */
     protected function _toHtml()
     {
-        if (Mage::getSingleton('admin/session')->isAllowed('system/ricento')) {
-            return parent::_toHtml();
+        try {
+            if (Mage::getSingleton('admin/session')->isAllowed('system/ricento')) {
+                return parent::_toHtml();
+            }
+        } catch (\Diglin\Ricardo\Exceptions\CurlException $e) { // @todo Curl Error can happens here - the session addError method is maybe too late to be defined here
+            Mage::logException($e);
+            Mage::getSingleton('admin/session')->addError($this->__('Error while trying to connect to the Ricardo API. Please, check your log files.'));
         }
 
         return '';
