@@ -20,9 +20,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing extends Mage_Adminhtml_Blo
         $this->_headerText = $this->__('Products Listing');
         $this->_addButtonLabel = $this->__('Create new listing');
 
-        $this->addButton('forward', array(
-            'label' => $this->__('Go to Synchronization Jobs'),
-            'onclick' => 'setLocation(\''.$this->getUrl('*/sync/index').'\')',
+        $this->addButton('sync_job', array(
+            'label' => $this->__('Show Synchronization Jobs'),
+            'onclick' => 'setLocation(\''.$this->getUrl('*/log/sync').'\')',
         ));
 
         parent::__construct();

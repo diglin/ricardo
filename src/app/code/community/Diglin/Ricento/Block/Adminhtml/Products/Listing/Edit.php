@@ -38,15 +38,20 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
             $this->_updateButton('delete', 'disabled', true);
             $this->_updateButton('delete', 'title', $this->__('Listed listings cannot be deleted. Stop the listing first.'));
             $this->_removeButton('save');
+            $this->_addButton('save_and_update', array(
+                'label' => $this->__('Save & Update List'),
+                'onclick' => 'editForm.submit(\'' . $this->getSaveAndListUrl() . '\');',
+                'class' => 'save list'
+            ), 2);
             $this->_addButton('stop', array(
                 'label'   => $this->__('Stop'),
                 'onclick' => 'setLocation(\'' . $this->getStopListingUrl() . '\')',
                 'class'   => 'cancel'
-            ));
+            ), 3);
         } else {
-            $this->_addButton('save_and_check', array(
-                'label' => $this->__('Save & Check before to Sync'),
-                'onclick' => 'editForm.submit(\'' . $this->getCheckUrl() . '\');',
+            $this->_addButton('save_and_list', array(
+                'label' => $this->__('Save & List'),
+                'onclick' => 'editForm.submit(\'' . $this->getSaveAndListUrl() . '\');',
                 'class' => 'save list'
             ), 2);
         }
@@ -108,13 +113,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
     }
 
     /**
-     * Get check Url to control data products before to sync
+     * Returns URL for "save and list" form action
      *
      * @return string
      */
-    public function getCheckUrl()
+    public function getSaveAndUpdateListUrl()
     {
-        return $this->getUrl('ricento/products_listing/saveAndCheck', array('id' => $this->getListingId()));
+        return $this->getUrl('ricento/products_listing/saveAndUpdateList', array('id' => $this->getListingId()));
     }
 
     /**

@@ -36,7 +36,7 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
      * @param int|string|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isApiTokenCredentialGoingToExpire($website = 0)
+    public function isApiTokenCredentialGoingToExpire($website = Mage_Core_Model_App::ADMIN_STORE_ID)
     {
         $token = Mage::getModel('diglin_ricento/api_token')
             ->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, Mage::app()->getWebsite($website)->getId());
@@ -59,7 +59,7 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
      * @param int|string|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isApiTokenCredentialExists($website = 0)
+    public function isApiTokenCredentialExists($website = Mage_Core_Model_App::ADMIN_STORE_ID)
     {
         $token = Mage::getModel('diglin_ricento/api_token')
             ->loadByWebsiteAndTokenType(Security::TOKEN_TYPE_IDENTIFIED, Mage::app()->getWebsite($website)->getId());

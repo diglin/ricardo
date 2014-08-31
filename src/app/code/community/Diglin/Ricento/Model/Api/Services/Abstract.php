@@ -162,6 +162,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     public function __call($method, $args)
     {
         $data = array();
+        $helper = Mage::helper('diglin_ricento');
         $key = $this->_underscore(substr($method,3));
         $profilerName = $this->_profilerPrefix . strtoupper($key);
         $arguments = array(
@@ -226,12 +227,16 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                     }
                     break;
             }
+        } catch (\Diglin\Ricardo\Exceptions\CurlException $e) {
+            Mage::logException($e);
+            Mage::getSingleton('core/session')
+                ->addError($helper->__('Error while trying to connect to the Ricardo API. Please, check your log files.'));
+            return null;
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             Mage::logException($e);
 
-            $ricentoException = new Diglin_Ricento_Exception($e->getMessage(), $e->getCode());
-
             if ($e->getCode() == \Diglin\Ricardo\Enums\SecurityErrors::TOKEN_AUTHORIZATION) {
+                $ricentoException = new Diglin_Ricento_Exception($e->getMessage(), $e->getCode());
                 $ricentoException->setNeedAuthorization(true);
                 $ricentoException->setValidationUrl($this->getServiceManager()->getSecurityManager()->getValidationUrl());
                 $this->_cleanupCredentialToken();

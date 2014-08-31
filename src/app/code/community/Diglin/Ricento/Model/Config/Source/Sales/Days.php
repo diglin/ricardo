@@ -21,7 +21,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Days extends Diglin_Ricento_Model
     public function toOptionHash()
     {
         if (empty($this->_days)) {
-            $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
+            $partnerConfiguration = (array) Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
 
             // Default duration
             $duration = array(1);

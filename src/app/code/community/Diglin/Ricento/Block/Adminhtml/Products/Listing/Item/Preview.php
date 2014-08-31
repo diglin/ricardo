@@ -66,7 +66,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
      */
     public function getProduct()
     {
-        return $this->getProductItem()->getProduct();
+        return $this->getProductItem()->getMagentoProduct();
     }
 
     /**
@@ -293,7 +293,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
      */
     public function getProductPrice()
     {
-        return Mage::helper('diglin_ricento')->formatPrice($this->getProductItem()->getPrice());
+        return Mage::helper('diglin_ricento')->formatPrice($this->getProductItem()->getProductPrice());
     }
 
     /**

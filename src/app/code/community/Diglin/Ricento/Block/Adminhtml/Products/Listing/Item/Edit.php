@@ -30,7 +30,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit extends Mage_Adm
     public function getHeaderText()
     {
         if (count($this->getSelectedItems()) == 1) {
-            return $this->__("Configure product '%s'", $this->escapeHtml($this->getSelectedItems()->getFirstItem()->getProduct()->getName()));
+            return $this->__("Configure product '%s'", $this->escapeHtml($this->getSelectedItems()->getFirstItem()->getMagentoProduct()->getName()));
         } else {
             return $this->__('Configure all %s selected products', count($this->getSelectedItems()));
         }

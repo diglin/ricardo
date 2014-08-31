@@ -289,7 +289,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         $fieldsetPromotion->addField('note_promotion', 'note', array(
             'text' => '<ul class="messages"><li class="notice-msg">'
-                . $this->__('These options will be not activated for products having no picture.')
+                . $this->__('These options will not be activated for products having no picture.')
                 . '</li></ul>'
         ));
 

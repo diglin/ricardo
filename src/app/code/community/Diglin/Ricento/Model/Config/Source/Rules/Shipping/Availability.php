@@ -18,7 +18,7 @@ class Diglin_Ricento_Model_Config_Source_Rules_Shipping_Availability extends Dig
     public function toOptionHash()
     {
         if (empty($this->_availabilities)) {
-            $availabilities = Mage::getSingleton('diglin_ricento/api_services_system')->getAvailabilities();
+            $availabilities = (array) Mage::getSingleton('diglin_ricento/api_services_system')->getAvailabilities();
 
             foreach ($availabilities as $availabilitiy)
                 if (isset($availabilitiy['AvailabilityId'])) {

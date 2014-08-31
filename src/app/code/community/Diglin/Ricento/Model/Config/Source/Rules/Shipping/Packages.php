@@ -20,7 +20,7 @@ class Diglin_Ricento_Model_Config_Source_Rules_Shipping_Packages extends Diglin_
     public function toOptionHash()
     {
         if (empty($this->_shippingConditions)) {
-            $shippingConditions = Mage::getSingleton('diglin_ricento/api_services_system')->getDeliveryConditions();
+            $shippingConditions = (array) Mage::getSingleton('diglin_ricento/api_services_system')->getDeliveryConditions();
 
             foreach ($shippingConditions as $shippingCondition)
                 if (!empty($shippingCondition['PackageSizes'])) {

@@ -32,7 +32,10 @@ class Diglin_Ricento_Model_Config_Source_Sales_Price_Source extends Diglin_Ricen
                 ->addFieldToFilter('backend_type', Varien_Db_Ddl_Table::TYPE_DECIMAL)
                 ->getItems();
 
-            $this->_options = array('' => Mage::helper('diglin_ricento')->__('-- Select Product Attribute --'));
+            if (!empty($items)) {
+                $this->_options = array('' => Mage::helper('diglin_ricento')->__('-- Select Product Attribute --'));
+            }
+
             foreach ($items as $item) {
                 if ($item->getAttributeCode() != 'price' && $item->getAttributeCode() != 'special_price') {
                     continue;

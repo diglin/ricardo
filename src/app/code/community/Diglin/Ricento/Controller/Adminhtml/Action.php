@@ -44,8 +44,20 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Action extends Mage_Adminhtml
         return Mage::registry('products_listing');
     }
 
+    protected function isApiReady()
+    {
+        $helper = Mage::helper('diglin_ricento');
+        $helperApi = Mage::helper('diglin_ricento/api');
+        $websiteId = $this->_initListing()->getWebsiteId();
+
+        return $helper->isEnabled($websiteId) && $helper->isConfigured($websiteId) && !$helperApi->isApiTokenCredentialGoingToExpire($websiteId);
+    }
+
     /**
      * @return boolean
      */
-    abstract protected function _savingAllowed();
+    protected function _savingAllowed()
+    {
+        return true;
+    }
 }
