@@ -11,38 +11,41 @@
 /**
  * Class Diglin_Ricento_Model_Sync_Job
  *
- * @method string getJobMessage()
  * @method string getJobType()
- * @method int    getProductsListingId()
- * @method string getStatus()
- * @method int    getTotalCount()
- * @method int    getTotalProceed()
- * @method int    getLastItemId()
+ * @method string getJobStatus()
+ * @method string getProgress()
  * @method DateTime getStartedAt()
+ * @method DateTime getEndedAt()
  * @method DateTime getCreatedAt()
  * @method DateTime getUpdatedAt()
  * @method Diglin_Ricento_Model_Sync_Job setJobMessage(string $message)
  * @method Diglin_Ricento_Model_Sync_Job setJobType(string $type)
- * @method Diglin_Ricento_Model_Sync_Job setProductsListingId(int $id)
- * @method Diglin_Ricento_Model_Sync_Job setStatus(string $status)
- * @method Diglin_Ricento_Model_Sync_Job setTotalCount(int $totalCount)
- * @method Diglin_Ricento_Model_Sync_Job setTotalProceed(int $totalProceed)
- * @method Diglin_Ricento_Model_Sync_Job setLastItemId(int $lastItemId)
+ * @method Diglin_Ricento_Model_Sync_Job setJobStatus(string $status)
+ * @method Diglin_Ricento_Model_Sync_Job setProgress(string $progress)
  * @method Diglin_Ricento_Model_Sync_Job setStartedAt(DateTime $starteddAt)
+ * @method Diglin_Ricento_Model_Sync_Job setEndedAt(DateTime $endedAt)
  * @method Diglin_Ricento_Model_Sync_Job setCreatedAt(DateTime $createdAt)
  * @method Diglin_Ricento_Model_Sync_Job setUpdatedAt(DateTime $updatedAt)
  */
-class Diglin_Ricento_Model_Sync_Job extends Mage_Core_Model_Abstract
+class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
 {
-    // TYPES OF SYNC
-    const TYPE_CHECK = 'check';
-    const TYPE_SYNC = 'sync';
+    // TYPES OF JOB
+    const TYPE_CHECK_LIST   = 'check_list';
+    const TYPE_LIST         = 'list';
+    const TYPE_STOP         = 'stop';
+    const TYPE_UPDATE       = 'update';
+
+    // PROGRESS
+    const PROGRESS_PENDING      = 'pending';
+    const PROGRESS_RUNNING      = 'running';
+    const PROGRESS_COMPLETED    = 'completed';
+    const PROGRESS_READY        = 'ready';
 
     // STATUSES
-    const STATUS_PENDING = 'pending';
-    const STATUS_RUNNING = 'running';
-    const STATUS_CHUNK_RUNNING = 'chunk_running';
-    const STATUS_COMPLETED = 'completed';
+    const STATUS_NOTICE     = 'notice';
+    const STATUS_WARNING    = 'warning';
+    const STATUS_ERROR      = 'error';
+    const STATUS_SUCCESS    = 'success';
 
     /**
      * Prefix of model events names
@@ -63,22 +66,10 @@ class Diglin_Ricento_Model_Sync_Job extends Mage_Core_Model_Abstract
     }
 
     /**
-     * Set date of last update, convert payment method array to string
-     *
-     * @return Diglin_Ricento_Model_Sync_Job
-     */
-    protected function _beforeSave()
-    {
-        parent::_beforeSave();
-        $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
-        return $this;
-    }
-
-    /**
      * Load the job by Job Type and Products Listing Id
      *
-     * @param $type
-     * @param $productsListingId
+     * @param string $type
+     * @param int $productsListingId
      * @return $this|bool
      */
     public function loadByJobTypeAndProductsListingId($type, $productsListingId)
@@ -93,24 +84,37 @@ class Diglin_Ricento_Model_Sync_Job extends Mage_Core_Model_Abstract
     }
 
     /**
-     * Save the current status of a job
-     *
-     * @param $status
-     * @param $totalProceed
-     * @param int $lastItemId
-     * @param null $jobId
-     * @return int|bool
+     * @return array
      */
-    public function saveCurrentJob($status, $totalProceed, $lastItemId = 0, $jobId = null)
+    public function getJobMessage()
     {
-        if (is_null($jobId)) {
-            $jobId = $this->getId();
-        }
+        $helper = Mage::helper('diglin_ricento');
 
-        if (is_null($jobId)) {
-            return false;
+        if ($this->getData('job_message')) {
+            return $this->getData('job_message');
+        } else {
+            switch ($this->getJobType()) {
+                case self::TYPE_CHECK_LIST:
+                    if ($this->getProgress() == self::PROGRESS_PENDING) {
+                        return $helper->__('Check in progress...');
+                    }
+                break;
+                case self::TYPE_LIST:
+                    if ($this->getProgress() == self::PROGRESS_PENDING) {
+                        return $helper->__('List in progress...');
+                    }
+                    break;
+            }
         }
+    }
 
-        return $this->getResource()->saveCurrent($jobId, $status, $totalProceed, $lastItemId);
+    /**
+     * @return string
+     */
+    public function getJobTypeLabel()
+    {
+        $logTypes = Mage::getModel('diglin_ricento/config_source_sync_type')->toOptionHash();
+
+        return $logTypes[$this->getJobType()];
     }
 }

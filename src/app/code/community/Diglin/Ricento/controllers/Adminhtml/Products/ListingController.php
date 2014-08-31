@@ -236,11 +236,11 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     /**
      * Save a product listing and check the product listing items
      */
-    public function saveAndCheckAction()
+    public function saveAndListAction()
     {
         $error = $this->saveAction();
         if (!$error) {
-            $this->_forward('check', 'sync', null, array('id' => $this->_getListing()->getId()));
+            $this->listAction();
         }
     }
 
@@ -313,23 +313,61 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function listAction()
     {
-        if (!$this->_initListing()) {
+        $productListing = $this->_initListing();
+
+        if (!$productListing) {
             $this->_redirect('*/*/index');
             return;
         }
         if ($this->_getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
-            $this->_getSession()->addError($this->__('Listing is already listed. To list new items again, use "Relist"'));
+            $this->_getSession()->addError($this->__('Listing "%s" is already listed. To list new items again, use "Relist"', $productListing->getTitle()));
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        if (!$this->isApiReady()) {
+            $this->_getSession()->addError($this->__('The API token and configuration are not ready to allow this action. Please, check that your token is enabled and not going to expire.'));
             $this->_redirect('*/*/index');
             return;
         }
 
         try {
-            $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_LISTED)->save();
-            //TODO set status for items as well if necessary
-            $this->_getSession()->addSuccess($this->__('The listing has been listed.'));
+            $totalItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->countNotListedItems($productListing->getId());
+
+            if ($totalItems === 0) {
+                $this->_getSession()->addError($this->__('There is no product to list. Please, add products to your products listing "%s".', $productListing->getTitle()));
+                $this->_redirect('*/*/edit', array('id' => $productListing->getId()));
+                return;
+            }
+
+            // Create a job to prepare the sync to Ricardo.ch
+
+            $job = Mage::getModel('diglin_ricento/sync_job');
+            $job
+                ->setJobType(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST)
+                ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
+                ->setJobMessage($job->getJobMessage())
+                ->save();
+
+            $jobListing = Mage::getModel('diglin_ricento/sync_job_listing');
+            $jobListing
+                ->setProductsListingId($productListing->getId())
+                ->setTotalCount($totalItems)
+                ->setTotalProceed(0)
+                ->setJobId($job->getId())
+                ->save();
+
+            $this->_getSession()->addSuccess($this->__('The job to check your products listing will start in few moment if it finishes with success, your products listing will be listed. Check the progression below.'));
+            $this->_redirect('*/log/sync', array('id' => $job->getId()));
+            return;
         } catch (Diglin_Ricento_Exception $e) {
+            Mage::logException($e);
             $this->_getSession()->addError($this->__('It\'s s not possible to list the product listing. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
+        } catch (Exception $e) {
+            Mage::logException($e);
+            $this->_getSession()->addError($this->__('An error occured while listing your products. Please check your log file.'));
         }
+
         $this->_redirect('*/*/index');
     }
 
@@ -339,18 +377,20 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function relistAction()
     {
-        if ($this->_getListing()->getStatus() !== Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+        $productListing = $this->_initListing();
+
+        if (!$productListing) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        if ($productListing->getStatus() !== Diglin_Ricento_Helper_Data::STATUS_LISTED) {
             $this->_getSession()->addError($this->__('Listing is not listed. To list a new or stopped listing, use "List"'));
             $this->_redirect('*/*/index');
             return;
         }
-        //TODO relist items
-        try {
-            $this->_getSession()->addSuccess($this->__('Products relisted.'));
-        } catch (Diglin_Ricento_Exception $e) {
-            $this->_getSession()->addError($this->__('It\'s s not possible to list the product listing. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
-        }
-        $this->_redirect('*/*/index');
+
+        // @todo
     }
 
     /**
@@ -401,7 +441,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
                 $notDeleted = array_diff($productListings, $goingToBeDeleted);
                 if ($notDeleted) {
-                    $this->_getSession()->addNotice($this->__('The following products listings IDs have not been deleted because they are still listed in Ricardo: ' . explode(',', $notDeleted)));
+                    $this->_getSession()->addNotice($this->__('The following products listings IDs have not been deleted because they are still listed in Ricardo: ' . implode(',', $notDeleted)));
                 }
             }
         } catch (Exception $e) {

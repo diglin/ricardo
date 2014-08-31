@@ -36,20 +36,27 @@
                     <action>ricento/products_listing</action>
                     <sort_order>20</sort_order>
                 </listing>
-                <synchronization translate="title" module="diglin_ricento">
-                    <title>Synchronization</title>
-                    <action>ricento/sync</action>
-                    <sort_order>30</sort_order>
-                </synchronization>
                 <log translate="title" module="diglin_ricento">
-                    <title>Log</title>
+                    <title>Logs</title>
                     <action>ricento/log</action>
-                    <sort_order>40</sort_order>
+                    <sort_order>30</sort_order>
+                    <children>
+                        <listing>
+                            <title>Listing</title>
+                            <action>ricento/log/listing</action>
+                            <sort_order>10</sort_order>
+                        </listing>
+                        <sync>
+                            <title>Synchronization</title>
+                            <action>ricento/log/sync</action>
+                            <sort_order>20</sort_order>
+                        </sync>
+                    </children>
                 </log>
                 <assistant translate="title" module="diglin_ricento">
                     <title>Ricardo Assistant</title>
                     <action>ricento/account/assistant</action>
-                    <sort_order>50</sort_order>
+                    <sort_order>40</sort_order>
                 </assistant>
                 <config translate="title" module="diglin_ricento">
                     <title>Configuration</title>
@@ -86,11 +93,8 @@
                             <listing translate="title" module="diglin_ricento">
                                 <title>Product Listing</title>
                             </listing>
-                            <synchronization translate="title" module="diglin_ricento">
-                                <title>Synchronization</title>
-                            </synchronization>
                             <log translate="title" module="diglin_ricento">
-                                <title>Synchronization log</title>
+                                <title>Log</title>
                             </log>
                             <assistant translate="title" module="diglin_ricento">
                                 <title>Ricardo Assistant</title>
