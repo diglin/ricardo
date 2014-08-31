@@ -53,6 +53,11 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
         return count($readerConnection->fetchAll($select, $binds));
     }
 
+    /**
+     * @param $status
+     * @param $productsListingId
+     * @return array
+     */
     public function getItemsPerStatusProductsListing($status, $productsListingId)
     {
         $readerConnection = $this->_getReadAdapter();
@@ -65,5 +70,4 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
 
         return $readerConnection->fetchCol($select, $binds);
     }
-
 }

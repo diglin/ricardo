@@ -14,7 +14,7 @@
             <block type="diglin_ricento/adminhtml_notifications_default" name="ricento_notifications_configured"
                    template="ricento/notifications/configured.phtml" before="-"/>
             <block type="diglin_ricento/adminhtml_notifications_expiration"
-                   name="ricento_notifications_api_expiration"/>
+                   name="ricento_notifications_api_expiration" template="ricento/notifications/expiration.phtml"/>
         </reference>
 
         <reference name="head">
@@ -46,6 +46,8 @@
         </reference>
     </ricento_dashboard_index>
 
+    <!-- PRODUCTS LISTING PAGES -->
+
     <ricento_products_listing_index>
         <update handle="ricento_scripts" />
         <reference name="content">
@@ -72,7 +74,9 @@
                    name="products_listing_add" />
         </reference>
     </ricento_products_listing_addproductspopup>
-    
+
+    <!-- PRODUCTS LISTING ITEMS PAGES -->
+
     <ricento_products_listing_item_configure>
         <update handle="ricento_scripts" />
         <reference name="content">
@@ -91,6 +95,8 @@
             <block type="diglin_ricento/adminhtml_products_listing_item_preview" name="products_listing_item_preview" />
         </reference>
     </ricento_products_listing_item_preview>
+
+    <!-- PRODUCTS CATEGORY PAGES -->
 
     <ricento_products_category_mapping>
         <update handle="overlay_popup" />
@@ -117,22 +123,21 @@
         </reference>
     </ricento_products_category_showcategoriestree>
 
-    <ricento_sync_index>
+    <!-- SYNCHRONIZATION PAGES -->
+
+    <ricento_log_sync>
         <update handle="ricento_scripts" />
         <reference name="head">
             <action method="addJs"><name>ricento/livepipe-ui/livepipe.js</name></action>
             <action method="addJs"><name>ricento/livepipe-ui/progressbar.js</name></action>
-        </reference>
-        <reference name="content">
-            <block type="diglin_ricento/adminhtml_sync_job" name="sync_job" as="sync_job"/>
-        </reference>
-    </ricento_sync_index>
+        </reference>-->
+    </ricento_log_sync>
 
-    <ricento_sync_checkajaxpopup>
+    <ricento_sync_jobmessagepopup>
         <update handle="overlay_popup" />
         <remove name="footer" />
         <reference name="content">
             <block type="adminhtml/template" name="sync_ajax_popup" as="sync_ajax_popup" template="ricento/sync/check/popup.phtml" />
         </reference>
-    </ricento_sync_checkajaxpopup>
+    </ricento_sync_jobmessagepopup>
 </layout>

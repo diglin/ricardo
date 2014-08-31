@@ -44,8 +44,6 @@
  */
 class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
 {
-
-
     /**
      * @var Diglin_Ricento_Model_Sales_Options
      */

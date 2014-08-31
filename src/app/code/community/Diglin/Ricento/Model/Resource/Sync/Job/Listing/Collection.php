@@ -9,20 +9,17 @@
  */
 
 /**
- * Resource Model of Sync_Log
+ * Class Diglin_Ricento_Model_Resource_Sync_Job_Listing_Collection
  */
-class Diglin_Ricento_Model_Resource_Sync_Log extends Mage_Core_Model_Resource_Db_Abstract
+class Diglin_Ricento_Model_Resource_Sync_Job_Listing_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
-
-
     /**
-     * Sync_Log Resource Constructor
+     * Sync Collection Resource Constructor
      * @return void
      */
     protected function _construct()
     {
-        $this->_init('diglin_ricento/sync_log', 'job_id');
+        parent::_construct();
+        $this->_init('diglin_ricento/sync_job_listing');
     }
-
-
 }

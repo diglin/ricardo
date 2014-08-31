@@ -1,0 +1,35 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Ricento
+ * @package     Diglin_Ricardo
+ * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ */
+
+/* @var $this Mage_Adminhtml_Block_Template */
+/* @see Diglin_Ricento_Block_Adminhtml_Sync_Log_Grid_Renderer_Progress */
+
+$progressUrl = $this->getProgressAjaxUrl();
+$progressPopupUrl = $this->getProgressPopupUrl();
+$prefix = $this->getPrefix();
+
+if($this->getRunProgress()) {?>
+<div id="progress<?php echo $prefix ?>" class="sync-indicator-text"></div>
+<div id="progress_bar<?php echo $prefix ?>" class="sync-progress-bar"></div>
+<div id="advice<?php echo $prefix ?>" class="sync-advice">
+<?php if ($this->getJobWillStart()) { ?>
+    <div class="sync-advice"><?php echo $this->__('The task will start soon');?></div>
+<?php } ?>
+</div>
+<div id="debug<?php echo $prefix ?>" style="display: none"></div><?php // Keep it to prevent, warning js messages ?>
+<script type="text/javascript">
+    // Use timeout cause of offsetWidth, needed here to set the progress bar
+    setTimeout(function(){
+        Ricento.progressInterval('<?php echo $progressUrl ?>', '<?php echo $prefix ?>');
+    }, 150);
+</script>
+<?php } else { ?>
+<div class="sync-advice"><?php echo $this->__('No progress');?></div>
+<?php } ?>

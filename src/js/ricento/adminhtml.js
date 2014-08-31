@@ -147,7 +147,7 @@ Ricento.showCategoryTreePopup = function(url) {
         }
     });
 };
-Ricento.checkPopup = function(url) {
+Ricento.progressPopup = function(url) {
     if ($('ricento_popup') && typeof(Windows) != 'undefined') {
         Windows.focus('ricento_popup');
         return;
@@ -199,8 +199,8 @@ Ricento.useProductListSettings = function(checkbox, htmlIdPrefix) {
     })
 }
 
-// Used in Synchronization Jobs Grid Page to display the progress of the check
-Ricento.checkInterval = function (url, prefix) {
+// Used in Synchronization Jobs Grid Page to display the progress
+Ricento.progressInterval = function (url, prefix) {
 
     var progress_bar = new Control.ProgressBar('progress_bar' + prefix, {interval: 0.15});
 
@@ -212,36 +212,49 @@ Ricento.checkInterval = function (url, prefix) {
         onSuccess: function(transport) {
             var response;
             var progressBarElement = $('progress_bar' + prefix);
-            var checkElement = $('check' + prefix);
+            var progressElement = $('progress' + prefix);
             var adviceElement = $('advice' + prefix);
+            var messageElement = $('job_message' + prefix);
+            var statusElement = $('job_status' + prefix);
+            var startedElement = $('started_at' + prefix);
+            var endedElement = $('ended_at' + prefix);
 
             try {
                 response = eval('(' + transport.responseText + ')');
+                if (response.length <= 0) {
+                    return;
+                }
                 progress_bar.setProgress(response.percentage);
-                checkElement.innerHTML = response.percentage + '%';
+                progressElement.innerHTML = Math.min(Math.round(response.percentage), 100) + '%';
 
-                if (response.status == 'running') {
-                    checkElement.addClassName('sync-indicator');
+                if (response.state == 'running') {
+                    progressElement.addClassName('sync-indicator');
                     adviceElement.innerHTML = '';
-                } else if (response.status == 'completed') {
+                } else if (response.state == 'completed') {
                     u.stop();
 
-                    checkElement.removeClassName('sync-indicator');
+                    progressElement.removeClassName('sync-indicator');
 
-                    switch (response.state ) {
-                        case 'ok':
+                    switch (response.status ) {
+                        case 'Success':
                             progressBarElement.setStyle({backgroundColor :'green'});
                             break;
-                        case 'warning':
+                        case 'Warning':
                             progressBarElement.setStyle({backgroundColor :'orange'});
                             break;
-                        case 'error':
+                        case 'Error':
                             progressBarElement.setStyle({backgroundColor :'red'});
                             break;
                     }
 
-                    adviceElement.innerHTML = response.message;
+                    statusElement.innerHTML = response.status;
+                    statusElement.addClassName('job_status-' + response.status.toLowerCase());
+                    adviceElement.innerHTML = '';
                 }
+
+                messageElement.innerHTML = response.message;
+                startedElement.innerHTML = response.started_at;
+                endedElement.innerHTML = response.ended_at;
 
             } catch (e) {
                 response = {};
