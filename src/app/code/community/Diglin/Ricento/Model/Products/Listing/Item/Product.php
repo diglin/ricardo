@@ -31,6 +31,11 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     protected $_productListingItemId = null;
 
     /**
+     * @var array
+     */
+    protected $_associatedProducts = array();
+
+    /**
      * @var Diglin_Ricento_Model_Products_Listing_Item
      */
     protected $_productListingItem = null;
@@ -50,7 +55,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      * @return Mage_Catalog_Model_Product
      * @throws Exception
      */
-    public function getProduct()
+    public function getMagentoProduct()
     {
         if ($this->_model) {
             return $this->_model;
@@ -61,7 +66,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
             return $this->_model;
         }
 
-        throw new Exception('Load instance first');
+        throw new Exception('Model has not been instanciated');
     }
 
     /**
@@ -126,12 +131,12 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     }
 
     /**
+     * @param bool $singleton
      * @return Mage_Catalog_Model_Product_Type_Abstract
-     * @throws Exception
      */
-    public function getTypeInstance()
+    public function getTypeInstance($singleton = false)
     {
-        $typeInstance = $this->getProduct()->getTypeInstance();
+        $typeInstance = $this->getMagentoProduct()->getTypeInstance($singleton);
         $typeInstance->setStoreFilter($this->getStoreId());
 
         return $typeInstance;
@@ -260,21 +265,24 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
         $productId = (int) (is_null($productId) ? $this->_productId : $productId);
         $storeId = (int) (is_null($storeId) ? $this->_storeId : $storeId);
 
-        $salesOptions = $this->_productListingItem->getSalesOptions();
+        $salesOptions = $this->getProductListingItem()->getSalesOptions();
 
-        // @todo take in consideration if inkl. or exkl. Tax?
-        // @todo do the conversion from a non supported currency to the supported currency - at the moment we do not support this feature
+        //@todo do the conversion from a non supported currency to the supported currency - at the moment we do not support this feature
 
         $price = $this->_getProductPrice($salesOptions->getPriceSourceAttributeCode(), $productId, $storeId);
 
         return Mage::helper('diglin_ricento')->calculatePriceChange($price, $salesOptions->getPriceChangeType(), $salesOptions->getPriceChange());
     }
 
+    /**
+     * @return bool|float
+     */
     public function getQty()
     {
-        // @todo finish to implement
-
-        $this->getProduct()->getTypeInstance(true);
+        if ($this->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE
+        || $this->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
+            return false;
+        }
 
         $stockItem = $this->getStockItem();
 
@@ -282,8 +290,65 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
             return false;
         }
 
-        $stockItem->getIsInStock();
+        return $stockItem->getQty();
+    }
 
+    /**
+     * Check quantity
+     *
+     * @param   float $qty
+     * @exception Mage_Core_Exception
+     * @return  bool
+     */
+    public function checkQty($qty)
+    {
+        $stockItem = $this->getStockItem();
+
+        if (!$stockItem->getManageStock()) {
+            return true;
+        }
+
+        $composite = false;
+        $usedProductIds = array();
+
+        if ($this->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE) {
+            /* @var $instance Mage_Catalog_Model_Product_Type_Configurable */
+            $usedProductIds = $this->getTypeInstance(true)->getUsedProductIds($this->getMagentoProduct());
+            $composite = true;
+        } else if ($this->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
+            /* @var $instance Mage_Catalog_Model_Product_Type_Grouped */
+            $usedProductIds = $this->getTypeInstance(true)->getAssociatedProductIds($this->getMagentoProduct());
+            $composite = true;
+        }
+
+        if ($composite) {
+            foreach ($usedProductIds as $id) {
+                $stockItem->unsetData(); // cleanup before to proceed, we may also use the method reset but it's not relevant here
+                $stockItemProd = $stockItem->loadByProduct($id);
+                if ($stockItemProd->getQty() - $stockItemProd->getMinQty() - $qty < 0) {
+                    switch ($stockItemProd->getBackorders()) {
+                        case Mage_CatalogInventory_Model_Stock::BACKORDERS_YES_NONOTIFY:
+                        case Mage_CatalogInventory_Model_Stock::BACKORDERS_YES_NOTIFY:
+                            break;
+                        default:
+                            return false;
+                            break;
+                    }
+                }
+            }
+        } else {
+            if ($stockItem->getQty() - $stockItem->getMinQty() - $qty < 0) {
+                switch ($stockItem->getBackorders()) {
+                    case Mage_CatalogInventory_Model_Stock::BACKORDERS_YES_NONOTIFY:
+                    case Mage_CatalogInventory_Model_Stock::BACKORDERS_YES_NOTIFY:
+                        break;
+                    default:
+                        return false;
+                        break;
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -318,11 +383,13 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     protected function _getProductName($field, $productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
     {
         $readConnection = $this->_getReadConnection();
+        $coreResource = Mage::getSingleton('core/resource');
+
         $select = $readConnection
             ->select()
-            ->from(array('cpev'=> $readConnection->getTableName('catalog_product_entity_varchar')), array($field => 'value'))
+            ->from(array('cpev'=> $coreResource->getTableName('catalog_product_entity_varchar')), array($field => 'value'))
             ->join(
-                array('ea' => $readConnection->getTableName('eav_attribute')),
+                array('ea' => $coreResource->getTableName('eav_attribute')),
                 '`cpev`.`attribute_id` = `ea`.`attribute_id` AND `ea`.`attribute_code` = \''. $field .'\'',
                 array()
             )
@@ -340,11 +407,13 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     protected function _getProductDescription($field, $productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
     {
         $readConnection = $this->_getReadConnection();
+        $coreResource = Mage::getSingleton('core/resource');
+
         $select = $readConnection
             ->select()
-            ->from(array('cpet'=> $readConnection->getTableName('catalog_product_entity_text')), array($field => 'value'))
+            ->from(array('cpet'=> $coreResource->getTableName('catalog_product_entity_text')), array($field => 'value'))
             ->join(
-                array('ea' => $readConnection->getTableName('eav_attribute')),
+                array('ea' => $coreResource->getTableName('eav_attribute')),
                 '`cpet`.`attribute_id` = `ea`.`attribute_id` AND `ea`.`attribute_code` = \''. $field .'\'',
                 array()
             )
@@ -355,24 +424,144 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
     /**
      * @param $field
-     * @param null $productId
-     * @param int $storeId
      * @return string
      */
-    protected function _getProductPrice($field, $productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
+    protected function _getProductPrice($field = null)
     {
+        switch ($this->getTypeId()) {
+            case Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE:
+                $price = $this->_getSimpleProductBasePrice($field);
+                return $this->_getConfigurableProductBasePrice($price);
+                break;
+            case Mage_Catalog_Model_Product_Type::TYPE_GROUPED:
+                return $this->_getGroupedProductBasePrice();
+                break;
+            case Mage_Catalog_Model_Product_Type::TYPE_SIMPLE:
+            default:
+                // @todo implement a factory adapter to get other kind of external product type
+                return $this->_getSimpleProductBasePrice($field);
+                break;
+        }
+    }
+
+    /**
+     * @param $field
+     * @return string
+     */
+    protected function _getSimpleProductBasePrice($field)
+    {
+        if (is_null($field)) {
+            $field = 'price';
+        }
+
+        $productId = (int) $this->getProductId();
+        $storeId = (int) $this->getStoreId();
+
         $readConnection = $this->_getReadConnection();
+        $coreResource = Mage::getSingleton('core/resource');
+
         $select = $readConnection
             ->select()
-            ->from(array('cped'=> $readConnection->getTableName('catalog_product_entity_decimal')), array($field => 'value'))
+            ->from(array('cped'=> $coreResource->getTableName('catalog_product_entity_decimal')), array($field => 'value'))
             ->join(
-                array('ea' => $readConnection->getTableName('eav_attribute')),
+                array('ea' => $coreResource->getTableName('eav_attribute')),
                 '`cped`.`attribute_id` = `ea`.`attribute_id` AND `ea`.`attribute_code` = \''. $field .'\'',
                 array()
             )
-            ->where('`cped`.`entity_id` = ?', $productId)->where('`cped`.`store_id` = ?', $storeId);
+            ->where('`cped`.`entity_id` = ?', $productId)
+            ->where('`cped`.`store_id` = ?', $storeId);
 
         return $readConnection->fetchOne($select);
+    }
+
+    /**
+     * Get price of total associated products with default qty
+     * Special price not supported by grouped product type
+     *
+     * @return int|null
+     */
+    protected function _getGroupedProductBasePrice()
+    {
+        if ($this->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
+            return null;
+        }
+
+        $defaultQty = 1;
+        $totalPrice = 0.0;
+
+        if (empty($this->_associatedProducts)) {
+            /* @var $groupedInstance Mage_Catalog_Model_Product_Type_Grouped */
+            $groupedInstance = $this->getTypeInstance(true);
+            $this->_associatedProducts = $groupedInstance->getAssociatedProducts($this->getMagentoProduct());
+        }
+
+        if (!empty($this->_associatedProducts)) {
+            foreach ($this->_associatedProducts as $associatedProduct) {
+
+                // Ricardo is a C2C/B2C platform, price always with tax included
+                $priceInclTax = Mage::helper('tax')->getPrice($associatedProduct, $associatedProduct->getPrice(), true, null, null, null, $this->getStoreId());
+
+                // Set default qty = 1 when qty = 0
+                $totalPrice += (((!$associatedProduct->getQty()) ? $associatedProduct->getQty() : $defaultQty) * $priceInclTax);
+            }
+        }
+
+        return $totalPrice;
+    }
+
+    /**
+     * @param float|int $productPrice
+     * @return null
+     */
+    protected function _getConfigurableProductBasePrice($productPrice)
+    {
+        if ($this->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE) {
+            return null;
+        }
+
+        /* @var $configurableInstance Mage_Catalog_Model_Product_Type_Configurable */
+        $attributes = $this->getTypeInstance(true)->getConfigurableAttributes($this->getMagentoProduct());
+
+        $i = 0;
+        $optionPrices = array();
+        $finalMinPrice = 0;
+
+        if (count($attributes)) {
+            foreach ($attributes as $attribute) {
+                /* @var Mage_Catalog_Model_Product_Type_Configurable_Attribute $attribute */
+                if ($attribute->getData('prices')) {
+                    $prices = $attribute->getData('prices');
+                    foreach ($prices as $price) {
+                        if ($price['pricing_value'] != 0) {
+                            $optionPrices[$i][] = $this->_calcSelectionPrice($price, $productPrice);
+                        }
+                    }
+
+                    $finalMinPrice += min($optionPrices[$i]);
+                    $i++;
+                }
+            }
+        }
+
+        return ($productPrice + $finalMinPrice);
+    }
+
+    /**
+     * Calculate configurable product selection price
+     *
+     * @param   array $priceInfo
+     * @param   float $productPrice
+     * @return  float
+     */
+    protected function _calcSelectionPrice($priceInfo, $productPrice)
+    {
+        if($priceInfo['is_percent']) {
+            $ratio = $priceInfo['pricing_value']/100;
+            $price = $productPrice * $ratio;
+        } else {
+            $price = $priceInfo['pricing_value'];
+        }
+        return $price;
     }
 
     /**
@@ -426,6 +615,9 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      */
     public function getProductListingItem()
     {
+        if (empty($this->_productListingItem) && $this->getProductListingItemId()) {
+            $this->_productListingItem = Mage::getModel('diglin_ricento/products_listing_item')->load($this->getProductListingItemId());
+        }
         return $this->_productListingItem;
     }
 
@@ -435,7 +627,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      */
     public function setProductListingItemId($productListingItemId)
     {
-        $this->_productListingItemId = $productListingItemId;
+        $this->_productListingItemId = (int) $productListingItemId;
         return $this;
     }
 

@@ -12,6 +12,7 @@
  * Products_Listing_Item Model
  *
  * @method int    getProductId()
+ * @method int    getStoreId()
  * @method int    getProductsListingId()
  * @method int    getSalesOptionsId()
  * @method int    getRuleId()
@@ -20,6 +21,7 @@
  * @method DateTime getUpdatedAt()
  * @method bool getLoadFallbackOptions()
  * @method Diglin_Ricento_Model_Products_Listing_Item setProductId(int $productId)
+ * @method Diglin_Ricento_Model_Products_Listing_Item setStoreId(int $storeId)
  * @method Diglin_Ricento_Model_Products_Listing_Item setProductsListingId(int $productListingId)
  * @method Diglin_Ricento_Model_Products_Listing_Item setSalesOptionsId(int $salesOptionsId)
  * @method Diglin_Ricento_Model_Products_Listing_Item setRuleId(int $ruleIid)
@@ -39,6 +41,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
      * @var Diglin_Ricento_Model_Rule
      */
     protected $_shippingPaymentRule;
+
     /**
      * Prefix of model events names
      * @var string
@@ -53,13 +56,6 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     protected $_eventObject = 'products_listing_item';
 
     /**
-     * Associated product
-     *
-     * @var Mage_Catalog_Model_Product
-     */
-    protected $_product;
-
-    /**
      * Products_Listing_Item Constructor
      * @return void
      */
@@ -70,8 +66,6 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     }
 
     /**
-     * Set date of last update
-     *
      * @return Diglin_Ricento_Model_Products_Listing_Item
      */
     protected function _beforeSave()
@@ -87,6 +81,9 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         return $this;
     }
 
+    /**
+     * @return $this|Mage_Core_Model_Abstract
+     */
     protected function _afterDeleteCommit()
     {
         if ($this->getSalesOptionsId()) {
@@ -102,16 +99,13 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     }
 
     /**
-     * @return Mage_Catalog_Model_Product|Mage_Core_Model_Abstract
+     * @return Diglin_Ricento_Model_Products_Listing_Item_Product
      */
     public function getProduct()
     {
-        if (!$this->_product) {
-            $this->_product = Mage::getModel('diglin_ricento/products_listing_item_product')
-                ->setProductId($this->getProductId())
-                ->getProduct();
-        }
-        return $this->_product;
+        return Mage::getSingleton('diglin_ricento/products_listing_item_product')
+            ->setProductListingItemId($this->getId())
+            ->setProductId($this->getProductId());
     }
 
     /**
@@ -151,7 +145,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
      */
     public function getProductsListing()
     {
-        return Mage::getModel('diglin_ricento/products_listing')->load($this->getProductsListingId());
+        return Mage::getSingleton('diglin_ricento/products_listing')->load($this->getProductsListingId());
     }
 
     /**
@@ -161,7 +155,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     {
         $ricardoCategoryId = $this->getSalesOptions()->getRicardoCategory();
         if ($ricardoCategoryId < 0) {
-            $catIds = $this->getProduct()->getCategoryIds();
+            $catIds = $this->getProduct()->getMagentoProduct()->getCategoryIds();
             foreach ($catIds as $id) {
                 $category = Mage::getModel('catalog/category')->load($id);
                 $ricardoCategoryId = $category->getRicardoCategory();
@@ -172,5 +166,56 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         }
 
         return (int) $ricardoCategoryId;
+    }
+
+    /**
+     * @return Mage_Catalog_Model_Product
+     */
+    public function getMagentoProduct()
+    {
+        return $this->getProduct()->getMagentoProduct();
+    }
+
+    /**
+     * @param bool $sub
+     * @return string
+     */
+    public function getProductTitle($sub = true)
+    {
+        return $this->getProduct()->getTitle($this->getProductId(), $this->getStoreId(), $sub);
+    }
+
+    /**
+     * @param bool $sub
+     * @return array|string
+     */
+    public function getProductSubtitle($sub = true)
+    {
+        return $this->getProduct()->getSubtitle($this->getProductId(), $this->getStoreId(), $sub);
+    }
+
+    /**
+     * @param bool $sub
+     * @return mixed|string
+     */
+    public function getProductDescription($sub = true)
+    {
+        return $this->getProduct()->getDescription($this->getProductId(), $this->getStoreId(), $sub);
+    }
+
+    /**
+     * @return float
+     */
+    public function getProductPrice()
+    {
+        return $this->getProduct()->getPrice($this->getProductId(), $this->getStoreId());
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductQty()
+    {
+        return $this->getProduct()->getQty();
     }
 }

@@ -10,17 +10,15 @@
  */
 class Diglin_Ricento_Model_Config_Source_Sync_Status extends Diglin_Ricento_Model_Config_Source_Abstract
 {
-
     public function toOptionHash()
     {
         $helper = Mage::helper('diglin_ricento');
 
         return array(
-            Diglin_Ricento_Model_Sync_Job::STATUS_PENDING => $helper->__('Idle'),
-            Diglin_Ricento_Model_Sync_Job::STATUS_RUNNING => $helper->__('Running Now'),
-            Diglin_Ricento_Model_Sync_Job::STATUS_CHUNK_RUNNING => $helper->__('Running'),
-            Diglin_Ricento_Model_Sync_Job::STATUS_COMPLETED => $helper->__('Completed')
+            Diglin_Ricento_Model_Sync_Job::STATUS_NOTICE => $helper->__('Notice'),
+            Diglin_Ricento_Model_Sync_Job::STATUS_SUCCESS => $helper->__('Success'),
+            Diglin_Ricento_Model_Sync_Job::STATUS_ERROR => $helper->__('Error'),
+            Diglin_Ricento_Model_Sync_Job::STATUS_WARNING => $helper->__('Warning')
         );
     }
-
 }
