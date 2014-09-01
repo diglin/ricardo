@@ -31,11 +31,12 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
      * getMessages() will return an array of messages that explain why the
      * validation failed.
      *
-     * @param  Diglin_Ricento_Model_Products_Listing_Item $item
+     * @param Diglin_Ricento_Model_Products_Listing_Item $item
+     * @param array $stores
      * @return boolean
      * @throws Zend_Validate_Exception If validation of $value is impossible
      */
-    public function isValid($item)
+    public function isValid($item, $stores = array(Mage_Core_Model_APP::ADMIN_STORE_ID))
     {
         if (!$item instanceof Diglin_Ricento_Model_Products_Listing_Item) {
             return false;
@@ -44,42 +45,83 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
         $item->setLoadFallbackOptions(true);
         $helper = Mage::helper('diglin_ricento');
 
+        // Validate product content for each available store
+
+        foreach ($stores as $store) {
+
+            $item
+                //->setReload(true) // @todo reload is a bottleneck but we need it to use it to get correct value of "HasOptions" below
+                ->setStoreId($store);
+
+            $storeCode = Mage::app()->getStore($store)->getName();
+
+            // Validate title
+
+            $strLen = new Zend_Validate_StringLength(array('min' => 1, 'max' => self::LENGTH_PRODUCT_TITLE));
+            if (!$strLen->isValid($item->getProductTitle(false))) {
+                // warning - content will be cut when exporting to ricardo
+                $this->_warnings[] = $helper->__('Product Title will be cut after %s characters when published on ricardo.ch for store "%s"', self::LENGTH_PRODUCT_TITLE, $storeCode);
+            }
+
+            // Validate subtitle
+
+            $strLen = new Zend_Validate_StringLength(array('max' => self::LENGTH_PRODUCT_SUBTITLE));
+            if (!$strLen->isValid($item->getProductSubtitle(false))) {
+                // warning - content will be cut when exporting to ricardo
+                $this->_warnings[] = $helper->__('Product Subtitle will be cut after %s characters when published on ricardo.ch for store "%s"', self::LENGTH_PRODUCT_SUBTITLE, $storeCode);
+            }
+
+            // Validate description
+
+            $strLen = new Zend_Validate_StringLength(array('min' => 1, 'max' => self::LENGTH_PRODUCT_DESCRIPTION));
+            if (!$strLen->isValid($item->getProductDescription(false))) {
+                // warning - content will be cut when exporting to ricardo
+                $this->_warnings[] = $helper->__('Product Description will be cut after %s characters when published on ricardo.ch for store "%s"', self::LENGTH_PRODUCT_DESCRIPTION, $storeCode);
+            }
+
+            // Validate custom options
+
+            if (!$item->getMagentoProduct()->hasOptions()) {
+                // warning - no option will be send to ricardo.ch
+                $this->_warnings[] = $helper->__('Custom Options are not supported. Those won\'t be synchronized into ricardo.ch for store "%s"', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY, $storeCode);
+            }
+        }
+
+        // Validate products listing item
+
+
+        // Validate Inventory - In Stock or not? Enough Qty or not?
+
+        $salesOptionsStockManagement = $item->getSalesOptions()->getStockManagement();
+        $stockItem = $item->getProduct()->getStockItem();
+
+        if ($stockItem->getManageStock()) {
+            if ($salesOptionsStockManagement == -1) {
+                $qty = 1;
+                // if stock managed and qty > 0 => ok
+                // if stock not managed => ok (default qty will be set to 1)
+            } else {
+                $qty = $salesOptionsStockManagement;
+                // if stock managed, check there is enough quantity compared to $salesOptionsStockManagement
+                // if stock is not managed => ok
+            }
+
+            if (!$item->getProduct()->checkQty($qty) || !$stockItem->getIsInStock()) {
+                // Error - Qty not available or not in stock
+                $this->_errors[] = $helper->__('The product or its associated products is/are not in stock or doesn\'t have enough quantity in stock  for store "%s"', $storeCode);
+            }
+        }
+
         // Validate the currency
+
         $currencyCode = Mage::app()->getWebsite($item->getProductsListing()->getWebsiteId())->getBaseCurrencyCode();
         if ($currencyCode != Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY) {
             // Warning - Ricardo supports only CHF currency
             $this->_warnings[] = $helper->__('Only %s currency is supported. No conversion will be done.', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY);
         }
 
-        // Validate name
-        $strLen = new Zend_Validate_StringLength(array('min' => 1, 'max' => self::LENGTH_PRODUCT_TITLE));
-        if (!$strLen->isValid($item->getProductTitle(false))) {
-            // warning - content will be cut when exporting to ricardo
-            $this->_warnings[] = $helper->__('Product Title will be cut after %s characters when published on ricardo.ch', self::LENGTH_PRODUCT_TITLE);
-        }
-
-        // Validate subtitle
-        $strLen = new Zend_Validate_StringLength(array('max' => self::LENGTH_PRODUCT_SUBTITLE));
-        if (!$strLen->isValid($item->getProductSubtitle(false))) {
-            // warning - content will be cut when exporting to ricardo
-            $this->_warnings[] = $helper->__('Product Subtitle will be cut after %s characters when published on ricardo.ch', self::LENGTH_PRODUCT_SUBTITLE);
-        }
-
-        // Validate description
-        $strLen = new Zend_Validate_StringLength(array('min' => 1, 'max' => self::LENGTH_PRODUCT_DESCRIPTION));
-        if (!$strLen->isValid($item->getProductDescription(false))) {
-            // warning - content will be cut when exporting to ricardo
-            $this->_warnings[] = $helper->__('Product Description will be cut after %s characters when published on ricardo.ch', self::LENGTH_PRODUCT_DESCRIPTION);
-        }
-
-        // Validate custom options
-        // @todo check if this use is correct
-        if (!$item->getMagentoProduct()->hasOptions()) {
-            // warning - no option will be send to ricardo.ch
-            $this->_warnings[] = $helper->__('Custom Options are not supported. Those won\'t be synchronized into ricardo.ch.', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY);
-        }
-
         // Validate Category exists
+
         $ricardoCategoryId = $item->getCategory();
         if (!$ricardoCategoryId) {
             // error - category cannot be empty
@@ -87,6 +129,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
         }
 
         // Validate Payment and Shipping Rule
+
         $methodValidator = new Diglin_Ricento_Model_Validate_Rules_Methods();
         $rules = $item->getShippingPaymentRule();
         $methods = array(
@@ -100,6 +143,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
         }
 
         // Validate price against buy now price > 0.05 or 0.1
+
         $salesOptions = $item->getSalesOptions();
         $productPrice = $item->getProduct()->getPrice();
         if ($salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION && $salesOptions->getSalesAuctionDirectBuy()) {
@@ -129,6 +173,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
         }
 
         // Validate Ending Date
+
         $period = (int) $item->getSalesOptions()->getSchedulePeriodDays();
         $betweenValidator  = new Zend_Validate_Between(
             array(
@@ -137,36 +182,16 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
                 'inclusive' => true
             )
         );
+
         if (!$betweenValidator->isValid($period)) {
             // Error - Period too long or too short
             $this->_errors[] = $helper->__('The ending date is too early or too late. Minimum period allow %s days - Maximum period allowed %s days', self::PERIOD_DAYS_MIN, self::PERIOD_DAYS_MAX);
-
-        }
-
-        // Validate Inventory - In Stock or not? Enough Qty or not?
-        $salesOptionsStockManagement = $item->getSalesOptions()->getStockManagement();
-        $stockItem = $item->getProduct()->getStockItem();
-
-        if ($stockItem->getManageStock()) {
-            if ($salesOptionsStockManagement == -1) {
-                $qty = 1;
-                // if stock managed and qty > 0 => ok
-                // if stock not managed => ok (default qty will be set to 1)
-            } else {
-                $qty = $salesOptionsStockManagement;
-                // if stock managed, check there is enough quantity compared to $salesOptionsStockManagement
-                // if stock is not managed => ok
-            }
-
-            if (!$item->getProduct()->checkQty($qty) || !$stockItem->getIsInStock()) {
-                // Error - Qty not available or not in stock
-                $this->_errors[] = $helper->__('The product or its associated products is/are not in stock or doesn\'t have enough quantity in stock.');
-            }
         }
 
         // Validate picture - warning if promotions exists but no picture
+
         $productResource = Mage::getResourceModel('catalog/product');
-        $assignedImages = $productResource->getAssignedImages($item->getMagentoProduct(), Mage_Core_Model_App::ADMIN_STORE_ID);
+        $assignedImages = $productResource->getAssignedImages($item->getMagentoProduct(), $stores);
         if (empty($assignedImages) && ($salesOptions->getPromotionSpace() || $salesOptions->getPromotionStartPage())) {
             // Warning - No promotion possible if no image in the product
             $this->_warnings[] = $helper->__('You cannot use the privilege spaces as you do not have any pictures for this product.');
