@@ -17,6 +17,7 @@
  * @method int    getSalesOptionsId()
  * @method int    getRuleId()
  * @method string getStatus()
+ * @method bool   getReload()
  * @method DateTime getCreatedAt()
  * @method DateTime getUpdatedAt()
  * @method bool getLoadFallbackOptions()
@@ -26,6 +27,7 @@
  * @method Diglin_Ricento_Model_Products_Listing_Item setSalesOptionsId(int $salesOptionsId)
  * @method Diglin_Ricento_Model_Products_Listing_Item setRuleId(int $ruleIid)
  * @method Diglin_Ricento_Model_Products_Listing_Item setStatus(string $status)
+ * @method Diglin_Ricento_Model_Products_Listing_Item setReload(bool $reload)
  * @method Diglin_Ricento_Model_Products_Listing_Item setCreatedAt(DateTime $createdAt)
  * @method Diglin_Ricento_Model_Products_Listing_Item setUpdatedAt(DateTime $updatedAt)
  * @method Diglin_Ricento_Model_Products_Listing_Item setLoadFallbackOptions(bool $loadFallbackOptions)
@@ -103,8 +105,19 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
      */
     public function getProduct()
     {
-        return Mage::getSingleton('diglin_ricento/products_listing_item_product')
-            ->setProductListingItemId($this->getId())
+        $reload = $this->getReload();
+
+        $itemProduct = Mage::getSingleton('diglin_ricento/products_listing_item_product');
+
+        if ($reload) {
+            // To use with precaution - it's a bottleneck
+            $itemProduct->reset();
+            $this->setReload(false);
+        }
+
+        return $itemProduct
+            ->setProductListingItem($this)
+            ->setStoreId($this->getStoreId())
             ->setProductId($this->getProductId());
     }
 
