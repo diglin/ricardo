@@ -8,6 +8,12 @@
  * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
+
+/**
+ * Class Diglin_Ricento_Model_Products_Listing_Item_Product
+ *
+ * @todo add logic to add in cache some values depending on product id and store id
+ */
 class Diglin_Ricento_Model_Products_Listing_Item_Product
 {
     /**
@@ -31,14 +37,15 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     protected $_productListingItemId = null;
 
     /**
+     * @var Diglin_Ricento_Model_Products_Listing_Item
+     */
+    protected $_productListingItem = null;
+
+    /**
      * @var array
      */
     protected $_associatedProducts = array();
 
-    /**
-     * @var Diglin_Ricento_Model_Products_Listing_Item
-     */
-    protected $_productListingItem = null;
 
     public function _construct($productListingItemId = null)
     {
@@ -59,8 +66,6 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
         $this->_model = null;
         $this->_productListingItemId = null;
         $this->_associatedProducts = null;
-        $this->_productId = null;
-        $this->_storeId = null;
         return $this;
     }
 
@@ -90,8 +95,8 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     {
         $this->_model = $productModel;
 
-        $this->setProductId($this->_model->getId());
-        $this->setStoreId($this->_model->getStoreId());
+        $this->setProductId($productModel->getId());
+        $this->setStoreId($productModel->getStoreId());
 
         return $this;
     }
@@ -137,7 +142,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
         $select = $readConnection
             ->select()
-            ->from($readConnection->getTableName('catalog_product_entity'), 'type_id')
+            ->from(Mage::getSingleton('core/resource')->getTableName('catalog_product_entity'), 'type_id')
             ->where('`entity_id` = ?', $productId);
 
         return $readConnection->fetchOne($select);
@@ -371,7 +376,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     public function getStockItem()
     {
         if (is_null($this->_model) && $this->_productId < 0) {
-            throw new Exception('Load instance first');
+            throw new Exception('Product Model must be instanciated first');
         }
 
         $productId = !is_null($this->_model) ? $this->_model->getId() : $this->_productId;
@@ -379,12 +384,17 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
         return Mage::getModel('cataloginventory/stock_item')->loadByProduct($productId);
     }
 
+    protected function _getCoreResource()
+    {
+        return Mage::getSingleton('core/resource');
+    }
+
     /**
      * @return Varien_Db_Adapter_Interface
      */
     protected function _getReadConnection()
     {
-        return Mage::getResourceModel('core/config')->getReadConnection();
+        return $this->_getCoreResource()->getReadConnection();
     }
 
     /**
@@ -396,13 +406,12 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     protected function _getProductName($field, $productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
     {
         $readConnection = $this->_getReadConnection();
-        $coreResource = Mage::getSingleton('core/resource');
 
         $select = $readConnection
             ->select()
-            ->from(array('cpev'=> $coreResource->getTableName('catalog_product_entity_varchar')), array($field => 'value'))
+            ->from(array('cpev'=> $this->_getCoreResource()->getTableName('catalog_product_entity_varchar')), array($field => 'value'))
             ->join(
-                array('ea' => $coreResource->getTableName('eav_attribute')),
+                array('ea' => $this->_getCoreResource()->getTableName('eav_attribute')),
                 '`cpev`.`attribute_id` = `ea`.`attribute_id` AND `ea`.`attribute_code` = \''. $field .'\'',
                 array()
             )
@@ -420,13 +429,12 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     protected function _getProductDescription($field, $productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
     {
         $readConnection = $this->_getReadConnection();
-        $coreResource = Mage::getSingleton('core/resource');
 
         $select = $readConnection
             ->select()
-            ->from(array('cpet'=> $coreResource->getTableName('catalog_product_entity_text')), array($field => 'value'))
+            ->from(array('cpet'=> $this->_getCoreResource()->getTableName('catalog_product_entity_text')), array($field => 'value'))
             ->join(
-                array('ea' => $coreResource->getTableName('eav_attribute')),
+                array('ea' => $this->_getCoreResource()->getTableName('eav_attribute')),
                 '`cpet`.`attribute_id` = `ea`.`attribute_id` AND `ea`.`attribute_code` = \''. $field .'\'',
                 array()
             )
@@ -461,28 +469,24 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      * @param $field
      * @return string
      */
-    protected function _getSimpleProductBasePrice($field)
+    protected function _getSimpleProductBasePrice($field = null)
     {
         if (is_null($field)) {
             $field = 'price';
         }
 
-        $productId = (int) $this->getProductId();
-        $storeId = (int) $this->getStoreId();
-
         $readConnection = $this->_getReadConnection();
-        $coreResource = Mage::getSingleton('core/resource');
 
         $select = $readConnection
             ->select()
-            ->from(array('cped'=> $coreResource->getTableName('catalog_product_entity_decimal')), array($field => 'value'))
+            ->from(array('cped'=> $this->_getCoreResource()->getTableName('catalog_product_entity_decimal')), array($field => 'value'))
             ->join(
-                array('ea' => $coreResource->getTableName('eav_attribute')),
+                array('ea' => $this->_getCoreResource()->getTableName('eav_attribute')),
                 '`cped`.`attribute_id` = `ea`.`attribute_id` AND `ea`.`attribute_code` = \''. $field .'\'',
                 array()
             )
-            ->where('`cped`.`entity_id` = ?', $productId)
-            ->where('`cped`.`store_id` = ?', $storeId);
+            ->where('`cped`.`entity_id` = ?', (int) $this->getProductId())
+            ->where('`cped`.`store_id` = ?', (int) $this->getStoreId());
 
         return $readConnection->fetchOne($select);
     }
