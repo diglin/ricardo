@@ -37,39 +37,47 @@ class Diglin_Ricento_Model_Cron
         try {
             foreach ($jobsCollection->getItems() as $job) {
 
-                $start = microtime(true);
-
-                $message = '';
                 $jobHasError = false;
                 $jobHasWarning = false;
 
-                // Set job to running to prevent conflict of multiple instance
+                // Set job to running to prevent conflicts of multiple instance
 
                 $job
                     ->setStartedAt(Mage::getSingleton('core/date')->gmtDate())
                     ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_RUNNING)
                     ->save();
 
-                $jobListing = Mage::getModel('diglin_ricento/sync_job_listing')->load($job->getId(), 'job_id');
+                // Cleanup in case of running the same job
+                $listingLog->cleanSpecificJob($job->getId());
 
-                if ($jobListing->getProductsListingId()) {
+                $jobListing = Mage::getModel('diglin_ricento/sync_job_listing')->load($job->getId(), 'job_id');
+                $productsListingId = $jobListing->getProductsListingId();
+
+                if ($productsListingId) {
+
+                    $start = microtime(true);
+
+                    // Detect which stores to use for each language defined at products listing level
+
+                    //$stores = $this->_getStoresListing((int) $productsListingId);
+                    $stores = array(Mage_Core_Model_App::ADMIN_STORE_ID);
 
                     // Get all pending products listing item to be checked
 
                     $itemCollection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
                     $itemCollection
                         ->addFieldToFilter('status', array('in' => Diglin_Ricento_Helper_Data::STATUS_PENDING))
-                        ->addFieldToFilter('products_listing_id', array('eq' => $jobListing->getProductsListingId()))
+                        ->addFieldToFilter('products_listing_id', array('eq' => $productsListingId))
                         ->setOrder('item_id', 'DESC');
 
                     $totalProceed = $jobListing->getTotalProceed();
 
                     foreach ($itemCollection->getItems() as $item) {
 
-                        // Check if the items are valid
+                        // Check if the items are valid for each store/language
 
                         $itemValidator = new Diglin_Ricento_Model_Validate_Products_Item();
-                        $itemValidator->isValid($item);
+                        $itemValidator->isValid($item, $stores);
 
                         $status = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                         if (count($itemValidator->getErrors())) {
@@ -90,18 +98,24 @@ class Diglin_Ricento_Model_Cron
                         // Save item information and eventual error messages
 
                         $listingLog->saveLog(array(
+                            'job_id' => $job->getId(),
                             'product_title' => $item->getProductTitle(),
-                            'products_listing_id' => $jobListing->getProductsListingId(),
+                            'products_listing_id' => $productsListingId,
                             'product_id' => $item->getProductId(),
                             'message' => Mage::helper('core')->jsonEncode($itemValidator->getMessages()),
                             'log_status' => $status,
                             'log_type' => Diglin_Ricento_Model_Products_Listing_Log::LOG_TYPE_CHECK
                         ));
                     }
+
+                    $end = microtime(true);
+                    Mage::log('Time to check the job id ' . $job->getId() . ' in ' . ($end-$start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+
                 }
 
-                $listingLogUrl = Mage::helper('adminhtml')->getUrl('ricento/log/listing', array('id' => $jobListing->getProductsListingId()));
-                $listinggUrl = Mage::helper('adminhtml')->getUrl('ricento/products_listing/edit', array('id' => $jobListing->getProductsListingId()));
+
+                $listingLogUrl = Mage::helper('adminhtml')->getUrl('ricento/log/listing', array('id' => $productsListingId));
+                $listinggUrl = Mage::helper('adminhtml')->getUrl('ricento/products_listing/edit', array('id' => $productsListingId));
 
                 if ($jobHasError) {
                     $typeError = $helper->__('errors');
@@ -135,17 +149,17 @@ class Diglin_Ricento_Model_Cron
 
                     $jobListingList = Mage::getModel('diglin_ricento/sync_job_listing');
                     $jobListingList
-                        ->setProductsListingId($jobListing->getProductsListingId())
+                        ->setProductsListingId($productsListingId)
                         ->setTotalCount($jobListing->getTotalCount())
                         ->setTotalProceed(0)
                         ->setJobId($jobList->getId())
                         ->save();
                 }
 
-                $end = microtime(true);
-                Mage::log('Time to check the job id ' . $job->getId() . ' in ' . ($end-$start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+
             }
         } catch (Exception $e) {
+            Mage::logException($e);
             if (isset($job) && $job instanceof Diglin_Ricento_Model_Sync_Job && $job->getId()) {
                 $job
                     ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
@@ -154,6 +168,41 @@ class Diglin_Ricento_Model_Cron
             throw $e;
         }
         return $this;
+    }
+
+    /**
+     * Get the store list of a product listing o
+     *
+     * @param int $productsListingId
+     * @return array
+     */
+    protected function _getStoresListing($productsListingId)
+    {
+        $productsListing = Mage::getModel('diglin_ricento/products_listing')->load($productsListingId);
+
+        $stores = array();
+        $defaultLang = $productsListing->getDefaultLanguage();
+        $publishLang = $productsListing->getPublishLanguages();
+        if ($publishLang != Diglin_Ricento_Helper_Data::LANG_ALL) {
+            $method = 'getLang'.ucwords($publishLang).'StoreId';
+            $stores[] = $productsListing->$method();
+        } else {
+            $supportedLang = Mage::helper('diglin_ricento')->getSupportedLang();
+
+            // We set default lang at first position
+            $method = 'getLang'.ucwords($defaultLang).'StoreId';
+            $stores[] = $productsListing->$method();
+
+            foreach ($supportedLang as $lang) {
+                if (strtolower($lang) == strtolower($defaultLang)) {
+                    continue;
+                }
+                $method = 'getLang'.ucwords($lang).'StoreId';
+                $stores[] = $productsListing->$method();
+            }
+        }
+
+        return $stores;
     }
 
     /**

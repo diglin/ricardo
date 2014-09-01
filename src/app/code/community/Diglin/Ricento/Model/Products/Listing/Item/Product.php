@@ -13,7 +13,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     /**
      * @var int
      */
-    private $_productId = 0;
+    private $_productId;
 
     /**
      * @var int
@@ -49,6 +49,19 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
                 ->load($productListingItemId)
                 ->setLoadFallbackOptions(true));
         }
+    }
+
+    /**
+     * @return $this
+     */
+    public function reset()
+    {
+        $this->_model = null;
+        $this->_productListingItemId = null;
+        $this->_associatedProducts = null;
+        $this->_productId = null;
+        $this->_storeId = null;
+        return $this;
     }
 
     /**
@@ -537,7 +550,9 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
                         }
                     }
 
+                    if (isset($optionPrices[$i])) {
                     $finalMinPrice += min($optionPrices[$i]);
+                    }
                     $i++;
                 }
             }

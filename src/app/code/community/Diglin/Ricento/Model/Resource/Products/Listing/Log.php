@@ -28,7 +28,20 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Log extends Mage_Core_Model
         $writeConection = $this->_getWriteAdapter();
 
         return $writeConection->insert(
-            $this->getTable('diglin_ricento/listing_log'),
+            $this->getMainTable(),
             $bind);
+    }
+
+    /**
+     * @param int $jobId
+     * @return int
+     */
+    public function cleanSpecificJob($jobId)
+    {
+        $writeConection = $this->_getWriteAdapter();
+        return $writeConection->delete(
+            $this->getMainTable(),
+            array('job_id = ?' => $jobId)
+        );
     }
 }
