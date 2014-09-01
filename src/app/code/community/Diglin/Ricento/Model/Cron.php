@@ -7,6 +7,10 @@
  * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
+
+/**
+ * Class Diglin_Ricento_Model_Cron
+ */
 class Diglin_Ricento_Model_Cron
 {
     public function process()
@@ -59,8 +63,7 @@ class Diglin_Ricento_Model_Cron
 
                     // Detect which stores to use for each language defined at products listing level
 
-                    //$stores = $this->_getStoresListing((int) $productsListingId);
-                    $stores = array(Mage_Core_Model_App::ADMIN_STORE_ID);
+                    $stores = $helper->getStoresFromListing((int) $productsListingId);
 
                     // Get all pending products listing item to be checked
 
@@ -75,6 +78,8 @@ class Diglin_Ricento_Model_Cron
                     foreach ($itemCollection->getItems() as $item) {
 
                         // Check if the items are valid for each store/language
+
+                        // Profiler ~ 56ms / product
 
                         $itemValidator = new Diglin_Ricento_Model_Validate_Products_Item();
                         $itemValidator->isValid($item, $stores);
@@ -110,9 +115,7 @@ class Diglin_Ricento_Model_Cron
 
                     $end = microtime(true);
                     Mage::log('Time to check the job id ' . $job->getId() . ' in ' . ($end-$start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
-
                 }
-
 
                 $listingLogUrl = Mage::helper('adminhtml')->getUrl('ricento/log/listing', array('id' => $productsListingId));
                 $listinggUrl = Mage::helper('adminhtml')->getUrl('ricento/products_listing/edit', array('id' => $productsListingId));
@@ -168,41 +171,6 @@ class Diglin_Ricento_Model_Cron
             throw $e;
         }
         return $this;
-    }
-
-    /**
-     * Get the store list of a product listing o
-     *
-     * @param int $productsListingId
-     * @return array
-     */
-    protected function _getStoresListing($productsListingId)
-    {
-        $productsListing = Mage::getModel('diglin_ricento/products_listing')->load($productsListingId);
-
-        $stores = array();
-        $defaultLang = $productsListing->getDefaultLanguage();
-        $publishLang = $productsListing->getPublishLanguages();
-        if ($publishLang != Diglin_Ricento_Helper_Data::LANG_ALL) {
-            $method = 'getLang'.ucwords($publishLang).'StoreId';
-            $stores[] = $productsListing->$method();
-        } else {
-            $supportedLang = Mage::helper('diglin_ricento')->getSupportedLang();
-
-            // We set default lang at first position
-            $method = 'getLang'.ucwords($defaultLang).'StoreId';
-            $stores[] = $productsListing->$method();
-
-            foreach ($supportedLang as $lang) {
-                if (strtolower($lang) == strtolower($defaultLang)) {
-                    continue;
-                }
-                $method = 'getLang'.ucwords($lang).'StoreId';
-                $stores[] = $productsListing->$method();
-            }
-        }
-
-        return $stores;
     }
 
     /**
