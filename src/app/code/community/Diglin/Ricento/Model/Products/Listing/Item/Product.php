@@ -150,7 +150,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     public function getTypeInstance($singleton = false)
     {
         $typeInstance = $this->getMagentoProduct()->getTypeInstance($singleton);
-        $typeInstance->setStoreFilter($this->getStoreId());
+        $typeInstance->setStoreFilter( (int) $this->getStoreId(), $this->getMagentoProduct());
 
         return $typeInstance;
     }
