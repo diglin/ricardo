@@ -428,4 +428,46 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 
         return $price;
     }
+
+
+
+    /**
+     * Get the store list of a product listing based on supported language
+     *
+     * @param int|Diglin_Ricento_Model_Products_Listing $productsListing
+     * @return array
+     */
+    public function getStoresFromListing($productsListing)
+    {
+        if (is_numeric($productsListing)) {
+            $productsListing = Mage::getModel('diglin_ricento/products_listing')->load($productsListing);
+        } else if (!$productsListing instanceof Diglin_Ricento_Model_Products_Listing) {
+            return array();
+        }
+
+        $stores = array();
+        $defaultLang = $productsListing->getDefaultLanguage();
+        $publishLang = $productsListing->getPublishLanguages();
+
+        if ($publishLang != Diglin_Ricento_Helper_Data::LANG_ALL) {
+            $method = 'getLang'.ucwords($publishLang).'StoreId';
+            $stores[] = $productsListing->$method();
+        } else {
+            $supportedLang = Mage::helper('diglin_ricento')->getSupportedLang();
+
+            // We set default lang at first position
+            $method = 'getLang'.ucwords($defaultLang).'StoreId';
+            $stores[] = $productsListing->$method();
+
+            foreach ($supportedLang as $lang) {
+                if (strtolower($lang) == strtolower($defaultLang)) {
+                    continue;
+                }
+                $method = 'getLang'.ucwords($lang).'StoreId';
+                $stores[] = $productsListing->$method();
+            }
+        }
+
+        return $stores;
+    }
 }
