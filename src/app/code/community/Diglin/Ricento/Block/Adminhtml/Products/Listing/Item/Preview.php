@@ -276,7 +276,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
 
         foreach ($warranties as $warranty => $warrantyText) {
             if ($currentWarranty == $warranty) {
-                if ($warranty == \Diglin\Ricardo\Enums\Warranty::FOLLOW_CONDITION) {
+                if ($warranty == \Diglin\Ricardo\Enums\Article\Warranty::FOLLOW_CONDITION) {
                     $warrantyText = $this->getSalesOptions()->getProductWarrantyCondition();
                 }
                 break;

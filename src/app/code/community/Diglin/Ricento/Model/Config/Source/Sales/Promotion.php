@@ -38,7 +38,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Promotion extends Diglin_Ricento_
             $this->_promotions = array(0 => $helper->__('No package'));
 
             foreach ($promotions as $promotion) {
-                if ($promotion['GroupId'] == \Diglin\Ricardo\Enums\PromotionCode::PREMIUMCATEGORY) {
+                if ($promotion['GroupId'] == \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMCATEGORY) {
                     $this->_promotions[$promotion['PromotionId']] = $helper->__($promotion['PromotionLabel']) . ' - ' . $store->formatPrice($promotion['PromotionFee']);
                 }
             }

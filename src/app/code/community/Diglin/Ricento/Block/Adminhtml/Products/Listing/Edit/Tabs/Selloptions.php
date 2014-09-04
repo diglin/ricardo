@@ -343,10 +343,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             $this->getForm()->getElement('product_warranty_condition')->setRequired(false);
         }
 
-        if ($this->getSalesOptions()->getPromotionStartPage() == \Diglin\Ricardo\Enums\PromotionCode::PREMIUMHOMEPAGE) {
+        if ($this->getSalesOptions()->getPromotionStartPage() == \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMHOMEPAGE) {
             $this->getForm()->getElement('promotion_start_page')->setChecked(true);
         }
-        $derivedValues['promotion_start_page'] = \Diglin\Ricardo\Enums\PromotionCode::PREMIUMHOMEPAGE;
+        $derivedValues['promotion_start_page'] = \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMHOMEPAGE;
 
 
         $this->getForm()->addValues($derivedValues);
@@ -449,7 +449,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $helper->startCurrencyEmulation();
 
         foreach ($promotions as $promotion) {
-            if ($promotion['PromotionId'] == \Diglin\Ricardo\Enums\PromotionCode::PREMIUMHOMEPAGE) {
+            if ($promotion['PromotionId'] == \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMHOMEPAGE) {
                 $price = $promotion['PromotionFee'];
                 break;
             }

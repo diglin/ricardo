@@ -89,7 +89,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
 //            $data['sales_options']['product_condition'] = null;
 //        }
         if (isset($data['sales_options']['product_warranty'])) {
-            if ($data['sales_options']['product_warranty'] == \Diglin\Ricardo\Enums\Warranty::NONE) {
+            if ($data['sales_options']['product_warranty'] == \Diglin\Ricardo\Enums\Article\Warranty::NONE) {
                 unset($data['sales_options']['product_warranty_condition']);
             } else {
                 $data['sales_options']['product_warranty_condition'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_condition']), 0, 5000);
