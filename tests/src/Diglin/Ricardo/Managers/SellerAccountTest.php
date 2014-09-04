@@ -10,8 +10,8 @@
 
 namespace Diglin\Ricardo\Managers;
 
-use Diglin\Ricardo\Enums\ArticlesTypes;
-use Diglin\Ricardo\Enums\CloseStatus;
+use Diglin\Ricardo\Enums\Article\ArticlesTypes;
+use Diglin\Ricardo\Enums\CloseListStatus;
 
 class SellerAccountTest extends TestAbstract
 {
@@ -97,7 +97,6 @@ class SellerAccountTest extends TestAbstract
     {
         $result = $this->_sellerAccountManager->getPaymentOptions();
 
-        echo $this->getLastApiDebug();
-        echo 'Get Seller Packages: ' . print_r($result, true);
+        parent::outputContent($result, 'GetPaymentOptions:', true);
     }
 }

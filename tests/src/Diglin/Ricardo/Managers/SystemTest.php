@@ -9,7 +9,7 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-use Diglin\Ricardo\Enums\PromotionCode;
+use Diglin\Ricardo\Enums\System\CategoryBrandingFilter;
 
 class SystemTest extends TestAbstract
 {
@@ -38,6 +38,8 @@ class SystemTest extends TestAbstract
 
         $this->assertGreaterThanOrEqual(1, count($result), 'Article Conditions are empty');
         $this->assertArrayHasKey('ArticleConditionText', $result[0], 'Data returned for the article conditions is not correct');
+
+        $this->outputContent($result, 'Article Conditions: ');
     }
 
     public function testGetAvailabilities()
@@ -53,7 +55,7 @@ class SystemTest extends TestAbstract
     public function testGetCategories()
     {
         // Set category_branding_filter = 0, you will get all categories, be aware it raises the memory to 24MB
-        $result = $this->_systemManager->getCategories(2, true); //@todo replace 2 by an enum if exist on ricardo api side
+        $result = $this->_systemManager->getCategories(CategoryBrandingFilter::ONLYBRANDING, true);
 
         $numberOfCategories = count($result);
 
@@ -217,7 +219,7 @@ class SystemTest extends TestAbstract
     public function testGetPromotions($categoryId)
     {
         $result = $this->_systemManager->getPromotions(
-            \Diglin\Ricardo\Core\Helper::getJsonDate(), \Diglin\Ricardo\Enums\CategoryArticleType::ALL, $categoryId, 1
+            \Diglin\Ricardo\Core\Helper::getJsonDate(), \Diglin\Ricardo\Enums\System\CategoryArticleType::ALL, $categoryId, 1
         );
 
         $this->assertArrayHasKey('GroupId', $result[0], 'Promotions: GroupId is missing');
@@ -256,5 +258,7 @@ class SystemTest extends TestAbstract
         $result = $this->_systemManager->getWarranties();
         $this->assertArrayHasKey('WarrantyConditionText', $result[0], 'Warranties: WarrantyConditionText is missing');
         $this->assertArrayHasKey('WarrantyId', $result[0], 'Warranties: WarrantyId is missing');
+
+        self::outputContent($result, 'Get Warranties: ');
     }
 }

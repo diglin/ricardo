@@ -9,7 +9,7 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-use Diglin\Ricardo\Enums\PromotionCode;
+use Diglin\Ricardo\Enums\Article\PromotionCode;
 
 /**
  * Class System

@@ -32,4 +32,16 @@ abstract class AbstractEnums
         }
         return false;
     }
+
+    /**
+     * @return array
+     */
+    public static function getValues()
+    {
+        $values = array();
+        foreach (static::getEnums() as $enum) {
+            $values[] = $enum['value'];
+        }
+        return $values;
+    }
 }

@@ -7,9 +7,14 @@
  * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
+namespace Diglin\Ricardo\Enums\Article;
 
-namespace Diglin\Ricardo\Enums;
+use Diglin\Ricardo\Enums\AbstractEnums;
 
+/**
+ * Class PromotionCode
+ * @package Diglin\Ricardo\Enums\Article
+ */
 class PromotionCode extends AbstractEnums
 {
     // The subtitle

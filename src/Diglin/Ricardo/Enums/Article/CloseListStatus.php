@@ -9,7 +9,13 @@
  */
 namespace Diglin\Ricardo\Enums;
 
-class CloseStatus extends AbstractEnums
+use Diglin\Ricardo\Enums\AbstractEnums;
+
+/**
+ * Class CloseListStatus
+ * @package Diglin\Ricardo\Enums
+ */
+class CloseListStatus extends AbstractEnums
 {
     /* Ricardo API Enum Close Status */
 
@@ -22,6 +28,9 @@ class CloseStatus extends AbstractEnums
     // Closed by customer
     const CLOSED_BY_CUSTOMER = 2;
 
+    // Archived
+    const ARCHIVED = 3;
+
     /**
      * @return array
      */
@@ -30,7 +39,8 @@ class CloseStatus extends AbstractEnums
         return array(
             array('label' => 'OPEN', 'value' => self::OPEN),
             array('label' => 'CLOSED', 'value' => self::CLOSED),
-            array('label' => 'CLOSED_BY_CUSTOMER', 'value' => self::CLOSED_BY_CUSTOMER)
+            array('label' => 'CLOSED_BY_CUSTOMER', 'value' => self::CLOSED_BY_CUSTOMER),
+            array('label' => 'ARCHIVED', 'value' => self::ARCHIVED),
         );
     }
 }

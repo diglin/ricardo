@@ -7,8 +7,14 @@
  * @package     Diglin_Ricardo
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
-namespace Diglin\Ricardo\Enums;
+namespace Diglin\Ricardo\Enums\System;
 
+use Diglin\Ricardo\Enums\AbstractEnums;
+
+/**
+ * Class CategoryArticleType
+ * @package Diglin\Ricardo\Enums
+ */
 class CategoryArticleType extends AbstractEnums
 {
     /* Ricardo API Enum category article type */

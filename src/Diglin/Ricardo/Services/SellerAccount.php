@@ -10,8 +10,8 @@
 namespace Diglin\Ricardo\Services;
 
 use Diglin\Ricardo\Core\Helper;
-use Diglin\Ricardo\Enums\ArticlesTypes;
-use Diglin\Ricardo\Enums\CloseStatus;
+use Diglin\Ricardo\Enums\Article\ArticlesTypes;
+use Diglin\Ricardo\Enums\CloseListStatus;
 
 /**
  * Class SellerAccount
@@ -181,7 +181,7 @@ class SellerAccount extends ServiceAbstract
     public function getArticles()
     {
         $articleTypes = ArticlesTypes::ALL;
-        $closeStatus = CloseStatus::CLOSED;
+        $closeStatus = CloseListStatus::CLOSED;
         $isPlannedArticles = true;
         $lastModificationDate = Helper::getJsonDate();
 

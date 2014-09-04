@@ -579,18 +579,6 @@ class Security extends ManagerAbstract
     }
 
     /**
-     * Set the validation url, useful in case of data coming from saved DB
-     *
-     * @param null $validationUrl
-     * @return $this
-     */
-//    public function setValidationUrl($validationUrl)
-//    {
-//        $this->_validationUrl = $validationUrl;
-//        return $this;
-//    }
-
-    /**
      * Get the validation Url
      *
      * @param bool $refresh

@@ -56,11 +56,21 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
      * Get the last API Curl request for debug purpose
      *
      * @param bool $flush
+     * @param bool $return
+     * @param bool $log
      * @return mixed
      */
-    protected function getLastApiDebug($flush = true)
+    protected function getLastApiDebug($flush = true, $return = true, $log = false)
     {
-        return print_r($this->getServiceManager()->getApi()->getLastDebug($flush), true);
+        $content = print_r($this->getServiceManager()->getApi()->getLastDebug($flush), true);
+
+        if ($log) {
+            $this->log($content);
+        }
+
+        if ($return) {
+            return $content;
+        }
     }
 
     /**
@@ -79,5 +89,19 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             echo $this->getLastApiDebug();
         }
         return;
+    }
+
+    protected function log($content)
+    {
+        $filename = __DIR__ . '/../../../../log/api.log';
+        $handle = fopen($filename, 'a+');
+
+        $time = date('Y-m-d H:i:s') . "\n";
+        $content = $time . $content;
+
+        fwrite($handle, $content);
+        fclose($handle);
+
+        return $this;
     }
 }
