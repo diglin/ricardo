@@ -83,16 +83,20 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
                 $data['sales_options']['schedule_period_days'] = 0;
             }
         }
-//        if (empty($data['sales_options']['product_condition_use_attribute'])) {
-//            $data['sales_options']['product_condition_source_attribute_code'] = null;
-//        } else {
-//            $data['sales_options']['product_condition'] = null;
-//        }
+
+        if (empty($data['sales_options']['product_condition_use_attribute'])) {
+            $data['sales_options']['product_condition_source_attribute_code'] = null;
+        } else {
+            $data['sales_options']['product_condition_source_attribute_code'] = 'ricardo_condition';
+        }
+
         if (isset($data['sales_options']['product_warranty'])) {
             if ($data['sales_options']['product_warranty'] == \Diglin\Ricardo\Enums\Article\Warranty::NONE) {
-                unset($data['sales_options']['product_warranty_condition']);
+                unset($data['sales_options']['product_warranty_description_de']);
+                unset($data['sales_options']['product_warranty_description_fr']);
             } else {
-                $data['sales_options']['product_warranty_condition'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_condition']), 0, 5000);
+                $data['sales_options']['product_warranty_description_de'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_description_de']), 0, 5000);
+                $data['sales_options']['product_warranty_description_fr'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_description_fr']), 0, 5000);
             }
         }
         if (!isset($data['sales_options']['promotion_start_page']) || empty($data['sales_options']['promotion_start_page'])) {
@@ -116,22 +120,27 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
                 }
             }
             if ($initDescription) {
-                $data['rules']['payment_description'] = null;
+                $data['rules']['payment_description_de'] = null;
+                $data['rules']['payment_description_fr'] = null;
             }
         }
 
-        if (!empty($data['rules']['payment_description'])) {
-            $data['rules']['payment_description'] = mb_substr(Mage::helper('core')->escapeHtml($data['rules']['payment_description']), 0, 5000);
+        if (!empty($data['rules']['payment_description_de'])) {
+            $data['rules']['payment_description_de'] = mb_substr(Mage::helper('core')->escapeHtml($data['rules']['payment_description_de']), 0, 5000);
+        }
+        if (!empty($data['rules']['payment_description_fr'])) {
+            $data['rules']['payment_description_fr'] = mb_substr(Mage::helper('core')->escapeHtml($data['rules']['payment_description_fr']), 0, 5000);
         }
         if (isset($data['rules']['shipping_method']) && (int) $data['rules']['shipping_method'] !== 0) {
-            $data['rules']['shipping_description'] = null;
+            $data['rules']['shipping_description_de'] = null;
+            $data['rules']['shipping_description_fr'] = null;
         }
-        if (!empty($data['rules']['shipping_description'])) {
-            $data['rules']['shipping_description'] = mb_substr(Mage::helper('core')->escapeHtml($data['rules']['shipping_description']), 0, 5000);
+        if (!empty($data['rules']['shipping_description_de'])) {
+            $data['rules']['shipping_description_de'] = mb_substr(Mage::helper('core')->escapeHtml($data['rules']['shipping_description_de']), 0, 5000);
         }
-//        if (!empty($data['rules']['free_shipping'])) {
-//            $data['rules']['shipping_price'] = 0;
-//        }
+        if (!empty($data['rules']['shipping_description_fr'])) {
+            $data['rules']['shipping_description_fr'] = mb_substr(Mage::helper('core')->escapeHtml($data['rules']['shipping_description_fr']), 0, 5000);
+        }
 
         return $data;
     }

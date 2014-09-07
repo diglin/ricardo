@@ -12,18 +12,22 @@
  * Class Diglin_Ricento_Model_Rule
  *
  * @method Diglin_Ricento_Model_Rule setShippingMethod(string $shippingMethod)
- * @method Diglin_Ricento_Model_Rule setShippingDescription(string $shippingDescription)
+ * @method Diglin_Ricento_Model_Rule setShippingDescriptionDe(string $shippingDescriptionDe)
+ * @method Diglin_Ricento_Model_Rule setShippingDescriptionFr(string $shippingDescriptionFr)
  * @method Diglin_Ricento_Model_Rule setShippingPrice(string $shippingPrice)
  * @method Diglin_Ricento_Model_Rule setShippingAvailability(string $shippingAvailability)
  * @method Diglin_Ricento_Model_Rule setPaymentMethods(string $paymentMethods)
- * @method Diglin_Ricento_Model_Rule setPaymentDescription(string $paymentDescription)
+ * @method Diglin_Ricento_Model_Rule setPaymentDescriptionDe(string $paymentDescriptionDe)
+ * @method Diglin_Ricento_Model_Rule setPaymentDescriptionFr(string $paymentDescriptionFr)
  * @method Diglin_Ricento_Model_Rule setShippingPackage(int $shippingPackage)
  * @method Diglin_Ricento_Model_Rule setShippingCumulativeFee(int $shippingCumulativeFee)
  * @method string getShippingMethod()
- * @method string getShippingDescription()
+ * @method string getShippingDescriptionDe()
+ * @method string getShippingDescriptionFr()
  * @method float getShippingPrice()
  * @method string getShippingAvailaibility()
- * @method string getPaymentDescription()
+ * @method string getPaymentDescriptionDe()
+ * @method string getPaymentDescriptionFr()
  * @method string[] getPaymentMethods()
  * @method string getShippingPackage()
  * @method int getShippingCumulativeFee()
@@ -108,5 +112,40 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
             }
         }
         return $this;
+    }
+
+    /**
+     * @param string $lang
+     * @return string
+     */
+    public function getShippingDescription($lang = Diglin_Ricento_Helper_Data::DEFAULT_SUPPORTED_LANG)
+    {
+        return $this->_getDescriptionLangMethod($lang, 'getShippingDescription');
+    }
+
+    /**
+     * @param string $lang
+     * @return string
+     */
+    public function getPaymentDescription($lang = Diglin_Ricento_Helper_Data::DEFAULT_SUPPORTED_LANG)
+    {
+        return $this->_getDescriptionLangMethod($lang, 'getPaymentDescription');
+    }
+
+    /**
+     * @param string $lang
+     * @param string $method
+     * @return string
+     */
+    protected function _getDescriptionLangMethod($lang = Diglin_Ricento_Helper_Data::DEFAULT_SUPPORTED_LANG, $method)
+    {
+        $supportedLang = Mage::helper('diglin_ricento')->getSupportedLang();
+        $lang = strtolower($lang);
+
+        if (in_array($lang, $supportedLang)) {
+            $method = $method . ucwords($lang);
+            return $this->$method();
+        }
+        return '';
     }
 }

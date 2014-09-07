@@ -29,7 +29,8 @@
  * @method int      getPromotionSpace()
  * @method int      getPromotionStartPage()
  * @method int      getProductWarranty()
- * @method string   getProductWarrantyCondition()
+ * @method string   getProductWarrantyDescriptionDe()
+ * @method string   getProductWarrantyDescriptionFr()
  * @method string   getProductCondition()
  * @method string   getProductConditionSourceAttributeCode()
  * @method string   getCreatedAt()
@@ -52,7 +53,8 @@
  * @method Diglin_Ricento_Model_Sales_Options setPromotionSpace(int $promotionSpace)
  * @method Diglin_Ricento_Model_Sales_Options setPromotionStartPage(int $promotionStartPage)
  * @method Diglin_Ricento_Model_Sales_Options setProductWarranty(int $warranty)
- * @method Diglin_Ricento_Model_Sales_Options setProductWarrantyCondtition(string $warrantyCondition)
+ * @method Diglin_Ricento_Model_Sales_Options setProductWarrantyDescriptionFr(string $warrantyDescriptionFr)
+ * @method Diglin_Ricento_Model_Sales_Options setProductWarrantyDescriptionDe(string $warrantyDescriptionDe)
  * @method Diglin_Ricento_Model_Sales_Options setProductCondition(string $productConditionSource)
  * @method Diglin_Ricento_Model_Sales_Options setProductConditionSourceAttributeCode(string $productConditionSourceAttributeCode)
  * @method Diglin_Ricento_Model_Sales_Options setCreatedAt(string $createdAt)
@@ -95,4 +97,29 @@ class Diglin_Ricento_Model_Sales_Options extends Mage_Core_Model_Abstract
         return $this;
     }
 
+    /**
+     * @param string $lang
+     * @return string
+     */
+    public function getProductWarrantyDescription($lang = Diglin_Ricento_Helper_Data::DEFAULT_SUPPORTED_LANG)
+    {
+        return $this->_getDescriptionLangMethod($lang, 'getProductWarrantyDescription');
+    }
+
+    /**
+     * @param string $lang
+     * @param string $method
+     * @return string
+     */
+    protected function _getDescriptionLangMethod($lang = Diglin_Ricento_Helper_Data::DEFAULT_SUPPORTED_LANG, $method)
+    {
+        $supportedLang = Mage::helper('diglin_ricento')->getSupportedLang();
+        $lang = strtolower($lang);
+
+        if (in_array($lang, $supportedLang)) {
+            $method = $method . ucwords($lang);
+            return $this->$method();
+        }
+        return '';
+    }
 }

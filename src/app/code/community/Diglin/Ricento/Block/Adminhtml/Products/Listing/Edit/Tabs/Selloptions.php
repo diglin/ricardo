@@ -236,13 +236,20 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[product_warranty]',
             'label' => $this->__('Warranty'),
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_warranty')->getAllOptions(),
-            'onchange' => 'salesOptionsForm.toggleWarrantyCondition(this);'
+            'onchange' => 'salesOptionsForm.toggleWarrantyDescription(this);'
         ));
-        $fieldsetCondition->addField('product_warranty_condition', 'textarea', array(
-            'name' => 'sales_options[product_warranty_condition]',
-            'label' => $this->__('Warranty condition'),
+        $fieldsetCondition->addField('product_warranty_description_de', 'textarea', array(
+            'name' => 'sales_options[product_warranty_description_de]',
+            'label' => $this->__('Warranty description German'),
             'class' => 'validate-length maximum-length-5000',
-            'note' => $this->__('Characters %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'product_warranty_condition')),
+            'note' => $this->__('Characters %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'product_warranty_description_de')),
+            'required' => true
+        ));
+        $fieldsetCondition->addField('product_warranty_description_fr', 'textarea', array(
+            'name' => 'sales_options[product_warranty_description_fr]',
+            'label' => $this->__('Warranty description French'),
+            'class' => 'validate-length maximum-length-5000',
+            'note' => $this->__('Characters %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'product_warranty_description_fr')),
             'required' => true
         ));
 
@@ -300,7 +307,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
     protected function _initFormValues()
     {
+        $supportedLangs = Mage::helper('diglin_ricento')->getSupportedLang();
+
         $this->getForm()->setValues($this->getSalesOptions());
+
         $derivedValues = array();
         $derivedValues['fix_currency'] = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
         $derivedValues['auction_currency'] = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
@@ -312,12 +322,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         } else {
             $derivedValues['ricardo_category_use_mapping'] = 0;
         }
-//        if ($this->getSalesOptions()->getProductConditionSourceAttributeCode()) {
-//            $derivedValues['product_condition_use_attribute'] = 1;
+        if ($this->getSalesOptions()->getProductConditionSourceAttributeCode()) {
+            $derivedValues['product_condition_use_attribute'] = 1;
 //            $this->getForm()->getElement('product_condition')->setDisabled(true);
 //            $this->getForm()->getElement('product_condition')->setRequired(false);
 //            $this->getForm()->getElement('product_condition_use_attribute')->setRequired(true);
-//        }
+        }
         if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
             $derivedValues['schedule_cycle_multiple_products_random'] = '1';
         }
@@ -337,11 +347,16 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 DateInterval::createFromDateString($this->getSalesOptions()->getSchedulePeriodDays() . ' day')
             )->format(Varien_Date::DATETIME_PHP_FORMAT);
         }
+
         if ($this->getSalesOptions()->getProductWarranty()) {
-            $derivedValues['product_warranty_condition'] = '';
-            $this->getForm()->getElement('product_warranty_condition')->setDisabled(true);
-            $this->getForm()->getElement('product_warranty_condition')->setRequired(false);
-        }
+            foreach ($supportedLangs as $supportedLang) {
+                $supportedLang = strtolower($supportedLang);
+                $derivedValues['product_warranty_description_' . $supportedLang] = '';
+                $this->getForm()->getElement('product_warranty_description_' . $supportedLang)
+                    ->setDisabled(true)
+                    ->setRequired(false);
+            }
+       }
 
         if ($this->getSalesOptions()->getPromotionStartPage() == \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMHOMEPAGE) {
             $this->getForm()->getElement('promotion_start_page')->setChecked(true);
@@ -440,7 +455,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     {
         $price = 0;
         $promotions = Mage::getSingleton('diglin_ricento/api_services_system')->getPromotions(
-            \Diglin\Ricardo\Core\Helper::getJsonDate(), \Diglin\Ricardo\Enums\CategoryArticleType::ALL, 1, 1
+            \Diglin\Ricardo\Core\Helper::getJsonDate(), \Diglin\Ricardo\Enums\System\CategoryArticleType::ALL, 1, 1
         );
 
         $helper = Mage::helper('diglin_ricento');

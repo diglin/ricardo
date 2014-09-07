@@ -55,10 +55,16 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'class'   => 'validate-payment-method-combination',
             'onchange' => 'rulesForm.togglePaymentDescription($(\'' . $htmlIdPrefix . 'payment_methods_'. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER .'\')); rulesForm.toggleStartPrice($(\'sales_options_sales_auction_start_price\'), \''. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD .'\');'
         ));
-        $fieldsetPayment->addField('payment_description', 'textarea', array(
-            'name'  => 'rules[payment_description]',
-            'label' => $this->__('Payment Description'),
-            'note' => $this->__('Characters: %s. Max. 5 000 characters. Payment information to display to customers. Will be send to ricardo only if you select the method "Other"', $this->getCountableText($htmlIdPrefix . 'payment_description')),
+        $fieldsetPayment->addField('payment_description_de', 'textarea', array(
+            'name'  => 'rules[payment_description_de]',
+            'label' => $this->__('Payment Description German'),
+            'note' => $this->__('Characters: %s. Max. 5 000 characters. Payment information to display to customers. Will be send to ricardo only if you select the method "Other"', $this->getCountableText($htmlIdPrefix . 'payment_description_de')),
+            'class' => 'validate-length maximum-length-5000'
+        ));
+        $fieldsetPayment->addField('payment_description_fr', 'textarea', array(
+            'name'  => 'rules[payment_description_fr]',
+            'label' => $this->__('Payment Description French'),
+            'note' => $this->__('Characters: %s. Max. 5 000 characters. Payment information to display to customers. Will be send to ricardo only if you select the method "Other"', $this->getCountableText($htmlIdPrefix . 'payment_description_fr')),
             'class' => 'validate-length maximum-length-5000'
         ));
 
@@ -91,17 +97,24 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'label'   => $this->__('Split Shipping fee'),
             'note'  => $this->__('If you select this option, the shipping fee will be calculate for each sold product. Let it empty if you don\'t such an option.')
         ));
-        $fieldsetShipping->addField('shipping_description', 'textarea', array(
-            'name'  => 'rules[shipping_description]',
-            'label' => $this->__('Shipping Description'),
-            'required' => true,
-            'class' => 'validate-length maximum-length-5000',
-            'note' => $this->__('Characters: %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'shipping_description'))
-        ));
         $fieldsetShipping->addField('shipping_availability', 'select', array(
             'name'    => 'rules[shipping_availability]',
             'label'   => $this->__('Shipping Availability'),
             'values'  => Mage::getSingleton('diglin_ricento/config_source_rules_shipping_availability')->getAllOptions()
+        ));
+        $fieldsetShipping->addField('shipping_description_de', 'textarea', array(
+            'name'  => 'rules[shipping_description_de]',
+            'label' => $this->__('Shipping Description German'),
+            'required' => true,
+            'class' => 'validate-length maximum-length-5000',
+            'note' => $this->__('Characters: %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'shipping_description_de'))
+        ));
+        $fieldsetShipping->addField('shipping_description_fr', 'textarea', array(
+            'name'  => 'rules[shipping_description_fr]',
+            'label' => $this->__('Shipping Description French'),
+            'required' => true,
+            'class' => 'validate-length maximum-length-5000',
+            'note' => $this->__('Characters: %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'shipping_description_fr'))
         ));
         $this->setForm($form);
 
@@ -110,6 +123,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
 
     protected function _initFormValues()
     {
+        $supportedLangs = Mage::helper('diglin_ricento')->getSupportedLang();
+
         $this->getForm()->setValues($this->getShippingPaymentRule());
 
 //        $shippingPrice = $this->getShippingPaymentRule()->getShippingPrice();
@@ -118,9 +133,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $this->getForm()->getElement('shipping_cumulative_fee')->setChecked((bool) $this->getShippingPaymentRule()->getShippingCumulativeFee());
 
         $disableDescription = (!$this->getShippingPaymentRule()->getShippingMethod()) ? false : true;
-        $this->getForm()->getElement('shipping_description')
-            ->setDisabled($disableDescription)
-            ->setRequired(!$disableDescription);
 
         $disablePaymentDescription = true;
         $methods = (array) $this->getShippingPaymentRule()->getPaymentMethods();
@@ -130,9 +142,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
                 break;
             }
         }
-        $this->getForm()->getElement('payment_description')
-            ->setDisabled($disablePaymentDescription)
-            ->setRequired(!$disablePaymentDescription);
+
+        foreach ($supportedLangs as $supportedLang) {
+            $supportedLang = strtolower($supportedLang);
+
+            $this->getForm()->getElement('shipping_description_' . $supportedLang)
+                ->setDisabled($disableDescription)
+                ->setRequired(!$disableDescription);
+            $this->getForm()->getElement('payment_description_' . $supportedLang)
+                ->setDisabled($disablePaymentDescription)
+                ->setRequired(!$disablePaymentDescription);
+        }
 
         $derivedValues = array();
         $derivedValues['shipping_cumulative_fee'] = 1;

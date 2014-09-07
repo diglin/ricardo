@@ -165,6 +165,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
         $helper = Mage::helper('diglin_ricento');
         $key = $this->_underscore(substr($method,3));
         $profilerName = $this->_profilerPrefix . strtoupper($key);
+
         $arguments = array(
             'service_adapter' => $this,
             'service_model' => $this->getServiceModel(),

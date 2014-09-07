@@ -124,15 +124,21 @@ $tablePaymentRule
     ->addColumn('payment_methods', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
         'nullable' => false
     ), 'Payment Methods')
-    ->addColumn('payment_description', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+    ->addColumn('payment_description_de', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
         'nullable' => false
-    ), 'Payment description')
+    ), 'Payment description DE')
+    ->addColumn('payment_description_fr', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+        'nullable' => false
+    ), 'Payment description FR')
     ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
         'nullable' => false
     ), 'Shipping Method')
-    ->addColumn('shipping_description', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+    ->addColumn('shipping_description_de', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
         'nullable' => true
-    ), 'Shipping Description')
+    ), 'Shipping Description DE')
+    ->addColumn('shipping_description_fr', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+        'nullable' => true
+    ), 'Shipping Description FR')
     ->addColumn('shipping_availability', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
         'nullable' => false
     ), 'Shipping Availability')

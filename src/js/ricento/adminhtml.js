@@ -271,11 +271,16 @@ Ricento.salesOptionsForm.prototype = {
         this.requiredClass = 'required-entry';
         this.validationPassedClass = 'validation-passed';
         this.requiredIfVisibleClass = 'required-if-visible';
+        this.langs = ['fr','de'];
         var self = this;
 
         this.showSalesTypeFieldsets($(this.htmlIdPrefix + "sales_type").value, $(this.htmlIdPrefix + "sales_auction_direct_buy").value == "1");
-        Countable.live($(this.htmlIdPrefix + 'product_warranty_condition'), function (counter){
-            $(self.htmlIdPrefix + 'product_warranty_condition_result__all').update(counter.characters);
+
+        Countable.live($(this.htmlIdPrefix + 'product_warranty_description_de'), function (counter){
+            $(self.htmlIdPrefix + 'product_warranty_description_de_result__all').update(counter.characters);
+        });
+        Countable.live($(this.htmlIdPrefix + 'product_warranty_description_fr'), function (counter){
+            $(self.htmlIdPrefix + 'product_warranty_description_fr_result__all').update(counter.characters);
         });
 
     },
@@ -331,13 +336,16 @@ Ricento.salesOptionsForm.prototype = {
 //        this.toggleRequired(conditionSource, field.checked, conditionSourceLabel);
 //        this.toggleRequired(condition, !field.checked);
 //    },
-    toggleWarrantyCondition: function (field) {
-        warrantyCondition = $(this.htmlIdPrefix + 'product_warranty_condition');
-        warrantyeConditionLabel = $$('label[for='+ this.htmlIdPrefix + 'product_warranty_condition]')[0];
+    toggleWarrantyDescription: function (field) {
 
-        required = (field.value == '0') ? 1 : 0;
-        warrantyCondition.disabled = !required;
-        this.toggleRequired(warrantyCondition, required, warrantyeConditionLabel);
+        for (i = 0; i < this.langs.length; i++) {
+            warrantyDescription = $(this.htmlIdPrefix + 'product_warranty_description_' + this.langs[i]);
+            warrantyDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'product_warranty_description_' + this.langs[i] + ']')[0];
+
+            required = (field.value == '0') ? 1 : 0;
+            warrantyDescription.disabled = !required;
+            this.toggleRequired(warrantyDescription, required, warrantyDescriptionLabel);
+        }
     },
     toggleStartPrice: function (field, methodId) {
             if ($('rules_payment_methods_' + methodId).checked) {
@@ -359,6 +367,100 @@ Ricento.salesOptionsForm.prototype = {
         }
     }
 };
+
+Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
+    initialize: function(htmlIdPrefix, packageSizes) {
+        this.htmlIdPrefix = htmlIdPrefix;
+        this.requiredText = '<span class="required">*</span>';
+        this.requiredClass = 'required-entry';
+        this.validationPassedClass = 'validation-passed';
+        this.requiredIfVisibleClass = 'required-if-visible';
+        this.packageSizes = packageSizes;
+        this.langs = ['fr','de'];
+
+        var self = this;
+        Countable.live($(this.htmlIdPrefix + 'payment_description_de'), function (counter) {
+            $(self.htmlIdPrefix + 'payment_description_de_result__all').update(counter.characters);
+        });
+        Countable.live($(this.htmlIdPrefix + 'payment_description_fr'), function (counter) {
+            $(self.htmlIdPrefix + 'payment_description_fr_result__all').update(counter.characters);
+        });
+        Countable.live($(this.htmlIdPrefix + 'shipping_description_de'), function (counter) {
+            $(self.htmlIdPrefix + 'shipping_description_de_result__all').update(counter.characters);
+        });
+        Countable.live($(this.htmlIdPrefix + 'shipping_description_fr'), function (counter) {
+            $(self.htmlIdPrefix + 'shipping_description_fr_result__all').update(counter.characters);
+        });
+    },
+    togglePaymentDescription: function (field) {
+        for (i = 0; i < this.langs.length; i++) {
+            paymentDescription = $(this.htmlIdPrefix + 'payment_description_' + this.langs[i]);
+            paymentDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'payment_description_' + this.langs[i] + ']')[0];
+
+            required = field.checked;
+            paymentDescription.disabled = !required;
+            this.toggleRequired(paymentDescription, required, paymentDescriptionLabel);
+        }
+    },
+    toggleShippingDescription: function (field) {
+        for (i = 0; i < this.langs.length; i++) {
+            shippingDescription = $(this.htmlIdPrefix + 'shipping_description_' + this.langs[i]);
+            shippingDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'shipping_description_'  + this.langs[i] + ']')[0];
+
+            required = (field.value == '0') ? 1 : 0;
+            shippingDescription.disabled = !required;
+            this.toggleRequired(shippingDescription, required, shippingDescriptionLabel);
+        }
+    },
+//    switchShippingPrice: function(field) {
+//        shippingPrice = $('rules_shipping_price');
+//        shippingPrice.value = '0.00';
+//        shippingPrice.disabled = field.checked;
+//    },
+    initPackages: function(field, selected) {
+        var deliveryId = field.value;
+        var packages = JSON.parse(this.packageSizes);
+        var package = packages[deliveryId];
+        var select = $(this.htmlIdPrefix + 'shipping_package');
+        select.removeClassName('hidden');
+
+        while (select.firstChild) {
+            select.removeChild(select.firstChild);
+        }
+
+        if (package != undefined && package != null && package.length > 0) {
+            for (i = 0; i < package.length; ++i) {
+                var opt = document.createElement('option');
+
+                if (selected != undefined && selected == package[i].PackageSizeId) {
+                    opt.selected = true;
+                }
+                opt.value = package[i].PackageSizeId;
+                opt.innerHTML = package[i].PackageSizeText;
+                var attribute = document.createAttribute('data-package-cost');
+                attribute.value = package[i].PackageSizeCost;
+                opt.setAttributeNode(attribute);
+                select.appendChild(opt);
+                if (i == 0 && selected == undefined ) {
+                    this._changePrice(package[i].PackageSizeCost);
+                }
+            }
+        } else if (package > 0) {
+            this._changePrice(package);
+            select.addClassName('hidden');
+        } else {
+            this._changePrice(0);
+            select.addClassName('hidden');
+        }
+    },
+    setShippingFee: function(field) {
+        selected = field.options[field.selectedIndex];
+        this._changePrice(selected.getAttribute('data-package-cost'));
+    },
+    _changePrice: function(price) {
+        $(this.htmlIdPrefix + 'shipping_price').value = (price > 0) ? Math.round(price*100)/100 : 0;
+    }
+});
 
 Ricento.CategoryMappper = Class.create();
 Ricento.CategoryMappper.prototype = {
@@ -405,8 +507,9 @@ Ricento.CategoryMappper.prototype = {
             input.checked = true;
         });
         $('ricardo_category_selected_title').value = link.dataset.text;
-        $('ricardo_categories_button_save').enable();
-        $('ricardo_categories_button_save').removeClassName('disabled');
+        $('ricardo_categories_button_save')
+            .enable()
+            .removeClassName('disabled');
     },
 
     loadChildren: function(link) {
@@ -414,8 +517,10 @@ Ricento.CategoryMappper.prototype = {
             return;
         }
         $$("input[type=radio][name='ricardo_category_id']").each(function(input) { input.checked = false; });
-        $('ricardo_categories_button_save').disable();
-        $('ricardo_categories_button_save').addClassName('disabled');
+        $('ricardo_categories_button_save')
+            .disable()
+            .addClassName('disabled');
+        
         $(link.parentNode.parentNode).select('li').each(function(item) {
             $(item).removeClassName('selected');
         });
@@ -475,94 +580,42 @@ Ricento.GeneralForm.prototype = {
                     item.disabled = true;
                 });
                 $(self.htmlIdPrefix + 'lang_' + lang + '_store_id').disabled = false;
-            };
+                self._showHideLangFields(lang, 'block');
+
+            } else if (e.value == 'all'){
+                self._showHideLangFields(lang, 'block');
+            } else {
+                self._showHideLangFields(lang, 'none');
+            }
         });
+
         if (e.value == 'all') {
             t.each(function(item) {
                 item.disabled = false;
             });
-        };
+        }
+    },
+    _showHideLangFields: function(lang, displayStyle) {
+        $$('label[for=rules_payment_description_' + lang + ']')[0].setStyle({'display': displayStyle});
+        $('rules_payment_description_' + lang).setStyle({'display': displayStyle});
+        $('note_payment_description_' + lang).setStyle({'display': displayStyle});
+
+        $$('label[for=rules_shipping_description_' + lang + ']')[0].setStyle({'display': displayStyle});
+        $('rules_shipping_description_' + lang).setStyle({'display': displayStyle});
+        $('note_shipping_description_' + lang).setStyle({'display': displayStyle});
+
+        $$('label[for=sales_options_product_warranty_description_' + lang + ']')[0].setStyle({'display': displayStyle});
+        $('sales_options_product_warranty_description_' + lang).setStyle({'display': displayStyle});
+        $('note_product_warranty_description_' + lang).setStyle({'display': displayStyle});
+
+        if (displayStyle == 'none') {
+            $('rules_payment_description_' + lang).removeClassName('required-entry');
+            $('rules_shipping_description_' + lang).removeClassName('required-entry');
+            $('sales_options_product_warranty_description_' + lang).removeClassName('required-entry');
+        } else {
+            $('rules_payment_description_' + lang).addClassName('required-entry');
+            $('rules_shipping_description_' + lang).addClassName('required-entry');
+            $('sales_options_product_warranty_description_' + lang).addClassName('required-entry');
+        }
     }
 };
-Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
-    initialize: function(htmlIdPrefix, packageSizes) {
-        this.htmlIdPrefix = htmlIdPrefix;
-        this.requiredText = '<span class="required">*</span>';
-        this.requiredClass = 'required-entry';
-        this.validationPassedClass = 'validation-passed';
-        this.requiredIfVisibleClass = 'required-if-visible';
-        this.packageSizes = packageSizes;
-
-        var self = this;
-        Countable.live($(this.htmlIdPrefix + 'payment_description'), function (counter) {
-            $(self.htmlIdPrefix + 'payment_description_result__all').update(counter.characters);
-        });
-        Countable.live($(this.htmlIdPrefix + 'shipping_description'), function (counter) {
-            $(self.htmlIdPrefix + 'shipping_description_result__all').update(counter.characters);
-        });
-    },
-    togglePaymentDescription: function (field) {
-        paymentDescription = $(this.htmlIdPrefix + 'payment_description');
-        paymentDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'payment_description]')[0];
-
-        required = field.checked;
-        paymentDescription.disabled = !required;
-        this.toggleRequired(paymentDescription, required, paymentDescriptionLabel);
-    },
-    toggleShippingDescription: function (field) {
-        shippingDescription = $(this.htmlIdPrefix + 'shipping_description');
-        shippingDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'shipping_description]')[0];
-
-        required = (field.value == '0') ? 1 : 0;
-        shippingDescription.disabled = !required;
-        this.toggleRequired(shippingDescription, required, shippingDescriptionLabel);
-    },
-//    switchShippingPrice: function(field) {
-//        shippingPrice = $('rules_shipping_price');
-//        shippingPrice.value = '0.00';
-//        shippingPrice.disabled = field.checked;
-//    },
-    initPackages: function(field, selected) {
-        var deliveryId = field.value;
-        var packages = JSON.parse(this.packageSizes);
-        var package = packages[deliveryId];
-        var select = $(this.htmlIdPrefix + 'shipping_package');
-        select.removeClassName('hidden');
-
-        while (select.firstChild) {
-            select.removeChild(select.firstChild);
-        }
-
-        if (package != undefined && package != null && package.length > 0) {
-            for (i = 0; i < package.length; ++i) {
-                var opt = document.createElement('option');
-
-                if (selected != undefined && selected == package[i].PackageSizeId) {
-                    opt.selected = true;
-                }
-                opt.value = package[i].PackageSizeId;
-                opt.innerHTML = package[i].PackageSizeText;
-                var attribute = document.createAttribute('data-package-cost');
-                attribute.value = package[i].PackageSizeCost;
-                opt.setAttributeNode(attribute);
-                select.appendChild(opt);
-                if (i == 0 && selected == undefined ) {
-                    this._changePrice(package[i].PackageSizeCost);
-                }
-            }
-        } else if (package > 0) {
-            this._changePrice(package);
-            select.addClassName('hidden');
-        } else {
-            this._changePrice(0);
-            select.addClassName('hidden');
-        }
-    },
-    setShippingFee: function(field) {
-        selected = field.options[field.selectedIndex];
-        this._changePrice(selected.getAttribute('data-package-cost'));
-    },
-    _changePrice: function(price) {
-        $(this.htmlIdPrefix + 'shipping_price').value = (price > 0) ? Math.round(price*100)/100 : 0;
-    }
-});

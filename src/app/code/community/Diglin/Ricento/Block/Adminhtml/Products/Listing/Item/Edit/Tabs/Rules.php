@@ -45,6 +45,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Rules
     protected function _initFormValues()
     {
         parent::_initFormValues();
+
+        $helper = Mage::helper('diglin_ricento');
+
         $useDefaultCheckbox = $this->getForm()->getElement('use_products_list_settings');
         $useDefaultCheckbox->setChecked(true);
         $useDefaultCheckbox->setValue(1);
@@ -57,10 +60,26 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Rules
             }
         }
         if ($useDefaultCheckbox->getChecked()) {
-            Mage::helper('diglin_ricento')->disableForm($this->getForm());
+            $helper->disableForm($this->getForm());
             $useDefaultCheckbox->setDisabled(false);
 //            $this->getForm()->getElement('free_shipping')->setChecked(false);
         }
+
+        $publishedLang = $this->_getListing()->getPublishLanguages();
+        if ($publishedLang != Diglin_Ricento_Helper_Data::LANG_ALL) {
+            $supportedLangs = $helper->getSupportedLang();
+            foreach ($supportedLangs as $supportedLang) {
+                $supportedLang = strtolower($supportedLang);
+                if ($supportedLang != $publishedLang) {
+                    $this->getForm()->getElement('fieldset_shipping')
+                        ->removeField('shipping_description_' . $supportedLang);
+
+                    $this->getForm()->getElement('fieldset_payment')
+                        ->removeField('payment_description_' . $supportedLang);
+                }
+            }
+        }
+
         return $this;
     }
 

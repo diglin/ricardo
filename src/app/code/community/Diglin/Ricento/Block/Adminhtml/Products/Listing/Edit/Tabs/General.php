@@ -102,7 +102,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
 
     protected function _afterToHtml($html)
     {
-        $html .= '<script type="text/javascript">var generalForm = new Ricento.GeneralForm("' . $this->getForm()->getHtmlIdPrefix() . '");</script>';
+        $languages = Mage::helper('diglin_ricento')->getSupportedLang();
+        $htmlIdPrefix = $this->getForm()->getHtmlIdPrefix();
+
+        $html .= '<script type="text/javascript">';
+        $html .= 'var generalForm = new Ricento.GeneralForm("' . $htmlIdPrefix . '");';
+        $html .= 'setTimeout(function(){generalForm.onChangeInput($(' . $htmlIdPrefix .'publish_languages), [\''. implode('\',\'', $languages) .'\'])}, 3000);';
+        $html .= '</script>';
         return parent::_afterToHtml($html);
     }
 

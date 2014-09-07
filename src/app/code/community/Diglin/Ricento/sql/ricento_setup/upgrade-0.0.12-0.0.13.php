@@ -14,10 +14,10 @@ $installer->startSetup();
 
 $salesOptionsTable = $installer->getTable('diglin_ricento/sales_options');
 
-$installer->getConnection()->addColumn($salesOptionsTable, 'product_warranty_condition', array(
+$installer->getConnection()->addColumn($salesOptionsTable, 'product_warranty_description', array(
     'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
     'nullable' => true,
     'after' => 'product_warranty',
-    'comment' => 'Product Warranty Condition'));
+    'comment' => 'Product Warranty Description'));
 
 $installer->endSetup();
