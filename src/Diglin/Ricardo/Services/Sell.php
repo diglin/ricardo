@@ -13,7 +13,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\AddArticlePicturesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter;
-use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter;
 
@@ -39,7 +39,7 @@ class Sell extends ServiceAbstract
     {
         return array(
             'method' => 'AddArticlePictures',
-            'params' => array('AddArticlePicturesParameter' => $addArticlePicturesParameter->getDataProperties())
+            'params' => array('addArticlePicturesParameter' => $addArticlePicturesParameter->getDataProperties())
         );
     }
 
@@ -76,7 +76,7 @@ class Sell extends ServiceAbstract
     {
         return array(
             'method' => 'AppendArticleDescription',
-            'params' => array('AppendArticleDescriptionParameter' => $appendArticleDescriptionParameter->getDataProperties())
+            'params' => array('appendArticleDescriptionParameter' => $appendArticleDescriptionParameter->getDataProperties())
         );
     }
 
@@ -101,7 +101,7 @@ class Sell extends ServiceAbstract
     {
         return array(
             'method' => 'CloseArticle',
-            'params' => array('CloseArticleParameter' => $closeArticleParameter->getDataProperties())
+            'params' => array('closeArticleParameter' => $closeArticleParameter->getDataProperties())
         );
     }
 
@@ -139,7 +139,7 @@ class Sell extends ServiceAbstract
     {
         return array(
             'method' => 'CloseArticles',
-            'params' => array('CloseArticlesParameter' => $closeArticlesParameter->getDataProperties())
+            'params' => array('closeArticlesParameter' => $closeArticlesParameter->getDataProperties())
         );
     }
 
@@ -243,11 +243,11 @@ class Sell extends ServiceAbstract
      * @param $insertArticleParameter
      * @return array
      */
-    public function insertArticle(InsertArticlesParameter $insertArticleParameter)
+    public function insertArticle(InsertArticleParameter $insertArticleParameter)
     {
         return array(
             'method' => 'InsertArticle',
-            'params' => array('InsertArticleParameter' => $insertArticleParameter->getDataProperties())
+            'params' => array('insertArticleParameter' => $insertArticleParameter->getDataProperties())
         );
     }
 
@@ -282,9 +282,42 @@ class Sell extends ServiceAbstract
      * Inserts a list of articles or a planned articles. This method is currently not fully usable to external partners
      *
      * @param $insertArticlesParameter
+     * @return array
      */
     public function insertArticles($insertArticlesParameter)
     {
+        return array(
+            'method' => 'InsertArticles',
+            'params' => array('insertArticlesParameter' => $insertArticlesParameter->getDataProperties())
+        );
+    }
+
+    /**
+     * Get the article result data
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "InsertArticlesResult": {
+     *      "Results": [{
+     *          "ArticleFee": "float"
+     *          "ArticleId": "int"
+     *          "CarDealerArticleId": "int"
+     *          "ErrorCodes": "int" ArticleErrors
+     *          "PlannedArticleId": "int"
+     *      }]
+     *   }
+     * </pre>
+     *
+     * @param array $data
+     * @return array|bool
+     */
+    public function insertArticlesResult(array $data)
+    {
+        if (isset($data['InsertArticlesResult']) && isset($data['InsertArticlesResult']['Results'])) {
+            return $data['InsertArticlesResult']['Results'];
+        }
+        return false;
     }
 
     /**
@@ -326,19 +359,29 @@ class Sell extends ServiceAbstract
     /**
      * Relists the article.
      *
-     * @param $relistArticleParameter
+     * @param int $articleId
+     * @return array
      */
-    public function relistArticle($relistArticleParameter)
+    public function relistArticle($articleId)
     {
+        return array(
+            'method' => 'RelistArticle',
+            'params' => array('insertArticlesParameter' => array('ArticleId', $articleId))
+        );
     }
 
     /**
      * Relists the auction articles. This method is currently not fully usable to external partners
      *
-     * @param $relistArticlesParameter
+     * @param array $articleIds
+     * @return array
      */
-    public function relistArticles($relistArticlesParameter)
+    public function relistArticles($articleIds)
     {
+        return array(
+            'method' => 'RelistArticles',
+            'params' => array('relistArticlesParameter' => array('ArticleId', $articleIds))
+        );
     }
 
     /**
@@ -414,7 +457,7 @@ class Sell extends ServiceAbstract
     {
         return array(
             'method' => 'UpdateArticle',
-            'params' => array('UpdateArticleParameter' => $updateArticleParameter->getDataProperties())
+            'params' => array('updateArticleParameter' => $updateArticleParameter->getDataProperties())
         );
     }
 
@@ -478,7 +521,7 @@ class Sell extends ServiceAbstract
     {
         return array(
             'method' => 'UpdateArticlePictures',
-            'params' => array('UpdateArticlePicturesParameter' => $updateArticlePicturesParameter->getDataProperties())
+            'params' => array('updateArticlePicturesParameter' => $updateArticlePicturesParameter->getDataProperties())
         );
     }
 

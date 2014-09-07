@@ -55,7 +55,7 @@ class ArticleDeliveryParameter extends ParameterAbstract
      */
     public function setDeliveryPackageSizeId($deliveryPackageSizeId)
     {
-        $this->_deliveryPackageSizeId = $deliveryPackageSizeId;
+        $this->_deliveryPackageSizeId = (int) $deliveryPackageSizeId;
         return $this;
     }
 
@@ -64,7 +64,7 @@ class ArticleDeliveryParameter extends ParameterAbstract
      */
     public function getDeliveryPackageSizeId()
     {
-        return $this->_deliveryPackageSizeId;
+        return (int) $this->_deliveryPackageSizeId;
     }
 
     /**
@@ -73,7 +73,7 @@ class ArticleDeliveryParameter extends ParameterAbstract
      */
     public function setIsCumulativeShipping($isCumulativeShipping)
     {
-        $this->_isCumulativeShipping = $isCumulativeShipping;
+        $this->_isCumulativeShipping = (bool) $isCumulativeShipping;
         return $this;
     }
 
@@ -82,7 +82,7 @@ class ArticleDeliveryParameter extends ParameterAbstract
      */
     public function getIsCumulativeShipping()
     {
-        return $this->_isCumulativeShipping;
+        return (bool) $this->_isCumulativeShipping;
     }
 
     /**
@@ -91,7 +91,7 @@ class ArticleDeliveryParameter extends ParameterAbstract
      */
     public function setDeliveryCost($deliveryCost)
     {
-        $this->_deliveryCost = $deliveryCost;
+        $this->_deliveryCost = (float) $deliveryCost;
         return $this;
     }
 
@@ -100,7 +100,7 @@ class ArticleDeliveryParameter extends ParameterAbstract
      */
     public function getDeliveryCost()
     {
-        return $this->_deliveryCost;
+        return floatval($this->_deliveryCost);
     }
 
     /**
@@ -109,7 +109,7 @@ class ArticleDeliveryParameter extends ParameterAbstract
      */
     public function setDeliveryId($deliveryId)
     {
-        $this->_deliveryId = $deliveryId;
+        $this->_deliveryId = (int) $deliveryId;
         return $this;
     }
 
@@ -118,16 +118,16 @@ class ArticleDeliveryParameter extends ParameterAbstract
      */
     public function getDeliveryId()
     {
-        return $this->_deliveryId;
+        return (int) $this->_deliveryId;
     }
 
     /**
      * @param boolean $isDeliveryFree
      * @return $this
      */
-    public function setIsDeliveryFree($isDeliveryFree)
+    public function setIsDeliveryFree($isDeliveryFree = false)
     {
-        $this->_isDeliveryFree = $isDeliveryFree;
+        $this->_isDeliveryFree = (bool) $isDeliveryFree;
         return $this;
     }
 
@@ -136,6 +136,6 @@ class ArticleDeliveryParameter extends ParameterAbstract
      */
     public function getIsDeliveryFree()
     {
-        return $this->_isDeliveryFree;
+        return (bool) $this->_isDeliveryFree;
     }
 }

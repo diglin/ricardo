@@ -72,7 +72,7 @@ abstract class ManagerAbstract
         $result = $this->_serviceManager->proceed($this->_serviceName, $method, $parameters);
 
         try {
-            $this->extractError($result);
+            $this->extractError((array) $result);
         } catch (SecurityErrors $e) {
             switch ($e->getCode()) {
                 case SecurityErrorsEnum::SESSIONEXPIRED:

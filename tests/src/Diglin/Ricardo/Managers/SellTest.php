@@ -11,6 +11,7 @@ namespace Diglin\Ricardo\Managers;
 
 use Diglin\Ricardo\Core\Helper;
 use Diglin\Ricardo\Enums\Article\InternalReferenceType;
+use Diglin\Ricardo\Enums\Article\PromotionCode;
 use Diglin\Ricardo\Enums\PictureExtension;
 use Diglin\Ricardo\Enums\System\CategoryBrandingFilter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter;
@@ -18,7 +19,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\ArticleDescriptionParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter;
-use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 
 class SellTest extends TestAbstract
 {
@@ -35,12 +36,12 @@ class SellTest extends TestAbstract
 
     public function testInsertArticle()
     {
-        $insertArticleParameter = new InsertArticlesParameter();
+        $insertArticleParameter = new InsertArticleParameter();
 
         $system = new System($this->getServiceManager());
         $conditions = $system->getArticleConditions(false);
         $availabilities = $system->getAvailabilities();
-        $categories = $system->getCategories(CategoryBrandingFilter::ONLYBRANDING);
+        //$categories = $system->getCategories(CategoryBrandingFilter::ONLYBRANDING);
         $warranties = $system->getWarranties();
         $paymentConditions = $system->getPaymentConditionsAndMethods();
         $deliveryConditions = $system->getDeliveryConditions();
@@ -50,8 +51,9 @@ class SellTest extends TestAbstract
         $delivery
             // required
             ->setDeliveryCost(5)
-            ->setIsDeliveryFree(false)
+            ->setIsDeliveryFree(0)
             ->setDeliveryId($deliveryConditions[0]['DeliveryConditionId'])
+            ->setIsCumulativeShipping(0)
             // optional
             ->setDeliveryPackageSizeId($deliveryConditions[0]['PackageSizes'][0]['PackageSizeId']);
 
@@ -64,30 +66,33 @@ class SellTest extends TestAbstract
         $articleInformation
             // required
             ->setArticleConditionId($conditions[0]['ArticleConditionId'])
-            ->setArticleDuration(5)
+            ->setArticleDuration(7 * 24 * 60) // 7 days
             ->setAvailabilityId($availabilities[0]['AvailabilityId'])
-            ->setCategoryId($categories[10]['CategoryId'])
-            ->setInitialQuantity(5)
+            ->setCategoryId(38828)
+            ->setInitialQuantity(1)
             ->setIsCustomerTemplate(false)
-            ->setIsRelistSoldOut(true)
-            ->setMainPictureId(1) // @todo ask ricardo how to get the right value because the picture is not yet sent to the API so we do not have the index or may be it's a kind of "sort order" or "position" value
+            ->setIsRelistSoldOut(false) // @fixme seems to not be allowed why?
+            ->setMainPictureId(1)
             ->setMaxRelistCount(5)
             ->setWarrantyId($warranties[1]['WarrantyId'])
+            ->setPromotionIds(array(
+                PromotionCode::BUYNOW
+            ))
+            ->setDeliveries($delivery)
             // optional
             ->setBuyNowPrice(20)
-            ->setDeliveries($delivery)
             ->setIncrement(5)
             ->setInternalReferences($internalReferences)
             ->setPaymentConditionIds(array($paymentConditions[0]['PaymentConditionId']))
             ->setPaymentMethodIds(array($paymentConditions[0]['PaymentMethods'][0]['PaymentMethodId']))
-            ->setStartDate(Helper::getJsonDate(time()))
+            ->setStartDate(Helper::getJsonDate(time() + 60*60))
             ->setStartPrice(5)
             ->setTemplateId(null);
 
         $descriptions = new ArticleDescriptionParameter();
         $descriptions
             // required
-            ->setArticleTitle('My Product ' . $this->_generateRandomString(30))
+            ->setArticleTitle('My Product ' . $this->_generateRandomString(20))
             ->setArticleDescription($this->_generateRandomString(2000))
             ->setLanguageId($partnerConfiguration['LanguageId'])
             // optional
@@ -98,24 +103,27 @@ class SellTest extends TestAbstract
 
 
         $filename = '../../../media/pictures/22-syncmaster-lcd-monitor.jpg';
-        $handle = fopen($filename, 'r');
-        $imageContent = base64_encode(fread($handle, filesize($filename)));
-        fclose($handle);
+
+        if (file_exists($filename)) {
+            $imageContent = array_values(unpack('C*', file_get_contents($filename)));
+
+        }
 
         $pictures = new ArticlePictureParameter();
         $pictures
             ->setPictureBytes($imageContent)
-            ->setPictureExtension(PictureExtension::JPG)
+            ->setPictureExtension(Helper::getPictureExtension($filename))
             ->setPictureIndex(1);
 
         $antiforgeryToken = $this->getServiceManager()->getSecurityManager()->getAntiforgeryToken();
-
         $insertArticleParameter
             ->setAntiforgeryToken($antiforgeryToken)
             ->setArticleInformation($articleInformation)
             ->setDescriptions($descriptions)
-            ->setIsUpdateArticle(false)
-            ->setPictures($pictures);
+            ->setPictures($pictures)
+            ->setIsUpdateArticle(false);
+
+
 
 
         try {

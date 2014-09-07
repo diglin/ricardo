@@ -9,6 +9,8 @@
  */
 namespace Diglin\Ricardo\Core;
 
+use Diglin\Ricardo\Enums\PictureExtension;
+
 class Helper
 {
     /**
@@ -45,5 +47,35 @@ class Helper
             $unixTimestamp = time();
         }
         return '/Date(' . ($unixTimestamp  * 1000) . date('O') . ')/';
+    }
+
+    /**
+     * Get the Picture Extension ID from the picture filename
+     *
+     * @param string $filename
+     * @return bool|int
+     */
+    public static function getPictureExtension($filename)
+    {
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+        switch (strtolower($extension))
+        {
+            case 'jpg':
+            case 'jpeg':
+                $return = PictureExtension::JPG;
+                break;
+            case 'gif':
+                $return = PictureExtension::GIF;
+                break;
+            case 'png':
+                $return = PictureExtension::PNG;
+                break;
+            default:
+                $return = false;
+                break;
+        }
+
+        return $return;
     }
 }

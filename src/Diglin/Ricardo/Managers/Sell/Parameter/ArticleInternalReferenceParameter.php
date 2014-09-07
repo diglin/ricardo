@@ -32,7 +32,7 @@ class ArticleInternalReferenceParameter extends ParameterAbstract
     );
 
     /**
-     * @param int $internalReferenceValue
+     * @param string $internalReferenceValue
      * @return $this
      */
     public function setInternalReferenceValue($internalReferenceValue)

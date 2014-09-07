@@ -43,12 +43,12 @@ class ArticleInformationParameter extends ParameterAbstract
     protected $_categoryId; // required
 
     /**
-     * @var ArticleDeliveryParameter
+     * @var array of ArticleDeliveryParameter
      */
-    protected $_deliveries; // optional
+    protected $_deliveries = array(); // required
 
     /**
-     * @var float
+     * @var int
      */
     protected $_increment; // optional
 
@@ -95,7 +95,7 @@ class ArticleInformationParameter extends ParameterAbstract
     /**
      * @var array
      */
-    protected $_promotionIds; // optional
+    protected $_promotionIds; // optional - required if BuyNow
 
     /**
      * @var string
@@ -128,16 +128,16 @@ class ArticleInformationParameter extends ParameterAbstract
         'mainPictureId',
         'maxRelistCount',
         'warrantyId',
+        'promotionIds',
+        'deliveries',
     );
 
     protected $_optionalProperties = array(
         'buyNowPrice',
-        'deliveries',
         'increment',
         'internalReferences',
         'paymentConditionIds',
         'paymentMethodIds',
-        'promotionIds',
         'startDate',
         'startPrice',
         'templateId'
@@ -158,7 +158,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getArticleConditionId()
     {
-        return $this->_articleConditionId;
+        return (int) $this->_articleConditionId;
     }
 
     /**
@@ -176,7 +176,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getArticleDuration()
     {
-        return $this->_articleDuration;
+        return (int) $this->_articleDuration;
     }
 
     /**
@@ -194,7 +194,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getAvailabilityId()
     {
-        return $this->_availabilityId;
+        return (int) $this->_availabilityId;
     }
 
     /**
@@ -212,7 +212,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getBuyNowPrice()
     {
-        return $this->_buyNowPrice;
+        return floatval($this->_buyNowPrice);
     }
 
     /**
@@ -230,29 +230,33 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getCategoryId()
     {
-        return $this->_categoryId;
+        return (int) $this->_categoryId;
     }
 
     /**
      * @param \Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter $deliveries
+     * @param bool $clear
      * @return $this
      */
-    public function setDeliveries(ArticleDeliveryParameter $deliveries)
+    public function setDeliveries(ArticleDeliveryParameter $deliveries, $clear = false)
     {
-        $this->_deliveries = $deliveries;
+        if ($clear) {
+            $this->_deliveries = array();
+        }
+        $this->_deliveries[] = $deliveries;
         return $this;
     }
 
     /**
-     * @return \Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter
+     * @return array of \Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter
      */
     public function getDeliveries()
     {
-        return $this->_deliveries;
+        return (array) $this->_deliveries;
     }
 
     /**
-     * @param float $increment
+     * @param int $increment
      * @return $this
      */
     public function setIncrement($increment)
@@ -262,11 +266,11 @@ class ArticleInformationParameter extends ParameterAbstract
     }
 
     /**
-     * @return float
+     * @return int
      */
     public function getIncrement()
     {
-        return $this->_increment;
+        return (int) $this->_increment;
     }
 
     /**
@@ -284,15 +288,19 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getInitialQuantity()
     {
-        return $this->_initialQuantity;
+        return (int) $this->_initialQuantity;
     }
 
     /**
-     * @param \Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter $internalReferences
+     * @param ArticleInternalReferenceParameter $internalReferences
+     * @param bool $clear
      * @return $this
      */
-    public function setInternalReferences(ArticleInternalReferenceParameter $internalReferences)
+    public function setInternalReferences(ArticleInternalReferenceParameter $internalReferences, $clear = false)
     {
+        if ($clear) {
+            $this->_internalReferences = array();
+        }
         $this->_internalReferences = $internalReferences;
         return $this;
     }
@@ -320,7 +328,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getIsCustomerTemplate()
     {
-        return $this->_isCustomerTemplate;
+        return (bool) $this->_isCustomerTemplate;
     }
 
     /**
@@ -338,7 +346,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getIsRelistSoldOut()
     {
-        return $this->_isRelistSoldOut;
+        return (bool) $this->_isRelistSoldOut;
     }
 
     /**
@@ -356,7 +364,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getMainPictureId()
     {
-        return $this->_mainPictureId;
+        return (int) $this->_mainPictureId;
     }
 
     /**
@@ -374,7 +382,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getMaxRelistCount()
     {
-        return $this->_maxRelistCount;
+        return (int) $this->_maxRelistCount;
     }
 
     /**
@@ -392,7 +400,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getPaymentConditionIds()
     {
-        return $this->_paymentConditionIds;
+        return (array) $this->_paymentConditionIds;
     }
 
     /**
@@ -410,7 +418,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getPaymentMethodIds()
     {
-        return $this->_paymentMethodIds;
+        return (array) $this->_paymentMethodIds;
     }
 
     /**
@@ -428,7 +436,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getPromotionIds()
     {
-        return $this->_promotionIds;
+        return (array) $this->_promotionIds;
     }
 
     /**
@@ -464,7 +472,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getStartPrice()
     {
-        return $this->_startPrice;
+        return floatval($this->_startPrice);
     }
 
     /**
@@ -478,7 +486,7 @@ class ArticleInformationParameter extends ParameterAbstract
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getTemplateId()
     {
@@ -500,7 +508,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getWarrantyId()
     {
-        return $this->_warrantyId;
+        return (int) $this->_warrantyId;
     }
 
 

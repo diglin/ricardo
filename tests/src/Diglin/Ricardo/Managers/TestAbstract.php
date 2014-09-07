@@ -86,7 +86,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             echo $testName . ' ' . print_r($output, true);
         }
         if ($debug) {
-            echo $this->getLastApiDebug();
+            echo $this->getLastApiDebug(false, false, true);
         }
         return;
     }
@@ -94,7 +94,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
     protected function log($content)
     {
         $filename = __DIR__ . '/../../../../log/api.log';
-        $handle = fopen($filename, 'a+');
+        $handle = fopen($filename, 'w+');
 
         $time = date('Y-m-d H:i:s') . "\n";
         $content = $time . $content;

@@ -23,46 +23,15 @@ class InsertArticlesParameter extends ParameterAbstract
     protected $_antiforgeryToken; // required
 
     /**
-     * @var ArticleInformationParameter
+     * @var array
      */
-    protected $_articleInformation; // required
+    protected $_articles = array(); // required
 
     /**
      * @var array
      */
-    protected $_descriptions = array(); // required
-
-    /**
-     * @var null
-     */
-    protected $_brandingArticleDetails = null; // optional
-
-    /**
-     * @var int
-     */
-    protected $_carDealerArticleId; // optional
-
-    /**
-     * @var boolean
-     */
-    protected $_isUpdateArticle; // Set to true if the preview is created for an update of live article without bid
-
-    /**
-     * @var array
-     */
-    protected $_pictures = array(); // required
-
     protected $_requiredProperties = array(
-        'antiforgeryToken',
-        'articleInformation',
-        'descriptions',
-        'pictures',
-    );
-
-    protected $_optionalProperties = array(
-        'brandingArticleDetails',
-        'isUpdateArticle',
-        'carDealerArticleId'
+        'articles',
     );
 
     /**
@@ -84,119 +53,24 @@ class InsertArticlesParameter extends ParameterAbstract
     }
 
     /**
-     * @param \Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter $articleInformation
-     * @return $this
-     */
-    public function setArticleInformation(ArticleInformationParameter $articleInformation)
-    {
-        $this->_articleInformation = $articleInformation;
-        return $this;
-    }
-
-    /**
-     * @return \Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter
-     */
-    public function getArticleInformation()
-    {
-        return $this->_articleInformation;
-    }
-
-    /**
-     * @param null $brandingArticleDetails
-     * @return $this
-     */
-    public function setBrandingArticleDetails($brandingArticleDetails)
-    {
-        $this->_brandingArticleDetails = $brandingArticleDetails;
-        return $this;
-    }
-
-    /**
-     * @return null
-     */
-    public function getBrandingArticleDetails()
-    {
-        return $this->_brandingArticleDetails;
-    }
-
-    /**
-     * @param int $carDealerArticleId
-     * @return $this
-     */
-    public function setCarDealerArticleId($carDealerArticleId)
-    {
-        $this->_carDealerArticleId = $carDealerArticleId;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCarDealerArticleId()
-    {
-        return $this->_carDealerArticleId;
-    }
-
-    /**
-     * @param \Diglin\Ricardo\Managers\Sell\Parameter\ArticleDescriptionParameter $descriptions
+     * @param InsertArticleParameter $articles
      * @param bool $clear
      * @return $this
      */
-    public function setDescriptions(ArticleDescriptionParameter $descriptions, $clear = false)
+    public function setArticles(InsertArticleParameter $articles, $clear = false)
     {
         if ($clear) {
-            $this->_descriptions = array();
+            $this->_articles = array();
         }
-
-        $this->_descriptions[] = $descriptions;
+        $this->_articles[] = $articles;
         return $this;
     }
 
     /**
-     * @return array of \Diglin\Ricardo\Managers\Sell\Parameter\ArticleDescriptionParameter
+     * @return array
      */
-    public function getDescriptions()
+    public function getArticles()
     {
-        return $this->_descriptions;
-    }
-
-    /**
-     * @param boolean $isUpdateArticle
-     * @return $this
-     */
-    public function setIsUpdateArticle($isUpdateArticle)
-    {
-        $this->_isUpdateArticle = $isUpdateArticle;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsUpdateArticle()
-    {
-        return $this->_isUpdateArticle;
-    }
-
-    /**
-     * @param \Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter $pictures
-     * @param bool $clear
-     * @return $this
-     */
-    public function setPictures(ArticlePictureParameter $pictures, $clear = false)
-    {
-        if ($clear) {
-            $this->_pictures = array();
-        }
-        $this->_pictures[] = $pictures;
-        return $this;
-    }
-
-    /**
-     * @return array of \Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter
-     */
-    public function getPictures()
-    {
-        return $this->_pictures;
+        return $this->_articles;
     }
 }

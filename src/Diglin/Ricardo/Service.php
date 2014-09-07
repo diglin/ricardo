@@ -222,7 +222,7 @@ class Service
 
             $getResultServiceMethod = $this->_prepareServiceGetResultMethod($serviceMethod);
 
-            if (method_exists($serviceInstance, $getResultServiceMethod) && !array_key_exists('ErrorCodes', $data)) {
+            if (method_exists($serviceInstance, $getResultServiceMethod) && is_array($data) && !array_key_exists('ErrorCodes', $data)) {
                 return $serviceInstance->$getResultServiceMethod( (array) $data);
             } else {
                 return $data;

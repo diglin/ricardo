@@ -14,7 +14,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\AddArticlePicturesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter;
-use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter;
 
@@ -63,12 +63,11 @@ class Sell extends ManagerAbstract
         return $this->_proceed('CloseArticles', $parameter);
     }
 
-
     /**
-     * @param InsertArticlesParameter $parameter
+     * @param InsertArticleParameter $parameter
      * @return array
      */
-    public function insertArticle(InsertArticlesParameter $parameter)
+    public function insertArticle(InsertArticleParameter $parameter)
     {
         return $this->_lastInsertArticle = $this->_proceed('InsertArticle', $parameter);
     }
@@ -79,6 +78,11 @@ class Sell extends ManagerAbstract
     public function getLastInsertArticle()
     {
         return $this->_lastInsertArticle;
+    }
+
+    public function relistArticle($articleId)
+    {
+        return $this->_proceed('RelistArticle', $articleId);
     }
 
     /**
