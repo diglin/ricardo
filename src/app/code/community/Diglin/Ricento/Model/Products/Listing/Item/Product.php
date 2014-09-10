@@ -27,6 +27,11 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     private $_storeId = Mage_Core_Model_App::ADMIN_STORE_ID;
 
     /**
+     * @var null
+     */
+    private $_defaultStoreId = null; // fallback for language
+
+    /**
      * @var Mage_Catalog_Model_Product
      */
     protected $_model;
@@ -127,15 +132,32 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     }
 
     /**
+     * @param int $storeId
+     * @return array
+     */
+    public function getStoresList($storeId)
+    {
+        return array(
+            $storeId,
+            $this->getDefaultStoreId(),
+            Mage_Core_Model_App::ADMIN_STORE_ID
+        );
+    }
+
+    /**
      * @param null|int $productId
      * @return string
      */
     public function getTypeId($productId = null)
     {
-        if (!is_null($this->_model) && ($this->_model->getId() == $productId || is_null($productId))) {
+        if (!is_null($productId) && !is_null($this->_model) && $this->_model->getId() && $this->_model->getId() == $productId) {
             return $this->_model->getTypeId();
         }
 
+        if (is_null($productId)) {
+            return false;
+        }
+        
         $productId = (int) (is_null($productId) ? $this->_productId : $productId);
 
         $readConnection = $this->_getReadConnection();
@@ -166,42 +188,39 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      * @param bool $sub
      * @return string
      */
-    public function getTitle($productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID, $sub = true)
+    public function getTitle($productId = null, $storeId = null, $sub = true)
     {
         $productId = (int) (is_null($productId) ? $this->_productId : $productId);
         $storeId = (int) (is_null($storeId) ? $this->_storeId : $storeId);
 
-        $name = $this->_getProductName('name', $productId, $storeId);
-        $ricardoTitle = $this->_getProductName('ricardo_title', $productId, $storeId);
+        $titles = array(
+            'ricardo_title',
+            'name'
+        );
 
-        if ($storeId == Mage_Core_Model_App::ADMIN_STORE_ID && empty($name) && empty($ricardoTitle)) {
+        $returnedTitle = null;
+
+        foreach ($this->getStoresList($storeId) as $id) {
+            if (is_null($id)) {
+                continue;
+            }
+            foreach ($titles as $title) {
+                $returnedTitle = $this->_getProductVarchar($title, $productId, $id);
+                if ($returnedTitle) {
+                    break;
+                }
+            }
+            if ($returnedTitle) {
+                break;
+            }
+        }
+
+        if (empty($returnedTitle)) {
             return '';
-        }
-
-        // Get default values if nothing found
-        if (empty($name)){
-            $name = $this->_getProductName('name', $productId);
-        }
-
-        if (empty($ricardoTitle)) {
-            $ricardoTitle = $this->_getProductName('ricardo_title', $productId);
-        }
-
-        // If really nothing found, return empty string
-        if (empty($name) && empty($ricardoTitle)) {
-            return '';
-        }
-
-        $title = $ricardoTitle;
-
-        if (empty($title)) {
-            $title = $name;
-        }
-
-        if ($sub && !empty($title)) {
-            return mb_substr($title, 0, Diglin_Ricento_Model_Validate_Products_Item::LENGTH_PRODUCT_TITLE);
+        } else if ($sub && !empty($returnedTitle)) {
+            return mb_substr($returnedTitle, 0, Diglin_Ricento_Model_Validate_Products_Item::LENGTH_PRODUCT_TITLE);
         } else {
-            return $title;
+            return $returnedTitle;
         }
     }
 
@@ -211,12 +230,19 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      * @param bool $sub
      * @return array|string
      */
-    public function getSubtitle($productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID, $sub = true)
+    public function getSubtitle($productId = null, $storeId = null, $sub = true)
     {
         $productId = (int) (is_null($productId) ? $this->_productId : $productId);
         $storeId = (int) (is_null($storeId) ? $this->_storeId : $storeId);
 
-        $subtitle = $this->_getProductName('ricardo_subtitle', $productId, $storeId);
+        $subtitle = '';
+
+        foreach ($this->getStoresList($storeId) as $id) {
+            $subtitle = $this->_getProductVarchar('ricardo_subtitle', $productId, $id);
+            if ($subtitle) {
+                break;
+            }
+        }
 
         if (empty($subtitle)) {
             return '';
@@ -233,63 +259,128 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      * @param bool $sub
      * @return mixed|string
      */
-    public function getDescription($productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID, $sub = true)
+    public function getDescription($productId = null, $storeId = null, $sub = true)
     {
         $productId = (int) (is_null($productId) ? $this->_productId : $productId);
         $storeId = (int) (is_null($storeId) ? $this->_storeId : $storeId);
 
-        $productDescription = $this->_getProductDescription('description', $productId, $storeId);
-        $ricardoDescription = $this->_getProductDescription('ricardo_description', $productId, $storeId);
+        $descriptions = array(
+            'ricardo_description',
+            'description'
+        );
 
-        if ($storeId == Mage_Core_Model_App::ADMIN_STORE_ID && empty($productDescription) && empty($ricardoDescription)) {
+        $returnedDescription = null;
+
+        foreach ($this->getStoresList($storeId) as $id) {
+            if (is_null($id)) {
+                continue;
+            }
+            foreach ($descriptions as $description) {
+                $returnedDescription = $this->_getProductText($description, $productId, $id);
+                if ($returnedDescription) {
+                    break;
+                }
+            }
+            if ($returnedDescription) {
+                break;
+            }
+        }
+
+        if (empty($returnedDescription)) {
             return '';
+        } else if ($sub) {
+            return mb_substr($returnedDescription, 0, Diglin_Ricento_Model_Validate_Products_Item::LENGTH_PRODUCT_DESCRIPTION);
+        } else {
+            return $returnedDescription;
         }
-
-        // Get default values if nothing found
-        if (empty($productDescription)){
-            $productDescription = $this->_getProductDescription('description', $productId);
-        }
-
-        if (empty($ricardoDescription)) {
-            $ricardoDescription = $this->_getProductDescription('ricardo_description', $productId);
-        }
-
-        // If really nothing found, return empty string
-        if (empty($productDescription) && empty($ricardoDescription)) {
-            return '';
-        }
-
-        $description = $ricardoDescription;
-
-        if (empty($description)) {
-            $description = $productDescription;
-        }
-
-
-        if ($sub) {
-            $description = mb_substr($description, 0, Diglin_Ricento_Model_Validate_Products_Item::LENGTH_PRODUCT_DESCRIPTION);
-        }
-
-        return Mage::helper('core')->escapeHtml($description);
     }
 
     /**
-     * @param null|int $productId
-     * @param int $storeId
      * @return float
      */
-    public function getPrice($productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function getPrice()
     {
-        $productId = (int) (is_null($productId) ? $this->_productId : $productId);
-        $storeId = (int) (is_null($storeId) ? $this->_storeId : $storeId);
-
         $salesOptions = $this->getProductListingItem()->getSalesOptions();
 
         //@todo do the conversion from a non supported currency to the supported currency - at the moment we do not support this feature
 
-        $price = $this->_getProductPrice($salesOptions->getPriceSourceAttributeCode(), $productId, $storeId);
+        $price = $this->_getProductPrice($salesOptions->getPriceSourceAttributeCode());
 
         return Mage::helper('diglin_ricento')->calculatePriceChange($price, $salesOptions->getPriceChangeType(), $salesOptions->getPriceChange());
+    }
+
+    /**
+     * @param null $productId
+     * @return string
+     */
+    public function getSku($productId = null)
+    {
+        if (!is_null($productId) && !is_null($this->_model) && $this->_model->getId() && $this->_model->getId() == $productId) {
+            return $this->_model->getSku();
+        }
+
+        $productId = (int) (is_null($productId) ? $this->_productId : $productId);
+
+        if (is_null($productId)) {
+            return false;
+        }
+
+        $readConnection = $this->_getReadConnection();
+
+        $select = $readConnection
+            ->select()
+            ->from(Mage::getSingleton('core/resource')->getTableName('catalog_product_entity'), 'sku')
+            ->where('`entity_id` = ?', $productId);
+
+        return $readConnection->fetchOne($select);
+    }
+
+    /**
+     * @param null $productId
+     * @param int $storeId
+     * @return array
+     */
+    public function getCondition($productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
+    {
+        return $this->_getProductVarchar('ricardo_condition', $productId, $storeId);
+    }
+
+    /**
+     * @param int|null $productId
+     * @return array|bool
+     */
+    public function getAssignedImages($productId = null)
+    {
+        if (is_null($productId) && $this->_model && $this->_model->getId()) {
+            $productId = $this->_model->getId();
+        } elseif (is_null($productId) && $this->_productId) {
+            $productId = $this->_productId;
+        }
+
+        if (!is_numeric($productId)) {
+            return false;
+        }
+
+        $stores = $this->getStoresList($this->_storeId);
+
+        if ($this->_model &&  $this->_model->getId()) {
+            $product =  $this->_model;
+        } else {
+            // No load - Better performance but we need a catalog product model
+            $product = Mage::getModel('catalog/product')->setId($productId);
+        }
+
+        $mediaConfig = Mage::getSingleton('catalog/product_media_config');
+
+        $images = Mage::getResourceModel('catalog/product')->getAssignedImages($product, $stores);
+
+        foreach ($images as &$image) {
+            if (isset($image['filepath'])) {
+                $image['filepath'] = $mediaConfig->getMediaPath($image['filepath']);
+            }
+        }
+
+        return $images;
     }
 
     /**
@@ -376,7 +467,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     public function getStockItem()
     {
         if (is_null($this->_model) && $this->_productId < 0) {
-            throw new Exception('Product Model must be instanciated first');
+            throw new Exception('Product Model must be init first');
         }
 
         $productId = !is_null($this->_model) ? $this->_model->getId() : $this->_productId;
@@ -384,6 +475,9 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
         return Mage::getModel('cataloginventory/stock_item')->loadByProduct($productId);
     }
 
+    /**
+     * @return Mage_Core_Model_Resource
+     */
     protected function _getCoreResource()
     {
         return Mage::getSingleton('core/resource');
@@ -394,7 +488,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      */
     protected function _getReadConnection()
     {
-        return $this->_getCoreResource()->getReadConnection();
+        return $this->_getCoreResource()->getConnection('core_read');
     }
 
     /**
@@ -403,7 +497,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      * @param int $storeId
      * @return array
      */
-    protected function _getProductName($field, $productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
+    protected function _getProductVarchar($field, $productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
     {
         $readConnection = $this->_getReadConnection();
 
@@ -426,7 +520,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      * @param int $storeId
      * @return string
      */
-    protected function _getProductDescription($field, $productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
+    protected function _getProductText($field, $productId = null, $storeId = Mage_Core_Model_App::ADMIN_STORE_ID)
     {
         $readConnection = $this->_getReadConnection();
 
@@ -467,7 +561,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
     /**
      * @param $field
-     * @return string
+     * @return float|null
      */
     protected function _getSimpleProductBasePrice($field = null)
     {
@@ -486,20 +580,25 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
                 array()
             )
             ->where('`cped`.`entity_id` = ?', (int) $this->getProductId())
-            ->where('`cped`.`store_id` = ?', (int) $this->getStoreId());
+            ->where('`cped`.`store_id` = ?', $this->_defaultStoreId);
 
-        return $readConnection->fetchOne($select);
+        $price = $readConnection->fetchOne($select);
+
+        //@todo calculate price with incl tax if price catalog doesn't include it
+        //Mage::helper('tax')->getPrice($product, $_finalPrice, true);
+
+        return $price;
     }
 
     /**
      * Get price of total associated products with default qty
      * Special price not supported by grouped product type
      *
-     * @return int|null
+     * @return float|null
      */
     protected function _getGroupedProductBasePrice()
     {
-        if ($this->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
+        if (!$this->isGroupedType()) {
             return null;
         }
 
@@ -516,7 +615,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
             foreach ($this->_associatedProducts as $associatedProduct) {
 
                 // Ricardo is a C2C/B2C platform, price always with tax included
-                $priceInclTax = Mage::helper('tax')->getPrice($associatedProduct, $associatedProduct->getPrice(), true, null, null, null, $this->getStoreId());
+                $priceInclTax = Mage::helper('tax')->getPrice($associatedProduct, $associatedProduct->getPrice(), true, null, null, null, $this->_defaultStoreId);
 
                 // Set default qty = 1 when qty = 0
                 $totalPrice += (((!$associatedProduct->getQty()) ? $associatedProduct->getQty() : $defaultQty) * $priceInclTax);
@@ -528,11 +627,11 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
     /**
      * @param float|int $productPrice
-     * @return null
+     * @return null|float
      */
     protected function _getConfigurableProductBasePrice($productPrice)
     {
-        if ($this->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE) {
+        if (!$this->isConfigurableType()) {
             return null;
         }
 
@@ -555,7 +654,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
                     }
 
                     if (isset($optionPrices[$i])) {
-                    $finalMinPrice += min($optionPrices[$i]);
+                        $finalMinPrice += min($optionPrices[$i]);
                     }
                     $i++;
                 }
@@ -617,6 +716,24 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     public function getStoreId()
     {
         return $this->_storeId;
+    }
+
+    /**
+     * @param null $defaultStoreId
+     * @return $this
+     */
+    public function setDefaultStoreId($defaultStoreId)
+    {
+        $this->_defaultStoreId = $defaultStoreId;
+        return $this;
+    }
+
+    /**
+     * @return null
+     */
+    public function getDefaultStoreId()
+    {
+        return $this->_defaultStoreId;
     }
 
     /**

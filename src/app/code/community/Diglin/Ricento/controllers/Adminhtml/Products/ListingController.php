@@ -365,7 +365,71 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->_getSession()->addError($this->__('It\'s s not possible to list the product listing. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
         } catch (Exception $e) {
             Mage::logException($e);
-            $this->_getSession()->addError($this->__('An error occured while listing your products. Please check your log file.'));
+            $this->_getSession()->addError($this->__('An error occurred while listing your products. Please check your log file.'));
+        }
+
+        $this->_redirect('*/*/index');
+    }
+
+    /**
+     * Action used to list the products to ricardo.ch when the cron job which check the products listing finished with warnings
+     */
+    public function forceListAction()
+    {
+        // @todo check this process to force to list the products
+        $productListing = $this->_initListing();
+
+        if (!$productListing) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+        if ($this->_getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+            $this->_getSession()->addError($this->__('Listing "%s" is already listed. To list new items again, use "Relist"', $productListing->getTitle()));
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        if (!$this->isApiReady()) {
+            $this->_getSession()->addError($this->__('The API token and configuration are not ready to allow this action. Please, check that your token is enabled and not going to expire.'));
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        try {
+            $totalItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->countNotListedItems($productListing->getId());
+
+            if ($totalItems === 0) {
+                $this->_getSession()->addError($this->__('There is no product to list. Please, add products to your products listing "%s".', $productListing->getTitle()));
+                $this->_redirect('*/*/edit', array('id' => $productListing->getId()));
+                return;
+            }
+
+            // Create a job to prepare the sync to Ricardo.ch
+
+            $job = Mage::getModel('diglin_ricento/sync_job');
+            $job
+                ->setJobType(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST)
+                ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
+                ->setJobMessage($job->getJobMessage())
+                ->save();
+
+            $jobListing = Mage::getModel('diglin_ricento/sync_job_listing');
+            $jobListing
+                ->setProductsListingId($productListing->getId())
+                ->setTotalCount($totalItems)
+                ->setTotalProceed(0)
+                ->setJobId($job->getId())
+                ->save();
+
+            $this->_getSession()->addSuccess($this->__('The job to check your products listing will start in few moment if it finishes with success, your products listing will be listed. Check the progression below.'));
+            $this->_redirect('*/log/sync', array('id' => $job->getId()));
+            return;
+        } catch (Diglin_Ricento_Exception $e) {
+            Mage::logException($e);
+            $this->_getSession()->addError($this->__('It\'s s not possible to list the product listing. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
+        } catch (Exception $e) {
+            Mage::logException($e);
+            $this->_getSession()->addError($this->__('An error occurred while listing your products. Please check your log file.'));
         }
 
         $this->_redirect('*/*/index');
