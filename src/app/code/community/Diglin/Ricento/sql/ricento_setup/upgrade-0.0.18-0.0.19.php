@@ -27,11 +27,4 @@ $installer->getConnection()->addColumn($shippingPaymentRule, 'shipping_cumulativ
     'after' => 'shipping_package',
     'comment' => 'Shipping Cumulative Fee'));
 
-$installer->getConnection()->addColumn(
-    $installer->getTable('diglin_ricento/products_listing_item'), 'ricardo_sku', array(
-        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'length' => 255,
-        'nullable' => true,
-        'comment' => 'Ricardo SKU'));
-
 $installer->endSetup();
