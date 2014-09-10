@@ -579,7 +579,7 @@ Ricento.GeneralForm.prototype = {
                 t.each(function(item) {
                     item.disabled = true;
                 });
-                $(self.htmlIdPrefix + 'lang_' + lang + '_store_id').disabled = false;
+                $(self.htmlIdPrefix + 'lang_store_id_' + lang).disabled = false;
                 self._showHideLangFields(lang, 'block');
 
             } else if (e.value == 'all'){

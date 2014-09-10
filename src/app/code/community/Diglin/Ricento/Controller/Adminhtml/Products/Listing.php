@@ -43,7 +43,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
             $data['product_listing']['default_language'] = $data['product_listing']['publish_languages'];
             foreach (Mage::helper('diglin_ricento')->getSupportedLang() as $lang) {
                 if ($data['product_listing']['publish_languages'] != $lang) {
-                    $data['product_listing']['lang_'. $lang .'_store_id'] = null;
+                    $data['product_listing']['lang_store_id_' . $lang] = null;
                 }
             }
         }

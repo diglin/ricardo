@@ -20,7 +20,7 @@ foreach ($languages as $lang) {
     if (empty($lang)) {
         continue;
     }
-    $columnName = 'lang_' . $lang . '_store_id';
+    $columnName = 'lang_store_id_' . $lang ;
     $installer->getConnection()->addColumn($productsListingTable, $columnName, array(
         'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
         'nullable' => true,

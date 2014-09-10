@@ -63,8 +63,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
 
         foreach ($languages as $lang) {
             $title = Mage::helper('catalog')->__('Store View for ' . ucwords(Mage::app()->getLocale()->getTranslation($lang, 'language')));
-            $fieldsetLang->addField('lang_'. $lang .'_store_id', 'select', array(
-                'name'      => 'product_listing[lang_'. $lang .'_store_id]',
+            $fieldsetLang->addField('lang_store_id_'. $lang, 'select', array(
+                'name'      => 'product_listing[lang_store_id_]' . $lang,
                 'label'     => $title,
                 'title'     => $title,
                 'class'     => 'lang_store_id',
@@ -92,7 +92,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
             $languages = Mage::helper('diglin_ricento')->getSupportedLang();
             foreach ($languages as $lang) {
                 if ($publishLanguages != $lang) {
-                    $this->getForm()->getElement('lang_'. strtolower($lang) .'_store_id')->setDisabled(true);
+                    $this->getForm()->getElement('lang_store_id_' . strtolower($lang))->setDisabled(true);
                 }
             }
         }

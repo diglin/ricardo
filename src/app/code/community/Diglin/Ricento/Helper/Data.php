@@ -8,6 +8,8 @@
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
 
+use Diglin\Ricardo\Enums\System\LanguageId;
+
 /**
  * Class Diglin_Ricento_Helper_Data
  *
@@ -33,7 +35,6 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const CFG_SUPPORTED_LANG = 'ricento/api_config/lang';
     const DEFAULT_SUPPORTED_LANG = 'de';
     const LANG_ALL = 'all';
-
 
     const CFG_SHIPPING_CALCULATION = 'ricento/global/shipping_calculation';
 
@@ -255,8 +256,8 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
             $lang = substr(strtolower($lang), 0, 2);
         }
 
-        if (in_array($lang, $this->getSupportedLang())) {
-            $lang = 'de';
+        if (!in_array($lang, $this->getSupportedLang())) {
+            $lang = self::DEFAULT_SUPPORTED_LANG;
         }
 
         return $lang;
@@ -270,6 +271,28 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     public function getSupportedLang()
     {
         return explode(',', strtolower(Mage::getStoreConfig(self::CFG_SUPPORTED_LANG)));
+    }
+
+    /**
+     * @param null|string $lang
+     * @return int
+     */
+    public function getRicardoLanguageIdFromLocaleCode($lang = null)
+    {
+        $lang = $this->_getLocaleCodeForApiConfig($lang);
+        switch ($lang) {
+            case 'de':
+                $langId = LanguageId::GERMAN;
+                break;
+            case 'fr':
+                $langId = LanguageId::FRENCH;
+                break;
+            default:
+                $langId = LanguageId::NONE;
+                break;
+        }
+
+        return $langId;
     }
 
     /**
@@ -446,24 +469,29 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         $stores = array();
+        $baseMethod = 'getLangStoreId';
         $defaultLang = $productsListing->getDefaultLanguage();
         $publishLang = $productsListing->getPublishLanguages();
 
         if ($publishLang != Diglin_Ricento_Helper_Data::LANG_ALL) {
-            $method = 'getLang'.ucwords($publishLang).'StoreId';
+            $method =  $baseMethod . ucwords($publishLang);
             $stores[] = $productsListing->$method();
         } else {
             $supportedLang = Mage::helper('diglin_ricento')->getSupportedLang();
 
             // We set default lang at first position
-            $method = 'getLang'.ucwords($defaultLang).'StoreId';
+            $method = $baseMethod . ucwords($defaultLang);
             $stores[] = $productsListing->$method();
 
             foreach ($supportedLang as $lang) {
+
+                // Prevent to have the default language twice
+
                 if (strtolower($lang) == strtolower($defaultLang)) {
                     continue;
                 }
-                $method = 'getLang'.ucwords($lang).'StoreId';
+
+                $method = $baseMethod . ucwords($lang);
                 $stores[] = $productsListing->$method();
             }
         }
