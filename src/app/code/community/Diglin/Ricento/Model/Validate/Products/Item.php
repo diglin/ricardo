@@ -49,9 +49,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 
         foreach ($stores as $store) {
 
-            $item
-                //->setReload(true) // @todo reload is a bottleneck but we need it to use it to get correct value of "HasOptions" below
-                ->setStoreId($store);
+            $item->setStoreId($store);
 
             $storeCode = Mage::app()->getStore($store)->getName();
 
@@ -78,13 +76,17 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
                 // warning - content will be cut when exporting to ricardo
                 $this->_warnings[] = $helper->__('Product Description will be cut after %s characters when published on ricardo.ch for store "%s"', self::LENGTH_PRODUCT_DESCRIPTION, $storeCode);
             }
+        }
 
-            // Validate custom options
+        // Reinit the product to default store
 
-            if (!$item->getMagentoProduct()->hasOptions()) {
-                // warning - no option will be send to ricardo.ch
-                $this->_warnings[] = $helper->__('Custom Options are not supported. Those won\'t be synchronized into ricardo.ch for store "%s"', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY, $storeCode);
-            }
+        $item->getMagentoProduct()->setStoreId(Mage_Core_Model_App::ADMIN_STORE_ID);
+
+        // Validate custom options
+
+        if (!$item->getMagentoProduct()->hasOptions()) {
+            // warning - no option will be send to ricardo.ch
+            $this->_warnings[] = $helper->__('Custom Options are not supported. Those won\'t be synchronized into ricardo.ch.', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY);
         }
 
         // Validate products listing item
@@ -103,12 +105,12 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
             } else {
                 $qty = $salesOptionsStockManagement;
                 // if stock managed, check there is enough quantity compared to $salesOptionsStockManagement
-                // if stock is not managed => ok
+                // if stock is not managed => ok (default qty will be set to 1)
             }
 
             if (!$item->getProduct()->checkQty($qty) || !$stockItem->getIsInStock()) {
                 // Error - Qty not available or not in stock
-                $this->_errors[] = $helper->__('The product or its associated products is/are not in stock or doesn\'t have enough quantity in stock  for store "%s"', $storeCode);
+                $this->_errors[] = $helper->__('The product or its associated products is/are not in stock or doesn\'t have enough quantity in stock.');
             }
         }
 
@@ -122,8 +124,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 
         // Validate Category exists
 
-        $ricardoCategoryId = $item->getCategory();
-        if (!$ricardoCategoryId) {
+        if (!$item->getCategory()) {
             // error - category cannot be empty
             $this->_errors[] = $helper->__('You MUST define a ricardo category for this product. Check that you set it at products listing level or at Magento category level.');
         }
@@ -145,7 +146,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
         // Validate price against buy now price > 0.05 or 0.1
 
         $salesOptions = $item->getSalesOptions();
-        $productPrice = $item->getProduct()->getPrice();
+        $productPrice = $item->getProductPrice();
         if ($salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION && $salesOptions->getSalesAuctionDirectBuy()) {
             $startPrice = $salesOptions->getSalesAuctionStartPrice();
             $minPrice = ($startPrice < 0.1) ? 0.1 : $startPrice;
@@ -158,7 +159,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
             }
         }
 
-        if ($salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUY_NOW) {
+        if ($salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW) {
             $betweenValidator  = new Zend_Validate_Between(
                 array(
                     'min' => self::BUYNOW_MINPRICE_FIXPRICE,
@@ -185,7 +186,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 
         if (!$betweenValidator->isValid($period)) {
             // Error - Period too long or too short
-            $this->_errors[] = $helper->__('The ending date is too early or too late. Minimum period allow %s days - Maximum period allowed %s days', self::PERIOD_DAYS_MIN, self::PERIOD_DAYS_MAX);
+            $this->_errors[] = $helper->__('The ending date is too early or too late. Minimum period allowed: %s days - Maximum period allowed: %s days', self::PERIOD_DAYS_MIN, self::PERIOD_DAYS_MAX);
         }
 
         // Validate picture - warning if promotions exists but no picture
