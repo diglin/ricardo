@@ -75,9 +75,9 @@ class Diglin_Ricento_Block_Adminhtml_Sync_Log_Grid extends Mage_Adminhtml_Block_
             'options'   => Mage::getSingleton('diglin_ricento/config_source_sync_status')->toOptionHash()
         ));
 
-        $dateFormatIso = Mage::app()->getLocale()->getDateTimeFormat(
-            Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM
-        );
+        $locale = Mage::app()->getLocale();
+        $dateFormatIso = $locale->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT)
+            . ' ' . $locale->getTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
 
         $this->addColumn('started_at', array(
             'header' => $this->__('Started at') ,

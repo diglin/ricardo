@@ -13,7 +13,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
     {
         parent::__construct();
         $this->setId('itemLogGrid');
-        $this->setDefaultSort('log_id');
+        $this->setDefaultSort('created_at');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
     }
@@ -52,7 +52,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
         ));
 
         $this->addColumn('title', array(
-            'header' => $this->__('Listing Title') ,
+            'header' => $this->__('Listing Title'),
             'align' => 'left',
             'index' => 'title',
             'type' => 'text',
