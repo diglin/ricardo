@@ -38,6 +38,7 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
     // PROGRESS
     const PROGRESS_PENDING      = 'pending';
     const PROGRESS_RUNNING      = 'running';
+    const PROGRESS_CHUNK_RUNNING = 'chunk_running';
     const PROGRESS_COMPLETED    = 'completed';
     const PROGRESS_READY        = 'ready';
 
@@ -95,12 +96,12 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
         } else {
             switch ($this->getJobType()) {
                 case self::TYPE_CHECK_LIST:
-                    if ($this->getProgress() == self::PROGRESS_PENDING) {
+                    if (in_array($this->getProgress(), array(self::PROGRESS_PENDING, self::PROGRESS_CHUNK_RUNNING))) {
                         return $helper->__('Check in progress...');
                     }
                 break;
                 case self::TYPE_LIST:
-                    if ($this->getProgress() == self::PROGRESS_PENDING) {
+                    if (in_array($this->getProgress(), array(self::PROGRESS_PENDING, self::PROGRESS_CHUNK_RUNNING))) {
                         return $helper->__('List in progress...');
                     }
                     break;

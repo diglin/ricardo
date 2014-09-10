@@ -12,18 +12,6 @@ $installer = $this;
 
 $installer->startSetup();
 
-$shippingPaymentRuleTable = $installer->getTable('diglin_ricento/shipping_payment_rule');
-
-$installer->getConnection()->changeColumn($shippingPaymentRuleTable, 'shipping_description', 'shipping_description_de', array(
-    'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-    'nullable' => true,
-    'after' => 'shipping_cumulative_fee',
-    'comment' => 'Shipping Description DE'));
-
-$installer->getConnection()->addColumn($shippingPaymentRuleTable, 'shipping_description_fr', array(
-    'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-    'nullable' => true,
-    'after' => 'shipping_cumulative_fee',
-    'comment' => 'Shipping Description FR'));
+$installer->run("ALTER TABLE " . $installer->getTable('diglin_ricento/sync_job') . " CHANGE `progress` `progress` ENUM('pending', 'ready', 'running', 'chunk_running', 'completed') NOT NULL AFTER job_type");
 
 $installer->endSetup();
