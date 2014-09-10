@@ -9,7 +9,7 @@
  */
 
 /**
- * Class Diglin_Ricento_Model_Api_Services_Security
+ * Class Diglin_Ricento_Model_Api_Services_System
  */
 class Diglin_Ricento_Model_Api_Services_System extends Diglin_Ricento_Model_Api_Services_Abstract
 {

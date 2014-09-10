@@ -14,7 +14,7 @@
 class Diglin_Ricento_Model_Config_Source_Sales_Type extends Diglin_Ricento_Model_Config_Source_Abstract
 {
     const AUCTION = 'auction';
-    const BUY_NOW = 'buynow';
+    const BUYNOW = 'buynow';
 
     /**
      * @return array
@@ -26,7 +26,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Type extends Diglin_Ricento_Model
         return array(
             '' => $helper->__('-- Please Select --'),
             self::AUCTION  => $helper->__('Auction'),
-            self::BUY_NOW => $helper->__('Buy now')
+            self::BUYNOW => $helper->__('Buy now')
         );
     }
 }
