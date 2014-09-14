@@ -480,14 +480,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setPaymentMethodIds($paymentMethods)
             ->setTemplateId($customTemplate);
 
-        if ($this->_salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
-
-            if ($this->_salesOptions->getScheduleOverwriteProductDateStart()) {
-                $startDate = $this->getProductsListing()->getSalesOptions()->getScheduleDateStart();
-            } else {
-                $startDate = $this->_salesOptions->getScheduleDateStart();
-            }
-
+        if (!is_null($startDate)) {
             $startDate = strtotime($startDate);
 
             if ($startDate < (time() + 60*60)) {
@@ -495,13 +488,20 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             }
 
             $articleInformation
-                ->setIncrement($this->_salesOptions->getSalesAuctionIncrement())
-                ->setStartDate(Helper::getJsonDate($startDate))
-                ->setStartPrice($this->_salesOptions->getSalesAuctionStartPrice());
+                ->setStartDate(Helper::getJsonDate($startDate));
         }
 
-        if ($this->_salesOptions->getSalesAuctionDirectBuy() || $this->_salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW) {
+        if ($this->_salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
+            $articleInformation
+                ->setIncrement($this->_salesOptions->getSalesAuctionIncrement())
+                ->setStartPrice($this->_salesOptions->getSalesAuctionStartPrice());
+
+            if ($this->_salesOptions->getSalesAuctionDirectBuy()) {
             $promotionIds[] = PromotionCode::BUYNOW;
+            }
+        }
+
+        if ($this->_salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW || $this->_salesOptions->getSalesAuctionDirectBuy()) {
             $articleInformation->setBuyNowPrice($this->getProductPrice());
         }
 

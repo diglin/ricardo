@@ -337,8 +337,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         }
         if ($this->getSalesOptions()->getScheduleDateStart() == null) {
             $derivedValues['schedule_date_start_immediately'] = 1;
-            $dateStart = new DateTime();
-            $derivedValues['schedule_date_start'] = $dateStart->format(Varien_Date::DATETIME_PHP_FORMAT);
         }
         if (!in_array($this->getSalesOptions()->getSchedulePeriodDays(), $this->_getDaysOptions()->toOptionHash())) {
             $derivedValues['schedule_period_use_end_date'] = 1;

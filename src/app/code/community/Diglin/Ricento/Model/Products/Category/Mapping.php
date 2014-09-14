@@ -6,6 +6,7 @@
 class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
 {
     const ROOT_CATEGORY_ID = 1;
+
     /**
      * Root element for category tree
      *
