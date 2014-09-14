@@ -10,8 +10,7 @@
 namespace Diglin\Ricardo\Exceptions;
 
 /**
- * Class SecurityErrors
+ * Class CustomerException
  * @package Diglin\Ricardo\Exceptions
- * @link https://ws.ricardo.ch/RicardoApi/documentation/html/T_Ricardo_Enums_SecurityErrors.htm
  */
-class SecurityErrors extends ExceptionAbstract {}
+class CustomerException extends ExceptionAbstract {}
