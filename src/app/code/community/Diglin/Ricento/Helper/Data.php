@@ -69,7 +69,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isEnabled($website = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function isEnabled($website = 0)
     {
         return self::getWebsiteConfigFlag(self::CFG_ENABLED, $website);
     }
@@ -140,7 +140,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isDevMode($website = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function isDevMode($website = 0)
     {
         return self::getWebsiteConfigFlag(self::CFG_DEV_MODE, $website);
     }
@@ -151,7 +151,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isConfigured($website = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function isConfigured($website = 0)
     {
         $configured = false;
         $configuredAccount = (!$this->canSimulateAuthorization() || ($this->canSimulateAuthorization() && $this->getRicardoUsername($website) && $this->getRicardoPass($website))) ? true : false;
@@ -176,7 +176,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function isDebugEnabled($website = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function isDebugEnabled($website = 0)
     {
         return self::getWebsiteConfigFlag(self::CFG_DEBUG_MODE, $website);
     }
@@ -198,7 +198,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return bool
      */
-    public function canSimulateAuthorization($website = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function canSimulateAuthorization($website = 0)
     {
         return self::getWebsiteConfigFlag(self::CFG_SIMULATE_AUTH, $website);
     }
@@ -210,7 +210,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getPartnerId($lang = null, $website = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function getPartnerId($lang = null, $website = 0)
     {
         $lang = $this->_getLocaleCodeForApiConfig($lang);
         return self::getWebsiteConfig(self::CFG_RICARDO_PARTNERID . $lang, $website);
@@ -223,7 +223,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getPartnerPass($lang = null, $website = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function getPartnerPass($lang = null, $website = 0)
     {
         $lang = $this->_getLocaleCodeForApiConfig($lang);
         return Mage::helper('core')->decrypt(self::getWebsiteConfig(self::CFG_RICARDO_PARTNERPASS . $lang, $website));
@@ -301,7 +301,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getRicardoUsername($website = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function getRicardoUsername($website = 0)
     {
         return self::getWebsiteConfig(self::CFG_RICARDO_USERNAME, $website);
     }
@@ -312,7 +312,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getRicardoPass($website = Mage_Core_Model_App::ADMIN_STORE_ID)
+    public function getRicardoPass($website = 0)
     {
         return Mage::helper('core')->decrypt(self::getWebsiteConfig(self::CFG_RICARDO_PASSWORD, $website));
     }
@@ -475,13 +475,17 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 
         if ($publishLang != Diglin_Ricento_Helper_Data::LANG_ALL) {
             $method =  $baseMethod . ucwords($publishLang);
-            $stores[] = $productsListing->$method();
+            if (method_exists($productsListing, $method)) {
+                $stores[] = (int) $productsListing->$method();
+            }
         } else {
             $supportedLang = Mage::helper('diglin_ricento')->getSupportedLang();
 
             // We set default lang at first position
             $method = $baseMethod . ucwords($defaultLang);
-            $stores[] = $productsListing->$method();
+            if (method_exists($productsListing, $method)) {
+                $stores[] = (int) $productsListing->$method();
+            }
 
             foreach ($supportedLang as $lang) {
 
@@ -492,7 +496,9 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
                 }
 
                 $method = $baseMethod . ucwords($lang);
-                $stores[] = $productsListing->$method();
+                if (method_exists($productsListing, $method)) {
+                    $stores[] = (int) $productsListing->$method();
+                }
             }
         }
 

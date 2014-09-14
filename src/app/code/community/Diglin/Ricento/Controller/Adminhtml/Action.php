@@ -33,7 +33,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Action extends Mage_Adminhtml
         $productsListing = Mage::getModel('diglin_ricento/products_listing')->load($id);
         Mage::register('products_listing', $productsListing);
 
-        return $productsListing;
+        return $this->_getListing();
     }
 
     /**

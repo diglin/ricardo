@@ -62,6 +62,8 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
                         Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($securityServiceModel->getCredentialTokenSessionDuration(), $securityServiceModel->getCredentialTokenSessionStart()))
                     ->save();
 
+                $this->_getSession()->addSuccess($this->__('Your Ricardo account has been authorized to get access to the API.'));
+
                 // @todo add catch for security authorization exception
 
             } catch (Exception $e) {
