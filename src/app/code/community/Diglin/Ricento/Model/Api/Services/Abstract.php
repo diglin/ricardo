@@ -158,6 +158,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
      * @return mixed|Varien_Object
      * @throws \Diglin\Ricardo\Exceptions\ExceptionAbstract
      * @throws Diglin_Ricento_Exception
+     * @throws Exception
      */
     public function __call($method, $args)
     {
@@ -230,20 +231,9 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
             }
         } catch (\Diglin\Ricardo\Exceptions\CurlException $e) {
             Mage::logException($e);
-            Mage::getSingleton('core/session')
-                ->addError($helper->__('Error while trying to connect to the Ricardo API. Please, check your log files.'));
-            return null;
+            throw new Exception($helper->__('Error while trying to connect to the Ricardo API. Please, check your log files.'));
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
-            Mage::logException($e);
-
-            if ($e->getCode() == \Diglin\Ricardo\Enums\SecurityErrors::TOKEN_AUTHORIZATION) {
-                $ricentoException = new Diglin_Ricento_Exception($e->getMessage(), $e->getCode());
-                $ricentoException->setNeedAuthorization(true);
-                $ricentoException->setValidationUrl($this->getServiceManager()->getSecurityManager()->getValidationUrl());
-                $this->_cleanupCredentialToken();
-                throw $ricentoException;
-            }
-            throw $e;
+            $this->_handleSecurityException($e);
         }
 
         Varien_Profiler::stop($profilerName);
@@ -336,7 +326,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     }
 
     /**
-     * Delete a specific token from the database
+     * Delete the credential token from the database
      *
      * @return $this
      */
@@ -361,7 +351,23 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                 )
             ->save();
 
-
         return $this;
+    }
+
+    /**
+     * @param Exception $e
+     * @throws Exception
+     * @throws Diglin_Ricento_Exception
+     */
+    protected function _handleSecurityException(Exception $e)
+    {
+        if ($e->getCode() == \Diglin\Ricardo\Enums\SecurityErrors::TOKEN_AUTHORIZATION) {
+            $ricentoException = new Diglin_Ricento_Exception($e->getMessage(), $e->getCode());
+            $ricentoException->setNeedAuthorization(true);
+            $ricentoException->setValidationUrl($this->getServiceManager()->getSecurityManager()->getValidationUrl());
+            $this->_cleanupCredentialToken();
+            throw $ricentoException;
+        }
+        throw $e;
     }
 }
