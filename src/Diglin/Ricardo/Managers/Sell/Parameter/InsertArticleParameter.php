@@ -183,11 +183,16 @@ class InsertArticleParameter extends ParameterAbstract
      * @param bool $clear
      * @return $this
      */
-    public function setPictures(ArticlePictureParameter $pictures, $clear = false)
+    public function setPictures(ArticlePictureParameter $pictures = null, $clear = false)
     {
         if ($clear) {
             $this->_pictures = array();
         }
+
+        if (is_null($pictures)) {
+            return $this;
+        }
+
         $this->_pictures[] = $pictures;
         return $this;
     }

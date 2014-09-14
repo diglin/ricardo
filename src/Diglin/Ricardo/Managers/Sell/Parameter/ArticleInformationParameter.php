@@ -50,7 +50,7 @@ class ArticleInformationParameter extends ParameterAbstract
     /**
      * @var int
      */
-    protected $_increment; // optional
+    protected $_increment = null; // optional
 
     /**
      * @var int
@@ -105,7 +105,7 @@ class ArticleInformationParameter extends ParameterAbstract
     /**
      * @var float
      */
-    protected $_startPrice; // optional
+    protected $_startPrice = null; // optional
 
     /**
      * @var int
@@ -261,7 +261,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function setIncrement($increment)
     {
-        $this->_increment = $increment;
+        $this->_increment = (int) $increment;
         return $this;
     }
 
@@ -270,7 +270,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getIncrement()
     {
-        return (int) $this->_increment;
+        return $this->_increment;
     }
 
     /**
@@ -463,7 +463,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function setStartPrice($startPrice)
     {
-        $this->_startPrice = $startPrice;
+        $this->_startPrice =  floatval($startPrice);
         return $this;
     }
 
@@ -472,7 +472,7 @@ class ArticleInformationParameter extends ParameterAbstract
      */
     public function getStartPrice()
     {
-        return floatval($this->_startPrice);
+        return $this->_startPrice;
     }
 
     /**

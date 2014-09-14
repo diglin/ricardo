@@ -14,7 +14,10 @@ use Diglin\Ricardo\Managers\Sell\Parameter\AddArticlePicturesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter;
 
@@ -64,12 +67,39 @@ class Sell extends ManagerAbstract
     }
 
     /**
+     * @param DeletePlannedArticleParameter $parameter
+     * @return array
+     */
+    public function deletePlannedArticle(DeletePlannedArticleParameter $parameter)
+    {
+        return $this->_proceed('DeletePlannedArticle', $parameter);
+    }
+
+    /**
+     * @param DeletePlannedArticlesParameter $parameter
+     * @return array
+     */
+    public function deletePlannedArticles(DeletePlannedArticlesParameter $parameter)
+    {
+        return $this->_proceed('DeletePlannedArticles', $parameter);
+    }
+
+    /**
      * @param InsertArticleParameter $parameter
      * @return array
      */
     public function insertArticle(InsertArticleParameter $parameter)
     {
         return $this->_lastInsertArticle = $this->_proceed('InsertArticle', $parameter);
+    }
+
+    /**
+     * @param InsertArticlesParameter $parameter
+     * @return array
+     */
+    public function insertArticles(InsertArticlesParameter $parameter)
+    {
+        return $this->_proceed('InsertArticles', $parameter);
     }
 
     /**

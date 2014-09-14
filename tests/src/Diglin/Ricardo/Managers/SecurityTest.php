@@ -49,7 +49,7 @@ class SecurityTest extends TestAbstract
     }
 
     /**
-     * @expectedException \Diglin\Ricardo\Exceptions\SecurityErrors
+     * @expectedException \Diglin\Ricardo\Exceptions\SecurityException
      */
     public function testgetCredentialTokenException()
     {

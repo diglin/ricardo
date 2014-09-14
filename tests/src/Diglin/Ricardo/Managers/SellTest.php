@@ -19,7 +19,11 @@ use Diglin\Ricardo\Managers\Sell\Parameter\ArticleDescriptionParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
 
 class SellTest extends TestAbstract
 {
@@ -34,7 +38,26 @@ class SellTest extends TestAbstract
         parent::setUp();
     }
 
-    public function testInsertArticle()
+    /**
+     * @param int $length
+     * @return string
+     */
+    protected function _generateRandomString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $randomString;
+    }
+
+    /**
+     * @param bool $buynow
+     * @param bool $startNow
+     * @return InsertArticleParameter
+     */
+    protected function getArticle($buynow = false, $startNow = false)
     {
         $insertArticleParameter = new InsertArticleParameter();
 
@@ -75,19 +98,27 @@ class SellTest extends TestAbstract
             ->setMainPictureId(1)
             ->setMaxRelistCount(5)
             ->setWarrantyId($warranties[1]['WarrantyId'])
-            ->setPromotionIds(array(
-                PromotionCode::BUYNOW
-            ))
             ->setDeliveries($delivery)
             // optional
             ->setBuyNowPrice(20)
-            ->setIncrement(5)
             ->setInternalReferences($internalReferences)
             ->setPaymentConditionIds(array($paymentConditions[0]['PaymentConditionId']))
             ->setPaymentMethodIds(array($paymentConditions[0]['PaymentMethods'][0]['PaymentMethodId']))
-            ->setStartDate(Helper::getJsonDate(time() + 60*60))
-            ->setStartPrice(5)
             ->setTemplateId(null);
+
+        if (!$startNow || !$buynow) {
+            $articleInformation
+                ->setStartDate(Helper::getJsonDate(time() + 60*60));
+        }
+
+        if (!$buynow) {
+            $articleInformation
+                ->setIncrement(5)
+                ->setStartPrice(5)
+                ->setPromotionIds(array(
+                    PromotionCode::BUYNOW
+                ));
+        }
 
         $descriptions = new ArticleDescriptionParameter();
         $descriptions
@@ -123,28 +154,124 @@ class SellTest extends TestAbstract
             ->setPictures($pictures)
             ->setIsUpdateArticle(false);
 
-
-
-
-        try {
-        $result = $this->_sellManager->insertArticle($insertArticleParameter);
-        } catch (\Exception $e) {
-//            print_r($e);
-            $this->getLastApiDebug(true, false, true);
-            throw $e;
-            return;
-        }
-
-        $this->outputContent($result, 'Insert Article: ', true);
+        return $insertArticleParameter;
     }
 
-    protected function _generateRandomString($length = 10)
+    public function testInsertPlannedArticle()
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        $insertArticleParameter = $this->getArticle();
+
+        try {
+            $result = $this->_sellManager->insertArticle($insertArticleParameter);
+        } catch (\Exception $e) {
+            $this->getLastApiDebug(true, false, true);
+            throw $e;
         }
-        return $randomString;
+
+        $this->assertArrayHasKey('PlannedArticleId', $result, 'Article does not have an article ID');
+        $this->assertArrayHasKey('ArticleFee', $result, 'Article does not have any article fee');
+
+        $this->outputContent($result, 'Insert Article: ');
+
+        $articleId = null;
+        !empty($result['PlannedArticleId']) && $articleId = $result['PlannedArticleId'];
+
+        return $articleId;
+    }
+
+    /**
+     * @depends testInsertPlannedArticle
+     */
+    public function testDeletePlannedArticle($articleId)
+    {
+        $deleteParameter = new DeletePlannedArticleParameter();
+        $deleteParameter
+            ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken())
+            ->setPlannedArticleId($articleId);
+
+        $result = $this->_sellManager->deletePlannedArticle($deleteParameter);
+
+        $this->assertArrayHasKey('PlannedArticleId', $result, 'No PlannedArticleId found');
+        $this->assertArrayHasKey('IsClosed', $result, 'No IsClosed found');
+        $this->assertArrayHasKey('PlannedIndex', $result, 'No PlannedIndex found');
+//        $this->assertEquals($articleId, $result['PlannedArticleId'], 'Article ID returned not equal'); //@fixme the Ricardo API doesn't provide any information if an article is deleted or not with this method
+
+        $this->outputContent($result, 'Delete Planned Article: ');
+    }
+
+    public function testInsertPlannedArticles()
+    {
+        $insertArticles = new InsertArticlesParameter();
+
+        $insertArticles->setArticles($this->getArticle());
+        $insertArticles->setArticles($this->getArticle());
+
+        try {
+            $result = $this->_sellManager->insertArticles($insertArticles);
+        } catch (\Exception $e) {
+            $this->getLastApiDebug(true, false, true);
+            throw $e;
+        }
+
+        $this->assertCount(2, $result, 'Two inserted article was expected.');
+        $this->assertArrayHasKey('PlannedArticleId', $result[0], 'Article does not have an article ID');
+        $this->assertArrayHasKey('ArticleFee', $result[0], 'Article does not have any article fee');
+
+        $this->outputContent($result, 'Insert Articles: ');
+
+        return array(
+            $result[0]['PlannedArticleId'],
+            $result[1]['PlannedArticleId']
+        );
+    }
+
+    /**
+     * @depends testInsertPlannedArticles
+     */
+    public function testDeletePlannedArticles($articles)
+    {
+        $deleteParameter = new DeletePlannedArticlesParameter();
+        $deleteParameter
+            ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken());
+
+        $article = new DeletePlannedArticleParameter();
+        $article->setPlannedArticleId($articles[0]);
+        $deleteParameter->setArticles($article);
+
+        $article = new DeletePlannedArticleParameter();
+        $article->setPlannedArticleId($articles[1]);
+        $deleteParameter->setArticles($article);
+
+        $result = $this->_sellManager->deletePlannedArticles($deleteParameter);
+
+        $this->outputContent($result, 'Delete Planned Articles: ', true);
+
+        $this->assertArrayHasKey('PlannedArticleId', $result[0], 'No PlannedArticleId found');
+        $this->assertArrayHasKey('IsClosed', $result[0], 'No IsClosed found');
+        $this->assertArrayHasKey('PlannedIndex', $result[0], 'No PlannedIndex found');
+        $this->assertEquals($articles[0], $result[0]['PlannedArticleId'], 'Article ID returned not equal');
+
+    }
+
+    public function testCloseArticle()
+    {
+        $insertedArticle = $this->_sellManager->insertArticle($this->getArticle(true, true));
+
+        $this->outputContent($insertedArticle, 'Inserted Buy Now Article with start now: ');
+
+//        $articleId = 729014362;
+//
+//        $closeParameter = new CloseArticleParameter();
+//        $closeParameter
+//            ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken())
+//            ->setArticleId($articleId);
+//
+//        $result = $this->_sellManager->closeArticle($closeParameter);
+//
+//        $this->outputContent($result, 'Close Article: ');
+//
+//        $this->assertArrayHasKey('ArticleNr', $result, 'No article ID returned');
+//        $this->assertArrayHasKey('IsClosed', $result, 'Result does not have IsClosed Key');
+//        $this->assertTrue('IsClosed', (bool) $result['IsClosed'], 'Article not closed');
     }
 }

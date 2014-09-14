@@ -30,6 +30,43 @@ class SystemTest extends TestAbstract
         $error = array_pop($result);
         $this->assertArrayHasKey('ErrorId', $error[0], 'GetAllErrorsCodes: no error ID found');
         $this->assertArrayHasKey('ErrorText', $error[0], 'GetAllErrorsCodes: no error text found');
+
+        //$this->generateEnumsClassAndCSV($result);
+
+        //$this->outputContent($result, 'Error Codes: ');
+    }
+
+    /**
+     * @param $result
+     */
+    protected function generateErrorCodesEnumsAndCSV($result)
+    {
+        $output = $csv = $enums = $log = '';
+        foreach ($result as $namespace => $errors) {
+            $csv = '';
+            $output = $namespace . "\n";
+            $enums = '
+                /**
+     * @return array
+     */
+    public static function getEnums()
+    {
+        return array(
+            ';
+
+            foreach ($errors as $error) {
+                $errorText = strtoupper($error['ErrorText']);
+                $output .= 'const ' . $errorText . ' = ' . $error['ErrorId'] . ';' . "\n";
+                $csv .= '"'. $errorText . '",' . '"' . $errorText . '"' . "\n";
+                $enums .= "array('label' => '". $errorText ."', 'value' => self::". $errorText .")," . "\n";
+            }
+
+            $enums .= ');
+    }';
+            $log .= $output . "\n\n" . $enums . "\n\n" . $csv . "\n\n";
+        }
+
+        $this->log($log . "\n\n");
     }
 
     public function testGetArticleConditions()
@@ -157,24 +194,19 @@ class SystemTest extends TestAbstract
 
     public function testGetPaymentConditions()
     {
-        $result = $this->_systemManager->getPaymentConditions();
+        $result = $this->_systemManager->getPaymentConditions(262144); // parameter has no effect on ricardo side @fixme
 
         $this->assertGreaterThanOrEqual(1, count($result), 'No Payment Condition found');
         $this->assertArrayHasKey('PaymentConditionId', $result[0], 'Payment Condition PaymentConditionId missing');
         $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition PaymentConditionText missing');
         $this->assertArrayHasKey('PaymentMethods', $result[0], 'Payment Condition PaymentMethods missing');
 
-        self::outputContent($result, 'Payment Conditions: ');
-
-        return $result[0]['PaymentConditionId'];
+        self::outputContent($result, 'Payment Conditions: ', true);
     }
 
-    /**
-     * @depends testGetPaymentConditions
-     */
     public function testGetPaymentConditionsAndMethods()
     {
-        $result = $this->_systemManager->getPaymentConditionsAndMethods();
+        $result = $this->_systemManager->getPaymentConditionsAndMethods(0); // parameter has no effect on ricardo side @fixme
 
         $this->assertArrayHasKey('PaymentConditionId', $result[0], 'Payment Condition & Methods PaymentConditionId missing');
         $this->assertArrayHasKey('PaymentConditionText', $result[0], 'Payment Condition & Methods PaymentConditionText missing');

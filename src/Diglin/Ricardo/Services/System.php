@@ -790,9 +790,11 @@ class System extends ServiceAbstract
      */
     public function getPaymentConditions($paymentMethodId = null)
     {
+        // $paymentMethodId has no effect on the Ricardo API side ! @fixme
+
         return array(
             'method' => 'GetPaymentConditions',
-            'params' => array('getPaymentConditionsParameter' => array('PaymentMethodId' => $paymentMethodId))
+            'params' => array('getPaymentConditionsParameter' => array('PaymentMethodId' => (int) $paymentMethodId))
         );
     }
 
@@ -832,9 +834,11 @@ class System extends ServiceAbstract
      */
     public function getPaymentConditionsAndMethods($paymentMethodId = null)
     {
+        // $paymentMethodId has no effect on the Ricardo API side ! @fixme
+
         return array(
             'method' => 'GetPaymentConditionsAndMethods',
-            'params' => array('getPaymentConditionsParameter' => array('PaymentMethodId' => $paymentMethodId))
+            'params' => array('getPaymentConditionsParameter' => array('PaymentMethodId' => (int) $paymentMethodId))
         );
     }
 

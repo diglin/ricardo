@@ -12,10 +12,10 @@ namespace Diglin\Ricardo\Managers\Sell\Parameter;
 use Diglin\Ricardo\Managers\ParameterAbstract;
 
 /**
- * Class CloseArticlesParameter
+ * Class DeletePlannedArticlesParameter
  * @package Diglin\Ricardo\Managers\Sell\Parameter
  */
-class CloseArticlesParameter extends ParameterAbstract
+class DeletePlannedArticlesParameter extends ParameterAbstract
 {
     /**
      * @var string
@@ -25,7 +25,7 @@ class CloseArticlesParameter extends ParameterAbstract
     /**
      * @var array
      */
-    protected $_articleIds = array(); // required
+    protected $_articles = array(); // required
 
     /**
      * @var array
@@ -54,29 +54,29 @@ class CloseArticlesParameter extends ParameterAbstract
     }
 
     /**
-     * @param CloseArticleParameter $articleIds
+     * @param DeletePlannedArticleParameter $plannedArticle
      * @param bool $clear
      * @return $this
      */
-    public function setArticleIds(CloseArticleParameter $articleIds = null, $clear = false)
+    public function setArticles(DeletePlannedArticleParameter $plannedArticle = null, $clear = false)
     {
         if ($clear) {
-            $this->_articleIds = array();
+            $this->_articles = array();
         }
 
-        if (is_null($articleIds)) {
+        if (is_null($plannedArticle)) {
             return $this;
         }
 
-        $this->_articleIds[] = $articleIds;
+        $this->_articles[] = $plannedArticle;
         return $this;
     }
 
     /**
      * @return array
      */
-    public function getArticleIds()
+    public function getArticles()
     {
-        return $this->_articleIds;
+        return $this->_articles;
     }
 }

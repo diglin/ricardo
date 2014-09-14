@@ -13,6 +13,8 @@ use Diglin\Ricardo\Managers\Sell\Parameter\AddArticlePicturesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter;
@@ -195,19 +197,82 @@ class Sell extends ServiceAbstract
     /**
      * Deletes the planned article.
      *
-     * @param $deletePlannedArticleParameter
+     * @param DeletePlannedArticleParameter $deletePlannedArticleParameter
+     * @return array
      */
-    public function deletePlannedArticle($deletePlannedArticleParameter)
+    public function deletePlannedArticle(DeletePlannedArticleParameter $deletePlannedArticleParameter)
     {
+        return array(
+            'method' => 'DeletePlannedArticle',
+            'params' => array('deletePlannedArticleParameter' => $deletePlannedArticleParameter->getDataProperties())
+        );
+
     }
 
     /**
-     * Deletes a list of planned articles.
+     * Get the result of the deleted article
      *
-     * @param $deletePlannedArticlesParameter
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "DeletePlannedArticleResult": {
+     *       "PlannedArticleId": "int"
+     *       "PlannedIndex": "int"
+     *       "IsClosed": "bool"
+     *     }
+     *   }
+     * </pre>
+     *
+     * @param array $data
+     * @return array|bool
      */
-    public function deletePlannedArticles($deletePlannedArticlesParameter)
+    public function deletePlannedArticleResult(array $data)
     {
+        if (isset($data['DeletePlannedArticleResult'])) {
+            return $data['DeletePlannedArticleResult'];
+        }
+        return false;
+    }
+
+    /**
+     * Deletes the planned articles.
+     *
+     * @param DeletePlannedArticlesParameter $deletePlannedArticleParameter
+     * @return array
+     */
+    public function deletePlannedArticles(DeletePlannedArticlesParameter $deletePlannedArticleParameter)
+    {
+        return array(
+            'method' => 'DeletePlannedArticles',
+            'params' => array('deletePlannedArticlesParameter' => $deletePlannedArticleParameter->getDataProperties())
+        );
+
+    }
+
+    /**
+     * Get the result of the deleted articles
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "DeletePlannedArticlesResult":
+     *       "DeleteResults": [{
+     *           "PlannedArticleId": "int"
+     *           "PlannedIndex": "int"
+     *          "IsClosed": "bool"
+     *          }]
+     *   }
+     * </pre>
+     *
+     * @param array $data
+     * @return array|bool
+     */
+    public function deletePlannedArticlesResult(array $data)
+    {
+        if (isset($data['DeletePlannedArticlesResult']) && isset($data['DeletePlannedArticlesResult']['DeleteResults'])) {
+            return $data['DeletePlannedArticlesResult']['DeleteResults'];
+        }
+        return false;
     }
 
     /**
@@ -258,7 +323,14 @@ class Sell extends ServiceAbstract
      * <pre>
      * {
      *     "InsertArticleResult": {
-     *       "ArticleFee": "float"
+     *       "ArticleFee": [{
+     *          "ListingFee": "float"
+     *          "TotalFee": "float"
+     *          "PromotionFees": [{
+     *              "PromotionFee": "float"
+     *              "PromotionId":  "int"
+     *          }]
+     *        }]
      *       "ArticleId": "int"
      *       "CarDealerArticleId": "int"
      *       "ErrorCodes": "int" ArticleErrors

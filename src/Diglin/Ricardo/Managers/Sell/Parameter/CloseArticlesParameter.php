@@ -58,11 +58,16 @@ class CloseArticlesParameter extends ParameterAbstract
      * @param bool $clear
      * @return $this
      */
-    public function setArticleIds(CloseArticleParameter $articleIds, $clear = false)
+    public function setArticleIds(CloseArticleParameter $articleIds = null, $clear = false)
     {
         if ($clear) {
             $this->_articleIds = array();
         }
+
+        if (is_null($articleIds)) {
+            return $this;
+        }
+
         $this->_articleIds[] = $articleIds;
         return $this;
     }

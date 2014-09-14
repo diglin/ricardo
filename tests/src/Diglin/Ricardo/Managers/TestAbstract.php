@@ -94,7 +94,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
     protected function log($content)
     {
         $filename = __DIR__ . '/../../../../log/api.log';
-        $handle = fopen($filename, 'w+');
+        $handle = fopen($filename, 'a+');
 
         $time = date('Y-m-d H:i:s') . "\n";
         $content = $time . $content;

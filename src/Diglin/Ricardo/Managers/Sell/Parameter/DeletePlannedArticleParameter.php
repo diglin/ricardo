@@ -12,10 +12,10 @@ namespace Diglin\Ricardo\Managers\Sell\Parameter;
 use Diglin\Ricardo\Managers\ParameterAbstract;
 
 /**
- * Class CloseArticlesParameter
+ * Class DeletePlannedArticleParameter
  * @package Diglin\Ricardo\Managers\Sell\Parameter
  */
-class CloseArticlesParameter extends ParameterAbstract
+class DeletePlannedArticleParameter extends ParameterAbstract
 {
     /**
      * @var string
@@ -23,16 +23,21 @@ class CloseArticlesParameter extends ParameterAbstract
     protected $_antiforgeryToken; // required
 
     /**
-     * @var array
+     * @var int
      */
-    protected $_articleIds = array(); // required
+    protected $_plannedArticleId = array(); // required
+
+    /**
+     * @var int
+     */
+    protected $_plannedIndex; // optional
 
     /**
      * @var array
      */
     protected $_requiredProperties = array(
         'antiforgeryToken',
-        'articleIds',
+        'plannedArticleId',
     );
 
     /**
@@ -54,24 +59,38 @@ class CloseArticlesParameter extends ParameterAbstract
     }
 
     /**
-     * @param CloseArticleParameter $articleIds
-     * @param bool $clear
+     * @param int $plannedArticleId
      * @return $this
      */
-    public function setArticleIds(CloseArticleParameter $articleIds, $clear = false)
+    public function setPlannedArticleId($plannedArticleId)
     {
-        if ($clear) {
-            $this->_articleIds = array();
-        }
-        $this->_articleIds[] = $articleIds;
+        $this->_plannedArticleId = (int) $plannedArticleId;
         return $this;
     }
 
     /**
-     * @return array
+     * @return int
      */
-    public function getArticleIds()
+    public function getPlannedArticleId()
     {
-        return $this->_articleIds;
+        return $this->_plannedArticleId;
+    }
+
+    /**
+     * @param int $plannedIndex
+     * @return $this
+     */
+    public function setPlannedIndex($plannedIndex)
+    {
+        $this->_plannedIndex = (int) $plannedIndex;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPlannedIndex()
+    {
+        return $this->_plannedIndex;
     }
 }
