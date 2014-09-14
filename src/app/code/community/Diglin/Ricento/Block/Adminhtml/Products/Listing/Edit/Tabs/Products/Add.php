@@ -64,20 +64,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
                 'product_id=entity_id',
                 '{{table}}.stock_id=1',
                 'left'
-            )->joinField('in_other_list',
-                'diglin_ricento/products_listing_item',
-                new Zend_Db_Expr('products_listing_id IS NOT NULL'),
-                'product_id=entity_id',
-                'products_listing_id !='.(int) $this->getRequest()->getParam('id', 0),
-                'left'
-            )->joinField('has_custom_options',
+            )
+            ->joinField('has_custom_options',
                 'catalog/product_option',
                 new Zend_Db_Expr('option_id IS NOT NULL'),
                 'product_id=entity_id',
                 null,
                 'left')
-            ->addFieldToFilter('in_other_list', array('eq' => 0))
-            ->groupByAttribute('entity_id');
+            ->distinct(true);
 
         $productIds = $this->_getSelectedProducts();
         if (empty($productIds)) {
@@ -129,13 +123,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
             'width'     => '1',
             'index'     => 'stock_qty'
         ));
-//        $this->addColumn('in_other_list', array(
-//            'header'    => $this->__('In other list?'),
-//            'type'      => 'options',
-//            'options'   => Mage::getModel('eav/entity_attribute_source_boolean')->getOptionArray(),
-//            'index'     => 'in_other_list',
-//            'sortable'  => false
-//        ));
 
         return parent::_prepareColumns();
     }

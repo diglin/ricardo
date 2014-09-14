@@ -83,7 +83,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'product_id=entity_id',
                 null,
                 'left'
-            );
+            )
+        ->distinct(true);
 
         $productIds = $this->_getSelectedProducts();
         if (empty($productIds)) {
@@ -99,7 +100,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     protected function _prepareColumns()
     {
         $this->addColumn('entity_id', array(
-            'header'    => Mage::helper('catalog')->__('ID'),
+            'header'    => Mage::helper('catalog')->__('Product ID'),
             'sortable'  => true,
             'width'     => '60',
             'index'     => 'entity_id',
