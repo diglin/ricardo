@@ -52,7 +52,7 @@ class Diglin_Ricento_Block_Adminhtml_Sync_Log_Grid extends Mage_Adminhtml_Block_
             'align' => 'left',
             'index' => 'job_message',
             'type' => 'text',
-            'string_limit' => 500, // very long
+            'string_limit' => 10000, // very long
             'frame_callback' => array($this, 'cellContainer')
         ));
 

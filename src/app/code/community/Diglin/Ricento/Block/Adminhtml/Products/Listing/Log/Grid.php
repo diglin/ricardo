@@ -42,6 +42,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
      */
     protected function _prepareColumns()
     {
+        $this->addColumn('job_id', array(
+            'header' => $this->__('Job ID') ,
+            'align' => 'left',
+            'index' => 'job_id',
+            'type' => 'number',
+            'width' => 50,
+        ));
 
         $this->addColumn('products_listing_id', array(
             'header' => $this->__('Listing ID') ,
@@ -79,7 +86,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
             'header' => $this->__('Message') ,
             'align' => 'left',
             'index' => 'message',
-//            'frame_callback' => array($this, 'prepareMessage') //@todo
+            'type' => 'text',
+            'string_limit' => 10000, // very long
+            'frame_callback' => array($this, 'prepareMessage')
         ));
 
         $this->addColumn('log_status', array(
@@ -161,5 +170,24 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
         }
 
         return '<div id="' . strtolower($column->getIndex()) . $row->getId() . '" ' . $class . '>' . $value . '</div>';
+    }
+
+    /**
+     * @param $value
+     * @param Varien_Object $row
+     * @param Mage_Adminhtml_Block_Widget_Grid_Column $column
+     * @return string
+     */
+    public function prepareMessage($value, Varien_Object $row, Mage_Adminhtml_Block_Widget_Grid_Column $column)
+    {
+        $output = '';
+        $value = htmlspecialchars_decode($value);
+        if ($column->getIndex() == 'message' && !empty($value)) {
+            $messages = Mage::helper('core')->jsonDecode($value);
+            isset($messages['errors']) && count($messages['errors']) > 0 && $output .= '<div id="message-errors"' . $row->getId() . ' class="message_errors">' . implode('<br>', $messages['errors']) . '</div>';
+            isset($messages['warnings']) && count($messages['warnings']) > 0 && $output .= '<div id="message-warnings"' . $row->getId() . ' class="message_warnings">' . implode('<br>', $messages['warnings']) . '</div>';
+            isset($messages['success']) && count($messages['success']) > 0 && $output .= '<div id="message-success"' . $row->getId() . ' class="message_success">' . implode('<br>', $messages['success']) . '</div>';
+        }
+        return $output;
     }
 }
