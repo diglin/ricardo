@@ -1,7 +1,7 @@
 # Introduction
 
 Diglin_Ricardo source code is a PHP Library to get access to the Ricardo.ch API which is a .NET Webservice sending Json or SOAP requests.
-With this library we handle only json requests as it is much more faster.
+With this library we handle only json requests as it is faster.
 
 ## Installation
 
@@ -80,7 +80,7 @@ Add the following requirements into your composer.json at root project level. Yo
  ### How to configure the test case
 
 To configure the test, please create an ini file in `tests/conf/config.ini` with the following content:
-Pay attention, you need two different configurations for each language. During the tests, only the German section is supported
+Pay attention, you need two different configurations for each interface language. During the tests, only the German section is supported. So use only this one.
 
 
 // Ricardo API Config for German version (for example)
@@ -94,6 +94,7 @@ allow_authorization_simulation = true
 customer_username =
 customer_password = ''
 debug = true
+display_test_content = true
 
 [FRENCH]
 host = ws.betaqxl.com
@@ -104,4 +105,5 @@ allow_authorization_simulation = true
 customer_username =
 customer_password = ''
 debug = true
+display_test_content = true
 ```
