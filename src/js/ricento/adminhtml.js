@@ -227,7 +227,7 @@ Ricento.progressInterval = function (url, prefix) {
                 progress_bar.setProgress(response.percentage);
                 progressElement.innerHTML = Math.min(Math.round(response.percentage), 100) + '%';
 
-                if (response.state == 'running') {
+                if (response.state == 'chunk_running') {
                     progressElement.addClassName('sync-indicator');
                     adviceElement.innerHTML = '';
                 } else if (response.state == 'completed') {

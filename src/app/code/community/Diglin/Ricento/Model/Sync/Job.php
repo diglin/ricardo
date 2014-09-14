@@ -14,6 +14,7 @@
  * @method string getJobType()
  * @method string getJobStatus()
  * @method string getProgress()
+ * @method bool    getLocked()
  * @method DateTime getStartedAt()
  * @method DateTime getEndedAt()
  * @method DateTime getCreatedAt()
@@ -22,6 +23,7 @@
  * @method Diglin_Ricento_Model_Sync_Job setJobType(string $type)
  * @method Diglin_Ricento_Model_Sync_Job setJobStatus(string $status)
  * @method Diglin_Ricento_Model_Sync_Job setProgress(string $progress)
+ * @method Diglin_Ricento_Model_Sync_Job setLocked(bool $locked)
  * @method Diglin_Ricento_Model_Sync_Job setStartedAt(DateTime $starteddAt)
  * @method Diglin_Ricento_Model_Sync_Job setEndedAt(DateTime $endedAt)
  * @method Diglin_Ricento_Model_Sync_Job setCreatedAt(DateTime $createdAt)
@@ -32,6 +34,7 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
     // TYPES OF JOB
     const TYPE_CHECK_LIST   = 'check_list';
     const TYPE_LIST         = 'list';
+    const TYPE_RELIST       = 'relist';
     const TYPE_STOP         = 'stop';
     const TYPE_UPDATE       = 'update';
 

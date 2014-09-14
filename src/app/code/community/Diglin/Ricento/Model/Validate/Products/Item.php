@@ -80,17 +80,14 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 
         // Reinit the product to default store
 
-        $item->getMagentoProduct()->setStoreId(Mage_Core_Model_App::ADMIN_STORE_ID);
+        $item->getProduct()->setStoreId(Mage_Core_Model_App::ADMIN_STORE_ID);
 
         // Validate custom options
 
-        if (!$item->getMagentoProduct()->hasOptions()) {
+        if (!$item->getProduct()->getHasOptions()) {
             // warning - no option will be send to ricardo.ch
             $this->_warnings[] = $helper->__('Custom Options are not supported. Those won\'t be synchronized into ricardo.ch.', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY);
         }
-
-        // Validate products listing item
-
 
         // Validate Inventory - In Stock or not? Enough Qty or not?
 
@@ -124,7 +121,8 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 
         // Validate Category exists
 
-        if (!$item->getCategory()) {
+        $category = $item->getCategory();
+        if (!$category) {
             // error - category cannot be empty
             $this->_errors[] = $helper->__('You MUST define a ricardo category for this product. Check that you set it at products listing level or at Magento category level.');
         }
@@ -155,7 +153,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 
             if (!$greatherThanValidator->isValid($productPrice)) {
                 // Error - Price not allowed
-                $this->_errors[] = $helper->__('Product Price of %s is incorrect for this starting price %s.', $productPrice, $minPrice);
+                $this->_errors[] = $helper->__('You cannot have a starting price for an auction of %2$s when you set a direct sales with a product price of %1$s.', $productPrice, $minPrice);
             }
         }
 
@@ -191,14 +189,11 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 
         // Validate picture - warning if promotions exists but no picture
 
-        $productResource = Mage::getResourceModel('catalog/product');
-        $assignedImages = $productResource->getAssignedImages($item->getMagentoProduct(), $stores);
+        $assignedImages = $item->getProduct()->getImages();
         if (empty($assignedImages) && ($salesOptions->getPromotionSpace() || $salesOptions->getPromotionStartPage())) {
             // Warning - No promotion possible if no image in the product
             $this->_warnings[] = $helper->__('You cannot use the privilege spaces as you do not have any pictures for this product.');
         }
-
-        $item->setLoadFallbackOptions(false);
 
         if (count($this->_errors)) {
             return false;

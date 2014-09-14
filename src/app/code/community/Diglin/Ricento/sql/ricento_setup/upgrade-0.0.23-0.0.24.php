@@ -13,5 +13,6 @@ $installer = $this;
 $installer->startSetup();
 
 $installer->run("ALTER TABLE " . $installer->getTable('diglin_ricento/sync_job') . " CHANGE `progress` `progress` ENUM('pending', 'ready', 'running', 'chunk_running', 'completed') NOT NULL AFTER job_type");
+$installer->run("ALTER TABLE " . $installer->getTable('diglin_ricento/sync_job') . " CHANGE `job_type` `job_type` ENUM('check_list', 'list', 'relist', 'stop', 'update') NOT NULL AFTER job_status");
 
 $installer->endSetup();

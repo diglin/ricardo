@@ -14,9 +14,9 @@ $jsonAllowedCombinations = $this->getJsonAllowedCombinations();
 Validation.addAllThese([
     ['validate-startprice-increment', '<?php echo $incrementValidationMessage ?>', function(fieldValue, field) {
 
-        var startPriceValue = $('sales_options_sales_auction_start_price').value;
+        startPriceValue = $('sales_options_sales_auction_start_price').value;
 
-        var allowedCombinations = <?php echo $jsonAllowedCombinations ?>;
+        allowedCombinations = <?php echo $jsonAllowedCombinations ?>;
         for (i = 0; i < allowedCombinations.length; ++i) {
             if (allowedCombinations[i].start_price.min <= startPriceValue && allowedCombinations[i].start_price.max >= startPriceValue ) {
                 if (allowedCombinations[i].increment.min <= fieldValue && allowedCombinations[i].increment.max >= fieldValue) {
@@ -32,6 +32,8 @@ Validation.addAllThese([
         var useMappingValue = Form.getInputs('edit_form','radio','sales_options[ricardo_category_use_mapping]').find(function(radio) {
             return radio.checked;
         }).value;
+
+        fieldValue = $('sales_options_ricardo_category').value;
 
         if (useMappingValue == 0 && fieldValue <= 0) {
             return false;

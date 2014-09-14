@@ -44,6 +44,12 @@ class Diglin_Ricento_Model_Resource_Api_Token extends Mage_Core_Model_Resource_D
             ->where('token_type = :token_type AND website_id = :website_id');
         $bind = array('token_type' => $tokenType, 'website_id' => (int) $websiteId);
 
-        return $readConnection->fetchOne($select, $bind);
+        $result = $readConnection->fetchOne($select, $bind);
+
+        if (empty($result) && !empty($websiteId)) {
+            $result = $this->getSpecificTokenType($tokenType, 0);
+        }
+
+        return $result;
     }
 }

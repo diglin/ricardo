@@ -19,6 +19,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 
 /**
  * Products_Listing_Item Model
@@ -79,6 +80,11 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     protected $_productsListing;
 
     /**
+     * @var Diglin_Ricento_Model_Products_Listing_Item_Product
+     */
+    protected $_itemProduct;
+
+    /**
      * Products_Listing_Item Constructor
      * @return void
      */
@@ -97,7 +103,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
 
         $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
 
-        if ($this->hasDataChanges() && $this->getStatus() == Diglin_Ricento_Helper_Data::STATUS_READY) {
+        if ($this->hasDataChanges() /*&& $this->getStatus() == Diglin_Ricento_Helper_Data::STATUS_READY*/) {
             $this->setStatus(Diglin_Ricento_Helper_Data::STATUS_PENDING);
         }
 
@@ -126,20 +132,22 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
      */
     public function getProduct()
     {
+        if (empty($this->_itemProduct)) {
+            $this->_itemProduct = Mage::getModel('diglin_ricento/products_listing_item_product');
+            $this->_itemProduct
+                ->setProductListingItem($this)
+                ->setDefaultStoreId($this->getDefaultStoreId()); // fallback for language
+        }
+
         $reload = $this->getReload();
-
-        $itemProduct = Mage::getSingleton('diglin_ricento/products_listing_item_product');
-
         if ($reload) {
             // To use with precaution - it's a bottleneck
-            $itemProduct->reset();
+            $this->_itemProduct->reset();
             $this->setReload(false);
         }
 
-        return $itemProduct
-            ->setProductListingItem($this)
+        return $this->_itemProduct
             ->setStoreId($this->getStoreId())
-            ->setDefaultStoreId($this->getDefaultStoreId()) // fallback for language
             ->setProductId($this->getProductId());
     }
 
@@ -193,7 +201,10 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     {
         $ricardoCategoryId = $this->getSalesOptions()->getRicardoCategory();
         if ($ricardoCategoryId < 0) {
-            $catIds = $this->getMagentoProduct()->getCategoryIds();
+            $catIds = $this->getProduct()->getCategoryIds();
+            if (!$catIds) {
+                return false;
+            }
             foreach ($catIds as $id) {
                 $category = Mage::getModel('catalog/category')->load($id);
                 $ricardoCategoryId = $category->getRicardoCategory();
@@ -329,6 +340,8 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     {
         $insertArticleParameter = new InsertArticleParameter();
 
+        $this->setLoadFallbackOptions(true);
+
         $this->_shippingPaymentRule = $this->getShippingPaymentRule();
         $this->_salesOptions = $this->getSalesOptions();
 
@@ -341,7 +354,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
 
         //** Article Images
 
-        $images = $this->getProduct()->getAssignedImages($this->getProductId());
+        $images = $this->getProduct()->getImages($this->getProductId());
         $i = 0;
         foreach ($images as $image) {
             if (isset($image['filepath']) && file_exists($image['filepath'])) {
@@ -360,8 +373,8 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             }
         }
 
-        $securtiy = Mage::getSingleton('diglin_ricento/api_services_security');
-        $antiforgeryToken = $securtiy->getServiceModel()->getAntiforgeryToken();
+        $security = Mage::getSingleton('diglin_ricento/api_services_security');
+        $antiforgeryToken = $security->getServiceModel()->getAntiforgeryToken();
 
         $insertArticleParameter
             ->setAntiforgeryToken($antiforgeryToken)
@@ -418,44 +431,16 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         $promotionIds = array();
         $paymentConditions = array();
 
-        $system = Mage::getSingleton('diglin_ricento/api_services_system');
         $paymentMethods = (array) $this->_shippingPaymentRule->getPaymentMethods();
 
-        // @todo fix the data returned from payment conditions below
-        /**
-         * PaymentConditionIds] => Array
-        (
-        [0] => Array
-        (
-        [0] => Array
-        (
-        [PaymentConditionId] => 5
-        [PaymentConditionText] => im Voraus
-        [PaymentMethods] =>
-        )
-
-        [1] => Array
-        (
-        [PaymentConditionId] => 1
-        [PaymentConditionText] => bei Abholung
-        [PaymentMethods] =>
-        )
-
-        [2] => Array
-        (
-        [PaymentConditionId] => 0
-        [PaymentConditionText] => Gemäss Beschreibung
-        [PaymentMethods] =>
-        )
-
-        )
-
-        )
-
-         */
-
         foreach ($paymentMethods as $paymentMethod) {
-            $paymentConditions[] = $system->getPaymentConditions($paymentMethod);
+            $paymentConditions[] = $this->_getPaymentConditionId($paymentMethod);
+        }
+
+        if ($this->_salesOptions->getScheduleOverwriteProductDateStart()) {
+            $startDate = $this->getProductsListing()->getSalesOptions()->getScheduleDateStart();
+        } else {
+            $startDate = $this->_salesOptions->getScheduleDateStart();
         }
 
         $customTemplate = ($this->_salesOptions->getCustomizationTemplate()) ? $this->_salesOptions->getCustomizationTemplate() : null;
@@ -464,7 +449,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         $articleInformation
             // required
             ->setArticleConditionId($this->getProductCondition())
-            ->setArticleDuration($this->_salesOptions->getSchedulePeriodDays())
+            ->setArticleDuration(($this->_salesOptions->getSchedulePeriodDays() * 24 * 60)) // In days
             ->setAvailabilityId($this->_shippingPaymentRule->getShippingAvailaibility())
             ->setCategoryId($this->getCategory())
             ->setInitialQuantity($this->getProductQty())
@@ -497,7 +482,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
                 ->setStartPrice($this->_salesOptions->getSalesAuctionStartPrice());
 
             if ($this->_salesOptions->getSalesAuctionDirectBuy()) {
-            $promotionIds[] = PromotionCode::BUYNOW;
+                $promotionIds[] = PromotionCode::BUYNOW;
             }
         }
 
@@ -543,5 +528,48 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setWarrantyDescription($this->_salesOptions->getProductWarrantyDescription($lang));
 
         return $descriptions;
+    }
+
+    /**
+     * @param int $paymentMethod
+     * @return null|int
+     */
+    protected function _getPaymentConditionId($paymentMethod)
+    {
+        $system = Mage::getSingleton('diglin_ricento/api_services_system');
+        $conditions = (array) $system->getPaymentConditionsAndMethods();
+
+
+        foreach ($conditions as $condition) {
+            if (isset($condition['PaymentMethods']) && !empty($condition['PaymentMethods'])) {
+                foreach ($condition['PaymentMethods'] as $method) {
+                    if (isset($method['PaymentMethodId']) && $method['PaymentMethodId'] == (int) $paymentMethod) {
+                        return (int) $condition['PaymentConditionId'];
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return bool|CloseArticleParameter
+     */
+    public function getCloseArticleParameter()
+    {
+        if (!$this->getRicardoArticleId()) {
+            return false;
+        }
+
+        $security = Mage::getSingleton('diglin_ricento/api_services_security');
+        $antiforgeryToken = $security->getServiceModel()->getAntiforgeryToken();
+
+        $closeParameter = new CloseArticleParameter();
+        $closeParameter
+            ->setAntiforgeryToken($antiforgeryToken)
+            ->setArticleId($this->getRicardoArticleId());
+
+        return $closeParameter;
     }
 }

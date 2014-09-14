@@ -53,16 +53,12 @@ class Diglin_Ricento_Adminhtml_SyncController extends Mage_Adminhtml_Controller_
 
         if ($job->getId()) {
 
-            switch ($job->getJobType()) {
-                case Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST:
-                    $jobListing = Mage::getModel('diglin_ricento/sync_job_listing')->load($jobId, 'job_id');
-                    $totalProceed = $jobListing->getTotalProceed();
-                    $totalCount = $jobListing->getTotalCount();
+            $jobListing = Mage::getModel('diglin_ricento/sync_job_listing')->load($jobId, 'job_id');
+            $totalProceed = $jobListing->getTotalProceed();
+            $totalCount = $jobListing->getTotalCount();
 
-                    if ($totalCount) {
-                        $percentDone = ($totalProceed * 100) / $totalCount;
-                    }
-                    break;
+            if ($totalCount) {
+                $percentDone = ($totalProceed * 100) / $totalCount;
             }
 
             $locale = Mage::app()->getLocale();

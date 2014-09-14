@@ -34,6 +34,17 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
     }
 
     /**
+     * Count the number of items not listed
+     *
+     * @param int $productsListingId
+     * @return int
+     */
+    public function coundReadyTolist($productsListingId)
+    {
+        return $this->_countItems('status IN (\'' . Diglin_Ricento_Helper_Data::STATUS_READY . '\', \'' . Diglin_Ricento_Helper_Data::STATUS_PENDING . '\')', $productsListingId);
+    }
+
+    /**
      * Count the number of items depending of the where clause
      *
      * @param int $productsListingId
@@ -69,5 +80,20 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
         $binds  = array('id' => $productsListingId, 'status' => $status);
 
         return $readerConnection->fetchCol($select, $binds);
+    }
+
+    /**
+     * @param int $itemId
+     * @param array $bind
+     * @return int
+     */
+    public function saveCurrentItem($itemId, $bind)
+    {
+        $writeConection = $this->_getWriteAdapter();
+
+        return $writeConection->update(
+            $this->getMainTable(),
+            $bind,
+            array($this->getIdFieldName() . ' = ?' => $itemId));
     }
 }
