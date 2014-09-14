@@ -12,7 +12,7 @@ namespace Diglin\Ricardo\Managers;
 use Diglin\Ricardo\Core\Helper;
 use Diglin\Ricardo\Service;
 use Diglin\Ricardo\Exceptions\ExceptionAbstract;
-use Diglin\Ricardo\Exceptions\SecurityErrors;
+use Diglin\Ricardo\Exceptions\SecurityException;
 use Diglin\Ricardo\Enums\SecurityErrors as SecurityErrorsEnum;
 
 /**
@@ -61,7 +61,7 @@ abstract class ManagerAbstract
      * @param string|null|array $parameters
      * @return array
      * @throws \Exception
-     * @throws SecurityErrors
+     * @throws SecurityException
      */
     protected function _proceed($method, $parameters = null)
     {
@@ -71,9 +71,13 @@ abstract class ManagerAbstract
 
         $result = $this->_serviceManager->proceed($this->_serviceName, $method, $parameters);
 
+        if (is_null($result)) {
+            throw new \Exception($this->_serviceManager->getApi()->getLastDebug());
+        }
+
         try {
             $this->extractError((array) $result);
-        } catch (SecurityErrors $e) {
+        } catch (SecurityException $e) {
             switch ($e->getCode()) {
                 case SecurityErrorsEnum::SESSIONEXPIRED:
                     $this->_serviceManager->getSecurityManager()->refreshToken();
@@ -84,7 +88,7 @@ abstract class ManagerAbstract
                 case SecurityErrorsEnum::TEMPORAYCREDENTIALUNVALIDATED:
                     // We init the validation url to be used later in any process (e.g. re-authorization)
                     $this->_serviceManager->getSecurityManager()->getValidationUrl(true);
-                    throw new SecurityErrors('Token Credential must be recreated! Please, authorize again the access to the Ricardo API', SecurityErrorsEnum::TOKEN_AUTHORIZATION);
+                    throw new SecurityException('Token Credential must be recreated! Please, authorize again the access to the Ricardo API. Original Error Code: '. $e->getCode(), SecurityErrorsEnum::TOKEN_AUTHORIZATION);
                     break;
                 case SecurityErrorsEnum::TEMPORAYCREDENTIALEXPIRED:
                     $this->_serviceManager->getSecurityManager()->getTemporaryToken(true);
@@ -94,7 +98,6 @@ abstract class ManagerAbstract
                     throw $e;
                     break;
             }
-            // @todo detect ErrorCodesType Technical and throw Exception to the user (happened when trying to get anonymous token at 8:17 12.08.2014)
         }
 
         return $result;
@@ -110,10 +113,15 @@ abstract class ManagerAbstract
     {
         if (!empty($result['ErrorCodes']) && isset($result['ErrorCodesType'])) {
 
+            if (count($result['ErrorCodes']) > 1) {
+                //@todo handle when several errors code are returned e.g. by inserting an article
+            }
+
             $errorCodeType = $result['ErrorCodesType'];
+            $errorType = $result['ErrorType'];
             $errorCode = array_shift($result['ErrorCodes']);
 
-            $classname = '\Diglin\Ricardo\Exceptions\\' . $errorCodeType;
+            $classname = '\Diglin\Ricardo\Exceptions\\' . $errorType;
             if (!class_exists($classname)) {
                 $classname = '\Exception';
             }

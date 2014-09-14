@@ -9,7 +9,7 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-use Diglin\Ricardo\Exceptions\SecurityErrors;
+use Diglin\Ricardo\Exceptions\SecurityException;
 use Diglin\Ricardo\Enums\SecurityErrors as SecurityErrorsEnum;
 use Diglin\Ricardo\Services\Security as SecurityService;
 use Diglin\Ricardo\Services\ServiceAbstract;
@@ -220,24 +220,18 @@ class Security extends ManagerAbstract
      * Refresh the token if necessary
      *
      * @return string|array
-     * @throws SecurityErrors
+     * @throws SecurityException
      */
     public function getCredentialToken()
     {
-        if ($this->_credentialToken && !$this->isDateExpired($this->_credentialTokenExpirationDate)
-//            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) > time()
-        ) {
+        if ($this->_credentialToken && !$this->isDateExpired($this->_credentialTokenExpirationDate)) {
             return $this->_credentialToken;
         }
 
-//        if ($this->_credentialToken && $this->_credentialTokenSessionDuration
-//            && ($this->_credentialTokenSessionStart + ($this->_credentialTokenSessionDuration * 60)) < time()
-//        ) {
-//            return $this->refreshToken($this->_credentialToken);
-//        }
-
-        // Temporary Token must be created before to simulate the authorization
-        // @todo move this line of code into the allow simulate part and set the temporary token with setter when needed to minimize API call
+        /**
+         * Temporary Token must be created before to simulate the authorization or getting the token credential
+         * MUST get the returned variable in case of DB saved or Authorization process has been done
+         */
         $temporaryToken = $this->getTemporaryToken();
 
         if ($this->_allowSimulateAuthorization) {
