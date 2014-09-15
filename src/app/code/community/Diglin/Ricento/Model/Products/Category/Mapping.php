@@ -22,16 +22,19 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
     protected $_categoryIndex = array();
 
     /**
-     * Create root category
+     * @var bool
      */
-    protected function _construct()
-    {
-        $this->_categoryTree = Mage::getModel('diglin_ricento/products_category', array(
-            'category_id' => self::ROOT_CATEGORY_ID,
-            'level'       => 0,
-            'is_final'    => 0
-        ));
-    }
+    protected $_canUseCache = true;
+
+    /**
+     * @var string
+     */
+    protected $_cacheKeyTree = 'ricardo_categories_tree';
+
+    /**
+     * @var string
+     */
+    protected $_cacheKeyIndex = 'ricardo_categories_index';
 
     /**
      * Returns child categories of current category
@@ -74,16 +77,36 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
     {
         Varien_Profiler::start('RICARDO_API_BUILD_CATEGORIES');
 
-        $this->_addCategoryToIndex($this->_categoryTree);
-        foreach ($this->_getRicardoCategoryData() as $_categoryData) {
-            /* @var $category Diglin_Ricento_Model_Products_Category */
-            $category = Mage::getModel('diglin_ricento/products_category');
-            $category->setDataFromApi($_categoryData);
-            if (!$this->getCategory($category->getParentId())) {
-                Mage::log("Ricardo parent category ID {$category->getParentId()} as parent for category {$category->getId()} not found.", Zend_Log::WARN, Diglin_Ricento_Helper_Data::LOG_FILE);
-                continue;
+        if ($this->getCanUseCache()) {
+            $this->_categoryTree = unserialize(Mage::app()->loadCache($this->_cacheKeyTree));
+            $this->_categoryIndex = unserialize(Mage::app()->loadCache($this->_cacheKeyIndex));
+        }
+
+        if (empty($this->_categoryTree)) {
+
+            $this->_categoryTree = Mage::getModel('diglin_ricento/products_category', array(
+                'category_id' => self::ROOT_CATEGORY_ID,
+                'level'       => 0,
+                'is_final'    => 0
+            ));
+
+            $this->_addCategoryToIndex($this->_categoryTree);
+
+            foreach ($this->_getRicardoCategoryData() as $_categoryData) {
+                /* @var $category Diglin_Ricento_Model_Products_Category */
+                $category = Mage::getModel('diglin_ricento/products_category');
+                $category->setDataFromApi($_categoryData);
+                if (!$this->getCategory($category->getParentId())) {
+                    Mage::log("Ricardo parent category ID {$category->getParentId()} as parent for category {$category->getId()} not found.", Zend_Log::WARN, Diglin_Ricento_Helper_Data::LOG_FILE);
+                    continue;
+                }
+                $this->_addCategoryToIndex($category);
             }
-            $this->_addCategoryToIndex($category);
+        }
+
+        if ($this->getCanUseCache() && !empty($this->_categoryTree)) {
+            Mage::app()->saveCache(serialize($this->_categoryTree), $this->_cacheKeyTree, array(Diglin_Ricento_Helper_Api::CACHE_TAG), Diglin_Ricento_Helper_Api::CACHE_LIFETIME);
+            Mage::app()->saveCache(serialize($this->_categoryIndex), $this->_cacheKeyIndex, array(Diglin_Ricento_Helper_Api::CACHE_TAG), Diglin_Ricento_Helper_Api::CACHE_LIFETIME);
         }
 
         Varien_Profiler::stop('RICARDO_API_BUILD_CATEGORIES');
@@ -126,5 +149,27 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
     private static function sortByLevelAndName($category1, $category2)
     {
         return ($category1['Level'] - $category2['Level']) ?: strnatcasecmp($category1['CategoryName'], $category2['CategoryName']);
+    }
+
+    /**
+     * Set if the cache is allow to be used
+     *
+     * @param boolean $canUseCache
+     * @return $this
+     */
+    public function setCanUseCache($canUseCache)
+    {
+        $this->_canUseCache = (bool) $canUseCache;
+        return $this;
+    }
+
+    /**
+     * Allowed to use the cache or not
+     *
+     * @return boolean
+     */
+    public function getCanUseCache()
+    {
+        return (Mage::app()->useCache(Diglin_Ricento_Helper_Api::CACHE_TYPE) && $this->_canUseCache);
     }
 }
