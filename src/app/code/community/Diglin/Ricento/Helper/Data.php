@@ -504,4 +504,14 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 
         return $stores;
     }
+
+    /**
+     * @return string
+     */
+    public function getDateTimeIsoFormat()
+    {
+        $locale = Mage::app()->getLocale();
+        return $locale->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT)
+            . ' ' . $locale->getTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
+    }
 }

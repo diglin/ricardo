@@ -71,7 +71,7 @@ class Diglin_Ricento_Model_Products_Category_Mapping extends Varien_Object
     /**
      * Build category index and tree
      *
-     * @todo cache the tree and index
+     * @return Diglin_Ricento_Model_Products_Category|mixed
      */
     protected function _buildRicardoCategoryTree()
     {

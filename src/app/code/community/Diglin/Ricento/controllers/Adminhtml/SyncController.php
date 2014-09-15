@@ -62,9 +62,7 @@ class Diglin_Ricento_Adminhtml_SyncController extends Mage_Adminhtml_Controller_
             }
 
             $locale = Mage::app()->getLocale();
-            $dateFormatIso = Mage::app()->getLocale()->getDateTimeFormat(
-                Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM
-            );
+            $dateFormatIso = Mage::helper('diglin_ricento')->getDateTimeIsoFormat();
 
             $response = array(
                 'percentage' => $percentDone,
