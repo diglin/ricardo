@@ -107,7 +107,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
 
         $html .= '<script type="text/javascript">';
         $html .= 'var generalForm = new Ricento.GeneralForm("' . $htmlIdPrefix . '");';
-        $html .= 'setTimeout(function(){generalForm.onChangeInput($(' . $htmlIdPrefix .'publish_languages), [\''. implode('\',\'', $languages) .'\'])}, 3000);';
+        !$this->isReadonlyForm() && $html .= 'setTimeout(function(){generalForm.onChangeInput($(' . $htmlIdPrefix .'publish_languages), [\''. implode('\',\'', $languages) .'\'])}, 3000);';
         $html .= '</script>';
         return parent::_afterToHtml($html);
     }
