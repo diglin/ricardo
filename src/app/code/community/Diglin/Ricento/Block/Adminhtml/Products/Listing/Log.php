@@ -13,10 +13,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log extends Mage_Adminhtml
     {
         $this->_controller = 'adminhtml_products_listing_log';
         $this->_blockGroup = 'diglin_ricento';
-        $this->_headerText = $this->__('Products Listing Log');
+        $this->_headerText = $this->__('Products Listing Log "%s"', $this->getProductsListing()->getTitle());
 
         parent::__construct();
 
         $this->removeButton('add');
+    }
+
+    /**
+     * @return Diglin_Ricento_Model_Products_Listing
+     */
+    public function getProductsListing()
+    {
+        return Mage::registry('products_listing');
     }
 }

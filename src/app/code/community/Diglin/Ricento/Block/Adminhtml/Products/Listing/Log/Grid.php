@@ -50,22 +50,24 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
             'width' => 50,
         ));
 
-        $this->addColumn('products_listing_id', array(
-            'header' => $this->__('Listing ID') ,
-            'align' => 'left',
-            'index' => 'products_listing_id',
-            'type' => 'number',
-            'width' => 50,
-        ));
+        if ($this->getNameInLayout() == 'ricento_listing_log') {
+            $this->addColumn('products_listing_id', array(
+                'header' => $this->__('Listing ID') ,
+                'align' => 'left',
+                'index' => 'products_listing_id',
+                'type' => 'number',
+                'width' => 50,
+            ));
 
-        $this->addColumn('title', array(
-            'header' => $this->__('Listing Title'),
-            'align' => 'left',
-            'index' => 'title',
-            'type' => 'text',
-            'width' => 150,
-            'frame_callback' => array($this, 'addListingUrl')
-        ));
+            $this->addColumn('title', array(
+                'header' => $this->__('Listing Title'),
+                'align' => 'left',
+                'index' => 'title',
+                'type' => 'text',
+                'width' => 150,
+                'frame_callback' => array($this, 'addListingUrl')
+            ));
+        }
 
         $this->addColumn('product_id', array(
             'header' => $this->__('Product ID') ,
