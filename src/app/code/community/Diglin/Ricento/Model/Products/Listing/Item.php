@@ -455,7 +455,6 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setCategoryId($this->getCategory())
             ->setInitialQuantity($this->getProductQty())
             ->setIsCustomerTemplate(false)
-            ->setIsRelistSoldOut(false)
             ->setMainPictureId(1)
             ->setMaxRelistCount($this->_salesOptions->getScheduleReactivation())
             ->setWarrantyId($this->_salesOptions->getProductWarranty())
@@ -478,9 +477,12 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         }
 
         if ($salesType == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
+            $soldOut = ($this->_salesOptions->getScheduleReactivation() === Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT) ? true : false;
+
             $articleInformation
                 ->setIncrement($this->_salesOptions->getSalesAuctionIncrement())
-                ->setStartPrice($this->_salesOptions->getSalesAuctionStartPrice());
+                ->setStartPrice($this->_salesOptions->getSalesAuctionStartPrice())
+                ->setIsRelistSoldOut($soldOut);
 
             if ($this->_salesOptions->getSalesAuctionDirectBuy()) {
                 $promotionIds[] = PromotionCode::BUYNOW;

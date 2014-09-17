@@ -10,6 +10,7 @@
  */
 class Diglin_Ricento_Model_Config_Source_Sales_Reactivation extends Diglin_Ricento_Model_Config_Source_Abstract
 {
+    const SOLDOUT = 99999;
 
     /**
      * @var array
@@ -33,7 +34,8 @@ class Diglin_Ricento_Model_Config_Source_Sales_Reactivation extends Diglin_Ricen
                 $this->_partnerConfiguration  = array(1);
             }
 
-            //$this->_partnerConfiguration = array_merge($this->_partnerConfiguration, array('99999' => Mage::helper('diglin_ricento')->__('Until sold')));
+            //@todo allow the product listing interface to set this value only for buy now sales type
+            //$this->_partnerConfiguration = array_merge($this->_partnerConfiguration, array(self::SOLDOUT => Mage::helper('diglin_ricento')->__('Until sold')));
         }
 
         return $this->_partnerConfiguration;
