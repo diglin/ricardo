@@ -58,9 +58,9 @@ class ArticleInformationParameter extends ParameterAbstract
     protected $_initialQuantity; // required
 
     /**
-     * @var ArticleInternalReferenceParameter
+     * @var array
      */
-    protected $_internalReferences; // optional
+    protected $_internalReferences = array(); // optional
 
     /**
      * @var boolean
@@ -301,7 +301,7 @@ class ArticleInformationParameter extends ParameterAbstract
         if ($clear) {
             $this->_internalReferences = array();
         }
-        $this->_internalReferences = $internalReferences;
+        $this->_internalReferences[] = $internalReferences;
         return $this;
     }
 

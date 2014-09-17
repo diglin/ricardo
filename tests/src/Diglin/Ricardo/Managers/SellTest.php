@@ -95,7 +95,6 @@ class SellTest extends TestAbstract
             ->setCategoryId(38828)
             ->setInitialQuantity(1)
             ->setIsCustomerTemplate(false)
-            ->setIsRelistSoldOut(false) // @fixme seems to not be allowed why?
             ->setMainPictureId(1)
             ->setMaxRelistCount(5)
             ->setWarrantyId($warranties[1]['WarrantyId'])
@@ -126,6 +125,11 @@ class SellTest extends TestAbstract
                         PromotionCode::BUYNOW
                     ));
             }
+        }
+
+        if (!$auction && $buynow) {
+            $articleInformation
+                ->setIsRelistSoldOut(true);
         }
 
         $descriptions = new ArticleDescriptionParameter();
@@ -179,7 +183,24 @@ class SellTest extends TestAbstract
         $this->assertArrayHasKey('PlannedArticleId', $result, 'Article does not have an article ID');
         $this->assertArrayHasKey('ArticleFee', $result, 'Article does not have any article fee');
 
-        $this->outputContent($result, 'Insert Article: ', true);
+        $this->outputContent($result, 'Insert Planned Article: ', true);
+    }
+
+    public function testInsertBuyNowArticle()
+    {
+        $insertArticleParameter = $this->getArticle(false, true, false);
+
+        try {
+            $result = $this->_sellManager->insertArticle($insertArticleParameter);
+        } catch (\Exception $e) {
+            $this->getLastApiDebug(true, false, true);
+            throw $e;
+        }
+
+        $this->assertArrayHasKey('PlannedArticleId', $result, 'Article does not have an article ID');
+        $this->assertArrayHasKey('ArticleFee', $result, 'Article does not have any article fee');
+
+        $this->outputContent($result, 'Insert Buy Now Article: ', true);
     }
 
     /**
@@ -267,7 +288,7 @@ class SellTest extends TestAbstract
 
         $this->outputContent($insertedArticle, 'Inserted Buy Now Article with start now: ', true);
 
-        $articleId = $insertedArticle['PlannedArticleId'];
+        $articleId = $insertedArticle['ArticleId'];
 
         $closeParameter = new CloseArticleParameter();
         $closeParameter
