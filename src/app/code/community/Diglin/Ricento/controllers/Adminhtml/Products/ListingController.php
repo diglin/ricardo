@@ -139,7 +139,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             }
         }
 
-        $this->_getSession()->addNotice($this->__('We detect and set for you the language configuration. Please, review it before to go further.'));
+        $this->_getSession()->addNotice($this->__('We have detected and set for you the language configuration. Please, review it before to go further.'));
 
         /* @var $salesOptions Diglin_Ricento_Model_Sales_Options */
         $salesOptions = Mage::getModel('diglin_ricento/sales_options');
@@ -159,7 +159,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             ->setDefaultLanguage($baseLanguage);
 
         foreach ($storeLanguages as $storeLang => $storeId) {
-            call_user_func(array($listing, 'setLang' . ucwords($storeLang) . 'StoreId'), $storeId);
+            call_user_func(array($listing, 'setLangStoreId' . ucwords($storeLang)), $storeId);
         }
 
         $listing->save();
