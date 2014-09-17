@@ -67,6 +67,7 @@ class Diglin_Ricento_Model_Cron
 
         $this->_runJobs(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST);
         $this->_runJobs(Diglin_Ricento_Model_Sync_Job::TYPE_LIST);
+        $this->_runJobs(Diglin_Ricento_Model_Sync_Job::TYPE_STOP);
 
         //** Cleanup
 
@@ -145,6 +146,12 @@ class Diglin_Ricento_Model_Cron
             case Diglin_Ricento_Model_Sync_Job::TYPE_LIST:
                 $logType = Diglin_Ricento_Model_Products_Listing_Log::LOG_TYPE_LIST;
                 break;
+            case Diglin_Ricento_Model_Sync_Job::TYPE_STOP:
+                $logType = Diglin_Ricento_Model_Products_Listing_Log::LOG_TYPE_STOP;
+                break;
+            case Diglin_Ricento_Model_Sync_Job::TYPE_RELIST:
+                $logType = Diglin_Ricento_Model_Products_Listing_Log::LOG_TYPE_RELIST;
+                break;
         }
 
         return $logType;
@@ -160,20 +167,34 @@ class Diglin_Ricento_Model_Cron
     }
 
     /**
+     * We build an url which will be replaced during its display in the log grid cause of issue with secure url key
+     *
      * @param Diglin_Ricento_Model_Sync_Job $job
      * @return string
      */
     protected function _getLogListingUrl(Diglin_Ricento_Model_Sync_Job $job = null)
     {
-        return Mage::helper('adminhtml')->getUrl('ricento/log/listing', array('id' => $this->_productsListingId, 'job_id' => $job->getId()));
+        return '{{adminhtml url="ricento/log/listing/" _query_id=' . $this->_productsListingId . ' _query_job_id=' . $job->getId() . '}}';
     }
 
     /**
+     * We build an url which will be replaced during its display in the log grid cause of issue with secure url key
+     *
      * @return string
      */
     protected function _getProductListingEditUrl()
     {
-        return Mage::helper('adminhtml')->getUrl('ricento/products_listing/edit', array('id' => $this->_productsListingId));
+        return '{{adminhtml url="ricento/products_listing/edit/" _query_id=' . $this->_productsListingId . '}}';
+    }
+
+    /**
+     * We build an url which will be replaced during its display in the log grid cause of issue with secure url key
+     *
+     * @return string
+     */
+    protected function _getForceListUrl()
+    {
+        return '{{adminhtml url="ricento/products_listing/forceList/" _query_id=' . $this->_productsListingId . '}}';
     }
 
     /**
@@ -442,7 +463,7 @@ class Diglin_Ricento_Model_Cron
 
         $message = '';
         if ($jobStatus != Diglin_Ricento_Model_Sync_Job::STATUS_SUCCESS) {
-            $message = Mage::helper('diglin_ricento')->__('You can ignore the warnings or errors and list your products on ricardo.ch by <a href="%s">clicking here</a>. However products having an error won\'t be saved on ricardo.ch', $adminhtmlHelper->getUrl('ricento/products_listing/forceList', array('id' => $this->_productsListingId)));
+            $message = Mage::helper('diglin_ricento')->__('You can ignore the warnings or errors and list your products on ricardo.ch by <a href="%s">clicking here</a>. However products having an error won\'t be saved on ricardo.ch', $this->_getForceListUrl() );
         }
         return $message;
     }
@@ -589,7 +610,7 @@ class Diglin_Ricento_Model_Cron
                 'product_id' => $item->getProductId(),
                 'message' => $this->_jsonEncode($this->_itemMessage),
                 'log_status' => $this->_itemStatus,
-                'log_type' => $this->_getLogType(Diglin_Ricento_Model_Sync_Job::TYPE_LIST)
+                'log_type' => $this->_getLogType(Diglin_Ricento_Model_Sync_Job::TYPE_RELIST)
             ));
 
             // Save the current information of the process to allow live display via ajax call
@@ -644,9 +665,7 @@ class Diglin_Ricento_Model_Cron
             try {
                 $stoppedArticle = $sell->stopArticle($item);
 
-                !empty($stoppedArticle['IsClosed']) && (bool) $stoppedArticle['IsClosed'] && $articleId = $stoppedArticle['ArticleNr'];
-
-                if (!empty($articleId)) {
+                if ($stoppedArticle) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_itemMessage = array('success' => $this->_getHelper()->__('Ricardo Article %d has been removed from ricardo.ch'));
                     $hasSuccess = true;
@@ -654,6 +673,7 @@ class Diglin_Ricento_Model_Cron
                 } else {
                     $this->_jobHasError = true;
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
+                    $this->_itemMessage = array('error' => $this->_getHelper()->__('The product %d has not been removed from ricardo.ch', $item->getProductId()));
                     // do not change the status of the item itself, the problem can be that the auction is still running and the article cannot be stopped
                 }
 
