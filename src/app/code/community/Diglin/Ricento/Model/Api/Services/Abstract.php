@@ -362,6 +362,9 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     protected function _handleSecurityException(Exception $e)
     {
         if ($e->getCode() == \Diglin\Ricardo\Enums\SecurityErrors::TOKEN_AUTHORIZATION) {
+
+            Mage::logException($e);
+
             $ricentoException = new Diglin_Ricento_Exception($e->getMessage(), $e->getCode());
             $ricentoException->setNeedAuthorization(true);
             $ricentoException->setValidationUrl($this->getServiceManager()->getSecurityManager()->getValidationUrl());

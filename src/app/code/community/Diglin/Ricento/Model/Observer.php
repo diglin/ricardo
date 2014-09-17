@@ -55,4 +55,11 @@ class Diglin_Ricento_Model_Observer
 
         self::$shouldAdd = false;
     }
+
+    public function reduceInventory(Varien_Event_Observer $observer)
+    {
+        /**
+         * @todo implement logic to reduce inventory on ricardo side when inventory decrease after a non ricardo order
+         */
+    }
 }

@@ -50,6 +50,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_STOPPED = 'stopped';
     const STATUS_READY = 'ready';
     const STATUS_ERROR = 'error';
+    const STATUS_SOLD = 'sold';
 
     const LOG_FILE = 'ricento.log';
 
