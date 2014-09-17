@@ -14,6 +14,11 @@
 class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento_Controller_Adminhtml_Products_Listing
 {
     /**
+     * @var string
+     */
+    protected $_successMessage = '';
+
+    /**
      * Show the products listing
      */
     public function indexAction()
@@ -308,19 +313,9 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $this->_redirect('*/*/edit', array('id' => $this->_getListing()->getId()));
     }
 
-    protected function _startJobList($jobType, $successMessage = '', $relist = false)
+    protected function _startJobList($jobType, $totalItems)
     {
-        $productListing = $this->_initListing();
-
-        if (!$productListing) {
-            $this->_redirect('*/*/index');
-            return;
-        }
-        if ($this->_getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED && !$relist) {
-            $this->_getSession()->addError($this->__('Listing "%s" is already listed. To list new items again, use "Relist"', $productListing->getTitle()));
-            $this->_redirect('*/*/index');
-            return;
-        }
+        $productListing = $this->_getListing();
 
         if (!$this->isApiReady()) {
             $this->_getSession()->addError($this->__('The API token and configuration are not ready to allow this action. Please, check that your token is enabled and not going to expire.'));
@@ -329,14 +324,6 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         }
 
         try {
-            $totalItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->coundReadyTolist($productListing->getId());
-
-            if ($totalItems === 0) {
-                $this->_getSession()->addError($this->__('There is no product ready to be listed. Please, add products to your products listing "%s".', $productListing->getTitle()));
-                $this->_redirect('*/*/edit', array('id' => $productListing->getId()));
-                return;
-            }
-
             // Create a job to prepare the sync to Ricardo.ch
 
             $job = Mage::getModel('diglin_ricento/sync_job');
@@ -354,7 +341,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
                 ->setJobId($job->getId())
                 ->save();
 
-            $this->_getSession()->addSuccess($successMessage);
+            $this->_getSession()->addSuccess($this->_successMessage);
             $this->_redirect('*/log/sync', array('id' => $job->getId()));
             return;
         } catch (Diglin_Ricento_Exception $e) {
@@ -381,7 +368,23 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function listAction()
     {
-        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST, $this->_getSuccessMesageList());
+        $productListing = $this->_getListing();
+
+        if (!$productListing) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        $countNotListedItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->countNotListedItems($productListing->getId());
+
+        if ($countNotListedItems == 0) {
+            $this->_getSession()->addError($this->__('There is no product ready to be listed. Please, add products to your products listing "%s".', $productListing->getId()));
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        $this->_successMessage = $this->_getSuccessMesageList();
+        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST, $countNotListedItems);
     }
 
     /**
@@ -389,17 +392,46 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function forceListAction()
     {
-        $successMessage = $this->__('The job to list your products listing will start in few moment. You can check the progression below.');
-        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_LIST, $successMessage);
+        $productListing = $this->_getListing();
+
+        if (!$productListing) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        $countNotListedItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->countNotListedItems($productListing->getId());
+
+        if ($countNotListedItems == 0) {
+            $this->_getSession()->addError($this->__('There is no product ready to be listed. Please, add products to your products listing "%s".', $productListing->getId()));
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        $this->_successMessage = $this->__('The job to list your products listing will start in few moment. You can check the progression below.');
+        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_LIST, $countNotListedItems);
     }
 
     /**
-     * Start to list the product listing on ricardo platform if was already listed but
-     * some products need to be again listed
+     * Start to list the product listing on ricardo platform if those was already listed and sold
      */
     public function relistAction()
     {
-        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_RELIST, $this->_getSuccessMesageList(), true);
+        $productListing = $this->_getListing();
+
+        if (!$productListing) {
+            $this->_redirect('*/*/index');
+            return;
+        }
+
+        $countSoldItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->countSoldItems($productListing->getId());
+
+        if ($countSoldItems == 0) {
+            $this->_getSession()->addError($this->__('There is no item to relist. Only products who have been sold on ricardo.ch can be relisted for the products listing %d.', $productListing->getId()));
+            $this->_redirect('*/*/index');
+            return;
+        }
+        $this->_successMessage = $this->_getSuccessMesageList();
+        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_RELIST, $countSoldItems);
     }
 
     /**
@@ -411,21 +443,16 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->_redirect('*/*/index');
             return;
         }
-        if ($this->_getListing()->getStatus() !== Diglin_Ricento_Helper_Data::STATUS_LISTED) {
-            $this->_getSession()->addError($this->__('Only listed listings can be stopped.'));
+
+        $countListedItem = Mage::getResourceModel('diglin_ricento/products_listing_item')->countListedItems($this->_getListing()->getId());
+
+        if ($countListedItem == 0) {
+            $this->_getSession()->addError($this->__('Only listed product items can be stopped.'));
             $this->_redirect('*/*/index');
             return;
         }
-        //TODO set status for items as well if necessary
-        // @todo stop list items on ricardo side, if an item cannot be stopped, prevent the user
 
-        try {
-            $this->_getListing()->setStatus(Diglin_Ricento_Helper_Data::STATUS_STOPPED)->save();
-            $this->_getSession()->addSuccess($this->__('Listing stopped.'));
-        } catch (Diglin_Ricento_Exception $e) {
-            $this->_getSession()->addError($this->__('It\'s s not possible to list the product listing. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
-        }
-        $this->_redirect('*/*/index');
+        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_STOP, $countListedItem);
     }
 
     /**

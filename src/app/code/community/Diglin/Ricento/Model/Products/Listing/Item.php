@@ -20,6 +20,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
 
 /**
  * Products_Listing_Item Model
@@ -373,8 +374,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             }
         }
 
-        $security = Mage::getSingleton('diglin_ricento/api_services_security');
-        $antiforgeryToken = $security->getServiceModel()->getAntiforgeryToken();
+        $antiforgeryToken = $this->_getSecurityService()->getServiceModel()->getAntiforgeryToken();
 
         $insertArticleParameter
             ->setAntiforgeryToken($antiforgeryToken)
@@ -432,6 +432,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         $paymentConditions = array();
 
         $paymentMethods = (array) $this->_shippingPaymentRule->getPaymentMethods();
+        $salesType = $this->_salesOptions->getSalesType();
 
         foreach ($paymentMethods as $paymentMethod) {
             $paymentConditions[] = $this->_getPaymentConditionId($paymentMethod);
@@ -443,7 +444,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             $startDate = $this->_salesOptions->getScheduleDateStart();
         }
 
-        $customTemplate = ($this->_salesOptions->getCustomizationTemplate()) ? $this->_salesOptions->getCustomizationTemplate() : null;
+        $customTemplate = ($this->_salesOptions->getCustomizationTemplate() >= 0) ? $this->_salesOptions->getCustomizationTemplate() : null;
 
         $articleInformation = new ArticleInformationParameter();
         $articleInformation
@@ -465,7 +466,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setPaymentMethodIds($paymentMethods)
             ->setTemplateId($customTemplate);
 
-        if (!is_null($startDate)) {
+        if (!is_null($startDate) || $salesType == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
             $startDate = strtotime($startDate);
 
             if ($startDate < (time() + 60*60)) {
@@ -476,7 +477,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
                 ->setStartDate(Helper::getJsonDate($startDate));
         }
 
-        if ($this->_salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
+        if ($salesType == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
             $articleInformation
                 ->setIncrement($this->_salesOptions->getSalesAuctionIncrement())
                 ->setStartPrice($this->_salesOptions->getSalesAuctionStartPrice());
@@ -486,7 +487,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             }
         }
 
-        if ($this->_salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW || $this->_salesOptions->getSalesAuctionDirectBuy()) {
+        if ($salesType == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW || $this->_salesOptions->getSalesAuctionDirectBuy()) {
             $articleInformation->setBuyNowPrice($this->getProductPrice());
         }
 
@@ -562,8 +563,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             return false;
         }
 
-        $security = Mage::getSingleton('diglin_ricento/api_services_security');
-        $antiforgeryToken = $security->getServiceModel()->getAntiforgeryToken();
+        $antiforgeryToken = $this->_getSecurityService()->getServiceModel()->getAntiforgeryToken();
 
         $closeParameter = new CloseArticleParameter();
         $closeParameter
@@ -571,5 +571,32 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setArticleId($this->getRicardoArticleId());
 
         return $closeParameter;
+    }
+
+    /**
+     * @return bool|DeletePlannedArticleParameter
+     */
+    public function getDeleteArticleParameter()
+    {
+        if (!$this->getRicardoArticleId()) {
+            return false;
+        }
+
+        $antiforgeryToken = $this->_getSecurityService()->getServiceModel()->getAntiforgeryToken();
+
+        $deleteParameter = new DeletePlannedArticleParameter();
+        $deleteParameter
+            ->setAntiforgeryToken($antiforgeryToken)
+            ->setPlannedArticleId($this->getRicardoArticleId());
+
+        return $deleteParameter;
+    }
+
+    /**
+     * @return Diglin_Ricento_Model_Api_Services_Security
+     */
+    protected function _getSecurityService()
+    {
+        return Mage::getSingleton('diglin_ricento/api_services_security');
     }
 }

@@ -34,7 +34,29 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
     }
 
     /**
-     * Count the number of items not listed
+     * Count the number of items listed
+     *
+     * @param int $productsListingId
+     * @return int
+     */
+    public function countListedItems($productsListingId)
+    {
+        return $this->_countItems('status IN (\'' . Diglin_Ricento_Helper_Data::STATUS_LISTED . '\')', $productsListingId);
+    }
+
+    /**
+     * Count the number of items sold
+     *
+     * @param int $productsListingId
+     * @return int
+     */
+    public function countSoldItems($productsListingId)
+    {
+        return $this->_countItems('status IN (\'' . Diglin_Ricento_Helper_Data::STATUS_SOLD . '\')', $productsListingId);
+    }
+
+    /**
+     * Count the number of items ready to list
      *
      * @param int $productsListingId
      * @return int

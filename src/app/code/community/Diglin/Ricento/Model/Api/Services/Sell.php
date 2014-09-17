@@ -52,12 +52,12 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
     public function insertArticle(Diglin_Ricento_Model_Products_Listing_Item $item)
     {
         $articleResult = array();
+        $insertArticle = $item->getInsertArticleParameter();
 
         try {
             $this->_prepareCredentialToken();
 
             // @todo insert for each associated products in case of configurable
-            $insertArticle = $item->getInsertArticleParameter();
 
             $articleResult = $this->getServiceModel()->insertArticle($insertArticle);
 
@@ -73,18 +73,30 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         return $articleResult;
     }
 
-    /**
-     * @param \Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter $articles
-     * @return array
-     */
-    public function insertArticles(\Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter $articles)
+    public function updateArticle()
     {
-        $articleResult = array();
+
+        return $this;
+    }
+
+    /**
+     * @param Diglin_Ricento_Model_Products_Listing_Item $item
+     * @return array|bool
+     */
+    public function relistArticle(Diglin_Ricento_Model_Products_Listing_Item $item)
+    {
+        $relistArticleResult = array();
+
+        if (!$item->getRicardoArticleId()) {
+            return false;
+        }
 
         try {
             $this->_prepareCredentialToken();
 
-            $articleResult = $this->getServiceModel()->insertArticles($articles);
+            // @todo insert for each associated products in case of configurable
+
+            $relistArticleResult = $this->getServiceModel()->relistArticle($item->getRicardoArticleId());
 
             $this->_updateCredentialToken();
 
@@ -92,18 +104,8 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
             Mage::logException($e);
             $this->_handleSecurityException($e);
         }
-        return $articleResult;
-    }
 
-    public function updateArticle()
-    {
-
-        return $this;
-    }
-    public function relistArticle()
-    {
-
-        return $this;
+        return $relistArticleResult;
     }
 
     /**
@@ -112,25 +114,35 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
      */
     public function stopArticle(Diglin_Ricento_Model_Products_Listing_Item $item)
     {
-        $articleResult = array();
+        $closeArticleResult = array();
+        $closeArticleParameter = $item->getCloseArticleParameter();
+
+        if (!$closeArticleParameter) {
+            return false;
+        }
 
         try {
             $this->_prepareCredentialToken();
 
             // @todo insert for each associated products in case of configurable
 
-            $closeArticle = $item->getCloseArticleParameter();
+            $closeArticleResult = $this->getServiceModel()->closeArticle($closeArticleParameter);
 
-            $articleResult = $this->getServiceModel()->closeArticle($closeArticle);
+            if (isset($closeArticleResult['IsClosed']) && (bool) $closeArticleResult['IsClosed']) {
+                $deleteArticleParameter = $item->getDeleteArticleParameter();
+                $closeArticleResult = $this->getServiceModel()->deletePlannedArticle($deleteArticleParameter);
+                $closeArticleResult['ArticleNr'] = $closeArticleResult['PlannedArticleId'];
+            }
 
             $this->_updateCredentialToken();
 
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             Mage::logException($e);
-            Mage::log($closeArticle->getDataProperties(), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+            Mage::log($closeArticleParameter->getDataProperties(), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
 
             $this->_handleSecurityException($e);
         }
-        return $articleResult;
+
+        return $closeArticleResult;
     }
 }
