@@ -110,9 +110,14 @@ class Sell extends ManagerAbstract
         return $this->_lastInsertArticle;
     }
 
+    /**
+     * @param $articleId
+     * @return array
+     */
     public function relistArticle($articleId)
     {
-        return $this->_proceed('RelistArticle', $articleId);
+        $antiforgery = $this->getServiceManager()->getSecurityManager()->getAntiforgeryToken();
+        return $this->_proceed('RelistArticle', array('ArticleId' => $articleId, 'AntiforgeryToken' => $antiforgery));
     }
 
     /**

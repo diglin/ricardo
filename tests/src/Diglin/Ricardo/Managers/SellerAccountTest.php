@@ -83,20 +83,20 @@ class SellerAccountTest extends TestAbstract
         $result = $this->_sellerAccountManager->getTemplates();
         $this->assertGreaterThanOrEqual(1, count($result), 'Number of templates found is not greater than 1. Create one on ricardo.ch or the sandbox, not into the ricardo Assistant');
 
-        echo 'Get Templates: ' . print_r($result, true);
+        parent::outputContent($result, 'Get Templates: ', true);
     }
 
     public function testGetSellerPackages()
     {
         $result = $this->_sellerAccountManager->getSellerPackages();
 
-        echo 'Get Seller Packages: ' . print_r($result, true);
+        parent::outputContent($result, 'get Seller Packages: ', true);
     }
 
     public function testGetPaymentOptions()
     {
         $result = $this->_sellerAccountManager->getPaymentOptions();
 
-        parent::outputContent($result, 'GetPaymentOptions:', true);
+        parent::outputContent($result, 'Get Payment Options: ', true);
     }
 }

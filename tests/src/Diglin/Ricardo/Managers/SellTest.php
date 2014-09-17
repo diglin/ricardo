@@ -53,11 +53,12 @@ class SellTest extends TestAbstract
     }
 
     /**
+     * @param bool $auction
      * @param bool $buynow
      * @param bool $startNow
      * @return InsertArticleParameter
      */
-    protected function getArticle($buynow = false, $startNow = false)
+    protected function getArticle($auction = true, $buynow = false, $startNow = false)
     {
         $insertArticleParameter = new InsertArticleParameter();
 
@@ -89,7 +90,7 @@ class SellTest extends TestAbstract
         $articleInformation
             // required
             ->setArticleConditionId($conditions[0]['ArticleConditionId'])
-            ->setArticleDuration(7 * 24 * 60) // 7 days
+            ->setArticleDuration(8 * 24 * 60) // 7 days
             ->setAvailabilityId($availabilities[0]['AvailabilityId'])
             ->setCategoryId(38828)
             ->setInitialQuantity(1)
@@ -100,24 +101,31 @@ class SellTest extends TestAbstract
             ->setWarrantyId($warranties[1]['WarrantyId'])
             ->setDeliveries($delivery)
             // optional
-            ->setBuyNowPrice(20)
             ->setInternalReferences($internalReferences)
             ->setPaymentConditionIds(array($paymentConditions[0]['PaymentConditionId']))
             ->setPaymentMethodIds(array($paymentConditions[0]['PaymentMethods'][0]['PaymentMethodId']))
             ->setTemplateId(null);
 
-        if (!$startNow || !$buynow) {
+        if ($auction) {
+            $articleInformation
+                ->setIncrement(5)
+                ->setStartPrice(5);
+        }
+
+        if ($auction && !$startNow) {
             $articleInformation
                 ->setStartDate(Helper::getJsonDate(time() + 60*60));
         }
 
-        if (!$buynow) {
-            $articleInformation
-                ->setIncrement(5)
-                ->setStartPrice(5)
-                ->setPromotionIds(array(
-                    PromotionCode::BUYNOW
-                ));
+        if ($buynow) {
+            $articleInformation->setBuyNowPrice(20);
+
+            if ($auction) {
+                $articleInformation
+                    ->setPromotionIds(array(
+                        PromotionCode::BUYNOW
+                    ));
+            }
         }
 
         $descriptions = new ArticleDescriptionParameter();
@@ -159,7 +167,7 @@ class SellTest extends TestAbstract
 
     public function testInsertPlannedArticle()
     {
-        $insertArticleParameter = $this->getArticle();
+        $insertArticleParameter = $this->getArticle(true, true, false);
 
         try {
             $result = $this->_sellManager->insertArticle($insertArticleParameter);
@@ -171,19 +179,19 @@ class SellTest extends TestAbstract
         $this->assertArrayHasKey('PlannedArticleId', $result, 'Article does not have an article ID');
         $this->assertArrayHasKey('ArticleFee', $result, 'Article does not have any article fee');
 
-        $this->outputContent($result, 'Insert Article: ');
-
-        $articleId = null;
-        !empty($result['PlannedArticleId']) && $articleId = $result['PlannedArticleId'];
-
-        return $articleId;
+        $this->outputContent($result, 'Insert Article: ', true);
     }
 
     /**
      * @depends testInsertPlannedArticle
      */
-    public function testDeletePlannedArticle($articleId)
+    public function testDeletePlannedArticle()
     {
+        $insertArticleParameter = $this->getArticle(true, true, false);
+        $result = $this->_sellManager->insertArticle($insertArticleParameter);
+
+        $articleId = $result['PlannedArticleId'];
+
         $deleteParameter = new DeletePlannedArticleParameter();
         $deleteParameter
             ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken())
@@ -255,23 +263,32 @@ class SellTest extends TestAbstract
 
     public function testCloseArticle()
     {
-        $insertedArticle = $this->_sellManager->insertArticle($this->getArticle(true, true));
+        $insertedArticle = $this->_sellManager->insertArticle($this->getArticle(true, true, true));
 
-        $this->outputContent($insertedArticle, 'Inserted Buy Now Article with start now: ');
+        $this->outputContent($insertedArticle, 'Inserted Buy Now Article with start now: ', true);
 
-//        $articleId = 729014362;
-//
-//        $closeParameter = new CloseArticleParameter();
-//        $closeParameter
-//            ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken())
-//            ->setArticleId($articleId);
-//
-//        $result = $this->_sellManager->closeArticle($closeParameter);
-//
-//        $this->outputContent($result, 'Close Article: ');
-//
-//        $this->assertArrayHasKey('ArticleNr', $result, 'No article ID returned');
-//        $this->assertArrayHasKey('IsClosed', $result, 'Result does not have IsClosed Key');
-//        $this->assertTrue('IsClosed', (bool) $result['IsClosed'], 'Article not closed');
+        $articleId = $insertedArticle['PlannedArticleId'];
+
+        $closeParameter = new CloseArticleParameter();
+        $closeParameter
+            ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken())
+            ->setArticleId($articleId);
+
+        $result = $this->_sellManager->closeArticle($closeParameter);
+
+        $this->outputContent($result, 'Close Article: ');
+
+        $this->assertArrayHasKey('ArticleNr', $result, 'No article ID returned');
+        $this->assertArrayHasKey('IsClosed', $result, 'Result does not have IsClosed Key');
+        $this->assertTrue('IsClosed', (bool) $result['IsClosed'], 'Article not closed');
+    }
+
+    public function testRelistArticle()
+    {
+        $articleId = 729014362;
+
+        $relist = $this->_sellManager->relistArticle($articleId);
+
+        $this->outputContent($relist, 'Relist Article: ', true);
     }
 }

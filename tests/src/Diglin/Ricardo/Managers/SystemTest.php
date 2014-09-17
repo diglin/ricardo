@@ -155,6 +155,8 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('LanguageId', $result[0], 'Languages data structure does not have LanguageId');
         $this->assertArrayHasKey('IsMainLanguage', $result[0], 'Languages data structure does not have IsMainLanguage');
         $this->assertArrayHasKey('LanguageText', $result[0], 'Languages data structure does not have LanguageText');
+
+        self::outputContent($result, 'Get Languages: ');
     }
 
     public function testGetPackages()

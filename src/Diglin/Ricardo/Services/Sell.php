@@ -429,16 +429,17 @@ class Sell extends ServiceAbstract
     }
 
     /**
-     * Relists the article.
-     *
-     * @param int $articleId
+     * @param $parameters
      * @return array
      */
-    public function relistArticle($articleId)
+    public function relistArticle($parameters)
     {
+        $articleId = $parameters['ArticleId'];
+        $antiforgeryToken = $parameters['AntiforgeryToken'];
+
         return array(
             'method' => 'RelistArticle',
-            'params' => array('insertArticlesParameter' => array('ArticleId', $articleId))
+            'params' => array('relistArticleParameter' => array('ArticleId', $articleId, 'AntiforgeryToken' => $antiforgeryToken))
         );
     }
 
