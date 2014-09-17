@@ -161,30 +161,31 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
         $this->setMassactionIdField('entity_id');
         $this->getMassactionBlock()->setFormFieldName('products_listing');
 
-        $statuses = Mage::getSingleton('diglin_ricento/config_source_status')->toOptionArray();
+// Changing status it's quite a bad idea at product listing level, better at product listing item level
+//        $statuses = Mage::getSingleton('diglin_ricento/config_source_status')->toOptionArray();
+//
+//        // Remove the first and last item cause no need here
+//        array_unshift($statuses, array('label'=>'', 'value'=>''));
+//        array_pop($statuses);
 
-        // Remove the first and last item cause no need here
-        array_unshift($statuses, array('label'=>'', 'value'=>''));
-        array_pop($statuses);
-
-        $this->getMassactionBlock()->addItem('status', array(
-            'label'=> $this->__('Change status'),
-            'url'  => $this->getUrl('*/*/massStatus', array('_current'=>true)),
-            'additional' => array(
-                'visibility' => array(
-                    'name' => 'status',
-                    'type' => 'select',
-                    'class' => 'required-entry',
-                    'label' => $this->__('Status'),
-                    'values' => $statuses
-                )
-            )
-        ));
+//        $this->getMassactionBlock()->addItem('status', array(
+//            'label'=> $this->__('Change status'),
+//            'url'  => $this->getUrl('*/*/massStatus', array('_current'=>true)),
+//            'additional' => array(
+//                'visibility' => array(
+//                    'name' => 'status',
+//                    'type' => 'select',
+//                    'class' => 'required-entry',
+//                    'label' => $this->__('Status'),
+//                    'values' => $statuses
+//                )
+//            )
+//        ));
 
         $this->getMassactionBlock()->addItem('delete', array(
             'label'=> $this->__('Delete'),
             'url'  => $this->getUrl('*/*/massDelete', array('_current'=>true)),
-            'confirm' => $this->__('Are you sure that you want to delete this/these products listing(s)?')
+            'confirm' => $this->__('Are you sure that you want to delete this/these products listing(s)? Be aware it\'s only possible when the listing is "Listed"')
         ));
 
         $this->getMassactionBlock()->addItem('logs', array(
