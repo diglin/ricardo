@@ -233,6 +233,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
             Mage::logException($e);
             throw new Exception($helper->__('Error while trying to connect to the Ricardo API. Please, check your log files.'));
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
+            $this->_updateCredentialToken();
             $this->_handleSecurityException($e);
         }
 
@@ -363,7 +364,9 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     {
         if ($e->getCode() == \Diglin\Ricardo\Enums\SecurityErrors::TOKEN_AUTHORIZATION) {
 
-            Mage::logException($e);
+            if (Mage::helper('diglin_ricento')->isDebugEnabled()) {
+                Mage::logException($e);
+            }
 
             $ricentoException = new Diglin_Ricento_Exception($e->getMessage(), $e->getCode());
             $ricentoException->setNeedAuthorization(true);

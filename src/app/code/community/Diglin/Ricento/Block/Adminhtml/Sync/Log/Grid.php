@@ -144,8 +144,12 @@ class Diglin_Ricento_Block_Adminhtml_Sync_Log_Grid extends Mage_Adminhtml_Block_
     public function cellContainer($value, Varien_Object $row, Mage_Adminhtml_Block_Widget_Grid_Column $column)
     {
         $class = '';
-        if ($column->getIndex() == 'job_status' && !empty($value)) {
-            $class = 'class="' . strtolower($column->getIndex()) . '-' . strtolower($value) . '"';
+        if ($column->getIndex() == 'job_status' && !empty($row->getJobStatus())) {
+            $class = 'class="' . strtolower($column->getIndex()) . '-' . strtolower($row->getJobStatus()) . '"';
+        }
+
+        if ($column->getIndex() == 'job_message') {
+            $value = Mage::getSingleton('diglin_ricento/filter')->filter($value);
         }
 
         return '<div id="' . strtolower($column->getIndex()) . $row->getId() . '" ' . $class . '>' . $value . '</div>';
