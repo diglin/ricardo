@@ -64,9 +64,12 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
             $this->_updateCredentialToken();
 
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
+            $this->_updateCredentialToken();
             Mage::logException($e);
-            $insertArticle->setPictures(null, true); // remove picture otherwise log is extremely long
-            Mage::log($insertArticle->getDataProperties(), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+            if (Mage::helper('diglin_ricento')->isDebugEnabled()) {
+                $insertArticle->setPictures(null, true); // remove picture otherwise log is extremely long
+                Mage::log($insertArticle->getDataProperties(), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+            }
 
             $this->_handleSecurityException($e);
         }
@@ -101,6 +104,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
             $this->_updateCredentialToken();
 
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
+            $this->_updateCredentialToken();
             Mage::logException($e);
             $this->_handleSecurityException($e);
         }
@@ -110,11 +114,11 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
 
     /**
      * @param Diglin_Ricento_Model_Products_Listing_Item $item
-     * @return array
+     * @return array|bool
+     * @throws Exception
      */
     public function stopArticle(Diglin_Ricento_Model_Products_Listing_Item $item)
     {
-        $closeArticleResult = array();
         $closeArticleParameter = $item->getCloseArticleParameter();
 
         if (!$closeArticleParameter) {
@@ -126,23 +130,54 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
 
             // @todo insert for each associated products in case of configurable
 
-            $closeArticleResult = $this->getServiceModel()->closeArticle($closeArticleParameter);
+            try {
 
-            if (isset($closeArticleResult['IsClosed']) && (bool) $closeArticleResult['IsClosed']) {
-                $deleteArticleParameter = $item->getDeleteArticleParameter();
-                $closeArticleResult = $this->getServiceModel()->deletePlannedArticle($deleteArticleParameter);
-                $closeArticleResult['ArticleNr'] = $closeArticleResult['PlannedArticleId'];
+                $closeArticleResult = $this->getServiceModel()->closeArticle($closeArticleParameter);
+
+                $this->_updateCredentialToken();
+
+                /**
+                 * Ricardo API is special here - if article is closed, returned values may be empty even if successful !!!
+                 * If it doesn't work, an exception is triggered
+                 */
+                if (isset($closeArticleResult['IsClosed'])) {
+                    return true;
+                }
+            } catch (Exception $e) {
+                switch ($e->getCode()) {
+                    case \Diglin\Ricardo\Enums\ArticleErrors::ARTICLENOTFOUND:
+                    case \Diglin\Ricardo\Enums\GeneralErrors::CLOSEAUCTIONFAILED:
+                    case \Diglin\Ricardo\Enums\GeneralErrors::CLOSECLASSIFIEDFAILED:
+                        // do nothing pass to the DeletePlannedArticle
+                        break;
+                    default:
+                        throw $e;
+                }
             }
+
+            $deleteArticleParameter = $item->getDeleteArticleParameter();
+            if (!$deleteArticleParameter) {
+                return false;
+            }
+
+            $closeArticleResult = $this->getServiceModel()->deletePlannedArticle($deleteArticleParameter);
 
             $this->_updateCredentialToken();
 
-        } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
-            Mage::logException($e);
-            Mage::log($closeArticleParameter->getDataProperties(), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+            /**
+             * Ricardo API is special here - if article is closed, returned values may be empty !!!
+             * If it doesn't work, an exception is triggered
+             */
+            if (isset($closeArticleResult['IsClosed'])) {
+                return true;
+            }
 
+        } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
+            $this->_updateCredentialToken();
+            Mage::logException($e);
             $this->_handleSecurityException($e);
         }
 
-        return $closeArticleResult;
+        return false;
     }
 }
