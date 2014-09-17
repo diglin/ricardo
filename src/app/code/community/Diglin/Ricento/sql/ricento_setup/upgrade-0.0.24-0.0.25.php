@@ -14,6 +14,13 @@ $installer->startSetup();
 
 $itemTable = $installer->getTable('diglin_ricento/products_listing_item');
 
+$installer->getConnection()->addColumn($itemTable, 'ricardo_article_id', array(
+    'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
+    'nullable' => true,
+    'unsigned' => true,
+    'after' => 'product_id',
+    'comment' => 'Ricardo Article Id'));
+
 $installer->getConnection()->addColumn($itemTable, 'is_planned', array(
     'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
     'nullable' => true,
