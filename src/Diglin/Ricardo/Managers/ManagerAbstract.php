@@ -111,7 +111,7 @@ abstract class ManagerAbstract
      */
     protected function extractError(array $result)
     {
-        if (!empty($result['ErrorCodes']) && isset($result['ErrorCodesType'])) {
+        if (isset($result['ErrorCodesType'])) {
 
             if (count($result['ErrorCodes']) > 1) {
                 //@todo handle when several errors code are returned e.g. by inserting an article
@@ -119,7 +119,15 @@ abstract class ManagerAbstract
 
             $errorCodeType = $result['ErrorCodesType'];
             $errorType = $result['ErrorType'];
-            $errorCode = array_shift($result['ErrorCodes']);
+
+            if (isset($result['ErrorCodes'])) {
+                $errorCode = array_shift($result['ErrorCodes']);
+            }
+
+            if (empty($errorCode)) {
+                $errorCode = array('Key' => null);
+                $errorCodeType .= ' ' . $errorType;
+            }
 
             $classname = '\Diglin\Ricardo\Exceptions\\' . $errorType;
             if (!class_exists($classname)) {
