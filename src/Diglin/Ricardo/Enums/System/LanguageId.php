@@ -19,9 +19,9 @@ class LanguageId extends AbstractEnums
 {
     const NONE = 0;
 
-    const GERMAN = 1;
+    const GERMAN = 2;
 
-    const FRENCH = 2;
+    const FRENCH = 3;
 
     /**
      * @return array
