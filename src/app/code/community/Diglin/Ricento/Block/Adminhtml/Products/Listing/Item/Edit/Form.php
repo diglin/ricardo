@@ -54,7 +54,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Form extends Mag
     protected function _initFormValues()
     {
         parent::_initFormValues();
-        $this->getForm()->addValues(array('item_ids' => join(',', $this->getSelectedItems()->getAllIds())));
+        $this->getForm()->addValues(array('item_ids' => implode(',', $this->getSelectedItems()->getAllIds())));
         return $this;
     }
 

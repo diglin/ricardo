@@ -29,7 +29,27 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
      */
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('diglin_ricento/products_listing')->getCollection();
+        $collection = Mage::getResourceModel('diglin_ricento/products_listing_collection');
+
+        $listingItemTable = $collection->getTable('diglin_ricento/products_listing_item');
+
+        $collection
+            ->getSelect()
+            ->joinLeft(
+                array('pli' => $listingItemTable),
+                'main_table.entity_id = pli.products_listing_id',
+                'COUNT(pli.item_id) AS total'
+            )
+            ->joinLeft(
+                array('plib' => $listingItemTable),
+                'main_table.entity_id = plib.products_listing_id AND plib.status = "listed"',
+                'COUNT(plib.item_id) AS total_active_products'
+            )
+            ->joinLeft(
+                array('plic' => $listingItemTable),
+                'main_table.entity_id = plic.products_listing_id AND plic.status != "listed"',
+                'COUNT(plic.item_id) AS total_inactive_products'
+            );
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -74,7 +94,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
             'header' => $this->__('Total') ,
             'align' => 'right',
             'width' => '50px',
-            'index' => 'total_products',
+            'index' => 'total',
             'type' => 'number',
         ));
 
@@ -186,11 +206,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
             'label'=> $this->__('Delete'),
             'url'  => $this->getUrl('*/*/massDelete', array('_current'=>true)),
             'confirm' => $this->__('Are you sure that you want to delete this/these products listing(s)? Be aware it\'s only possible when the listing is "Listed"')
-        ));
-
-        $this->getMassactionBlock()->addItem('logs', array(
-            'label'=> $this->__('View Logs'),
-            'url'  => $this->getUrl('*/*/massViewLogs', array('_current'=>true))
         ));
 
         return $this;
