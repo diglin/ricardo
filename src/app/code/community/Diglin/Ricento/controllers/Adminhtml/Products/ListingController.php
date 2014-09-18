@@ -374,7 +374,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function listAction()
     {
-        $productListing = $this->_getListing();
+        $productListing = $this->_initListing();
 
         if (!$productListing) {
             $this->_redirect('*/*/index');
@@ -398,7 +398,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function forceListAction()
     {
-        $productListing = $this->_getListing();
+        $productListing = $this->_initListing();
 
         if (!$productListing) {
             $this->_redirect('*/*/index');
@@ -422,7 +422,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function relistAction()
     {
-        $productListing = $this->_getListing();
+        $productListing = $this->_initListing();
 
         if (!$productListing) {
             $this->_redirect('*/*/index');
