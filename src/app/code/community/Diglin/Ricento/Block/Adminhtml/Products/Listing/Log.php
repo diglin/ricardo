@@ -18,6 +18,19 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log extends Mage_Adminhtml
         parent::__construct();
 
         $this->removeButton('add');
+
+        $this->addButton('show_listing', array(
+            'label' => $this->__('Edit "%s"', $this->getProductsListing()->getTitle()),
+            'onclick' => 'setLocation(\'' . $this->getEditUrl() .'\')',
+        ));
+    }
+
+    /**
+     * @return string
+     */
+    public function getEditUrl()
+    {
+        return $this->getUrl('*/products_listing/edit', array('id' => $this->getProductsListing()->getId()));
     }
 
     /**
