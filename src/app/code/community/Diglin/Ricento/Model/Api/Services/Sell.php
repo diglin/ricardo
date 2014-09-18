@@ -66,6 +66,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             $this->_updateCredentialToken();
             Mage::logException($e);
+
             if (Mage::helper('diglin_ricento')->isDebugEnabled()) {
                 $insertArticle->setPictures(null, true); // remove picture otherwise log is extremely long
                 Mage::log($insertArticle->getDataProperties(), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);

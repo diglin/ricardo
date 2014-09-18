@@ -37,6 +37,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 '</li></ul>';
         }
 
+        /**
+         * Category fieldset
+         */
+
         $fieldsetCategory = $form->addFieldset('fieldset_category', array('legend' => Mage::helper('catalog')->__('Category')));
         $fieldsetCategory->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
         $fieldsetCategory->addField('ricardo_category_use_mapping', 'radios_extensible', array(
@@ -56,13 +60,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'types' => array('ricardo_category' => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_category_form_renderer_mapping'))
         ));
 
+        /**
+         * Sales Type fieldset
+         */
+
         $fieldsetType = $form->addFieldset('fieldset_type', array('legend' => $this->__('Type of sales')));
         $fieldsetType->addField('sales_type', 'select', array(
             'name' => 'sales_options[sales_type]',
             'required' => true,
             'label' => $this->__('Type of sales'),
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_type')->getAllOptions(),
-            'onchange' => "salesOptionsForm.showSalesTypeFieldsets(this.value, $('" . $htmlIdPrefix . "sales_auction_direct_buy').value == '1')"
+            'onchange' => "salesOptionsForm.showSalesTypeFieldsets(this.value, $('" . $htmlIdPrefix . "sales_auction_direct_buy').value == '1', '". $this->__('Until Sold') ."', ". Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT .")"
         ));
 
         $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
@@ -93,6 +101,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'onchange' => "salesOptionsForm.showSalesTypeFieldsets('auction', this.value =='1'); salesOptionsForm.toggleStockManagement(this)",
             'note' => $this->__('Fill in the fieldset "Buy now" below to define the direct price settings. <strong>Note</strong>: if set to "Yes", the stock management will be set to "Custom Qty" with a value of 1.')
         ));
+
+        /**
+         * Buy Now fieldset
+         */
 
         $fieldsetTypeBuynow = $form->addFieldset('fieldset_type_buynow', array('legend' => $this->__('Buy now'), 'fieldset_container_id' => 'fieldset_toggle_buynow'));
 
@@ -131,6 +143,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 . '</li></ul>'
         ));
 
+        /**
+         * Schedule fieldset
+         */
 
         $fieldsetSchedule = $form->addFieldset('fieldset_schedule', array('legend' => $this->__('Schedule')));
         $fieldsetSchedule->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
@@ -201,23 +216,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'values' => Mage::getSingleton('eav/entity_attribute_source_boolean')->getAllOptions()
         ));
 
-        $fieldsetCondition = $form->addFieldset('fieldset_condition', array('legend' => $this->__('Product Condition')));
+        /**
+         * Product Condition fieldset
+         */
 
-//        $fieldsetCondition->addType('checkboxes_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_checkboxes_extensible'));
-//        $fieldsetCondition->addField('product_condition_use_attribute', 'checkboxes_extensible', array(
-//            'name' => 'sales_options[product_condition_use_attribute]',
-//            'label' => $this->getConditionSourceLabel(),
-//            'values' => array(
-//                array('value' => 1, 'label' => $this->__('If available use condition information from product'), 'field' => array(
-//                    'product_condition_source_attribute_code', 'select', array(
-//                        'name' => 'sales_options[product_condition_source_attribute_code]',
-//                        'class' => 'inline-select',
-//                        'values' => Mage::getSingleton('diglin_ricento/config_source_sales_product_condition_source')->getAllOptions()
-//                    )
-//                ))
-//            ),
-//            'onclick' => 'salesOptionsForm.toggleConditionSource(this)'
-//        ));
+        $fieldsetCondition = $form->addFieldset('fieldset_condition', array('legend' => $this->__('Product Condition')));
 
         $fieldsetCondition->addField('product_condition', 'select', array(
             'name' => 'sales_options[product_condition]',
@@ -253,12 +256,16 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'required' => true
         ));
 
+        /**
+         * Stock Management fieldset
+         */
+
         $fieldsetStock = $form->addFieldset('fieldset_stock', array('legend' => $this->__('Stock Management')));
         $fieldsetStock->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
         $fieldsetStock->addField('stock_management_use_inventory', 'radios_extensible', array(
             'name' => 'sales_options[stock_management_use_inventory]',
             'label' => $this->__('Stock Management'),
-            'note' => $this->__('Range  1...999. If you use the product inventory option, the amount of items will be taken from the field "Qty" defined in the product inventory and limited to 999 if you have a quantity above this value.'),
+            'note' => $this->__('Range 1...999. If you use the product inventory option, the amount of items will be taken from the field "Qty" defined in the product inventory and limited to 999 if you have a quantity above this value.'),
             'values' => array(
                 array('value' => 1, 'label' => $this->__('Use product inventory')),
                 array('value' => 0, 'label' => $this->__('Use custom qty'), 'field' => array(
@@ -270,6 +277,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             )
         ));
 
+        /**
+         * Template fieldset
+         */
+
         $fieldsetCustomization = $form->addFieldset('fieldset_customization', array('legend' => $this->__('Customization')));
         $fieldsetCustomization->addField('customization_template', 'select', array(
             'name' => 'sales_options[customization_template]',
@@ -277,6 +288,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_template')->getAllOptions(),
             'note' => $this->__('To create one go to your <a href="%s">Ricardo account</a> into "My Sales".', Diglin_Ricento_Helper_Data::RICARDO_URL)
         ));
+
+        /**
+         * Promotions fieldset
+         */
 
         $fieldsetPromotion = $form->addFieldset('fieldset_promotion', array('legend' => $this->__('Promotion')));
         $fieldsetPromotion->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
@@ -300,7 +315,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                 . '</li></ul>'
         ));
 
-
         $this->setForm($form);
         return parent::_prepareForm();
     }
@@ -312,32 +326,65 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $this->getForm()->setValues($this->getSalesOptions());
 
         $derivedValues = array();
-        $derivedValues['fix_currency'] = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
-        $derivedValues['auction_currency'] = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
+        $derivedValues['fix_currency'] = $derivedValues['auction_currency'] = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
+
+        /**
+         * Set default sales type
+         */
         if ($this->getSalesOptions()->getSalesType() == null) {
             $derivedValues['sales_type'] = Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION;
         }
+
+        /**
+         * Add "Until Sold" option to the select input when it's buy now sales type
+         */
+        if ($this->getSalesOptions()->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW) {
+            $options = $this->getForm()->getElement('schedule_reactivation')->getOptions();
+            $options = array_merge($options, array(Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT => Mage::helper('diglin_ricento')->__('Until sold')));
+            $this->getForm()->getElement('schedule_reactivation')->setOptions($options);
+        }
+
+        /**
+         * Select which radio box to enable when no ricardo category exists
+         */
         if ((int) $this->getSalesOptions()->getRicardoCategory() == -1) {
             $derivedValues['ricardo_category_use_mapping'] = 1;
         } else {
             $derivedValues['ricardo_category_use_mapping'] = 0;
         }
+
+        /**
+         * Set the default value of the dropdown for the "condition use attribute"
+         */
         if ($this->getSalesOptions()->getProductConditionSourceAttributeCode()) {
             $derivedValues['product_condition_use_attribute'] = 1;
-//            $this->getForm()->getElement('product_condition')->setDisabled(true);
-//            $this->getForm()->getElement('product_condition')->setRequired(false);
-//            $this->getForm()->getElement('product_condition_use_attribute')->setRequired(true);
         }
+
+        /**
+         * Set the default value of the radio button for the "time to publish between each article"
+         */
         if ($this->getSalesOptions()->getScheduleCycleMultipleProducts() === null) {
             $derivedValues['schedule_cycle_multiple_products_random'] = '1';
         }
+
+        /**
+         * Set the default values of the radio button for the "stock management"
+         */
         if ((int)$this->getSalesOptions()->getStockManagement() === -1) {
             $derivedValues['stock_management'] = '';
             $derivedValues['stock_management_use_inventory'] = 1;
         }
+
+        /**
+         * Set the default values of the radio button for the "Starting Date"
+         */
         if ($this->getSalesOptions()->getScheduleDateStart() == null) {
             $derivedValues['schedule_date_start_immediately'] = 1;
         }
+
+        /**
+         * Set the default values for the ending date
+         */
         if (!in_array($this->getSalesOptions()->getSchedulePeriodDays(), $this->_getDaysOptions()->toOptionHash())) {
             $derivedValues['schedule_period_use_end_date'] = 1;
             $derivedValues['schedule_period_end_date'] = date_add(
@@ -346,6 +393,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             )->format(Varien_Date::DATETIME_PHP_FORMAT);
         }
 
+        /**
+         * Define if the warranty description must be enabled or not
+         */
         if ($this->getSalesOptions()->getProductWarranty()) {
             foreach ($supportedLangs as $supportedLang) {
                 $supportedLang = strtolower($supportedLang);
@@ -354,12 +404,15 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
                     ->setDisabled(true)
                     ->setRequired(false);
             }
-       }
+        }
 
+        /**
+         * Define the values and defaults for the promotion homepage
+         */
+        $derivedValues['promotion_start_page'] = \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMHOMEPAGE;
         if ($this->getSalesOptions()->getPromotionStartPage() == \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMHOMEPAGE) {
             $this->getForm()->getElement('promotion_start_page')->setChecked(true);
         }
-        $derivedValues['promotion_start_page'] = \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMHOMEPAGE;
 
 
         $this->getForm()->addValues($derivedValues);

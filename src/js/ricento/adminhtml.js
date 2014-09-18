@@ -304,11 +304,26 @@ Ricento.salesOptionsForm.prototype = {
             field.removeClassName(this.requiredClass);
         }
     },
-    showSalesTypeFieldsets : function(salesType, allowDirectBuy) {
+    showSalesTypeFieldsets : function(salesType, allowDirectBuy, untilsoldText, untilsoldValue) {
         $$('div[id^=fieldset_toggle_]').each(this._hideFieldset.bind(this));
         this._showFieldset($('fieldset_toggle_' + salesType));
         if (allowDirectBuy) {
             this._showFieldset($('fieldset_toggle_buynow'));
+        }
+        if (salesType == 'buynow') {
+            var option = document.createElement("option");
+            option.text = untilsoldText;
+            option.value = untilsoldValue;
+            $(this.htmlIdPrefix + 'schedule_reactivation').add(option);
+        } else {
+            var options = $(this.htmlIdPrefix + 'schedule_reactivation').options;
+
+            for(var i= 0; i < options.length; i++)
+            {
+                if (options[i].value == untilsoldValue) {
+                    $(this.htmlIdPrefix + 'schedule_reactivation').remove(i);
+                }
+            }
         }
     },
     _hideFieldset : function(fieldset) {
