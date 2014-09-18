@@ -226,7 +226,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetClassified',
-            'params' => array('GetClassifiedParameter')
+            'params' => array('getClassifiedParameter')
         );
     }
 
@@ -237,7 +237,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetClassifieds',
-            'params' => array('GetClassifiedsParameter')
+            'params' => array('getClassifiedsParameter')
         );
     }
 
@@ -249,7 +249,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetClosedArticles',
-            'params' => array('GetClosedArticlesParameter')
+            'params' => array('getClosedArticlesParameter')
         );
     }
 
@@ -261,7 +261,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetClosedClassifieds',
-            'params' => array('GetClosedClassifiedsParameter')
+            'params' => array('getClosedClassifiedsParameter')
         );
     }
 
@@ -273,7 +273,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetOpenArticle',
-            'params' => array('GetOpenArticleParameter')
+            'params' => array('getOpenArticleParameter')
         );
     }
 
@@ -285,7 +285,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetOpenArticles',
-            'params' => array('GetOpenArticlesParameter')
+            'params' => array('getOpenArticlesParameter')
         );
     }
 
@@ -300,7 +300,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetPaymentOptions',
-            'params' => array('GetPaymentOptionsParameter' => array('CustomerId' => $customerId))
+            'params' => array('getPaymentOptionsParameter' => array('CustomerId' => $customerId))
         );
     }
 
@@ -337,7 +337,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetPlannedArticle',
-            'params' => array('GetPlannedArticleParameter')
+            'params' => array('getPlannedArticleParameter')
         );
     }
 
@@ -348,7 +348,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetPlannedArticles',
-            'params' => array('GetPlannedArticlesParameter')
+            'params' => array('getPlannedArticlesParameter')
         );
     }
 
@@ -359,7 +359,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetPlannedPictures',
-            'params' => array('GetPlannedPicturesParameter')
+            'params' => array('getPlannedPicturesParameter')
         );
     }
 
@@ -391,7 +391,7 @@ class SellerAccount extends ServiceAbstract
     {
         return array(
             'method' => 'GetSoldArticle',
-            'params' => array('GetSoldArticleParameter')
+            'params' => array('getSoldArticleParameter')
         );
     }
 

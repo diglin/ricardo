@@ -95,7 +95,15 @@ class SellerAccountTest extends TestAbstract
 
     public function testGetPaymentOptions()
     {
-        $result = $this->_sellerAccountManager->getPaymentOptions();
+        $customerId = null;
+        $customer = new Customer($this->getServiceManager());
+        $customerInfo = $customer->getCustomerInformation();
+
+        if(isset($customerInfo['CustomerId'])) {
+            $customerId = $customerInfo['CustomerId'];
+        }
+
+        $result = $this->_sellerAccountManager->getPaymentOptions($customerId);
 
         parent::outputContent($result, 'Get Payment Options: ', true);
     }

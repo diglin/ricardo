@@ -132,6 +132,14 @@ class SellerAccount extends ManagerAbstract
      */
     public function getPaymentOptions($customerId = null)
     {
+        if (is_null($customerId)) {
+            $customer = new Customer($this->getServiceManager());
+            $customerInfo = $customer->getCustomerInformation();
+            if (isset($customerInfo['CustomerId'])) {
+                $customerId = $customerInfo['CustomerId'];
+            }
+        }
+
         return $this->_proceed('PaymentOptions', $customerId);
 
     }

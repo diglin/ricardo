@@ -23,6 +23,9 @@ use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter;
 
 class Sell extends ManagerAbstract
 {
+    /**
+     * @var string
+     */
     protected $_serviceName = 'sell';
 
     /**
