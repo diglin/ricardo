@@ -192,9 +192,9 @@ class Diglin_Ricento_Model_Cron
      *
      * @return string
      */
-    protected function _getForceListUrl()
+    protected function _getListUrl()
     {
-        return '{{adminhtml url="ricento/products_listing/forceList/" _query_id=' . $this->_productsListingId . '}}';
+        return '{{adminhtml url="ricento/products_listing/list/" _query_id=' . $this->_productsListingId . '}}';
     }
 
     /**
@@ -241,6 +241,8 @@ class Diglin_Ricento_Model_Cron
                 if (!$this->_productsListingId) {
                     return $this;
                 }
+
+                $job->saveCurrentJob(array('progress' => Diglin_Ricento_Model_Sync_Job::PROGRESS_RUNNING));
 
                 // Cleanup in case of running again the same job
 
@@ -305,7 +307,6 @@ class Diglin_Ricento_Model_Cron
                     'job_status' => $jobStatus,
                     'ended_at' => $endedAt,
                     'progress' => $this->_progressStatus,
-//                    'locked' => ($this->_progressStatus == Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED) ? 0 : 1
                 ));
 
                 $afterMethod = $jobMethod . 'After';
@@ -459,11 +460,9 @@ class Diglin_Ricento_Model_Cron
      */
     protected function _proceedCheckListStatusMessage($jobStatus)
     {
-        $adminhtmlHelper = Mage::helper('adminhtml');
-
         $message = '';
         if ($jobStatus != Diglin_Ricento_Model_Sync_Job::STATUS_SUCCESS) {
-            $message = Mage::helper('diglin_ricento')->__('You can ignore the warnings or errors and list your products on ricardo.ch by <a href="%s">clicking here</a>. However products having an error won\'t be saved on ricardo.ch', $this->_getForceListUrl() );
+            $message = Mage::helper('diglin_ricento')->__('You can ignore the warnings or errors and list your products on ricardo.ch by <a href="%s">clicking here</a>. However products having an error won\'t be saved on ricardo.ch', $this->_getListUrl() );
         }
         return $message;
     }
@@ -497,6 +496,7 @@ class Diglin_Ricento_Model_Cron
 
             try {
                 $articleId = null;
+                $isPlanned = false;
 
                 $insertedArticle = $sell->insertArticle($item);
 
@@ -507,7 +507,7 @@ class Diglin_Ricento_Model_Cron
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_itemMessage = array('inserted_article' => $insertedArticle);
                     $hasSuccess = true;
-                    $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => $articleId, 'status' => Diglin_Ricento_Helper_Data::STATUS_LISTED));
+                    $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => $articleId, 'status' => Diglin_Ricento_Helper_Data::STATUS_LISTED, 'is_planned' => (int) $isPlanned));
                 } else {
                     $this->_jobHasError = true;
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
@@ -530,87 +530,6 @@ class Diglin_Ricento_Model_Cron
                 'message' => $this->_jsonEncode($this->_itemMessage),
                 'log_status' => $this->_itemStatus,
                 'log_type' => $this->_getLogType(Diglin_Ricento_Model_Sync_Job::TYPE_LIST)
-            ));
-
-            // Save the current information of the process to allow live display via ajax call
-
-            $jobListing->saveCurrentJob(array(
-                'total_proceed' => ++$this->_totalProceed,
-                'last_item_id' => $item->getId()
-            ));
-
-            $this->_itemMessage = null;
-            $this->_itemStatus = null;
-        }
-
-        if ($hasSuccess) {
-            $listing = Mage::getModel('diglin_ricento/products_listing')->load($this->_productsListingId);
-            $listing
-                ->setStatus(Diglin_Ricento_Helper_Data::STATUS_LISTED)
-                ->save();
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Diglin_Ricento_Model_Sync_Job $job
-     * @param Diglin_Ricento_Model_Sync_Job_Listing $jobListing
-     * @return $this
-     */
-    protected function _proceedRelist(Diglin_Ricento_Model_Sync_Job $job, Diglin_Ricento_Model_Sync_Job_Listing $jobListing)
-    {
-        $sell = Mage::getSingleton('diglin_ricento/api_services_sell');
-
-        $relistedArticle = null;
-        $articleId = null;
-        $hasSuccess = false;
-
-        $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_SOLD), $jobListing->getLastItemId());
-
-        if ($job->getProgress() == Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING && $itemCollection->count() > 0) {
-            $this->_startJob($job);
-        }
-
-        if ($itemCollection->count() == 0) {
-            $job->setJobMessage($this->_getHelper()->__('No item is ready for this job. No action has been done.'));
-            $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED;
-            return $this;
-        }
-
-        /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
-        foreach ($itemCollection->getItems() as $item) {
-
-            try {
-                $relistedArticle = $sell->relistArticle($item);
-
-                if (!empty($articleId)) {
-                    $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
-                    $this->_itemMessage = array('inserted_article' => $relistedArticle);
-                    $hasSuccess = true;
-                    $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => $articleId, 'status' => Diglin_Ricento_Helper_Data::STATUS_LISTED));
-                } else {
-                    $this->_jobHasError = true;
-                    $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
-                    $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_ERROR));
-                }
-
-            } catch (Exception $e) {
-                $this->_handleException($e);
-                $e = null;
-                // keep going for the next item - no break
-            }
-
-            // Save item information and eventual error messages
-
-            $this->_getListingLog()->saveLog(array(
-                'job_id' => $job->getId(),
-                'product_title' => $item->getProductTitle(),
-                'products_listing_id' => $this->_productsListingId,
-                'product_id' => $item->getProductId(),
-                'message' => $this->_jsonEncode($this->_itemMessage),
-                'log_status' => $this->_itemStatus,
-                'log_type' => $this->_getLogType(Diglin_Ricento_Model_Sync_Job::TYPE_RELIST)
             ));
 
             // Save the current information of the process to allow live display via ajax call
@@ -716,6 +635,89 @@ class Diglin_Ricento_Model_Cron
                     ->setStatus(Diglin_Ricento_Helper_Data::STATUS_STOPPED)
                     ->save();
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Diglin_Ricento_Model_Sync_Job $job
+     * @param Diglin_Ricento_Model_Sync_Job_Listing $jobListing
+     * @return $this
+     *
+     * @deprecated since 18.09.2014
+     */
+    protected function _proceedRelist(Diglin_Ricento_Model_Sync_Job $job, Diglin_Ricento_Model_Sync_Job_Listing $jobListing)
+    {
+        $sell = Mage::getSingleton('diglin_ricento/api_services_sell');
+
+        $relistedArticle = null;
+        $articleId = null;
+        $hasSuccess = false;
+
+        $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_SOLD), $jobListing->getLastItemId());
+
+        if ($job->getProgress() == Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING && $itemCollection->count() > 0) {
+            $this->_startJob($job);
+        }
+
+        if ($itemCollection->count() == 0) {
+            $job->setJobMessage($this->_getHelper()->__('No item is ready for this job. No action has been done.'));
+            $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED;
+            return $this;
+        }
+
+        /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
+        foreach ($itemCollection->getItems() as $item) {
+
+            try {
+                $relistedArticle = $sell->relistArticle($item);
+
+                if (!empty($articleId)) {
+                    $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
+                    $this->_itemMessage = array('inserted_article' => $relistedArticle);
+                    $hasSuccess = true;
+                    $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => $articleId, 'status' => Diglin_Ricento_Helper_Data::STATUS_LISTED));
+                } else {
+                    $this->_jobHasError = true;
+                    $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
+                    $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_ERROR));
+                }
+
+            } catch (Exception $e) {
+                $this->_handleException($e);
+                $e = null;
+                // keep going for the next item - no break
+            }
+
+            // Save item information and eventual error messages
+
+            $this->_getListingLog()->saveLog(array(
+                'job_id' => $job->getId(),
+                'product_title' => $item->getProductTitle(),
+                'products_listing_id' => $this->_productsListingId,
+                'product_id' => $item->getProductId(),
+                'message' => $this->_jsonEncode($this->_itemMessage),
+                'log_status' => $this->_itemStatus,
+                'log_type' => $this->_getLogType(Diglin_Ricento_Model_Sync_Job::TYPE_RELIST)
+            ));
+
+            // Save the current information of the process to allow live display via ajax call
+
+            $jobListing->saveCurrentJob(array(
+                'total_proceed' => ++$this->_totalProceed,
+                'last_item_id' => $item->getId()
+            ));
+
+            $this->_itemMessage = null;
+            $this->_itemStatus = null;
+        }
+
+        if ($hasSuccess) {
+            $listing = Mage::getModel('diglin_ricento/products_listing')->load($this->_productsListingId);
+            $listing
+                ->setStatus(Diglin_Ricento_Helper_Data::STATUS_LISTED)
+                ->save();
         }
 
         return $this;
