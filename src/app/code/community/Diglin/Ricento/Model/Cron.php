@@ -667,13 +667,13 @@ class Diglin_Ricento_Model_Cron
 
                 if ($stoppedArticle) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
-                    $this->_itemMessage = array('success' => $this->_getHelper()->__('Ricardo Article %d has been removed from ricardo.ch'));
+                    $this->_itemMessage = array('success' => $this->_getHelper()->__('The product has been removed from ricardo.ch'));
                     $hasSuccess = true;
                     $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => null, 'status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED));
                 } else {
                     $this->_jobHasError = true;
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
-                    $this->_itemMessage = array('error' => $this->_getHelper()->__('The product %d has not been removed from ricardo.ch', $item->getProductId()));
+                    $this->_itemMessage = array('error' => $this->_getHelper()->__('The product has not been removed from ricardo.ch'));
                     // do not change the status of the item itself, the problem can be that the auction is still running and the article cannot be stopped
                 }
 

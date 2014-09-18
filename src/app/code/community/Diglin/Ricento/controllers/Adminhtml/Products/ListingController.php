@@ -313,6 +313,10 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $this->_redirect('*/*/edit', array('id' => $this->_getListing()->getId()));
     }
 
+    /**
+     * @param string $jobType
+     * @param int $totalItems
+     */
     protected function _startJobList($jobType, $totalItems)
     {
         $productListing = $this->_getListing();
@@ -360,7 +364,9 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     protected function _getSuccessMesageList()
     {
-        return $this->__('The job to check your products listing will start in few moment if it finishes with success, your products listing will be listed. Check the progression below.');
+        return $this->__('The job to check your products listing will start in few minutes.')
+        . $this->__('If it finishes with success, your products will be listed automatically otherwise you will have to choose if you want to keep going to list or fix potential issues.')
+        . $this->__('You can check the progression below.');
     }
 
     /**
@@ -407,7 +413,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             return;
         }
 
-        $this->_successMessage = $this->__('The job to list your products listing will start in few moment. You can check the progression below.');
+        $this->_successMessage = $this->__('The job to list your products listing will start in few minutes.') . $this->__('You can check the progression below.');
         $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_LIST, $countNotListedItems);
     }
 
@@ -452,6 +458,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             return;
         }
 
+        $this->_successMessage = $this->__('The job to stop to list your products will start in few minutes.') . $this->__('You can check the progression below.');
         $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_STOP, $countListedItem);
     }
 
@@ -477,7 +484,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
                 $notDeleted = array_diff($productListings, $goingToBeDeleted);
                 if ($notDeleted) {
-                    $this->_getSession()->addNotice($this->__('The following products listings IDs have not been deleted because they are still listed in Ricardo: ' . implode(',', $notDeleted)));
+                    $this->_getSession()->addNotice($this->__('The following products listings IDs have not been deleted because they are still listed on ricardo.ch: ' . implode(',', $notDeleted)));
                 }
             }
         } catch (Exception $e) {
@@ -486,22 +493,5 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         }
 
         $this->_redirect('*/*/index');
-    }
-
-    /**
-     * Change the status of the product listing via mass action
-     * Depending on the status, it may be redirected to an other method of this controller
-     */
-    public function massStatusAction()
-    {
-
-    }
-
-    /**
-     * View logs of selected product listings
-     */
-    public function massViewLogsAction()
-    {
-
     }
 }
