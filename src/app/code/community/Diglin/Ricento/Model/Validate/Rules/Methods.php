@@ -55,9 +55,17 @@ class Diglin_Ricento_Model_Validate_Rules_Methods extends Zend_Validate_Abstract
 
     protected function _normalizeAllowedPaymentCombinations()
     {
-        foreach ($this->_allowedPaymentCombinations as &$paymentArray) {
+        foreach ($this->_allowedPaymentCombinations as $key => &$paymentArray) {
+            if (array_search(\Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD, $paymentArray) !== false
+                && !Mage::helper('diglin_ricento')->isCardPaymentAllowed()) {
+                unset($this->_allowedPaymentCombinations[$key]);
+                continue;
+            }
+
             sort($paymentArray);
         }
+
+        sort($this->_allowedPaymentCombinations);
     }
 
     /**
@@ -115,7 +123,7 @@ class Diglin_Ricento_Model_Validate_Rules_Methods extends Zend_Validate_Abstract
     }
 
     /**
-     * Returns JavaScript with form validation methods based on $_allowedPaymentCombinations and $disallowedPaymentShippingCombinations
+     * Returns JavaScript with form validation methods based on $_allowedPaymentCombinations and $_disallowedPaymentShippingCombinations
      *
      * @return string
      */

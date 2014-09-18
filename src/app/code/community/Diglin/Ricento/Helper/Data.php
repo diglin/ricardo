@@ -515,4 +515,18 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         return $locale->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT)
             . ' ' . $locale->getTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
     }
+
+    /**
+     * @return bool
+     */
+    public function isCardPaymentAllowed()
+    {
+        $creditCardAvailable = false;
+        $paymentOptions = (array) Mage::getSingleton('diglin_ricento/api_services_selleraccount')->getPaymentOptions();
+
+        if (isset($paymentOptions['CardPaymentOptionAvailable'])) {
+            $creditCardAvailable = (bool) $paymentOptions['CardPaymentOptionAvailable'];
+        }
+        return $creditCardAvailable;
+    }
 }

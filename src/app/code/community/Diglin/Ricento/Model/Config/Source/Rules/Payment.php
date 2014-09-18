@@ -20,13 +20,18 @@ class Diglin_Ricento_Model_Config_Source_Rules_Payment extends Diglin_Ricento_Mo
      */
     public function toOptionHash()
     {
-        // @todo check to not have credit card payment methods when it's deactivated for an account
         if (empty($this->_paymentMethodsConditions)) {
+
+            $creditCardAvailable = Mage::helper('diglin_ricento')->isCardPaymentAllowed();
+
             $paymentMethodsConditions = (array) Mage::getSingleton('diglin_ricento/api_services_system')->getPaymentConditionsAndMethods();
 
             foreach ($paymentMethodsConditions as $paymentMethodsCondition)
                 if (isset($paymentMethodsCondition['PaymentMethods'])) {
                     foreach ($paymentMethodsCondition['PaymentMethods'] as $method) {
+                        if (!$creditCardAvailable && $method['PaymentMethodId'] == \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD) {
+                            continue;
+                        }
                         $this->_paymentMethodsConditions[$method['PaymentMethodId']] = $method['PaymentMethodText'];
                     }
                 }
