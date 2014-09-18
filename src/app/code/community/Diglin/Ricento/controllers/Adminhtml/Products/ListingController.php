@@ -239,17 +239,6 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     }
 
     /**
-     * Save a product listing and check the product listing items
-     */
-    public function saveAndListAction()
-    {
-        $error = $this->saveAction();
-        if (!$error) {
-            $this->listAction();
-        }
-    }
-
-    /**
      * Delete a product listing
      */
     public function deleteAction()
@@ -372,7 +361,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     /**
      * Start to list the product listing on ricardo platform if not already listed
      */
-    public function listAction()
+    public function checkAndlistAction()
     {
         $productListing = $this->_initListing();
 
@@ -396,7 +385,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     /**
      * Action used to list the products to ricardo.ch when the cron job which check the products listing finished with warnings
      */
-    public function forceListAction()
+    public function listAction()
     {
         $productListing = $this->_initListing();
 
@@ -419,6 +408,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
     /**
      * Start to list the product listing on ricardo platform if those was already listed and sold
+     *
+     * @deprecated since 18.09.2014
      */
     public function relistAction()
     {
