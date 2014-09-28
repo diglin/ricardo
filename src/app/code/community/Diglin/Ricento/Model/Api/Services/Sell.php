@@ -60,7 +60,9 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
 
             // @todo insert for each associated products in case of configurable
 
+            $start = microtime(true);
             $articleResult = $this->getServiceModel()->insertArticle($insertArticle);
+            Mage::log('Time to insert article ' . (microtime(true) - $start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
 
             $this->_updateCredentialToken();
 
@@ -92,7 +94,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
     {
         $relistArticleResult = array();
 
-        if (!$item->getRicardoArticleId()) {
+        if (!$item->getRicardoArticleId() || $item->getIsPlanned()) {
             return false;
         }
 
@@ -121,10 +123,15 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
      */
     public function stopArticle(Diglin_Ricento_Model_Products_Listing_Item $item)
     {
-        $closeArticleParameter = $item->getCloseArticleParameter();
-
-        if (!$closeArticleParameter) {
-            return false;
+        /**
+         * If it is a planned article, we have to delete instead to close the article
+         */
+        if ($item->getIsPlanned()) {
+            $parameterMethod = 'getDeleteArticleParameter';
+            $serviceMethod = 'deletePlannedArticle';
+        } else {
+            $parameterMethod = 'close';
+            $serviceMethod = 'closeArticle';
         }
 
         try {
@@ -132,45 +139,20 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
 
             // @todo insert for each associated products in case of configurable
 
-            try {
-
-                $closeArticleResult = $this->getServiceModel()->closeArticle($closeArticleParameter);
-
-                $this->_updateCredentialToken();
-
-                /**
-                 * Ricardo API is special here - if article is closed, returned values may be empty even if successful !!!
-                 * If it doesn't work, an exception is triggered
-                 */
-                if (isset($closeArticleResult['IsClosed'])) {
-                    return true;
-                }
-            } catch (Exception $e) {
-                switch ($e->getCode()) {
-                    case \Diglin\Ricardo\Enums\ArticleErrors::ARTICLENOTFOUND:
-                    case \Diglin\Ricardo\Enums\GeneralErrors::CLOSEAUCTIONFAILED:
-                    case \Diglin\Ricardo\Enums\GeneralErrors::CLOSECLASSIFIEDFAILED:
-                        // do nothing pass to the DeletePlannedArticle
-                        break;
-                    default:
-                        throw $e;
-                }
-            }
-
-            $deleteArticleParameter = $item->getDeleteArticleParameter();
-            if (!$deleteArticleParameter) {
+            $parameter = $item->$parameterMethod();
+            if (!$parameter) {
                 return false;
             }
 
-            $closeArticleResult = $this->getServiceModel()->deletePlannedArticle($deleteArticleParameter);
+            $result = $this->getServiceModel()->$serviceMethod($parameter);
 
             $this->_updateCredentialToken();
 
             /**
              * Ricardo API is special here - if article is closed, returned values may be empty !!!
-             * If it doesn't work, an exception is triggered
+             * If it's closed/deleted or an error occurred, an exception is triggered
              */
-            if (isset($closeArticleResult['IsClosed'])) {
+            if (isset($result['IsClosed'])) {
                 return true;
             }
 
