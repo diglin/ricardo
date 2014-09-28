@@ -23,6 +23,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
         $this->setSaveParametersInSession(true);
     }
 
+    public function getListing()
+    {
+        return Mage::registry('products_listing');
+    }
+
     /**
      * Prepare the collection to be displayed as a grid
      *
@@ -31,27 +36,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
     protected function _prepareCollection()
     {
         $collection = Mage::getResourceModel('diglin_ricento/products_listing_collection');
-
-        $listingItemTable = $collection->getTable('diglin_ricento/products_listing_item');
-
-        $collection
-            ->getSelect()
-            ->joinLeft(
-                array('pli' => $listingItemTable),
-                'main_table.entity_id = pli.products_listing_id',
-                'COUNT(pli.item_id) AS total'
-            )
-            ->joinLeft(
-                array('plib' => $listingItemTable),
-                'main_table.entity_id = plib.products_listing_id AND plib.status = "listed"',
-                'COUNT(plib.item_id) AS total_active_products'
-            )
-            ->joinLeft(
-                array('plic' => $listingItemTable),
-                'main_table.entity_id = plic.products_listing_id AND plic.status != "listed"',
-                'COUNT(plic.item_id) AS total_inactive_products'
-            );
-
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -97,14 +81,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
             'width' => '50px',
             'index' => 'total',
             'type' => 'number',
-        ));
-
-        $this->addColumn('sold', array(
-            'header' => $this->__('Sold') ,
-            'align' => 'right',
-            'width' => '50px',
-            'index' => 'total_sold_products',
-            'type' => 'number',
+            'renderer' => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_listing_grid_renderer_total')
         ));
 
         $this->addColumn('status', array(

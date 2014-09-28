@@ -65,11 +65,17 @@ class Diglin_Ricento_Adminhtml_SyncController extends Mage_Adminhtml_Controller_
             $locale = Mage::app()->getLocale();
             $dateFormatIso = Mage::helper('diglin_ricento')->getDateTimeIsoFormat();
 
+            $jobMessage = $job->getJobMessage();
+
+            if (is_array($jobMessage)) {
+                $jobMessage = implode('<br>', $jobMessage);
+            }
+
             $response = array(
                 'percentage' => $percentDone,
                 'status' => ucfirst($job->getJobStatus()),
                 'state' => $job->getProgress(),
-                'message' => Mage::getSingleton('diglin_ricento/filter')->filter($job->getJobMessage()),
+                'message' => Mage::getSingleton('diglin_ricento/filter')->filter($jobMessage),
                 'started_at' => ($job->getStartedAt()) ? $locale->date($job->getStartedAt())->toString($dateFormatIso) : '',
                 'ended_at' => ($job->getEndedAt()) ? $locale->date($job->getEndedAt())->toString($dateFormatIso) : ''
             );

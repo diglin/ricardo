@@ -324,7 +324,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $job
                 ->setJobType($jobType)
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
-                ->setJobMessage($job->getJobMessage())
+                ->setJobMessage(array($job->getJobMessage()))
                 ->save();
 
             $jobListing = Mage::getModel('diglin_ricento/sync_job_listing');
@@ -340,7 +340,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             return;
         } catch (Diglin_Ricento_Exception $e) {
             Mage::logException($e);
-            $this->_getSession()->addError($this->__('It\'s s not possible to start $this job. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
+            $this->_getSession()->addError($this->__('It\'s s not possible to start this job. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
         } catch (Exception $e) {
             Mage::logException($e);
             $this->_getSession()->addError($this->__('An error occurred while starting this job. Please check your log file.'));
@@ -354,9 +354,9 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     protected function _getSuccessMesageList()
     {
-        return $this->__('The job to check your products listing will start in few minutes.')
-        . $this->__('If it finishes with success, your products will be listed automatically otherwise you will have to choose if you want to keep going to list or fix potential issues.')
-        . $this->__('You can check the progression below.');
+        return $this->__('The job to check your products listing will start in few minutes. You can check the progression below.')
+        . '<br>'
+        . $this->__('If it finishes with success, your products will be listed automatically otherwise you will have to choose if you want to keep going to list or fix potential issues.');
     }
 
     /**
@@ -371,16 +371,16 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             return;
         }
 
-        $countNotListedItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->countNotListedItems($productListing->getId());
+        $countPendingItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->countPendingItems($productListing->getId());
 
-        if ($countNotListedItems == 0) {
-            $this->_getSession()->addError($this->__('There is no product ready to be listed. Please, add products to your products listing "%s".', $productListing->getId()));
+        if ($countPendingItems == 0) {
+            $this->_getSession()->addError($this->__('There is no product ready to be listed. Please, add products to your products listing "%s".', $productListing->getTitle()));
             $this->_redirect('*/*/index');
             return;
         }
 
         $this->_successMessage = $this->_getSuccessMesageList();
-        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST, $countNotListedItems);
+        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST, $countPendingItems);
     }
 
     /**
@@ -395,16 +395,18 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             return;
         }
 
-        $countNotListedItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->countNotListedItems($productListing->getId());
+        $countReadyToList = Mage::getResourceModel('diglin_ricento/products_listing_item')->coundReadyTolist($productListing->getId());
 
-        if ($countNotListedItems == 0) {
-            $this->_getSession()->addError($this->__('There is no product ready to be listed. Please, add products to your products listing "%s".', $productListing->getId()));
+        if ($countReadyToList == 0) {
+            $this->_getSession()->addError($this->__('There is no product ready to be listed. Please, add products to your products listing "%s".', $productListing->getTitle()));
             $this->_redirect('*/*/index');
             return;
         }
 
-        $this->_successMessage = $this->__('The job to list your products listing will start in few minutes.') . $this->__('You can check the progression below.');
-        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_LIST, $countNotListedItems);
+        $this->_successMessage = $this->__('The job to list your products listing will start in few minutes.')
+            . '<br>'
+            . $this->__('You can check the progression below.');
+        $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_LIST, $countReadyToList);
     }
 
     /**

@@ -35,11 +35,11 @@ class Diglin_Ricento_Model_Config_Source_Status extends Diglin_Ricento_Model_Con
             ),  // Products are listed into ricardo and are in progress of sales
             array(
                 'value' => Diglin_Ricento_Helper_Data::STATUS_LISTED,
-                'label' => $helper->__('List')
+                'label' => $helper->__('Listed')
             ),  // Products are listed into ricardo and are in progress of sales
             array(
                 'value' => Diglin_Ricento_Helper_Data::STATUS_STOPPED,
-                'label' => $helper->__('Stop')
+                'label' => $helper->__('Stopped')
             ),  // Products are not listed or having been stopped from ricardo
             array(
                 'value' => Diglin_Ricento_Helper_Data::STATUS_ERROR,

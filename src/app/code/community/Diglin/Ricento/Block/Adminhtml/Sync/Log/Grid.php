@@ -150,6 +150,8 @@ class Diglin_Ricento_Block_Adminhtml_Sync_Log_Grid extends Mage_Adminhtml_Block_
         }
 
         if ($column->getIndex() == 'job_message') {
+            $value = Mage::helper('core')->jsonDecode($value);
+            $value = (is_array($value)) ? implode('<br>', $value) : $value;
             $value = Mage::getSingleton('diglin_ricento/filter')->filter($value);
         }
 

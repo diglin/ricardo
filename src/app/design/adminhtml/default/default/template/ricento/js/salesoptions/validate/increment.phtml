@@ -14,6 +14,10 @@ $jsonAllowedCombinations = $this->getJsonAllowedCombinations();
 Validation.addAllThese([
     ['validate-startprice-increment', '<?php echo $incrementValidationMessage ?>', function(fieldValue, field) {
 
+        if ($('fieldset_toggle_auction').getStyle('display') == 'none') {
+            return true;
+        }
+
         startPriceValue = $('sales_options_sales_auction_start_price').value;
 
         allowedCombinations = <?php echo $jsonAllowedCombinations ?>;
@@ -23,7 +27,6 @@ Validation.addAllThese([
                     return true;
                 }
             }
-
         }
         return false;
     }],

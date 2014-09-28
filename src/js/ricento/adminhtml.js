@@ -227,7 +227,7 @@ Ricento.progressInterval = function (url, prefix) {
                 progress_bar.setProgress(response.percentage);
                 progressElement.innerHTML = Math.min(Math.round(response.percentage), 100) + '%';
 
-                if (response.state == 'chunk_running') {
+                if (response.state == 'chunk_running' || response.state == 'running') {
                     progressElement.addClassName('sync-indicator');
                     adviceElement.innerHTML = '';
                 } else if (response.state == 'completed') {
@@ -271,6 +271,7 @@ Ricento.salesOptionsForm.prototype = {
         this.requiredClass = 'required-entry';
         this.validationPassedClass = 'validation-passed';
         this.requiredIfVisibleClass = 'required-if-visible';
+        this.startPriceClass = 'validate-number-range number-range-0.05-1000000';
         this.langs = ['fr','de'];
         var self = this;
 
@@ -315,8 +316,10 @@ Ricento.salesOptionsForm.prototype = {
             option.text = untilsoldText;
             option.value = untilsoldValue;
             $(this.htmlIdPrefix + 'schedule_reactivation').add(option);
+            $(this.htmlIdPrefix + 'sales_auction_start_price').removeClassName(this.startPriceClass);
         } else {
             var options = $(this.htmlIdPrefix + 'schedule_reactivation').options;
+            $(this.htmlIdPrefix + 'sales_auction_start_price').addClassName(this.startPriceClass);
 
             for(var i= 0; i < options.length; i++)
             {

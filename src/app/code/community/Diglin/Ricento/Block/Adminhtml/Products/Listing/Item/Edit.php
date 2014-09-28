@@ -21,6 +21,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit extends Mage_Adm
         $this->_controller = 'adminhtml_products_listing_item';
 
         parent::__construct();
+
+        $this->updateButton('back', 'label', Mage::helper('adminhtml')->__('Back to the list "%s"', $this->getListing()->getTitle()));
     }
 
     /**
