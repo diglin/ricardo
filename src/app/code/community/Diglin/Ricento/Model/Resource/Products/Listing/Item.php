@@ -29,9 +29,9 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
      * @param int $productsListingId
      * @return int
      */
-    public function countNotListedItems($productsListingId)
+    public function countPendingItems($productsListingId)
     {
-        return $this->_countItems('status NOT IN (\'' . Diglin_Ricento_Helper_Data::STATUS_LISTED . '\')', $productsListingId);
+        return $this->_countItems('status IN (\'' . Diglin_Ricento_Helper_Data::STATUS_PENDING . '\', \'' . Diglin_Ricento_Helper_Data::STATUS_ERROR .'\')', $productsListingId);
     }
 
     /**
@@ -64,7 +64,7 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
      */
     public function coundReadyTolist($productsListingId)
     {
-        return $this->_countItems('status IN (\'' . Diglin_Ricento_Helper_Data::STATUS_READY . '\', \'' . Diglin_Ricento_Helper_Data::STATUS_PENDING . '\')', $productsListingId);
+        return $this->_countItems('status IN (\'' . Diglin_Ricento_Helper_Data::STATUS_READY . '\')', $productsListingId);
     }
 
     /**
