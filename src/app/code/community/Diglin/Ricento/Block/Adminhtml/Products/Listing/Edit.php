@@ -37,32 +37,25 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
 
         $this->_addButton('stop', array(
             'label'   => $this->__('Stop'),
+            'title'   => $this->__('Remove article listed on ricardo.ch'),
             'onclick' => 'setLocation(\'' . $this->getStopListingUrl() . '\')',
-            'class'   => 'cancel',
-            'disabled' => true
+            'class'   => 'cancel'
         ), 3);
 
+        $this->_addButton('check_and_list', array(
+            'label' => $this->__('Check & List'),
+            'title' => $this->__('Check & list only pending & error items'),
+            'onclick' => 'editForm.submit(\'' . $this->getCheckAndListUrl() . '\');',
+            'class' => 'list success'
+        ), 2);
+
         if ($this->getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
-            $this->_updateButton('stop', 'disabled', false);
             $this->_updateButton('add_product_from_category', 'disabled', true);
             $this->_updateButton('add_product', 'disabled', true);
             $this->_updateButton('delete', 'disabled', true);
             $this->_updateButton('delete', 'title', $this->__('Listed listings cannot be deleted. Stop the listing first.'));
 
             $this->_removeButton('save');
-
-            $this->_addButton('save_and_update', array(
-                'label' => $this->__('Save & Update List'),
-                'onclick' => 'editForm.submit(\'' . $this->getCheckAndListUrl() . '\');',
-                'class' => 'save list'
-            ), 2);
-
-        } else {
-            $this->_addButton('check_and_list', array(
-                'label' => $this->__('Check & List'),
-                'onclick' => 'editForm.submit(\'' . $this->getCheckAndListUrl() . '\');',
-                'class' => 'list success'
-            ), 2);
         }
     }
 
