@@ -13,10 +13,10 @@ namespace Diglin\Ricardo\Enums\Customer;
 use Diglin\Ricardo\Enums\AbstractEnums;
 
 /**
- * Class OpenArticlesSortBy
+ * Class SoldArticlesSortBy
  * @package Diglin\Ricardo\Enums\Customer
  */
-class OpenArticlesSortBy extends AbstractEnums
+class SoldArticlesSortBy extends AbstractEnums
 {
     const SORTBYARTICLEID = 1; // Sort by article Id = 1
 
@@ -36,6 +36,8 @@ class OpenArticlesSortBy extends AbstractEnums
 
     const SORTBYBUYNOWPRICE = 9; // Sort by buy now price = 9
 
+    const SORTBYBUYERNICK = 10; // Sort by buyer nick = 10
+
     const SORTBYCURRENTPRICE = 11; // Sort by current price = 11
 
     const SORTBYENDDATE = 12; // Sort by end date = 12
@@ -44,9 +46,31 @@ class OpenArticlesSortBy extends AbstractEnums
 
     const SORTBYSTARTDATE = 14; // Sort by the start date = 14
 
-    const SORTBYCATEGORY = 15; // Sort by the category = 15
+    const SORTBYCATEGORY = 16; // Sort by the category = 16
 
-    const SORTBYSHIPPINGFEES = 16; // Sort by the shipping fees = 16
+    const SORTBYSHIPPINGFEES = 17; // Sort by the shipping fees = 17
+
+    const SORTBYCOMPANYNAME = 18; // Sort by the company name = 18
+
+    const SORTBYFIRSTNAME = 19; // Sort by the first name = 19
+
+    const SORTBYADDRESS1 = 20; // Sort by the address1 = 20
+
+    const SORTBYADDRESS2 = 21; // Sort by the address2 = 21
+
+    const SORTBYPOSTBOX = 22; // Sort by the post box = 22
+
+    const SORTBYZIPCODE = 23; // Sort by the zip code = 23
+
+    const SORTBYCITY = 24; // Sort by the city = 24
+
+    const SORTBYCOUNTRY = 25; // Sort by the country = 25
+
+    const ORTBYEMAIL = 26; // Sort by the email = 26
+
+    const SORTBYPHONENUMBER = 27; // Sort by the phone number = 27
+
+    const SORTBYMOBILEPHONE = 28; // Sort by the mobile phone = 28
 
     /**
      * @return array
@@ -59,7 +83,6 @@ class OpenArticlesSortBy extends AbstractEnums
             array('label' => 'SORTBYINTERNALREFERENCE', 'value' => self::SORTBYINTERNALREFERENCE),
             array('label' => 'SORTBYQUANTITY', 'value' => self::SORTBYQUANTITY),
             array('label' => 'SORTBYVIEWCOUNT', 'value' => self::SORTBYVIEWCOUNT),
-            array('label' => 'SORTBYVIEWCOUNT', 'value' => self::SORTBYVIEWCOUNT),
             array('label' => 'SORTBYOBSERVERCOUNT', 'value' => self::SORTBYOBSERVERCOUNT),
             array('label' => 'SORTBYBIDCOUNT', 'value' => self::SORTBYBIDCOUNT),
             array('label' => 'SORTBYSTARTPRICE', 'value' => self::SORTBYSTARTPRICE),
@@ -70,6 +93,17 @@ class OpenArticlesSortBy extends AbstractEnums
             array('label' => 'SORTBYSTARTDATE', 'value' => self::SORTBYSTARTDATE),
             array('label' => 'SORTBYCATEGORY', 'value' => self::SORTBYCATEGORY),
             array('label' => 'SORTBYSHIPPINGFEES', 'value' => self::SORTBYSHIPPINGFEES),
+            array('label' => 'SORTBYCOMPANYNAME', 'value' => self::SORTBYCOMPANYNAME),
+            array('label' => 'SORTBYFIRSTNAME', 'value' => self::SORTBYFIRSTNAME),
+            array('label' => 'SORTBYADDRESS1', 'value' => self::SORTBYADDRESS1),
+            array('label' => 'SORTBYADDRESS2', 'value' => self::SORTBYADDRESS2),
+            array('label' => 'SORTBYPOSTBOX', 'value' => self::SORTBYPOSTBOX),
+            array('label' => 'SORTBYZIPCODE', 'value' => self::SORTBYZIPCODE),
+            array('label' => 'SORTBYCITY', 'value' => self::SORTBYCITY),
+            array('label' => 'SORTBYCOUNTRY', 'value' => self::SORTBYCOUNTRY),
+            array('label' => 'ORTBYEMAIL', 'value' => self::ORTBYEMAIL),
+            array('label' => 'SORTBYPHONENUMBER', 'value' => self::SORTBYPHONENUMBER),
+            array('label' => 'SORTBYMOBILEPHONE', 'value' => self::SORTBYMOBILEPHONE),
         );
     }
 }

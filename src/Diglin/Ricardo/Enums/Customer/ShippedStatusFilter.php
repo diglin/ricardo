@@ -14,16 +14,16 @@ namespace Diglin\Ricardo\Enums\Customer;
 use Diglin\Ricardo\Enums\AbstractEnums;
 
 /**
- * Class PaidStatusFilter
+ * Class ShippedStatusFilter
  * @package Diglin\Ricardo\Enums\Customer
  */
-class PaidStatusFilter extends AbstractEnums
+class ShippedStatusFilter extends AbstractEnums
 {
     const ANY = 0;
 
-    const PAID = 1;
+    const SHIPPED = 1;
 
-    const NOTPAID = 2;
+    const NOTSHIPPED = 2;
 
     /**
      * @return array
@@ -32,8 +32,8 @@ class PaidStatusFilter extends AbstractEnums
     {
         return array(
             array('label' => 'ANY', 'value' => self::ANY),
-            array('label' => 'PAID', 'value' => self::PAID),
-            array('label' => 'NOTPAID', 'value' => self::NOTPAID),
+            array('label' => 'SHIPPED', 'value' => self::SHIPPED),
+            array('label' => 'NOTSHIPPED', 'value' => self::NOTSHIPPED),
         );
     }
 }
