@@ -85,7 +85,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 
         // Validate custom options
 
-        if (!$item->getProduct()->getHasOptions()) {
+        if ($item->getProduct()->getHasOptions()) {
             // warning - no option will be send to ricardo.ch
             $this->_warnings[] = $helper->__('Custom Options are not supported. Those won\'t be synchronized into ricardo.ch.', Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY);
         }
