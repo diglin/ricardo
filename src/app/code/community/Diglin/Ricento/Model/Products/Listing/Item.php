@@ -33,6 +33,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
  * @method int    getProductsListingId()
  * @method int    getSalesOptionsId()
  * @method int    getRuleId()
+ * @method int    getIsPlanned()
  * @method string getStatus()
  * @method bool   getReload()
  * @method DateTime getCreatedAt()
@@ -45,6 +46,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
  * @method Diglin_Ricento_Model_Products_Listing_Item setProductsListingId(int $productListingId)
  * @method Diglin_Ricento_Model_Products_Listing_Item setSalesOptionsId(int $salesOptionsId)
  * @method Diglin_Ricento_Model_Products_Listing_Item setRuleId(int $ruleIid)
+ * @method Diglin_Ricento_Model_Products_Listing_Item setIsPlanned(int $isPlanned)
  * @method Diglin_Ricento_Model_Products_Listing_Item setStatus(string $status)
  * @method Diglin_Ricento_Model_Products_Listing_Item setReload(bool $reload)
  * @method Diglin_Ricento_Model_Products_Listing_Item setCreatedAt(DateTime $createdAt)
@@ -305,6 +307,14 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     }
 
     /**
+     * @return string
+     */
+    public function getInternalReference()
+    {
+        return Mage::helper('diglin_ricento')->generateInternalReference($this);
+    }
+
+    /**
      * Define a list of store IDs for each supported and expected language
      * Define a default one in case of accept all languages
      *
@@ -423,7 +433,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
 
         $internalReferences
             ->setInternalReferenceTypeId(InternalReferenceType::SELLERSPECIFIC)
-            ->setInternalReferenceValue($this->getProductSku());
+            ->setInternalReferenceValue($this->getInternalReference());
 
         return $internalReferences;
     }
@@ -478,6 +488,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         if (!is_null($startDate) || $salesType == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
             $startDate = strtotime($startDate);
 
+            // ricardo.ch constrains, starting date must be in 1 hour after now
             if ($startDate < (time() + 60*60)) {
                 $startDate = time() + 60*60;
             }
@@ -555,7 +566,6 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     {
         $system = Mage::getSingleton('diglin_ricento/api_services_system');
         $conditions = (array) $system->getPaymentConditionsAndMethods();
-
 
         foreach ($conditions as $condition) {
             if (isset($condition['PaymentMethods']) && !empty($condition['PaymentMethods'])) {

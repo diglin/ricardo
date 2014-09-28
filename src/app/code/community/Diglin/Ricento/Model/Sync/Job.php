@@ -40,6 +40,8 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
     const TYPE_RELIST       = 'relist';
     const TYPE_STOP         = 'stop';
     const TYPE_UPDATE       = 'update';
+    const TYPE_ORDER        = 'order';
+    const TYPE_SYNCLIST     = 'sync_list';
 
     // PROGRESS
     const PROGRESS_PENDING      = 'pending';
@@ -70,6 +72,18 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
     protected function _construct()
     {
         $this->_init('diglin_ricento/sync_job');
+    }
+
+    protected function _afterLoad()
+    {
+        $this->setJobMessage(Mage::helper('core')->jsonDecode($this->getData('job_message')));
+        return parent::_afterLoad();
+    }
+
+    protected function _beforeSave()
+    {
+        $this->setJobMessage(Mage::helper('core')->jsonEncode($this->getData('job_message')));
+        return parent::_beforeSave();
     }
 
     /**

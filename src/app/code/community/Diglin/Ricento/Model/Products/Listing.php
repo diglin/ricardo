@@ -13,10 +13,6 @@
  * Products Listing Model
  *
  * @method string getTitle()
- * @method int    getTotalActiveProducts()
- * @method int    getTotalInActiveProducts()
- * @method int    getTotalSoldProducts()
- * @method int    getTotalProducts()
  * @method string getStatus()
  * @method int    getSalesOptionsId()
  * @method int    getWebsiteId()
@@ -28,10 +24,6 @@
  * @method DateTime getCreatedAt()
  * @method DateTime getUpdatedAt()
  * @method Diglin_Ricento_Model_Products_Listing setTitle(string $title)
- * @method Diglin_Ricento_Model_Products_Listing setTotalActiveProducts(int $totalActiveProducts)
- * @method Diglin_Ricento_Model_Products_Listing setTotalInActiveProducts(int $totalInactiveProducts)
- * @method Diglin_Ricento_Model_Products_Listing setTotalSoldProducts(int $totalSoldProducts)
- * @method Diglin_Ricento_Model_Products_Listing setTotalProducts(int $totalProducts)
  * @method Diglin_Ricento_Model_Products_Listing setStatus(string $status)
  * @method Diglin_Ricento_Model_Products_Listing setSalesOptionsId(int $salesOptionsId)
  * @method Diglin_Ricento_Model_Products_Listing setWebsiteId(int $websiteId)
