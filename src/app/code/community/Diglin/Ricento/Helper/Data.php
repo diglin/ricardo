@@ -37,28 +37,33 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const DEFAULT_SUPPORTED_LANG = 'de';
     const LANG_ALL = 'all';
 
+    const ALLOWED_CURRENCY = 'CHF';
+
     const CFG_SHIPPING_CALCULATION = 'ricento/global/shipping_calculation';
-
     const CFG_CLEAN_JOBS_ENABLED = 'ricento/global/cleanup_jobs/enabled';
-    const CFG_CLEAN_JOBS_KEEP_DAYS = 'ricento/global/cleanup_jobs/keep_days';
 
+    const CFG_CLEAN_JOBS_KEEP_DAYS = 'ricento/global/cleanup_jobs/keep_days';
     const CFG_CLEAN_LISTING_LOGS_ENABLED = 'ricento/global/listing_logs/enabled';
+
     const CFG_CLEAN_LISTING_LOGS_KEEP_DAYS = 'ricento/global/listing_logs/keep_days';
 
-    // Common statuses for products listing and products listing item
+    /**
+     * Common statuses for products listing and products listing item
+     */
     const STATUS_PENDING = 'pending';
     const STATUS_LISTED = 'listed';
     const STATUS_STOPPED = 'stopped';
     const STATUS_READY = 'ready';
     const STATUS_ERROR = 'error';
+
     const STATUS_SOLD = 'sold';
 
     const LOG_FILE = 'ricento.log';
 
-    const ALLOWED_CURRENCY = 'CHF';
-
     const RICARDO_URL = 'http://www.ricardo.ch';
     const RICARDO_URL_HELP_PROMOTION = 'http://www.ricardo.ch/ueber-uns/gebühren/einstelloptionen'; //@todo make it for french too
+
+    const NODE_DISPATCHER_TYPES = 'global/ricento/dispatcher/types';
 
     /**
      * @var Mage_Directory_Model_Currency
@@ -373,90 +378,6 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Format the price with the ricardo supported currencies
-     *
-     * @param $value
-     * @return string
-     */
-    public function formatPrice($value)
-    {
-        $this->startCurrencyEmulation();
-
-        $value = Mage::app()->getStore()->formatPrice($value);
-
-        $this->stopCurrencyEmulation();
-
-        return $value;
-    }
-
-    /**
-     * Emulate CHF currency in case the current store settings is different as the allowed currency/ies
-     *
-     * @return $this
-     */
-    public function startCurrencyEmulation()
-    {
-        $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
-
-        if (isset($partnerConfiguration['CurrencyPrefix'])) {
-            $ricardoCurrency = $partnerConfiguration['CurrencyPrefix'];
-        } else {
-            $ricardoCurrency = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
-        }
-
-        $store = Mage::app()->getStore();
-        $this->_oldCurrency = $store->getCurrentCurrency();
-        $store->setCurrentCurrency(Mage::getModel('directory/currency')->load($ricardoCurrency));
-
-        return $this;
-    }
-
-    /**
-     * Revert the changes done regarding the currency of the current store
-     *
-     * @return $this
-     */
-    public function stopCurrencyEmulation()
-    {
-        Mage::app()->getStore()->setCurrentCurrency($this->_oldCurrency);
-
-        return $this;
-    }
-
-    /**
-     * Calculate the price change depending on the type and value of the change to apply
-     *
-     * @param float|int $price
-     * @param string $priceChangeType
-     * @param float|int $priceChange
-     * @return float
-     */
-    public function calculatePriceChange($price, $priceChangeType, $priceChange)
-    {
-        switch ($priceChangeType) {
-            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_DYNAMIC_NEG:
-                $price -= ($price * $priceChange / 100);
-                break;
-            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_DYNAMIC_POS:
-                $price += ($price * $priceChange / 100);
-                break;
-            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_FIXED_NEG:
-                $price -= $priceChange;
-                break;
-            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_FIXED_POS:
-                $price += $priceChange;
-                break;
-            case Diglin_Ricento_Model_Config_Source_Sales_Price_Method::PRICE_TYPE_NOCHANGE:
-            default:
-                break;
-        }
-
-        return $price;
-    }
-
-
-
-    /**
      * Get the store list of a product listing based on supported language
      *
      * @param int|Diglin_Ricento_Model_Products_Listing $productsListing
@@ -477,17 +398,16 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 
         if ($publishLang != Diglin_Ricento_Helper_Data::LANG_ALL) {
             $method =  $baseMethod . ucwords($publishLang);
-            if (method_exists($productsListing, $method)) {
-                $stores[] = (int) $productsListing->$method();
+            $store = (int) $productsListing->$method();
+            if (!empty($store)) {
+                $stores[] = $store;
             }
         } else {
             $supportedLang = Mage::helper('diglin_ricento')->getSupportedLang();
 
             // We set default lang at first position
             $method = $baseMethod . ucwords($defaultLang);
-            if (method_exists($productsListing, $method)) {
-                $stores[] = (int) $productsListing->$method();
-            }
+            $stores[] = (int) $productsListing->$method();
 
             foreach ($supportedLang as $lang) {
 
@@ -498,9 +418,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
                 }
 
                 $method = $baseMethod . ucwords($lang);
-                if (method_exists($productsListing, $method)) {
-                    $stores[] = (int) $productsListing->$method();
-                }
+                $stores[] = (int) $productsListing->$method();
             }
         }
 
@@ -529,5 +447,21 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
             $creditCardAvailable = (bool) $paymentOptions['CardPaymentOptionAvailable'];
         }
         return $creditCardAvailable;
+    }
+
+    /**
+     * Generate the Internal Reference - Must be unique to allow the mapping with ricardo
+     *
+     * @param Diglin_Ricento_Model_Products_Listing_Item $item
+     * @param int $productId
+     * @return string
+     */
+    public function generateInternalReference(Diglin_Ricento_Model_Products_Listing_Item $item, $productId = null)
+    {
+        if ($productId) {
+            $productId = $item->getProductId();
+        }
+
+        return $item->getId() . '#PID#' . $productId;
     }
 }
