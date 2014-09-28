@@ -25,12 +25,29 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
     protected $_jobType = Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST;
 
     /**
+     * @var int
+     */
+    protected $_totalSuccess = 0;
+
+    /**
+     * @var int
+     */
+    protected $_totalWarning = 0;
+
+    /**
+     * @var int
+     */
+    protected $_totalError = 0;
+
+
+    /**
      * @return $this
      */
     protected function _proceed()
     {
         $job = $this->_currentJob;
         $jobListing = $this->_currentJobListing;
+        $this->_totalSuccess = $this->_totalWarning = $this->_totalError = 0;
 
         /**
          * Status of the collection must be the same as Diglin_Ricento_Model_Resource_Products_Listing_Item::countPendingItems
@@ -72,20 +89,24 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
                 $this->_itemMessage = $itemValidator->getMessages();
                 $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
 
-                if (!empty($itemValidator->getSuccess())) { // @todo item validator doesn't set success at the moment
+                // @todo item validator doesn't set success at the moment
+                if (empty($itemValidator->getWarnings()) && empty($itemValidator->getErrors())) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_jobHasSuccess = true;
+                    ++$this->_totalSuccess;
                 }
 
                 if (!empty($itemValidator->getWarnings())) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_WARNING;
                     $this->_jobHasWarning = true;
+                    ++$this->_totalWarning;
                 }
 
                 if (!empty($itemValidator->getErrors())) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
                     $this->_jobHasError = true;
                     $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_ERROR));
+                    ++$this->_totalError;
                 }
 
                 if ($this->_itemStatus != Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR) {
@@ -126,14 +147,16 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
     }
 
     /**
-     * @param Diglin_Ricento_Model_Sync_Job_Listing $jobListing
      * @return $this
      */
-    protected function _proceedCheckListAfter(Diglin_Ricento_Model_Sync_Job_Listing $jobListing)
+    protected function _proceedAfter()
     {
         // Ready to list the product automatically which are ready for that
 
         if ($this->_jobHasSuccess && $this->_progressStatus == Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED) {
+
+            $countReadyItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->coundReadyTolist($this->_productsListingId);
+
             $jobList = Mage::getModel('diglin_ricento/sync_job');
             $jobList
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
@@ -144,7 +167,7 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
             $jobListingList = Mage::getModel('diglin_ricento/sync_job_listing');
             $jobListingList
                 ->setProductsListingId($this->_productsListingId)
-                ->setTotalCount($jobListing->getTotalCount())
+                ->setTotalCount($countReadyItems)
                 ->setTotalProceed(0)
                 ->setJobId($jobList->getId())
                 ->save();
@@ -160,11 +183,14 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
      * @param string $jobStatus
      * @return string
      */
-    protected function _proceedCheckListStatusMessage($jobStatus)
+    protected function _getStatusMessage($jobStatus)
     {
         $message = '';
+        $helper =  Mage::helper('diglin_ricento');
         if ($jobStatus != Diglin_Ricento_Model_Sync_Job::STATUS_SUCCESS) {
-            $message = Mage::helper('diglin_ricento')->__('You can ignore the warnings or errors and list your products on ricardo.ch by <a href="%s">clicking here</a>. However products having an error won\'t be saved on ricardo.ch', $this->_getListUrl() );
+            $message = $helper->__('%d success, %d warning(s), %d error(s)', $this->_totalSuccess, $this->_totalWarning, $this->_totalError);
+            $message .= '<br>';
+            $message .= $helper->__('You can force to list your products on ricardo.ch by <a href="%s">clicking here</a>. However products having an error won\'t be synchronized', $this->_getListUrl() );
         }
         return $message;
     }

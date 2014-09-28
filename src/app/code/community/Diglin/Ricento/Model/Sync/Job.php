@@ -12,11 +12,9 @@
 /**
  * Class Diglin_Ricento_Model_Sync_Job
  *
- * @method string getJobType()
  * @method string getJobStatus()
+ * @method string getJobType()
  * @method string getProgress()
- * @method bool    getLocked()
- * @method bool    getIsPlanned()
  * @method DateTime getStartedAt()
  * @method DateTime getEndedAt()
  * @method DateTime getCreatedAt()
@@ -25,8 +23,6 @@
  * @method Diglin_Ricento_Model_Sync_Job setJobType(string $type)
  * @method Diglin_Ricento_Model_Sync_Job setJobStatus(string $status)
  * @method Diglin_Ricento_Model_Sync_Job setProgress(string $progress)
- * @method Diglin_Ricento_Model_Sync_Job setLocked(bool $locked)
- * @method Diglin_Ricento_Model_Sync_Job setIsPlanned(bool $isPlanned)
  * @method Diglin_Ricento_Model_Sync_Job setStartedAt(DateTime $starteddAt)
  * @method Diglin_Ricento_Model_Sync_Job setEndedAt(DateTime $endedAt)
  * @method Diglin_Ricento_Model_Sync_Job setCreatedAt(DateTime $createdAt)
@@ -82,7 +78,10 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
 
     protected function _beforeSave()
     {
-        $this->setJobMessage(Mage::helper('core')->jsonEncode($this->getData('job_message')));
+        $message = $this->getData('job_message');
+        if (is_array($message)) {
+            $this->setJobMessage(Mage::helper('core')->jsonEncode($message));
+        }
         return parent::_beforeSave();
     }
 

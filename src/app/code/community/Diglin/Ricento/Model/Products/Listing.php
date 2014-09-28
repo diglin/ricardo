@@ -78,13 +78,14 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
     protected function _beforeSave()
     {
         parent::_beforeSave();
-        $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
 
         if ($this->hasDataChanges() && $this->getStatus() != Diglin_Ricento_Helper_Data::STATUS_LISTED) {
             $this->setStatus(Diglin_Ricento_Helper_Data::STATUS_PENDING);
             // Be aware doing that doesn't trigger Magento events but it's faster
             $this->getProductsListingItemCollection()->updateStatusToAll(Diglin_Ricento_Helper_Data::STATUS_PENDING);
         }
+
+        $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
 
         return $this;
     }

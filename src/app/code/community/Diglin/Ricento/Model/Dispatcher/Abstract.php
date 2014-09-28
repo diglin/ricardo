@@ -110,12 +110,11 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     }
 
     /**
-     * @param Diglin_Ricento_Model_Sync_Job $job
      * @return $this
      */
-    protected function _startJob(Diglin_Ricento_Model_Sync_Job $job)
+    protected function _startJob()
     {
-        $job
+        $this->_currentJob
             ->setStartedAt(Mage::getSingleton('core/date')->gmtDate())
             ->setProgress($this->_progressStatus)
             ->save();
@@ -182,7 +181,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                  * We set the status to block any parallel process to execute the same job. In case of recoverable error, the job status is reverted
                  */
                 if ($this->_currentJob->getProgress() == Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING) {
-                    $this->_startJob($this->_currentJob);
+                    $this->_startJob();
                 }
 
                 /**
@@ -359,7 +358,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
             $this->_currentJob
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING)
                 ->setJobStatus(Diglin_Ricento_Model_Sync_Job::STATUS_ERROR)
-                ->setJobMessage($e->__toString())
+                ->setJobMessage(array($e->__toString()))
                 ->save();
         }
         return $this;

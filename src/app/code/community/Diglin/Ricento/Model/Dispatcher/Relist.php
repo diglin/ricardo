@@ -43,7 +43,7 @@ class Diglin_Ricento_Model_Dispatcher_Relist extends Diglin_Ricento_Model_Dispat
         $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_SOLD), $jobListing->getLastItemId());
 
         if ($itemCollection->count() == 0) {
-            $job->setJobMessage($this->_getNoItemMessage());
+            $job->setJobMessage(array($this->_getNoItemMessage()));
             $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED;
             return $this;
         }
