@@ -101,7 +101,8 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
             $sellerAccount = Mage::getSingleton('diglin_ricento/api_services_selleraccount');
             $sellerAccount->setCanUseCache(false);
 
-            $this->_openedArticles = $sellerAccount->getOpenArticles(new OpenArticlesParameter());
+            $openParameter = new OpenArticlesParameter();
+            $this->_openedArticles = $sellerAccount->getOpenArticles($openParameter);
         }
 
         $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED), $jobListing->getLastItemId());
@@ -116,11 +117,11 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
                 /**
                  * Get the new ricardo article id if the article was planned before
                  */
-                $articleId = $this->lookupForRicardoArticleId($item->getInternalReference());
+                $article = $this->lookupForRicardoArticle($item->getInternalReference());
 
-                if ($articleId) {
+                if ($article) {
                     $item
-                        ->setRicardoArticleId($articleId)
+                        ->setRicardoArticleId($article['ArticleId'])
                         ->setIsPlanned(0)
                         ->save();
                 }
@@ -142,12 +143,12 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
      * @param string $internalReference
      * @return bool
      */
-    protected function lookupForRicardoArticleId($internalReference)
+    protected function lookupForRicardoArticle($internalReference)
     {
         foreach ($this->_openedArticles as $openArticle) {
             if (isset($openArticle['ArticleInternalReferences']) && !empty($openArticle['ArticleInternalReferences'][0])) {
                 if ($openArticle['ArticleInternalReferences'][0]['InternalReferenceValue'] == $internalReference) {
-                    return $openArticle['ArticleId'];
+                    return $openArticle;
                 }
             }
         }
