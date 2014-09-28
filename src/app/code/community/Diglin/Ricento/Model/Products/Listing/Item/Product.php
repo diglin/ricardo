@@ -388,6 +388,10 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
         $subtitle = '';
 
+        if ($this->getTypeId($productId) == Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE) {
+            // @todo get subtitle from the current option
+        }
+
         foreach ($this->getStoresList($storeId) as $id) {
             $subtitle = $this->_getProductVarchar('ricardo_subtitle', $productId, $id);
             if ($subtitle) {
@@ -451,13 +455,12 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      */
     public function getPrice()
     {
-        $salesOptions = $this->getProductListingItem()->getSalesOptions();
-
         //@todo do the conversion from a non supported currency to the supported currency - at the moment we do not support this feature
 
+        $salesOptions = $this->getProductListingItem()->getSalesOptions();
         $price = $this->_getProductPrice($salesOptions->getPriceSourceAttributeCode());
 
-        return Mage::helper('diglin_ricento')->calculatePriceChange($price, $salesOptions->getPriceChangeType(), $salesOptions->getPriceChange());
+        return Mage::helper('diglin_ricento/price')->calculatePriceChange($price, $salesOptions->getPriceChangeType(), $salesOptions->getPriceChange());
     }
 
     /**
@@ -509,9 +512,8 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
             return false;
         }
 
-        $stores = $this->getStoresList($this->_storeId);
         $mediaConfig = Mage::getSingleton('catalog/product_media_config');
-        $images = $this->getAssignedImages($productId, $stores);
+        $images = $this->getAssignedImages($productId);
 
         foreach ($images as &$image) {
             if (isset($image['filepath'])) {
@@ -526,40 +528,30 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      * Return assigned images for specific stores
      *
      * @param int $productId
-     * @param int|array $storeIds
      * @return array
      *
      */
-    public function getAssignedImages($productId = null, $storeIds = null)
+    public function getAssignedImages($productId = null)
     {
-        is_null($storeIds) && $storeIds = $this->_storeId;
-
-        if (!is_array($storeIds)) {
-            $storeIds = array($storeIds);
-        }
-
         $productId = (int) (is_null($productId) ? $this->_productId : $productId);
 
-        $mainTable = Mage::getResourceModel('catalog/product')->getAttribute('image')
-            ->getBackend()
-            ->getTable();
+        $read = $this->_getReadConnection();
+        $resource = $this->_getCoreResource();
 
-        $read      = $this->_getReadConnection();
-        $coreResource = $this->_getCoreResource();
-
-        $select    = $read->select()
+        $select = $read->select()
             ->from(
-                array('images' => $mainTable),
-                array('value as filepath', 'store_id')
+                array('mg' => $resource->getTableName('catalog/product_attribute_media_gallery')),
+                array(
+                    'filepath' => 'mg.value', 'mgv.label', 'mgv.position'
+                )
             )
             ->joinLeft(
-                array('attr' => $coreResource->getTableName('eav/attribute')),
-                'images.attribute_id = attr.attribute_id',
-                array('attribute_code')
+                array('mgv' => $resource->getTableName('catalog/product_attribute_media_gallery_value')),
+                '(mg.value_id = mgv.value_id AND mgv.store_id = 0)',
+                array()
             )
-            ->where('entity_id = ?', $productId)
-            ->where('store_id IN (?)', $storeIds)
-            ->where('attribute_code IN (?)', array('small_image', 'thumbnail', 'image'));
+            ->where('entity_id IN(?)', $productId)
+            ->order(array('mgv.position ASC'));
 
         return $read->fetchAll($select);
     }
@@ -744,10 +736,11 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     }
 
     /**
-     * @param $field
-     * @return float|null
+     * @param null $field
+     * @param bool $withTax
+     * @return float|string
      */
-    protected function _getSimpleProductBasePrice($field = null)
+    protected function _getSimpleProductBasePrice($field = null, $withTax = true)
     {
         if (is_null($field)) {
             $field = 'price';
@@ -768,8 +761,17 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
         $price = $readConnection->fetchOne($select);
 
-        //@todo calculate price with incl tax if price catalog doesn't include it
-        //Mage::helper('tax')->getPrice($product, $_finalPrice, true);
+        if ($field == 'special_price' && empty($price)) {
+            $price = $this->_getSimpleProductBasePrice('price', false);
+        }
+
+        /**
+         * Calculate price with incl tax if price catalog doesn't include it
+         * @todo improve performance - Loading product is bad idea
+         */
+        if ($withTax) {
+            $price = Mage::helper('tax')->getPrice($this->getMagentoProduct(), $price, true, null, null, null, $this->_defaultStoreId);
+        }
 
         return $price;
     }
@@ -904,7 +906,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
     protected function _getConfigurableProductBasePrice($productPrice)
     {
         if (!$this->isConfigurableType()) {
-            return null;
+            return $productPrice;
         }
 
         $attributes = $this->getConfigurableAttributes();
