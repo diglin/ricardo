@@ -224,7 +224,7 @@ class Service
             $getResultServiceMethod = $this->_prepareServiceGetResultMethod($serviceMethod);
 
             if (!is_array($data)) {
-                throw new \Exception('Error occurred with the API. Here is the message returned: ' . "\n" . $data);
+                throw new \Exception('Error occurred with the API. Here is the message returned: ' . "\n" . $data . "\n" . print_r($this->getApi()->getLastDebug(), true));
             } else if (method_exists($serviceInstance, $getResultServiceMethod) && is_array($data) && !array_key_exists('ErrorCodes', $data)) {
                 return $serviceInstance->$getResultServiceMethod( (array) $data);
             } else {
