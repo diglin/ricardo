@@ -187,9 +187,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
         $value = htmlspecialchars_decode($value);
         if ($column->getIndex() == 'message' && !empty($value)) {
             $messages = Mage::helper('core')->jsonDecode($value);
-            isset($messages['errors']) && count($messages['errors']) > 0 && $output .= '<div id="message-errors"' . $row->getId() . ' class="message_errors">' . implode('<br>', $messages['errors']) . '</div>';
-            isset($messages['warnings']) && count($messages['warnings']) > 0 && $output .= '<div id="message-warnings"' . $row->getId() . ' class="message_warnings">' . implode('<br>', $messages['warnings']) . '</div>';
-            isset($messages['success']) && count($messages['success']) > 0 && $output .= '<div id="message-success"' . $row->getId() . ' class="message_success">' . implode('<br>', $messages['success']) . '</div>';
+            isset($messages['errors']) && count($messages['errors']) > 0 && $output .= '<div id="message-errors"' . $row->getId() . ' class="message_errors">' . implode('<br>', (array) $messages['errors']) . '</div>';
+            isset($messages['warnings']) && count($messages['warnings']) > 0 && $output .= '<div id="message-warnings"' . $row->getId() . ' class="message_warnings">' . implode('<br>', (array) $messages['warnings']) . '</div>';
+            isset($messages['success']) && count($messages['success']) > 0 && $output .= '<div id="message-success"' . $row->getId() . ' class="message_success">' . implode('<br>', (array) $messages['success']) . '</div>';
         }
         return $output;
     }
