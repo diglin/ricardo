@@ -4,6 +4,9 @@
         <Diglin_Ricento>
             <active>true</active>
             <codePool>community</codePool>
+            <depends>
+                <Mage_Payment />
+            </depends>
         </Diglin_Ricento>
     </modules>
 </config>

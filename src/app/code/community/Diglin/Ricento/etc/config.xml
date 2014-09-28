@@ -45,6 +45,17 @@
                 <keep_days>30</keep_days>
             </listing_logs>
         </ricento>
+
+        <default>
+            <payment>
+                <ricento>
+                    <active>1</active>
+                    <model>diglin_ricento/sales_method_payment</model>
+                    <order_status>pending</order_status>
+                    <title>Ricardo Payment Method</title>
+                </ricento>
+            </payment>
+        </default>
     </default>
     <global>
         <psr0_namespaces>
@@ -241,6 +252,14 @@
                     <model>diglin_ricento/cron::process</model>
                 </run>
             </ricento_sync_jobs>
+            <ricento_async_jobs>
+                <schedule>
+                    <cron_expr>*/1 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>diglin_ricento/cron::async</model>
+                </run>
+            </ricento_async_jobs>
         </jobs>
     </crontab>
 </config>
