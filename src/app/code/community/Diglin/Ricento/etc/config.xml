@@ -168,6 +168,29 @@
                 <configurable />
                 <grouped />
             </allow_product_types>
+
+            <dispatcher>
+                <types>
+                    <check_list>
+                        <class>Diglin_Ricento_Model_Dispatcher_Check_List</class>
+                    </check_list>
+                    <sync_list>
+                        <class>Diglin_Ricento_Model_Dispatcher_Sync_List</class>
+                    </sync_list>
+                    <list>
+                        <class>Diglin_Ricento_Model_Dispatcher_List</class>
+                    </list>
+                    <order>
+                        <class>Diglin_Ricento_Model_Dispatcher_Order</class>
+                    </order>
+                    <relist>
+                        <class>Diglin_Ricento_Model_Dispatcher_Relist</class>
+                    </relist>
+                    <stop>
+                        <class>Diglin_Ricento_Model_Dispatcher_Stop</class>
+                    </stop>
+                </types>
+            </dispatcher>
         </ricento>
     </global>
 
