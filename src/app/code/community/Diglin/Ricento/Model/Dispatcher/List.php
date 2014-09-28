@@ -68,11 +68,17 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
                 }
 
                 if (!empty($articleId)) {
+                    // Must be set at first in case of error
+                    $item->getResource()->saveCurrentItem($item->getId(), array(
+                        'ricardo_article_id' => $articleId,
+                        'status' => Diglin_Ricento_Helper_Data::STATUS_LISTED,
+                        'is_planned' => (int) $isPlanned,
+                        'qty_inventory' => $item->getProductQty()
+                    ));
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_itemMessage = array('inserted_article' => $insertedArticle);
                     $hasSuccess = true;
                     $this->_jobHasSuccess = true;
-                    $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => $articleId, 'status' => Diglin_Ricento_Helper_Data::STATUS_LISTED, 'is_planned' => (int) $isPlanned));
                 } else if ($item->getRicardoArticleId()) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_NOTICE;
                     $this->_itemMessage = array('notice' => $this->_getHelper()->__('This item is already listed or has already a ricardo article Id. No insert done to ricardo.ch'));

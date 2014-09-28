@@ -13,7 +13,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.25</version>
+            <version>0.0.26</version>
         </Diglin_Ricento>
     </modules>
     <default>
