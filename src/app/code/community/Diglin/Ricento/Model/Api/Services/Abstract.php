@@ -16,6 +16,8 @@ use \Diglin\Ricardo\Services\ServiceAbstract;
 
 /**
  * Class Diglin_Ricento_Model_Api_Services_Abstract
+ *
+ * @method Diglin_Ricento_Model_Api_Services_Abstract setCacheLifetime(int $lifetime)
  */
 abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
 {
@@ -190,20 +192,23 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                         }
 
                         Mage::dispatchEvent('ricardo_api_call_get_before', $arguments);
+
                         if (empty($data) || !$this->getCanUseCache() || array_key_exists('ErrorCodes', $data)) {
                             $data = call_user_func_array(array($this->getServiceModel(), $method), $args);
                         }
+
                         Mage::dispatchEvent('ricardo_api_call_get_after', array_merge($arguments, array('data' => $data)));
 
                         $this->setData($key, $data);
 
                         if ($this->getCanUseCache() && !array_key_exists('ErrorCodes', $data)) {
-                            Mage::app()->saveCache(serialize($data), $key, array(Diglin_Ricento_Helper_Api::CACHE_TAG), Diglin_Ricento_Helper_Api::CACHE_LIFETIME);
+                            Mage::app()->saveCache(serialize($data), $key, array(Diglin_Ricento_Helper_Api::CACHE_TAG), $this->getCacheLifeTime());
                         }
 
                         $this->_updateCredentialToken();
 
                         Mage::dispatchEvent('ricardo_api_end_call', array_merge($arguments, array('data' => $data)));
+
                         Varien_Profiler::stop($profilerName);
 
                         return $data;
@@ -263,6 +268,18 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     public function getCanUseCache()
     {
         return (Mage::app()->useCache(Diglin_Ricento_Helper_Api::CACHE_TYPE) && $this->_canUseCache);
+    }
+
+    /**
+     * @return int|mixed
+     */
+    public function getCacheLifeTime()
+    {
+        if ($this->getData('cache_lifetime')) {
+            return $this->getData('cache_lifetime');
+        }
+
+        return Diglin_Ricento_Helper_Api::CACHE_LIFETIME;
     }
 
     /**
