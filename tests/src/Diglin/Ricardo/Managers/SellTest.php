@@ -2,10 +2,11 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <sylvain.raye at diglin.com>
- * @category    Ricento
+ * @author Sylvain Rayé <support at diglin.com>
+ * @category    Diglin
  * @package     Diglin_Ricardo
- * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 namespace Diglin\Ricardo\Managers;
 
@@ -36,137 +37,6 @@ class SellTest extends TestAbstract
     {
         $this->_sellManager = new Sell($this->getServiceManager());
         parent::setUp();
-    }
-
-    /**
-     * @param int $length
-     * @return string
-     */
-    protected function _generateRandomString($length = 10)
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, strlen($characters) - 1)];
-        }
-        return $randomString;
-    }
-
-    /**
-     * @param bool $auction
-     * @param bool $buynow
-     * @param bool $startNow
-     * @return InsertArticleParameter
-     */
-    protected function getArticle($auction = true, $buynow = false, $startNow = false)
-    {
-        $insertArticleParameter = new InsertArticleParameter();
-
-        $system = new System($this->getServiceManager());
-        $conditions = $system->getArticleConditions(false);
-        $availabilities = $system->getAvailabilities();
-        //$categories = $system->getCategories(CategoryBrandingFilter::ONLYBRANDING);
-        $warranties = $system->getWarranties();
-        $paymentConditions = $system->getPaymentConditionsAndMethods();
-        $deliveryConditions = $system->getDeliveryConditions();
-        $partnerConfiguration = $system->getPartnerConfigurations();
-
-        $delivery = new ArticleDeliveryParameter();
-        $delivery
-            // required
-            ->setDeliveryCost(5)
-            ->setIsDeliveryFree(0)
-            ->setDeliveryId($deliveryConditions[0]['DeliveryConditionId'])
-            ->setIsCumulativeShipping(0)
-            // optional
-            ->setDeliveryPackageSizeId($deliveryConditions[0]['PackageSizes'][0]['PackageSizeId']);
-
-        $internalReferences = new ArticleInternalReferenceParameter();
-        $internalReferences
-            ->setInternalReferenceTypeId(InternalReferenceType::SELLERSPECIFIC)
-            ->setInternalReferenceValue('MY_MAGENTO_SKU');
-
-        $articleInformation = new ArticleInformationParameter();
-        $articleInformation
-            // required
-            ->setArticleConditionId($conditions[0]['ArticleConditionId'])
-            ->setArticleDuration(8 * 24 * 60) // 7 days
-            ->setAvailabilityId($availabilities[0]['AvailabilityId'])
-            ->setCategoryId(38828)
-            ->setInitialQuantity(1)
-            ->setIsCustomerTemplate(false)
-            ->setMainPictureId(1)
-            ->setMaxRelistCount(5)
-            ->setWarrantyId($warranties[1]['WarrantyId'])
-            ->setDeliveries($delivery)
-            // optional
-            ->setInternalReferences($internalReferences)
-            ->setPaymentConditionIds(array($paymentConditions[0]['PaymentConditionId']))
-            ->setPaymentMethodIds(array($paymentConditions[0]['PaymentMethods'][0]['PaymentMethodId']))
-            ->setTemplateId(null);
-
-        if ($auction) {
-            $articleInformation
-                ->setIncrement(5)
-                ->setStartPrice(5);
-        }
-
-        if ($auction && !$startNow) {
-            $articleInformation
-                ->setStartDate(Helper::getJsonDate(time() + 60*60));
-        }
-
-        if ($buynow) {
-            $articleInformation->setBuyNowPrice(20);
-
-            if ($auction) {
-                $articleInformation
-                    ->setPromotionIds(array(
-                        PromotionCode::BUYNOW
-                    ));
-            }
-        }
-
-        if (!$auction && $buynow) {
-            $articleInformation
-                ->setIsRelistSoldOut(true);
-        }
-
-        $descriptions = new ArticleDescriptionParameter();
-        $descriptions
-            // required
-            ->setArticleTitle('My Product ' . $this->_generateRandomString(20))
-            ->setArticleDescription($this->_generateRandomString(2000))
-            ->setLanguageId($partnerConfiguration['LanguageId'])
-            // optional
-            ->setArticleSubtitle($this->_generateRandomString(60))
-            ->setDeliveryDescription($this->_generateRandomString(2000))
-            ->setPaymentDescription($this->_generateRandomString(2000))
-            ->setWarrantyDescription($this->_generateRandomString(2000));
-
-
-        $filename = '../../../media/pictures/22-syncmaster-lcd-monitor.jpg';
-
-        if (file_exists($filename)) {
-            $imageContent = array_values(unpack('C*', file_get_contents($filename)));
-
-        }
-
-        $pictures = new ArticlePictureParameter();
-        $pictures
-            ->setPictureBytes($imageContent)
-            ->setPictureExtension(Helper::getPictureExtension($filename))
-            ->setPictureIndex(1);
-
-        $antiforgeryToken = $this->getServiceManager()->getSecurityManager()->getAntiforgeryToken();
-        $insertArticleParameter
-            ->setAntiforgeryToken($antiforgeryToken)
-            ->setArticleInformation($articleInformation)
-            ->setDescriptions($descriptions)
-            ->setPictures($pictures)
-            ->setIsUpdateArticle(false);
-
-        return $insertArticleParameter;
     }
 
     public function testInsertPlannedArticle()
@@ -299,9 +169,9 @@ class SellTest extends TestAbstract
 
         $this->outputContent($result, 'Close Article: ');
 
+        // ricardo API return some empty values so it means that everything is fine. In case, not, an exception will be thrown
         $this->assertArrayHasKey('ArticleNr', $result, 'No article ID returned');
         $this->assertArrayHasKey('IsClosed', $result, 'Result does not have IsClosed Key');
-        $this->assertTrue('IsClosed', (bool) $result['IsClosed'], 'Article not closed');
     }
 
     public function testRelistArticle()

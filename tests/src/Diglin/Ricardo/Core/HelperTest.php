@@ -2,10 +2,10 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <sylvain.raye at diglin.com>
- * @category    diglin_ricardo
+ * @author Sylvain Rayé <support at diglin.com>
+ * @category    Diglin
  * @package     Diglin_Ricardo
- * @copyright   Copyright [c] 2011-2014 Diglin [http://www.diglin.com]
+ * @copyright   Copyright [c] 2011-2015 Diglin [http://www.diglin.com]
  */
 namespace Diglin\Ricardo\Core;
 

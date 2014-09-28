@@ -2,22 +2,28 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <sylvain.raye at diglin.com>
+ * @author Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricardo
- * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 namespace Diglin\Ricardo\Services;
 
 use Diglin\Ricardo\Core\Helper;
 use Diglin\Ricardo\Enums\Article\ArticlesTypes;
-use Diglin\Ricardo\Enums\CloseListStatus;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter;
 
 /**
  * Class SellerAccount
  *
  * Refers to the account as a seller:
- * get all open articles, get sold articles, get articles that haven't been sold
+ * get all open articles, get sold articles, get articles that haven't been sold, etc
  *
  * @package Diglin\Ricardo\Services
  * @link https://ws.ricardo.ch/RicardoApi/documentation/html/Methods_T_Ricardo_Contracts_ISellerAccountService.htm
@@ -35,7 +41,7 @@ class SellerAccount extends ServiceAbstract
     protected $_typeOfToken = self::TOKEN_TYPE_IDENTIFIED;
 
     /**
-     * Adds the card payment option to specified articles.
+     * Adds the card payment option to specified articles parameters
      */
     public function addCardPaymentOption()
     {
@@ -59,17 +65,13 @@ class SellerAccount extends ServiceAbstract
     }
 
     /**
-     * Asserts the article modification.
+     * Asserts the article modification parameters
+     *
+     * @param $articleId
+     * @return array
      */
-    public function assertArticleModification()
+    public function assertArticleModification($articleId)
     {
-        $articleId = null;
-
-        $args = func_get_args();
-        if (!empty($args) && is_array($args[0])) {
-            (isset($args[0]['article_id'])) ? $articleId = $args[0]['article_id'] : '';
-        };
-
         return array(
             'method' => 'AssertArticleModification',
             'params' => array('assertArticleModificationParameter' => array(
@@ -102,61 +104,10 @@ class SellerAccount extends ServiceAbstract
     }
 
     /**
-     * Asserts the classified modification.
+     * Gets an article parameter
      */
-    public function assertClassifiedModification()
+    public function getArticle($articleId)
     {
-        $classifiedId = null;
-
-        $args = func_get_args();
-        if (!empty($args) && is_array($args[0])) {
-            (isset($args[0]['classified_id'])) ? $classifiedId = $args[0]['classified_id'] : '';
-        };
-
-        return array(
-            'method' => 'AssertClassifiedModification',
-            'params' => array('assertClassifiedModificationParameter' => array(
-                'ClassifiedId' => $classifiedId
-            ))
-        );
-    }
-
-    /**
-     * Get if the classified can be modified or not
-     *
-     * The Ricardo API returns:
-     * <pre>
-     * {
-     *     "AssertClassifiedModificationResult": {
-     *       "CanModify": "BOOLEAN"
-     *     }
-     * }
-     * </pre>
-     *
-     * @param array $data
-     * @return bool
-     */
-    public function assertClassifiedModificationResult(array $data)
-    {
-        if (isset($data['AssertClassifiedModificationResult']) && isset($data['AssertClassifiedModificationResult']['CanModify'])) {
-            return $data['AssertClassifiedModificationResult']['CanModify'];
-        }
-        return false;
-    }
-
-
-    /**
-     * Gets an article.
-     */
-    public function getArticle()
-    {
-        $articleId = null;
-
-        $args = func_get_args();
-        if (!empty($args) && is_array($args[0])) {
-            (isset($args[0]['article_id'])) ? $articleId = $args[0]['article_id'] : '';
-        };
-
         return array(
             'method' => 'GetArticle',
             'params' => array('getArticleParameter' => array(
@@ -165,6 +116,12 @@ class SellerAccount extends ServiceAbstract
         );
     }
 
+    /**
+     * Gets an article result.
+     *
+     * @param array $data
+     * @return array
+     */
     public function getArticleResult(array $data)
     {
         if (isset($data['GetArticleResult'])) {
@@ -174,40 +131,20 @@ class SellerAccount extends ServiceAbstract
     }
 
     /**
-     * Get all auctions by date and type
+     * Get all auctions by date and type parameters
      *
+     * @param ArticlesParameter $parameter
      * @return array
      */
-    public function getArticles()
+    public function getArticles(ArticlesParameter $parameter)
     {
-        $articleTypes = ArticlesTypes::ALL;
-        $closeStatus = CloseListStatus::CLOSED;
-        $isPlannedArticles = true;
-        $lastModificationDate = Helper::getJsonDate();
-
-        $args = func_get_args();
-        if (!empty($args) && is_array($args[0])) {
-            (isset($args[0]['article_types'])) ? $articleTypes = (int) $args[0]['article_types'] : '';
-            (isset($args[0]['close_status'])) ? $closeStatus = (int) $args[0]['close_status'] : '';
-            (isset($args[0]['is_planned_articles'])) ? $isPlannedArticles = (int) $args[0]['is_planned_articles'] : '';
-            (!empty($args[0]['last_modification_date'])) ? $lastModificationDate = $args[0]['last_modification_date'] : '';
-        };
-
         return array(
             'method' => 'GetArticles',
-            'params' => array('getAuctionsParameter' => array(
-                'ArticlesType' => $articleTypes, // required
-                'CloseStatus' => $closeStatus, // required
-                'IsPlannedArticles' => $isPlannedArticles, // optional
-                'LastModificationDate' => $lastModificationDate // optional
-            ))
+            'params' => array('getAuctionsParameter' => $parameter->getDataProperties())
         );
     }
 
     /**
-     *
-     *
-     *
      * @param array $data
      * @return array
      */
@@ -220,83 +157,97 @@ class SellerAccount extends ServiceAbstract
     }
 
     /**
-     * Gets a classified.
+     * Get all articles that were closed by customer parameters
+     *
+     * @param ClosedArticlesParameter $parameter
+     * @return array
      */
-    public function getClassified()
-    {
-        return array(
-            'method' => 'GetClassified',
-            'params' => array('getClassifiedParameter')
-        );
-    }
-
-    /**
-     * Get all classifieds by date and type
-     */
-    public function getClassifieds()
-    {
-        return array(
-            'method' => 'GetClassifieds',
-            'params' => array('getClassifiedsParameter')
-        );
-    }
-
-
-    /**
-     * Get all articles that were closed by customer
-     */
-    public function getClosedArticles()
+    public function getClosedArticles(ClosedArticlesParameter $parameter)
     {
         return array(
             'method' => 'GetClosedArticles',
-            'params' => array('getClosedArticlesParameter')
+            'params' => array('getClosedArticlesParameter' => $parameter->getDataProperties())
         );
     }
 
-
     /**
-     * Get all classified items that were closed by customer
+     * Result to get all articles that were closed by customer
+     *
+     * @param array $data
+     * @return array
      */
-    public function getClosedClassifieds()
+    public function getClosedArticlesResult(array $data)
     {
-        return array(
-            'method' => 'GetClosedClassifieds',
-            'params' => array('getClosedClassifiedsParameter')
-        );
+        if (isset($data['GetClosedArticlesResult']) && isset($data['GetClosedArticlesResult']['Auctions'])) {
+            return $data['GetClosedArticlesResult']['Auctions'];
+        }
+        return array();
     }
 
-
     /**
-     * Gets an open article.
+     * Gets an open article parameter
+     *
+     * @param int $articleId
+     * @return array
      */
-    public function getOpenArticle()
+    public function getOpenArticle($articleId)
     {
         return array(
             'method' => 'GetOpenArticle',
-            'params' => array('getOpenArticleParameter')
+            'params' => array('getOpenArticleParameter' => array('ArticleId' => $articleId))
         );
     }
 
+    /**
+     * Gets an open article result
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getOpenArticleResult(array $data)
+    {
+        if (isset($data['GetOpenArticleResult'])) {
+            return $data['GetOpenArticleResult'];
+        }
+        return array();
+    }
 
     /**
-     * Gets the open articles.
+     * Gets open articles parameter
+     *
+     * @param OpenArticlesParameter $parameter
+     * @return array
      */
-    public function getOpenArticles()
+    public function getOpenArticles(OpenArticlesParameter $parameter)
     {
         return array(
             'method' => 'GetOpenArticles',
-            'params' => array('getOpenArticlesParameter')
+            'params' => array('getOpenArticlesParameter' => $parameter->getDataProperties())
         );
+    }
+
+    /**
+     * Gets open articles result
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getOpenArticlesResult(array $data)
+    {
+        if (isset($data['GetOpenArticlesResult'])) {
+            return $data['GetOpenArticlesResult'];
+        }
+        return array();
     }
 
 
     /**
-     * Gets the payment options for a seller.
+     * Gets the payment options for a seller parameter
      *
      * @param int $customerId
      * @return array
      */
-    public function getPaymentOptions($customerId = null)
+    public function getPaymentOptions($customerId)
     {
         return array(
             'method' => 'GetPaymentOptions',
@@ -322,7 +273,7 @@ class SellerAccount extends ServiceAbstract
      * @param array $data
      * @return array
      */
-    public function getPaymentOptionsResult($data)
+    public function getPaymentOptionsResult(array $data)
     {
         if (isset($data['GetPaymentOptionsResult'])) {
             return $data['GetPaymentOptionsResult'];
@@ -331,29 +282,65 @@ class SellerAccount extends ServiceAbstract
     }
 
     /**
-     * Gets a planned articles.
+     * Gets planned articles parameter
+     *
+     * @param PlannedArticleParameter $parameter
+     * @return array
      */
-    public function getPlannedArticle()
+    public function getPlannedArticle(PlannedArticleParameter $parameter)
     {
         return array(
             'method' => 'GetPlannedArticle',
-            'params' => array('getPlannedArticleParameter')
+            'params' => array('getPlannedArticleParameter' => $parameter->getDataProperties())
         );
     }
 
     /**
-     * Gets the planned articles.
+     * Result gets planned articles result
+     *
+     * @param array $data
+     * @return array
      */
-    public function getPlannedArticles()
+    public function getPlannedArticleResult(array $data)
+    {
+        if (isset($data['GetPlannedArticleResult'])) {
+            return $data['GetPlannedArticleResult'];
+        }
+        return array();
+    }
+
+    /**
+     * Gets the planned articles parameter
+     *
+     * @param PlannedArticleParameter $parameter
+     * @return array
+     */
+    public function getPlannedArticles(PlannedArticleParameter $parameter)
     {
         return array(
             'method' => 'GetPlannedArticles',
-            'params' => array('getPlannedArticlesParameter')
+            'params' => array('getPlannedArticlesParameter' => $parameter->getDataProperties())
         );
     }
 
     /**
-     * Gets the planned pictures.
+     * Gets the planned articles result
+     *
+     * @param $data
+     * @return array
+     */
+    public function getPlannedArticlesResult(array $data)
+    {
+        if (isset($data['GetPlannedArticlesResult'])) {
+            return $data['GetPlannedArticlesResult'];
+        }
+        return array();
+    }
+
+    /**
+     * Gets the planned pictures parameter
+     *
+     * @todo
      */
     public function getPlannedPictures()
     {
@@ -364,7 +351,23 @@ class SellerAccount extends ServiceAbstract
     }
 
     /**
-     * Gets list of customer's listing packages(normally should be just one item)
+     * Gets the planned pictures result
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getPlannedPicturesResult(array $data)
+    {
+        if (isset($data['GetPlannedPicturesResult']) && isset($data['GetPlannedPicturesResult']['Pictures'])) {
+            return $data['GetPlannedPicturesResult']['Pictures'];
+        }
+        return array();
+    }
+
+    /**
+     * Gets list of customer's listing packages(normally should be just one item) parameter
+     *
+     * @return array
      */
     public function getSellerPackages()
     {
@@ -376,6 +379,12 @@ class SellerAccount extends ServiceAbstract
         );
     }
 
+    /**
+     * Get Seller Package Result
+     *
+     * @param array $data
+     * @return array
+     */
     public function getSellerPackagesResult(array $data)
     {
         if (isset($data['GetSellerPackagesResult'])) {
@@ -385,26 +394,63 @@ class SellerAccount extends ServiceAbstract
     }
 
     /**
-     * Gets the sold article.
+     * Gets the sold article parameter
+     *
+     * @param $articleId
+     * @return array
      */
-    public function getSoldArticle()
+    public function getSoldArticle($articleId)
     {
         return array(
             'method' => 'GetSoldArticle',
-            'params' => array('getSoldArticleParameter')
-        );
-    }
-
-    public function getSoldArticles()
-    {
-        return array(
-            'method' => 'GetSoldArticles',
-            'params' => array('getSoldArticlesParameter')
+            'params' => array('getSoldArticleParameter' => array('ArticleId' => $articleId))
         );
     }
 
     /**
-     * Get available article templates
+     * Get Sold Article Result
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getSoldArticleResult(array $data)
+    {
+        if (isset($data['GetSoldArticleResult'])) {
+            return $data['GetSoldArticleResult'];
+        }
+        return array();
+    }
+
+    /**
+     * Gets the sold articles parameter
+     *
+     * @param SoldArticlesParameter $parameter
+     * @return array
+     */
+    public function getSoldArticles(SoldArticlesParameter $parameter)
+    {
+        return array(
+            'method' => 'GetSoldArticles',
+            'params' => array('getSoldArticlesParameter' => $parameter->getDataProperties())
+        );
+    }
+
+    /**
+     * Get Sold Articles Result
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getSoldArticlesResult(array $data)
+    {
+        if (isset($data['GetSoldArticlesResult'])) {
+            return $data['GetSoldArticlesResult'];
+        }
+        return array();
+    }
+
+    /**
+     * Get available article templates parameter
      *
      * @return array
      */
@@ -417,12 +463,12 @@ class SellerAccount extends ServiceAbstract
     }
 
     /**
-     * Get the list of templates available
+     * Get the list of templates available Result
      *
      * @param array
      * @return array
      */
-    public function getTemplatesResult($data)
+    public function getTemplatesResult(array $data)
     {
         if (isset($data['GetTemplatesResult']) && isset($data['GetTemplatesResult']['Templates'])) {
             return $data['GetTemplatesResult']['Templates'];
@@ -431,29 +477,62 @@ class SellerAccount extends ServiceAbstract
     }
 
     /**
-     * Gets the unsold article.
+     * Gets the unsold article parameter
      */
-    public function getUnsoldArticle()
+    public function getUnsoldArticle($articleId)
     {
         return array(
             'method' => 'GetUnsoldArticle',
-            'params' => array('getUnsoldArticleParameter' => array())
+            'params' => array('getUnsoldArticleParameter' => array('ArticleId' => $articleId))
         );
     }
 
     /**
-     * Gets the unsold articles.
+     * Get Unsold Article Result
+     *
+     * @param array $data
+     * @return array
      */
-    public function getUnsoldArticles()
+    public function getUnsoldArticleResult(array $data)
+    {
+        if (isset($data['GetUnsoldArticleResult'])) {
+            return $data['GetUnsoldArticleResult'];
+        }
+        return array();
+    }
+
+    /**
+     * Gets the unsold articles parameter
+     *
+     * @param UnsoldArticlesParameter $parameter
+     * @return array
+     */
+    public function getUnsoldArticles(UnsoldArticlesParameter $parameter)
     {
         return array(
             'method' => 'GetUnsoldArticles',
-            'params' => array('getUnsoldArticlesParameter' => array())
+            'params' => array('getUnsoldArticlesParameter' => $parameter->getDataProperties())
         );
+    }
+
+    /**
+     * Get the unsold articles result
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getUnsoldArticlesResult(array $data)
+    {
+        if (isset($data['GetUnsoldArticlesResult'])) {
+            return $data['GetUnsoldArticlesResult'];
+        }
+        return array();
     }
 
     /**
      * Inserts the answer.
+     *
+     * @todo
      */
     public function insertAnswer()
     {
@@ -465,6 +544,8 @@ class SellerAccount extends ServiceAbstract
 
     /**
      * Inserts selected by customer listing package
+     *
+     * @todo
      */
     public function insertSellerPackage()
     {
@@ -476,6 +557,8 @@ class SellerAccount extends ServiceAbstract
 
     /**
      * Removes the card payment option from specified articles.
+     *
+     * @todo
      */
     public function removeCardPaymentOption()
     {
@@ -487,6 +570,8 @@ class SellerAccount extends ServiceAbstract
 
     /**
      * Sets if the article has cumulative shipping.
+     *
+     * @todo
      */
     public function setCumulativeShipping()
     {
@@ -498,6 +583,8 @@ class SellerAccount extends ServiceAbstract
 
     /**
      * Change the automatic reactivation for a premium package
+     *
+     * @todo
      */
     public function setPremiumPackageAutomaticReactivation()
     {
