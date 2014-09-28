@@ -52,7 +52,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
             $this->setDefaultFilter(array('in_category'=>1));
         }
         /* @var $collection Mage_Catalog_Model_Resource_Product_Collection */
-        $collection = Mage::getModel('catalog/product')->getCollection()
+        $collection = Mage::getResourceModel('catalog/product_collection')
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('sku')
             ->addAttributeToSelect('type_id')
@@ -65,13 +65,19 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
                 'product_id=entity_id',
                 '{{table}}.stock_id=1',
                 'left'
-            )
-            ->joinField('has_custom_options',
+            )->joinField('in_other_list',
+                'diglin_ricento/products_listing_item',
+                new Zend_Db_Expr('products_listing_id IS NOT NULL'),
+                'product_id=entity_id',
+                'products_listing_id !='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->joinField('has_custom_options',
                 'catalog/product_option',
                 new Zend_Db_Expr('option_id IS NOT NULL'),
                 'product_id=entity_id',
                 null,
                 'left')
+            ->addFieldToFilter('in_other_list', array('eq' => 0))
             ->distinct(true);
 
         $productIds = $this->_getSelectedProducts();
