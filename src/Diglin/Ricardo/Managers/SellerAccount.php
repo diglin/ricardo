@@ -10,6 +10,15 @@
  */
 namespace Diglin\Ricardo\Managers;
 
+use Diglin\Ricardo\Enums\Article\ArticlesTypes;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter;
+
 /**
  * Class SellerAccount
  * @package Diglin\Ricardo\Managers
@@ -45,83 +54,57 @@ class SellerAccount extends ManagerAbstract
      */
     public function getArticleModificationAllowed($articleId)
     {
-        return (bool) $this->_proceed('AssertArticleModification', array('article_id' => $articleId));
+        return (bool) $this->_proceed('AssertArticleModification', $articleId);
     }
 
     /**
-     * Get Article Information
+     * Get Article Information for NOT planned article
      *
      * @param string $articleId
      * @return array
      */
     public function getArticle($articleId)
     {
-        return $this->_proceed('Article', array('article_id' => $articleId));
+        return $this->_proceed('Article', $articleId);
     }
 
     /**
      * Get all auctions by date and type
      *
-     * @param int $articleTypes
-     * @param int $closeStatus
-     * @param bool $isPlannedArticles
-     * @param string $lastModificationDate
+     * @param ArticlesParameter $parameter
      * @return array
      */
-    public function getArticles($articleTypes, $closeStatus, $isPlannedArticles = false, $lastModificationDate = null)
+    public function getArticles(ArticlesParameter $parameter)
     {
-        return $this->_proceed('Articles', array(
-            'article_types' => $articleTypes,
-            'close_status' => $closeStatus,
-            'is_planned_articles' => $isPlannedArticles,
-            'last_modification_date' => $lastModificationDate
-        ));
+        return $this->_proceed('Articles', $parameter);
     }
 
     /**
-     * Gets a classified.
+     * @param ClosedArticlesParameter $parameter
+     * @return array
      */
-    public function getClassified()
+    public function getClosedArticles(ClosedArticlesParameter $parameter)
     {
+        return $this->_proceed('ClosedArticles', $parameter);
     }
-
-    /**
-     * Get all classifieds by date and type
-     */
-    public function getClassifieds()
-    {
-    }
-
-
-    /**
-     * Get all articles that were closed by customer
-     */
-    public function getClosedArticles()
-    {
-    }
-
-
-    /**
-     * Get all classified items that were closed by customer
-     */
-    public function getClosedClassifieds()
-    {
-    }
-
 
     /**
      * Gets an open article.
      */
-    public function getOpenArticle()
+    public function getOpenArticle($articleId)
     {
+        return $this->_proceed('OpenArticle', $articleId);
     }
-
 
     /**
      * Gets the open articles.
+     *
+     * @param OpenArticlesParameter $parameter
+     * @return array
      */
-    public function getOpenArticles()
+    public function getOpenArticles(OpenArticlesParameter $parameter)
     {
+        return $this->_proceed('OpenArticles', $parameter);
     }
 
 
@@ -146,17 +129,25 @@ class SellerAccount extends ManagerAbstract
     }
 
     /**
-     * Gets a planned articles.
+     * Gets a planned articles
+     *
+     * @param PlannedArticleParameter $parameter
+     * @return array
      */
-    public function getPlannedArticle()
+    public function getPlannedArticle(PlannedArticleParameter $parameter)
     {
+        return $this->_proceed('PlannedArticle', $parameter);
     }
 
     /**
      * Gets the planned articles.
+     *
+     * @param PlannedArticlesParameter $parameter
+     * @return array
      */
-    public function getPlannedArticles()
+    public function getPlannedArticles(PlannedArticlesParameter $parameter)
     {
+        return $this->_proceed('PlannedArticles', $parameter);
     }
 
     /**
@@ -164,6 +155,7 @@ class SellerAccount extends ManagerAbstract
      */
     public function getPlannedPictures()
     {
+        // @todo
     }
 
     /**
@@ -178,13 +170,22 @@ class SellerAccount extends ManagerAbstract
 
     /**
      * Gets the sold article.
+     *
+     * @param int $articleId
+     * @return array
      */
-    public function getSoldArticle()
+    public function getSoldArticle($articleId)
     {
+        return $this->_proceed('SoldArticle', $articleId);
     }
 
-    public function getSoldArticles()
+    /**
+     * @param SoldArticlesParameter $parameter
+     * @return array
+     */
+    public function getSoldArticles(SoldArticlesParameter $parameter)
     {
+        return $this->_proceed('SoldArticles', $parameter);
     }
 
     /**
@@ -201,15 +202,20 @@ class SellerAccount extends ManagerAbstract
     /**
      * Gets the unsold article.
      */
-    public function getUnsoldArticle()
+    public function getUnsoldArticle($articleId)
     {
+        return $this->_proceed('UnsoldArticle', $articleId);
     }
 
     /**
-     * Gets the unsold articles.
+     * Gets the unsold articles
+     *
+     * @param UnsoldArticlesParameter $parameter
+     * @return array
      */
-    public function getUnsoldArticles()
+    public function getUnsoldArticles(UnsoldArticlesParameter $parameter)
     {
+        return $this->_proceed('UnsoldArticles', $parameter);
     }
 
     /**
@@ -217,6 +223,7 @@ class SellerAccount extends ManagerAbstract
      */
     public function insertAnswer()
     {
+        // @todo
     }
 
     /**
@@ -224,6 +231,7 @@ class SellerAccount extends ManagerAbstract
      */
     public function insertSellerPackage()
     {
+        // @todo
     }
 
     /**
@@ -231,6 +239,7 @@ class SellerAccount extends ManagerAbstract
      */
     public function removeCardPaymentOption()
     {
+        // @todo
     }
 
     /**
@@ -238,6 +247,7 @@ class SellerAccount extends ManagerAbstract
      */
     public function setCumulativeShipping()
     {
+        // @todo
     }
 
     /**
@@ -245,5 +255,6 @@ class SellerAccount extends ManagerAbstract
      */
     public function setPremiumPackageAutomaticReactivation()
     {
+        // @todo
     }
 }

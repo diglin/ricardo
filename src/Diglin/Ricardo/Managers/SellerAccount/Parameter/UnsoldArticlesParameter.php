@@ -12,81 +12,85 @@ namespace Diglin\Ricardo\Managers\SellerAccount\Parameter;
 
 use Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use Diglin\Ricardo\Enums\Customer\OpenArticlesSortBy;
-use Diglin\Ricardo\Enums\Customer\PaidStatusFilter;
-use Diglin\Ricardo\Enums\Customer\ShippedStatusFilter;
 use \Diglin\Ricardo\Managers\ParameterAbstract;
 
-class SoldArticlesParameter extends ParameterAbstract
+/**
+ * Class UnsoldArticlesParameter
+ * Required properties must be sent to ricardo API but can be null
+ *
+ * @package Diglin\Ricardo\Managers\SellerAccount\Parameter
+ */
+class UnsoldArticlesParameter extends ParameterAbstract
 {
     /**
-     * @var array
-     */
-    protected $_articleIdsFilter = array();
-
-    /**
+     * Required
+     *
      * @var string
      */
-    protected $_articleTitleFilter;
+    protected $_articleTitleFilter = null;
 
     /**
+     * Required
+     *
      * @var int
      */
     protected $_articleTypeFilter = ArticlesTypes::ALL;
 
     /**
+     * Required
+     *
+     * @var string
+     */
+    protected $_internalReferenceFilter = null;
+
+    /**
+     * Required
+     *
+     * @var string
+     */
+    protected $_minimumEndDate = null;
+
+    /**
+     * Optional
+     *
+     * @var array
+     */
+    protected $_articleIdsFilter = array();
+
+    /**
+     * Optional
+     *
      * @var bool
      */
     protected $_ascendingSort = true;
 
     /**
-     * @var string
-     */
-    protected $_internalReferenceFilter;
-
-    /**
-     * @var string
-     */
-    protected $_lastnameFilter;
-
-    /**
-     * @var string
-     */
-    protected $_nicknameFilter;
-
-    /**
+     * Optional
+     *
      * @var int
      */
     protected $_pageNumber;
 
     /**
+     * Optional
+     *
      * @var int
      */
     protected $_pageSize;
 
     /**
+     * Optional
+     *
      * @var int
      */
     protected $_sortBy;
 
-    // new
-
     /**
+     * Optional
+     *
      * @var bool
      */
     protected $_isArchived;
-
-    /**
-     * @var bool
-     */
-    protected $_isCompletedTransaction;
-
-    protected $_maximumEndDate;
-
-    protected $_minimumEndDate;
-
-    protected $_paidStatusFilter = PaidStatusFilter::ANY;
-
-    protected $_shippedStatusFilter = ShippedStatusFilter::ANY;
 
     /**
      * @var array
@@ -95,13 +99,13 @@ class SoldArticlesParameter extends ParameterAbstract
         'articleTitleFilter',
         'articleTypeFilter',
         'internalReferenceFilter',
-        'lastnameFilter',
-        'nicknameFilter',
+        'minimumEndDate',
     );
 
     protected $_optionalProperties = array(
         'articleIdsFilter',
         'ascendingSort',
+        'is_archived',
         'pageNumber',
         'pageSize',
         'sortBy',
@@ -202,42 +206,6 @@ class SoldArticlesParameter extends ParameterAbstract
     }
 
     /**
-     * @param mixed $lastnameFilter
-     * @return $this
-     */
-    public function setLastnameFilter($lastnameFilter)
-    {
-        $this->_lastnameFilter = $lastnameFilter;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLastnameFilter()
-    {
-        return $this->_lastnameFilter;
-    }
-
-    /**
-     * @param mixed $nicknameFilter
-     * @return $this
-     */
-    public function setNicknameFilter($nicknameFilter)
-    {
-        $this->_nicknameFilter = $nicknameFilter;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNicknameFilter()
-    {
-        return $this->_nicknameFilter;
-    }
-
-    /**
      * @param null $pageNumber
      * @return $this
      */
@@ -310,42 +278,6 @@ class SoldArticlesParameter extends ParameterAbstract
     }
 
     /**
-     * @param boolean $isCompletedTransaction
-     * @return $this
-     */
-    public function setIsCompletedTransaction($isCompletedTransaction)
-    {
-        $this->_isCompletedTransaction = (bool) $isCompletedTransaction;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsCompletedTransaction()
-    {
-        return (bool) $this->_isCompletedTransaction;
-    }
-
-    /**
-     * @param mixed $maximumEndDate
-     * @return $this
-     */
-    public function setMaximumEndDate($maximumEndDate)
-    {
-        $this->_maximumEndDate = $maximumEndDate;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMaximumEndDate()
-    {
-        return $this->_maximumEndDate;
-    }
-
-    /**
      * @param mixed $minimumEndDate
      * @return $this
      */
@@ -361,41 +293,5 @@ class SoldArticlesParameter extends ParameterAbstract
     public function getMinimumEndDate()
     {
         return $this->_minimumEndDate;
-    }
-
-    /**
-     * @param int $paidStatusFilter
-     * @return $this
-     */
-    public function setPaidStatusFilter($paidStatusFilter)
-    {
-        $this->_paidStatusFilter = (int) $paidStatusFilter;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPaidStatusFilter()
-    {
-        return (int) $this->_paidStatusFilter;
-    }
-
-    /**
-     * @param int $shippedStatusFilter
-     * @return $this
-     */
-    public function setShippedStatusFilter($shippedStatusFilter)
-    {
-        $this->_shippedStatusFilter = (int) $shippedStatusFilter;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getShippedStatusFilter()
-    {
-        return (int) $this->_shippedStatusFilter;
     }
 }

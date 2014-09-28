@@ -12,29 +12,130 @@ namespace Diglin\Ricardo\Managers\SellerAccount\Parameter;
 
 use Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use Diglin\Ricardo\Enums\Customer\OpenArticlesSortBy;
+use Diglin\Ricardo\Enums\Customer\PaidStatusFilter;
+use Diglin\Ricardo\Enums\Customer\ShippedStatusFilter;
 use \Diglin\Ricardo\Managers\ParameterAbstract;
 
-class OpenArticlesParameter extends ParameterAbstract
+/**
+ * Class SoldArticlesParameter
+ *
+ * Required properties must be sent to ricardo API but can be null
+ *
+ * @package Diglin\Ricardo\Managers\SellerAccount\Parameter
+ */
+class SoldArticlesParameter extends ParameterAbstract
 {
-    protected $_articleIdsFilter = array();
+    /**
+     * Required
+     *
+     * @var string
+     */
+    protected $_articleTitleFilter = null;
 
-    protected $_articleTitleFilter;
-
+    /**
+     * Required
+     *
+     * @var int
+     */
     protected $_articleTypeFilter = ArticlesTypes::ALL;
 
-    protected $_ascendingSort = true;
+    /**
+     * Required
+     *
+     * @var string
+     */
+    protected $_internalReferenceFilter = null;
 
-    protected $_internalReferenceFilter;
+    /**
+     * Required
+     *
+     * @var string
+     */
+    protected $_lastnameFilter = null;
 
-    protected $_lastnameFilter;
+    /**
+     * Required
+     *
+     * @var string
+     */
+    protected $_nicknameFilter = null;
 
-    protected $_nicknameFilter;
+    /**
+     * Required
+     *
+     * @var bool
+     */
+    protected $_isCompletedTransaction = null;
 
-    protected $_pageNumber = null;
+    /**
+     * Optional
+     *
+     * @var array
+     */
+    protected $_articleIdsFilter = null;
 
-    protected $_pageSize = null;
+    /**
+     * Optional
+     *
+     * @var bool
+     */
+    protected $_ascendingSort = false;
 
-    protected $_sortBy = null;
+    /**
+     * Optional
+     *
+     * @var int
+     */
+    protected $_pageNumber;
+
+    /**
+     * Optional
+     *
+     * @var int
+     */
+    protected $_pageSize;
+
+    /**
+     * Optional
+     *
+     * @var int
+     */
+    protected $_sortBy;
+
+    /**
+     * Optional
+     *
+     * @var bool
+     */
+    protected $_isArchived;
+
+    /**
+     * Optional
+     *
+     * @var string
+     */
+    protected $_maximumEndDate;
+
+    /**
+     * Optional
+     *
+     * @var string
+     */
+    protected $_minimumEndDate;
+
+    /**
+     * Optional
+     *
+     * @var int
+     */
+    protected $_paidStatusFilter = PaidStatusFilter::ANY;
+
+    /**
+     * Optional
+     *
+     * @var int
+     */
+    protected $_shippedStatusFilter = ShippedStatusFilter::ANY;
 
     /**
      * @var array
@@ -45,6 +146,7 @@ class OpenArticlesParameter extends ParameterAbstract
         'internalReferenceFilter',
         'lastnameFilter',
         'nicknameFilter',
+        'isCompletedTransaction',
     );
 
     protected $_optionalProperties = array(
@@ -53,6 +155,11 @@ class OpenArticlesParameter extends ParameterAbstract
         'pageNumber',
         'pageSize',
         'sortBy',
+        'isArchived',
+        'maximumEndDate',
+        'minimumEndDate',
+        'paidStatusFilter',
+        'shippedStatusFilter',
     );
 
     /**
@@ -61,7 +168,7 @@ class OpenArticlesParameter extends ParameterAbstract
      */
     public function setArticleIdsFilter($articleIdsFilter)
     {
-        $this->_articleIdsFilter = $articleIdsFilter;
+        $this->_articleIdsFilter = (array) $articleIdsFilter;
         return $this;
     }
 
@@ -70,7 +177,7 @@ class OpenArticlesParameter extends ParameterAbstract
      */
     public function getArticleIdsFilter()
     {
-        return (array) $this->_articleIdsFilter;
+        return $this->_articleIdsFilter;
     }
 
     /**
@@ -218,7 +325,12 @@ class OpenArticlesParameter extends ParameterAbstract
      */
     public function getPageSize()
     {
-        return (int) $this->_pageSize;
+        $this->_pageSize = (int) $this->_pageSize;
+
+        if (empty($this->_pageSize)) {
+            $this->_pageSize = null;
+        }
+        return $this->_pageSize;
     }
 
     /**
@@ -236,6 +348,119 @@ class OpenArticlesParameter extends ParameterAbstract
      */
     public function getSortBy()
     {
-        return (int) $this->_sortBy;
+        $this->_sortBy = (int) $this->_sortBy;
+
+        if (empty($this->_sortBy)) {
+            $this->_sortBy = null;
+        }
+        return $this->_sortBy;
+    }
+
+    /**
+     * @param boolean $isArchived
+     * @return $this
+     */
+    public function setIsArchived($isArchived)
+    {
+        $this->_isArchived = (bool) $isArchived;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsArchived()
+    {
+        return (bool) $this->_isArchived;
+    }
+
+    /**
+     * @param boolean $isCompletedTransaction
+     * @return $this
+     */
+    public function setIsCompletedTransaction($isCompletedTransaction)
+    {
+        $this->_isCompletedTransaction = (bool) $isCompletedTransaction;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsCompletedTransaction()
+    {
+        return (bool) $this->_isCompletedTransaction;
+    }
+
+    /**
+     * @param mixed $maximumEndDate
+     * @return $this
+     */
+    public function setMaximumEndDate($maximumEndDate)
+    {
+        $this->_maximumEndDate = $maximumEndDate;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaximumEndDate()
+    {
+        return $this->_maximumEndDate;
+    }
+
+    /**
+     * @param mixed $minimumEndDate
+     * @return $this
+     */
+    public function setMinimumEndDate($minimumEndDate)
+    {
+        $this->_minimumEndDate = $minimumEndDate;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinimumEndDate()
+    {
+        return $this->_minimumEndDate;
+    }
+
+    /**
+     * @param int $paidStatusFilter
+     * @return $this
+     */
+    public function setPaidStatusFilter($paidStatusFilter)
+    {
+        $this->_paidStatusFilter = (int) $paidStatusFilter;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPaidStatusFilter()
+    {
+        return (int) $this->_paidStatusFilter;
+    }
+
+    /**
+     * @param int $shippedStatusFilter
+     * @return $this
+     */
+    public function setShippedStatusFilter($shippedStatusFilter)
+    {
+        $this->_shippedStatusFilter = (int) $shippedStatusFilter;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getShippedStatusFilter()
+    {
+        return (int) $this->_shippedStatusFilter;
     }
 }

@@ -10,120 +10,92 @@
  */
 namespace Diglin\Ricardo\Managers\SellerAccount\Parameter;
 
-use Diglin\Ricardo\Enums\Article\ArticlesTypes;
-use Diglin\Ricardo\Enums\CloseListStatus;
 use Diglin\Ricardo\Managers\ParameterAbstract;
 
 /**
- * Class ArticlesParameter
+ * Class PlannedArticleParameter
  * @package Diglin\Ricardo\Managers\SellerAccount\Parameter
  */
-class ArticlesParameter extends ParameterAbstract
+class PlannedArticleParameter extends ParameterAbstract
 {
     /**
      * @var int
      */
-    protected $_articlesType = ArticlesTypes::ALL;
+    protected $_plannedArticleId;
 
     /**
      * @var int
      */
-    protected $_closeStatus = CloseListStatus::OPEN;
+    protected $_plannedIndex;
 
     /**
-     * @var bool
+     * @var boolean
      */
-    protected $_isPlannedArticles = false;
-
-    /**
-     * @var null
-     */
-    protected $_lastModificationDate = null;
+    protected $_withPicture;
 
     /**
      * @var array
      */
     protected $_requiredProperties = array(
-        'articlesType',
-        'closeStatus',
+        'plannedArticleId',
     );
 
     protected $_optionalProperties = array(
-        'isPlannedArticles',
-        'lastModificationDate',
+        'plannedIndex',
+        'withPicture',
     );
 
     /**
-     * @param int $articlesType
+     * @param int $plannedArticleId
      * @return $this
      */
-    public function setArticlesType($articlesType)
+    public function setPlannedArticleId($plannedArticleId)
     {
-        $this->_articlesType = $articlesType;
+        $this->_plannedArticleId = (int) $plannedArticleId;
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getArticlesType()
+    public function getPlannedArticleId()
     {
-        return $this->_articlesType;
+        return (int) $this->_plannedArticleId;
     }
 
     /**
-     * @param int $closeStatus
+     * @param int $plannedIndex
      * @return $this
      */
-    public function setCloseStatus($closeStatus)
+    public function setPlannedIndex($plannedIndex)
     {
-        $this->_closeStatus = $closeStatus;
+        $this->_plannedIndex = (int) $plannedIndex;
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getCloseStatus()
+    public function getPlannedIndex()
     {
-        return $this->_closeStatus;
+        return (int) $this->_plannedIndex;
     }
 
     /**
-     * @param boolean $isPlannedArticles
+     * @param boolean $withPicture
      * @return $this
      */
-    public function setIsPlannedArticles($isPlannedArticles)
+    public function setWithPicture($withPicture)
     {
-        $this->_isPlannedArticles = (bool) $isPlannedArticles;
+        $this->_withPicture = (bool) $withPicture;
         return $this;
     }
 
     /**
      * @return boolean
      */
-    public function getIsPlannedArticles()
+    public function getWithPicture()
     {
-        return (bool) $this->_isPlannedArticles;
+        return (bool) $this->_withPicture;
     }
-
-    /**
-     * @param null $lastModificationDate
-     * @return $this
-     */
-    public function setLastModificationDate($lastModificationDate)
-    {
-        $this->_lastModificationDate = $lastModificationDate;
-        return $this;
-    }
-
-    /**
-     * @return null
-     */
-    public function getLastModificationDate()
-    {
-        return $this->_lastModificationDate;
-    }
-
-
 }

@@ -13,89 +13,185 @@ namespace Diglin\Ricardo\Managers\SellerAccount\Parameter;
 use Diglin\Ricardo\Managers\ParameterAbstract;
 
 /**
- * Class PlannedArticleParameter
+ * Class PlannedArticlesParameter
  * @package Diglin\Ricardo\Managers\SellerAccount\Parameter
  */
-class PlannedArticleParameter extends ParameterAbstract
+class PlannedArticlesParameter extends ParameterAbstract
 {
     /**
-     * @var int
+     * @var array
      */
-    protected $_plannedArticleId;
+    protected $_articleIdsFilter = array();
 
     /**
-     * @var int
+     * @var string
      */
-    protected $_plannedIndex;
+    protected $_articleTitleFilter;
 
     /**
      * @var boolean
      */
-    protected $_withPicture;
+    protected $_ascendingSort;
+
+    /**
+     * @var string
+     */
+    protected $_internalReferenceFilter;
+
+    /**
+     * @var int
+     */
+    protected $_pageNumber;
+
+    /**
+     * @var int
+     */
+    protected $_pageSize;
+
+    /**
+     * @var int
+     */
+    protected $_sortBy;
 
     /**
      * @var array
      */
     protected $_requiredProperties = array(
-        'plannedArticleId',
+        'articleTitleFilter',
+        'internalReferenceFilter',
     );
 
     protected $_optionalProperties = array(
-        'plannedIndex',
-        'withPicture',
+        'articleIdsFilter',
+        'ascendingSort',
+        'pageNumber',
+        'pageSize',
+        'sortBy',
     );
 
     /**
-     * @param int $plannedArticleId
+     * @param array $articleIdsFilter
      * @return $this
      */
-    public function setPlannedArticleId($plannedArticleId)
+    public function setArticleIdsFilter($articleIdsFilter)
     {
-        $this->_plannedArticleId = (int) $plannedArticleId;
+        $this->_articleIdsFilter = $articleIdsFilter;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getArticleIdsFilter()
+    {
+        return (array) $this->_articleIdsFilter;
+    }
+
+    /**
+     * @param mixed $articleTitleFilter
+     * @return $this
+     */
+    public function setArticleTitleFilter($articleTitleFilter)
+    {
+        $this->_articleTitleFilter = $articleTitleFilter;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticleTitleFilter()
+    {
+        return $this->_articleTitleFilter;
+    }
+
+    /**
+     * @param bool $ascendingSort
+     * @return $this
+     */
+    public function setAscendingSort($ascendingSort)
+    {
+        $this->_ascendingSort = $ascendingSort;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAscendingSort()
+    {
+        return (bool) $this->_ascendingSort;
+    }
+
+    /**
+     * @param int $pageNumber
+     * @return $this
+     */
+    public function setPageNumber($pageNumber)
+    {
+        $this->_pageNumber = $pageNumber;
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getPlannedArticleId()
+    public function getPageNumber()
     {
-        return (int) $this->_plannedArticleId;
+        return (int) $this->_pageNumber;
     }
 
     /**
-     * @param int $plannedIndex
+     * @param int $pageSize
      * @return $this
      */
-    public function setPlannedIndex($plannedIndex)
+    public function setPageSize($pageSize)
     {
-        $this->_plannedIndex = (int) $plannedIndex;
+        $this->_pageSize = $pageSize;
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getPlannedIndex()
+    public function getPageSize()
     {
-        return (int) $this->_plannedIndex;
+        return (int) $this->_pageSize;
     }
 
     /**
-     * @param boolean $withPicture
+     * @param int $sortBy
      * @return $this
      */
-    public function setWithPicture($withPicture)
+    public function setSortBy($sortBy)
     {
-        $this->_withPicture = (bool) $withPicture;
+        $this->_sortBy = $sortBy;
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return int
      */
-    public function getWithPicture()
+    public function getSortBy()
     {
-        return (bool) $this->_withPicture;
+        return (int) $this->_sortBy;
+    }
+
+    /**
+     * @param string $internalReferenceFilter
+     * @return $this
+     */
+    public function setInternalReferenceFilter($internalReferenceFilter)
+    {
+        $this->_internalReferenceFilter = $internalReferenceFilter;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInternalReferenceFilter()
+    {
+        return $this->_internalReferenceFilter;
     }
 }

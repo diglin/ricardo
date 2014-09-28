@@ -11,7 +11,7 @@
 namespace Diglin\Ricardo\Managers\SellerAccount\Parameter;
 
 use Diglin\Ricardo\Enums\Article\ArticlesTypes;
-use Diglin\Ricardo\Enums\CloseListStatus;
+use Diglin\Ricardo\Enums\Article\CloseListStatus;
 use Diglin\Ricardo\Managers\ParameterAbstract;
 
 /**
@@ -124,6 +124,4 @@ class ArticlesParameter extends ParameterAbstract
     {
         return $this->_lastModificationDate;
     }
-
-
 }
