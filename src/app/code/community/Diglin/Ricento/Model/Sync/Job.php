@@ -124,6 +124,9 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
                         return $helper->__('List in progress...');
                     }
                     break;
+                default:
+                    return $helper->__('Job in progress...');
+                    break;
             }
         }
     }
