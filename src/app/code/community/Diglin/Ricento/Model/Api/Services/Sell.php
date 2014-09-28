@@ -130,7 +130,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
             $parameterMethod = 'getDeleteArticleParameter';
             $serviceMethod = 'deletePlannedArticle';
         } else {
-            $parameterMethod = 'close';
+            $parameterMethod = 'getCloseArticleParameter';
             $serviceMethod = 'closeArticle';
         }
 
