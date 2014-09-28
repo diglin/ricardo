@@ -26,11 +26,18 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $this->setUseAjax(true);
     }
 
+    /**
+     * @return string
+     */
     public function getGridUrl()
     {
         return $this->getUrl('*/*/productsGrid', array('id' => $this->getListing()->getId()));
     }
 
+    /**
+     * @param $item
+     * @return string
+     */
     public function getRowUrl($item)
     {
         return $this->getUrl('*/products_listing_item/configure', array('id' => $this->getListing()->getId(), 'product' => $item->getId()));
@@ -49,11 +56,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         if ($this->getListing()->getId()) {
             $this->setDefaultFilter(array('in_category'=>1));
         }
-        $collection = Mage::getModel('catalog/product')->getCollection()
+
+        $collection = Mage::getResourceModel('catalog/product_collection')
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('sku')
             ->addAttributeToSelect('type_id')
             ->addAttributeToSelect('price')
+            ->addWebsiteFilter($this->getListing()->getWebsiteId())
             ->joinField('stock_qty',
                 'cataloginventory/stock_item',
                 'qty',
@@ -143,10 +152,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             'header'    => Mage::helper('catalog')->__('Status'),
             'width'     => '80',
             'index'     => 'status',
-            'type'     => 'text',
-            'sortable' => false,
-            'filter'    => false,
-//            'options'  => Mage::getModel('diglin_ricento/config_source_status')->toOptionHash(),
+            'type'     => 'options',
+            'sortable' => true,
+            'options'  => Mage::getSingleton('diglin_ricento/config_source_status')->toOptionHash(),
+            'frame_callback' => array($this, 'decorateStatus')
         ));
         $this->addColumn('has_custom_options', array(
             'header'    => '',
@@ -232,6 +241,32 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             $products = $this->getListing()->getProductIds();
         }
         return $products;
+    }
+
+    /**
+     * @param $value
+     * @param Varien_Object $row
+     * @param Mage_Adminhtml_Block_Widget_Grid_Column $column
+     * @return string
+     */
+    public function decorateStatus($value, Varien_Object $row, Mage_Adminhtml_Block_Widget_Grid_Column $column)
+    {
+        $output = '';
+        $value = htmlspecialchars_decode($value);
+        if ($column->getIndex() == 'status' && !empty($value)) {
+            switch ($value) {
+                case 'Error':
+                    $output .= '<div id="message-errors"' . $row->getId() . ' class="message_errors">' . $value . '</div>';
+                    break;
+                case 'Listed':
+                    $output .= '<div id="message-success"' . $row->getId() . ' class="message_success">' . $value . '</div>';
+                    break;
+                default:
+                    $output .= '<div id="message-warnings"' . $row->getId() . ' class="message_warnings">' . $value . '</div>';
+                    break;
+            }
+        }
+        return $output;
     }
 
 }
