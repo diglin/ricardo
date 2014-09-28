@@ -40,14 +40,23 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
             'title'   => $this->__('Remove article listed on ricardo.ch'),
             'onclick' => 'setLocation(\'' . $this->getStopListingUrl() . '\')',
             'class'   => 'cancel'
-        ), 3);
+        ), -1, 2);
 
         $this->_addButton('check_and_list', array(
             'label' => $this->__('Check & List'),
             'title' => $this->__('Check & list only pending & error items'),
             'onclick' => 'editForm.submit(\'' . $this->getCheckAndListUrl() . '\');',
             'class' => 'list success'
-        ), 2);
+        ), -1, 3);
+
+        if (Mage::getResourceModel('diglin_ricento/products_listing_item')->coundReadyTolist($this->getListing()->getId())) {
+            $this->_addButton('force_list', array(
+                'label' => $this->__('List'),
+                'title' => $this->__('List only "Ready to list" items'),
+                'onclick' => 'editForm.submit(\'' . $this->getListUrl() . '\');',
+                'class' => 'list success'
+            ), -1, 4);
+        }
 
         if ($this->getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
             $this->_updateButton('add_product_from_category', 'disabled', true);
@@ -112,6 +121,16 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
     public function getCheckAndListUrl()
     {
         return $this->getUrl('ricento/products_listing/checkAndList', array('id' => $this->getListingId()));
+    }
+
+    /**
+     * Returns URL for "save and list" form action
+     *
+     * @return string
+     */
+    public function getListUrl()
+    {
+        return $this->getUrl('ricento/products_listing/list', array('id' => $this->getListingId()));
     }
 
     /**
