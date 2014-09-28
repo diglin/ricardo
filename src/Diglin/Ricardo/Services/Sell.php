@@ -17,9 +17,18 @@ use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter;
 
+/**
+ * Class Sell
+ *
+ * This service is to be used to manage your articles as a seller: you can list, relist, modify, close an article ...
+ *
+ * @package Diglin\Ricardo\Services
+ * @link https://ws.ricardo.ch/RicardoApi/documentation/html/T_Ricardo_Contracts_ISellService.htm
+ */
 class Sell extends ServiceAbstract
 {
     /**
@@ -354,10 +363,10 @@ class Sell extends ServiceAbstract
     /**
      * Inserts a list of articles or a planned articles. This method is currently not fully usable to external partners
      *
-     * @param $insertArticlesParameter
+     * @param InsertArticlesParameter $insertArticlesParameter
      * @return array
      */
-    public function insertArticles($insertArticlesParameter)
+    public function insertArticles(InsertArticlesParameter $insertArticlesParameter)
     {
         return array(
             'method' => 'InsertArticles',

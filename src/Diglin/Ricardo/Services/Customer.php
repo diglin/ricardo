@@ -10,6 +10,10 @@
  */
 namespace Diglin\Ricardo\Services;
 
+/**
+ * Class Customer
+ * @package Diglin\Ricardo\Services
+ */
 class Customer extends ServiceAbstract
 {
     /**
