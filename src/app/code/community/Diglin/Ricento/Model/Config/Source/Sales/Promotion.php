@@ -31,7 +31,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Promotion extends Diglin_Ricento_
                 return array();
             }
 
-            $helper = Mage::helper('diglin_ricento');
+            $helper = Mage::helper('diglin_ricento/price');
             $store = Mage::app()->getStore();
 
             $helper->startCurrencyEmulation();

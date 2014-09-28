@@ -81,7 +81,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetTypeAuction->addField('sales_auction_start_price', 'text', array(
             'name' => 'sales_options[sales_auction_start_price]',
             'label' => $this->__('Start price'),
-            'class' => 'validate-number required-if-visible validate-number-range number-range-0.05-1000000',
+            'class' => 'validate-number required-if-visible',
             'onchange' => 'salesOptionsForm.toggleStartPrice(this, \''. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD .'\');',
             'note' => $this->__('Range from Fr. 0.05 to Fr. 1 000 000. If Credit card payment method available and enabled, the range is from Fr. 0.05 to Fr. 2 999.95.')
         ));
@@ -307,7 +307,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[promotion_start_page]',
             'label' => $this->__('Home Privilege Space'),
             'note' => $this->__('Privilege space on the homepage. More information about this feature <a onclick="window.open(\'%s\');">here</a>', Diglin_Ricento_Helper_Data::RICARDO_URL_HELP_PROMOTION),
-            'after_element_html' => $this->__('Home Space') . ' ' .  $this->_getPromotionHomeFee()
+            'after_element_html' => $this->__('Home Space') . ' - ' .  $this->_getPromotionHomeFee()
         ));
 
         $fieldsetPromotion->addField('note_promotion', 'note', array(
@@ -510,10 +510,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             \Diglin\Ricardo\Core\Helper::getJsonDate(), \Diglin\Ricardo\Enums\System\CategoryArticleType::ALL, 1, 1
         );
 
-        $helper = Mage::helper('diglin_ricento');
+        $priceHelper = Mage::helper('diglin_ricento/price');
         $store = Mage::app()->getStore();
 
-        $helper->startCurrencyEmulation();
+        $priceHelper->startCurrencyEmulation();
 
         foreach ($promotions as $promotion) {
             if ($promotion['PromotionId'] == \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMHOMEPAGE) {
@@ -524,7 +524,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         $price = $store->formatPrice($price);
 
-        $helper->stopCurrencyEmulation();
+        $priceHelper->stopCurrencyEmulation();
 
         return $price;
     }
