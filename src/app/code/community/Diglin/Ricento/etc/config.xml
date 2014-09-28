@@ -203,6 +203,21 @@
                 </types>
             </dispatcher>
         </ricento>
+
+        <template>
+            <email>
+                <system_admin_notification_email_template translate="label" module="diglin_ricento">
+                    <label>Admin Email Notification</label>
+                    <file>ricento/admin_message.html</file>
+                    <type>text</type>
+                </system_admin_notification_email_template>
+                <customer_private_message_email_template translate="label" module="diglin_ricento">
+                    <label>Private message</label>
+                    <file>ricento/private_message.html</file>
+                    <type>html</type>
+                </customer_private_message_email_template>
+            </email>
+        </template>
     </global>
 
     <adminhtml>
