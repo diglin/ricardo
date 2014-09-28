@@ -10,7 +10,7 @@
 /* @var $installer Mage_Catalog_Model_Resource_Setup */
 $installer = $this;
 
-// Implement sql and EAV changes from versions 0.0.1 to 0.0.7 until now (@todo finish to update here until version 1.0.0 will be officially ready to release)
+// Implement sql and EAV changes from versions 0.0.1 to 0.0.27 until now (@todo finish to update here until version 1.0.0 will be officially ready to release)
 
 $installer->startSetup();
 
@@ -19,7 +19,6 @@ $salesOptionsTable = $installer->getTable('diglin_ricento/sales_options');
 $shippingPaymentRuleTable = $installer->getTable('diglin_ricento/shipping_payment_rule');
 $productListingTable = $installer->getTable('diglin_ricento/products_listing');
 $productListingItemTable = $installer->getTable('diglin_ricento/products_listing_item');
-$syncLogTable = $installer->getTable('diglin_ricento/sync_log');
 
 $tableApiTokens = $installer->getConnection()->newTable($apiTokenTable);
 $tableApiTokens->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
@@ -29,13 +28,14 @@ $tableApiTokens->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, ar
     ->addColumn('expiration_date', Varien_Db_Ddl_Table::TYPE_DATETIME, null, array('nullable' => false))
     ->addColumn('session_duration', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false))
     ->addColumn('session_expiration_date', Varien_Db_Ddl_Table::TYPE_DATETIME, null, array('nullable' => false))
+    ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->setComment('Tokens for Ricardo API');
 $installer->getConnection()->createTable($tableApiTokens);
 
 $tableSalesOptions = $installer->getConnection()->newTable($salesOptionsTable);
 $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
-    ->addColumn('ricardo_category', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
+    ->addColumn('ricardo_category', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('nullable' => true, 'unsigned' => false, 'default' => '-1'))
     ->addColumn('sales_type', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
     ->addColumn('price_source_attribute_code', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
     ->addColumn('price_change', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('default' => 0))
@@ -53,6 +53,8 @@ $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4,
     ->addColumn('promotion_space', Varien_Db_Ddl_Table::TYPE_INTEGER, 2, array('nullable' => false, 'unsigned' => true, 'default' => 0))
     ->addColumn('promotion_start_page', Varien_Db_Ddl_Table::TYPE_INTEGER, 1, array('nullable' => false, 'default' => 0))
     ->addColumn('product_warranty', Varien_Db_Ddl_Table::TYPE_SMALLINT, 2, array('default' => 0, 'unsigned' => true, 'nullable' => false))
+    ->addColumn('product_warranty_description_de', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
+    ->addColumn('product_warranty_description_fr', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
     ->addColumn('product_condition', Varien_Db_Ddl_Table::TYPE_VARCHAR, 50, array('nullable' => false))
     ->addColumn('product_condition_source_attribute_code', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
@@ -67,29 +69,22 @@ $tableProductListings->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER,
     ->addColumn('sales_options_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('website_id', Varien_Db_Ddl_Table::TYPE_SMALLINT, 5, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('publish_languages', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
+    ->addColumn('default_language', Varien_Db_Ddl_Table::TYPE_VARCHAR, 50, array('nullable' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
     ->addForeignKey($installer->getFkName('diglin_ricento/products_listing', 'sales_options_id', 'diglin_ricento/sales_options', 'entity_id'),
-        'sales_options_id', $salesOptionsTable, 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+        'sales_options_id', $salesOptionsTable, 'entity_id', Varien_Db_Ddl_Table::ACTION_NO_ACTION, Varien_Db_Ddl_Table::ACTION_NO_ACTION)
     ->addForeignKey($installer->getFkName('diglin_ricento/products_listing', 'rule_id', 'diglin_ricento/shipping_payment_rule', 'rule_id'),
-        'rule_id', $shippingPaymentRuleTable, 'rule_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+        'rule_id', $shippingPaymentRuleTable, 'rule_id', Varien_Db_Ddl_Table::ACTION_NO_ACTION, Varien_Db_Ddl_Table::ACTION_NO_ACTION)
     ->setComment('List of products to be published on ricardo platform');
 $installer->getConnection()->createTable($tableProductListings);
 
-$tableSyncLogs = $installer->getConnection()->newTable($syncLogTable);
-$tableSyncLogs->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
-    ->addColumn('job_message', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => false))
-    ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
-    ->addColumn('status', Varien_Db_Ddl_Table::TYPE_INTEGER, 4)
-    ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
-    ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
-    ->addForeignKey($installer->getFkName('diglin_ricento/sync_log', 'products_listing_id', 'diglin_ricento/products_listing', 'entity_id'),
-        'products_listing_id', $productListingTable, 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
-    ->setComment('Ricardo synchronization logs');
-$installer->getConnection()->createTable($tableSyncLogs);
-
 $tableProductListingItems = $installer->getConnection()->newTable($productListingItemTable);
 $tableProductListingItems->addColumn('item§', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
+    ->addColumn('ricardo_article_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('is_planned', Varien_Db_Ddl_Table::TYPE_SMALLINT, null, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('qty_inventory', Varien_Db_Ddl_Table::TYPE_DECIMAL, null, array('unsigned' => true, 'nullable' => true))
     ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('sales_options_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true, 'default' => null))
@@ -108,6 +103,7 @@ $tableProductListingItems->addColumn('item§', Varien_Db_Ddl_Table::TYPE_INTEGER
     ->addIndex($installer->getIdxName('diglin_ricento/products_listing_item', array('product_id', 'products_listing_id')),
         array('product_id', 'products_listing_id'), array('type' => 'unique'))
     ->setComment('Associated products for product listings');
+
 $installer->getConnection()->createTable($tableProductListingItems);
 
 $tablePaymentRule = $installer->getConnection()->newTable($shippingPaymentRuleTable);
@@ -122,10 +118,10 @@ $tablePaymentRule
         'nullable' => false
     ), 'Payment Methods')
     ->addColumn('payment_description_de', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
-        'nullable' => false
+        'nullable' => true
     ), 'Payment description DE')
     ->addColumn('payment_description_fr', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
-        'nullable' => false
+        'nullable' => true
     ), 'Payment description FR')
     ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
         'nullable' => false
@@ -144,6 +140,58 @@ $tablePaymentRule
     ), 'Selection Price Value')
     ->setComment('Shipping & Payment Rule for product list or product item');
 $installer->getConnection()->createTable($tablePaymentRule);
+
+$tableSync = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/sync_job'));
+$tableSync->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
+    ->addColumn('job_message', Varien_Db_Ddl_Table::TYPE_TEXT, Varien_Db_Ddl_Table::MAX_TEXT_SIZE, array('nullable' => true))
+    ->addColumn('job_status', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array('nullable' => true))
+    ->addColumn('job_type', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array('nullable' => true))
+    ->addColumn('started_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
+    ->addColumn('ended_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
+    ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
+    ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
+    ->setComment('Ricardo synchronization job');
+
+$installer->getConnection()->createTable($tableSync);
+
+$installer->run("ALTER TABLE " . $tableSync->getName() . " ADD COLUMN `progress` ENUM('pending', 'ready', 'running', 'chunk_running', 'completed') NOT NULL AFTER job_type");
+
+$tableSyncListing = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/sync_job_listing'));
+$tableSyncListing
+    ->addColumn('job_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
+    ->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
+    ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
+    ->addColumn('last_item_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true))
+    ->addColumn('total_count', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'default' => 0))
+    ->addColumn('total_proceed', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'default' => 0))
+    ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
+    ->addForeignKey($installer->getFkName('diglin_ricento/sync_job_listing', 'job_id', 'diglin_ricento/sync_job', 'job_id'),
+        'job_id', $installer->getTable('diglin_ricento/sync_job'), 'job_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+    ->setComment('Ricardo synchronization job for listing');
+
+$installer->getConnection()->createTable($tableSyncListing);
+
+$tableProdListingLogs = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/listing_log'));
+$tableProdListingLogs
+    ->addColumn('log_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
+    ->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => true, 'unsigned' => true))
+    ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
+    ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
+    ->addColumn('product_title', Varien_Db_Ddl_Table::TYPE_VARBINARY, 255, array('nullable' => true))
+    ->addColumn('message', Varien_Db_Ddl_Table::TYPE_TEXT, Varien_Db_Ddl_Table::MAX_TEXT_SIZE, array('nullable' => true))
+    ->addColumn('log_type', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
+    ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
+    ->addForeignKey($installer->getFkName('diglin_ricento/listing_log', 'job_id', 'diglin_ricento/sync_job', 'job_id'),
+        'job_id', $installer->getTable('diglin_ricento/sync_job'), 'job_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_SET_NULL)
+    ->addForeignKey($installer->getFkName('diglin_ricento/listing_log', 'products_listing_id', 'diglin_ricento/products_listing', 'entity_id'),
+        'products_listing_id', $installer->getTable('diglin_ricento/products_listing'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+    ->addForeignKey($installer->getFkName('diglin_ricento/listing_log', 'product_id', 'catalog/product', 'entity_id'),
+        'product_id', $installer->getTable('catalog/product'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE)
+    ->setComment('Ricardo Products Listing logs');
+
+$installer->getConnection()->createTable($tableProdListingLogs);
+
+$installer->run("ALTER TABLE " . $tableProdListingLogs->getName() . " ADD COLUMN `log_status` ENUM('notice', 'warning', 'error', 'success') NOT NULL AFTER log_type");
 
 $installer->endSetup();
 
@@ -187,9 +235,9 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_title', ar
     'backend'           => '',
     'frontend'          => '',
     'label'             => 'Ricardo Title',
-    'note'              => 'Title is limited to 80 chars. on Ricardo.ch, use this field instead of the product name to prevent any unwanted behavior. Normal product name will be used if this field is empty. Keep in mind that the product name will be cut to 80 chars on ricardo.ch.',
+    'note'              => 'Title is limited to 40 characters on Ricardo.ch, use this field instead of the product name to prevent any unwanted behavior. Normal product name will be used if this field is empty but will be cut to 40 chars on ricardo.ch.',
     'input'             => 'text',
-    'class'             => '',
+    'class'             => 'validate-length maximum-length-40',
     'source'            => '',
     'global'            => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
     'visible'           => true,
@@ -212,9 +260,9 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_subtitle',
     'backend'           => '',
     'frontend'          => '',
     'label'             => 'Ricardo Subtitle',
-    'note'              => 'Title is limited to 80 chars. on Ricardo.ch',
+    'note'              => 'Subtitle is limited to 60 characters on Ricardo.ch. Let empty if you don\'t need it.',
     'input'             => 'text',
-    'class'             => '',
+    'class'             => 'validate-length maximum-length-60',
     'source'            => '',
     'global'            => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
     'visible'           => true,
@@ -237,9 +285,9 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_descriptio
     'backend'           => '',
     'frontend'          => '',
     'label'             => 'Ricardo Description',
-    'note'              => 'Description of the product for Ricardo page. If empty, the default Magento description of your product will be taken.',
+    'note'              => '65 000 characters Max. - Description of the product for Ricardo page. If empty, the default Magento description of your product will be taken.',
     'input'             => 'textarea',
-    'class'             => '',
+    'class'             => 'validate-length maximum-length-65000',
     'source'            => '',
     'global'            => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
     'visible'           => true,
