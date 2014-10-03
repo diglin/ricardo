@@ -188,9 +188,9 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
         $message = '';
         $helper =  Mage::helper('diglin_ricento');
         if ($jobStatus != Diglin_Ricento_Model_Sync_Job::STATUS_SUCCESS) {
-            $message = $helper->__('%d success, %d warning(s), %d error(s)', $this->_totalSuccess, $this->_totalWarning, $this->_totalError);
+            $message = $helper->__('Report: %d success, %d warning(s), %d error(s)', $this->_totalSuccess, $this->_totalWarning, $this->_totalError);
             $message .= '<br>';
-            $message .= $helper->__('You can force to list your products on ricardo.ch by <a href="%s">clicking here</a>. However products having an error won\'t be synchronized', $this->_getListUrl() );
+            $message .= $helper->__('Successful products checked are going to be listed. To force to list products having a warning, please <a href="%s">clicking here</a>. Products with an error won\'t be synchronized, you have to fix the problem first.', $this->_getListUrl() );
         }
         return $message;
     }

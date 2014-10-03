@@ -31,7 +31,7 @@ class Diglin_Ricento_Model_Dispatcher
         $className = $this->getAdapterClassName($type);
 
         if (empty($className) || !class_exists($className)) {
-            Mage::throwException(Mage::helper('diglin_ricento')->__("The dispatcher of type '%s' is not found.", $type));
+            Mage::throwException(Mage::helper('diglin_ricento')->__("The dispatcher of type '%s' is not found at %s.", $type, Diglin_Ricento_Helper_Data::NODE_DISPATCHER_TYPES));
         }
 
         $adapter = new $className();

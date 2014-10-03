@@ -226,8 +226,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                         ->setTotalProceed($this->_totalProceed)
                         ->save();
 
-                    $message[] = $helper->__('The Job "%s" has finished with %s for the <a href="%s" target="_blank">products listing %d</a>. Please, view the <a href="%s">log</a> for details.',
-                        $this->_currentJob->getJobTypeLabel(),
+                    $message[] = $helper->__('The Job has finished with %s for the <a href="%s" target="_blank">products listing %d</a>. Please, view the <a href="%s">log</a> for details.',
                         $typeError,
                         $this->_getProductListingEditUrl(),
                         $this->_productsListingId,
