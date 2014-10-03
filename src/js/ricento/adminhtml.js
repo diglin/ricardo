@@ -250,6 +250,8 @@ Ricento.progressInterval = function (url, prefix) {
                     statusElement.innerHTML = response.status;
                     statusElement.addClassName('job_status-' + response.status.toLowerCase());
                     adviceElement.innerHTML = '';
+
+                    setTimeout(window.location.reload(true), 2500);
                 }
 
                 messageElement.innerHTML = response.message;
