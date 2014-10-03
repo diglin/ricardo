@@ -14,8 +14,6 @@
  */
 class Diglin_Ricento_Model_Resource_Sales_Options_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
-
-
     /**
      * Sales_Options Collection Resource Constructor
      * @return void
@@ -25,6 +23,4 @@ class Diglin_Ricento_Model_Resource_Sales_Options_Collection extends Mage_Core_M
         parent::_construct();
         $this->_init('diglin_ricento/sales_options');
     }
-
-
 }

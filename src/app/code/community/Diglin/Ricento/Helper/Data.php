@@ -29,7 +29,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const CFG_SIMULATE_AUTH = 'ricento/api_config/simulate_authorization';
     const CFG_RICARDO_USERNAME = 'ricento/api_config/ricardo_username';
     const CFG_RICARDO_PASSWORD = 'ricento/api_config/ricardo_password';
-    const CFG_RICARDO_PARTNERID = 'ricento/api_config/partner_id_';
+    const CFG_RICARDO_PARTNERKEY = 'ricento/api_config/partner_key_';
     const CFG_RICARDO_PARTNERPASS = 'ricento/api_config/partner_pass_';
     const CFG_EXPIRATION_NOTIFICATION_DELAY = 'ricento/api_config/expiration_notification_delay'; // in day
 
@@ -164,7 +164,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         $configuredAccount = (!$this->canSimulateAuthorization() || ($this->canSimulateAuthorization() && $this->getRicardoUsername($website) && $this->getRicardoPass($website))) ? true : false;
 
         foreach ($this->getSupportedLang() as $lang) {
-            if ($this->getPartnerId($lang, $website) && $this->getPartnerPass($lang, $website)) {
+            if ($this->getPartnerKey($lang, $website) && $this->getPartnerPass($lang, $website)) {
                 $configured = true;
                 break;
             }
@@ -217,10 +217,10 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null|string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
-    public function getPartnerId($lang = null, $website = 0)
+    public function getPartnerKey($lang = null, $website = 0)
     {
         $lang = $this->_getLocaleCodeForApiConfig($lang);
-        return self::getWebsiteConfig(self::CFG_RICARDO_PARTNERID . $lang, $website);
+        return self::getWebsiteConfig(self::CFG_RICARDO_PARTNERKEY . $lang, $website);
     }
 
     /**

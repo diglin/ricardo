@@ -125,7 +125,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
 
             $config = array(
                 'host' => $host,
-                'partnership_id' => $helper->getPartnerId($lang, $website),
+                'partnership_key' => $helper->getPartnerKey($lang, $website),
                 'partnership_passwd' => $helper->getPartnerPass($lang, $website),
                 'partner_url' => $helper->getPartnerUrl($website->getId()),
                 'allow_authorization_simulation' => ($helper->canSimulateAuthorization()) ? true : false,

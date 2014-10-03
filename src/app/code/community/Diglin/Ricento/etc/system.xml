@@ -125,8 +125,8 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </api_de>
-                        <partner_id_de module="diglin_ricento" translate="label comment">
-                            <label>German Partner ID</label>
+                        <partner_key_de module="diglin_ricento" translate="label comment">
+                            <label>German Partner Key</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
@@ -134,7 +134,7 @@
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[Partner ID has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
-                        </partner_id_de>
+                        </partner_key_de>
                         <partner_pass_de module="diglin_ricento" translate="label comment">
                             <label>German Partner Password</label>
                             <frontend_type>obscure</frontend_type>
@@ -155,8 +155,8 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </api_fr>
-                        <partner_id_fr module="diglin_ricento" translate="label comment">
-                            <label>French Partner ID</label>
+                        <partner_key_fr module="diglin_ricento" translate="label comment">
+                            <label>French Partner Key</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
@@ -164,7 +164,7 @@
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[Partner ID has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
-                        </partner_id_fr>
+                        </partner_key_fr>
                         <partner_pass_fr module="diglin_ricento" translate="label comment">
                             <label>French Partner Password</label>
                             <frontend_type>obscure</frontend_type>
