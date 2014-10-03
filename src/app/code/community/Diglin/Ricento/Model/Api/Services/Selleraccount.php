@@ -31,6 +31,12 @@ class Diglin_Ricento_Model_Api_Services_Selleraccount extends Diglin_Ricento_Mod
      */
     public function getServiceModel()
     {
-        return parent::getServiceModel();
+        $this->_prepareCredentialToken();
+
+        $model = parent::getServiceModel();
+
+        $this->_updateCredentialToken();
+
+        return $model;
     }
 } 

@@ -185,12 +185,22 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </general_api_config>
+                        <!--<email_notification module="diglin_ricento" translate="label comment">-->
+                            <!--<label>Notification API Token Expiration</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<source_model>adminhtml/system_config_source_yesno</source_model>-->
+                            <!--<comment><![CDATA[Do you want to receive an email when the API Token will expire? If your API Token expires, you won't be able to use the extension until you authorize it again. Receiving a notification per email will help you to prevent such a problem.]]></comment>-->
+                            <!--<sort_order>60</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>0</show_in_store>-->
+                        <!--</email_notification>-->
                         <dev_mode module="diglin_ricento" translate="label comment">
                             <label>Development Mode</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <comment><![CDATA[If you enable tihs configuration, all API requests will be send to the Ricardo Sandbox instead to use the production servers. Be aware, you have to provide others partner IDs and Passwords specific for dev environment.]]></comment>
-                            <sort_order>55</sort_order>
+                            <sort_order>70</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -200,7 +210,7 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <comment><![CDATA[Write into the var/log/ricento.log file all requests sent to the Ricardo API. Enable it to help us to suppport you and send this file to us if you have an issue. Your passwords will be anonymized.]]></comment>
-                            <sort_order>60</sort_order>
+                            <sort_order>70</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -215,6 +225,16 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
+                        <account_creation module="diglin_ricento" translate="label comment">
+                            <label>Send Confirmation Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Do you want to send a confirmation email to a customer when his account is created thanks to the Ricardo API]]></comment>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </account_creation>
                         <shipping_calculation module="diglin_ricento" translate="label">
                             <label>Shipping Calculation</label>
                             <sort_order>10</sort_order>
@@ -222,7 +242,7 @@
                             <source_model>diglin_ricento/config_source_rules_shipping_calculation</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
+                            <show_in_store>0</show_in_store>
                         </shipping_calculation>
                     </fields>
                 </global>

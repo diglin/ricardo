@@ -13,7 +13,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.27</version>
+            <version>0.0.28</version>
         </Diglin_Ricento>
     </modules>
     <default>
@@ -26,14 +26,16 @@
                 <assistant_url_dev>https://ra.betaqxl.com/</assistant_url_dev>
                 <signup_url>http://api.ricardo.ch/request.php</signup_url>
                 <simulate_authorization>0</simulate_authorization>
-                <expiration_notification_delay>1</expiration_notification_delay>
+                <email_notification>1</email_notification>
                 <!-- it's only possible one day before -->
+                <expiration_notification_delay>1</expiration_notification_delay>
                 <host>ws.betaqxl.com</host>
                 <!-- @todo change with the production host -->
                 <host_dev>ws.betaqxl.com</host_dev>
                 <lang>de,fr</lang>
             </api_config>
             <global>
+                <account_creation>0</account_creation>
                 <shipping_calculation>highest_price</shipping_calculation>
             </global>
             <cleanup_jobs>
@@ -59,8 +61,8 @@
     </default>
     <global>
         <psr0_namespaces>
-            <Diglin_Ricardo />
             <!-- Required to load the Ricardo PHP library -->
+            <Diglin_Ricardo />
         </psr0_namespaces>
         <phpunit>
             <suite>
@@ -115,6 +117,9 @@
                     <shipping_payment_rule>
                         <table>ricento_shipping_payment_rule</table>
                     </shipping_payment_rule>
+                    <sales_transaction>
+                        <table>ricento_sales_transaction</table>
+                    </sales_transaction>
                 </entities>
             </diglin_ricento_resource>
         </models>
