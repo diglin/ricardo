@@ -125,7 +125,9 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
                     }
                     break;
                 default:
-                    return $helper->__('Job in progress...');
+                    if (in_array($this->getProgress(), array(self::PROGRESS_PENDING, self::PROGRESS_CHUNK_RUNNING))) {
+                        return $helper->__('Job in progress...');
+                    }
                     break;
             }
         }
