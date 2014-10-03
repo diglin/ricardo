@@ -480,4 +480,22 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 
         return new Varien_Object(array('item_id' => $itemId, 'product_id' => $productId));
     }
+
+    /**
+     * @param array $data
+     * @return Varien_Object
+     */
+    public function extractData(array $data)
+    {
+        $object = new Varien_Object();
+
+        foreach ($data as $key => $value) {
+            if (is_array($value) && !is_numeric($key)) {
+                $value = $this->extractData($value);
+            }
+            $object->setDataUsingMethod($key, $value);
+        }
+
+        return $object;
+    }
 }
