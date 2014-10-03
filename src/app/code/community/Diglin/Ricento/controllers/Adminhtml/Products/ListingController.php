@@ -336,6 +336,20 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
             $collection->walk('delete');
 
+            /**
+             * Do nothing if the same job is already running
+             */
+            $collection->clear();
+            $collection
+                ->getSelect()
+                ->where('progress', array('in' => array(Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING, Diglin_Ricento_Model_Sync_Job::PROGRESS_RUNNING)));
+
+            if ($collection->count() > 0) {
+                $this->_getSession()->addNotice($this->__('A similar job is already running. This job won\'t be executed.'));
+                $this->_redirect('*/products_listing/edit', array('id' => $productListing->getId()));
+                return;
+            }
+
             $job
                 ->setJobType($jobType)
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
