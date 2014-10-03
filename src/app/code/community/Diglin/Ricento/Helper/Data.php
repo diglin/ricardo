@@ -461,7 +461,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function generateInternalReference(Diglin_Ricento_Model_Products_Listing_Item $item, $productId = null)
     {
-        if ($productId) {
+        if (is_null($productId)) {
             $productId = $item->getProductId();
         }
 
