@@ -14,28 +14,31 @@
  */
 class Diglin_Ricento_Model_Cron
 {
+    protected $_syncProcess = array(
+        Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST, //** Check list before to sync to ricardo.ch
+        Diglin_Ricento_Model_Sync_Job::TYPE_LIST, //** List to ricardo.ch
+        Diglin_Ricento_Model_Sync_Job::TYPE_STOP,//** Stop the list on ricardo.ch if needed
+        Diglin_Ricento_Model_Sync_Job::TYPE_RELIST //** Relist to ricardo.ch
+    );
+
+    protected $_asyncProcess = array(
+        Diglin_Ricento_Model_Sync_Job::TYPE_SYNCLIST, //** Sync List before getting orders
+        //Diglin_Ricento_Model_Sync_Job::TYPE_ORDER //** Get new orders
+    );
+
     /**
      * Process Cron tasks - should be run in a short period of time
      */
     public function process()
     {
+        //@todo uncomment
+        //ini_set('memory_limit', 512);
+
         //** Launch Pending Jobs
 
-        //** Check list before to sync to ricardo.ch
-
-        $this->dispatch(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST);
-
-        //** List to ricardo.ch
-
-        $this->dispatch(Diglin_Ricento_Model_Sync_Job::TYPE_LIST);
-
-        //** Stop the list on ricardo.ch if needed
-
-        $this->dispatch(Diglin_Ricento_Model_Sync_Job::TYPE_STOP);
-
-        //** Relist to ricardo.ch
-
-        $this->dispatch(Diglin_Ricento_Model_Sync_Job::TYPE_RELIST);
+        foreach ($this->_syncProcess as $jobType) {
+            $this->dispatch($jobType);
+        }
     }
 
     /**
@@ -43,13 +46,12 @@ class Diglin_Ricento_Model_Cron
      */
     public function async()
     {
-        //** Sync List before getting orders
+        //@todo uncomment
+        //ini_set('memory_limit', 512);
 
-        $this->dispatch(Diglin_Ricento_Model_Sync_Job::TYPE_SYNCLIST);
-
-        //** Get new orders
-
-        $this->dispatch(Diglin_Ricento_Model_Sync_Job::TYPE_ORDER);
+        foreach ($this->_asyncProcess as $jobType) {
+            $this->dispatch($jobType);
+        }
 
         //** Cleanup
 
@@ -84,8 +86,8 @@ class Diglin_Ricento_Model_Cron
      */
     protected function _processCleanupListingLog()
     {
-        if (Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_CLEAN_JOBS_ENABLED)) {
-            $daysKeep = (int)Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_CLEAN_JOBS_KEEP_DAYS);
+        if (Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_CLEAN_LISTING_LOGS_ENABLED)) {
+            $daysKeep = (int)Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_CLEAN_LISTING_LOGS_KEEP_DAYS);
 
             $jobsCollection = Mage::getResourceModel('diglin_ricento/products_listing_log_collection');
             $jobsCollection

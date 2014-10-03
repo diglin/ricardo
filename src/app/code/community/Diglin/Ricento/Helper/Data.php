@@ -32,6 +32,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const CFG_RICARDO_PARTNERKEY = 'ricento/api_config/partner_key_';
     const CFG_RICARDO_PARTNERPASS = 'ricento/api_config/partner_pass_';
     const CFG_EXPIRATION_NOTIFICATION_DELAY = 'ricento/api_config/expiration_notification_delay'; // in day
+    const CFG_EMAIL_NOTIFICATION = 'ricento/api_config/email_notification'; // in day
 
     const CFG_SUPPORTED_LANG = 'ricento/api_config/lang';
     const DEFAULT_SUPPORTED_LANG = 'de';
@@ -40,12 +41,13 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const ALLOWED_CURRENCY = 'CHF';
 
     const CFG_SHIPPING_CALCULATION = 'ricento/global/shipping_calculation';
-    const CFG_CLEAN_JOBS_ENABLED = 'ricento/global/cleanup_jobs/enabled';
+    const CFG_ACCOUNT_CREATION_EMAIL = 'ricento/global/account_creation';
 
-    const CFG_CLEAN_JOBS_KEEP_DAYS = 'ricento/global/cleanup_jobs/keep_days';
-    const CFG_CLEAN_LISTING_LOGS_ENABLED = 'ricento/global/listing_logs/enabled';
+    const CFG_CLEAN_JOBS_ENABLED = 'ricento/cleanup_jobs/enabled';
+    const CFG_CLEAN_JOBS_KEEP_DAYS = 'ricento/cleanup_jobs/keep_days';
 
-    const CFG_CLEAN_LISTING_LOGS_KEEP_DAYS = 'ricento/global/listing_logs/keep_days';
+    const CFG_CLEAN_LISTING_LOGS_ENABLED = 'ricento/listing_logs/enabled';
+    const CFG_CLEAN_LISTING_LOGS_KEEP_DAYS = 'ricento/listing_logs/keep_days';
 
     /**
      * Common statuses for products listing and products listing item
