@@ -46,8 +46,8 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
 
         $listingIds = $readListingConnection->fetchCol($select);
 
-        foreach ($listingIds as $listingId)
-        {
+        foreach ($listingIds as $listingId) {
+
             /**
              * We want items listed and planned because we want to get the new ricardo_article_id
              */
@@ -56,7 +56,8 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
             $select = $readConnection->select()
                 ->from($itemResource->getTable('diglin_ricento/products_listing_item'), 'item_id')
                 ->where('products_listing_id = :id')
-                ->where('is_planned = 1');
+                ->where('is_planned = 1')
+                ->where('status = ?', Diglin_Ricento_Helper_Data::STATUS_LISTED);
 
             $binds  = array('id' => $listingId);
             $countListedItems = count($readConnection->fetchAll($select, $binds));
@@ -93,17 +94,9 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
     {
         $jobListing = $this->_currentJobListing;
 
-        /**
-         * Get the list of opened articles (not planned but already live)
-         */
-        if (empty($this->_openedArticles)) {
-            /* @var $sellerAccount Diglin_Ricento_Model_Api_Services_SellerAccount */
-            $sellerAccount = Mage::getSingleton('diglin_ricento/api_services_selleraccount');
-            $sellerAccount->setCanUseCache(false);
-
-            $openParameter = new OpenArticlesParameter();
-            $this->_openedArticles = $sellerAccount->getOpenArticles($openParameter);
-        }
+        /* @var $sellerAccount Diglin_Ricento_Model_Api_Services_SellerAccount */
+        $sellerAccount = Mage::getSingleton('diglin_ricento/api_services_selleraccount');
+        $sellerAccount->setCanUseCache(false);
 
         $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED), $jobListing->getLastItemId());
         $itemCollection->addFieldToFilter('is_planned', 1);
@@ -111,17 +104,20 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
         /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
         foreach ($itemCollection->getItems() as $item) {
 
-            $startingDate = strtotime($item->getSalesOptions()->getScheduleDateStart());
+            $openParameter = new OpenArticlesParameter();
+            $openParameter->setInternalReferenceFilter($item->getInternalReference());
 
-            if (!empty($startingDate) && $startingDate < time()) {
+            $article = $sellerAccount->getOpenArticles($openParameter);
+
+            if (count($article['OpenArticles']) > 0) {
+                $article = Mage::helper('diglin_ricento')->extractData($article['OpenArticles'][0]); // Only one element expected but more may come
+
                 /**
                  * Get the new ricardo article id if the article was planned before
                  */
-                $article = $this->lookupForRicardoArticle($item->getInternalReference());
-
-                if ($article) {
+                if ($article->getArticleId()) {
                     $item
-                        ->setRicardoArticleId($article['ArticleId'])
+                        ->setRicardoArticleId($article->getArticleId())
                         ->setIsPlanned(0)
                         ->save();
                 }
@@ -134,24 +130,5 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
         }
 
         return $this;
-    }
-
-    /**
-     * Search the article ID from the internal reference
-     * @todo maybe move it to an helper
-     *
-     * @param string $internalReference
-     * @return bool
-     */
-    protected function lookupForRicardoArticle($internalReference)
-    {
-        foreach ($this->_openedArticles as $openArticle) {
-            if (isset($openArticle['ArticleInternalReferences']) && !empty($openArticle['ArticleInternalReferences'][0])) {
-                if ($openArticle['ArticleInternalReferences'][0]['InternalReferenceValue'] == $internalReference) {
-                    return $openArticle;
-                }
-            }
-        }
-        return false;
     }
 }
