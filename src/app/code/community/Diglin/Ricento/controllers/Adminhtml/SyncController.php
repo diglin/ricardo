@@ -76,8 +76,8 @@ class Diglin_Ricento_Adminhtml_SyncController extends Mage_Adminhtml_Controller_
                 'status' => ucfirst($job->getJobStatus()),
                 'state' => $job->getProgress(),
                 'message' => Mage::getSingleton('diglin_ricento/filter')->filter($jobMessage),
-                'started_at' => ($job->getStartedAt()) ? $locale->date($job->getStartedAt())->toString($dateFormatIso) : '',
-                'ended_at' => ($job->getEndedAt()) ? $locale->date($job->getEndedAt())->toString($dateFormatIso) : ''
+                'started_at' => ($job->getStartedAt()) ? $locale->date($job->getStartedAt(), Varien_Date::DATETIME_INTERNAL_FORMAT)->toString($dateFormatIso) : '',
+                'ended_at' => ($job->getEndedAt()) ? $locale->date($job->getEndedAt(), Varien_Date::DATETIME_INTERNAL_FORMAT)->toString($dateFormatIso) : '',
             );
         }
 

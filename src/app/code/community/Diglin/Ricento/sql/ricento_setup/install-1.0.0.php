@@ -125,7 +125,7 @@ $tablePaymentRule
     ), 'Payment description FR')
     ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
         'nullable' => false
-    ), 'Shipping Method')
+    ), 'Shipping Methods')
     ->addColumn('shipping_description_de', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
         'nullable' => true
     ), 'Shipping Description DE')
