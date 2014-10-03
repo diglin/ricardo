@@ -453,6 +453,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * Generate the Internal Reference - Must be unique to allow the mapping with ricardo
+     * Returned value will be similar to "123456#PID#987654"
      *
      * @param Diglin_Ricento_Model_Products_Listing_Item $item
      * @param int $productId
@@ -465,5 +466,18 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         return $item->getId() . '#PID#' . $productId;
+    }
+
+    /**
+     * Extract the item Id and the product Id from the Internal Reference exposed from the ricardo API
+     *
+     * @param $internalReference
+     * @return Varien_Object
+     */
+    public function extractInternalReference($internalReference)
+    {
+        list ($itemId, $productId) = explode('#PID#', $internalReference);
+
+        return new Varien_Object(array('item_id' => $itemId, 'product_id' => $productId));
     }
 }
