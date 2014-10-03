@@ -59,14 +59,13 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_itemMessage = array('success' => $this->_getHelper()->__('The product has been removed from ricardo.ch'));
                     $hasSuccess = true;
-                    $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => null, 'status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED));
+                    $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => null, 'is_planned' => null, 'qty' => null, 'status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED));
                 } else {
                     $this->_jobHasError = true;
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
                     $this->_itemMessage = array('error' => $this->_getHelper()->__('The product has not been removed from ricardo.ch'));
                     // do not change the status of the item itself, the problem can be that the auction is still running and the article cannot be stopped
                 }
-
             } catch (Exception $e) {
                 $this->_handleException($e);
                 $e = null;
@@ -97,8 +96,7 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
         }
 
         if ($hasSuccess) {
-            $itemResource = Mage::getResourceModel('diglin_ricento/products_listing_item');
-            $countListedItem = $itemResource->countListedItems($this->_productsListingId);
+            $countListedItem = Mage::getResourceModel('diglin_ricento/products_listing_item')->countListedItems($this->_productsListingId);
 
             if ($countListedItem == 0) {
                 $listing = Mage::getModel('diglin_ricento/products_listing')->load($this->_productsListingId);
