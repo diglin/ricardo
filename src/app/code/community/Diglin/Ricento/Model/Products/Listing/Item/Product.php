@@ -538,11 +538,14 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
         $read = $this->_getReadConnection();
         $resource = $this->_getCoreResource();
 
+        /**
+         * Get the gallery images, only those enabled
+         */
         $select = $read->select()
             ->from(
                 array('mg' => $resource->getTableName('catalog/product_attribute_media_gallery')),
                 array(
-                    'filepath' => 'mg.value', 'mgv.label', 'mgv.position'
+                    'filepath' => 'mg.value'
                 )
             )
             ->joinLeft(
@@ -551,9 +554,34 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
                 array()
             )
             ->where('entity_id IN(?)', $productId)
+            ->where('disabled = 0')
             ->order(array('mgv.position ASC'));
 
-        return $read->fetchAll($select);
+        $mediaGallery = $read->fetchAll($select);
+
+        /**
+         * Get the Base image
+         */
+        $mainTable = Mage::getResourceModel('catalog/product')->getAttribute('image')
+            ->getBackend()
+            ->getTable();
+
+        $select = $read->select()
+            ->from(
+                array('images' => $mainTable),
+                array('value as filepath')
+            )
+            ->joinLeft(
+                array('attr' => $resource->getTableName('eav/attribute')),
+                'images.attribute_id = attr.attribute_id',
+                array('attribute_code')
+            )
+            ->where('entity_id = ?', $productId)
+            ->where('store_id = 0')
+            ->where('attribute_code = ?', 'image');
+            //->where('attribute_code IN (?)', array('small_image', 'thumbnail', 'image'));
+
+        return array_merge($mediaGallery, $read->fetchAll($select));
     }
 
     /**
