@@ -25,6 +25,16 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
     protected $_jobType = Diglin_Ricento_Model_Sync_Job::TYPE_STOP;
 
     /**
+     * @var int
+     */
+    protected $_totalSuccess = 0;
+
+    /**
+     * @var int
+     */
+    protected $_totalError = 0;
+
+    /**
      * @return $this
      */
     protected function _proceed()
@@ -59,11 +69,13 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_itemMessage = array('success' => $this->_getHelper()->__('The product has been removed from ricardo.ch'));
                     $hasSuccess = true;
-                    $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => null, 'is_planned' => null, 'qty' => null, 'status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED));
+                    ++$this->_totalSuccess;
+                    $item->getResource()->saveCurrentItem($item->getId(), array('is_planned' => null, 'qty_inventory' => null, 'status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED));
                 } else {
+                    ++$this->_totalError;
                     $this->_jobHasError = true;
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
-                    $this->_itemMessage = array('error' => $this->_getHelper()->__('The product has not been removed from ricardo.ch'));
+                    $this->_itemMessage = array('errors' => $this->_getHelper()->__('The product has not been removed from ricardo.ch. Probably because someone bid the product or bought it.'));
                     // do not change the status of the item itself, the problem can be that the auction is still running and the article cannot be stopped
                 }
             } catch (Exception $e) {
@@ -96,7 +108,8 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
         }
 
         if ($hasSuccess) {
-            $countListedItem = Mage::getResourceModel('diglin_ricento/products_listing_item')->countListedItems($this->_productsListingId);
+            $countListedItem = Mage::getResourceModel('diglin_ricento/products_listing_item')
+                ->countListedItems($this->_productsListingId);
 
             if ($countListedItem == 0) {
                 $listing = Mage::getModel('diglin_ricento/products_listing')->load($this->_productsListingId);
@@ -107,5 +120,18 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
         }
 
         return $this;
+    }
+
+    /**
+     * @param string $jobStatus
+     * @return string
+     */
+    protected function _getStatusMessage($jobStatus)
+    {
+        $message = '';
+        if ($jobStatus != Diglin_Ricento_Model_Sync_Job::STATUS_SUCCESS) {
+            $message = Mage::helper('diglin_ricento')->__('Report: %d success, %d error(s)', $this->_totalSuccess, $this->_totalError);
+        }
+        return $message;
     }
 }
