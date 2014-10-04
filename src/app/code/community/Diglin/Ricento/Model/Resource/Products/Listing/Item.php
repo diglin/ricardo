@@ -31,7 +31,7 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
      */
     public function countPendingItems($productsListingId)
     {
-        return $this->_countItems('status IN (\'' . Diglin_Ricento_Helper_Data::STATUS_PENDING . '\', \'' . Diglin_Ricento_Helper_Data::STATUS_ERROR .'\')', $productsListingId);
+        return $this->_countItems('status IN (\'' . Diglin_Ricento_Helper_Data::STATUS_PENDING . '\', \'' . Diglin_Ricento_Helper_Data::STATUS_ERROR .'\', \'' . Diglin_Ricento_Helper_Data::STATUS_STOPPED .'\')', $productsListingId);
     }
 
     /**

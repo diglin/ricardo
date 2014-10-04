@@ -55,7 +55,8 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
         $itemCollection = $this->_getItemCollection(
             array(
                 Diglin_Ricento_Helper_Data::STATUS_PENDING,
-                Diglin_Ricento_Helper_Data::STATUS_ERROR
+                Diglin_Ricento_Helper_Data::STATUS_ERROR,
+                Diglin_Ricento_Helper_Data::STATUS_STOPPED
             ),
             $jobListing->getLastItemId()
         );
