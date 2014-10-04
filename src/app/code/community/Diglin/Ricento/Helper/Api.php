@@ -94,4 +94,12 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
     {
         return strtotime($time) - ($sessionDuration * 60);
     }
+
+    /**
+     * @return string
+     */
+    public function getValidationUrl()
+    {
+        return Mage::getSingleton('diglin_ricento/api_services_security')->getValidationUrl();
+    }
 }
