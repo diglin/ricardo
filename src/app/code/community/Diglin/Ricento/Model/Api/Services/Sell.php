@@ -38,12 +38,19 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
      * Overwritten just to get the class/method auto completion
      * Be aware that using directly this method to use the methods of the object instead of using
      * the magic methods of the abstract (__call, __get, __set) will prevent to use the cache of Magento
+     * but also some logic related to the securtiy token
      *
      * @return \Diglin\Ricardo\Managers\Sell
      */
     public function getServiceModel()
     {
-        return parent::getServiceModel();
+        $this->_prepareCredentialToken();
+
+        $model = parent::getServiceModel();
+
+        $this->_updateCredentialToken();
+
+        return $model;
     }
 
     /**
@@ -56,15 +63,15 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         $insertArticle = $item->getInsertArticleParameter();
 
         try {
-            $this->_prepareCredentialToken();
-
             // @todo insert for each associated products in case of configurable
 
             $start = microtime(true);
-            $articleResult = $this->getServiceModel()->insertArticle($insertArticle);
-            Mage::log('Time to insert article ' . (microtime(true) - $start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
 
-            $this->_updateCredentialToken();
+            $articleResult = $this->getServiceModel()->insertArticle($insertArticle);
+
+            if (Mage::helper('diglin_ricento')->isDebugEnabled()) {
+                Mage::log('Time to insert article ' . (microtime(true) - $start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+            }
 
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             $this->_updateCredentialToken();
@@ -82,7 +89,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
 
     public function updateArticle()
     {
-
+        // @todo
         return $this;
     }
 
@@ -99,13 +106,9 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         }
 
         try {
-            $this->_prepareCredentialToken();
-
             // @todo insert for each associated products in case of configurable
 
             $relistArticleResult = $this->getServiceModel()->relistArticle($item->getRicardoArticleId());
-
-            $this->_updateCredentialToken();
 
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             $this->_updateCredentialToken();
@@ -135,8 +138,6 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         }
 
         try {
-            $this->_prepareCredentialToken();
-
             // @todo insert for each associated products in case of configurable
 
             $parameter = $item->$parameterMethod();
@@ -146,8 +147,6 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
 
             $result = $this->getServiceModel()->$serviceMethod($parameter);
 
-            $this->_updateCredentialToken();
-
             /**
              * Ricardo API is special here - if article is closed, returned values may be empty !!!
              * If it's closed/deleted or an error occurred, an exception is triggered
@@ -155,11 +154,21 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
             if (isset($result['IsClosed'])) {
                 return true;
             }
-
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             $this->_updateCredentialToken();
             Mage::logException($e);
-            $this->_handleSecurityException($e);
+            try {
+                $this->_handleSecurityException($e);
+            } catch (\Diglin\Ricardo\Exceptions\GeneralException $e) {
+                switch ($e->getCode()) {
+                    case \Diglin\Ricardo\Enums\GeneralErrors::DELETEPLANNEDFAILED:
+                    case \Diglin\Ricardo\Enums\GeneralErrors::CLOSEAUCTIONFAILED:
+                        return false;
+                    default:
+                        break;
+                }
+                throw $e;
+            }
         }
 
         return false;

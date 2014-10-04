@@ -26,6 +26,7 @@ class Diglin_Ricento_Model_Api_Services_Selleraccount extends Diglin_Ricento_Mod
      *
      * Be aware that using directly this method to use the methods of the object instead of using
      * the magic methods of the abstract (__call, __get, __set) will prevent to use the cache of Magento
+     * but also some logic related to the securtiy token
      *
      * @return \Diglin\Ricardo\Managers\SellerAccount
      */
