@@ -266,6 +266,7 @@
         <jobs>
             <ricento_sync_jobs>
                 <schedule>
+                    <!-- @todo change the time to */5 -->
                     <cron_expr>*/1 * * * *</cron_expr>
                 </schedule>
                 <run>
@@ -274,6 +275,7 @@
             </ricento_sync_jobs>
             <ricento_async_jobs>
                 <schedule>
+                    <!-- @todo change the time to 0,30 -->
                     <cron_expr>*/1 * * * *</cron_expr>
                 </schedule>
                 <run>
