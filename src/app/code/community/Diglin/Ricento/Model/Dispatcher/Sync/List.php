@@ -11,6 +11,7 @@
 
 use \Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use \Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter;
+use \Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter;
 
 /**
  * Class Diglin_Ricento_Model_Dispatcher_Sync_List
@@ -87,6 +88,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
 
     /**
      * We update the ricardo article ID because it changes when it's planned or opened
+     * We need it to retrieve the sold article in a later process
      *
      * @return $this
      */
@@ -96,21 +98,48 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
 
         /* @var $sellerAccount Diglin_Ricento_Model_Api_Services_SellerAccount */
         $sellerAccount = Mage::getSingleton('diglin_ricento/api_services_selleraccount');
-        $sellerAccount->setCanUseCache(false);
 
         $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED), $jobListing->getLastItemId());
         $itemCollection->addFieldToFilter('is_planned', 1);
 
+        $helper = Mage::helper('diglin_ricento');
+
         /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
         foreach ($itemCollection->getItems() as $item) {
 
+            $article = null;
             $openParameter = new OpenArticlesParameter();
             $openParameter->setInternalReferenceFilter($item->getInternalReference());
 
-            $article = $sellerAccount->getOpenArticles($openParameter);
+            $openArticles = $sellerAccount->getServiceModel()->getOpenArticles($openParameter);
 
-            if (count($article['OpenArticles']) > 0) {
-                $article = Mage::helper('diglin_ricento')->extractData($article['OpenArticles'][0]); // Only one element expected but more may come
+            /**
+             * Get Article information from OpenArticles method
+             */
+            if (count($openArticles['OpenArticles']) > 0) {
+                $article = Mage::helper('diglin_ricento')->extractData($openArticles['OpenArticles'][0]); // Only one element expected but more may come
+            } else {
+                /**
+                 * We may have missed the article Id value changes in OpenArticles method, due to sales for example
+                 * so we try to get it from sold articles method
+                 */
+                $soldArticlesParameter = new SoldArticlesParameter();
+
+                /**
+                 * Set date to filter e.g. last day. Do not use a higher value as the minimum sales duration is 1 day,
+                 * we prevent to have conflict with several sold articles having similar internal reference
+                 */
+                $soldArticlesParameter
+                    ->setInternalReferenceFilter($item->getInternalReference())
+                    ->setMinimumEndDate($helper->getJsonDate(time() - (1 * 24 * 60 * 60)));
+
+                $articles = $sellerAccount->getServiceModel()->getSoldArticles($soldArticlesParameter);
+                if (count($articles) > 0) {
+                    $article = $helper->extractData($articles[0]);
+                }
+            }
+
+            if ($article) {
 
                 /**
                  * Get the new ricardo article id if the article was planned before
