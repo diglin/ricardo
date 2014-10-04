@@ -385,4 +385,22 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 
         return $this;
     }
+
+    /**
+     * @param int $productsListingId
+     * @return $this
+     */
+    public function setProductsListingId($productsListingId)
+    {
+        $this->_productsListingId = $productsListingId;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductsListingId()
+    {
+        return $this->_productsListingId;
+    }
 }
