@@ -507,7 +507,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
     {
         $price = 0;
         $promotions = Mage::getSingleton('diglin_ricento/api_services_system')->getPromotions(
-            \Diglin\Ricardo\Core\Helper::getJsonDate(), \Diglin\Ricardo\Enums\System\CategoryArticleType::ALL, 1, 1
+            Mage::helper('diglin_ricento')->getJsonDate(), \Diglin\Ricardo\Enums\System\CategoryArticleType::ALL, 1, 1
         );
 
         $priceHelper = Mage::helper('diglin_ricento/price');

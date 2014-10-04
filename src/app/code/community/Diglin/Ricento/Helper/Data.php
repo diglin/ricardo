@@ -66,6 +66,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const RICARDO_URL_HELP_PROMOTION = 'http://www.ricardo.ch/ueber-uns/gebühren/einstelloptionen'; //@todo make it for french too
 
     const NODE_DISPATCHER_TYPES = 'global/ricento/dispatcher/types';
+    const NODE_PRODUCT_TYPES = 'global/ricento/allow_product_types';
 
     /**
      * @var Mage_Directory_Model_Currency
@@ -92,7 +93,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     {
         $allowProductTypes = array();
         foreach (Mage::getConfig()
-                     ->getNode('global/ricento/allow_product_types')->children() as $type) {
+                     ->getNode(self::NODE_PRODUCT_TYPES)->children() as $type) {
             $allowProductTypes[$type->getName()] = $type->getName();
         }
         return $allowProductTypes;
@@ -497,5 +498,23 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         return $object;
+    }
+
+    /**
+     * @param $unixtimestamp
+     * @return string
+     */
+    public function getJsonDate($unixtimestamp = null)
+    {
+        return \Diglin\Ricardo\Core\Helper::getJsonDate($unixtimestamp);
+    }
+
+    /**
+     * @param $date
+     * @return string
+     */
+    public function getJsonTimestamp($date)
+    {
+        return \Diglin\Ricardo\Core\Helper::getJsonTimestamp($date);
     }
 }
