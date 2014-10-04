@@ -91,7 +91,6 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
         $this->getSoldArticles($articleIds);
 
-        // @todo get all data, save them into db (?), get customer data (address, email, tel, etc)
 
         $jobListing->saveCurrentJob(array(
             'total_proceed' => count($articleIds),
@@ -103,26 +102,32 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     /**
      * @param array $articleIds
      * @return mixed
+     * @throws Exception
      */
     public function getSoldArticles($articleIds = array())
     {
+        $helper = Mage::helper('diglin_ricento');
+
         $soldArticlesParameter = new SoldArticlesParameter();
+
+        /**
+         * Set date to filter e.g. last day. Do not use a higher value as the minimum sales duration is 1 day,
+         * we prevent to have conflict with several sold articles having similar internal reference
+         */
         $soldArticlesParameter
-            ->setArticleIdsFilter($articleIds);
-        // @todo set date to filter e.g. latest 30 min
+            ->setArticleIdsFilter($articleIds)
+            ->setMinimumEndDate($helper->getJsonDate(time() - (1 * 24 * 60 * 60)));
 
         $sellerAccountService = Mage::getSingleton('diglin_ricento/api_services_selleraccount');
         $soldArticles = $sellerAccountService->getServiceModel()->getSoldArticles($soldArticlesParameter);
 
-        $helper = Mage::helper('diglin_ricento');
-        
         foreach($soldArticles as $soldArticle) {
 
+            $rawData = $soldArticle;
             $soldArticle = $helper->extractData($soldArticle);
+            $transaction = $soldArticle->getTransaction();
 
-            if ($soldArticle->getTransaction() && count($soldArticle->getTransaction()) > 0) {
-
-                $transaction = $soldArticle->getTransaction();
+            if ($transaction && count($transaction) > 0) {
 
                 /**
                  * 1. Check that the transaction doesn't already exists
@@ -149,28 +154,42 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 }
 
                 /**
-                 * 3. Create customer if not exist
+                 * 3. Create customer if not exist and set his default billing address
                  */
-                $buyer = $helper->extractData($transaction->getBuyer());
-                $customer = $this->_getCustomer($buyer);
-                $buyerAddress = $helper->extractData($transaction->getBuyer()['Addresses']);
+                $customer = $this->_getCustomer($transaction->getBuyer());
+                $buyerAddress = $transaction->getBuyer()->getAddresses();
 
                 if ($customer) {
-                    $address = Mage::getModel('customer/address');
-                    $address
-                        ->setCompany($buyer->getCompanyName())
-                        ->setLastname($customer->getLastname())
-                        ->setFirstname($customer->getFirstname())
-                        ->setStreet($buyerAddress->getAddress1() . "\n" . $buyerAddress->getAddress2() . "\n" . $buyerAddress->getPostalBox())
-                        ->setPostcode($buyerAddress->getZipCode())
-                        ->setCity($buyerAddress->getCity())
-                        ->setRegionId(null)
-                        ->setCountryId($this->_getCountryId($buyerAddress->getCountry()))
-                        ->setTelephone($buyer->getPhone())
-                        ->setIsDefaultBilling(true)
-                        ->setIsDefaultShipping(true);
 
-                    $customer->addAddress($address);
+                    $address = $customer->getDefaultBillingAddress();
+
+                    $street = $buyerAddress->getAddress1() . "\n" . $buyerAddress->getAddress2() . "\n" . $buyerAddress->getPostalBox();
+                    $postCode = $buyerAddress->getZipCode();
+                    $city = $buyerAddress->getCity();
+
+                    if (!$address || ($address->getCity() != $city && $address->getPostcode() != $postCode && $address->getStreet() != $street )) {
+
+                        $address = Mage::getModel('customer/address');
+                        $address
+                            ->setCustomerId($customer->getId())
+                            ->setCompany($transaction->getBuyer()->getCompanyName())
+                            ->setLastname($customer->getLastname())
+                            ->setFirstname($customer->getFirstname())
+                            ->setStreet($street)
+                            ->setPostcode($postCode)
+                            ->setCity($city)
+                            ->setRegionId(null)
+                            ->setCountryId($this->_getCountryId($buyerAddress->getCountry()))
+                            ->setTelephone($transaction->getBuyer()->getPhone())
+                            ->setIsDefaultBilling(true)
+                            ->setIsDefaultShipping(true)
+                            ->setSaveInAddressBook(1)
+                            ->save();
+
+                        $customer->addAddress($address);
+                    }
+                } else {
+                    throw new Exception($helper->__('Customer creation failed! Ricardo transaction cannot be added.'));
                 }
 
                 /**
@@ -180,20 +199,23 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 $salesTransaction
                     ->setBidId($transaction->getBidId())
                     ->setCustomerId($customer->getId())
+                    ->setAddressId($address->getId())
                     ->setRicardoCustomerId($customer->getRicardoCustomerId())
                     ->setRicardoArticleId($soldArticle->getArticleId())
                     ->setQty($transaction->getBuyerQuantity())
                     ->setViewCount($soldArticle->getViewCount())
                     ->setShippingFee($soldArticle->getDeliveryCost())
                     ->setShippingMethod($soldArticle->getDeliveryId())
+                    ->setShippingCumulativeFee((int) $soldArticle->getIsCumulativeShipping())
                     ->setPaymentMethod($soldArticle->getPaymentMethodIds()[0])
-                    ->setTotalBidPrice($transaction->getWinningBidPrice())
+                    ->setTotalBidPrice($soldArticle->getWinningBidPrice())
                     ->setProductId($extractedInternReference->getProductId())
-                    ->setRawData(Mage::helper('core')->jsonEncode($soldArticle->getData()))
-                    ->setSoldAt(\Diglin\Ricardo\Core\Helper::getJsonTimestamp($transaction->getEndDate()));
-//                    ->save();
+                    ->setRawData(Mage::helper('core')->jsonEncode($rawData))
+                    ->setSoldAt($helper->getJsonTimestamp($soldArticle->getEndDate()))
+//                    ->save()
+                ;
 
-                return $salesTransaction->getData();
+                print_r($salesTransaction->getData());
             }
         }
     }
@@ -210,10 +232,14 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             return false;
         }
 
-        /* @var $customer Mage_Customer_Model_Customer */
-        $customer = Mage::getModel('customer/customer')->loadByEmail($buyer->getEmail());
-        $storeId = $this->_getStoreId();
         $isNew = false;
+        $listing = $this->_getListing();
+        $storeId = $this->_getStoreId($listing);
+
+        /* @var $customer Mage_Customer_Model_Customer */
+        $customer = Mage::getModel('customer/customer')
+            ->setWebsiteId($listing->getWebsiteId())
+            ->loadByEmail($buyer->getEmail());
 
         if (!$customer->getId()) {
             $customer
@@ -227,13 +253,15 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             $isNew = true;
         }
 
-        if (!$customer->setRicardoCustomerId()) {
+        if (!$customer->getRicardoCustomerId()) {
             $customer
                 ->setRicardoCustomerId($buyer->getBuyerId())
                 ->setRicardoUsername($buyer->getNickName());
         }
 
-        $customer->save();
+        if ($customer->hasDataChanges()) {
+            $customer->save();
+        }
 
         if ($isNew && Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_ACCOUNT_CREATION_EMAIL)) {
             if ($customer->isConfirmationRequired()) {
@@ -250,20 +278,51 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     /**
      * @param $countryName
      * @return string
+     * @throws Exception
      */
     protected function _getCountryId($countryName)
     {
-        // @todo translate countryName e.g. from "Schweiz" or "Suisse" to "CH"
-        $directory = Mage::getModel('directory/country')->loadByCode('CH');
+        $code = $this->_translateCountryNameToCode($countryName);
+        if (!$code) {
+            throw new Exception(Mage::helper('diglin_ricento')->__('Country Code is not available. Please contact the author of this extension or support.'));
+        }
+        $directory = Mage::getModel('directory/country')->loadByCode($code);
         return $directory->getCountryId();
     }
 
     /**
+     * VERY TEMPORARY SOLUTION until ricardo provide an API method to get the correct value
+     * @todo remove it as soon the API has implemented the method to get it
+     *
+     * @param $countryName
+     * @return string
+     */
+    protected function _translateCountryNameToCode($countryName)
+    {
+        $countryCode = array(
+            'Schweiz'       => 'CH',
+            'Suisse'        => 'CH',
+            'Liechtenstein' => 'LI', // ok for both lang
+            'Österreich'    => 'AT',
+            'Autriche'      => 'AT',
+            'Deutschland'   => 'DE',
+            'Allemagne'     => 'DE',
+            'Frankreich'    => 'FR',
+            'France'        => 'FR',
+            'Italien'       => 'IT',
+            'Italie'        => 'IT',
+        );
+
+        return (isset($countryCode[$countryName])) ? $countryCode[$countryName] : false;
+    }
+
+    /**
+     * @param $listing
      * @return int
      */
-    protected function _getStoreId()
+    protected function _getStoreId($listing)
     {
-        return Mage::app()->getWebsite($this->_getListing()->getWebsiteId())->getDefaultStore()->getId();
+        return Mage::app()->getWebsite($listing->getWebsiteId())->getDefaultStore()->getId();
     }
 
     public function createNewOrder ()
