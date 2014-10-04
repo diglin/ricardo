@@ -492,8 +492,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
                 $startDate = time() + 60*60;
             }
 
-            $articleInformation
-                ->setStartDate(Helper::getJsonDate($startDate));
+            $articleInformation->setStartDate(Mage::helper('diglin_ricento')->getJsonDate($startDate));
         }
 
         if ($salesType == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
