@@ -31,10 +31,16 @@ class Diglin_Ricento_Model_Cron
      */
     public function process()
     {
+        if (!Mage::helper('diglin_ricento')->isEnabled()) {
+            return;
+        }
+
         //@todo uncomment
         //ini_set('memory_limit', 512);
 
         //** Launch Pending Jobs
+
+        // @todo check that the API token is not expired or an error may occcur, in this case send only once an email to the admin
 
         foreach ($this->_syncProcess as $jobType) {
             $this->dispatch($jobType);
@@ -46,6 +52,10 @@ class Diglin_Ricento_Model_Cron
      */
     public function async()
     {
+        if (!Mage::helper('diglin_ricento')->isEnabled()) {
+            return;
+        }
+
         //@todo uncomment
         //ini_set('memory_limit', 512);
 
