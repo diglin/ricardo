@@ -39,6 +39,15 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
         ))
             ->toHtml();
 
-        return '<p>' . $buttonSignUp . '&nbsp;' . $buttonDashboard . ' - <strong>Diglin_Ricento Version: '. Mage::getConfig()->getModuleConfig('Diglin_Ricento')->version .' - Powered by <a href="http://www.diglin.com/?utm_source=magento&utm_medium=extension&utm_campaign=ricento">Diglin GmbH</a></strong></p>';
+        $buttonAuthorize  = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
+            'label'     => $this->__('API Authorization'),
+            'onclick'   => "window.open('". Mage::helper('diglin_ricento/api')->getValidationUrl() ."', '_blank');",
+            'class'     => 'go',
+            'type'      => 'button',
+            'id'        => 'ricardo-api-authorization',
+        ))
+            ->toHtml();
+
+        return '<p>' . $buttonSignUp . '&nbsp;' . $buttonDashboard . '&nbsp;' . $buttonAuthorize .' - <strong>Diglin_Ricento Version: '. Mage::getConfig()->getModuleConfig('Diglin_Ricento')->version .' - Powered by <a href="http://www.diglin.com/?utm_source=magento&utm_medium=extension&utm_campaign=ricento">Diglin GmbH</a></strong></p>';
     }
 }
