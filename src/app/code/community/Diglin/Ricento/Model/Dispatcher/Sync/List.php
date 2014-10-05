@@ -107,55 +107,82 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
         /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
         foreach ($itemCollection->getItems() as $item) {
 
+            $hasSuccess = false;
             $article = null;
             $openParameter = new OpenArticlesParameter();
             $openParameter->setInternalReferenceFilter($item->getInternalReference());
 
-            $openArticles = $sellerAccount->getServiceModel()->getOpenArticles($openParameter);
+            try {
+                $openArticles = $sellerAccount->getServiceModel()->getOpenArticles($openParameter);
+
+                /**
+                 * Get Article information from OpenArticles method
+                 */
+                if (count($openArticles['OpenArticles']) > 0) {
+                    $article = Mage::helper('diglin_ricento')->extractData($openArticles['OpenArticles'][0]); // Only one element expected but more may come
+                } else {
+                    /**
+                     * We may have missed the article Id value changes in OpenArticles method, due to sales for example
+                     * so we try to get it from sold articles method
+                     */
+                    $soldArticlesParameter = new SoldArticlesParameter();
+
+                    /**
+                     * Set date to filter e.g. last day. Do not use a higher value as the minimum sales duration is 1 day,
+                     * we prevent to have conflict with several sold articles having similar internal reference
+                     */
+                    $soldArticlesParameter
+                        ->setInternalReferenceFilter($item->getInternalReference())
+                        ->setMinimumEndDate($helper->getJsonDate(time() - (1 * 24 * 60 * 60)));
+
+                    $articles = $sellerAccount->getServiceModel()->getSoldArticles($soldArticlesParameter);
+                    if (count($articles) > 0) {
+                        $article = $helper->extractData($articles[0]);
+                    }
+                }
+
+                if ($article) {
+
+                    /**
+                     * Get the new ricardo article id if the article was planned before
+                     */
+                    if ($article->getArticleId()) {
+                        $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
+                        $this->_itemMessage = array('success' => $this->_getHelper()->__('The product has been updated to its new article id'));
+                        $item->getResource()->saveCurrentItem($item->getId(), array('is_planned' => 0, 'ricardo_Article_id' => $article->getArticleId()));
+                    }
+                }
+            } catch (Exception $e) {
+                $this->_handleException($e);
+                $e = null;
+                // keep going for the next item - no break
+            }
 
             /**
-             * Get Article information from OpenArticles method
+             * Save item information and eventual error messages
              */
-            if (count($openArticles['OpenArticles']) > 0) {
-                $article = Mage::helper('diglin_ricento')->extractData($openArticles['OpenArticles'][0]); // Only one element expected but more may come
-            } else {
-                /**
-                 * We may have missed the article Id value changes in OpenArticles method, due to sales for example
-                 * so we try to get it from sold articles method
-                 */
-                $soldArticlesParameter = new SoldArticlesParameter();
-
-                /**
-                 * Set date to filter e.g. last day. Do not use a higher value as the minimum sales duration is 1 day,
-                 * we prevent to have conflict with several sold articles having similar internal reference
-                 */
-                $soldArticlesParameter
-                    ->setInternalReferenceFilter($item->getInternalReference())
-                    ->setMinimumEndDate($helper->getJsonDate(time() - (1 * 24 * 60 * 60)));
-
-                $articles = $sellerAccount->getServiceModel()->getSoldArticles($soldArticlesParameter);
-                if (count($articles) > 0) {
-                    $article = $helper->extractData($articles[0]);
-                }
+            if (!is_null($this->_itemMessage)) {
+                $this->_getListingLog()->saveLog(array(
+                    'job_id' => $this->_currentJob->getId(),
+                    'product_title' => $item->getProductTitle(),
+                    'products_listing_id' => $this->_productsListingId,
+                    'product_id' => $item->getProductId(),
+                    'message' => $this->_jsonEncode($this->_itemMessage),
+                    'log_status' => $this->_itemStatus,
+                    'log_type' => $this->_logType
+                ));
             }
 
-            if ($article) {
-
-                /**
-                 * Get the new ricardo article id if the article was planned before
-                 */
-                if ($article->getArticleId()) {
-                    $item
-                        ->setRicardoArticleId($article->getArticleId())
-                        ->setIsPlanned(0)
-                        ->save();
-                }
-            }
-
+            /**
+             * Save the current information of the process to allow live display via ajax call
+             */
             $jobListing->saveCurrentJob(array(
                 'total_proceed' => ++$this->_totalProceed,
                 'last_item_id' => $item->getId()
             ));
+
+            $this->_itemMessage = null;
+            $this->_itemStatus = null;
         }
 
         return $this;
