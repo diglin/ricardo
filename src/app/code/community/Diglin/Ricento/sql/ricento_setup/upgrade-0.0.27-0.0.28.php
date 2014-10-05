@@ -53,25 +53,30 @@ $transactionTable = $installer->getTable('diglin_ricento/sales_transaction');
 $transaction = $installer->getConnection()->newTable($transactionTable);
 $transaction
     ->addColumn('transaction_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
-    ->addColumn('bid_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('bid_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
     ->addColumn('order_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('website_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
     ->addColumn('address_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
     ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
     ->addColumn('ricardo_customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
     ->addColumn('ricardo_article_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
     ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
-    ->addColumn('qty', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('qty', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
     ->addColumn('view_count', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true))
     ->addColumn('total_bid_price', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('nullable' => false, 'unsigned' => true, 'default' => 0))
-    ->addColumn('payment_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
+    ->addColumn('payment_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
     ->addColumn('shipping_fee', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('nullable' => false, 'unsigned' => true, 'default' => 0))
-    ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
-    ->addColumn('shipping_cumulative_fee', Varien_Db_Ddl_Table::TYPE_INTEGER, 2, array('unsigned' => true, 'nullable' => true))
-    ->addColumn('raw_data', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
+    ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
+    ->addColumn('shipping_cumulative_fee', Varien_Db_Ddl_Table::TYPE_INTEGER, 2, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('raw_data', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => false))
     ->addColumn('sold_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->setComment('Transactions done on ricardo.ch from listed articles and synced back in Magento')
+    ->addForeignKey($installer->getFkName('diglin_ricento/sales_transaction', 'address_id', 'customer/address_entity', 'entity_id'),
+        'address_id', $installer->getTable('customer/address_entity'), 'entity_id', Varien_Db_Ddl_Table::ACTION_SET_NULL, Varien_Db_Ddl_Table::ACTION_SET_NULL)
+    ->addForeignKey($installer->getFkName('diglin_ricento/sales_transaction', 'website_id', 'core/website', 'website_id'),
+        'website_id', $installer->getTable('core/website'), 'website_id', Varien_Db_Ddl_Table::ACTION_SET_NULL, Varien_Db_Ddl_Table::ACTION_SET_NULL)
     ->addForeignKey($installer->getFkName('diglin_ricento/sales_transaction', 'order_id', 'sales/order', 'entity_id'),
         'order_id', $installer->getTable('sales/order'), 'entity_id', Varien_Db_Ddl_Table::ACTION_SET_NULL, Varien_Db_Ddl_Table::ACTION_SET_NULL)
     ->addForeignKey($installer->getFkName('diglin_ricento/sales_transaction', 'customer_id', 'customer/entity', 'entity_id'),
