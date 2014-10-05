@@ -11,6 +11,8 @@
 
 class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Method_Abstract
 {
+    const CHECK_IS_RICARDO_ORDER            = 256;
+
     /**
      * unique internal payment method identifier
      *
@@ -19,18 +21,11 @@ class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Metho
     protected $_code = 'ricento';
 
     /**
-     * payment form block
-     *
-     * @var string MODULE/BLOCKNAME
-     */
-    protected $_formBlockType = 'debit/form';
-
-    /**
      * payment info block
      *
      * @var string MODULE/BLOCKNAME
      */
-    protected $_infoBlockType = 'debit/info';
+    protected $_infoBlockType = 'diglin_ricento/payment_info';
 
     /**
      * @var bool Allow capturing for this payment method
@@ -50,13 +45,16 @@ class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Metho
      */
     public function assignData($data)
     {
+        $additionalData = new Varien_Object(unserialize($data['additional_data']));
+        // @todo define info when ricardo_payment_method is provided in $data['additional_data'] (serialized array)
         $info = $this->getInfoInstance();
+
+        return parent::assignData($data);
     }
 
     /**
      * Check whether payment method can be used
      * Not allowed for frontend
-     * @todo not allowed for backend too but check that we get the data while sync
      *
      * @param Mage_Sales_Model_Quote|null $quote
      *
@@ -64,10 +62,29 @@ class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Metho
      */
     public function isAvailable($quote = null)
     {
-        if (!Mage::app()->getStore()->isAdmin()) {
-            return false;
+        if ($quote && parent::isAvailable($quote) && $this->isApplicableToQuote($quote, self::CHECK_IS_RICARDO_ORDER)) {
+            return true;
         }
 
-        return parent::isAvailable($quote);
+        return false;
+    }
+
+    /**
+     * Check whether payment method is applicable to quote
+     * Purposed to allow use in controllers some logic that was implemented in blocks only before
+     *
+     * @param Mage_Sales_Model_Quote $quote
+     * @param int|null $checksBitMask
+     * @return bool
+     */
+    public function isApplicableToQuote($quote, $checksBitMask)
+    {
+        if ($checksBitMask & self::CHECK_IS_RICARDO_ORDER) {
+            if (!$quote->getIsRicardo()) {
+                return false;
+            }
+        }
+
+        return parent::isApplicableToQuote($quote, $checksBitMask);
     }
 }
