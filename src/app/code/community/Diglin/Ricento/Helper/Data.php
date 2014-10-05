@@ -13,60 +13,71 @@ use Diglin\Ricardo\Enums\System\LanguageId;
 
 /**
  * Class Diglin_Ricento_Helper_Data
- *
- * @todo remove almost all $website and getWebsiteConfig as the configuration is not anymore on website base but default values configuration
  */
 class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    const CFG_ENABLED = 'ricento/api_config/enabled';
-    const CFG_ASSISTANT_URL = 'ricento/api_config/assistant_url';
-    const CFG_ASSISTANT_URL_DEV = 'ricento/api_config/assistant_url_dev';
-    const CFG_RICARDO_SIGNUP_API_URL = 'ricento/api_config/signup_url';
-    const CFG_DEV_MODE = 'ricento/api_config/dev_mode';
-    const CFG_DEBUG_MODE = 'ricento/api_config/debug';
-    const CFG_API_HOST = 'ricento/api_config/host';
-    const CFG_API_HOST_DEV = 'ricento/api_config/host_dev';
-    const CFG_SIMULATE_AUTH = 'ricento/api_config/simulate_authorization';
-    const CFG_RICARDO_USERNAME = 'ricento/api_config/ricardo_username';
-    const CFG_RICARDO_PASSWORD = 'ricento/api_config/ricardo_password';
-    const CFG_RICARDO_PARTNERKEY = 'ricento/api_config/partner_key_';
-    const CFG_RICARDO_PARTNERPASS = 'ricento/api_config/partner_pass_';
+    /**
+     * API config
+     */
+    const CFG_ENABLED                       = 'ricento/api_config/enabled';
+    const CFG_ASSISTANT_URL                 = 'ricento/api_config/assistant_url';
+    const CFG_ASSISTANT_URL_DEV             = 'ricento/api_config/assistant_url_dev';
+    const CFG_RICARDO_SIGNUP_API_URL        = 'ricento/api_config/signup_url';
+    const CFG_DEV_MODE                      = 'ricento/api_config/dev_mode';
+    const CFG_DEBUG_MODE                    = 'ricento/api_config/debug';
+    const CFG_API_HOST                      = 'ricento/api_config/host';
+    const CFG_API_HOST_DEV                  = 'ricento/api_config/host_dev';
+    const CFG_SIMULATE_AUTH                 = 'ricento/api_config/simulate_authorization';
+    const CFG_RICARDO_USERNAME              = 'ricento/api_config/ricardo_username';
+    const CFG_RICARDO_PASSWORD              = 'ricento/api_config/ricardo_password';
+    const CFG_RICARDO_PARTNERKEY            = 'ricento/api_config/partner_key_';
+    const CFG_RICARDO_PARTNERPASS           = 'ricento/api_config/partner_pass_';
     const CFG_EXPIRATION_NOTIFICATION_DELAY = 'ricento/api_config/expiration_notification_delay'; // in day
-    const CFG_EMAIL_NOTIFICATION = 'ricento/api_config/email_notification'; // in day
+    const CFG_EMAIL_NOTIFICATION            = 'ricento/api_config/email_notification'; // in day
 
-    const CFG_SUPPORTED_LANG = 'ricento/api_config/lang';
-    const DEFAULT_SUPPORTED_LANG = 'de';
-    const LANG_ALL = 'all';
+    const CFG_SUPPORTED_LANG                = 'ricento/api_config/lang';
+    const DEFAULT_SUPPORTED_LANG            = 'de';
+    const LANG_ALL                          = 'all';
 
-    const ALLOWED_CURRENCY = 'CHF';
+    const ALLOWED_CURRENCY                  = 'CHF';
 
-    const CFG_SHIPPING_CALCULATION = 'ricento/global/shipping_calculation';
-    const CFG_ACCOUNT_CREATION_EMAIL = 'ricento/global/account_creation';
+    /**
+     * Global config
+     */
+    const CFG_SHIPPING_CALCULATION          = 'ricento/global/shipping_calculation';
+    const CFG_ACCOUNT_CREATION_EMAIL        = 'ricento/global/email_account_creation';
+    const CFG_ORDER_CREATION_EMAIL          = 'ricento/global/email_order_creation';
+    const CFG_MERGE_ORDER                   = 'ricento/global/merge_order';
 
-    const CFG_CLEAN_JOBS_ENABLED = 'ricento/cleanup_jobs/enabled';
-    const CFG_CLEAN_JOBS_KEEP_DAYS = 'ricento/cleanup_jobs/keep_days';
+    /**
+     * Cleanup Job config
+     */
+    const CFG_CLEAN_JOBS_ENABLED            = 'ricento/cleanup_jobs/enabled';
+    const CFG_CLEAN_JOBS_KEEP_DAYS          = 'ricento/cleanup_jobs/keep_days';
 
-    const CFG_CLEAN_LISTING_LOGS_ENABLED = 'ricento/listing_logs/enabled';
-    const CFG_CLEAN_LISTING_LOGS_KEEP_DAYS = 'ricento/listing_logs/keep_days';
+    /**
+     * Listing logs config
+     */
+    const CFG_CLEAN_LISTING_LOGS_ENABLED    = 'ricento/listing_logs/enabled';
+    const CFG_CLEAN_LISTING_LOGS_KEEP_DAYS  = 'ricento/listing_logs/keep_days';
 
     /**
      * Common statuses for products listing and products listing item
      */
-    const STATUS_PENDING = 'pending';
-    const STATUS_LISTED = 'listed';
-    const STATUS_STOPPED = 'stopped';
-    const STATUS_READY = 'ready';
-    const STATUS_ERROR = 'error';
+    const STATUS_PENDING    = 'pending';
+    const STATUS_LISTED     = 'listed';
+    const STATUS_STOPPED    = 'stopped';
+    const STATUS_READY      = 'ready';
+    const STATUS_ERROR      = 'error';
+    const STATUS_SOLD       = 'sold';
 
-    const STATUS_SOLD = 'sold';
+    const LOG_FILE          = 'ricento.log';
 
-    const LOG_FILE = 'ricento.log';
-
-    const RICARDO_URL = 'http://www.ricardo.ch';
+    const RICARDO_URL       = 'http://www.ricardo.ch';
     const RICARDO_URL_HELP_PROMOTION = 'http://www.ricardo.ch/ueber-uns/gebühren/einstelloptionen'; //@todo make it for french too
 
     const NODE_DISPATCHER_TYPES = 'global/ricento/dispatcher/types';
-    const NODE_PRODUCT_TYPES = 'global/ricento/allow_product_types';
+    const NODE_PRODUCT_TYPES    = 'global/ricento/allow_product_types';
 
     /**
      * @var Mage_Directory_Model_Currency

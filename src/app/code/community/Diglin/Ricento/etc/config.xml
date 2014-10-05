@@ -35,7 +35,9 @@
                 <lang>de,fr</lang>
             </api_config>
             <global>
-                <account_creation>0</account_creation>
+                <email_account_creation>0</email_account_creation>
+                <email_order_creation>0</email_order_creation>
+                <merge_order>1</merge_order>
                 <shipping_calculation>highest_price</shipping_calculation>
             </global>
             <cleanup_jobs>

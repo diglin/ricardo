@@ -225,25 +225,49 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <account_creation module="diglin_ricento" translate="label comment">
-                            <label>Send Confirmation Email</label>
+                        <merge_order module="diglin_ricento" translate="label comment">
+                            <label>Merge Order</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[Do you want to send a confirmation email to a customer when his account is created thanks to the Ricardo API]]></comment>
-                            <sort_order>1</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </account_creation>
-                        <shipping_calculation module="diglin_ricento" translate="label">
-                            <label>Shipping Calculation</label>
+                            <comment><![CDATA[If a customer order several products in a period of 30 minutes, do you want to merge the ricardo transaction in one order?]]></comment>
                             <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </merge_order>
+                        <shipping_calculation module="diglin_ricento" translate="label comment">
+                            <label>Shipping Calculation</label>
+                            <sort_order>20</sort_order>
                             <frontend_type>select</frontend_type>
                             <source_model>diglin_ricento/config_source_rules_shipping_calculation</source_model>
+                            <comment><![CDATA[You can decide how do you want to calculate the shipping cost when an order merge several bought products by a customer.<br>
+                            "Highest Price": it will find which product has the highest cost for the shipping and will take only this one for the calculation.<br>
+                            "Cumulative": it will calculate the shipping cost based on the configuration you did in the products listing for each article and will combine them.
+                            ]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </shipping_calculation>
+                        <email_account_creation module="diglin_ricento" translate="label comment">
+                            <label>Send Account Creation Confirmation Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Do you want to send a confirmation email to a customer when his account is created thanks to the Ricardo API?]]></comment>
+                            <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </shipping_calculation>
+                        </email_account_creation>
+                        <email_order_creation module="diglin_ricento" translate="label comment">
+                            <label>Send Email for new order</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Do you want to send the newly order created by email to a customer when the order is created thanks to the Ricardo API?]]></comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email_order_creation>
                     </fields>
                 </global>
                 <cleanup_jobs module="diglin_ricento" translate="label comment">
