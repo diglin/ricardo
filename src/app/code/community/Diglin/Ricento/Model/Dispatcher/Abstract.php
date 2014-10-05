@@ -58,7 +58,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     /**
      * @var string
      */
-    protected $_itemMessage;
+    protected $_itemMessage = null;
 
     /**
      * @var int
@@ -252,8 +252,8 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 
                 $this->_proceedAfter();
 
-                unset($this->_currentJob);
-                unset($this->_currentJobListing);
+                $this->_currentJob = null;
+                $this->_currentJobListing = null;
             }
         } catch (Exception $e) {
             Mage::logException($e);
