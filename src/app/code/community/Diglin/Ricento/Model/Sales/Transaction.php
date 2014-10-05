@@ -14,6 +14,7 @@
  *
  * @method int getBidId()
  * @method int getOrderId()
+ * @method int getWebsiteId()
  * @method int getAddressId()
  * @method int getCustomerId()
  * @method int getRicardoCustomerId()
@@ -27,12 +28,13 @@
  * @method int      getShippingMethod()
  * @method int      getShippingCumulativeFee()
  * @method string getRawData()
- * @method string getSoldAT()
+ * @method string getSoldAt()
  * @method string getUpdateAt()
  * @method string getCreatedAt()
  *
  * @method Diglin_Ricento_Model_Sales_Transaction setBidId(int $bidId)
  * @method Diglin_Ricento_Model_Sales_Transaction setOrderId(int $orderId)
+ * @method Diglin_Ricento_Model_Sales_Transaction setWebsiteId(int $websiteId)
  * @method Diglin_Ricento_Model_Sales_Transaction setAddressId(int $addressId)
  * @method Diglin_Ricento_Model_Sales_Transaction setCustomerId(int $customerId)
  * @method Diglin_Ricento_Model_Sales_Transaction setRicardoCustomerId(int $ricardoCustomerId)

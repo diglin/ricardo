@@ -62,6 +62,11 @@ class Diglin_Ricento_Model_Observer
         /**
          * @todo implement logic to reduce inventory on ricardo side when inventory decrease after a non ricardo order
          */
+
+        /**
+         * 1. Is Product part of a listed products listing
+         * 2. Update the quantity on ricardo side
+         */
     }
 
     /**

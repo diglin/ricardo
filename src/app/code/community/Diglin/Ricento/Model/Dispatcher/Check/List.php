@@ -90,7 +90,7 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
                 $this->_itemMessage = $itemValidator->getMessages();
                 $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
 
-                // @todo item validator doesn't set success at the moment
+                // item validator doesn't send back success at the moment
                 if (empty($itemValidator->getWarnings()) && empty($itemValidator->getErrors())) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_jobHasSuccess = true;
