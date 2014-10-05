@@ -14,6 +14,10 @@
  */
 class Diglin_Ricento_Model_Config_Source_Rules_Shipping_Calculation
 {
+    const HIGHEST_PRICE = 'highest_price';
+
+    const CUMULATIVE = 'cumulative';
+
     /**
      * Create option array to display the list of possible options for shipping calculation
      *
@@ -26,11 +30,11 @@ class Diglin_Ricento_Model_Config_Source_Rules_Shipping_Calculation
         return array(
 
             array(
-                'value' => 'highest_price' ,
+                'value' => self::HIGHEST_PRICE,
                 'label' => $helper->__('Highest Price')
             ),
             array(
-                'value' => 'cumulative' ,
+                'value' => self::CUMULATIVE,
                 'label' => $helper->__('Cumulative')
             )
         );
