@@ -63,4 +63,20 @@ class Diglin_Ricento_Model_Observer
          * @todo implement logic to reduce inventory on ricardo side when inventory decrease after a non ricardo order
          */
     }
+
+    /**
+     * Event
+     * - adminhtml_block_html_before
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function disableFormField(Varien_Event_Observer $observer)
+    {
+        $block = $observer->getEvent()->getBlock();
+
+        if ($block instanceof Mage_Adminhtml_Block_Customer_Edit_Tab_Account) {
+            $block->getForm()->getElement('ricardo_username')->setDisabled(true);
+            $block->getForm()->getElement('ricardo_customer_id')->setDisabled(true);
+        }
+    }
 }

@@ -59,6 +59,7 @@
             </payment>
         </default>
     </default>
+
     <global>
         <psr0_namespaces>
             <!-- Required to load the Ricardo PHP library -->
@@ -245,6 +246,17 @@
                 </diglin_ricento>
             </modules>
         </translate>
+
+        <events>
+            <adminhtml_block_html_before>
+                <observers>
+                    <ricardo_customer_fields>
+                        <class>Diglin_Ricento_Model_Observer</class>
+                        <method>disableFormField</method>
+                    </ricardo_customer_fields>
+                </observers>
+            </adminhtml_block_html_before>
+        </events>
     </adminhtml>
 
     <admin>
