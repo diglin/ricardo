@@ -49,13 +49,6 @@ class SellerAccountTest extends TestAbstract
 
     protected function tearDown()
     {
-//        $closeParameter = new CloseArticleParameter();
-//        $closeParameter
-//            ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken())
-//            ->setArticleId($this->_articleId);
-//
-//        $this->_sellManager->closeArticle($closeParameter);
-
         //@todo remove the template
 
         parent::tearDown();
@@ -76,7 +69,7 @@ class SellerAccountTest extends TestAbstract
         //$result = $this->_sellerAccountManager->getArticleModificationAllowed(0);
     }
 
-    public function totoGetArticle()
+    public function testGetArticle()
     {
         $sell = new Sell($this->getServiceManager());
         $result = $sell->insertArticle($this->getArticle(false, true, true));
@@ -100,7 +93,7 @@ class SellerAccountTest extends TestAbstract
         $sell->closeArticle($closeParameter);
     }
 
-    public function totoGetArticles()
+    public function testGetArticles()
     {
         $articles = array();
 
@@ -179,7 +172,7 @@ class SellerAccountTest extends TestAbstract
     }
 
     /**
-     * @todo difficult to test it, help to debug but lots of things must be dne manually
+     * @todo difficult to test it, help to debug but lots of things must be done manually
      */
     public function testGetSoldArticle()
     {
@@ -199,11 +192,12 @@ class SellerAccountTest extends TestAbstract
             ->setInternalReferenceFilter(null)
             ->setLastnameFilter(null)
             ->setNicknameFilter(null)
-            ->setIsCompletedTransaction(false);
+            ->setIsCompletedTransaction(false)
+            ->setPageSize(5);
 
         $result = $this->_sellerAccountManager->getSoldArticles($articleParameter);
 
-        parent::outputContent($result, 'Get Sold Articles: ');
+        parent::outputContent($result, 'Get Sold Articles: ', true);
 
         $this->assertArrayHasKey('TotalLines', $result, 'Total Lines result is not returned');
         $this->assertArrayHasKey('SoldArticles', $result, 'Sold Articles result is not returned');

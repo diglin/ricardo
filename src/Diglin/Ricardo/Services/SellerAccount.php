@@ -443,8 +443,8 @@ class SellerAccount extends ServiceAbstract
      */
     public function getSoldArticlesResult(array $data)
     {
-        if (isset($data['GetSoldArticlesResult'])) {
-            return $data['GetSoldArticlesResult'];
+        if (isset($data['GetSoldArticlesResult']) && isset($data['GetSoldArticlesResult']['SoldArticles'])) {
+            return $data['GetSoldArticlesResult']['SoldArticles'];
         }
         return array();
     }
