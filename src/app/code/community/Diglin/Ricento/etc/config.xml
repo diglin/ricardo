@@ -332,4 +332,8 @@
             </ricento_async_jobs>
         </jobs>
     </crontab>
+
+    <uninstall>
+        <filename>uninstall.txt</filename>
+    </uninstall>
 </config>
