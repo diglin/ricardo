@@ -15,7 +15,7 @@ $installer->startSetup();
 
 $productsListingTable = $installer->getTable('diglin_ricento/products_listing');
 $storeTable = $installer->getTable('core/store');
-$languages = array('fr','de'); //Mage::helper('diglin_ricento')->getSupportedLang();
+$languages = array('fr','de'); //Mage::helper('diglin_ricento')->getSupportedLang(); // helper not working in this context!!!
 
 foreach ($languages as $lang) {
     if (empty($lang)) {

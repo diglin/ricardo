@@ -23,4 +23,4 @@ Base image, picture set as part of the gallery in Magento backend and not disabl
 ## Why do I have to authorise the API to get access to the extension?
 
 For security reasons, the API token is valid 2 weeks at the time of writting and will be prolongate until 2 months in future. It means you have to authorize and validate that
-you are the owner of the API. A message will be displayed in the Magento backend or an email sent when the API token is not anymore available valid.
+you are the owner of the API. A message will be displayed in the Magento backend or an email sent when the API token is not anymore valid.
