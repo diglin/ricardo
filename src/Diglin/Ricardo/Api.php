@@ -36,7 +36,7 @@ class Api implements ApiInterface
     /**
      * @var string
      */
-    protected $_partnerId;
+    protected $_partnerKey;
 
     /**
      * @var bool
@@ -56,7 +56,7 @@ class Api implements ApiInterface
     public function __construct(ConfigInterface $config)
     {
         $this->_config = $config;
-        $this->_username = $this->_partnerId = $config->getPartnershipId();
+        $this->_username = $this->_partnerKey = $config->getPartnershipKey();
 
         if ($config->get('debug')) {
             $this->_debug = $config->get('debug');
@@ -93,7 +93,8 @@ class Api implements ApiInterface
         $result = json_decode($return, true);
 
         if ($this->_debug) {
-            $this->_lastDebug[] = array(
+            // It may take too much memory here as some parameter are pictures bytes
+            $this->_lastDebug = array(
                 'curl_options' => $curlOptions,
                 'params' => print_r($params, true),
                 'return' => $return
@@ -140,7 +141,7 @@ class Api implements ApiInterface
     }
 
     /**
-     * Username is in fact the API token but we call it username
+     * Username is in fact the API key but we call it username
      * to be homogeneous with the header naming convention
      *
      * @param mixed $username
@@ -208,7 +209,7 @@ class Api implements ApiInterface
      */
     public function revertUsername()
     {
-        $this->_username = $this->_partnerId;
+        $this->_username = $this->_partnerKey;
         return $this;
     }
 }

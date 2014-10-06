@@ -47,6 +47,7 @@ class Helper
         if (is_null($unixTimestamp)) {
             $unixTimestamp = time();
         }
+
         return '/Date(' . ($unixTimestamp  * 1000) . date('O') . ')/';
     }
 

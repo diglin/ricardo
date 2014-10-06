@@ -87,7 +87,7 @@ Pay attention, you need two different configurations for each interface language
 ```
 [GERMAN]
 host = ws.betaqxl.com
-partnership_id = YOUR_PARTNER_ID
+partnership_key = YOUR_PARTNER_KEY
 partnership_passwd = YOUR_PARTNER_PASS
 partner_url = YOUR_WEBSITE_URL
 allow_authorization_simulation = true
@@ -98,7 +98,7 @@ display_test_content = true
 
 [FRENCH]
 host = ws.betaqxl.com
-partnership_id = YOUR_PARTNER_ID
+partnership_key = YOUR_PARTNER_KEY
 partnership_passwd = YOUR_PARTNER_PASS
 partner_url = YOUR_WEBSITE_URL
 allow_authorization_simulation = true

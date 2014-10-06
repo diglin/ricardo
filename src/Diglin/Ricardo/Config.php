@@ -31,10 +31,10 @@ class Config extends \Zend_Config implements ConfigInterface
     {
         parent::__construct($array, $allowModifications);
 
-        if (!$this->getHost() || !$this->getPartnershipId() || !$this->getPartnershipPasswd())
+        if (!$this->getHost() || !$this->getPartnershipKey() || !$this->getPartnershipPasswd())
         {
             throw new \Exception(
-                sprintf('Default Configuration values are missing: host %s, partnership ID %s or partnership Password %s. Please fix it!', $this->getHost(), $this->getPartnershipId(), $this->getPartnershipPasswd())
+                sprintf('Default Configuration values are missing: host %s, partnership ID %s or partnership Password %s. Please fix it!', $this->getHost(), $this->getPartnershipKey(), $this->getPartnershipPasswd())
             );
         }
     }
@@ -47,14 +47,14 @@ class Config extends \Zend_Config implements ConfigInterface
     }
 
     /**
-     * Partnership ID and Username are the same but Ricardo
-     * provides the partnership ID and you have to use it as a username in HTTP header
+     * Partnership Key and Username are the same but Ricardo
+     * provides the partnership Key and you have to use it as a username in HTTP header
      *
      * @return string
      */
-    public function getPartnershipId()
+    public function getPartnershipKey()
     {
-        return $this->get('partnership_id');
+        return $this->get('partnership_key');
     }
 
     /**

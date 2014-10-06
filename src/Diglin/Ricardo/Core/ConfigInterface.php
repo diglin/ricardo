@@ -24,7 +24,7 @@ interface ConfigInterface
      *
      * @return mixed
      */
-    public function getPartnershipId();
+    public function getPartnershipKey();
 
     /**
      * Get the Partnership Password configuration
