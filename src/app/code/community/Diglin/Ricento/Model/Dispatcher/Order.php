@@ -134,8 +134,6 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
      */
     public function getSoldArticles($articleIds = array())
     {
-        $helper = Mage::helper('diglin_ricento');
-
         $soldArticlesParameter = new SoldArticlesParameter();
 
         /**
@@ -144,7 +142,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
          */
         $soldArticlesParameter
             ->setArticleIdsFilter($articleIds)
-            ->setMinimumEndDate($helper->getJsonDate(time() - (3 * 24 * 60 * 60))); //@todo revert to 3 days
+            ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (3 * 24 * 60 * 60))); //@todo revert to 3 days
 
         $sellerAccountService = Mage::getSingleton('diglin_ricento/api_services_selleraccount');
         $soldArticles = $sellerAccountService->getServiceModel()->getSoldArticles($soldArticlesParameter);
@@ -152,7 +150,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         foreach ($soldArticles as $soldArticle) {
 
             $rawData = $soldArticle;
-            $soldArticle = $helper->extractData($soldArticle);
+            $soldArticle = $this->_getHelper()->extractData($soldArticle);
             $transaction = $soldArticle->getTransaction();
 
             $listing = $this->_getListing();
@@ -233,7 +231,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                         $customer->addAddress($address);
                     }
                 } else {
-                    throw new Exception($helper->__('Customer creation failed! Ricardo transaction cannot be added.'));
+                    throw new Exception($this->_getHelper()->__('Customer creation failed! Ricardo transaction cannot be added.'));
                 }
 
                 /**
@@ -256,7 +254,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     ->setTotalBidPrice($soldArticle->getWinningBidPrice())
                     ->setProductId($extractedInternReference->getProductId())
                     ->setRawData(Mage::helper('core')->jsonEncode($rawData))
-                    ->setSoldAt($helper->getJsonTimestamp($soldArticle->getEndDate()))
+                    ->setSoldAt($this->_getHelper()->getJsonTimestamp($soldArticle->getEndDate()))
                     ->save();
             }
         }
