@@ -11,6 +11,11 @@
 class Diglin_Ricento_Helper_Price extends Mage_Core_Helper_Abstract
 {
     /**
+     * @var string
+     */
+    protected $_oldCurrency = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
+
+    /**
      * Format the price with the ricardo supported currencies
      *
      * @param float $value
