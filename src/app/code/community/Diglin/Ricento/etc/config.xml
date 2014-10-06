@@ -37,8 +37,7 @@
                 <email_notification>1</email_notification>
                 <!-- it's only possible one day before -->
                 <expiration_notification_delay>1</expiration_notification_delay>
-                <host>ws.betaqxl.com</host>
-                <!-- @todo change with the production host -->
+                <host>ws.ricardo.ch</host>
                 <host_dev>ws.betaqxl.com</host_dev>
                 <lang>de,fr</lang>
             </api_config>
@@ -99,7 +98,7 @@
             <types>
                 <ricardo_api translate="label,description" module="diglin_ricento">
                     <label>Ricardo API</label>
-                    <description>Cache content when Ricardo API is called</description>
+                    <description><![CDATA[Cache Ricardo API content (category, system info, payment & shipping info, etc) when called.]]></description>
                     <tags>RICARDO_API</tags>
                 </ricardo_api>
             </types>
