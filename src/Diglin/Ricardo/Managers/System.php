@@ -60,6 +60,11 @@ class System extends ManagerAbstract
     /**
      * @var array
      */
+    protected $_countryIsoCode;
+
+    /**
+     * @var array
+     */
     protected $_deliveryConditions;
 
     /**
@@ -196,10 +201,19 @@ class System extends ManagerAbstract
      */
     public function getCountries()
     {
-        if (empty($this->_categories)) {
-            $this->_categories = $this->_proceed('Countries');
+        if (empty($this->_countries)) {
+            $this->_countries = $this->_proceed('Countries');
         }
-        return $this->_categories;
+        return $this->_countries;
+    }
+
+    /**
+     * @param string $ip
+     * @return array
+     */
+    public function getCountryIso($ip)
+    {
+         return $this->_proceed('CountryIso', $ip);
     }
 
     /**

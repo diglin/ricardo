@@ -355,13 +355,13 @@ class System extends ServiceAbstract
      * @param string $ip
      * @return array
      */
-//    public function getCountryIso($ip)
-//    {
-//        return array(
-//            'method' => 'GetCountryIso',
-//            'params' => array('getCountryIsoParameter' => array('IpAddress' => $ip))
-//        );
-//    }
+    public function getCountryIso($ip)
+    {
+        return array(
+            'method' => 'GetCountryIso',
+            'params' => array('countryIsoParameter' => array('IpAddress' => $ip))
+        );
+    }
 
     /**
      * Gets the 2 letter country ISO result
@@ -385,14 +385,14 @@ class System extends ServiceAbstract
      * @param array $data
      * @return array
      */
-//    public function getCountryIsoResult(array $data)
-//    {
-//        if (isset($data['GetCountryIsoResult']) && isset($data['GetCountryIsoResult']['CountryIso'])) {
-//            return $data['GetCountryIsoResult']['CountryIso'];
-//        }
-//
-//        return array();
-//    }
+    public function getCountryIsoResult(array $data)
+    {
+        if (isset($data['GetCountryIsoResult']) && isset($data['GetCountryIsoResult']['CountryIso'])) {
+            return $data['GetCountryIsoResult']['CountryIso'];
+        }
+
+        return array();
+    }
 
     /**
      * Gets the delivery conditions.

@@ -65,7 +65,7 @@ class SoldArticlesParameter extends ParameterAbstract
      *
      * @var bool
      */
-    protected $_isCompletedTransaction = null;
+    protected $_isCompletedTransaction = false;
 
     /**
      * Optional
