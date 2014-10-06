@@ -121,6 +121,19 @@ class SystemTest extends TestAbstract
 
         $this->assertGreaterThanOrEqual(10, count($result), 'No country found');
         $this->assertArrayHasKey('CountryId', $result[0], 'Country data structure is wrong');
+
+        self::outputContent($result, 'Countries: ');
+    }
+
+    public function testGetCountryIso()
+    {
+//        $result = $this->_systemManager->getCountryIso();
+//
+//        self::outputContent($result, 'Country Iso Code: ');
+//
+//        $this->assertGreaterThanOrEqual(10, count($result), 'No country found');
+//        $this->assertArrayHasKey('CountryId', $result[0], 'Country data structure is wrong');
+
     }
 
     public function testGetDeliveryConditions()
