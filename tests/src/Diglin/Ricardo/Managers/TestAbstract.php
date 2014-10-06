@@ -237,8 +237,8 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             ->setPaymentDescription($this->_generateRandomString(2000))
             ->setWarrantyDescription($this->_generateRandomString(2000));
 
-
-        $filename = '../../../media/pictures/22-syncmaster-lcd-monitor.jpg';
+        $imageContent = '';
+        $filename = __DIR__ . '/../../../media/pictures/22-syncmaster-lcd-monitor.jpg';
 
         if (file_exists($filename)) {
             $imageContent = array_values(unpack('C*', file_get_contents($filename)));
