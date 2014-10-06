@@ -10,6 +10,3 @@ src/app/locale/en_US/template/email/ricento app/locale/en_US/template/email/rice
 
 src/app/locale/fr_FR/Diglin_Ricento.csv app/locale/fr_FR/Diglin_Ricento.csv
 src/app/locale/fr_FR/template/email/ricento app/locale/fr_FR/template/email/ricento
-
-# Import the ricardo PHP lib via modman
-@import lib/ricardo
