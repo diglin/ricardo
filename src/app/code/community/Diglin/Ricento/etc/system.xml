@@ -58,16 +58,45 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>0</show_in_store>
                     <fields>
+
+                        <general_api_config module="diglin_ricento" translate="label">
+                            <label>General API Config</label>
+                            <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
+                            <comment><![CDATA[Enable the ricardo extension for this website]]></comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </general_api_config>
                         <enabled module="diglin_ricento" translate="label comment">
-                            <label>Enabled for this Website</label>
+                            <label>Ricardo Extension enabled</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>1</sort_order>
+                            <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </enabled>
-
+                        <dev_mode module="diglin_ricento" translate="label comment">
+                            <label>Development Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[If you enable this configuration, all API requests will be send to the Ricardo Sandbox instead to use the production servers. Be aware, you have to provide others partner Keys and Passwords specific for dev environment below.]]></comment>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </dev_mode>
+                        <debug module="diglin_ricento" translate="label comment">
+                            <label>Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Write into the var/log/ricento.log file all requests sent to the Ricardo API. Enable it to help us to suppport you and send this file to us if you have an issue. Your passwords will be anonymized.]]></comment>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </debug>
                         <!--<simulate_authorization module="diglin_ricento" translate="label comment">-->
                             <!--<label>Automatize API Authorization</label>-->
                             <!--<frontend_type>select</frontend_type>-->
@@ -124,7 +153,11 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
                         </api_de>
+                        <!-- PRODUCTION -->
                         <partner_key_de module="diglin_ricento" translate="label comment">
                             <label>German Partner Key</label>
                             <frontend_type>text</frontend_type>
@@ -133,7 +166,11 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[Partner ID has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                                <dev_mode>0</dev_mode>
+                            </depends>
                         </partner_key_de>
                         <partner_pass_de module="diglin_ricento" translate="label comment">
                             <label>German Partner Password</label>
@@ -145,7 +182,42 @@
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                                <dev_mode>0</dev_mode>
+                            </depends>
                         </partner_pass_de>
+
+                        <!-- DEVELOPMENT -->
+                        <partner_key_dev_de module="diglin_ricento" translate="label comment">
+                            <label>DEV German Partner Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <!--<frontend_class>required-entry</frontend_class>-->
+                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                                <dev_mode>1</dev_mode>
+                            </depends>
+                        </partner_key_dev_de>
+                        <partner_pass_dev_de module="diglin_ricento" translate="label comment">
+                            <label>DEV German Partner Password</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <!--<frontend_class>required-entry</frontend_class>-->
+                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                                <dev_mode>1</dev_mode>
+                            </depends>
+                        </partner_pass_dev_de>
 
                         <api_fr module="diglin_ricento" translate="label">
                             <label>French API Token</label>
@@ -154,7 +226,11 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
                         </api_fr>
+                        <!-- PRODUCTION -->
                         <partner_key_fr module="diglin_ricento" translate="label comment">
                             <label>French Partner Key</label>
                             <frontend_type>text</frontend_type>
@@ -163,7 +239,11 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[Partner ID has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                                <dev_mode>0</dev_mode>
+                            </depends>
                         </partner_key_fr>
                         <partner_pass_fr module="diglin_ricento" translate="label comment">
                             <label>French Partner Password</label>
@@ -175,16 +255,43 @@
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                                <dev_mode>0</dev_mode>
+                            </depends>
                         </partner_pass_fr>
-
-                        <general_api_config module="diglin_ricento" translate="label">
-                            <label>General API Config</label>
-                            <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
-                            <sort_order>50</sort_order>
+                        <!-- DEVELOPMENT -->
+                        <partner_key_dev_fr module="diglin_ricento" translate="label comment">
+                            <label>DEV French Partner Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </general_api_config>
+                            <!--<frontend_class>required-entry</frontend_class>-->
+                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                                <dev_mode>1</dev_mode>
+                            </depends>
+                        </partner_key_dev_fr>
+                        <partner_pass_dev_fr module="diglin_ricento" translate="label comment">
+                            <label>DEV French Partner Password</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <!--<frontend_class>required-entry</frontend_class>-->
+                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                                <dev_mode>1</dev_mode>
+                            </depends>
+                        </partner_pass_dev_fr>
+
+                        <!-- @todo -->
                         <!--<email_notification module="diglin_ricento" translate="label comment">-->
                             <!--<label>Notification API Token Expiration</label>-->
                             <!--<frontend_type>select</frontend_type>-->
@@ -195,26 +302,6 @@
                             <!--<show_in_website>1</show_in_website>-->
                             <!--<show_in_store>0</show_in_store>-->
                         <!--</email_notification>-->
-                        <dev_mode module="diglin_ricento" translate="label comment">
-                            <label>Development Mode</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[If you enable tihs configuration, all API requests will be send to the Ricardo Sandbox instead to use the production servers. Be aware, you have to provide others partner IDs and Passwords specific for dev environment.]]></comment>
-                            <sort_order>70</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </dev_mode>
-                        <debug module="diglin_ricento" translate="label comment">
-                            <label>Debug</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[Write into the var/log/ricento.log file all requests sent to the Ricardo API. Enable it to help us to suppport you and send this file to us if you have an issue. Your passwords will be anonymized.]]></comment>
-                            <sort_order>70</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </debug>
                     </fields>
                 </api_config>
 
