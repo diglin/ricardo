@@ -39,7 +39,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     /**
      * @var int
      */
-    protected $_currentWebsite = 0;
+    protected $_currentWebsite = Mage_Core_Model_App::ADMIN_STORE_ID;
 
     /**
      * @var string
@@ -66,10 +66,6 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
      */
     public function getCurrentWebsite()
     {
-//        $registryProductListing = Mage::registry('products_listing');
-//        if ($registryProductListing instanceof Diglin_Ricento_Model_Products_Listing && $registryProductListing->getWebsiteId()) {
-//            $this->_currentWebsite = $registryProductListing->getWebsiteId();
-//        }
         return Mage::app()->getWebsite($this->_currentWebsite);
     }
 
@@ -97,8 +93,10 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
      */
     public function getServiceManager()
     {
+        $helper = Mage::helper('diglin_ricento');
+
         if (!Mage::registry('ricardo_api_lang')) {
-            Mage::register('ricardo_api_lang', Diglin_Ricento_Helper_Data::DEFAULT_SUPPORTED_LANG);
+            Mage::register('ricardo_api_lang', $helper->getDefaultSupportedLang());
         }
 
         $website = $this->getCurrentWebsite();
@@ -107,7 +105,6 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
         $registryKey = $this->_registryKey . ucwords($lang) . $website->getId();
 
         if (!Mage::registry($registryKey)) {
-            $helper = Mage::helper('diglin_ricento');
 
             if (!$helper->isConfigured($website)) {
                 Mage::throwException($helper->__('Ricardo API Credentials are not configured. Please, configure the extension before to proceed.'));

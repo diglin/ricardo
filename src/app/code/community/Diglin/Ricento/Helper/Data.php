@@ -233,8 +233,9 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getPartnerKey($lang = null, $website = 0)
     {
+        $dev = ($this->isDevMode($website)) ? 'dev_' : '';
         $lang = $this->_getLocaleCodeForApiConfig($lang);
-        return self::getWebsiteConfig(self::CFG_RICARDO_PARTNERKEY . $lang, $website);
+        return self::getWebsiteConfig(self::CFG_RICARDO_PARTNERKEY . $dev . $lang, $website);
     }
 
     /**
@@ -246,8 +247,9 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getPartnerPass($lang = null, $website = 0)
     {
+        $dev = ($this->isDevMode($website)) ? 'dev_' : '';
         $lang = $this->_getLocaleCodeForApiConfig($lang);
-        return Mage::helper('core')->decrypt(self::getWebsiteConfig(self::CFG_RICARDO_PARTNERPASS . $lang, $website));
+        return Mage::helper('core')->decrypt(self::getWebsiteConfig(self::CFG_RICARDO_PARTNERPASS. $dev . $lang, $website));
     }
 
     /**
@@ -314,6 +316,21 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         return $langId;
+    }
+
+    /**
+     * Get the default supported lang depending if the partner key is set or not
+     * @return string
+     */
+    public function getDefaultSupportedLang()
+    {
+        foreach($this->getSupportedLang() as $lang) {
+            if ($this->getPartnerKey($lang)) {
+                return $lang;
+            }
+        }
+
+        return self::DEFAULT_SUPPORTED_LANG;
     }
 
     /**
