@@ -67,8 +67,10 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
         if (!empty($data['sales_options']['stock_management_use_inventory'])) {
             $data['sales_options']['stock_management'] = -1;
         }
-        if (!empty($data['sales_options']['sales_auction_direct_buy'])) {
+        if (!empty($data['sales_options']['sales_auction_direct_buy'])
+            && $data['sales_options']['sales_type'] == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION) {
             $data['sales_options']['stock_management'] = 1;
+            $this->_getSession()->addNotice($this->__('Stock quantity set to 1 because auction sales type with direct buy option does not allow more than one article to be sold'));
         }
         if (!empty($data['sales_options']['schedule_date_start_immediately'])) {
             $data['sales_options']['schedule_date_start'] = null;

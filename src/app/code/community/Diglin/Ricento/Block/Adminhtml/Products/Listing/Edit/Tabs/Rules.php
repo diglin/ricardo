@@ -95,8 +95,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
 //        ));
         $fieldsetShipping->addField('shipping_cumulative_fee', 'checkbox', array(
             'name'    => 'rules[shipping_cumulative_fee]',
-            'label'   => $this->__('Split Shipping fee'),
-            'note'  => $this->__('If you select this option, the shipping fee will be calculate for each sold product. Let it empty if you don\'t such an option.')
+            'label'   => $this->__('Is Shipping fee cumulative'),
+            'note'  => $this->__('If you select this option, the shipping fee will be calculate for each sold product.')
+                . $this->__('e.g. an article is sold with a quantity of 3 to one customer and the shipping fee is 15 CHF. Total Shipping fee is 45 CHF. Let it empty if you don\'t such an option.')
         ));
         $fieldsetShipping->addField('shipping_availability', 'select', array(
             'name'    => 'rules[shipping_availability]',
