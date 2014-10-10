@@ -9,6 +9,8 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
+use \Diglin\Ricardo\Enums\PaymentMethods;
+
 /**
  * Class Diglin_Ricento_Model_Config_Source_Rules_Payment
  */
@@ -30,7 +32,7 @@ class Diglin_Ricento_Model_Config_Source_Rules_Payment extends Diglin_Ricento_Mo
             foreach ($paymentMethodsConditions as $paymentMethodsCondition)
                 if (isset($paymentMethodsCondition['PaymentMethods'])) {
                     foreach ($paymentMethodsCondition['PaymentMethods'] as $method) {
-                        if (!$creditCardAvailable && $method['PaymentMethodId'] == \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD) {
+                        if (!$creditCardAvailable && $method['PaymentMethodId'] == PaymentMethods::TYPE_CREDIT_CARD) {
                             continue;
                         }
                         $this->_paymentMethodsConditions[$method['PaymentMethodId']] = $method['PaymentMethodText'];
