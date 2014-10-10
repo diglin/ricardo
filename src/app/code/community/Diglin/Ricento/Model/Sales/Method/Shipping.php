@@ -41,6 +41,8 @@ class Diglin_Ricento_Model_Sales_Method_Shipping extends Mage_Shipping_Model_Car
         /**
          * @todo finish to implement if needed
          * Be aware the packages can have DeliveryCost value but also subpackages
+         *
+         * At the moment, we do not use those values as we get the shipping information and payment from the ricardo API
          */
 
         $packages = Mage::getSingleton('diglin_ricento/config_source_rules_shipping_packages')->toOptionHash();
