@@ -35,7 +35,7 @@ class Diglin_Ricento_Model_Cron
             return;
         }
 
-        ini_set('memory_limit', 512);
+        ini_set('memory_limit', '512M');
 
         //** Launch Pending Jobs
 
@@ -55,7 +55,7 @@ class Diglin_Ricento_Model_Cron
             return;
         }
 
-        ini_set('memory_limit', 512);
+        ini_set('memory_limit', '512M');
 
         foreach ($this->_asyncProcess as $jobType) {
             $this->dispatch($jobType);
