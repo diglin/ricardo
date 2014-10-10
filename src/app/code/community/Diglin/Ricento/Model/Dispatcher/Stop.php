@@ -70,7 +70,7 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
                     $this->_itemMessage = array('success' => $this->_getHelper()->__('The product has been removed from ricardo.ch'));
                     $hasSuccess = true;
                     ++$this->_totalSuccess;
-                    $item->getResource()->saveCurrentItem($item->getId(), array('is_planned' => null, 'qty_inventory' => null, 'status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED));
+                    $item->getResource()->saveCurrentItem($item->getId(), array('ricardo_article_id' => null, 'is_planned' => null, 'qty_inventory' => null, 'status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED));
                 } else {
                     ++$this->_totalError;
                     $this->_jobHasError = true;
