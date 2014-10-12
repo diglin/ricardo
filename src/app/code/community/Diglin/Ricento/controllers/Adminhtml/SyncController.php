@@ -1,14 +1,14 @@
 <?php
+
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-
 class Diglin_Ricento_Adminhtml_SyncController extends Mage_Adminhtml_Controller_Action
 {
     /**
@@ -38,8 +38,8 @@ class Diglin_Ricento_Adminhtml_SyncController extends Mage_Adminhtml_Controller_
      */
     public function progressAjaxAction()
     {
-        $jobId = (int) $this->getRequest()->getParam('jobid');
-        $isAjax = (bool) ($this->getRequest()->getQuery('isAjax', false) || $this->getRequest()->getQuery('ajax', false));
+        $jobId = (int)$this->getRequest()->getParam('jobid');
+        $isAjax = (bool)($this->getRequest()->getQuery('isAjax', false) || $this->getRequest()->getQuery('ajax', false));
         $percentDone = 0;
         $response = array();
 

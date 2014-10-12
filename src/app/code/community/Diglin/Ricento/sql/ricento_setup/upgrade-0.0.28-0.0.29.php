@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -13,7 +13,7 @@ $installer = $this;
 
 $installer->startSetup();
 
-$transactionTable = $installer->getTable('diglin_ricento/sales_transaction');
+//$transactionTable = $installer->getTable('diglin_ricento/sales_transaction');
 
 /**
  * Add a column to sales/quote_item table

@@ -2,13 +2,16 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
+/**
+ * Class Diglin_Ricento_Model_Resource_Products_Listing_Log_Collection
+ */
 class Diglin_Ricento_Model_Resource_Products_Listing_Log_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
     /**

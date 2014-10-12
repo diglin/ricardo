@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -14,13 +14,15 @@
  */
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
-
     public function __construct()
     {
         parent::__construct();
         $this->setTemplate('ricento/products/listing/item/edit/form.phtml');
     }
 
+    /**
+     * @return Mage_Core_Block_Abstract
+     */
     protected function _prepareLayout()
     {
         $this->setChild('tabs',
@@ -28,18 +30,22 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Form extends Mag
         );
         return parent::_prepareLayout();
     }
+
+    /**
+     * @return Mage_Adminhtml_Block_Widget_Form
+     */
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form(array(
-            'id'     => 'edit_form' ,
-            'class'  => 'ricento-form',
+            'id' => 'edit_form',
+            'class' => 'ricento-form',
             'action' => $this->getUrl('*/*/save', array(
                     'id' => $this->getRequest()
                             ->getParam('id')
-                )) , 'method' => 'post' , 'enctype' => 'multipart/form-data'
+                )), 'method' => 'post', 'enctype' => 'multipart/form-data'
         ));
         $form->addField('item_ids', 'hidden', array(
-            'name'    => 'item_ids'
+            'name' => 'item_ids'
         ));
 
         $form->setUseContainer(true);
@@ -47,11 +53,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Form extends Mag
         return parent::_prepareForm();
     }
 
+    /**
+     * @return string
+     */
     public function getTabsHtml()
     {
         return $this->getChildHtml('tabs');
     }
 
+    /**
+     * @return $this|Mage_Adminhtml_Block_Widget_Form
+     */
     protected function _initFormValues()
     {
         parent::_initFormValues();

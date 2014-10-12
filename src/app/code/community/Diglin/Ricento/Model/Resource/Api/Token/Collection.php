@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -14,8 +14,6 @@
  */
 class Diglin_Ricento_Model_Resource_Api_Token_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
-
-
     /**
      * Api_Token Collection Resource Constructor
      * @return void

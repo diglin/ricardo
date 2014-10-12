@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -19,7 +19,7 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Radios_Extensible extends Vari
     public function __construct($attributes = array())
     {
         if (!empty($attributes['types'])) {
-            foreach($attributes['types'] as $type => $className) {
+            foreach ($attributes['types'] as $type => $className) {
                 $this->addType($type, $className);
             }
         }
@@ -53,8 +53,9 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Radios_Extensible extends Vari
             $field = $this->getField($option['field']);
             if (strpos($option['label'], '%s') !== false) {
                 $html = parent::_optionToHtml($option, $selected);
-                return '<li>' . preg_replace_callback('#(<label [^>]*for="\w+"[^>]*>)(.*)</label>#', function($matches) use ($field) {
-                    $labelTag = $matches[1]; $labelText = $matches[2];
+                return '<li>' . preg_replace_callback('#(<label [^>]*for="\w+"[^>]*>)(.*)</label>#', function ($matches) use ($field) {
+                    $labelTag = $matches[1];
+                    $labelText = $matches[2];
                     return $labelTag . sprintf($labelText, '</label> ' . $field->getElementHtml() . ' ' . $labelTag) . '</label>';
                 }, $html) . '</li>';
             } else {
@@ -90,30 +91,29 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Radios_Extensible extends Vari
      */
     public function serialize($attributes = array(), $valueSeparator = '=', $fieldSeparator = ' ', $quote = '"')
     {
-        $attributes[] ='disabled';
+        $attributes[] = 'disabled';
         return parent::serialize($attributes, $valueSeparator, $fieldSeparator, $quote);
     }
 
     protected function _UpdatedOptionToHtml($option, $selected)
     {
-        $html = '<input type="radio" '.$this->serialize(array('name', 'class', 'style'));
+        $html = '<input type="radio" ' . $this->serialize(array('name', 'class', 'style'));
         if (is_array($option)) {
-            $html.= ' value="'.$this->_escape($option['value']).'" id="'.$this->getHtmlId().$option['value'].'"';
+            $html .= ' value="' . $this->_escape($option['value']) . '" id="' . $this->getHtmlId() . $option['value'] . '"';
             if ($option['value'] == $selected) {
-                $html.= ' checked="checked"';
+                $html .= ' checked="checked"';
             }
-            $html.= ' />';
-            $html.= '<label class="inline" for="'.$this->getHtmlId().$option['value'].'">'.$option['label'].'</label>';
-        }
-        elseif ($option instanceof Varien_Object) {
-            $html.= 'id="'.$this->getHtmlId().$option->getValue().'"'.$option->serialize(array('label', 'title', 'value', 'class', 'style'));
+            $html .= ' />';
+            $html .= '<label class="inline" for="' . $this->getHtmlId() . $option['value'] . '">' . $option['label'] . '</label>';
+        } elseif ($option instanceof Varien_Object) {
+            $html .= 'id="' . $this->getHtmlId() . $option->getValue() . '"' . $option->serialize(array('label', 'title', 'value', 'class', 'style'));
             if (in_array($option->getValue(), $selected)) {
-                $html.= ' checked="checked"';
+                $html .= ' checked="checked"';
             }
-            $html.= ' />';
-            $html.= '<label class="inline" for="'.$this->getHtmlId().$option->getValue().'">'.$option->getLabel().'</label>';
+            $html .= ' />';
+            $html .= '<label class="inline" for="' . $this->getHtmlId() . $option->getValue() . '">' . $option->getLabel() . '</label>';
         }
-        $html.= $this->getSeparator() . "\n";
+        $html .= $this->getSeparator() . "\n";
         return $html;
     }
 }

@@ -1,9 +1,8 @@
 <?php
-
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -577,7 +576,6 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
             ->where('entity_id = ?', $productId)
             ->where('store_id = 0')
             ->where('attribute_code = ?', 'image');
-            //->where('attribute_code IN (?)', array('small_image', 'thumbnail', 'image'));
 
         return array_merge($mediaGallery, $read->fetchAll($select));
     }

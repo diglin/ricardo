@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -14,11 +14,11 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
 {
     public function confirmationAction()
     {
-        $success = (int) $this->getRequest()->getParam('success', 0);
+        $success = (int)$this->getRequest()->getParam('success', 0);
 
         if ($success) {
             $temporaryToken = $this->getRequest()->getParam('temporarytoken');
-            $websiteId = (int) $this->getRequest()->getParam('website');
+            $websiteId = (int)$this->getRequest()->getParam('website');
 
             if (!is_numeric($websiteId) || is_null($websiteId)) {
                 $this->_getSession()->addError($this->__('The website code returned from Ricardo is not correct! Your authorization has not been saved on our side.'));
@@ -60,7 +60,9 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
                     ->setExpirationDate($securityServiceModel->getCredentialTokenExpirationDate())
                     ->setSessionDuration($securityServiceModel->getCredentialTokenSessionDuration())
                     ->setSessionExpirationDate(
-                        Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($securityServiceModel->getCredentialTokenSessionDuration(), $securityServiceModel->getCredentialTokenSessionStart()))
+                        Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate(
+                            $securityServiceModel->getCredentialTokenSessionDuration(),
+                            $securityServiceModel->getCredentialTokenSessionStart()))
                     ->save();
 
                 $this->_getSession()->addSuccess($this->__('Your Ricardo account has been authorized to get access to the API.'));

@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -40,11 +40,11 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
     const TYPE_SYNCLIST     = 'sync_list';
 
     // PROGRESS
-    const PROGRESS_PENDING      = 'pending';
-    const PROGRESS_RUNNING      = 'running';
-    const PROGRESS_CHUNK_RUNNING = 'chunk_running';
-    const PROGRESS_COMPLETED    = 'completed';
-    const PROGRESS_READY        = 'ready';
+    const PROGRESS_PENDING          = 'pending';
+    const PROGRESS_RUNNING          = 'running';
+    const PROGRESS_CHUNK_RUNNING    = 'chunk_running';
+    const PROGRESS_COMPLETED        = 'completed';
+    const PROGRESS_READY            = 'ready';
 
     // STATUSES
     const STATUS_NOTICE     = 'notice';

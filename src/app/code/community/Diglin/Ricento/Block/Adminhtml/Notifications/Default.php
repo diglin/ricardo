@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -33,7 +33,7 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Default extends Mage_Adminhtm
             if (Mage::getSingleton('admin/session')->isAllowed('system/ricento')) {
                 return parent::_toHtml();
             }
-        } catch (\Diglin\Ricardo\Exceptions\CurlException $e) { // @todo Curl Error can happens here - the session addError method is maybe too late to be defined here
+        } catch (\Diglin\Ricardo\Exceptions\CurlException $e) { // @todo Curl Error can happens here - the addError session method is maybe too late to be defined here
             Mage::logException($e);
             Mage::getSingleton('admin/session')->addError($this->__('Error while trying to connect to the Ricardo API. Please, check your log files.'));
         }

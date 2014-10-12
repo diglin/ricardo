@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -28,6 +28,10 @@
  * @method Diglin_Ricento_Model_Sync_Job_Listing setTotalCount(int $total)
  * @method Diglin_Ricento_Model_Sync_Job_Listing setTotalProceed(int $proceed)
  * @method Diglin_Ricento_Model_Sync_Job_Listing setUpdatedAt(string $date)
+ */
+
+/**
+ * Class Diglin_Ricento_Model_Sync_Job_Listing
  */
 class Diglin_Ricento_Model_Sync_Job_Listing extends Diglin_Ricento_Model_Sync_Abstract
 {

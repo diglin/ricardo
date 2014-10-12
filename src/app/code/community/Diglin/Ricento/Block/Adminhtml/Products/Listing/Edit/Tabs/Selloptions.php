@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -140,7 +140,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         $fieldsetTypeBuynow->addField('price_note', 'note', array(
             'text' => '<ul class="messages"><li class="notice-msg">'
-                . $this->__('For Fixed Price articles, the minimum price is Fr. 0.05 and maximum Fr. 2 999.95 if the Credit Card payment method is used.<br>For Auction articles, the minimum amount is Fr. 0.1 and must be greater than the Start Price.<br>If not correctly defined, the minimum and maximum values will be automatically set.')
+                . $this->__('For Fixed Price articles, the minimum price is Fr. 0.05 and maximum Fr. 2 999.95 if the Credit Card payment method is used.')
+                . '<br>'
+                . $this->__('For Auction articles, the minimum amount is Fr. 0.1 and must be greater than the Start Price.')
+                . '<br>'
+                . $this->__('If not correctly defined, the minimum and maximum values will be automatically set.')
                 . '</li></ul>'
         ));
 

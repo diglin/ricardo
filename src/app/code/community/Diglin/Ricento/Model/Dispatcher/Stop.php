@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -84,8 +84,9 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
                 // keep going for the next item - no break
             }
 
-            // Save item information and eventual error messages
-
+            /**
+             * Save item information and eventual error messages
+             */
             $this->_getListingLog()->saveLog(array(
                 'job_id' => $job->getId(),
                 'product_title' => $item->getProductTitle(),
@@ -96,8 +97,9 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
                 'log_type' => $this->_logType
             ));
 
-            // Save the current information of the process to allow live display via ajax call
-
+            /**
+             * Save the current information of the process to allow live display via ajax call
+             */
             $jobListing->saveCurrentJob(array(
                 'total_proceed' => ++$this->_totalProceed,
                 'last_item_id' => $item->getId()

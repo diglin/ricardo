@@ -3,7 +3,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -64,8 +64,6 @@
                 <model>diglin_ricento/sales_method_payment</model>
                 <title>Ricardo Payment Methods</title>
                 <allowspecific>0</allowspecific>
-                <order_status_cc>processing</order_status_cc>
-                <order_status_nocc>pending</order_status_nocc>
                 <sort_order>999</sort_order>
             </ricento>
         </payment>
@@ -276,11 +274,6 @@
                     <to_order>*</to_order>
                 </is_ricardo>
             </sales_convert_quote>
-            <!--<sales_convert_quote_item>-->
-                <!--<ricardo_transaction_id>-->
-                    <!--<to_order_item>*</to_order_item>-->
-                <!--</ricardo_transaction_id>-->
-            <!--</sales_convert_quote_item>-->
         </fieldsets>
     </global>
 
@@ -336,8 +329,7 @@
         <jobs>
             <ricento_sync_jobs>
                 <schedule>
-                    <!-- @todo change the time to */5 -->
-                    <cron_expr>*/1 * * * *</cron_expr>
+                    <cron_expr>*/5 * * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>diglin_ricento/cron::process</model>
@@ -345,8 +337,7 @@
             </ricento_sync_jobs>
             <ricento_async_jobs>
                 <schedule>
-                    <!-- @todo change the time to 0,30 -->
-                    <cron_expr>*/1 * * * *</cron_expr>
+                    <cron_expr>0,30 * * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>diglin_ricento/cron::async</model>

@@ -2,11 +2,15 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Class Diglin_Ricento_Model_Validate_Products_Item
  */
 class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 {
@@ -21,8 +25,19 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
     const PERIOD_DAYS_MIN = 1; // in days
     const PERIOD_DAYS_MAX = 10; // in days
 
+    /**
+     * @var array
+     */
     protected $_errors = array();
+
+    /**
+     * @var array
+     */
     protected $_warnings = array();
+
+    /**
+     * @var array
+     */
     protected $_success = array();
 
     /**

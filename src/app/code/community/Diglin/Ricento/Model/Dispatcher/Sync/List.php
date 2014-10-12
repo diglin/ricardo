@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -196,7 +196,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
         $soldArticlesParameter = new SoldArticlesParameter();
 
         /**
-         * Set date to filter e.g. last day. Do not use a higher value as the minimum sales duration is 1 day,
+         * Set end date to filter e.g. last day. Do not use a higher value as the minimum sales duration is 1 day,
          * we prevent to have conflict with several sold articles having similar internal reference
          */
         $soldArticlesParameter

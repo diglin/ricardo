@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -16,6 +16,9 @@ class Diglin_Ricento_Model_Config_Source_Rules_Shipping extends Diglin_Ricento_M
 {
     const TYPE_OTHER = 0;
 
+    /**
+     * @var array
+     */
     protected $_shippingConditions = array();
 
     /**

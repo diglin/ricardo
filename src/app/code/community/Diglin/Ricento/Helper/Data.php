@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -83,8 +83,6 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Payment Config
      */
-    const PAYMENT_ORDER_STATUS_CC   = 'payment/ricento/order_status_cc';
-    const PAYMENT_ORDER_STATUS_NOCC = 'payment/ricento/order_status_nocc';
     const PAYMENT_CURRENCY          = 'payment/ricento/currency';
 
     /**

@@ -3,7 +3,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -106,6 +106,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
         return array($this->__('No Ricardo category found'));
     }
 
+    /**
+     * @param $category
+     * @return Diglin_Ricento_Model_Products_Category
+     */
     protected function _getCategoriesPath($category)
     {
         $parentId = false;

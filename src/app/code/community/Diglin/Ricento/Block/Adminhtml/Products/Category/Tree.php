@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -30,7 +30,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Tree extends Mage_Adminht
     {
         $instructions = $this->__('Only product types supported, enabled and not listed in other product listing will be added.');
         $instructions .= '&nbsp;';
-        $instructions .= $this->__('Be aware, you have also to select the sub-categories, otherwise selecting only a top category won\'t allow to add products of the subcategories.');
+        $instructions .= $this->__('Be aware, you have also to select the sub-categories, otherwise selecting only a top category won\'t allow to add products of its subcategories.');
         return $instructions;
     }
 }

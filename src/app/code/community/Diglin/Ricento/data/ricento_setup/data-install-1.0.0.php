@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -34,5 +34,27 @@ foreach ($languages as $lang) {
         Varien_Db_Ddl_Table::ACTION_SET_NULL
     );
 }
+
+$connection = $installer->getConnection();
+$data = array(
+    array('ricardo_payment_canceled', 'Ricardo Payment Canceled'),
+    array('ricardo_payment_pending', 'Pending Ricardo Payment')
+);
+$connection = $installer->getConnection()->insertArray(
+    $installer->getTable('sales/order_status'),
+    array('status', 'label'),
+    $data
+);
+
+$relation = array(
+    array('canceled', 'ricardo_payment_canceled', 0),
+    array('pending', 'ricardo_payment_pending', 0),
+);
+
+$connection = $installer->getConnection()->insertArray(
+    $installer->getTable('sales/order_status_state'),
+    array('state', 'status', 'is_default'),
+    $relation
+);
 
 $installer->endSetup();

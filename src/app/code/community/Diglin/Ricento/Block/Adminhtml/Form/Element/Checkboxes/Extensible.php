@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -29,19 +29,21 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Checkboxes_Extensible extends 
         }
         return $this;
     }
+
     protected function _optionToHtml($option)
     {
         if (isset($option['field'])) {
             $field = $this->getField($option['field']);
             if (strpos($option['label'], '%s') !== false) {
                 $html = parent::_optionToHtml($option);
-                return preg_replace_callback('#(<label [^>]*for="\w+"[^>]*>)(.*)</label>#', function($matches) use ($field) {
-                    $labelTag = $matches[1]; $labelText = $matches[2];
+                return preg_replace_callback('#(<label [^>]*for="\w+"[^>]*>)(.*)</label>#', function ($matches) use ($field) {
+                    $labelTag = $matches[1];
+                    $labelText = $matches[2];
                     return $labelTag . sprintf($labelText, '</label> ' . $field->getElementHtml() . ' ' . $labelTag) . '</label>';
                 }, $html);
             } else {
                 $html = parent::_optionToHtml($option);
-                return str_replace('</li>', ' ' . $field->getElementHtml() . '</li>',$html);
+                return str_replace('</li>', ' ' . $field->getElementHtml() . '</li>', $html);
             }
         }
         return parent::_optionToHtml($option);
@@ -83,5 +85,4 @@ class Diglin_Ricento_Block_Adminhtml_Form_Element_Checkboxes_Extensible extends 
         }
         return parent::getDisabled($value);
     }
-
 }
