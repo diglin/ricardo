@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Diglin GmbH - Switzerland
  *
@@ -8,6 +7,10 @@
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Class Diglin_Ricento_Adminhtml_SyncController
  */
 class Diglin_Ricento_Adminhtml_SyncController extends Mage_Adminhtml_Controller_Action
 {
