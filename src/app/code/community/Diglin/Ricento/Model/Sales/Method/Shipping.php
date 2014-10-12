@@ -9,7 +9,11 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Diglin_Ricento_Model_Sales_Method_Shipping extends Mage_Shipping_Model_Carrier_Abstract
+/**
+ * Class Diglin_Ricento_Model_Sales_Method_Shipping
+ */
+class Diglin_Ricento_Model_Sales_Method_Shipping
+    extends Mage_Shipping_Model_Carrier_Abstract
     implements Mage_Shipping_Model_Carrier_Interface
 {
     /**
@@ -38,31 +42,61 @@ class Diglin_Ricento_Model_Sales_Method_Shipping extends Mage_Shipping_Model_Car
             return false;
         }
 
-        /**
-         * @todo finish to implement if needed
-         * Be aware the packages can have DeliveryCost value but also subpackages
-         *
-         * At the moment, we do not use those values as we get the shipping information and payment from the ricardo API
-         */
+        $calculationMethod = Mage::helper('diglin_ricento')->getShippingCalculationMethod();
+        $shippingPrice = 0;
+        $isRicardo = false;
 
-        $packages = Mage::getSingleton('diglin_ricento/config_source_rules_shipping_packages')->toOptionHash();
+        if ($request->getAllItems()) {
+            foreach ($request->getAllItems() as $item) {
+                $value = $item->getOptionByCode('info_buyRequest')->getValue();
+                $params = unserialize($value);
+                $price = 0;
+
+                if (isset($params['is_ricardo'])) {
+                    $isRicardo = true;
+                }
+                if (isset($params['shipping_fee'])) {
+                    $price = $params['shipping_fee'];
+                }
+                if (isset($params['shipping_cumulative_fee']) && $params['shipping_cumulative_fee']) {
+                    $price *= $item->getQty();
+                }
+
+                if ($calculationMethod == Diglin_Ricento_Model_Config_Source_Rules_Shipping_Calculation::HIGHEST_PRICE) {
+                    if ($shippingPrice <= $price) {
+                        $shippingPrice = $price;
+                    }
+                } else {
+                    $shippingPrice += $price;
+                }
+            }
+        }
+
+        if (!$isRicardo) {
+            return false;
+        }
 
         /** @var Mage_Shipping_Model_Rate_Result $result */
         $result = Mage::getModel('shipping/rate_result');
 
-        foreach ($this->getAllowedMethods() as $conditionId => $conditionText) {
+        $description = Mage::getSingleton('core/session')->getRicardoShippingDescription();
+        $shippingMethod = Mage::getSingleton('core/session')->getRicardoShippingMethod();
 
-            /** @var Mage_Shipping_Model_Rate_Result_Method $rate */
-            $rate = Mage::getModel('shipping/rate_result_method');
+        $shippingPrice = $this->getFinalPriceWithHandlingFee($shippingPrice);
 
-            $rate->setCarrier($this->_code);
-            $rate->setCarrierTitle($this->getConfigData('title'));
-            $rate->setMethod($conditionId);
-            $rate->setMethodTitle($conditionText);
-            $rate->setPrice($packages[$conditionId]); //@todo change price for each sub package
-            $rate->setCost(0);
+        if ($shippingPrice !== false) {
+            $method = Mage::getModel('shipping/rate_result_method');
 
-            $result->append($rate);
+            $method->setCarrier($this->_code);
+            $method->setCarrierTitle($this->getConfigData('title'));
+
+            $method->setMethod($shippingMethod);
+            $method->setMethodTitle((strlen($description) > 0) ? $description : '');
+
+            $method->setPrice($shippingPrice);
+            $method->setCost($shippingPrice);
+
+            $result->append($method);
         }
 
         return $result;

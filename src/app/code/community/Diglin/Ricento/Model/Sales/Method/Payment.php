@@ -13,12 +13,14 @@ class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Metho
 {
     const CHECK_IS_RICARDO_ORDER            = 256;
 
+    const PAYMENT_CODE = 'ricento';
+
     /**
      * unique internal payment method identifier
      *
      * @var string [a-z0-9_]
      */
-    protected $_code = 'ricento';
+    protected $_code = self::PAYMENT_CODE;
 
     /**
      * payment info block
@@ -36,21 +38,6 @@ class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Metho
      * @var bool Allow partial capturing for this payment method
      */
     protected $_canCapturePartial = true;
-
-    /**
-     * Assigns data to the payment info instance
-     *
-     * @param  Varien_Object|array $data Payment Data from checkout
-     * @return Diglin_Ricento_Model_Sales_Method_Payment Self.
-     */
-    public function assignData($data)
-    {
-        $additionalData = new Varien_Object(unserialize($data['additional_data']));
-        // @todo define info when ricardo_payment_method is provided in $data['additional_data'] (serialized array)
-        $info = $this->getInfoInstance();
-
-        return parent::assignData($data);
-    }
 
     /**
      * Check whether payment method can be used

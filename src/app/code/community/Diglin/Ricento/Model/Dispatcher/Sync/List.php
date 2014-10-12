@@ -143,11 +143,11 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
                     if ($article->getArticleId() && !$isUnsold) {
                         $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                         $this->_itemMessage = array('success' => $this->_getHelper()->__('The product is now live on ricardo.ch'));
-                        $item->getResource()->saveCurrentItem($item->getId(), array('is_planned' => 0, 'ricardo_Article_id' => $article->getArticleId()));
+                        $item->getResource()->saveCurrentItem($item->getId(), array('is_planned' => 0, 'ricardo_article_id' => $article->getArticleId()));
                     } elseif ($article->getArticleId() && $isUnsold) {
                         $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                         $this->_itemMessage = array('success' => $this->_getHelper()->__('Sorry, the product has not been sold'));
-                        $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED, 'is_planned' => 0, 'ricardo_Article_id' => $article->getArticleId()));
+                        $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED, 'is_planned' => 0, 'ricardo_article_id' => $article->getArticleId()));
                     }
                 }
             } catch (Exception $e) {

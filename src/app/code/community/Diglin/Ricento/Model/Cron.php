@@ -39,7 +39,7 @@ class Diglin_Ricento_Model_Cron
 
         //** Launch Pending Jobs
 
-        // @todo check that the API token is not expired or an error may occcur, in this case send only once an email to the admin
+        // @todo check that the API token is not expired or an error may occur, in this case send only once an email to the admin
 
         foreach ($this->_syncProcess as $jobType) {
             $this->dispatch($jobType);

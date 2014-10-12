@@ -87,7 +87,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         foreach ($itemCollection->getItems() as $item) {
 
             try {
-                $transaction = $this->getSoldArticles(array($item->getRicardoArticleId()));
+                $transaction = $this->getSoldArticles(array($item->getRicardoArticleId()), $item);
 
                 if ($transaction) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
@@ -129,23 +129,26 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
     /**
      * @param array $articleIds
-     * @return mixed
+     * @param Diglin_Ricento_Model_Products_Listing_Item $productItem
+     * @return bool
      * @throws Exception
      */
-    public function getSoldArticles($articleIds = array())
+    public function getSoldArticles($articleIds = array(), Diglin_Ricento_Model_Products_Listing_Item $productItem = null)
     {
         $soldArticlesParameter = new SoldArticlesParameter();
 
         /**
-         * Set date to filter e.g. last day. Do not use a higher value as the minimum sales duration is 1 day,
+         * Set minimum end date to filter e.g. last day. Do not use a higher value as the minimum sales duration is 1 day,
          * we prevent to have conflict with several sold articles having similar internal reference
          */
         $soldArticlesParameter
+            ->setPageSize($this->_limit) // if not defined, default is 10
             ->setArticleIdsFilter($articleIds)
-            ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (3 * 24 * 60 * 60))); //@todo revert to 3 days
+            ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (3 * 24 * 60 * 60)));
 
         $sellerAccountService = Mage::getSingleton('diglin_ricento/api_services_selleraccount');
         $soldArticles = $sellerAccountService->getServiceModel()->getSoldArticles($soldArticlesParameter);
+        $soldArticles = array_reverse($soldArticles);
 
         foreach ($soldArticles as $soldArticle) {
 
@@ -168,14 +171,21 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 }
 
                 /**
-                 * 2. Check if the products listing item exists and listed
+                 * 2. Check if the products listing item exists and is listed
                  */
                 if (!isset($soldArticle->getArticleInternalReferences()[0]['InternalReferenceValue'])) {
                     continue;
                 }
                 $internalReferenceValue = $soldArticle->getArticleInternalReferences()[0]['InternalReferenceValue'];
                 $extractedInternReference = Mage::helper('diglin_ricento')->extractInternalReference($internalReferenceValue);
-                $productItem = Mage::getModel('diglin_ricento/products_listing_item')->load($extractedInternReference->getItemId());
+
+                if (!($extractedInternReference instanceof Varien_Object)) {
+                    continue;
+                }
+
+                if (is_null($productItem) || $productItem->getId() != $extractedInternReference->getItemId()) {
+                    $productItem = Mage::getModel('diglin_ricento/products_listing_item')->load($extractedInternReference->getItemId());
+                }
 
                 if (!$productItem->getId() || $productItem->getStatus() != Diglin_Ricento_Helper_Data::STATUS_LISTED) {
                     continue;
@@ -200,7 +210,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                         /**
                          * Ricardo API doesn't provide the region and Magento 1.6 doesn't allow to make region optional
                          * We use the first region found for the current country but it's far to be good
-                         * @todo add a "other" region into each country
+                         * @todo add a "other" region into each country having required region
                          */
                         $countryId = $this->_getCountryId($buyerAddress->getCountry());
                         $regionId = null;
@@ -210,6 +220,8 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                                 ->getFirstItem()
                                 ->getId();
                         }
+
+                        $phone = ($transaction->getBuyer()->getPhone()) ? $transaction->getBuyer()->getPhone() : $transaction->getBuyer()->getMobile();
 
                         $address = Mage::getModel('customer/address');
                         $address
@@ -222,7 +234,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                             ->setCity($city)
                             ->setRegionId($regionId)
                             ->setCountryId($countryId)
-                            ->setTelephone($transaction->getBuyer()->getPhone())
+                            ->setTelephone($phone)
                             ->setIsDefaultBilling(true)
                             ->setIsDefaultShipping(true)
                             ->setSaveInAddressBook(1)
@@ -235,7 +247,14 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 }
 
                 /**
-                 * 4. Insert transaction into DB for future use
+                 * 4. Prepare data transaction
+                 */
+                $lang = $this->_getHelper()->getLocalCodeFromRicardoLanguageId($soldArticle->getMainLanguageId());
+                $shippingDescription = $productItem->getShippingPaymentRule()->getShippingDescription($lang);
+                $paymentDescription = $productItem->getShippingPaymentRule()->getPaymentDescription($lang);
+
+                /**
+                 * 5. Insert transaction into DB for future use
                  */
                 $salesTransaction = Mage::getModel('diglin_ricento/sales_transaction');
                 $salesTransaction
@@ -248,13 +267,24 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     ->setQty($transaction->getBuyerQuantity())
                     ->setViewCount($soldArticle->getViewCount())
                     ->setShippingFee($soldArticle->getDeliveryCost())
+                    ->setShippingText($soldArticle->getDeliveryText()) // @fixme - if bought in FR and the API use the DE key, text will in DE. I have no efficient solution now
                     ->setShippingMethod($soldArticle->getDeliveryId())
                     ->setShippingCumulativeFee((int)$soldArticle->getIsCumulativeShipping())
-                    ->setPaymentMethod($soldArticle->getPaymentMethodIds()[0])
+                    ->setLanguageId($soldArticle->getMainLanguageId())
+                    ->setShippingDescription($shippingDescription)
+                    ->setPaymentMethods(implode(',', $soldArticle->getPaymentMethodIds()->getData()))
+                    ->setPaymentDescription($paymentDescription)
                     ->setTotalBidPrice($soldArticle->getWinningBidPrice())
                     ->setProductId($extractedInternReference->getProductId())
                     ->setRawData(Mage::helper('core')->jsonEncode($rawData))
                     ->setSoldAt($this->_getHelper()->getJsonTimestamp($soldArticle->getEndDate()))
+                    ->save();
+
+                /**
+                 * 6. Decrease the quantity at products listing item level
+                 */
+                $productItem
+                    ->setQtyInventory($productItem->getQtyInventory() - $salesTransaction->getQty())
                     ->save();
             }
         }
@@ -363,17 +393,15 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     /**
      * @param array $transactions
      */
-    public function createNewOrder(array $transactions)
+    public function createNewOrder($transactions)
     {
         $quote = null;
-        $storeId = 0;
-        $shippingTransactionMethod = 0;
-        $shippingMethodFee = $highestShippingFee = 0;
-        $paymentMethod = $shippingMethod = 'ricento';
-        $calculationMethod = Mage::helper('diglin_ricento')->getShippingCalculationMethod();
+        $dispatchedTransactions = array();
+        $storeId = $shippingTransactionMethod = $shippingMethodFee = $highestShippingFee = 0;
+        $shippingText = $shippingDescription = '';
+        $paymentMethod = $shippingMethod = Diglin_Ricento_Model_Sales_Method_Payment::PAYMENT_CODE;
 
         try {
-
             /**
              * If a customer ordered several articles of the same seller in a short period of time
              * the order will merge all articles.
@@ -386,7 +414,9 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
                 Mage::app()->getLocale()->emulate($storeId);
 
-                // Init quote
+                /**
+                 * 1. Init Quote and define customer and his address
+                 */
                 if (is_null($quote)) {
                     $quote = Mage::getModel('sales/quote');
                     $quote->setStoreId($storeId);
@@ -404,70 +434,77 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     $quote->getBillingAddress()->setPaymentMethod($paymentMethod);
                 }
 
+                /**
+                 * 2. Add product and its information to the quote
+                 */
                 $infoBuyRequest = new Varien_Object();
                 $infoBuyRequest
                     ->setQty($transaction->getQty())
-                    ->setRicardoTransactionId($transaction->getId());
+                    ->setIsRicardo(true)
+                    ->setRicardoTransactionId($transaction->getId())
+                    ->setShippingCumulativeFee($transaction->getShippingCumulativeFee())
+                    ->setShippingFee($transaction->getShippingFee());
 
                 $product = Mage::getModel('catalog/product')
                     ->setStoreId($storeId)
                     ->load($transaction->getProductId())
                     ->setSkipCheckRequiredOption(true);
 
-                $item = $quote->addProduct($product, $infoBuyRequest);
+                $quoteItem = $quote->addProduct($product, $infoBuyRequest);
 
                 // Error with a product which is missing or have required options
-                if (is_string($item)) {
-                    Mage::throwException($item);
+                if (is_string($quoteItem)) {
+                    Mage::throwException($quoteItem);
                 }
-
-                $item->setRicardoTransactionId($transaction->getId());
 
                 /**
-                 * Define which shipping method to use if more article have different shipping method
+                 * 3. Set shipping information, price, etc
                  */
-                if ($calculationMethod == Diglin_Ricento_Model_Config_Source_Rules_Shipping_Calculation::HIGHEST_PRICE) {
-                    if($transaction->getShippingFee() > $shippingMethodFee) {
-                        $shippingTransactionMethod = $transaction->getShippingMethod();
-                        $shippingMethodFee = $transaction->getShippingFee();
-                    }
-                } else {
-                    /**
-                     * We search the shipping method to apply, we use the expensive one (maybe not the best solution)
-                     */
-                    if ($highestShippingFee < $transaction->getShippingFee()) {
-                        $highestShippingFee = $transaction->getShippingFee();
-                        $shippingTransactionMethod = $transaction->getShippingMethod();
-                    }
-                    $shippingMethodFee += $transaction->getShippingFee();
-                }
+                $shippingText = $transaction->getShippingText();
+                $shippingDescription = $transaction->getShippingDescription();
+
+                /**
+                 * 4. Keep the complete transactions list for later use
+                 */
+                $dispatchedTransactions[$transaction->getBidId()] = $transaction->getId();
             }
 
             if ($quote) {
-                // Used by the ricento payment method, needed to accept it
-                $quote->setIsRicardo(1);
-
-                $quote->setQuoteCurrencyCode(Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY);
+                /**
+                 * Define payment method and information
+                 */
+                $quote
+                    ->setIsRicardo(1)
+                    ->setQuoteCurrencyCode(Mage::getStoreConfig(Diglin_Ricento_Helper_Data::PAYMENT_CURRENCY));
 
                 $payment = $quote->getPayment();
                 $payment->importData(array(
                     'method' => $paymentMethod,
-                    'additional_data' => serialize(array(
+                    'additional_data' => Mage::helper('core')->jsonEncode(array(
                         'is_ricardo' => true,
-                        'ricardo_payment_method' => $transaction->getPaymentMethod())
+                        'ricardo_payment_methods' => $transaction->getPaymentMethods(),
+                        'ricardo_transaction_ids' => implode(',', $dispatchedTransactions),
+                        'ricardo_bid_ids' => implode(',', array_keys($dispatchedTransactions)),
+                        )
                     )));
+
+                /**
+                 * Set Shipping information and price
+                 */
+                // Hack for carrier to get the rate - see Diglin_Ricento_Model_Sales_Method_Shipping::collectRates
+                Mage::getSingleton('core/session')
+                    ->setRicardoShippingDescription($shippingText . "\n" . $shippingDescription)
+                    ->setRicardoShippingMethod($shippingTransactionMethod);
 
                 $shipping = $quote->getShippingAddress();
                 $shipping
-                    ->setShippingMethod($shippingMethod . '_' . $shippingTransactionMethod)
-                    ->setCollectShippingRates(true)->collectShippingRates()
-                    ->setShippingAmount($shippingMethodFee);
+                    ->setShippingMethod($shippingMethod . '_' . $shippingTransactionMethod);
 
                 $sendCustomerNotification = Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_ORDER_CREATION_EMAIL, $storeId);
 
                 $quote->addData(array(
-                        'customer_note_notify' => $sendCustomerNotification,
-                        'customer_note' => Mage::helper('diglin_ricento')->__('This order is automatically generated by the Ricardo Extension.'))
+                        'customer_note_notify' => false,
+                        'customer_note' => $this->_getHelper()->__('Order automatically generated by the Ricardo Extension.'))
                 );
 
                 $quote->collectTotals()->save();
@@ -480,20 +517,38 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                         ->setCustomer($quote->getCustomer())
                         ->setCustomerId($quote->getCustomer()->getId());
 
-//                    $orderData = array(
-//                        'currency' => Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY
-//                    );
-
+                    /* @var $order Mage_Sales_Model_Order */
                     $order = $this->_getOrderCreateModel()
                         ->initRuleData()
-//                        ->importPostData($orderData)
+                        ->collectShippingRates()
                         ->setSendConfirmation($sendCustomerNotification)
                         ->createOrder();
+
+                    /**
+                     * Define order status
+                     */
+                    $order->setState(Mage_Sales_Model_Order::STATE_PENDING_PAYMENT, Diglin_Ricento_Helper_Data::ORDER_STATUS_PENDING, $this->_getHelper()->__('Payment is pending'), false);
+
+                    $rawData = $this->_getHelper()->extractData(Mage::helper('core')->jsonDecode($transaction->getRawData()));
+                    if ($rawData->getTransaction()->getIsTransactionCompleted()) {
+                        $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true, $this->_getHelper()->__('Payment has been completed on ricardo.ch side'), false);
+                    }
+
+                    if ($rawData->getTransaction()->getIsTransactionCancelled()) {
+                        $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, Diglin_Ricento_Helper_Data::ORDER_STATUS_CANCEL, $this->_getHelper()->__('Order canceled on ricardo.ch side'), false);
+                    }
 
                     $quote->setIsActive(false)
                         ->save();
 
-                    $transaction->setOrderId($order->getId())->save();
+                    /**
+                     * Save the new order id to the ricardo transaction
+                     */
+                    foreach ($transactions as $transaction) {
+                        $transaction
+                            ->setOrderId($order->getId())
+                            ->save();
+                    }
                 }
 
                 Mage::app()->getLocale()->revert();
@@ -506,6 +561,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             // Deactivate the last quote if a problem occur to prevent cart display in frontend to the customer
             $quote = $this->_getSession()->getQuote();
             $quote->setIsActive(false)
+                ->setReservedOrderId(NULL)
                 ->save();
 
             if (Mage::app()->getStore()->isAdmin()) {

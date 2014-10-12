@@ -13,7 +13,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.30</version>
+            <version>0.0.31</version>
         </Diglin_Ricento>
     </modules>
 
@@ -26,6 +26,13 @@
         </system>
 
         <ricento>
+            <global>
+                <merge_order>1</merge_order>
+                <decrease_inventory>0</decrease_inventory>
+                <shipping_calculation>highest_price</shipping_calculation>
+                <email_account_creation>0</email_account_creation>
+                <email_order_creation>0</email_order_creation>
+            </global>
             <api_config>
                 <enabled>1</enabled>
                 <dev_mode>0</dev_mode>
@@ -35,18 +42,12 @@
                 <signup_url>http://api.ricardo.ch/request.php</signup_url>
                 <simulate_authorization>0</simulate_authorization>
                 <email_notification>1</email_notification>
-                <!-- it's only possible one day before -->
+                <!-- it's only possible one day before to renew the API token -->
                 <expiration_notification_delay>1</expiration_notification_delay>
                 <host>ws.ricardo.ch</host>
                 <host_dev>ws.betaqxl.com</host_dev>
                 <lang>de,fr</lang>
             </api_config>
-            <global>
-                <email_account_creation>0</email_account_creation>
-                <email_order_creation>0</email_order_creation>
-                <merge_order>1</merge_order>
-                <shipping_calculation>highest_price</shipping_calculation>
-            </global>
             <cleanup_jobs>
                 <enabled>1</enabled>
                 <keep_days>30</keep_days>
@@ -58,21 +59,22 @@
         </ricento>
 
         <payment>
-            <ricento>
+            <ricento translate="title" module="diglin_ricento">
                 <active>1</active>
                 <model>diglin_ricento/sales_method_payment</model>
-                <title>Ricardo API Payment Method</title>
+                <title>Ricardo Payment Methods</title>
                 <allowspecific>0</allowspecific>
-                <order_status>pending</order_status>
+                <order_status_cc>processing</order_status_cc>
+                <order_status_nocc>pending</order_status_nocc>
                 <sort_order>999</sort_order>
             </ricento>
         </payment>
 
         <carriers>
-            <ricento>
+            <ricento translate="title" module="diglin_ricento">
                 <active>1</active>
                 <model>diglin_ricento/sales_method_shipping</model>
-                <title>Ricardo API Shipping</title>
+                <title>Ricardo Shipping</title>
                 <sort_order>999</sort_order>
                 <sallowspecific>0</sallowspecific>
                 <showmethod>0</showmethod>
@@ -200,6 +202,26 @@
                     </diglin_ricento>
                 </observers>
             </add_spl_autoloader>
+
+            <!--<sales_order_item_save_commit_after>-->
+                <!--<observers>-->
+                    <!--<ricento_qty_decrease>-->
+                        <!--<type>singleton</type>-->
+                        <!--<class>diglin_ricento/observer</class>-->
+                        <!--<method>decreaseInventory</method>-->
+                    <!--</ricento_qty_decrease>-->
+                <!--</observers>-->
+            <!--</sales_order_item_save_commit_after>-->
+
+            <payment_info_block_prepare_specific_information>
+                <observers>
+                    <ricento_payment_info>
+                        <class>diglin_ricento/observer</class>
+                        <method>paymentMethodsInformation</method>
+                    </ricento_payment_info>
+                </observers>
+            </payment_info_block_prepare_specific_information>
+
         </events>
 
         <ricento>
@@ -254,11 +276,11 @@
                     <to_order>*</to_order>
                 </is_ricardo>
             </sales_convert_quote>
-            <sales_convert_quote_item>
-                <ricardo_transaction_id>
-                    <to_order_item>*</to_order_item>
-                </ricardo_transaction_id>
-            </sales_convert_quote_item>
+            <!--<sales_convert_quote_item>-->
+                <!--<ricardo_transaction_id>-->
+                    <!--<to_order_item>*</to_order_item>-->
+                <!--</ricardo_transaction_id>-->
+            <!--</sales_convert_quote_item>-->
         </fieldsets>
     </global>
 

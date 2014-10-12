@@ -87,7 +87,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         return $articleResult;
     }
 
-    public function updateArticle()
+    public function updateArticle(Diglin_Ricento_Model_Products_Listing_Item $item)
     {
         // @todo
         return $this;

@@ -11,5 +11,19 @@
 
 class Diglin_Ricento_Block_Payment_Info extends Mage_Payment_Block_Info
 {
+    protected function _construct()
+    {
+        parent::_construct();
+        $this->setTemplate('ricento/payment/info/default.phtml');
+    }
 
+    /**
+     * Render as PDF
+     * @return string
+     */
+    public function toPdf()
+    {
+        $this->setTemplate('ricento/payment/info/pdf/default.phtml');
+        return $this->toHtml();
+    }
 }

@@ -51,9 +51,74 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                 </hint>
+
+                <global module="diglin_ricento" translate="label comment">
+                    <label>Global Configuration</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <merge_order module="diglin_ricento" translate="label comment">
+                            <label>Merge Order</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[If a customer order several products in a period of 30 minutes, do you want to merge the ricardo transaction in one order?]]></comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </merge_order>
+                        <!-- @todo Implementation to finish -->
+                        <!--<decrease_inventory module="diglin_ricento" translate="label comment">-->
+                            <!--<label>Decrease Inventory</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<source_model>adminhtml/system_config_source_yesno</source_model>-->
+                            <!--<comment><![CDATA[If an order is passed on your shop but the product is also listed on ricardo.ch, do you want to decrease the stock on ricardo.ch side? Be aware, it's not possible to increase the quantity if the order is canceled.]]></comment>-->
+                            <!--<sort_order>20</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>0</show_in_website>-->
+                            <!--<show_in_store>0</show_in_store>-->
+                        <!--</decrease_inventory>-->
+                        <shipping_calculation module="diglin_ricento" translate="label comment">
+                            <label>Shipping Calculation</label>
+                            <sort_order>30</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>diglin_ricento/config_source_rules_shipping_calculation</source_model>
+                            <comment><![CDATA[You can decide how do you want to calculate the shipping cost when an order merge several bought products by a customer.<br>
+                            "Highest Price": it will find which product has the highest cost for the shipping and will take only this one for the calculation.<br>
+                            "Cumulative": it will calculate the shipping cost based on the configuration you did in the products listing for each article and will combine them.
+                            ]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </shipping_calculation>
+                        <email_account_creation module="diglin_ricento" translate="label comment">
+                            <label>Send Account Creation Confirmation Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Do you want to send a confirmation email to a customer when his account is created thanks to the Ricardo API?]]></comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email_account_creation>
+                        <email_order_creation module="diglin_ricento" translate="label comment">
+                            <label>Send Email for new order</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Do you want to send the newly order created by email to a customer when the order is created thanks to the Ricardo API?]]></comment>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email_order_creation>
+                    </fields>
+                </global>
+
                 <api_config module="diglin_ricento" translate="label">
                     <label>API Token Configuration</label>
-                    <sort_order>10</sort_order>
+                    <sort_order>20</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>0</show_in_store>
@@ -305,58 +370,6 @@
                     </fields>
                 </api_config>
 
-                <global module="diglin_ricento" translate="label comment">
-                    <label>Global Configuration</label>
-                    <sort_order>20</sort_order>
-                    <show_in_default>1</show_in_default>
-                    <show_in_website>1</show_in_website>
-                    <show_in_store>1</show_in_store>
-                    <fields>
-                        <merge_order module="diglin_ricento" translate="label comment">
-                            <label>Merge Order</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[If a customer order several products in a period of 30 minutes, do you want to merge the ricardo transaction in one order?]]></comment>
-                            <sort_order>10</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </merge_order>
-                        <shipping_calculation module="diglin_ricento" translate="label comment">
-                            <label>Shipping Calculation</label>
-                            <sort_order>20</sort_order>
-                            <frontend_type>select</frontend_type>
-                            <source_model>diglin_ricento/config_source_rules_shipping_calculation</source_model>
-                            <comment><![CDATA[You can decide how do you want to calculate the shipping cost when an order merge several bought products by a customer.<br>
-                            "Highest Price": it will find which product has the highest cost for the shipping and will take only this one for the calculation.<br>
-                            "Cumulative": it will calculate the shipping cost based on the configuration you did in the products listing for each article and will combine them.
-                            ]]></comment>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </shipping_calculation>
-                        <email_account_creation module="diglin_ricento" translate="label comment">
-                            <label>Send Account Creation Confirmation Email</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[Do you want to send a confirmation email to a customer when his account is created thanks to the Ricardo API?]]></comment>
-                            <sort_order>30</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </email_account_creation>
-                        <email_order_creation module="diglin_ricento" translate="label comment">
-                            <label>Send Email for new order</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[Do you want to send the newly order created by email to a customer when the order is created thanks to the Ricardo API?]]></comment>
-                            <sort_order>40</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </email_order_creation>
-                    </fields>
-                </global>
                 <cleanup_jobs module="diglin_ricento" translate="label comment">
                     <label>Cleanup Synchronization Jobs Log</label>
                     <sort_order>30</sort_order>
@@ -411,5 +424,92 @@
                 </listing_logs>
             </groups>
         </ricento>
+
+        <payment>
+            <groups>
+                <ricento translate="label" module="diglin_ricento">
+                    <label>Ricardo API Payment Methods</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>999</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <order_status_cc translate="label">
+                            <label>New Order Status with Credit Card Payment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                            <comment><![CDATA[If a customer pay via Credit Card on ricardo.ch side, which status to use for the order?]]></comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status_cc>
+                        <order_status_nocc translate="label">
+                            <label>New Order Status with Payment other than Credit Card</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                            <comment><![CDATA[If a customer wish to pay with Cash, Bank Transfer or other offline payment methods, which status to use for the order?]]></comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status_nocc>
+                        <bank_transfer_instructions translate="label">
+                            <label>Bank Transfer Instructions</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </bank_transfer_instructions>
+                        <currency translate="label">
+                            <label>Accepted Currency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>diglin_ricento/config_source_sales_currency</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </currency>
+
+                        <!--<allowspecific translate="label">-->
+                            <!--<label>Payment from Applicable Countries</label>-->
+                            <!--<frontend_type>allowspecific</frontend_type>-->
+                            <!--<sort_order>160</sort_order>-->
+                            <!--<source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>0</show_in_store>-->
+                        <!--</allowspecific>-->
+                        <!--<specificcountry translate="label">-->
+                            <!--<label>Payment from Specific Countries</label>-->
+                            <!--<frontend_type>multiselect</frontend_type>-->
+                            <!--<sort_order>170</sort_order>-->
+                            <!--<source_model>adminhtml/system_config_source_country</source_model>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>0</show_in_store>-->
+                        <!--</specificcountry>-->
+                        <!--<min_order_total translate="label">-->
+                            <!--<label>Minimum Order Total</label>-->
+                            <!--<frontend_type>text</frontend_type>-->
+                            <!--<sort_order>180</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>0</show_in_store>-->
+                        <!--</min_order_total>-->
+                        <!--<max_order_total translate="label">-->
+                            <!--<label>Maximum Order Total</label>-->
+                            <!--<frontend_type>text</frontend_type>-->
+                            <!--<sort_order>190</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>0</show_in_store>-->
+                        <!--</max_order_total>-->
+                    </fields>
+                </ricento>
+            </groups>
+        </payment>
     </sections>
 </config>

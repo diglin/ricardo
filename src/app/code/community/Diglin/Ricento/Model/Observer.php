@@ -57,16 +57,47 @@ class Diglin_Ricento_Model_Observer
         self::$shouldAdd = false;
     }
 
-    public function reduceInventory(Varien_Event_Observer $observer)
+    /**
+     * Decrease the inventory on ricardo.ch when an order is passed outside of ricardo.ch
+     *
+     * @todo to be finished
+     *
+     * Event
+     * - sales_order_item_save_commit_after
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function decreaseInventory(Varien_Event_Observer $observer)
     {
-        /**
-         * @todo implement logic to reduce inventory on ricardo side when inventory decrease after a non ricardo order
-         */
+        /* @var $item Mage_Sales_Model_Order_Item */
+        $item = $observer->getEvent()->getItem();
 
-        /**
-         * 1. Is Product part of a listed products listing
-         * 2. Update the quantity on ricardo side
-         */
+        if (!Mage::helper('diglin_ricento')->getDecreaseInventory() || $item->getOrder()->getIsRicardo()) {
+            return;
+        }
+
+        $collection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection')
+            ->addFieldToFilter('product_id', $item->getProductId())
+            ->addFieldToFilter('status', Diglin_Ricento_Helper_Data::STATUS_LISTED)
+            ->addFieldToFilter('ricardo_article_id', new Zend_Db_Expr('not null'))
+            ->addFieldToFilter('is_planned', 0);
+
+        $sell = Mage::getSingleton('diglin_ricento/api_services_sell');
+
+        foreach ($collection->getItems() as $productItem) {
+            /**
+             * We cannot decrease below 1
+             */
+            $newQuantity = $productItem->getQtyInventory() - $item->getQtyOrdered();
+            if (!($newQuantity)) {
+
+                $productItem->setQtyInventory($newQuantity);
+
+                $sell->updateArticle($productItem);
+
+                $productItem->save();
+            }
+        }
     }
 
     /**
@@ -82,6 +113,35 @@ class Diglin_Ricento_Model_Observer
         if ($block instanceof Mage_Adminhtml_Block_Customer_Edit_Tab_Account) {
             $block->getForm()->getElement('ricardo_username')->setDisabled(true);
             $block->getForm()->getElement('ricardo_customer_id')->setDisabled(true);
+        }
+    }
+
+    /**
+     * Event
+     * - payment_info_block_prepare_specific_information
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function paymentMethodsInformation(Varien_Event_Observer $observer)
+    {
+        /* @var $payment Mage_Sales_Model_Order_Payment */
+        $payment = $observer->getEvent()->getPayment();
+        $transport = $observer->getEvent()->getTransport();
+
+        if ($payment->getMethod() == Diglin_Ricento_Model_Sales_Method_Payment::PAYMENT_CODE) {
+            $additionalData = Mage::helper('core')->jsonDecode($payment->getAdditionalData(), Zend_Json::TYPE_OBJECT);
+            $methods = explode(',', $additionalData->ricardo_payment_methods);
+
+            $label = array();
+            foreach ($methods as $method) {
+                $label[] = Mage::helper('diglin_ricento')->__(\Diglin\Ricardo\Enums\PaymentMethods::getLabel($method));
+            }
+
+            if (!empty($label)) {
+                $transport->setData(array(
+                    'bid_ids' => (isset($additionalData->ricardo_bid_ids)) ? $additionalData->ricardo_bid_ids : null,
+                    'methods' => $label));
+            }
         }
     }
 }

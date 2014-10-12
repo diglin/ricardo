@@ -5,6 +5,11 @@
 "PREMIUMCATEGORYSILVER", "Medium"
 "PREMIUMCATEGORYGOLD", "Big"
 
+"TYPE_BANK_TRANSFER", "Bank transfer"
+"TYPE_CASH", "Cash"
+"TYPE_CREDIT_CARD", "Credit Card via ricardo.ch"
+"TYPE_OTHER", "Other payment method"
+
 /* Security Errors */
 "UNKNOWNPROPERTY","Unknow Property"
 "CUSTOMERNOTARTICLEOWNER","The current customer can't act on the article as he's not the owner "

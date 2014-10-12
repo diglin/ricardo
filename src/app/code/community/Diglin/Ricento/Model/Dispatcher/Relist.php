@@ -26,8 +26,8 @@ class Diglin_Ricento_Model_Dispatcher_Relist extends Diglin_Ricento_Model_Dispat
 
     /**
      * @return $this
-     *
-     * @todo not used at the moment, keep it at the moment
+     * @deprecated since 1.0
+     * @todo Relist is not used as we list again instead of relist, keep it at the moment
      */
     protected function _proceed()
     {

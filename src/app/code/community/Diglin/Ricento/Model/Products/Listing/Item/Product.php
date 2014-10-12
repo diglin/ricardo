@@ -12,8 +12,6 @@
 
 /**
  * Class Diglin_Ricento_Model_Products_Listing_Item_Product
- *
- * @todo add logic to add in cache some values depending on product id and store id
  */
 class Diglin_Ricento_Model_Products_Listing_Item_Product
 {

@@ -19,7 +19,7 @@ $installer->addAttribute('customer', 'ricardo_username', array(
     'user_defined' => false,
     'default' => '',
     'unique' => true,
-    'note' => 'Ricardo Username imported after an order creation',
+    'note' => 'Ricardo Username imported from ricardo.ch',
     'visible' => true,
     'visible_on_front' => false,
     'frontend_class' => 'disabled'
@@ -33,7 +33,7 @@ $installer->addAttribute('customer', 'ricardo_customer_id', array(
     'user_defined' => false,
     'default' => '',
     'unique' => true,
-    'note' => 'Ricardo Customer ID imported after an order creation',
+    'note' => 'Ricardo Customer ID imported from ricardo.ch',
     'visible' => true,
     'visible_on_front' => false,
     'frontend_class' => 'disabled'
@@ -58,15 +58,19 @@ $transaction
     ->addColumn('website_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
     ->addColumn('address_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
     ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('language_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 3, array('unsigned' => true, 'nullable' => true))
     ->addColumn('ricardo_customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
     ->addColumn('ricardo_article_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
     ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
     ->addColumn('qty', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
     ->addColumn('view_count', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true))
     ->addColumn('total_bid_price', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('nullable' => false, 'unsigned' => true, 'default' => 0))
-    ->addColumn('payment_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
+    ->addColumn('payment_methods', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
+    ->addColumn('payment_description', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
     ->addColumn('shipping_fee', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('nullable' => false, 'unsigned' => true, 'default' => 0))
     ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
+    ->addColumn('shipping_text', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
+    ->addColumn('shipping_description', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
     ->addColumn('shipping_cumulative_fee', Varien_Db_Ddl_Table::TYPE_INTEGER, 2, array('unsigned' => true, 'nullable' => false))
     ->addColumn('raw_data', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => false))
     ->addColumn('sold_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)

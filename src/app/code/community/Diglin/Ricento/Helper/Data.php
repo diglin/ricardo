@@ -10,7 +10,7 @@
  */
 
 use Diglin\Ricardo\Enums\System\LanguageId;
-
+use Diglin\Ricardo\Enums\PaymentMethods;
 /**
  * Class Diglin_Ricento_Helper_Data
  */
@@ -48,6 +48,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const CFG_ACCOUNT_CREATION_EMAIL        = 'ricento/global/email_account_creation';
     const CFG_ORDER_CREATION_EMAIL          = 'ricento/global/email_order_creation';
     const CFG_MERGE_ORDER                   = 'ricento/global/merge_order';
+    const CFG_DECREASE_INVENTORY            = 'ricento/global/decrease_inventory';
 
     /**
      * Cleanup Job config
@@ -78,6 +79,19 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 
     const NODE_DISPATCHER_TYPES = 'global/ricento/dispatcher/types';
     const NODE_PRODUCT_TYPES    = 'global/ricento/allow_product_types';
+
+    /**
+     * Payment Config
+     */
+    const PAYMENT_ORDER_STATUS_CC   = 'payment/ricento/order_status_cc';
+    const PAYMENT_ORDER_STATUS_NOCC = 'payment/ricento/order_status_nocc';
+    const PAYMENT_CURRENCY          = 'payment/ricento/currency';
+
+    /**
+     * Order Status
+     */
+    const ORDER_STATUS_PENDING = 'pending_ricento';
+    const ORDER_STATUS_CANCEL = 'canceled_ricento';
 
     /**
      * @var Mage_Directory_Model_Currency
@@ -319,6 +333,25 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * @param $id
+     * @return string
+     */
+    public function getLocalCodeFromRicardoLanguageId($id)
+    {
+        switch ($id) {
+            case LanguageId::FRENCH:
+                $locale = 'fr';
+                break;
+            default:
+            case LanguageId::GERMAN:
+                $locale = 'de';
+                break;
+        }
+
+        return $locale;
+    }
+
+    /**
      * Get the default supported lang depending if the partner key is set or not
      * @return string
      */
@@ -481,6 +514,21 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Is the ricardo payment method ID is Credit Card
+     *
+     * @param $paymentMethodId
+     * @return bool
+     */
+    public function isCreditCard($paymentMethodId)
+    {
+        if ($paymentMethodId == PaymentMethods::TYPE_CREDIT_CARD) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Generate the Internal Reference - Must be unique to allow the mapping with ricardo
      * Returned value will be similar to "123456#PID#987654"
      *
@@ -505,6 +553,10 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function extractInternalReference($internalReference)
     {
+        if (strpos($internalReference, '#PID#') === false) {
+            return $internalReference;
+        }
+
         list ($itemId, $productId) = explode('#PID#', $internalReference);
 
         return new Varien_Object(array('item_id' => $itemId, 'product_id' => $productId));
@@ -544,5 +596,13 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     public function getJsonTimestamp($date)
     {
         return \Diglin\Ricardo\Core\Helper::getJsonTimestamp($date);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDecreaseInventory()
+    {
+        return Mage::getStoreConfigFlag(self::CFG_DECREASE_INVENTORY);
     }
 }
