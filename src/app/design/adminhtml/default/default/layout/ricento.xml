@@ -37,11 +37,35 @@
     </ricento_scripts>
 
     <ricento_dashboard_index>
-        <reference name="root">
+        <reference name="content">
             <block type="core/template" name="ricento_dashboard" as="ricento.dashboard"
-                   template="diglin_ricento/dashboard.phtml">
-                <block type="core/text_list" name="ricento_dashboard_left" as="ricento.dashboard.left"/>
-                <block type="core/text_list" name="ricento_dashboard_right" as="ricento.dashboard.right"/>
+                   template="ricento/dashboard.phtml">
+                <block type="core/text_list" name="ricento_dashboard_left" as="ricento.dashboard.left">
+                    <block type="core/template" name="ricento_dashboard_toolbar" as="ricento.dashboard.toolbar"
+                           template="ricento/dashboard/toolbar.phtml"/>
+                    <block type="adminhtml/template" name="ricento_dashboard_account" as="ricento.dashboard.account"
+                           template="ricento/dashboard/account.phtml">
+                        <block type="diglin_ricento/adminhtml_dashboard_account" name="ricento_dashboard_account_grid"
+                               as="ricento.dashboard.account.grid"/>
+                    </block>
+                    <block type="core/template" name="ricento_dashboard_news" as="ricento.dashboard.news"
+                           template="ricento/dashboard/news.phtml"/>
+                </block>
+                <block type="core/text_list" name="ricento_dashboard_right" as="ricento.dashboard.right">
+                    <block type="diglin_ricento/adminhtml_dashboard_lifetime" name="ricento_dashboard_lifetime"
+                           as="ricento.dashboard.lifetime"
+                           template="ricento/dashboard/lifetime.phtml"/>
+                    <block type="adminhtml/template" name="ricento_dashboard_turnover" as="ricento.dashboard.turnover"
+                           template="ricento/dashboard/turnover.phtml">
+                        <block type="diglin_ricento/adminhtml_dashboard_turnover" name="ricento_dashboard_turnover_graph" as="ricento.dashboard.turnover.graph" />
+                    </block>
+                    <block type="core/template" name="ricento_dashboard_bestsellers" as="ricento.dashboard.bestsellers"
+                           template="ricento/dashboard/bestsellers.phtml">
+                        <block type="diglin_ricento/adminhtml_dashboard_bestseller"
+                               name="ricento_dashboard_bestseller_grid"
+                               as="ricento.dashboard.bestseller.grid"/>
+                    </block>
+                </block>
             </block>
         </reference>
     </ricento_dashboard_index>

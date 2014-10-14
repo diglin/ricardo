@@ -405,3 +405,9 @@ table.allowed-combinations td {width: 50%; padding: 5px;}
 .message_success, .message_warnings, .message_errors {
     margin-bottom: 3px;
 }
+.ricento_dashboard .left {
+    width: 33%;
+}
+.ricento_dashboard .right {
+    width: 66%;
+}
