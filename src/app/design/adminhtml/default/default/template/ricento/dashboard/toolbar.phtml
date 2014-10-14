@@ -6,13 +6,16 @@
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
+
+/** @var $this Mage_Adminhtml_Block_Template */
 ?>
 <div class="entry-edit">
     <ul class="ricento_toolbar">
-        <li>Product Lists</li>
-        <li>Synchronizsation</li>
-        <li>Logs</li>
-        <li>Configuration</li>
-        <li>Support</li>
+        <li><a href="<?php echo $this->getUrl('ricento/products_listing'); ?>" class="ricento_icon ricento_icon_list"><?php echo $this->__('Product Lists') ?></a></li>
+        <li><a href="<?php echo $this->getUrl('ricento/log/sync'); ?>" class="ricento_icon ricento_icon_sync"><?php echo $this->__('Synchronizsation') ?></a></li>
+        <li><a href="<?php echo $this->getUrl('ricento/log/listing'); ?>" class="ricento_icon ricento_icon_logs"><?php echo $this->__('Logs') ?></a></li>
+        <li><a href="<?php echo $this->getUrl('adminhtml/system_config/edit', array('section' => 'ricento')); ?>" class="ricento_icon ricento_icon_conf"><?php echo $this->__('Configuration') ?></a></li>
+        <li><a href=<?php echo $this->getUrl('ricento/account/assistant'); ?>"" class="ricento_icon ricento_icon_support"><?php echo $this->__('Support') ?></a></li>
     </ul>
+    <p class="icons-copyright">Icons provided by <a href="http://icons8.com/">icons8</a> as Creative Commons Attribution-NoDerivs 3.0 Unported</p>
 </div>

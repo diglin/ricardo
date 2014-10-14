@@ -41,7 +41,7 @@
             <block type="core/template" name="ricento_dashboard" as="ricento.dashboard"
                    template="ricento/dashboard.phtml">
                 <block type="core/text_list" name="ricento_dashboard_left" as="ricento.dashboard.left">
-                    <block type="core/template" name="ricento_dashboard_toolbar" as="ricento.dashboard.toolbar"
+                    <block type="adminhtml/template" name="ricento_dashboard_toolbar" as="ricento.dashboard.toolbar"
                            template="ricento/dashboard/toolbar.phtml"/>
                     <block type="adminhtml/template" name="ricento_dashboard_account" as="ricento.dashboard.account"
                            template="ricento/dashboard/account.phtml">

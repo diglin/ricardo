@@ -411,3 +411,115 @@ table.allowed-combinations td {width: 50%; padding: 5px;}
 .ricento_dashboard .right {
     width: 66%;
 }
+
+.ricento_toolbar {
+    margin-bottom: 20px;
+}
+.ricento_toolbar:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.ricento_toolbar li {
+    display: block;
+    float: left;
+    margin-right: 5px;
+    width: 100px;
+    text-align: center;
+}
+.ricento_icon:before {
+    content: "";
+    display: block;
+    width: 57px;
+    height: 57px;
+    margin: auto;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    background-color: rgb(246, 146, 28);;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.ricento_icon_list:before {
+    background-image: -webkit-gradient(radial, 28.5 -47, 0, 28.5 0, 700,
+    from(rgba(255,255,255,1)), to(rgba(255,255,255,0)),
+    color-stop(10%, rgba(255,255,255,0.2)),
+    color-stop(10.5%, rgba(140,140,140,0.2)),
+    color-stop(13%, rgba(140,140,140,0)),
+    color-stop(13.7%, rgba(255,255,255,0)),
+    color-stop(17%, rgba(255,255,255,1))), url(../images/view-details-48.png);
+    background-image: -moz-radial-gradient(28.5px -47px 45deg, circle farthest-side,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.2) 72%,
+    rgba(140,140,140,0.3) 74.5%,
+    rgba(140,140,140,0) 85%,
+    rgba(255,255,255,0) 95%,
+    rgba(255,255,255,1) 160%), url(../images/view-details-48.png);
+}
+.ricento_icon_sync:before {
+    background-image: -webkit-gradient(radial, 28.5 -47, 0, 28.5 0, 700,
+    from(rgba(255,255,255,1)), to(rgba(255,255,255,0)),
+    color-stop(10%, rgba(255,255,255,0.2)),
+    color-stop(10.5%, rgba(140,140,140,0.2)),
+    color-stop(13%, rgba(140,140,140,0)),
+    color-stop(13.7%, rgba(255,255,255,0)),
+    color-stop(17%, rgba(255,255,255,1))), url(../images/sinchronize-48.png);
+    background-image: -moz-radial-gradient(28.5px -47px 45deg, circle farthest-side,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.2) 72%,
+    rgba(140,140,140,0.3) 74.5%,
+    rgba(140,140,140,0) 85%,
+    rgba(255,255,255,0) 95%,
+    rgba(255,255,255,1) 160%), url(../images/sinchronize-48.png);
+}
+.ricento_icon_logs:before {
+    background-image: -webkit-gradient(radial, 28.5 -47, 0, 28.5 0, 700,
+    from(rgba(255,255,255,1)), to(rgba(255,255,255,0)),
+    color-stop(10%, rgba(255,255,255,0.2)),
+    color-stop(10.5%, rgba(140,140,140,0.2)),
+    color-stop(13%, rgba(140,140,140,0)),
+    color-stop(13.7%, rgba(255,255,255,0)),
+    color-stop(17%, rgba(255,255,255,1))), url(../images/statistics-48.png);
+    background-image: -moz-radial-gradient(28.5px -47px 45deg, circle farthest-side,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.2) 72%,
+    rgba(140,140,140,0.3) 74.5%,
+    rgba(140,140,140,0) 85%,
+    rgba(255,255,255,0) 95%,
+    rgba(255,255,255,1) 160%), url(../images/statistics-48.png);
+}
+.ricento_icon_conf:before {
+    background-image: -webkit-gradient(radial, 28.5 -47, 0, 28.5 0, 700,
+    from(rgba(255,255,255,1)), to(rgba(255,255,255,0)),
+    color-stop(10%, rgba(255,255,255,0.2)),
+    color-stop(10.5%, rgba(140,140,140,0.2)),
+    color-stop(13%, rgba(140,140,140,0)),
+    color-stop(13.7%, rgba(255,255,255,0)),
+    color-stop(17%, rgba(255,255,255,1))), url(../images/settings-13-48.png);
+    background-image: -moz-radial-gradient(28.5px -47px 45deg, circle farthest-side,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.2) 72%,
+    rgba(140,140,140,0.3) 74.5%,
+    rgba(140,140,140,0) 85%,
+    rgba(255,255,255,0) 95%,
+    rgba(255,255,255,1) 160%), url(../images/settings-13-48.png);
+}
+.ricento_icon_support:before {
+    background-image: -webkit-gradient(radial, 28.5 -47, 0, 28.5 0, 700,
+    from(rgba(255,255,255,1)), to(rgba(255,255,255,0)),
+    color-stop(10%, rgba(255,255,255,0.2)),
+    color-stop(10.5%, rgba(140,140,140,0.2)),
+    color-stop(13%, rgba(140,140,140,0)),
+    color-stop(13.7%, rgba(255,255,255,0)),
+    color-stop(17%, rgba(255,255,255,1))), url(../images/online-support-48.png);
+    background-image: -moz-radial-gradient(28.5px -47px 45deg, circle farthest-side,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.2) 72%,
+    rgba(140,140,140,0.3) 74.5%,
+    rgba(140,140,140,0) 85%,
+    rgba(255,255,255,0) 95%,
+    rgba(255,255,255,1) 160%), url(../images/online-support-48.png);
+}
+.icons-copyright {
+    text-align: right;
+    font-size: 9px;
+}
