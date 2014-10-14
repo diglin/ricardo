@@ -24,10 +24,14 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getResourceModel('diglin_ricento/api_token_collection')
-            ->addFieldToSelect(array('token','website_id'))
+        /** @var Diglin_Ricento_Model_Resource_Api_Token_Collection $collection */
+        $collection = Mage::getResourceModel('diglin_ricento/api_token_collection');
+        $collection
+            ->join(array('website' => 'core/website'), 'website.website_id=main_table.website_id', array('website_name' => 'name'))
+            ->addFieldToSelect(array('entity_id', 'token', 'website_id'))
             ->addFieldToFilter('token_type', 'identify');
-        //TODO join language
+        //TODO clarify: website or store?
+        //TODO join language (but from where?)
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -36,30 +40,38 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
     protected function _prepareColumns()
     {
         $this->addColumn('website_id', array(
-            'header'    => $this->__('Store View'), //TODO website vs. store klären
-            'index'     => 'website_id',
+            'header'    => $this->__('Website'),
+            'index'     => 'website_name',
             'type'      => 'text'
-            //'renderer'  => 'adminhtml/dashboard_searches_renderer_searchquery',
         ));
 
         $this->addColumn('language', array(
             'header'    => $this->__('Lang'),
             'sortable'  => false,
-//            'index'     => 'language',
+            'width'     => '30px',
+            'index'     => 'language',
             'type'      => 'text'
         ));
 
         $this->addColumn('api_token', array(
             'header'    => $this->__('Token'),
             'sortable'  => false,
-            'index'     => 'api_token',
+            'index'     => 'token',
             'type'      => 'text'
         ));
 
         $this->addColumn('action', array(
             'header'    => $this->__('Action'),
             'sortable'  => false,
-            'type'      => 'action'
+            'width'     => '100px',
+            'renderer'  => 'diglin_ricento/adminhtml_widget_grid_column_renderer_button',
+            'actions' => array(
+                array(
+                    'caption' => $this->__('Unlink'),
+                    'url' => array('base' => '*/api/unlinkToken'),
+                    'field' => 'entity_id',
+                    'class' => 'delete'
+                )),
         ));
         $this->setFilterVisibility(false);
         $this->setPagerVisibility(false);
