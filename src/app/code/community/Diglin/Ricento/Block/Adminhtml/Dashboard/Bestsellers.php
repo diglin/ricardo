@@ -14,6 +14,8 @@
  */
 class Diglin_Ricento_Block_Adminhtml_Dashboard_Bestsellers extends Mage_Adminhtml_Block_Dashboard_Grid
 {
+    const LIMIT = 20;
+
     protected $_collection;
 
     public function __construct()
@@ -24,8 +26,14 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Bestsellers extends Mage_Adminhtm
 
     protected function _prepareCollection()
     {
+        /** @var Diglin_Ricento_Model_Resource_Sales_Transaction_Collection $collection */
         $collection = Mage::getResourceModel('diglin_ricento/sales_transaction_collection');
-        //TODO aggregate data
+        $collection->joinProducts()->setGroupByProduct(true);
+        $collection->getSelect()
+            ->columns('SUM(qty) AS qty')
+            ->group('product_id')
+            ->limit(self::LIMIT);
+        $collection->setOrder('qty', Varien_Data_Collection::SORT_ORDER_DESC);
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -35,19 +43,23 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Bestsellers extends Mage_Adminhtm
     {
         $this->addColumn('name', array(
             'header'    => $this->__('Product Name'),
-            'type'      => 'text'
+            'type'      => 'text',
+            'index'     => 'product_name'
         ));
 
         $this->addColumn('sku', array(
             'header'    => $this->__('SKU'),
             'sortable'  => false,
-            'type'      => 'text'
+            'type'      => 'text',
+            'index'     => 'product_sku'
         ));
 
         $this->addColumn('price', array(
             'header'    => $this->__('Price'),
             'sortable'  => false,
-            'type'      => 'price'
+            'type'      => 'currency',
+            'currency_code' => (string) Mage::getStoreConfig(Mage_Directory_Model_Currency::XML_PATH_CURRENCY_BASE),
+            'index'     => 'product_price'
         ));
 
         $this->addColumn('qty', array(
