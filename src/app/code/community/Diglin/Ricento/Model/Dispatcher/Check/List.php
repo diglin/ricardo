@@ -39,7 +39,6 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
      */
     protected $_totalError = 0;
 
-
     /**
      * @return $this
      */
@@ -91,19 +90,21 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
                 $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
 
                 // item validator doesn't send back success at the moment
-                if (empty($itemValidator->getWarnings()) && empty($itemValidator->getErrors())) {
+                $warnings = $itemValidator->getWarnings();
+                $errors = $itemValidator->getErrors();
+                if (empty($warnings) && empty($errors)) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_jobHasSuccess = true;
                     ++$this->_totalSuccess;
                 }
 
-                if (!empty($itemValidator->getWarnings())) {
+                if (!empty($warnings)) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_WARNING;
                     $this->_jobHasWarning = true;
                     ++$this->_totalWarning;
                 }
 
-                if (!empty($itemValidator->getErrors())) {
+                if (!empty($errors)) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
                     $this->_jobHasError = true;
                     $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_ERROR));

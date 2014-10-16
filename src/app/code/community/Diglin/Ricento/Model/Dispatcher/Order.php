@@ -173,11 +173,11 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 /**
                  * 2. Check if the products listing item exists and is listed
                  */
-                if (!isset($soldArticle->getArticleInternalReferences()[0]['InternalReferenceValue'])) {
+                $references = $soldArticle->getArticleInternalReferences();
+                if (!is_array($references) || !isset($references[0]['InternalReferenceValue'])) {
                     continue;
                 }
-                $internalReferenceValue = $soldArticle->getArticleInternalReferences()[0]['InternalReferenceValue'];
-                $extractedInternReference = Mage::helper('diglin_ricento')->extractInternalReference($internalReferenceValue);
+                $extractedInternReference = Mage::helper('diglin_ricento')->extractInternalReference($references[0]['InternalReferenceValue']);
 
                 if (!($extractedInternReference instanceof Varien_Object)) {
                     continue;

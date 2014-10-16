@@ -202,19 +202,20 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'label' => $this->__('Reactivation'),
             'options' => $this->_getReactivationOptions()->toOptionHash()
         ));
-        $fieldsetSchedule->addField('schedule_cycle_multiple_products_random', 'radios_extensible', array(
-            'name' => 'sales_options[schedule_cycle_multiple_products_random]',
-            'label' => $this->__('Cycle'),
-            'values' => array(
-                array('value' => 0, 'label' => $this->__('Cycle to publish multiple products %s minutes after the first publish'), 'field' => array(
-                    'schedule_cycle_multiple_products', 'text', array(
-                        'name' => 'sales_options[schedule_cycle_multiple_products]',
-                        'class' => 'inline-number validate-number',
-                    )
-                )),
-                array('value' => 1, 'label' => $this->__('Randomly published'))
-            )
-        ));
+        // @todo cycle to implement
+//        $fieldsetSchedule->addField('schedule_cycle_multiple_products_random', 'radios_extensible', array(
+//            'name' => 'sales_options[schedule_cycle_multiple_products_random]',
+//            'label' => $this->__('Cycle'),
+//            'values' => array(
+//                array('value' => 0, 'label' => $this->__('Cycle to publish multiple products %s minutes after the first publish'), 'field' => array(
+//                    'schedule_cycle_multiple_products', 'text', array(
+//                        'name' => 'sales_options[schedule_cycle_multiple_products]',
+//                        'class' => 'inline-number validate-number',
+//                    )
+//                )),
+//                array('value' => 1, 'label' => $this->__('Randomly published'))
+//            )
+//        ));
         $fieldsetSchedule->addField('schedule_overwrite_product_date_start', 'select', array(
             'name' => 'sales_options[schedule_overwrite_product_date_start]',
             'label' => $this->__('Overwrite all products starting date'),

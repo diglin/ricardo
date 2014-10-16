@@ -54,7 +54,8 @@ class Diglin_Ricento_Model_Dispatcher_Relist extends Diglin_Ricento_Model_Dispat
             try {
                 $relistedArticle = $sell->relistArticle($item);
 
-                if (!empty($item->getRicardoArticleId())) {
+                $articleId = $item->getRicardoArticleId();
+                if (!empty($articleId)) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_itemMessage = array('relisted_article' => print_r($relistedArticle, true));
                     $hasSuccess = true;
