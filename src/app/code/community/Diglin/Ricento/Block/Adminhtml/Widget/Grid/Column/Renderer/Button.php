@@ -16,9 +16,22 @@ class Diglin_Ricento_Block_Adminhtml_Widget_Grid_Column_Renderer_Button extends 
 {
     protected function _toLinkHtml($action, Varien_Object $row)
     {
-        return preg_replace(
-            '~^<a(.*?)>(.*)</a>$~', '<button$1><span>$2</span></button>',
-            parent::_toLinkHtml($action, $row));
-    }
+        $actionAttributes = new Varien_Object();
 
+        $actionCaption = '';
+        $this->_transformActionData($action, $actionCaption, $row);
+
+        $action['onclick'] = "window.location='{$action['href']}'";
+        unset($action['href']);
+
+        if(isset($action['confirm'])) {
+            $action['onclick'] = 'window.confirm(\''
+                . addslashes($this->escapeHtml($action['confirm']))
+                . '\') && (' . $action['onclick'] . ')';
+            unset($action['confirm']);
+        }
+
+        $actionAttributes->setData($action);
+        return '<button ' . $actionAttributes->serialize() . '><span>' . $actionCaption . '</span></button>';
+    }
 }

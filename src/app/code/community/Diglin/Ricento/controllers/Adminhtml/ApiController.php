@@ -78,4 +78,9 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
 
         $this->_redirect('adminhtml');
     }
+
+    public function unlinkTokenAction()
+    {
+        //TODO implement unlinkTokenAction
+    }
 }

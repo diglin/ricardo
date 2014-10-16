@@ -29,9 +29,8 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
         $collection
             ->join(array('website' => 'core/website'), 'website.website_id=main_table.website_id', array('website_name' => 'name'))
             ->addFieldToSelect(array('entity_id', 'token', 'website_id'))
-            ->addFieldToFilter('token_type', 'identify');
-        //TODO clarify: website or store?
-        //TODO join language (but from where?)
+            ->addFieldToFilter('token_type', 'identified');
+        //TODO include language in collection
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -65,12 +64,14 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
             'sortable'  => false,
             'width'     => '100px',
             'renderer'  => 'diglin_ricento/adminhtml_widget_grid_column_renderer_button',
+            'index' => 'entity_id',
             'actions' => array(
                 array(
                     'caption' => $this->__('Unlink'),
-                    'url' => array('base' => '*/api/unlinkToken'),
-                    'field' => 'entity_id',
-                    'class' => 'delete'
+                    'url'     => array('base' => '*/api/unlinkToken'),
+                    'confirm' => $this->__('Are you sure?'),
+                    'field'   => 'entity_id',
+                    'class'   => 'delete'
                 )),
         ));
         $this->setFilterVisibility(false);
