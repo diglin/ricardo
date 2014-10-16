@@ -14,4 +14,17 @@ class Diglin_Ricento_Model_Resource_Sales_Transaction extends Mage_Core_Model_Re
     {
         $this->_init('diglin_ricento/sales_transaction', 'transaction_id');
     }
+
+    /**
+     * Returns sum of all transaction prices
+     *
+     * @return string
+     */
+    public function getTotalSalesValue()
+    {
+        $result = $this->getReadConnection()->select()
+            ->from($this->getMainTable(), array(new Zend_Db_Expr('SUM(total_bid_price)')))
+            ->query(Zend_Db::FETCH_NUM)->fetchColumn(0);
+        return $result;
+    }
 }

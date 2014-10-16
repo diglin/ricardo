@@ -14,8 +14,16 @@
  */
 class Diglin_Ricento_Block_Adminhtml_Dashboard_Lifetime extends Mage_Adminhtml_Block_Template
 {
-    public function getPriceHtml()
+    /**
+     * Returns formatted sum of all transaction prices
+     * 
+     * @return string
+     */
+    public function getValueHtml()
     {
-        return Mage::helper('core')->formatCurrency(0); //TODO calculate
+        /** @var Diglin_Ricento_Model_Resource_Sales_Transaction $transactionResource */
+        $transactionResource = Mage::getResourceModel('diglin_ricento/sales_transaction');
+
+        return Mage::helper('core')->formatCurrency($transactionResource->getTotalSalesValue());
     }
 }
