@@ -81,7 +81,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     {
         $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED));
         $itemCollection
-            ->addFieldToFilter('is_planned = 0');
+            ->addFieldToFilter('is_planned', 0);
 
         /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
         foreach ($itemCollection->getItems() as $item) {
@@ -174,7 +174,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                  * 2. Check if the products listing item exists and is listed
                  */
                 $references = $soldArticle->getArticleInternalReferences();
-                if (!is_array($references) || !isset($references[0]['InternalReferenceValue'])) {
+                if (!isset($references[0]['InternalReferenceValue'])) {
                     continue;
                 }
                 $extractedInternReference = Mage::helper('diglin_ricento')->extractInternalReference($references[0]['InternalReferenceValue']);
@@ -364,7 +364,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         $transactionCollection
             ->getSelect()
             ->where('order_id IS NULL')
-            ->where('UNIX_TIMESTAMP(sold_at) + 1800 < UNIX_TIMESTAMP(now())'); // 30 min past
+            ->where('UNIX_TIMESTAMP(sold_at) + (30*60) < UNIX_TIMESTAMP(now())'); // 30 min past
 
         $inc = 0;
         foreach ($transactionCollection->getItems() as $transactionItem) {

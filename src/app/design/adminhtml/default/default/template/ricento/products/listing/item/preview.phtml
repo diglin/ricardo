@@ -64,7 +64,7 @@
                         <input type="text" id="quantity" name="quantity" value="1" /><?php echo $this->__('of %s', $this->getSalesOptions()->getStockManagement()); ?>
                     <?php endif; ?>
                     </div>
-                <?php if ($this->getSalesOptions()->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUY_NOW || $this->getSalesOptions()->getSalesAuctionDirectBuy()): ?>
+                <?php if ($this->getSalesOptions()->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW || $this->getSalesOptions()->getSalesAuctionDirectBuy()): ?>
                     <?php $price = $this->getProductPrice(); ?>
                     <?php if ($price): ?>
                         <div class="buy_now">
