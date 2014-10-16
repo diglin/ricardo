@@ -2,10 +2,11 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <sylvain.raye at diglin.com>
- * @category    Ricento
- * @package     Diglin_Ricardo
- * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ * @author      Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /* @var $this Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview */
@@ -63,7 +64,7 @@
                         <input type="text" id="quantity" name="quantity" value="1" /><?php echo $this->__('of %s', $this->getSalesOptions()->getStockManagement()); ?>
                     <?php endif; ?>
                     </div>
-                <?php if ($this->getSalesOptions()->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUY_NOW || $this->getSalesOptions()->getSalesAuctionDirectBuy()): ?>
+                <?php if ($this->getSalesOptions()->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW || $this->getSalesOptions()->getSalesAuctionDirectBuy()): ?>
                     <?php $price = $this->getProductPrice(); ?>
                     <?php if ($price): ?>
                         <div class="buy_now">

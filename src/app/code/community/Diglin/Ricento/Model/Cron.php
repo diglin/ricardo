@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -23,7 +23,7 @@ class Diglin_Ricento_Model_Cron
 
     protected $_asyncProcess = array(
         Diglin_Ricento_Model_Sync_Job::TYPE_SYNCLIST, //** Sync List before getting orders
-        //Diglin_Ricento_Model_Sync_Job::TYPE_ORDER //** Get new orders
+        Diglin_Ricento_Model_Sync_Job::TYPE_ORDER //** Get new orders
     );
 
     /**
@@ -39,7 +39,7 @@ class Diglin_Ricento_Model_Cron
 
         //** Launch Pending Jobs
 
-        // @todo check that the API token is not expired or an error may occur, in this case send only once an email to the admin
+        // @todo check that the API token is not expired or that an error may occur, in this case send only once an email to the admin
 
         foreach ($this->_syncProcess as $jobType) {
             $this->dispatch($jobType);

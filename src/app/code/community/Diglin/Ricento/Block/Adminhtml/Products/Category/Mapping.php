@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -36,10 +36,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Mapping extends Mage_Admi
         );
 
         if ($this->getCategoryId() != Diglin_Ricento_Model_Products_Category_Mapping::ROOT_CATEGORY_ID) {
+
             /* @var $mapping Diglin_Ricento_Model_Products_Category_Mapping */
             $mapping = Mage::getModel('diglin_ricento/products_category_mapping');
             $category = $mapping->getCategory($this->getCategoryId());
             $this->setLevels($category ? $category->getLevel() : 1);
+
             while ($category && $category->getParentId() != Diglin_Ricento_Model_Products_Category_Mapping::ROOT_CATEGORY_ID) {
                 $this->getChild('sublevel')->insert(
                     $this->getLayout()

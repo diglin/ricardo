@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -50,42 +50,47 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $fieldsetPayment = $form->addFieldset('fieldset_payment', array('legend' => $this->__('Payment Methods')));
         $fieldsetPayment->addType('checkboxes_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_checkboxes_extensible'));
         $fieldsetPayment->addField('payment_methods', 'checkboxes_extensible', array(
-            'name'    => 'rules[payment_methods][]',
-            'label'   => $this->__('Payment Methods'),
-            'values'  => Mage::getSingleton('diglin_ricento/config_source_rules_payment')->getAllOptions(),
-            'class'   => 'validate-payment-method-combination',
-            'onchange' => 'rulesForm.togglePaymentDescription($(\'' . $htmlIdPrefix . 'payment_methods_'. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER .'\')); rulesForm.toggleStartPrice($(\'sales_options_sales_auction_start_price\'), \''. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD .'\');'
+            'name' => 'rules[payment_methods][]',
+            'label' => $this->__('Payment Methods'),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_rules_payment')->getAllOptions(),
+            'class' => 'validate-payment-method-combination',
+            'onchange' => 'rulesForm.togglePaymentDescription($(\''
+                . $htmlIdPrefix . 'payment_methods_'
+                . \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER . '\')); rulesForm.toggleStartPrice($(\'sales_options_sales_auction_start_price\'), \''
+                . \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD . '\');'
         ));
         $fieldsetPayment->addField('payment_description_de', 'textarea', array(
-            'name'  => 'rules[payment_description_de]',
+            'name' => 'rules[payment_description_de]',
             'label' => $this->__('Payment Description German'),
-            'note' => $this->__('Characters: %s. Max. 5 000 characters. Payment information to display to customers. Will be send to ricardo only if you select the method "Other"', $this->getCountableText($htmlIdPrefix . 'payment_description_de')),
+            'note' => $this->__('Characters: %s. Max. 5 000 characters. Payment information to display to customers. Will be send to ricardo only if you select the method "Other"',
+                    $this->getCountableText($htmlIdPrefix . 'payment_description_de')),
             'class' => 'validate-length maximum-length-5000'
         ));
         $fieldsetPayment->addField('payment_description_fr', 'textarea', array(
-            'name'  => 'rules[payment_description_fr]',
+            'name' => 'rules[payment_description_fr]',
             'label' => $this->__('Payment Description French'),
-            'note' => $this->__('Characters: %s. Max. 5 000 characters. Payment information to display to customers. Will be send to ricardo only if you select the method "Other"', $this->getCountableText($htmlIdPrefix . 'payment_description_fr')),
+            'note' => $this->__('Characters: %s. Max. 5 000 characters. Payment information to display to customers. Will be send to ricardo only if you select the method "Other"',
+                    $this->getCountableText($htmlIdPrefix . 'payment_description_fr')),
             'class' => 'validate-length maximum-length-5000'
         ));
 
         $fieldsetShipping = $form->addFieldset('fieldset_shipping', array('legend' => $this->__('Shipping Methods')));
         $fieldsetShipping->addField('shipping_method', 'select', array(
-            'name'    => 'rules[shipping_method]',
-            'label'   => $this->__('Shipping Methods'),
-            'values'  => Mage::getSingleton('diglin_ricento/config_source_rules_shipping')->getAllOptions(),
-            'class'   => 'validate-payment-shipping-combination',
+            'name' => 'rules[shipping_method]',
+            'label' => $this->__('Shipping Methods'),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_rules_shipping')->getAllOptions(),
+            'class' => 'validate-payment-shipping-combination',
             'onchange' => 'rulesForm.toggleShippingDescription(this); rulesForm.initPackages(this);'
         ));
         $fieldsetShipping->addField('shipping_package', 'select', array(
-            'name'    => 'rules[shipping_package]',
-            'class'   => '',
+            'name' => 'rules[shipping_package]',
+            'class' => '',
             'onchange' => 'rulesForm.setShippingFee(this);'
         ));
         $fieldsetShipping->addField('shipping_price', 'text', array(
-            'name'     => 'rules[shipping_price]',
-            'label'    => $this->__('Shipping Price'),
-            'class'    => 'validate-number',
+            'name' => 'rules[shipping_price]',
+            'label' => $this->__('Shipping Price'),
+            'class' => 'validate-number',
             'required' => true
         ));
 //        $fieldsetShipping->addField('free_shipping', 'checkbox', array(
@@ -94,25 +99,25 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
 //            'onclick' => 'rulesForm.switchShippingPrice(this);'
 //        ));
         $fieldsetShipping->addField('shipping_cumulative_fee', 'checkbox', array(
-            'name'    => 'rules[shipping_cumulative_fee]',
-            'label'   => $this->__('Is Shipping fee cumulative'),
-            'note'  => $this->__('If you select this option, the shipping fee will be calculate for each sold product.')
+            'name' => 'rules[shipping_cumulative_fee]',
+            'label' => $this->__('Is Shipping fee cumulative'),
+            'note' => $this->__('If you select this option, the shipping fee will be calculate for each sold product.')
                 . $this->__('e.g. an article is sold with a quantity of 3 to one customer and the shipping fee is 15 CHF. Total Shipping fee is 45 CHF. Let it empty if you don\'t such an option.')
         ));
         $fieldsetShipping->addField('shipping_availability', 'select', array(
-            'name'    => 'rules[shipping_availability]',
-            'label'   => $this->__('Shipping Availability'),
-            'values'  => Mage::getSingleton('diglin_ricento/config_source_rules_shipping_availability')->getAllOptions()
+            'name' => 'rules[shipping_availability]',
+            'label' => $this->__('Shipping Availability'),
+            'values' => Mage::getSingleton('diglin_ricento/config_source_rules_shipping_availability')->getAllOptions()
         ));
         $fieldsetShipping->addField('shipping_description_de', 'textarea', array(
-            'name'  => 'rules[shipping_description_de]',
+            'name' => 'rules[shipping_description_de]',
             'label' => $this->__('Shipping Description German'),
             'required' => true,
             'class' => 'validate-length maximum-length-5000',
             'note' => $this->__('Characters: %s. Max. 5 000 characters', $this->getCountableText($htmlIdPrefix . 'shipping_description_de'))
         ));
         $fieldsetShipping->addField('shipping_description_fr', 'textarea', array(
-            'name'  => 'rules[shipping_description_fr]',
+            'name' => 'rules[shipping_description_fr]',
             'label' => $this->__('Shipping Description French'),
             'required' => true,
             'class' => 'validate-length maximum-length-5000',
@@ -128,16 +133,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $supportedLangs = Mage::helper('diglin_ricento')->getSupportedLang();
 
         $this->getForm()->setValues($this->getShippingPaymentRule());
-
-//        $shippingPrice = $this->getShippingPaymentRule()->getShippingPrice();
-//        $isFreeShipping = (!is_null($shippingPrice) && $shippingPrice == 0) ? true : false;
-//        $this->getForm()->getElement('shipping_price')->setDisabled($isFreeShipping);
-        $this->getForm()->getElement('shipping_cumulative_fee')->setChecked((bool) $this->getShippingPaymentRule()->getShippingCumulativeFee());
+        $this->getForm()->getElement('shipping_cumulative_fee')->setChecked((bool)$this->getShippingPaymentRule()->getShippingCumulativeFee());
 
         $disableDescription = (!$this->getShippingPaymentRule()->getShippingMethod()) ? false : true;
 
         $disablePaymentDescription = true;
-        $methods = (array) $this->getShippingPaymentRule()->getPaymentMethods();
+        $methods = (array)$this->getShippingPaymentRule()->getPaymentMethods();
         foreach ($methods as $method) {
             if ((int)$method === 0) {
                 $disablePaymentDescription = false;
@@ -190,8 +191,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
     protected function _afterToHtml($html)
     {
         $shippingPackage = ($this->getShippingPaymentRule()->getShippingPackage()) ? ',' . $this->getShippingPaymentRule()->getShippingPackage() : '';
-        $html .= '<script>var rulesForm = new Ricento.RulesForm("' . $this->getForm()->getHtmlIdPrefix() . '", "' . Mage::helper('core')->jsQuoteEscape(json_encode(Mage::getSingleton('diglin_ricento/config_source_rules_shipping_packages')->toOptionHash()), "\"") . '");';
-        $html .= 'rulesForm.initPackages($(\''. $this->getForm()->getHtmlIdPrefix() .'shipping_method\') '. $shippingPackage .');';
+        $html .= '<script>var rulesForm = new Ricento.RulesForm("' . $this->getForm()->getHtmlIdPrefix() . '", "'
+            . Mage::helper('core')->jsQuoteEscape(json_encode(Mage::getSingleton('diglin_ricento/config_source_rules_shipping_packages')->toOptionHash()), "\"") . '");';
+        $html .= 'rulesForm.initPackages($(\'' . $this->getForm()->getHtmlIdPrefix() . 'shipping_method\') ' . $shippingPackage . ');';
         $html .= '</script>';
         $html .= Mage::getModel('diglin_ricento/validate_rules_methods')->getJavaScriptValidator();
         return parent::_afterToHtml($html);

@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -37,9 +37,10 @@ class Diglin_Ricento_Adminhtml_LogController extends Diglin_Ricento_Controller_A
         $productsListing = null;
         if ($this->getRequest()->getParam('id')) {
             $productsListing = $this->_initListing();
+            $id = $productsListing->getId();
         }
 
-        if ($productsListing && !empty($productsListing->getId())) {
+        if ($productsListing && !empty($id)) {
             $block = $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_log');
         } else {
             $block = $this->getLayout()->createBlock('diglin_ricento/adminhtml_log', 'ricento_logs_tabs',

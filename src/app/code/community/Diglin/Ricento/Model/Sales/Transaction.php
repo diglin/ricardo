@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Ricento
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -62,7 +62,6 @@
  */
 class Diglin_Ricento_Model_Sales_Transaction extends Mage_Core_Model_Abstract
 {
-
     protected function _construct()
     {
         $this->_init('diglin_ricento/sales_transaction');

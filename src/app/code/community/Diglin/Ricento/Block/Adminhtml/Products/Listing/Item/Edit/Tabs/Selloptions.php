@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -128,6 +128,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
         return $this->_model;
     }
 
+    /**
+     * @param Diglin_Ricento_Model_Products_Listing_Item $item
+     */
     protected function _loadSalesOptionsFromItem(Diglin_Ricento_Model_Products_Listing_Item $item)
     {
         if ($item->getSalesOptionsId()) {

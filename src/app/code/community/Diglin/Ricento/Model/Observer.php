@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -60,7 +60,7 @@ class Diglin_Ricento_Model_Observer
     /**
      * Decrease the inventory on ricardo.ch when an order is passed outside of ricardo.ch
      *
-     * @todo to be finished
+     * @todo to finish
      *
      * Event
      * - sales_order_item_save_commit_after

@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -90,7 +90,7 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Diglin_Ricent
             if (!empty($categoryIds)) {
                 $supportedTypes = Mage::helper('diglin_ricento')->getAllowedProductTypes();
 
-                $productsListingItemIds = (array) $this->_getListing()
+                $productsListingItemIds = (array)$this->_getListing()
                     ->getProductsListingItemCollection()
                     ->getColumnValues('product_id');
 
@@ -107,7 +107,7 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Diglin_Ricent
                             'diglin_ricento/products_listing_item',
                             new Zend_Db_Expr('products_listing_id IS NOT NULL'),
                             'product_id=entity_id',
-                            'products_listing_id !=' . (int) $this->_getListing()->getId(),
+                            'products_listing_id !=' . (int)$this->_getListing()->getId(),
                             'left'
                         )
                         ->addFieldToFilter('in_other_list', array('eq' => 0))
@@ -121,7 +121,7 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Diglin_Ricent
                     $productIds = $productCollection->getAllIds();
                     $productsListingItemIds = array_merge($productsListingItemIds, $productIds);
                     foreach ($productIds as $productId) {
-                        if ($this->_getListing()->addProduct((int) $productId)) {
+                        if ($this->_getListing()->addProduct((int)$productId)) {
                             ++$productsAdded;
                         }
                     }

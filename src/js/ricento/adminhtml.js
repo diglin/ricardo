@@ -1,5 +1,11 @@
 /**
+ * Diglin GmbH - Switzerland
  *
+ * @author      Sylvain Rayé <support at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 Ricento = window.Ricento || {};
 Ricento.addProductsPopup = function(url) {
@@ -347,17 +353,6 @@ Ricento.salesOptionsForm.prototype = {
         });
         fieldset.show();
     },
-//    toggleConditionSource : function(field) {
-//        conditionSourceLabel = $$('label[for='+ this.htmlIdPrefix + 'product_condition_use_attribute]')[0];
-//        conditionSourceValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition_source_attribute_code');
-//        conditionValidation = $('advice-required-entry-'+ this.htmlIdPrefix + 'product_condition');
-//        conditionSource = $(this.htmlIdPrefix + 'product_condition_source_attribute_code');
-//        condition = $(this.htmlIdPrefix + 'product_condition');
-//
-//        condition.disabled = field.checked;
-//        this.toggleRequired(conditionSource, field.checked, conditionSourceLabel);
-//        this.toggleRequired(condition, !field.checked);
-//    },
     toggleWarrantyDescription: function (field) {
 
         for (i = 0; i < this.langs.length; i++) {
@@ -434,11 +429,6 @@ Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
             this.toggleRequired(shippingDescription, required, shippingDescriptionLabel);
         }
     },
-//    switchShippingPrice: function(field) {
-//        shippingPrice = $('rules_shipping_price');
-//        shippingPrice.value = '0.00';
-//        shippingPrice.disabled = field.checked;
-//    },
     initPackages: function(field, selected) {
         var deliveryId = field.value;
         var packages = JSON.parse(this.packageSizes);

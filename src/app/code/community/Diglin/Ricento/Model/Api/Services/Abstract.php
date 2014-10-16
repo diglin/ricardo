@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -167,20 +167,12 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
         $key = $this->_underscore(substr($method,3));
         $profilerName = $this->_profilerPrefix . strtoupper($key);
 
-        $arguments = array(
-            'service_adapter' => $this,
-            'service_model' => $this->getServiceModel(),
-            'method' => $method,
-            'parameters' => $args
-        );
-
         try {
             switch (substr($method, 0, 3)) {
                 case 'get' :
                     if (method_exists($this->getServiceModel(), $method) && is_callable(array($this->getServiceModel(), $method), true)) {
 
                         Varien_Profiler::start($profilerName);
-//                        Mage::dispatchEvent('ricardo_api_init_call', $arguments);
 
                         $this->_prepareCredentialToken();
 
@@ -188,13 +180,9 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                             $data = unserialize(Mage::app()->loadCache($key));
                         }
 
-//                        Mage::dispatchEvent('ricardo_api_call_get_before', $arguments);
-
                         if (empty($data) || !$this->getCanUseCache() || array_key_exists('ErrorCodes', $data)) {
                             $data = call_user_func_array(array($this->getServiceModel(), $method), $args);
                         }
-
-//                        Mage::dispatchEvent('ricardo_api_call_get_after', array_merge($arguments, array('data' => $data)));
 
                         $this->setData($key, $data);
 
@@ -203,8 +191,6 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                         }
 
                         $this->_updateCredentialToken();
-
-//                        Mage::dispatchEvent('ricardo_api_end_call', array_merge($arguments, array('data' => $data)));
 
                         Varien_Profiler::stop($profilerName);
 
@@ -215,17 +201,13 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                     if (method_exists($this->getServiceModel(), $method) && is_callable(array($this->getServiceModel(), $method), true)) {
 
                         Varien_Profiler::start($profilerName);
-//                        Mage::dispatchEvent('ricardo_api_init_call', $arguments);
 
                         $this->_prepareCredentialToken();
 
-//                        Mage::dispatchEvent('ricardo_api_call_set_before', $arguments);
                         call_user_func_array(array($this->getServiceModel(), $method), $args);
-//                        Mage::dispatchEvent('ricardo_api_call_set_after', $arguments);
 
                         $this->_updateCredentialToken();
 
-//                        Mage::dispatchEvent('ricardo_api_end_call', array_merge($arguments, array('data' => $data)));
                         Varien_Profiler::stop($profilerName);
 
                         return $this;
@@ -317,7 +299,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
         /* @var $serviceModel \Diglin\Ricardo\Managers\ManagerAbstract */
         $typeOfToken = self::getServiceModel()->getTypeOfToken();
 
-        // we want to skip the use of __call to prevent loop, we use getServiceModel()
+        // we want to skip the use of magic __call to prevent loop, we use getServiceModel()
         $security = Mage::getSingleton('diglin_ricento/api_services_security')->getServiceModel();
 
         $isTokenRefreshed = $security->getIsCredentialTokenRefreshed();

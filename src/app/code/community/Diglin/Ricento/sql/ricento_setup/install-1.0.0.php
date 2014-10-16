@@ -193,6 +193,69 @@ $installer->getConnection()->createTable($tableProdListingLogs);
 
 $installer->run("ALTER TABLE " . $tableProdListingLogs->getName() . " ADD COLUMN `log_status` ENUM('notice', 'warning', 'error', 'success') NOT NULL AFTER log_type");
 
+$transactionTable = $installer->getTable('diglin_ricento/sales_transaction');
+$transaction = $installer->getConnection()->newTable($transactionTable);
+$transaction
+    ->addColumn('transaction_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
+    ->addColumn('bid_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('order_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('website_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('address_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('language_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 3, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('ricardo_customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('ricardo_article_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('qty', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('view_count', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('total_bid_price', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('nullable' => false, 'unsigned' => true, 'default' => 0))
+    ->addColumn('payment_methods', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
+    ->addColumn('payment_description', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
+    ->addColumn('shipping_fee', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('nullable' => false, 'unsigned' => true, 'default' => 0))
+    ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
+    ->addColumn('shipping_text', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
+    ->addColumn('shipping_description', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
+    ->addColumn('shipping_cumulative_fee', Varien_Db_Ddl_Table::TYPE_INTEGER, 2, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('raw_data', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => false))
+    ->addColumn('sold_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
+    ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
+    ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
+    ->setComment('Transactions done on ricardo.ch from listed articles and synced back in Magento')
+    ->addForeignKey($installer->getFkName('diglin_ricento/sales_transaction', 'address_id', 'customer/address_entity', 'entity_id'),
+        'address_id', $installer->getTable('customer/address_entity'), 'entity_id', Varien_Db_Ddl_Table::ACTION_SET_NULL, Varien_Db_Ddl_Table::ACTION_SET_NULL)
+    ->addForeignKey($installer->getFkName('diglin_ricento/sales_transaction', 'website_id', 'core/website', 'website_id'),
+        'website_id', $installer->getTable('core/website'), 'website_id', Varien_Db_Ddl_Table::ACTION_SET_NULL, Varien_Db_Ddl_Table::ACTION_SET_NULL)
+    ->addForeignKey($installer->getFkName('diglin_ricento/sales_transaction', 'order_id', 'sales/order', 'entity_id'),
+        'order_id', $installer->getTable('sales/order'), 'entity_id', Varien_Db_Ddl_Table::ACTION_SET_NULL, Varien_Db_Ddl_Table::ACTION_SET_NULL)
+    ->addForeignKey($installer->getFkName('diglin_ricento/sales_transaction', 'customer_id', 'customer/entity', 'entity_id'),
+        'customer_id', $installer->getTable('customer/entity'), 'entity_id', Varien_Db_Ddl_Table::ACTION_SET_NULL, Varien_Db_Ddl_Table::ACTION_SET_NULL)
+    ->addForeignKey($installer->getFkName('diglin_ricento/sales_transaction', 'product_id', 'catalog/product', 'entity_id'),
+        'product_id', $installer->getTable('catalog/product'), 'entity_id', Varien_Db_Ddl_Table::ACTION_SET_NULL, Varien_Db_Ddl_Table::ACTION_SET_NULL);
+
+$installer->getConnection()->createTable($transaction);
+
+/**
+ * Add a column to sales/quote table
+ */
+$salesQuoteTable = $installer->getTable('sales/quote');
+
+$installer->getConnection()->addColumn($salesQuoteTable, 'is_ricardo', array(
+    'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
+    'nullable' => true,
+    'unsigned' => true,
+    'comment' => 'Is Ricardo Transaction'));
+
+/**
+ * Add a column to sales/order table
+ */
+$salesOrderTable = $installer->getTable('sales/order');
+
+$installer->getConnection()->addColumn($salesOrderTable, 'is_ricardo', array(
+    'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
+    'nullable' => true,
+    'unsigned' => true,
+    'comment' => 'Is Ricardo Transaction'));
+
 $installer->endSetup();
 
 // Create Catalog Category Enttities
@@ -330,3 +393,41 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_condition'
     'used_in_product_listing' => true,
     'apply_to'	=> 'simple,grouped,configurable'
 ));
+
+$installer->addAttribute('customer', 'ricardo_username', array(
+    'type' => 'varchar',
+    'input' => 'text',
+    'label' => 'Ricardo Username',
+    'required' => false,
+    'user_defined' => false,
+    'default' => '',
+    'unique' => true,
+    'note' => 'Ricardo Username imported from ricardo.ch',
+    'visible' => true,
+    'visible_on_front' => false,
+    'frontend_class' => 'disabled'
+));
+
+$installer->addAttribute('customer', 'ricardo_customer_id', array(
+    'type' => 'int',
+    'input' => 'text',
+    'label' => 'Ricardo Customer ID',
+    'required' => false,
+    'user_defined' => false,
+    'default' => '',
+    'unique' => true,
+    'note' => 'Ricardo Customer ID imported from ricardo.ch',
+    'visible' => true,
+    'visible_on_front' => false,
+    'frontend_class' => 'disabled'
+));
+
+Mage::getSingleton('eav/config')
+    ->getAttribute('customer', 'ricardo_username')
+    ->setData('used_in_forms', array('adminhtml_customer'))
+    ->save();
+
+Mage::getSingleton('eav/config')
+    ->getAttribute('customer', 'ricardo_customer_id')
+    ->setData('used_in_forms', array('adminhtml_customer'))
+    ->save();

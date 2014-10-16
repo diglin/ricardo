@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -54,7 +54,8 @@ class Diglin_Ricento_Model_Dispatcher_Relist extends Diglin_Ricento_Model_Dispat
             try {
                 $relistedArticle = $sell->relistArticle($item);
 
-                if (!empty($item->getRicardoArticleId())) {
+                $articleId = $item->getRicardoArticleId();
+                if (!empty($articleId)) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
                     $this->_itemMessage = array('relisted_article' => print_r($relistedArticle, true));
                     $hasSuccess = true;
@@ -71,8 +72,9 @@ class Diglin_Ricento_Model_Dispatcher_Relist extends Diglin_Ricento_Model_Dispat
                 // keep going for the next item - no break
             }
 
-            // Save item information and eventual error messages
-
+            /**
+             * Save item information and eventual error messages
+             */
             $this->_getListingLog()->saveLog(array(
                 'job_id' => $job->getId(),
                 'product_title' => $item->getProductTitle(),
@@ -83,8 +85,9 @@ class Diglin_Ricento_Model_Dispatcher_Relist extends Diglin_Ricento_Model_Dispat
                 'log_type' => $this->_logType
             ));
 
-            // Save the current information of the process to allow live display via ajax call
-
+            /**
+             * Save the current information of the process to allow live display via ajax call
+             */
             $jobListing->saveCurrentJob(array(
                 'total_proceed' => ++$this->_totalProceed,
                 'last_item_id' => $item->getId()

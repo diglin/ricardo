@@ -2,10 +2,11 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <sylvain.raye at diglin.com>
- * @category    Ricento
+ * @author      Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
  * @package     Diglin_Ricento
- * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 /* @see Diglin_Ricento_Adminhtml_AccountController */
 ?>
@@ -15,8 +16,8 @@
             <tr>
                 <td style="width: 50%;">
                     <h3 class="icon-head head-categories"><?php echo $this->getTitle() ?></h3>
-                    <?php echo Mage::helper('diglin_ricento')->__('You may also access to the <a href="%s" target="_blank" onClick="javascript:document.getElementById(\'dashboarddiv\').innerHTML=\'\'; ">content of this page</a> in a new window.',
-                        $this->getIframeUrl()); ?>
+                    <?php echo Mage::helper('diglin_ricento')->__('You may also access to the %s content of this page</a> in a new window.',
+                        '<a href="'. $this->getIframeUrl() .'" target="_blank" onClick="javascript:document.getElementById(\'dashboarddiv\').innerHTML=\'\'; ">'); ?>
                 </td>
             </tr>
         </tbody>

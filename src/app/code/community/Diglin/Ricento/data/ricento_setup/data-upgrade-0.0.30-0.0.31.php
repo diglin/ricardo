@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -14,7 +14,6 @@ $installer = $this;
 $installer->startSetup();
 
 $connection = $installer->getConnection();
-$installer->startSetup();
 $data = array(
     array('ricardo_payment_canceled', 'Ricardo Payment Canceled'),
     array('ricardo_payment_pending', 'Pending Ricardo Payment')

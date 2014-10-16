@@ -2,7 +2,7 @@
 /**
  * Diglin GmbH - Switzerland
  *
- * @author Sylvain Rayé <support at diglin.com>
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
@@ -140,7 +140,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
 
         $fieldsetTypeBuynow->addField('price_note', 'note', array(
             'text' => '<ul class="messages"><li class="notice-msg">'
-                . $this->__('For Fixed Price articles, the minimum price is Fr. 0.05 and maximum Fr. 2 999.95 if the Credit Card payment method is used.<br>For Auction articles, the minimum amount is Fr. 0.1 and must be greater than the Start Price.<br>If not correctly defined, the minimum and maximum values will be automatically set.')
+                . $this->__('For Fixed Price articles, the minimum price is Fr. 0.05 and maximum Fr. 2 999.95 if the Credit Card payment method is used.')
+                . '<br>'
+                . $this->__('For Auction articles, the minimum amount is Fr. 0.1 and must be greater than the Start Price.')
+                . '<br>'
+                . $this->__('If not correctly defined, the minimum and maximum values will be automatically set.')
                 . '</li></ul>'
         ));
 
@@ -198,19 +202,20 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'label' => $this->__('Reactivation'),
             'options' => $this->_getReactivationOptions()->toOptionHash()
         ));
-        $fieldsetSchedule->addField('schedule_cycle_multiple_products_random', 'radios_extensible', array(
-            'name' => 'sales_options[schedule_cycle_multiple_products_random]',
-            'label' => $this->__('Cycle'),
-            'values' => array(
-                array('value' => 0, 'label' => $this->__('Cycle to publish multiple products %s minutes after the first publish'), 'field' => array(
-                    'schedule_cycle_multiple_products', 'text', array(
-                        'name' => 'sales_options[schedule_cycle_multiple_products]',
-                        'class' => 'inline-number validate-number',
-                    )
-                )),
-                array('value' => 1, 'label' => $this->__('Randomly published'))
-            )
-        ));
+        // @todo cycle to implement
+//        $fieldsetSchedule->addField('schedule_cycle_multiple_products_random', 'radios_extensible', array(
+//            'name' => 'sales_options[schedule_cycle_multiple_products_random]',
+//            'label' => $this->__('Cycle'),
+//            'values' => array(
+//                array('value' => 0, 'label' => $this->__('Cycle to publish multiple products %s minutes after the first publish'), 'field' => array(
+//                    'schedule_cycle_multiple_products', 'text', array(
+//                        'name' => 'sales_options[schedule_cycle_multiple_products]',
+//                        'class' => 'inline-number validate-number',
+//                    )
+//                )),
+//                array('value' => 1, 'label' => $this->__('Randomly published'))
+//            )
+//        ));
         $fieldsetSchedule->addField('schedule_overwrite_product_date_start', 'select', array(
             'name' => 'sales_options[schedule_overwrite_product_date_start]',
             'label' => $this->__('Overwrite all products starting date'),
@@ -299,14 +304,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetPromotion->addField('promotion_space', 'radios_extensible', array(
             'name' => 'sales_options[promotion_space]',
             'label' => $this->__('Privilege Space'),
-            'note' => $this->__('Privilege space on main category page and search results. More information about this feature <a onclick="window.open(\'%s\');">here</a>', Diglin_Ricento_Helper_Data::RICARDO_URL_HELP_PROMOTION),
+            'note' => $this->__("Privilege space on main category page and search results. More information about this feature <a onclick=\"window.open('%s');\">here</a>", Diglin_Ricento_Helper_Data::RICARDO_URL_HELP_PROMOTION),
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_promotion')->getAllOptions()
         ));
 
         $fieldsetPromotion->addField('promotion_start_page', 'checkbox', array(
             'name' => 'sales_options[promotion_start_page]',
             'label' => $this->__('Home Privilege Space'),
-            'note' => $this->__('Privilege space on the homepage. More information about this feature <a onclick="window.open(\'%s\');">here</a>', Diglin_Ricento_Helper_Data::RICARDO_URL_HELP_PROMOTION),
+            'note' => $this->__("Privilege space on the homepage. More information about this feature <a onclick=\"window.open('%s');\">here</a>", Diglin_Ricento_Helper_Data::RICARDO_URL_HELP_PROMOTION),
             'after_element_html' => $this->__('Home Space') . ' - ' .  $this->_getPromotionHomeFee()
         ));
 
