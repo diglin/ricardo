@@ -14,10 +14,19 @@
  */
 class Diglin_Ricento_Adminhtml_DashboardController extends Mage_Adminhtml_Controller_Action
 {
-
+    /**
+     * Ricento dashboard
+     */
     public function indexAction()
     {
         $this->loadLayout();
         $this->renderLayout();
+    }
+    /**
+     * Proxy for Google Chart API, reused from core dashboard
+     */
+    public function tunnelAction()
+    {
+        $this->_forward('tunnel', 'dashboard', 'admin');
     }
 }

@@ -127,4 +127,34 @@ class Diglin_Ricento_Model_Resource_Sales_Transaction_Collection extends Mage_Co
         return $countSelect;
     }
 
+    /**
+     * Prepares collection for revenue report by month
+     */
+    public function prepareReport()
+    {
+        $dateStart = Mage::app()->getLocale()->date();
+        $dateEnd = clone $dateStart;
+        $dateStart->subYear(1);
+
+        $dateStart->setHour(0);
+        $dateStart->setMinute(0);
+        $dateStart->setSecond(0);
+
+        $dateEnd->setHour(23);
+        $dateEnd->setMinute(59);
+        $dateEnd->setSecond(59);
+
+        $this->getSelect()->reset(Zend_Db_Select::COLUMNS);
+        $this->getSelect()->columns(
+            array(
+                'range'    => 'DATE_FORMAT(sold_at, "%Y-%m")',
+                'revenue'  => 'SUM(main_table.total_bid_price)',
+            ))
+            ->where(
+                $this->_getConditionSql('sold_at', array("from" => $dateStart, "to" => $dateEnd, 'datetime' => true))
+            )
+            ->group(
+                $this->getConnection()->getDateFormatSql('sold_at', '%Y-%m')
+            );
+    }
 }

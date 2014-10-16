@@ -21,8 +21,9 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Turnover extends Mage_Adminhtml_B
      */
     public function __construct()
     {
-        $this->setHtmlId('turnover');
         parent::__construct();
+        $this->setHtmlId('turnover');
+        $this->setTemplate('ricento/dashboard/turnover/graph.phtml');
     }
 
     /**
@@ -32,17 +33,15 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Turnover extends Mage_Adminhtml_B
      */
     protected function _prepareData()
     {
-        $this->setDataHelperName('adminhtml/dashboard_order');
-        $this->getDataHelper()->setParam('store', $this->getRequest()->getParam('store'));
-        $this->getDataHelper()->setParam('website', $this->getRequest()->getParam('website'));
-        $this->getDataHelper()->setParam('group', $this->getRequest()->getParam('group'));
+        $this->setDataHelperName('diglin_ricento/dashboard_turnover');
 
-        $this->setDataRows('quantity');
+        $this->setDataRows('revenue');
         $this->_axisMaps = array(
             'x' => 'range',
-            'y' => 'quantity'
+            'y' => 'revenue'
         );
 
         parent::_prepareData();
+        $this->getDataHelper()->setParam('period', '1y');
     }
 }
