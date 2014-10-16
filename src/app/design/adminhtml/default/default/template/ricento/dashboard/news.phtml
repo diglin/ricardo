@@ -6,10 +6,23 @@
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
  */
+
+/** @var $this Diglin_Ricento_Block_Adminhtml_Dashboard_News */
+
+$news = $this->getNewsFromFeed();
 ?>
 <div class="entry-edit">
     <div class="entry-edit-head"><h4><?php echo $this->__('Ricardo News') ?></h4></div>
-    <fieldset class="a-center bold">
-        RSS
+    <fieldset class="a-left">
+        <?php if (empty($news)): ?>
+            <em><?php echo $this->__('News could not be retrieved'); ?></em>
+        <?php endif; ?>
+        <?php foreach ($news as $newsEntry): ?>
+            <div class="ricento_news_item">
+                <h4 class="ricento_news_title"><?php echo $this->escapeHtml($newsEntry->getTitle()) ?></h4>
+                <div class="ricento_news_description"><?php echo $newsEntry->getDescription() ?></div>
+                <div class="ricento_news_link"><a href="<?php echo $newsEntry->getLink() ?>"><?php echo $this->__('Read more') ?></a></div>
+            </div>
+        <?php endforeach; ?>
     </fieldset>
 </div>

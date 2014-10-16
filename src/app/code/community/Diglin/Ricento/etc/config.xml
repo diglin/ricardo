@@ -56,6 +56,10 @@
                 <enabled>1</enabled>
                 <keep_days>30</keep_days>
             </listing_logs>
+            <rss>
+                <news_count>3</news_count>
+                <news_feed>http://www.tagesschau.de/xml/rss2</news_feed>
+            </rss>
         </ricento>
 
         <payment>

@@ -48,7 +48,8 @@
                         <block type="diglin_ricento/adminhtml_dashboard_account" name="ricento_dashboard_account_grid"
                                as="ricento.dashboard.account.grid"/>
                     </block>
-                    <block type="core/template" name="ricento_dashboard_news" as="ricento.dashboard.news"
+                    <block type="diglin_ricento/adminhtml_dashboard_news" name="ricento_dashboard_news"
+                           as="ricento.dashboard.news"
                            template="ricento/dashboard/news.phtml"/>
                 </block>
                 <block type="core/text_list" name="ricento_dashboard_right" as="ricento.dashboard.right">
