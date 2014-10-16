@@ -39,7 +39,8 @@ class Diglin_Ricento_Adminhtml_LogController extends Diglin_Ricento_Controller_A
             $productsListing = $this->_initListing();
         }
 
-        if ($productsListing && !empty($productsListing->getId())) {
+        $productsListingId = $productsListing->getId();
+        if ($productsListing && !empty($productsListingId)) {
             $block = $this->getLayout()->createBlock('diglin_ricento/adminhtml_products_listing_log');
         } else {
             $block = $this->getLayout()->createBlock('diglin_ricento/adminhtml_log', 'ricento_logs_tabs',

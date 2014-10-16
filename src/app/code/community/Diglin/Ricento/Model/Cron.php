@@ -23,7 +23,7 @@ class Diglin_Ricento_Model_Cron
 
     protected $_asyncProcess = array(
         Diglin_Ricento_Model_Sync_Job::TYPE_SYNCLIST, //** Sync List before getting orders
-        //Diglin_Ricento_Model_Sync_Job::TYPE_ORDER //** Get new orders
+        Diglin_Ricento_Model_Sync_Job::TYPE_ORDER //** Get new orders
     );
 
     /**
