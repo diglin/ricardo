@@ -100,6 +100,6 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
      */
     public function getValidationUrl()
     {
-        return Mage::getSingleton('diglin_ricento/api_services_security')->getValidationUrl();
+        return Mage::getSingleton('diglin_ricento/api_services_security')->getValidationUrl(); // @todo add setWebsiteId
     }
 }

@@ -87,14 +87,9 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         foreach ($itemCollection->getItems() as $item) {
 
             try {
-                $transaction = $this->getSoldArticles(array($item->getRicardoArticleId()), $item);
-
-                if ($transaction) {
-                    $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
-                    $this->_itemMessage = array('success' => $this->_getHelper()->__('The product has been sold'));
-                }
+                $this->getSoldArticles(array($item->getRicardoArticleId()), $item);
             } catch (Exception $e) {
-                $this->_handleException($e);
+                $this->_handleException($e, Mage::getSingleton('diglin_ricento/api_services_selleraccount'));
                 $e = null;
                 // keep going for the next item - no break
             }
@@ -147,7 +142,11 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (3 * 24 * 60 * 60)));
 
         $sellerAccountService = Mage::getSingleton('diglin_ricento/api_services_selleraccount');
-        $soldArticles = $sellerAccountService->getServiceModel()->getSoldArticles($soldArticlesParameter);
+        $sellerAccountService->setCurrentWebsite($this->_getListing()->getWebsiteId());
+
+        $soldArticles = $sellerAccountService
+            ->getSoldArticles($soldArticlesParameter);
+
         $soldArticles = array_reverse($soldArticles);
 
         foreach ($soldArticles as $soldArticle) {
@@ -163,8 +162,8 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 /**
                  * 1. Check that the transaction doesn't already exists
                  */
-                $salesTransaction = Mage::getModel('diglin_ricento/sales_transaction');
-                $salesTransaction->load($transaction->getBidId(), 'bid_id');
+                $salesTransaction = Mage::getModel('diglin_ricento/sales_transaction')
+                    ->load($transaction->getBidId(), 'bid_id');
 
                 if ($salesTransaction->getId()) {
                     continue;
@@ -286,10 +285,13 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 $productItem
                     ->setQtyInventory($productItem->getQtyInventory() - $salesTransaction->getQty())
                     ->save();
+
+                $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
+                $this->_itemMessage = array('success' => $this->_getHelper()->__('The product has been sold'));
             }
         }
 
-        return true;
+        return true; // @todo it returns true also when no transaction have been done
     }
 
     /**
@@ -321,8 +323,6 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 ->setPassword($customer->generatePassword())
                 ->setStoreId($storeId)
                 ->setConfirmation(null);
-
-            $isNew = true;
         }
 
         if (!$customer->getRicardoCustomerId()) {
@@ -335,7 +335,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             $customer->save();
         }
 
-        if ($isNew && Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_ACCOUNT_CREATION_EMAIL, $storeId)) {
+        if ($customer->isObjectNew() && Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_ACCOUNT_CREATION_EMAIL, $storeId)) {
             if ($customer->isConfirmationRequired()) {
                 $typeEmail = 'confirmation';
             } else {
@@ -437,23 +437,24 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 /**
                  * 2. Add product and its information to the quote
                  */
-                $unitPrice = $transaction->getTotalBidPrice() / $transaction->getQty();
+                //$unitPrice = $transaction->getTotalBidPrice() / $transaction->getQty();
                 $infoBuyRequest = new Varien_Object();
                 $infoBuyRequest
                     ->setQty($transaction->getQty())
                     ->setIsRicardo(true)
                     ->setRicardoTransactionId($transaction->getId())
                     ->setShippingCumulativeFee($transaction->getShippingCumulativeFee())
-                    ->setShippingFee($transaction->getShippingFee())
-                    ->setCustomPrice($unitPrice) // Set unit custom price
-                    ->setOriginalCustomPrice($unitPrice); // Set unit custom price
+                    ->setShippingFee($transaction->getShippingFee());
+
 
                 $product = Mage::getModel('catalog/product')
                     ->setStoreId($storeId)
                     ->load($transaction->getProductId())
                     ->setSkipCheckRequiredOption(true);
 
-                $quoteItem = $quote->addProduct($product, $infoBuyRequest);
+                $quoteItem = $quote->addProduct($product, $infoBuyRequest)
+                    ->setCustomPrice($transaction->getTotalBidPrice()) // Set unit custom price
+                    ->setOriginalCustomPrice($transaction->getTotalBidPrice()); // Set unit custom price;
 
                 // Error with a product which is missing or have required options
                 if (is_string($quoteItem)) {
@@ -463,8 +464,8 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 /**
                  * 3. Set shipping information, price, etc
                  */
-                $shippingText = $transaction->getShippingText();
-                $shippingDescription = $transaction->getShippingDescription();
+                $shippingText = $transaction->getShippingText(); // @todo provide correct language
+                $shippingDescription = $transaction->getShippingDescription();  // @todo get shipping description in correct language
 
                 /**
                  * 4. Keep the complete transactions list for later use
@@ -532,14 +533,15 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                      */
                     $order->setState(Mage_Sales_Model_Order::STATE_PENDING_PAYMENT, Diglin_Ricento_Helper_Data::ORDER_STATUS_PENDING, $this->_getHelper()->__('Payment is pending'), false);
 
-                    $rawData = $this->_getHelper()->extractData(Mage::helper('core')->jsonDecode($transaction->getRawData()));
-                    if ($rawData->getTransaction()->getIsTransactionCompleted()) {
-                        $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true, $this->_getHelper()->__('Payment has been completed on ricardo.ch side'), false);
-                    }
-
-                    if ($rawData->getTransaction()->getIsTransactionCancelled()) {
-                        $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, Diglin_Ricento_Helper_Data::ORDER_STATUS_CANCEL, $this->_getHelper()->__('Order canceled on ricardo.ch side'), false);
-                    }
+                    // @fixme getIsTransactionCompleted or getIsTransactionCancelled has no value from ricardo.ch side at the moment, wait API update
+//                    $rawData = $this->_getHelper()->extractData(Mage::helper('core')->jsonDecode($transaction->getRawData()));
+//                    if ($rawData->getTransaction()->getIsTransactionCompleted()) {
+//                        $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true, $this->_getHelper()->__('Payment has been completed on ricardo.ch side'), false);
+//                    }
+//
+//                    if ($rawData->getTransaction()->getIsTransactionCancelled()) {
+//                        $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, Diglin_Ricento_Helper_Data::ORDER_STATUS_CANCEL, $this->_getHelper()->__('Order canceled on ricardo.ch side'), false);
+//                    }
 
                     $quote->setIsActive(false)
                         ->save();
@@ -558,7 +560,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             }
         } catch (Exception $e) {
             // We store and send the exception but don't block the rest of the process
-            Mage::logException($e);
+            Mage::log("\n" . $e->__toString(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
             Mage::helper('diglin_ricento/tools')->sendAdminNotification($e->__toString());
 
             // Deactivate the last quote if a problem occur to prevent cart display in frontend to the customer
@@ -609,14 +611,6 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     }
 
     /**
-     * @return Diglin_Ricento_Model_Products_Listing
-     */
-    protected function _getListing()
-    {
-        return Mage::getModel('diglin_ricento/products_listing')->load($this->_productsListingId);
-    }
-
-    /**
      * @param $countryRicardoId
      * @return string
      * @throws Exception
@@ -624,7 +618,10 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     protected function _getCountryId($countryRicardoId)
     {
         $countryName = '';
-        $countries = Mage::getSingleton('diglin_ricento/api_services_system')->getCountries();
+        $countries = Mage::getSingleton('diglin_ricento/api_services_system')
+            ->setCurrentWebsite($this->_getListing()->getWebsiteId())
+            ->getCountries();
+
         foreach ($countries as $country) {
             if ($country['CountryId'] == $countryRicardoId) {
                 $countryName = $country['CountryName'];
