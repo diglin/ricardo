@@ -92,12 +92,15 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function editAction()
     {
-        if (!$this->_initListing()) {
+        $productsListing = $this->_initListing();
+        if (!$productsListing) {
             $this->_redirect('*/*/index');
             return;
         }
 
         try {
+            $this->_title($this->__('Edit List "%s"', $productsListing->getTitle()));
+
             $this->loadLayout();
             $this->renderLayout();
         } catch (Diglin_Ricento_Exception $e) {
@@ -410,6 +413,23 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
         $this->_successMessage = $this->_getSuccessMesageList();
         $this->_startJobList(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST, $countPendingItems);
+    }
+
+    public function checkAjaxAction()
+    {
+        $return = true;
+        try {
+            Mage::getSingleton('diglin_ricento/dispatcher')->dispatch(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST)->proceed();
+        } catch (Exception $e) {
+            Mage::logException($e);
+            $return = false;
+        }
+
+        $response = array(
+            'status' => $return
+        );
+
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
     }
 
     /**

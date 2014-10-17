@@ -31,6 +31,7 @@ if($this->getRunProgress()) {?>
         Ricento.progressInterval('<?php echo $progressUrl ?>', '<?php echo $prefix ?>');
     }, 150);
 </script>
+<?php echo $this->getAdditionalHtml(); ?>
 <?php } else { ?>
 <div class="sync-advice"><?php echo $this->__('No progress');?></div>
 <?php } ?>
