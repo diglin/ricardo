@@ -14,9 +14,9 @@
  */
 class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Method_Abstract
 {
-    const CHECK_IS_RICARDO_ORDER            = 256;
+    const CHECK_IS_RICARDO_ORDER    = 256;
 
-    const PAYMENT_CODE = 'ricento';
+    const PAYMENT_CODE              = 'ricento';
 
     /**
      * unique internal payment method identifier
@@ -32,15 +32,9 @@ class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Metho
      */
     protected $_infoBlockType = 'diglin_ricento/payment_info';
 
-    /**
-     * @var bool Allow capturing for this payment method
-     */
-    protected $_canCapture = true;
+    protected $_canManageRecurringProfiles  = false;
 
-    /**
-     * @var bool Allow partial capturing for this payment method
-     */
-    protected $_canCapturePartial = true;
+    protected $_canUseCheckout              = false;
 
     /**
      * Check whether payment method can be used

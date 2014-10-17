@@ -19,7 +19,7 @@
 <?php if ($_specificInfo = $this->getSpecificInformation()):?>
 
 <?php if (isset($_specificInfo['bid_ids'])): ?>
-<p><?php echo Mage::helper('diglin_ricento')->__('Transactions %s', $_specificInfo['bid_ids']) ?></p>
+<p><?php echo Mage::helper('diglin_ricento')->__('Transactions: <strong>%s</strong>', $_specificInfo['bid_ids']) ?></p>
 <?php endif; ?>
 <ul>
 <?php foreach ($_specificInfo['methods'] as $_value):?>
