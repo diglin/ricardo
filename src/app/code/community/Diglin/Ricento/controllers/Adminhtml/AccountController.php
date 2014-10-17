@@ -26,12 +26,15 @@ class Diglin_Ricento_Adminhtml_AccountController extends Mage_Adminhtml_Controll
         $ricardoLabel = $this->__('Ricardo');
         $signupLabel = $this->__('API Signup');
 
+        $this->_title($signupLabel);
+
         $this->loadLayout()
             ->_setActiveMenu('ricento/signup')
             ->_addBreadcrumb($ricardoLabel, $ricardoLabel)
             ->_addBreadcrumb($signupLabel, $signupLabel)
             ->_addContent($block)
             ->renderLayout();
+
     }
 
     public function assistantAction()
@@ -46,11 +49,14 @@ class Diglin_Ricento_Adminhtml_AccountController extends Mage_Adminhtml_Controll
         $ricardoLabel = $this->__('Ricardo');
         $assistantLabel = $this->__('Assistant Portal');
 
+        $this->_title($assistantLabel);
+
         $this->loadLayout()
             ->_setActiveMenu('ricento/assistant')
             ->_addBreadcrumb($ricardoLabel, $ricardoLabel)
             ->_addBreadcrumb($assistantLabel, $assistantLabel)
             ->_addContent($block)
             ->renderLayout();
+
     }
 }
