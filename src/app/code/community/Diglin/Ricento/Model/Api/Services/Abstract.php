@@ -165,6 +165,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
         $data = array();
         $helper = Mage::helper('diglin_ricento');
         $key = $this->_underscore(substr($method,3));
+        $cacheKey = $key . Mage::registry('ricardo_api_lang');
         $profilerName = $this->_profilerPrefix . strtoupper($key);
 
         try {
@@ -177,7 +178,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                         $this->_prepareCredentialToken();
 
                         if ($this->getCanUseCache()) {
-                            $data = unserialize(Mage::app()->loadCache($key));
+                            $data = unserialize(Mage::app()->loadCache($cacheKey));
                         }
 
                         if (empty($data) || !$this->getCanUseCache() || array_key_exists('ErrorCodes', $data)) {
@@ -187,7 +188,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                         $this->setData($key, $data);
 
                         if ($this->getCanUseCache() && !array_key_exists('ErrorCodes', $data)) {
-                            Mage::app()->saveCache(serialize($data), $key, array(Diglin_Ricento_Helper_Api::CACHE_TAG), $this->getCacheLifeTime());
+                            Mage::app()->saveCache(serialize($data), $cacheKey, array(Diglin_Ricento_Helper_Api::CACHE_TAG), $this->getCacheLifeTime());
                         }
 
                         $this->_updateCredentialToken();

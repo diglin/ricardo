@@ -130,10 +130,6 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
      */
     protected function _getStatusMessage($jobStatus)
     {
-        $message = '';
-        if ($jobStatus != Diglin_Ricento_Model_Sync_Job::STATUS_SUCCESS) {
-            $message = Mage::helper('diglin_ricento')->__('Report: %d success, %d error(s)', $this->_totalSuccess, $this->_totalError);
-        }
-        return $message;
+        return Mage::helper('diglin_ricento')->__('Report: %d success, %d error(s)', $this->_totalSuccess, $this->_totalError);
     }
 }

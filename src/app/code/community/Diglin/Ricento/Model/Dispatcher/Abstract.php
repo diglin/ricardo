@@ -403,4 +403,12 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     {
         return $this->_productsListingId;
     }
+
+    /**
+     * @return Diglin_Ricento_Model_Products_Listing
+     */
+    protected function _getListing()
+    {
+        return Mage::getModel('diglin_ricento/products_listing')->load($this->_productsListingId);
+    }
 }

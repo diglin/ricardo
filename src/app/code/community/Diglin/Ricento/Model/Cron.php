@@ -31,7 +31,7 @@ class Diglin_Ricento_Model_Cron
      */
     public function process()
     {
-        if (!Mage::helper('diglin_ricento')->isEnabled()) {
+        if (!Mage::helper('diglin_ricento')->isEnabled()) { // @fixme potential problem with multishop
             return;
         }
 
@@ -51,7 +51,7 @@ class Diglin_Ricento_Model_Cron
      */
     public function async()
     {
-        if (!Mage::helper('diglin_ricento')->isEnabled()) {
+        if (!Mage::helper('diglin_ricento')->isEnabled()) { // @fixme potential problem with multishop
             return;
         }
 
