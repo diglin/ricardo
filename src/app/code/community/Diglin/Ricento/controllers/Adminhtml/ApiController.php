@@ -34,15 +34,16 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
 
             try {
                 // Save the temporary token created after to got the validation url from Diglin_Ricento_Model_Api_Services_Security
-                $apiToken = Mage::getModel('diglin_ricento/api_token')
+                $apiTokenTemp = Mage::getModel('diglin_ricento/api_token')
                     ->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $websiteId);
-                $apiToken
+
+                $apiTokenTemp
                     ->setWebsiteId($websiteId)
                     ->setToken($temporaryToken)
                     ->setTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY)
                     ->save();
 
-                $expirationDate = new DateTime($apiToken->getExpirationDate());
+                $expirationDate = new DateTime($apiTokenTemp->getExpirationDate());
 
                 // Initialize the Security Model with the required variable
                 $securityServiceModel
@@ -65,6 +66,9 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
                             $securityServiceModel->getCredentialTokenSessionStart()))
                     ->save();
 
+                // Cleanup as we do not need it and in any case we will have to generate it again.
+                $apiTokenTemp->delete();
+
                 $this->_getSession()->addSuccess($this->__('Your Ricardo account has been authorized to get access to the API.'));
 
                 // @todo add catch for security authorization exception
@@ -83,6 +87,17 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
 
     public function unlinkTokenAction()
     {
-        //TODO implement unlinkTokenAction
+        $entityId = $this->getRequest()->getParam('entity_id');
+        if (!empty($entityId)) {
+
+            $token = Mage::getModel('diglin_ricento/api_token')
+                ->load($entityId);
+
+            if ($token->getId()) {
+                $token->delete();
+            }
+        }
+
+        $this->_redirect('ricento/dashboard');
     }
 }
