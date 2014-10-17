@@ -355,6 +355,11 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getDefaultSupportedLang()
     {
+        $lang = $this->_getLocaleCodeForApiConfig();
+        if ($this->getPartnerKey($lang)) {
+            return $lang;
+        }
+
         foreach($this->getSupportedLang() as $lang) {
             if ($this->getPartnerKey($lang)) {
                 return $lang;
