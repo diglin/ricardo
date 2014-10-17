@@ -619,6 +619,8 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
      */
     protected function _getAntiforgeryToken()
     {
-        return Mage::getSingleton('diglin_ricento/api_services_security')->getServiceModel()->getAntiforgeryToken();
+        return Mage::getSingleton('diglin_ricento/api_services_security')
+            ->getServiceModel()
+            ->getAntiforgeryToken(); // @todo setCurrentWebsite() ?
     }
 }

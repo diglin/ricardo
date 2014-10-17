@@ -25,16 +25,6 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
     protected $_jobType = Diglin_Ricento_Model_Sync_Job::TYPE_STOP;
 
     /**
-     * @var int
-     */
-    protected $_totalSuccess = 0;
-
-    /**
-     * @var int
-     */
-    protected $_totalError = 0;
-
-    /**
      * @return $this
      */
     protected function _proceed()
@@ -58,6 +48,7 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
         }
 
         $sell = Mage::getSingleton('diglin_ricento/api_services_sell');
+        $sell->setCurrentWebsite($this->_getListing()->getWebsiteId());
 
         /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
         foreach ($itemCollection->getItems() as $item) {

@@ -25,6 +25,11 @@ class Diglin_Ricento_Model_Api_Services_Customer extends Diglin_Ricento_Model_Ap
     protected $_model = '\Diglin\Ricardo\Managers\Customer';
 
     /**
+     * @var bool
+     */
+    protected $_canUseCache = false;
+
+    /**
      * Overwritten just to get the class/method auto completion
      * Be aware that using directly this method to use the methods of the object instead of using
      * the magic methods of the abstract (__call, __get, __set) will prevent to use the cache of Magento
@@ -34,12 +39,6 @@ class Diglin_Ricento_Model_Api_Services_Customer extends Diglin_Ricento_Model_Ap
      */
     public function getServiceModel()
     {
-        $this->_prepareCredentialToken();
-
-        $model = parent::getServiceModel();
-
-        $this->_updateCredentialToken();
-
-        return $model;
+        return parent::getServiceModel();
     }
 }

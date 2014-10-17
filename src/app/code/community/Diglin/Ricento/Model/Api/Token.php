@@ -20,7 +20,7 @@
  * @method DateTime getSessionExpirationDate()
  * @method DateTime getCreatedAt()
  * @method DateTime getUpdatedAt()
- * @method Diglin_Ricento_Model_Api_Token setToken() setToken(string $token)
+ * @method Diglin_Ricento_Model_Api_Token setToken(string $token)
  * @method Diglin_Ricento_Model_Api_Token setTokenType(string $tokenType)
  * @method Diglin_Ricento_Model_Api_Token setWebsiteId(int $websiteId)
  * @method Diglin_Ricento_Model_Api_Token setSessionDuration(int $sessionDuration)

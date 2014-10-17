@@ -38,19 +38,13 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
      * Overwritten just to get the class/method auto completion
      * Be aware that using directly this method to use the methods of the object instead of using
      * the magic methods of the abstract (__call, __get, __set) will prevent to use the cache of Magento
-     * but also some logic related to the securtiy token
+     * but also some logic related to the secure token
      *
      * @return \Diglin\Ricardo\Managers\Sell
      */
     public function getServiceModel()
     {
-        $this->_prepareCredentialToken();
-
-        $model = parent::getServiceModel();
-
-        $this->_updateCredentialToken();
-
-        return $model;
+        return parent::getServiceModel();
     }
 
     /**
@@ -67,7 +61,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
 
             $start = microtime(true);
 
-            $articleResult = $this->getServiceModel()->insertArticle($insertArticle);
+            $articleResult = parent::insertArticle($insertArticle);
 
             if (Mage::helper('diglin_ricento')->isDebugEnabled()) {
                 Mage::log('Time to insert article ' . (microtime(true) - $start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
@@ -108,7 +102,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         try {
             // @todo insert for each associated products in case of configurable
 
-            $relistArticleResult = $this->getServiceModel()->relistArticle($item->getRicardoArticleId());
+            $relistArticleResult = parent::relistArticle($item->getRicardoArticleId());
 
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             $this->_updateCredentialToken();
@@ -145,7 +139,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
                 return false;
             }
 
-            $result = $this->getServiceModel()->$serviceMethod($parameter);
+            $result = $this->$serviceMethod($parameter);
 
             /**
              * Ricardo API is special here - if article is closed, returned values may be empty !!!

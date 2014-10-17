@@ -81,6 +81,16 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     protected $_totalProceed = 0;
 
     /**
+     * @var int
+     */
+    protected $_totalSuccess = 0;
+
+    /**
+     * @var int
+     */
+    protected $_totalError = 0;
+
+    /**
      * @return $this
      */
     public function proceed()
@@ -256,7 +266,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                 $this->_currentJobListing = null;
             }
         } catch (Exception $e) {
-            Mage::logException($e);
+            Mage::log("\n" . $e->__toString(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
             $this->_currentJob = (isset($this->_currentJob)) ? $this->_currentJob : null;
             $this->_setJobError($e);
         }
@@ -365,14 +375,16 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 
     /**
      * @param Exception $e
+     * @param null|Diglin_Ricento_Model_Api_Services_Abstract $lastService
      * @return $this
      */
-    protected function _handleException(Exception $e)
+    protected function _handleException(Exception $e, $lastService = null)
     {
-        if ($this->_getHelper()->isDebugEnabled()) {
-            Mage::log(Mage::getSingleton('diglin_ricento/api_services_sell')->getLastApiDebug(), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+        if ($this->_getHelper()->isDebugEnabled() && $lastService instanceof Diglin_Ricento_Model_Api_Services_Abstract) {
+            Mage::log($lastService->getLastApiDebug(), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
         }
-        Mage::logException($e);
+
+        Mage::log("\n" . $e->__toString(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
 
         $this->_itemMessage = array('errors' =>
             array(
@@ -382,6 +394,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 
         $this->_jobHasError = true;
         $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
+        ++$this->_totalError;
 
         return $this;
     }

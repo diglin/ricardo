@@ -109,7 +109,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
             $openParameter->setInternalReferenceFilter($item->getInternalReference());
 
             try {
-                $openArticles = $this->_getSellerAccount()->getServiceModel()->getOpenArticles($openParameter);
+                $openArticles = $this->_getSellerAccount()->getOpenArticles($openParameter);
 
                 /**
                  * Get Article information from OpenArticles method
@@ -203,7 +203,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
             ->setInternalReferenceFilter($item->getInternalReference())
             ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (1 * 24 * 60 * 60)));
 
-        $articles = $this->_getSellerAccount()->getServiceModel()->getSoldArticles($soldArticlesParameter);
+        $articles = $this->_getSellerAccount()->getSoldArticles($soldArticlesParameter);
         if (count($articles) > 0) {
             $article = $this->_getHelper()->extractData($articles[0]);
         }
@@ -224,7 +224,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
             ->setInternalReferenceFilter($item->getInternalReference())
             ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (1 * 24 * 60 * 60)));
 
-        $articles = $this->_getSellerAccount()->getServiceModel()->getUnsoldArticles($unsoldArticlesParameter);
+        $articles = $this->_getSellerAccount()->getUnsoldArticles($unsoldArticlesParameter);
         if (count($articles) > 0) {
             $article = $this->_getHelper()->extractData($articles[0]);
         }
@@ -237,6 +237,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
      */
     protected function _getSellerAccount()
     {
-        return Mage::getSingleton('diglin_ricento/api_services_selleraccount');
+        return Mage::getSingleton('diglin_ricento/api_services_selleraccount')
+            ->setCurrentWebsite($this->_getListing()->getWebsiteId());
     }
 }

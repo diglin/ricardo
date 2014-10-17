@@ -33,6 +33,7 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
         $jobListing = $this->_currentJobListing;
 
         $sell = Mage::getSingleton('diglin_ricento/api_services_sell');
+        $sell->setCurrentWebsite($this->_getListing()->getWebsiteId());
 
         $insertedArticle = null;
         $hasSuccess = false;
@@ -83,15 +84,17 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_NOTICE;
                     $this->_itemMessage = array('notice' => $this->_getHelper()->__('This item is already listed or has already a ricardo article Id. No insert done to ricardo.ch'));
                     $this->_jobHasSuccess = true;
+                    ++$this->_totalSuccess;
                     // no change needed for the item status
                 } else {
+                    ++$this->_totalError;
                     $this->_jobHasError = true;
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
                     $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_ERROR));
                 }
 
             } catch (Exception $e) {
-                $this->_handleException($e);
+                $this->_handleException($e, $sell);
                 $e = null;
                 // keep going for the next item - no break
             }
@@ -129,5 +132,14 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
         }
 
         return $this;
+    }
+
+    /**
+     * @param string $jobStatus
+     * @return string
+     */
+    protected function _getStatusMessage($jobStatus)
+    {
+        return Mage::helper('diglin_ricento')->__('Report: %d success, %d error(s)', $this->_totalSuccess, $this->_totalError);
     }
 }

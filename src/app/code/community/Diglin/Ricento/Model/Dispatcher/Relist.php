@@ -35,6 +35,7 @@ class Diglin_Ricento_Model_Dispatcher_Relist extends Diglin_Ricento_Model_Dispat
         $jobListing = $this->_currentJobListing;
 
         $sell = Mage::getSingleton('diglin_ricento/api_services_sell');
+        $sell->setCurrentWebsite($this->_getListing()->getWebsiteId());
 
         $relistedArticle = null;
         $articleId = null;

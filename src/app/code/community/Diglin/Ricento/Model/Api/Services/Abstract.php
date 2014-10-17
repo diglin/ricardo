@@ -128,7 +128,8 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                 'allow_authorization_simulation' => ($helper->canSimulateAuthorization()) ? true : false,
                 'customer_username' => $helper->getRicardoUsername($website),
                 'customer_password' => $helper->getRicardoPass($website),
-                'debug' => ($helper->isDebugEnabled($website)) ? true : false
+                'debug' => ($helper->isDebugEnabled($website)) ? true : false,
+                'log_path' => Mage::getBaseDir('var') . DS . 'log' . DS . Diglin_Ricento_Helper_Data::LOG_FILE
             );
 
             Mage::register($registryKey, new Service(new Api(new Config($config))), false);
@@ -214,6 +215,22 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                         return $this;
                     }
                     break;
+                default:
+                    if (method_exists($this->getServiceModel(), $method) && is_callable(array($this->getServiceModel(), $method), true)) {
+
+                        Varien_Profiler::start($profilerName);
+
+                        $this->_prepareCredentialToken();
+
+                        $data = call_user_func_array(array($this->getServiceModel(), $method), $args);
+
+                        $this->_updateCredentialToken();
+
+                        Varien_Profiler::stop($profilerName);
+
+                        return $data;
+                    }
+                    break;
             }
         } catch (\Diglin\Ricardo\Exceptions\CurlException $e) {
             Mage::logException($e);
@@ -222,8 +239,6 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
             $this->_updateCredentialToken();
             $this->_handleSecurityException($e);
         }
-
-        Varien_Profiler::stop($profilerName);
 
         return parent::__call($method, $args);
     }
@@ -274,7 +289,8 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
 
         if ($typeOfToken == ServiceAbstract::TOKEN_TYPE_IDENTIFIED) {
 
-            $security = Mage::getSingleton('diglin_ricento/api_services_security');
+            $security = Mage::getSingleton('diglin_ricento/api_services_security')
+                ->setCurrentWebsite($this->getCurrentWebsite()->getId());
 
             $apiToken = Mage::getModel('diglin_ricento/api_token')
                 ->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_IDENTIFIED, $this->getCurrentWebsite()->getId());
@@ -284,7 +300,8 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                     ->setCredentialToken($apiToken->getToken())
                     ->setCredentialTokenExpirationDate(strtotime($apiToken->getExpirationDate()))
                     ->setCredentialTokenSessionDuration($apiToken->getSessionDuration())
-                    ->setCredentialTokenSessionStart(Mage::helper('diglin_ricento/api')->calculateSessionStart($apiToken->getSessionDuration(), $apiToken->getSessionExpirationDate()));
+                    ->setCredentialTokenSessionStart(Mage::helper('diglin_ricento/api')
+                        ->calculateSessionStart($apiToken->getSessionDuration(), $apiToken->getSessionExpirationDate()));
             }
         }
         return $this;
@@ -298,14 +315,14 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     protected function _updateCredentialToken()
     {
         /* @var $serviceModel \Diglin\Ricardo\Managers\ManagerAbstract */
-        $typeOfToken = self::getServiceModel()->getTypeOfToken();
+        $typeOfToken = @self::getServiceModel()->getTypeOfToken();
 
         // we want to skip the use of magic __call to prevent loop, we use getServiceModel()
-        $security = Mage::getSingleton('diglin_ricento/api_services_security')->getServiceModel();
+        $security = Mage::getSingleton('diglin_ricento/api_services_security')
+            ->setCurrentWebsite($this->getCurrentWebsite()->getId())
+            ->getServiceModel();
 
-        $isTokenRefreshed = $security->getIsCredentialTokenRefreshed();
-
-        if ($typeOfToken == ServiceAbstract::TOKEN_TYPE_IDENTIFIED && $isTokenRefreshed) {
+        if ($typeOfToken == ServiceAbstract::TOKEN_TYPE_IDENTIFIED && $security->getIsCredentialTokenRefreshed()) {
 
             $apiToken = Mage::getModel('diglin_ricento/api_token')
                 ->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_IDENTIFIED, $this->getCurrentWebsite()->getId());
@@ -314,7 +331,10 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                 ->setToken($security->getCredentialToken())
                 ->setTokenType(ServiceAbstract::TOKEN_TYPE_IDENTIFIED)
                 ->setSessionExpirationDate(
-                    Mage::helper('diglin_ricento/api')->calculateSessionExpirationDate($security->getCredentialTokenSessionDuration(), $security->getCredentialTokenSessionStart())
+                    Mage::helper('diglin_ricento/api')
+                        ->calculateSessionExpirationDate(
+                            $security->getCredentialTokenSessionDuration(),
+                            $security->getCredentialTokenSessionStart())
                 )
                 ->save();
 
@@ -338,7 +358,9 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
             $token->delete();
         }
 
-        $security = Mage::getSingleton('diglin_ricento/api_services_security')->getServiceModel();
+        $security = Mage::getSingleton('diglin_ricento/api_services_security')
+            ->setCurrentWebsite($this->getCurrentWebsite()->getId())
+            ->getServiceModel();
 
         Mage::getModel('diglin_ricento/api_token')
             ->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $this->getCurrentWebsite()->getId())
