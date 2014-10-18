@@ -30,7 +30,6 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
             ->join(array('website' => 'core/website'), 'website.website_id=main_table.website_id', array('website_name' => 'name'))
             ->addFieldToSelect(array('entity_id', 'token', 'website_id'))
             ->addFieldToFilter('token_type', 'identified');
-        //TODO include language in collection
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -44,19 +43,12 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
             'type'      => 'text'
         ));
 
-        $this->addColumn('language', array(
-            'header'    => $this->__('Lang'),
-            'sortable'  => false,
-            'width'     => '30px',
-            'index'     => 'language',
-            'type'      => 'text'
-        ));
-
         $this->addColumn('api_token', array(
             'header'    => $this->__('Token'),
             'sortable'  => false,
             'index'     => 'token',
-            'type'      => 'text'
+            'type'      => 'text',
+            'frame_callback' => array($this, 'secrecyToken')
         ));
 
         $this->addColumn('action', array(
@@ -78,5 +70,23 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
         $this->setPagerVisibility(false);
 
         return parent::_prepareColumns();
+    }
+
+    /**
+     * @param $value
+     * @param Varien_Object $row
+     * @param Mage_Adminhtml_Block_Widget_Grid_Column $column
+     * @return string
+     */
+    public function secrecyToken($value, Varien_Object $row, Mage_Adminhtml_Block_Widget_Grid_Column $column)
+    {
+        if ($column->getIndex() == 'token' && !empty($value)) {
+            $value = explode('-', $value);
+            $value[1] = 'XXXX';
+            $value[2] = 'XXXX';
+            $value[3] = 'XXXX';
+            return implode('-', $value);
+        }
+        return $value;
     }
 }
