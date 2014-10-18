@@ -469,7 +469,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             // required
             ->setArticleConditionId($this->getProductCondition())
             ->setArticleDuration(($this->_salesOptions->getSchedulePeriodDays() * 24 * 60)) // In minutes
-            ->setAvailabilityId($this->_shippingPaymentRule->getShippingAvailaibility())
+            ->setAvailabilityId($this->_shippingPaymentRule->getShippingAvailability())
             ->setCategoryId($this->getCategory())
             ->setInitialQuantity($this->getProductQty())
             ->setIsCustomerTemplate(false)

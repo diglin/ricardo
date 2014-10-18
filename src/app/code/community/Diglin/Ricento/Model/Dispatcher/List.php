@@ -80,11 +80,11 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
                     $this->_itemMessage = array('inserted_article' => $insertedArticle);
                     $hasSuccess = true;
                     $this->_jobHasSuccess = true;
+                    ++$this->_totalSuccess;
                 } else if ($item->getRicardoArticleId()) {
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_NOTICE;
                     $this->_itemMessage = array('notice' => $this->_getHelper()->__('This item is already listed or has already a ricardo article Id. No insert done to ricardo.ch'));
                     $this->_jobHasSuccess = true;
-                    ++$this->_totalSuccess;
                     // no change needed for the item status
                 } else {
                     ++$this->_totalError;

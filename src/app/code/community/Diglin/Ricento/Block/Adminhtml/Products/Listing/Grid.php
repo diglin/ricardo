@@ -120,14 +120,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
                         ),
                         'field'   => 'id'
                     ),
-                    array(
-                        'caption' => $helper->__('Relist'),
-                        'url'     => array(
-                            'base'=>'*/*/relist',
-                            'params'=>array('store'=>$this->getRequest()->getParam('store'))
-                        ),
-                        'field'   => 'id'
-                    ),
+//                    array(
+//                        'caption' => $helper->__('Relist'),
+//                        'url'     => array(
+//                            'base'=>'*/*/relist',
+//                            'params'=>array('store'=>$this->getRequest()->getParam('store'))
+//                        ),
+//                        'field'   => 'id'
+//                    ),
                     array(
                         'caption' => $helper->__('Stop List'),
                         'url'     => array(
@@ -139,7 +139,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid extends Mage_Adminhtm
                     array(
                         'caption' => $helper->__('View Logs'),
                         'url'     => array(
-                            'base'=>'*/log/view',
+                            'base'=>'*/log/listing',
                             'params'=>array('store'=>$this->getRequest()->getParam('store'))
                         ),
                         'field'   => 'id'

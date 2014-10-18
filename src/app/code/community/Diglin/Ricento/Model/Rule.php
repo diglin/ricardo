@@ -26,7 +26,7 @@
  * @method string getShippingDescriptionDe()
  * @method string getShippingDescriptionFr()
  * @method float getShippingPrice()
- * @method string getShippingAvailaibility()
+ * @method string getShippingAvailability()
  * @method string getPaymentDescriptionDe()
  * @method string getPaymentDescriptionFr()
  * @method string[] getPaymentMethods()

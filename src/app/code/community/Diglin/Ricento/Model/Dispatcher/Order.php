@@ -307,7 +307,6 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             return false;
         }
 
-        $isNew = false;
         $storeId = $this->_getStoreId($websiteId);
 
         /* @var $customer Mage_Customer_Model_Customer */
