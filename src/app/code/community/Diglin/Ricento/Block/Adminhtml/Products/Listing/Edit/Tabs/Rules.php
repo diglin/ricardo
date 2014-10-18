@@ -94,11 +94,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'class' => 'validate-number',
             'required' => true
         ));
-//        $fieldsetShipping->addField('free_shipping', 'checkbox', array(
-//            'name'    => 'rules[free_shipping]',
-//            'label'   => $this->__('Free shipping'),
-//            'onclick' => 'rulesForm.switchShippingPrice(this);'
-//        ));
         $fieldsetShipping->addField('shipping_cumulative_fee', 'checkbox', array(
             'name' => 'rules[shipping_cumulative_fee]',
             'label' => $this->__('Is Shipping fee cumulative'),
@@ -131,7 +126,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
 
     protected function _initFormValues()
     {
-        $supportedLangs = Mage::helper('diglin_ricento')->getSupportedLang();
+        $supportedLanguages = Mage::helper('diglin_ricento')->getSupportedLang();
 
         $this->getForm()->setValues($this->getShippingPaymentRule());
         $this->getForm()->getElement('shipping_cumulative_fee')->setChecked((bool)$this->getShippingPaymentRule()->getShippingCumulativeFee());
@@ -147,7 +142,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             }
         }
 
-        foreach ($supportedLangs as $supportedLang) {
+        foreach ($supportedLanguages as $supportedLang) {
             $supportedLang = strtolower($supportedLang);
 
             $this->getForm()->getElement('shipping_description_' . $supportedLang)
