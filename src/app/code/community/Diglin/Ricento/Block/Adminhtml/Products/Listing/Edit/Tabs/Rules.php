@@ -54,6 +54,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'label' => $this->__('Payment Methods'),
             'values' => Mage::getSingleton('diglin_ricento/config_source_rules_payment')->getAllOptions(),
             'class' => 'validate-payment-method-combination',
+            'note' => $this->__('Combination possible: Cash, Bank transfer / Post, Other, Credit Card + Other, Credit Card + Bank transfer or Credit Card + Cash'),
             'onchange' => 'rulesForm.togglePaymentDescription($(\''
                 . $htmlIdPrefix . 'payment_methods_'
                 . \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER . '\')); rulesForm.toggleStartPrice($(\'sales_options_sales_auction_start_price\'), \''
