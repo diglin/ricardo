@@ -91,6 +91,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Selloptions
             }
         }
 
+        $this->getForm()->getElement('fieldset_schedule')->removeField('schedule_overwrite_product_date_start');
+
         return $this;
     }
 

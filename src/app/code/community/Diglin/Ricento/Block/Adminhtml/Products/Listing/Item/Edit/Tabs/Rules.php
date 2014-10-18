@@ -63,7 +63,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Edit_Tabs_Rules
         if ($useDefaultCheckbox->getChecked()) {
             $helper->disableForm($this->getForm());
             $useDefaultCheckbox->setDisabled(false);
-//            $this->getForm()->getElement('free_shipping')->setChecked(false);
         }
 
         $publishedLang = $this->_getListing()->getPublishLanguages();
