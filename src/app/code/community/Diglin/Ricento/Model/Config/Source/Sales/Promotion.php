@@ -15,6 +15,7 @@
 class Diglin_Ricento_Model_Config_Source_Sales_Promotion extends Diglin_Ricento_Model_Config_Source_Abstract
 {
     protected $_promotions = array();
+
     /**
      * Return options as value => label array
      *
@@ -31,20 +32,22 @@ class Diglin_Ricento_Model_Config_Source_Sales_Promotion extends Diglin_Ricento_
                 return array();
             }
 
-            $helper = Mage::helper('diglin_ricento/price');
-            $store = Mage::app()->getStore();
+            $websiteId = 0;
+            // Listing exists in a context of products listing edition
+            $listing =  Mage::registry('products_listing');
+            if ($listing->getWebsiteId()) {
+                $websiteId = $listing->getWebsiteId();
+            }
 
-            $helper->startCurrencyEmulation();
+            $helper = Mage::helper('diglin_ricento/price');
 
             $this->_promotions = array(0 => $helper->__('No package'));
 
             foreach ($promotions as $promotion) {
                 if ($promotion['GroupId'] == \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMCATEGORY) {
-                    $this->_promotions[$promotion['PromotionId']] = $helper->__($promotion['PromotionLabel']) . ' - ' . $store->formatPrice($promotion['PromotionFee']);
+                    $this->_promotions[$promotion['PromotionId']] = $helper->__($promotion['PromotionLabel']) . ' - ' . $helper->formatPrice($promotion['PromotionFee'], $websiteId);
                 }
             }
-
-            $helper->stopCurrencyEmulation();
         }
 
         return $this->_promotions;

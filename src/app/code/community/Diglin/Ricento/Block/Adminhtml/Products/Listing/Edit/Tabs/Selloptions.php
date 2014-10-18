@@ -516,9 +516,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         );
 
         $priceHelper = Mage::helper('diglin_ricento/price');
-        $store = Mage::app()->getStore();
-
-        $priceHelper->startCurrencyEmulation();
 
         foreach ($promotions as $promotion) {
             if ($promotion['PromotionId'] == \Diglin\Ricardo\Enums\Article\PromotionCode::PREMIUMHOMEPAGE) {
@@ -527,10 +524,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             }
         }
 
-        $price = $store->formatPrice($price);
-
-        $priceHelper->stopCurrencyEmulation();
-
-        return $price;
+        return $priceHelper->formatPrice($price, $this->_getListing()->getWebsiteId());
     }
 }

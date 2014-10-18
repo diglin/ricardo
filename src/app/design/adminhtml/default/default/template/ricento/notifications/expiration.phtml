@@ -13,7 +13,9 @@
  */
 
 /* @var $website Mage_Core_Model_Website */
-$website = Mage::app()->getWebsite();
+$websites = Mage::app()->getWebsites();
+
+foreach ($websites as $website) {
 ?>
 <?php if ($this->isEnabled($website) && $this->isApiConfigured($website) && $this->isApiGoExpire($website)): ?>
 <div class="notification-global">
@@ -27,3 +29,4 @@ $website = Mage::app()->getWebsite();
     <?php echo $this->__('To hide this message, you have to <a href="%s">disable the extension</a>.', Mage::helper('diglin_ricento')->getConfigurationUrl($website)); ?>
 </div>
 <?php endif ?>
+<?php } ?>

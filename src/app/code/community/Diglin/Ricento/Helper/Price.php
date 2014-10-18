@@ -19,16 +19,16 @@ class Diglin_Ricento_Helper_Price extends Mage_Core_Helper_Abstract
      * Format the price with the ricardo supported currencies
      *
      * @param float $value
-     * @param int $store
+     * @param int $websiteId
      * @return string
      */
-    public function formatPrice($value, $store = null)
+    public function formatPrice($value, $websiteId = null)
     {
-        $this->startCurrencyEmulation();
+        $this->startCurrencyEmulation($websiteId);
 
-        $value = Mage::app()->getStore($store)->formatPrice($value);
+        $value = Mage::app()->getWebsite($websiteId)->getDefaultStore()->formatPrice($value);
 
-        $this->stopCurrencyEmulation();
+        $this->stopCurrencyEmulation($websiteId);
 
         return $value;
     }
@@ -36,11 +36,14 @@ class Diglin_Ricento_Helper_Price extends Mage_Core_Helper_Abstract
     /**
      * Emulate CHF currency in case the current store settings is different as the allowed currency/ies
      *
+     * @param int $websiteId
      * @return $this
      */
-    public function startCurrencyEmulation()
+    public function startCurrencyEmulation($websiteId = null)
     {
-        $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
+        $partnerConfiguration = Mage::getSingleton('diglin_ricento/api_services_system')
+            ->setCurrentWebsite($websiteId)
+            ->getPartnerConfigurations();
 
         if (isset($partnerConfiguration['CurrencyPrefix'])) {
             $ricardoCurrency = $partnerConfiguration['CurrencyPrefix'];
@@ -48,7 +51,7 @@ class Diglin_Ricento_Helper_Price extends Mage_Core_Helper_Abstract
             $ricardoCurrency = Diglin_Ricento_Helper_Data::ALLOWED_CURRENCY;
         }
 
-        $store = Mage::app()->getStore();
+        $store = Mage::app()->getWebsite($websiteId)->getDefaultStore();
         $this->_oldCurrency = $store->getCurrentCurrency();
         $store->setCurrentCurrency(Mage::getModel('directory/currency')->load($ricardoCurrency));
 
@@ -58,11 +61,12 @@ class Diglin_Ricento_Helper_Price extends Mage_Core_Helper_Abstract
     /**
      * Revert the changes done regarding the currency of the current store
      *
+     * @param int $websiteId
      * @return $this
      */
-    public function stopCurrencyEmulation()
+    public function stopCurrencyEmulation($websiteId = null)
     {
-        Mage::app()->getStore()->setCurrentCurrency($this->_oldCurrency);
+        Mage::app()->getWebsite($websiteId)->getDefaultStore()->setCurrentCurrency($this->_oldCurrency);
 
         return $this;
     }

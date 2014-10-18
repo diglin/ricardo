@@ -22,6 +22,7 @@ class Diglin_Ricento_Adminhtml_DashboardController extends Mage_Adminhtml_Contro
         $this->loadLayout();
         $this->renderLayout();
     }
+
     /**
      * Proxy for Google Chart API, reused from core dashboard
      */

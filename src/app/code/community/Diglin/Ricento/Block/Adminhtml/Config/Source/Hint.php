@@ -42,9 +42,11 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
         $buttonAuthorize = null;
 
         try {
+            $website = $this->getRequest()->getParam('website');
+            $websiteId = Mage::app()->getWebsite($website)->getId();
             $buttonAuthorize  = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
                 'label'     => $this->__('API Authorization'),
-                'onclick'   => "window.open('". Mage::helper('diglin_ricento/api')->getValidationUrl() ."', '_blank');",
+                'onclick'   => "window.open('". Mage::helper('diglin_ricento/api')->getValidationUrl($websiteId) ."', '_blank');",
                 'class'     => 'go',
                 'type'      => 'button',
                 'id'        => 'ricardo-api-authorization',

@@ -176,7 +176,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
         $availabilities = Mage::getSingleton('diglin_ricento/config_source_rules_shipping_availability')->toOptionHash();
 
         foreach ($availabilities as $availabilityId => $availabilityText) {
-            if ($availabilityId === (int) $this->getShippingPaymentRule()->getShippingAvailaibility()) {
+            if ($availabilityId === (int) $this->getShippingPaymentRule()->getShippingAvailability()) {
                 return $availabilityText;
             }
         }
@@ -264,7 +264,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
      */
     protected function _getPrice($price)
     {
-        return Mage::helper('diglin_ricento/price')->formatPrice($price);
+        return Mage::helper('diglin_ricento/price')->formatPrice($price, $this->getListing()->getWebsiteId());
     }
 
     /**

@@ -293,7 +293,10 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                 ->setCurrentWebsite($this->getCurrentWebsite()->getId());
 
             $apiToken = Mage::getModel('diglin_ricento/api_token')
-                ->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_IDENTIFIED, $this->getCurrentWebsite()->getId());
+                ->loadByWebsiteAndTokenType(
+                    ServiceAbstract::TOKEN_TYPE_IDENTIFIED,
+                    $this->getCurrentWebsite()->getId()
+                );
 
             if ($apiToken->getId()) {
                 $security->getServiceModel()

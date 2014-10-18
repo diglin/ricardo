@@ -34,7 +34,6 @@ class Diglin_Ricento_Adminhtml_AccountController extends Mage_Adminhtml_Controll
             ->_addBreadcrumb($signupLabel, $signupLabel)
             ->_addContent($block)
             ->renderLayout();
-
     }
 
     public function assistantAction()
@@ -57,6 +56,5 @@ class Diglin_Ricento_Adminhtml_AccountController extends Mage_Adminhtml_Controll
             ->_addBreadcrumb($assistantLabel, $assistantLabel)
             ->_addContent($block)
             ->renderLayout();
-
     }
 }
