@@ -126,9 +126,10 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
     /**
      * Retrieve array of product id's for listing
      *
+     * @param bool $withChildren
      * @return array
      */
-    public function getProductIds()
+    public function getProductIds($withChildren = true)
     {
         if (!$this->getId()) {
             return array();
@@ -136,7 +137,7 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
 
         $array = $this->getData('product_ids');
         if (is_null($array)) {
-            $array = $this->getResource()->getProductIds($this);
+            $array = $this->getResource()->getProductIds($this, $withChildren);
             $this->setData('product_ids', $array);
         }
         return $array;

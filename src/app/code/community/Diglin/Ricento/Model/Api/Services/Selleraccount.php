@@ -22,11 +22,6 @@ class Diglin_Ricento_Model_Api_Services_Selleraccount extends Diglin_Ricento_Mod
     protected $_model = '\Diglin\Ricardo\Managers\SellerAccount';
 
     /**
-     * @var bool
-     */
-    protected $_canUseCache = false;
-
-    /**
      * Overwritten just to get the class/method auto completion
      *
      * Be aware that using directly this method to use the methods of the object instead of using

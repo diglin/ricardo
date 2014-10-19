@@ -100,8 +100,6 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         }
 
         try {
-            // @todo insert for each associated products in case of configurable
-
             $relistArticleResult = parent::relistArticle($item->getRicardoArticleId());
 
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
@@ -132,8 +130,6 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         }
 
         try {
-            // @todo insert for each associated products in case of configurable
-
             $parameter = $item->$parameterMethod();
             if (!$parameter) {
                 return false;

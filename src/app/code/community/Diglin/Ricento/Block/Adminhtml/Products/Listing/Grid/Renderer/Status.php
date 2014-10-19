@@ -29,12 +29,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Grid_Renderer_Status
         $sqlListed = $readAdapter->select()
             ->from($resourceModel->getTable('diglin_ricento/products_listing_item'), new Zend_Db_Expr('COUNT(*)'))
             ->where('products_listing_id = ?', $row->getId())
-            ->where('status = ?', Diglin_Ricento_Helper_Data::STATUS_LISTED);
+            ->where('status = ?', Diglin_Ricento_Helper_Data::STATUS_LISTED)
+            ->where('parent_item_id IS NULL');
 
         $sqlNotListed = $readAdapter->select()
             ->from($resourceModel->getTable('diglin_ricento/products_listing_item'), new Zend_Db_Expr('COUNT(*)'))
             ->where('products_listing_id = ?', $row->getId())
-            ->where('status != ?', Diglin_Ricento_Helper_Data::STATUS_LISTED);
+            ->where('status != ?', Diglin_Ricento_Helper_Data::STATUS_LISTED)
+            ->where('parent_item_id IS NULL');
 
 
         $totalListed = $readAdapter->fetchOne($sqlListed);

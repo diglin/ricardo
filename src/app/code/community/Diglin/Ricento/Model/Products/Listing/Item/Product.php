@@ -313,17 +313,13 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
      */
     public function getCategoryIds($productId = null)
     {
-        if (!is_null($productId) && !is_null($this->_model) && $this->_model->getId() && $this->_model->getId() == $productId) {
-            return $this->_model->getTypeId();
-        }
-
         $productId = (int) (is_null($productId) ? $this->_productId : $productId);
 
         if (empty($productId) && empty($this->_category_ids)) {
             return false;
         }
 
-        if (empty($this->_category_ids) || $productId != $this->_productId) {
+        if ($productId && empty($this->_category_ids) || $productId != $this->_productId) {
             $this->getProductInformation($productId);
         }
 
@@ -917,6 +913,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
         if (empty($this->_configurable_attributes)) {
             $this->_configurable_attributes = Mage::getResourceModel('catalog/product_type_configurable_attribute_collection')
+                ->orderByPosition()
                 ->setProductFilter($this->getMagentoProduct());
         }
 
@@ -946,7 +943,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
                     $prices = $attribute->getData('prices');
                     foreach ($prices as $price) {
                         if ($price['pricing_value'] != 0) {
-                            $optionPrices[$i][] = $this->_calcSelectionPrice($price, $productPrice);
+                            $optionPrices[$i][] = Mage::helper('diglin_ricento/price')->calcSelectionPrice($price, $productPrice);
                         }
                     }
 
@@ -959,24 +956,6 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
         }
 
         return ($productPrice + $finalMinPrice);
-    }
-
-    /**
-     * Calculate configurable product selection price
-     *
-     * @param   array $priceInfo
-     * @param   float $productPrice
-     * @return  float
-     */
-    protected function _calcSelectionPrice($priceInfo, $productPrice)
-    {
-        if($priceInfo['is_percent']) {
-            $ratio = $priceInfo['pricing_value']/100;
-            $price = $productPrice * $ratio;
-        } else {
-            $price = $priceInfo['pricing_value'];
-        }
-        return $price;
     }
 
     /**

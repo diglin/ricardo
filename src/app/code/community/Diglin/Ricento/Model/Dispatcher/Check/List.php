@@ -155,6 +155,11 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
     {
         // Ready to list the product automatically which are ready for that
 
+        /**
+         * Prepare products listing item for configurable products
+         */
+        $this->_prepareConfigurableProduct();
+
         if ($this->_jobHasSuccess && $this->_progressStatus == Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED) {
 
             $countReadyItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->coundReadyTolist($this->_productsListingId);
@@ -182,17 +187,130 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
     }
 
     /**
+     * Create products listing items for configurable product
+     *
+     * @return $this
+     */
+    protected function _prepareConfigurableProduct()
+    {
+        /**
+         * Get children products of configurable product
+         */
+        $collectionListingItemBis = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
+        $collectionListingItemBis
+            ->addFieldToFilter('parent_product_id', array('notnull' => 1))
+            ->addFieldToFilter('status', Diglin_Ricento_Helper_Data::STATUS_READY)
+            ->addFieldToFilter('products_listing_id', $this->_productsListingId)
+            ->getSelect()
+            ->group('parent_product_id');
+
+        $parentProductIds = $collectionListingItemBis->getColumnValues('parent_product_id');
+
+        /**
+         * Get the list of configurable products
+         */
+        $collectionListingItem = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
+        $collectionListingItem
+            ->addFieldToFilter('products_listing_id', $this->_productsListingId)
+            ->addFieldToFilter('status', Diglin_Ricento_Helper_Data::STATUS_READY)
+            ->getConfigurableProducts();
+
+        if (count($parentProductIds)) {
+            $collectionListingItem->addFieldToFilter('product_id', array('nin' => $parentProductIds));
+        }
+
+        /**
+         * Get all configurable product of a list
+         *
+         * @var $item Diglin_Ricento_Model_Products_Listing_Item
+         */
+        foreach ($collectionListingItem->getItems() as $item) {
+
+            /**
+             * Get all children products
+             */
+            $collection = Mage::getResourceModel('catalog/product_collection')
+                ->addAttributeToSelect('sku')
+                ->addFilterByRequiredOptions()
+                ->addFieldToFilter('entity_id', array('in' => $item->getProduct()->getUsedProductIds()));
+
+            $attributes = $item->getProduct()->getConfigurableAttributes();
+
+            foreach ($attributes as $attribute) {
+                $collection->addAttributeToSelect($attribute->getProductAttribute()->getAttributeCode());
+                $collection->addAttributeToFilter($attribute->getProductAttribute()->getAttributeCode(), array('notnull' => 1));
+            }
+
+            foreach ($collection->getItems() as $childProduct) {
+
+                $configurableChild = array();
+
+                foreach ($attributes as $attribute) {
+
+                    $productAttribute = $attribute->getProductAttribute();
+                    $attributeValueId = $childProduct->getData($productAttribute->getAttributeCode());
+                    if ($attributeValueId) {
+
+                        $priceVariation = array();
+                        $subtitle = $productAttribute->getFrontendLabel() . ': ';
+
+                        /**
+                         * Get price variation
+                         */
+                        $prices = $attribute->getData('prices');
+                        foreach ($prices as $price) {
+                            if ($price['pricing_value'] != 0 && $price['value_index'] == $attributeValueId) {
+                                $priceVariation = array('pricing_value' => $price['pricing_value'], 'is_percent' => $price['is_percent']);
+                                break;
+                            }
+                        }
+
+                        /**
+                         * Get attribute label to be used as subtitle
+                         */
+                        foreach ($productAttribute->getSource()->getAllOptions() as $option) {
+                            if ($attributeValueId == $option['value']) {
+                                $subtitle .= $option['label'];
+                            }
+                        }
+
+                        $configurableChild['options'][$attributeValueId] = array_merge(array('subtitle' => $subtitle), $priceVariation);
+                    }
+                }
+
+                $configurableChild['stock_qty'] = Mage::getModel('cataloginventory/stock_item')->loadByProduct($childProduct->getId())->getQty();
+
+                /**
+                 * Save as new products listing item
+                 */
+                $itemChild = clone $item;
+                $itemChild
+                    ->setId(null)
+                    ->setCreatedAt(Mage::getSingleton('core/date')->gmtDate())
+                    ->setUpdatedAt(null)
+                    ->setProductId($childProduct->getId())
+                    ->setAdditionalData(Mage::helper('core')->jsonEncode($configurableChild))
+                    ->setParentItemId($item->getId())
+                    ->setParentProductId($item->getProductId())
+                    ->save();
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @param string $jobStatus
      * @return string
      */
     protected function _getStatusMessage($jobStatus)
     {
         $message = '';
-        $helper =  Mage::helper('diglin_ricento');
+        $helper = Mage::helper('diglin_ricento');
         if ($jobStatus != Diglin_Ricento_Model_Sync_Job::STATUS_SUCCESS) {
             $message = $helper->__('Report: %d success, %d warning(s), %d error(s)', $this->_totalSuccess, $this->_totalWarning, $this->_totalError);
             $message .= '<br>';
-            $message .= $helper->__('Successful products checked are going to be listed. To force to list products having a warning, please <a href="%s">clicking here</a>. Products with an error won\'t be synchronized, you have to fix the problem first.', $this->_getListUrl() );
+            $message .= $helper->__('Successful products checked are going to be listed. To force to list products having a warning, please <a href="%s">click here</a>. Products with an error won\'t be synchronized, you have to fix the problem first.', $this->_getListUrl());
         }
         return $message;
     }

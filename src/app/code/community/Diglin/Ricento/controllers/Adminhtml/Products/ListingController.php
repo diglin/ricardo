@@ -406,8 +406,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $countPendingItems = Mage::getResourceModel('diglin_ricento/products_listing_item')->countPendingItems($productListing->getId());
 
         if ($countPendingItems == 0) {
-            $this->_getSession()->addError($this->__('There is no product ready to be listed. Please, add products to your products listing "%s".', $productListing->getTitle()));
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addError($this->__('There is no pending product to check.'));
+            $this->_redirect('*/*/edit', array('id' => $productListing->getId()));
             return;
         }
 
@@ -419,7 +419,11 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     {
         $return = true;
         try {
-            Mage::getSingleton('diglin_ricento/dispatcher')->dispatch(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST)->proceed();
+
+            Mage::getSingleton('diglin_ricento/dispatcher')
+                ->dispatch(Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST)
+                ->proceed();
+
         } catch (Exception $e) {
             Mage::logException($e);
             $return = false;

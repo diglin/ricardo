@@ -123,7 +123,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
 
         $store = Mage::app()->getWebsite($this->getListing()->getWebsiteId())->getDefaultStore();
         $this->addColumn('price', array(
-            'header'=> Mage::helper('catalog')->__('Price'),
+            'header'=> Mage::helper('diglin_ricento')->__('Price Catalog'),
             'type'  => 'price',
             'currency_code' => $store->getBaseCurrency()->getCode(),
             'index' => 'price',
@@ -238,7 +238,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     {
         $products = $this->getRequest()->getPost('selected_products');
         if (is_null($products)) {
-            $products = $this->getListing()->getProductIds();
+            $products = $this->getListing()->getProductIds(false);
         }
         return $products;
     }

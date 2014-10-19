@@ -27,16 +27,22 @@ class Diglin_Ricento_Model_Resource_Products_Listing extends Mage_Core_Model_Res
      * Get product ids of listing items
      *
      * @param Diglin_Ricento_Model_Products_Listing $listing
+     * @param bool $withChildren
      * @return array
      */
-    public function getProductIds($listing)
+    public function getProductIds($listing, $withChildren = true)
     {
         $readerConnection = $this->_getReadAdapter();
 
         $select = $readerConnection->select()
             ->from($this->getTable('diglin_ricento/products_listing_item'), 'product_id')
             ->where('products_listing_id = :listing_id');
-        $bind = array('listing_id' => (int)$listing->getId());
+
+        $bind = array('listing_id' => (int) $listing->getId());
+
+        if (!$withChildren) {
+            $select->where('parent_product_id IS NULL');
+        }
 
         return $readerConnection->fetchCol($select, $bind);
     }

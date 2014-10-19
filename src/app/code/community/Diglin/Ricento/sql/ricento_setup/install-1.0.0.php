@@ -81,7 +81,7 @@ $tableProductListings->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER,
 $installer->getConnection()->createTable($tableProductListings);
 
 $tableProductListingItems = $installer->getConnection()->newTable($productListingItemTable);
-$tableProductListingItems->addColumn('item§', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
+$tableProductListingItems->addColumn('item_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('ricardo_article_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
     ->addColumn('is_planned', Varien_Db_Ddl_Table::TYPE_SMALLINT, null, array('unsigned' => true, 'nullable' => true))
     ->addColumn('qty_inventory', Varien_Db_Ddl_Table::TYPE_DECIMAL, null, array('unsigned' => true, 'nullable' => true))

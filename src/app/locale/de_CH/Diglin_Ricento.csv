@@ -78,7 +78,7 @@
 "errors","Fehler"
 "warnings","Warnungen"
 "success","Erfolgreich"
-"The Job has finished with %s for the <a href=""%s"" target=""_blank"">products listing %d</a>. Please, view the <a href=""%s"">log</a> for details.","Der Job wurd mit %s für das  <a href=""%s"" target=""_blank"">Produktlisting %d</a> beendet. Bitte schauen Sie in den <a href=""%s"">Log</a> für Details."
+"The Job has finished with %s for the products listing <a href=""%s"" target=""_blank"">""%s""</a>. Please, view the <a href=""%s"">log</a> for details.","Der Job wurd mit %s für das Produktlisting <a href=""%s"" target=""_blank"">""%s""</a> beendet. Bitte schauen Sie in den <a href=""%s"">Log</a> für Details."
 "No item is ready for this job. No action has been done.","Das Produkt ist bereit für den Job. Es wurde keine Aktion durchgeführt."
 "Error Code: %d","Fehlercode: %d"
 "Notice","Hinweis"

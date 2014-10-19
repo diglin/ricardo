@@ -209,7 +209,10 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                 $this->_proceed();
 
                 $end = microtime(true);
-                Mage::log('Time to run the job id ' . $this->_currentJob->getId() . ' in ' . ($end - $start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+
+                if ($helper->isDebugEnabled()) {
+                    Mage::log('Time to run the job id ' . $this->_currentJob->getId() . ' in ' . ($end - $start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
+                }
 
                 if ($this->_jobHasError || $this->_currentJob->getJobStatus() == Diglin_Ricento_Model_Sync_Job::STATUS_ERROR) {
                     $typeError = $helper->__('errors');
@@ -236,10 +239,10 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                         ->setTotalProceed($this->_totalProceed)
                         ->save();
 
-                    $message[] = $helper->__('The Job has finished with %s for the <a href="%s" target="_blank">products listing %d</a>. Please, view the <a href="%s">log</a> for details.',
+                    $message[] = $helper->__('The Job has finished with %s for the products listing <a href="%s" target="_blank">"%s"</a>. Please, view the <a href="%s">log</a> for details.',
                         $typeError,
                         $this->_getProductListingEditUrl(),
-                        $this->_productsListingId,
+                        $this->_getListing()->getTitle(),
                         $this->_getLogListingUrl()
                     );
 

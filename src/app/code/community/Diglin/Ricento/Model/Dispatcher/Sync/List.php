@@ -238,6 +238,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
     protected function _getSellerAccount()
     {
         return Mage::getSingleton('diglin_ricento/api_services_selleraccount')
+            ->setCanUseCache(false)
             ->setCurrentWebsite($this->_getListing()->getWebsiteId());
     }
 }

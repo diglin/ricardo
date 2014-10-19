@@ -505,7 +505,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @fixme potential problem with missing Mage::getSingleton('diglin_ricento/api_services_selleraccount')->setCurrentWebsite
      * not fixed at the moment bc Diglin_Ricento_Model_Validate_Rules_Methods use this helper and may be not in a context
-     * of having relevant information about which website to use (default is used at the mommnt)
+     * of having relevant information about which website to use (default is used at the moment)
      *
      * @return bool
      */

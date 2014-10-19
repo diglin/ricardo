@@ -101,8 +101,9 @@ class Diglin_Ricento_Adminhtml_Products_CategoryController extends Diglin_Ricent
                     /* Only supported products type, not already in the current & other list */
                     $productCollection = Mage::getResourceModel('catalog/product_collection')
                         ->addWebsiteFilter($this->_getListing()->getWebsiteId())
-                        ->addFieldToFilter('type_id', array('in' => $supportedTypes))
                         ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
+                        ->addFieldToFilter('type_id', array('in' => $supportedTypes))
+                        ->addFieldToFilter('visibility', array('neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE ))
                         ->joinField('in_other_list',
                             'diglin_ricento/products_listing_item',
                             new Zend_Db_Expr('products_listing_id IS NOT NULL'),

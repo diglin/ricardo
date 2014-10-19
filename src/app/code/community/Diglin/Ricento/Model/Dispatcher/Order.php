@@ -141,7 +141,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             ->setArticleIdsFilter($articleIds)
             ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (3 * 24 * 60 * 60)));
 
-        $sellerAccountService = Mage::getSingleton('diglin_ricento/api_services_selleraccount');
+        $sellerAccountService = Mage::getSingleton('diglin_ricento/api_services_selleraccount')->setCanUseCache(false);
         $sellerAccountService->setCurrentWebsite($this->_getListing()->getWebsiteId());
 
         $soldArticles = $sellerAccountService

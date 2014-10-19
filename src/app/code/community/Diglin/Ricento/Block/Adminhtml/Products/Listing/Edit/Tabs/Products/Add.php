@@ -59,6 +59,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Add
             ->addWebsiteFilter($this->getListing()->getWebsiteId())
             ->addAttributeToFilter('type_id', array('in' => $this->_helper->getAllowedProductTypes()))
             ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
+            ->addFieldToFilter('visibility', array('neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE ))
             ->joinField('stock_qty',
                 'cataloginventory/stock_item',
                 'qty',

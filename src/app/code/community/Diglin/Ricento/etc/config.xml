@@ -341,7 +341,7 @@
             </ricento_sync_jobs>
             <ricento_async_jobs>
                 <schedule>
-                    <cron_expr>0,30 * * * *</cron_expr>
+                    <cron_expr>*/10 * * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>diglin_ricento/cron::async</model>
