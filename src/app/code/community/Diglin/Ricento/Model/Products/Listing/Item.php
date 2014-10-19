@@ -289,7 +289,9 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
      */
     public function getProductDescription($sub = true)
     {
-        return $this->getProduct()->getDescription($this->getBaseProductId(), $this->getStoreId(), $sub);
+        $description = $this->getProduct()->getDescription($this->getBaseProductId(), $this->getStoreId(), $sub);
+
+        return strip_tags($description, implode('', Mage::helper('diglin_ricento')->getAllowedTags()));
     }
 
     /**

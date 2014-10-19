@@ -612,4 +612,17 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return Mage::getStoreConfigFlag(self::CFG_DECREASE_INVENTORY);
     }
+
+    public function getAllowedTags()
+    {
+        $allowedTags = array();
+        $partnerConfiguration = (array) Mage::getSingleton('diglin_ricento/api_services_system')->getPartnerConfigurations();
+        if (isset($partnerConfiguration['GrantedDescriptionTags'])) {
+            foreach ($partnerConfiguration['GrantedDescriptionTags'] as $tag) {
+                $allowedTags[] = '<'.$tag.'>';
+            }
+        }
+
+        return $allowedTags;
+    }
 }
