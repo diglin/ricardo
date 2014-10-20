@@ -87,6 +87,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'product_id=entity_id',
                 '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
                 'left'
+            )->joinField('ricardo_article_id',
+                'diglin_ricento/products_listing_item',
+                'ricardo_article_id',
+                'product_id=entity_id',
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
             )->joinField('has_custom_options',
                 'catalog/product_option',
                 new Zend_Db_Expr('option_id IS NOT NULL'),
@@ -142,6 +148,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             'width'     => '120',
             'index'     => 'sku'
         ));
+
+        $this->addColumn('ricardo_article_id', array(
+            'header'    => Mage::helper('diglin_ricento')->__('Ricardo Article ID'),
+            'width'     => '120',
+            'index'     => 'ricardo_article_id'
+        ));
+
         $this->addColumn('qty', array(
             'header'    => Mage::helper('catalog')->__('Inventory'),
             'type'      => 'number',

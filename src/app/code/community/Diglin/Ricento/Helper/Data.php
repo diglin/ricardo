@@ -613,6 +613,11 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfigFlag(self::CFG_DECREASE_INVENTORY);
     }
 
+    /**
+     * Get allowed HTML Tags from the API
+     *
+     * @return array
+     */
     public function getAllowedTags()
     {
         $allowedTags = array();

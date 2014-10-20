@@ -387,9 +387,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
     {
         if ($e->getCode() == \Diglin\Ricardo\Enums\SecurityErrors::TOKEN_AUTHORIZATION) {
 
-            if (Mage::helper('diglin_ricento')->isDebugEnabled()) {
-                Mage::logException($e);
-            }
+            Mage::logException($e);
 
             $ricentoException = new Diglin_Ricento_Exception($e->getMessage(), $e->getCode());
             $ricentoException->setNeedAuthorization(true);
