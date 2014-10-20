@@ -102,7 +102,8 @@ class Diglin_Ricento_Helper_Api extends Mage_Core_Helper_Abstract
     public function getValidationUrl($websiteId = 0)
     {
         return Mage::getSingleton('diglin_ricento/api_services_security')
-            ->setCurrentWebsite($websiteId)
+//@fixme there is issue with getting credential token in multi shop so for real website support start to fix here - not planned at the moment
+//            ->setCurrentWebsite($websiteId)
             ->getValidationUrl();
     }
 }

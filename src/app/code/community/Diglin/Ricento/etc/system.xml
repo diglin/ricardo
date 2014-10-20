@@ -104,7 +104,7 @@
                     <label>API Token Configuration</label>
                     <sort_order>20</sort_order>
                     <show_in_default>1</show_in_default>
-                    <show_in_website>1</show_in_website>
+                    <show_in_website>0</show_in_website>
                     <show_in_store>0</show_in_store>
                     <fields>
 
@@ -114,7 +114,7 @@
                             <comment><![CDATA[Enable the ricardo extension for this website]]></comment>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </general_api_config>
                         <enabled module="diglin_ricento" translate="label comment">
@@ -123,7 +123,7 @@
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </enabled>
                         <dev_mode module="diglin_ricento" translate="label comment">
@@ -133,7 +133,7 @@
                             <comment><![CDATA[If you enable this configuration, all API requests will be send to the Ricardo Sandbox instead to use the production servers. Be aware, you have to provide others partner Keys and Passwords specific for dev environment below.]]></comment>
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </dev_mode>
                         <debug module="diglin_ricento" translate="label comment">
@@ -200,7 +200,7 @@
                             <sort_order>20</sort_order>
                             <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <depends>
                                 <enabled>1</enabled>
@@ -208,11 +208,11 @@
                         </api_de>
                         <!-- PRODUCTION -->
                         <partner_key_de module="diglin_ricento" translate="label comment">
-                            <label>German Partner Key</label>
+                            <label>PROD German Partner Key</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -222,12 +222,12 @@
                             </depends>
                         </partner_key_de>
                         <partner_pass_de module="diglin_ricento" translate="label comment">
-                            <label>German Partner Password</label>
+                            <label>PROD German Partner Password</label>
                             <frontend_type>obscure</frontend_type>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -243,7 +243,7 @@
                             <frontend_type>text</frontend_type>
                             <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -258,7 +258,7 @@
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -273,7 +273,7 @@
                             <sort_order>35</sort_order>
                             <frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <depends>
                                 <enabled>1</enabled>
@@ -281,11 +281,11 @@
                         </api_fr>
                         <!-- PRODUCTION -->
                         <partner_key_fr module="diglin_ricento" translate="label comment">
-                            <label>French Partner Key</label>
+                            <label>PROD French Partner Key</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -295,12 +295,12 @@
                             </depends>
                         </partner_key_fr>
                         <partner_pass_fr module="diglin_ricento" translate="label comment">
-                            <label>French Partner Password</label>
+                            <label>PROD French Partner Password</label>
                             <frontend_type>obscure</frontend_type>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
                             <sort_order>45</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
@@ -330,7 +330,7 @@
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
                             <sort_order>45</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
                             <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
