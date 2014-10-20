@@ -160,6 +160,16 @@ class Service
     }
 
     /**
+     * @param \Diglin\Ricardo\Managers\Security $securityManager
+     * @return $this
+     */
+    public function setSecurityManager($securityManager)
+    {
+        $this->_securityManager = $securityManager;
+        return $this;
+    }
+
+    /**
      * Execute a method on the service and return an array
      *
      * @param string $serviceName

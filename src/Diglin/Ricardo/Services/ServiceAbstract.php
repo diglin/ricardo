@@ -40,7 +40,7 @@ abstract class ServiceAbstract
      */
     public function getService()
     {
-        return $this->_service;
+            return $this->_service;
     }
 
     /**

@@ -11,7 +11,7 @@
 namespace Diglin\Ricardo\Managers\SellerAccount\Parameter;
 
 use Diglin\Ricardo\Enums\Article\ArticlesTypes;
-use Diglin\Ricardo\Enums\Customer\OpenArticlesSortBy;
+use Diglin\Ricardo\Enums\Customer\SoldArticlesSortBy;
 use Diglin\Ricardo\Enums\Customer\PaidStatusFilter;
 use Diglin\Ricardo\Enums\Customer\ShippedStatusFilter;
 use \Diglin\Ricardo\Managers\ParameterAbstract;
@@ -100,7 +100,7 @@ class SoldArticlesParameter extends ParameterAbstract
      *
      * @var int
      */
-    protected $_sortBy;
+    protected $_sortBy = SoldArticlesSortBy::SORTBYENDDATE;
 
     /**
      * Optional

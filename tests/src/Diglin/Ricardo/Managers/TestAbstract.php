@@ -163,7 +163,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             ->setDeliveryCost(5)
             ->setIsDeliveryFree(0)
             ->setDeliveryId($deliveryConditions[0]['DeliveryConditionId'])
-            ->setIsCumulativeShipping(0)
+            ->setIsCumulativeShipping(1)
             // optional
             ->setDeliveryPackageSizeId($deliveryConditions[0]['PackageSizes'][0]['PackageSizeId']);
 
@@ -185,7 +185,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             ->setArticleDuration(8 * 24 * 60) // 7 days
             ->setAvailabilityId($availabilities[0]['AvailabilityId'])
             ->setCategoryId(38828)
-            ->setInitialQuantity(1)
+            ->setInitialQuantity(100)
             ->setIsCustomerTemplate(false)
             ->setMainPictureId(1)
             ->setMaxRelistCount(5)

@@ -106,4 +106,9 @@ class Config extends \Zend_Config implements ConfigInterface
     {
         return $this->get('partner_url');
     }
+
+    public function getLogFilePath()
+    {
+        return $this->get('log_path');
+    }
 }

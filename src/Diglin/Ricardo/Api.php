@@ -89,8 +89,7 @@ class Api implements ApiInterface
 
         $ch = curl_init();
         curl_setopt_array($ch, $curlOptions);
-        $return = curl_exec($ch);
-        $result = json_decode($return, true);
+        $return = json_decode(curl_exec($ch), true);
 
         if ($this->_debug) {
             // It may take too much memory here as some parameter are pictures bytes
@@ -99,6 +98,14 @@ class Api implements ApiInterface
                 'params' => print_r($params, true),
                 'return' => $return
             );
+
+            if ($this->getConfig()->getLogFilePath()) {
+                $dir = dirname($this->getConfig()->getLogFilePath());
+                @mkdir($dir, 0775);
+                if (is_writable($dir . DIRECTORY_SEPARATOR)) {
+                    file_put_contents($this->getConfig()->getLogFilePath(), print_r($this->_lastDebug, true), FILE_APPEND);
+                }
+            }
         }
 
         if (curl_errno($ch)) {
@@ -107,7 +114,7 @@ class Api implements ApiInterface
 
         curl_close($ch);
 
-        return $result;
+        return $return;
     }
 
     /**
