@@ -21,14 +21,19 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
      */
     public function render(Varien_Data_Form_Element_Abstract $element)
     {
-        $buttonSignUp = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
-            'label'     => $this->__('Sign Up to Ricardo API'),
-            'onclick'   => "window.open('" . Mage::helper('diglin_ricento')->getRicardoSignupApiUrl() . "', '_blank');",
-            'class'     => 'go',
-            'type'      => 'button',
-            'id'        => 'ricardo-account',
-        ))
-        ->toHtml();
+        $website = $this->getRequest()->getParam('website');
+        $websiteId = Mage::app()->getWebsite($website)->getId();
+
+        if (Mage::helper('diglin_ricento')->isConfigured($websiteId)) {
+            $buttonSignUp = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
+                'label'     => $this->__('Sign Up to Ricardo API'),
+                'onclick'   => "window.open('" . Mage::helper('diglin_ricento')->getRicardoSignupApiUrl() . "', '_blank');",
+                'class'     => 'go',
+                'type'      => 'button',
+                'id'        => 'ricardo-account',
+            ))
+            ->toHtml();
+        }
 
         $buttonDashboard  = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
             'label'     => $this->__('Ricardo Assistant'),
@@ -42,8 +47,6 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
         $buttonAuthorize = null;
 
         try {
-            $website = $this->getRequest()->getParam('website');
-            $websiteId = Mage::app()->getWebsite($website)->getId();
             $buttonAuthorize  = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
                 'label'     => $this->__('API Authorization'),
                 'onclick'   => "window.open('". Mage::helper('diglin_ricento/api')->getValidationUrl($websiteId) ."', '_blank');",
