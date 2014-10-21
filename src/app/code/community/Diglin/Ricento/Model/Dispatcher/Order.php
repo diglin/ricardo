@@ -34,16 +34,19 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         $jobType = Diglin_Ricento_Model_Sync_Job::TYPE_ORDER;
 
         $productsListingResource = Mage::getResourceModel('diglin_ricento/products_listing');
+
         $readListingConnection = $productsListingResource->getReadConnection();
-        $select = $readListingConnection->select()
-            ->from($productsListingResource->getTable('diglin_ricento/products_listing'), 'entity_id');
+        $select = $readListingConnection
+                    ->select()
+                    ->from($productsListingResource->getTable('diglin_ricento/products_listing'), 'entity_id');
 
         $listingIds = $readListingConnection->fetchCol($select);
 
         foreach ($listingIds as $listingId) {
             $itemResource = Mage::getResourceModel('diglin_ricento/products_listing_item');
             $readConnection = $itemResource->getReadConnection();
-            $select = $readConnection->select()
+            $select = $readConnection
+                ->select()
                 ->from($itemResource->getTable('diglin_ricento/products_listing_item'), 'item_id')
                 ->where('products_listing_id = :id')
                 ->where('status = :status');
@@ -54,6 +57,8 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             if ($countListedItems == 0) {
                 continue;
             }
+
+            Mage::getResourceModel('diglin_ricento/sync_job')->cleanupPendingJob($this->_jobType, $listingId);
 
             $job = Mage::getModel('diglin_ricento/sync_job');
             $job
@@ -153,8 +158,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         $sellerAccountService = Mage::getSingleton('diglin_ricento/api_services_selleraccount')->setCanUseCache(false);
         $sellerAccountService->setCurrentWebsite($this->_getListing()->getWebsiteId());
 
-        $soldArticles = $sellerAccountService
-            ->getSoldArticles($soldArticlesParameter);
+        $soldArticles = $sellerAccountService->getSoldArticles($soldArticlesParameter);
 
         $soldArticles = array_reverse($soldArticles);
 
@@ -472,15 +476,17 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     ->load($transaction->getProductId())
                     ->setSkipCheckRequiredOption(true);
 
-                $quoteItem = $quote->addProduct($product, $infoBuyRequest)
-                    // Set unit custom price
-                    ->setCustomPrice($transaction->getTotalBidPrice())
-                    ->setOriginalCustomPrice($transaction->getTotalBidPrice());
+                $quoteItem = $quote->addProduct($product, $infoBuyRequest);
 
                 // Error with a product which is missing or have required options
                 if (is_string($quoteItem)) {
                     Mage::throwException($quoteItem); // @todo - do we want really block the process at this level? Other solution to inform about the error?
                 }
+
+                $quoteItem
+                    // Set unit custom price
+                    ->setCustomPrice($transaction->getTotalBidPrice())
+                    ->setOriginalCustomPrice($transaction->getTotalBidPrice());
 
                 /**
                  * 3. Set shipping information, price, etc

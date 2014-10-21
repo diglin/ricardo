@@ -119,7 +119,7 @@ class Diglin_Ricento_Model_Observer
 
         if ($block instanceof Mage_Adminhtml_Block_Customer_Edit_Tab_Account) {
             $block->getForm()->getElement('ricardo_username')->setDisabled(true);
-            $block->getForm()->getElement('ricardo_customer_id')->setDisabled(true);
+            $block->getForm()->getElement('ricardo_id')->setDisabled(true);
         }
         return $this;
     }

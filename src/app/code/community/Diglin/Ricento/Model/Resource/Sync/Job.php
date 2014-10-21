@@ -42,4 +42,30 @@ class Diglin_Ricento_Model_Resource_Sync_Job extends Diglin_Ricento_Model_Resour
 
         return $readConnection->fetchOne($select, $bind);
     }
+
+    /**
+     * @param $jobType
+     * @param $productListingId
+     * @return $this
+     */
+    public function cleanupPendingJob($jobType, $productListingId)
+    {
+        $readConnection = $this->_getReadAdapter();
+
+        $select = $readConnection
+            ->select()
+            ->from(array('sj' => $this->getTable('diglin_ricento/sync_job')), 'job_id')
+            ->join(array('jl' => $this->getTable('diglin_ricento/sync_job_listing')),
+                'jl.job_id = sj.job_id', '*')
+            ->where('jl.products_listing_id = ?', $productListingId)
+            ->where('job_Type = ? ', $jobType)
+            ->where('progress = ?', Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
+            ->deleteFromSelect('sj');
+
+        if (!empty($select) && !is_numeric($select)) {
+            $readConnection->query($select);
+        }
+
+        return $this;
+    }
 }
