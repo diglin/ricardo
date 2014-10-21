@@ -13,7 +13,7 @@
 $installer = $this;
 
 // Customer Attributes
-$installer->deleteTableRow($installer->getTable('eav_attribute'), 'attribute_code', 'ricardo_customer_id');
+$installer->deleteTableRow($installer->getTable('eav_attribute'), 'attribute_code', 'ricardo_id');
 $installer->deleteTableRow($installer->getTable('eav_attribute'), 'attribute_code', 'ricardo_username');
 
 // Product Attributes
@@ -23,8 +23,23 @@ $installer->deleteTableRow($installer->getTable('eav_attribute'), 'attribute_cod
 $installer->deleteTableRow($installer->getTable('eav_attribute'), 'attribute_code', 'ricardo_description');
 $installer->deleteTableRow($installer->getTable('eav_attribute'), 'attribute_code', 'ricardo_condition');
 
+// Sales Quote Columns
 $installer->getConnection()->dropColumn($installer->getTable('sales/quote'), 'is_ricardo');
-$installer->getConnection()->dropColumn($installer->getTable('sales/order'), 'is_ricardo');
+$installer->getConnection()->dropColumn($installer->getTable('sales/quote'), 'customer_ricardo_id');
+$installer->getConnection()->dropColumn($installer->getTable('sales/quote'), 'customer_ricardo_username');
 
-$installer->getConnection()->dropColumn($installer->getTable('sales/quote_item'), 'ricardo_transaction_id');
-$installer->getConnection()->dropColumn($installer->getTable('sales/order_item'), 'ricardo_transaction_id');
+// Sales Order Columns
+$installer->getConnection()->dropColumn($installer->getTable('sales/order'), 'is_ricardo');
+$installer->getConnection()->dropColumn($installer->getTable('sales/order'), 'customer_ricardo_id');
+$installer->getConnection()->dropColumn($installer->getTable('sales/order'), 'customer_ricardo_username');
+
+// Remove all ricento tables
+$installer->getConnection()->dropTable($installer->getTable('diglin_ricento/api_token'));
+$installer->getConnection()->dropTable($installer->getTable('diglin_ricento/products_listing'));
+$installer->getConnection()->dropTable($installer->getTable('diglin_ricento/products_listing_item'));
+$installer->getConnection()->dropTable($installer->getTable('diglin_ricento/listing_log'));
+$installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sales_options'));
+$installer->getConnection()->dropTable($installer->getTable('diglin_ricento/shipping_payment_rule'));
+$installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sync_job'));
+$installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sales_transaction'));
+$installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sync_job_listing'));

@@ -10,7 +10,7 @@
 /* @var $installer Mage_Catalog_Model_Resource_Setup */
 $installer = $this;
 
-// Implement sql and EAV changes from versions 0.0.1 to 0.0.27 until now (@todo finish to update here until version 1.0.0 will be officially ready to release)
+// Implement sql and EAV changes from versions 0.0.1 to 0.0.32 until now (@todo finish to update here until version 1.0.0 will be officially ready to release)
 
 $installer->startSetup();
 
@@ -19,6 +19,11 @@ $salesOptionsTable = $installer->getTable('diglin_ricento/sales_options');
 $shippingPaymentRuleTable = $installer->getTable('diglin_ricento/shipping_payment_rule');
 $productListingTable = $installer->getTable('diglin_ricento/products_listing');
 $productListingItemTable = $installer->getTable('diglin_ricento/products_listing_item');
+
+$syncJobTable = $installer->getTable('diglin_ricento/sync_job');
+$listingLogTable = $installer->getTable('diglin_ricento/listing_log');
+$transactionTable = $installer->getTable('diglin_ricento/sales_transaction');
+$syncJobListingTable = $installer->getTable('diglin_ricento/sync_job_listing');
 
 $tableApiTokens = $installer->getConnection()->newTable($apiTokenTable);
 $tableApiTokens->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
@@ -81,15 +86,19 @@ $tableProductListings->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER,
 $installer->getConnection()->createTable($tableProductListings);
 
 $tableProductListingItems = $installer->getConnection()->newTable($productListingItemTable);
-$tableProductListingItems->addColumn('item_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
+$tableProductListingItems
+    ->addColumn('item_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
+    ->addColumn('parent_item_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => true, 'unsigned' => true))
     ->addColumn('ricardo_article_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
     ->addColumn('is_planned', Varien_Db_Ddl_Table::TYPE_SMALLINT, null, array('unsigned' => true, 'nullable' => true))
     ->addColumn('qty_inventory', Varien_Db_Ddl_Table::TYPE_DECIMAL, null, array('unsigned' => true, 'nullable' => true))
     ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
+    ->addColumn('parent_product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true))
     ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('sales_options_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true, 'default' => null))
     ->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true, 'default' => true))
     ->addColumn('status', Varien_Db_Ddl_Table::TYPE_TEXT, 20, array('nullable' => false, 'default' => Diglin_Ricento_Helper_Data::STATUS_PENDING))
+    ->addColumn('additional_data', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
     ->addForeignKey($installer->getFkName('diglin_ricento/products_listing_item', 'product_id', 'catalog/product', 'entity_id'),
@@ -102,7 +111,7 @@ $tableProductListingItems->addColumn('item_id', Varien_Db_Ddl_Table::TYPE_INTEGE
         'rule_id', $shippingPaymentRuleTable, 'rule_id', Varien_Db_Ddl_Table::ACTION_SET_NULL)
     ->addIndex($installer->getIdxName('diglin_ricento/products_listing_item', array('product_id', 'products_listing_id')),
         array('product_id', 'products_listing_id'), array('type' => 'unique'))
-    ->setComment('Associated products for product listings');
+    ->setComment('Associated products for products listing');
 
 $installer->getConnection()->createTable($tableProductListingItems);
 
@@ -141,11 +150,11 @@ $tablePaymentRule
     ->setComment('Shipping & Payment Rule for product list or product item');
 $installer->getConnection()->createTable($tablePaymentRule);
 
-$tableSync = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/sync_job'));
+$tableSync = $installer->getConnection()->newTable($syncJobTable);
 $tableSync->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('job_message', Varien_Db_Ddl_Table::TYPE_TEXT, Varien_Db_Ddl_Table::MAX_TEXT_SIZE, array('nullable' => true))
     ->addColumn('job_status', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array('nullable' => true))
-    ->addColumn('job_type', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array('nullable' => true))
+    ->addColumn('job_type', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array('nullable' => false))
     ->addColumn('started_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
     ->addColumn('ended_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
@@ -156,7 +165,7 @@ $installer->getConnection()->createTable($tableSync);
 
 $installer->run("ALTER TABLE " . $tableSync->getName() . " ADD COLUMN `progress` ENUM('pending', 'ready', 'running', 'chunk_running', 'completed') NOT NULL AFTER job_type");
 
-$tableSyncListing = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/sync_job_listing'));
+$tableSyncListing = $installer->getConnection()->newTable($syncJobListingTable);
 $tableSyncListing
     ->addColumn('job_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
@@ -166,12 +175,12 @@ $tableSyncListing
     ->addColumn('total_proceed', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'default' => 0))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addForeignKey($installer->getFkName('diglin_ricento/sync_job_listing', 'job_id', 'diglin_ricento/sync_job', 'job_id'),
-        'job_id', $installer->getTable('diglin_ricento/sync_job'), 'job_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+        'job_id', $syncJobTable, 'job_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->setComment('Ricardo synchronization job for listing');
 
 $installer->getConnection()->createTable($tableSyncListing);
 
-$tableProdListingLogs = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/listing_log'));
+$tableProdListingLogs = $installer->getConnection()->newTable($listingLogTable);
 $tableProdListingLogs
     ->addColumn('log_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
     ->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => true, 'unsigned' => true))
@@ -182,7 +191,7 @@ $tableProdListingLogs
     ->addColumn('log_type', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addForeignKey($installer->getFkName('diglin_ricento/listing_log', 'job_id', 'diglin_ricento/sync_job', 'job_id'),
-        'job_id', $installer->getTable('diglin_ricento/sync_job'), 'job_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_SET_NULL)
+        'job_id', $syncJobTable, 'job_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_SET_NULL)
     ->addForeignKey($installer->getFkName('diglin_ricento/listing_log', 'products_listing_id', 'diglin_ricento/products_listing', 'entity_id'),
         'products_listing_id', $installer->getTable('diglin_ricento/products_listing'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->addForeignKey($installer->getFkName('diglin_ricento/listing_log', 'product_id', 'catalog/product', 'entity_id'),
@@ -193,7 +202,6 @@ $installer->getConnection()->createTable($tableProdListingLogs);
 
 $installer->run("ALTER TABLE " . $tableProdListingLogs->getName() . " ADD COLUMN `log_status` ENUM('notice', 'warning', 'error', 'success') NOT NULL AFTER log_type");
 
-$transactionTable = $installer->getTable('diglin_ricento/sales_transaction');
 $transaction = $installer->getConnection()->newTable($transactionTable);
 $transaction
     ->addColumn('transaction_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
@@ -394,7 +402,7 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_condition'
     'apply_to'	=> 'simple,grouped,configurable'
 ));
 
-$installer->addAttribute('customer', 'ricardo_username', array(
+$installer->addAttribute('customer', 'customer_ricardo_username', array(
     'type' => 'varchar',
     'input' => 'text',
     'label' => 'Ricardo Username',
@@ -408,7 +416,7 @@ $installer->addAttribute('customer', 'ricardo_username', array(
     'frontend_class' => 'disabled'
 ));
 
-$installer->addAttribute('customer', 'ricardo_customer_id', array(
+$installer->addAttribute('customer', 'customer_ricardo_id', array(
     'type' => 'int',
     'input' => 'text',
     'label' => 'Ricardo Customer ID',
@@ -423,11 +431,11 @@ $installer->addAttribute('customer', 'ricardo_customer_id', array(
 ));
 
 Mage::getSingleton('eav/config')
-    ->getAttribute('customer', 'ricardo_username')
+    ->getAttribute('customer', 'customer_ricardo_username')
     ->setData('used_in_forms', array('adminhtml_customer'))
     ->save();
 
 Mage::getSingleton('eav/config')
-    ->getAttribute('customer', 'ricardo_customer_id')
+    ->getAttribute('customer', 'customer_ricardo_id')
     ->setData('used_in_forms', array('adminhtml_customer'))
     ->save();
