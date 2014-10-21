@@ -4,6 +4,12 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_News extends Mage_Adminhtml_Block
     const XML_PATH_NEWS_COUNT = 'ricento/rss/news_count';
     const XML_PATH_NEWS_FEED = 'ricento/rss/news_feed';
 
+    public function _construct()
+    {
+        $this->setData('cache_lifetime', 86400);
+        parent::_construct();
+    }
+
     /**
      * @return Zend_Feed_Reader_EntryInterface[]
      * @throws Zend_Feed_Exception
@@ -11,9 +17,13 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_News extends Mage_Adminhtml_Block
     public function getNewsFromFeed()
     {
         $newsEntries = array();
+
+        $lang = Mage::helper('diglin_ricento')->getDefaultSupportedLang();
+        $feedConfig = Mage::getStoreConfig(self::XML_PATH_NEWS_FEED . '_' .$lang);
+
         try {
             $count = Mage::getStoreConfig(self::XML_PATH_NEWS_COUNT);
-            $feed = Zend_Feed_Reader::import(Mage::getStoreConfig(self::XML_PATH_NEWS_FEED));
+            $feed = Zend_Feed_Reader::import($feedConfig);
 
             /* @var $feedItem Zend_Feed_Reader_Entry_Rss */
             foreach ($feed as $feedItem) {
@@ -21,7 +31,7 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_News extends Mage_Adminhtml_Block
                     break;
                 }
 
-                $feedUrl = parse_url(Mage::getStoreConfig(self::XML_PATH_NEWS_FEED));
+                $feedUrl = parse_url($feedConfig);
                 $baseUrl = $feedUrl['scheme'] . '://' . $feedUrl['host'];
                 $description = str_replace('src="/', 'src="'. $baseUrl .'/', $feedItem->getDescription());
 
@@ -33,5 +43,21 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_News extends Mage_Adminhtml_Block
             Mage::logException($e);
         }
         return $newsEntries;
+    }
+
+    /**
+     * Get cache key informative items
+     *
+     * @return array
+     */
+    public function getCacheKeyInfo()
+    {
+        return array(
+            'BLOCK_TPL',
+            Mage::app()->getStore()->getCode(),
+            $this->getTemplateFile(),
+            'template' => $this->getTemplate(),
+            Mage::helper('diglin_ricento')->getDefaultSupportedLang()
+        );
     }
 }

@@ -58,7 +58,8 @@
             </listing_logs>
             <rss>
                 <news_count>4</news_count>
-                <news_feed>http://www.ricardo.ch/verkauferportal/de-ch/news.aspx?view=rss</news_feed>
+                <news_feed_de>http://www.ricardo.ch/verkauferportal/de-ch/news.aspx?view=rss</news_feed_de>
+                <news_feed_fr>http://www.fr.ricardo.ch/portail-vendeur/fr-ch/actualit%C3%A9s.aspx?view=rss</news_feed_fr>
             </rss>
         </ricento>
 
