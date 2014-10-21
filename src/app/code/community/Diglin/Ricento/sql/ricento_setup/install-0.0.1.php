@@ -61,17 +61,17 @@ $tableProductListings->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER,
     ->setComment('List of products to be published on ricardo platform');
 $installer->getConnection()->createTable($tableProductListings);
 
-$tableSyncLogs = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/sync_log'));
-$tableSyncLogs->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
-    ->addColumn('job_message', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => false))
-    ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
-    ->addColumn('status', Varien_Db_Ddl_Table::TYPE_INTEGER, 4)
-    ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
-    ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
-    ->addForeignKey($installer->getFkName('diglin_ricento/sync_log', 'products_listing_id', 'diglin_ricento/products_listing', 'entity_id'),
-        'products_listing_id', $installer->getTable('diglin_ricento/products_listing'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
-    ->setComment('Ricardo synchronization logs');
-$installer->getConnection()->createTable($tableSyncLogs);
+//$tableSyncLogs = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/sync_log'));
+//$tableSyncLogs->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
+//    ->addColumn('job_message', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => false))
+//    ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true))
+//    ->addColumn('status', Varien_Db_Ddl_Table::TYPE_INTEGER, 4)
+//    ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
+//    ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_DATETIME)
+//    ->addForeignKey($installer->getFkName('diglin_ricento/sync_log', 'products_listing_id', 'diglin_ricento/products_listing', 'entity_id'),
+//        'products_listing_id', $installer->getTable('diglin_ricento/products_listing'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
+//    ->setComment('Ricardo synchronization logs');
+//$installer->getConnection()->createTable($tableSyncLogs);
 
 $tableProductListingItems = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/products_listing_item'));
 $tableProductListingItems->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))

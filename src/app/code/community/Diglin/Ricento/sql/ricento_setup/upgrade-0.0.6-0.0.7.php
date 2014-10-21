@@ -36,7 +36,7 @@ try {
 
 try {
     // change table name from ricento_sync_logs to ricento_sync_log
-    $installer->getConnection()->renameTable('ricento_sync_logs', $installer->getTable('diglin_ricento/sync_log'));
+//    $installer->getConnection()->renameTable('ricento_sync_logs', $installer->getTable('diglin_ricento/sync_log'));
 } catch (Exception $e) {
     // Exceptions may be raised in case of the table doesn't exist or already exists. In any case we do not care.
     Mage::logException($e);

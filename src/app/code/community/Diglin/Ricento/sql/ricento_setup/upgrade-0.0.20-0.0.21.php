@@ -65,6 +65,6 @@ $installer->getConnection()->createTable($tableProdListingLogs);
 
 $installer->run("ALTER TABLE " . $tableProdListingLogs->getName() . " ADD COLUMN `log_status` ENUM('notice', 'warning', 'error', 'success') NOT NULL AFTER log_type");
 
-$installer->getConnection()->dropTable('diglin_ricento/sync_log');
+//$installer->getConnection()->dropTable('diglin_ricento/sync_log');
 
 $installer->endSetup();

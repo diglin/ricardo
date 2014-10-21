@@ -16,7 +16,7 @@ $tables = array(
     $installer->getTable('diglin_ricento/products_listing_item'),
     $installer->getTable('diglin_ricento/products_listing'),
     $installer->getTable('diglin_ricento/sales_options'),
-    $installer->getTable('diglin_ricento/sync_log'),
+//    $installer->getTable('diglin_ricento/sync_log'),
 );
 
 foreach ($tables as $table) {
