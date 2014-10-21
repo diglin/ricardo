@@ -10,3 +10,9 @@ src/app/locale/en_US/template/email/ricento app/locale/en_US/template/email/rice
 
 src/app/locale/fr_FR/Diglin_Ricento.csv app/locale/fr_FR/Diglin_Ricento.csv
 src/app/locale/fr_FR/template/email/ricento app/locale/fr_FR/template/email/ricento
+
+src/app/locale/fr_FR/Diglin_Ricento.csv app/locale/de_CH/Diglin_Ricento.csv
+src/app/locale/fr_FR/template/email/ricento app/locale/de_CH/template/email/ricento
+
+src/app/locale/fr_FR/Diglin_Ricento.csv app/locale/de_DE/Diglin_Ricento.csv
+src/app/locale/fr_FR/template/email/ricento app/locale/de_DE/template/email/ricento

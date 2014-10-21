@@ -15,7 +15,7 @@
 class Diglin_Ricento_Model_Config_Source_Status extends Diglin_Ricento_Model_Config_Source_Abstract
 {
     /**
-     * Create option array to display in a form the status of a product listing
+     * Create option array to display in a form the status of a products listing
      *
      * @return array
      */

@@ -89,7 +89,7 @@ class Diglin_Ricento_Model_Cron
     }
 
     /**
-     * Cleanup Product Listing Log after X days
+     * Cleanup Products Listing Log after X days
      * @return $this
      */
     protected function _processCleanupListingLog()

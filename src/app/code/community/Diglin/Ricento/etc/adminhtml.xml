@@ -83,7 +83,7 @@
                                 <title>Dashboard</title>
                             </dashboard>
                             <listing translate="title" module="diglin_ricento">
-                                <title>Product Listing</title>
+                                <title>Products Listing</title>
                             </listing>
                             <log translate="title" module="diglin_ricento">
                                 <title>Log</title>

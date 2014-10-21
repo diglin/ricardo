@@ -19,7 +19,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs extends Mage_Adm
         parent::__construct();
         $this->setId('products_listing_tabs');
         $this->setDestElementId('edit_form');
-        $this->setTitle($this->__('Product Listing'));
+        $this->setTitle($this->__('Products Listing'));
     }
 
     protected function _beforeToHtml()

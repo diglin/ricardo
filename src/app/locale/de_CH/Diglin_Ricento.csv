@@ -5,7 +5,6 @@
 "Ricardo Assistant","Ricardo Assistent"
 "Configuration","Konfiguration"
 "Ricento by Diglin GmbH","Ricento von der Diglin GmbH"
-"Product Listing","Produktübersicht"
 "Log","Log"
 "Ricardo Payment Methods","Ricardo Zahlarten"
 "Ricardo Shipping","Ricardo Versandarten"
@@ -196,7 +195,7 @@
 "No Selection","Keine Auswahl"
 "Open Ricardo Category Window","Öffne Ricardo Kategorie Fenster"
 "Add products from selected categories","Füge Produkte von gewählten Kategorien hinzu"
-"Only product types supported, enabled and not listed in other product listing will be added.","Nur Produkte, deren Typ unterstützt wird und die aktiv und nicht bereits gelistet sind, werden hinzugefügt."
+"Only product types supported, enabled and not listed in other products listing will be added.","Nur Produkte, deren Typ unterstützt wird und die aktiv und nicht bereits gelistet sind, werden hinzugefügt."
 "Be aware, you have also to select the sub-categories, otherwise selecting only a top category won\'t allow to add products of its subcategories.","Bitte achten Sie darauf, auch die Unterkategorien zu wählen. Wenn Sie nur eine Oberkategorie wählen können Produkte nicht zu deren Unterkategorien hinzugefügt werden.."
 "Create new listing","Erstelle neues Listing."
 "Show Synchronization Jobs","Zeige Synchronisierung-Aufträge"
@@ -320,8 +319,8 @@
 "Check & list only pending & error items","Prüfe & liste nur wartende und fehlerhafte Produkte"
 "List","Liste"
 "List only ""Ready to list"" items","Liste nur Produkte, die den Status ""Fertig zur Listung"" haben"
-"Edit Product Listing '%s'","Bearbeite Produktlisting '%s'"
-"New Product Listing","Neues Produktlisting"
+"Edit Products Listing '%s'","Bearbeite Produktlisting '%s'"
+"New Products Listing","Neues Produktlisting"
 "Websites","Websites"
 "Total","Gesamt"
 "Edit","Bearbeiten"
@@ -385,16 +384,25 @@
 "Shipping Description (CH):","Versandkosten Beschreibung (CH):"
 "You must select a Ricardo Category if you set this option","Sie müssen eine Ricardo-Kategorie wählen, um diese Option zu wählen"
 "The task will start few minutes","Der Vorgang wird in ein paar Minuten starten"
-"No progress","Kein Fortschritt",
+"No progress","Kein Fortschritt"
+
+"Ricardo Lifetime Sales","Ricardo Lifetime Verkauf"
+"Turnover per month","Umsatz pro Monate"
+"Best Sellers","Best Sellers"
+"Qty sold", "Menge Verkauft"
+"Product Name","Produktname"
+"SKU","SKU"
+"Price","Preis"
+"Your Ricardo API Token","Ihre Ricardo API Token"
 
 "PREMIUMCATEGORYBRONZE"," ""Klein"""
 "PREMIUMCATEGORYSILVER"," ""Medium"""
-"PREMIUMCATEGORYGOLD"," ""Gross""",
+"PREMIUMCATEGORYGOLD"," ""Gross"""
 
 "TYPE_BANK_TRANSFER"," ""Banküberweisung"""
 "TYPE_CASH"," ""Bar"""
 "TYPE_CREDIT_CARD"," ""Kreditkarte via ricardo.ch"""
-"TYPE_OTHER"," ""Andere Zahlmethoden""",
+"TYPE_OTHER"," ""Andere Zahlmethoden"""
 
 /* Security Errors */
 "UNKNOWNPROPERTY","Unbekannter Besitzer"
@@ -418,7 +426,7 @@
 "ACCOUNTBANNED","Das Kundenkonto wurde gesperrt."
 "ACCOUNTCLOSED","Das Kundenkonto wurde geschlossen."
 "METHODNOTALLOWED","Die Partnerschaft passt nicht mit der gewählten Methode überein."
-"TOKEN_AUTHORIZATION","Die Authorisierung muss nochmal durchgeführt werden",
+"TOKEN_AUTHORIZATION","Die Authorisierung muss nochmal durchgeführt werden"
 
 /* General Errors */
 "CLOSEAUCTIONFAILED","Auktion konnte nicht geschlossen werden"
@@ -433,7 +441,7 @@
 "TECHNICALPROBLEM","technischer Fehler"
 "ARTICLESAMOUNTLIMIT","Limit für die Menge pro Übertragung liegt bei 100 "
 "LISTOFARTICLESEMPTY","Liste der Produkte ist leer"
-"UNKNOWNCATEGORYNAME","Kategoriename ist nicht bekannt",
+"UNKNOWNCATEGORYNAME","Kategoriename ist nicht bekannt"
 
 /* Article Errors */
 "EMPTYCOUNTRYID","Ein technischer Fehler ist aufgetreten. Wir bitten Sie um Entschuldigung. Bitte versuchen Sie es später nochmals oder kontaktieren Sie unseren Kundendienst."
@@ -570,7 +578,7 @@
 "NUMBEROFARTICLELIMITED","Anzahl der Produkte ist limitiert."
 "PAYMENTMETHODNEEDALTERNATEONE","Alternative Zahlart notwendig."
 "WRONGPAYMENTMETHODS","falsche Zahlart"
-"CUMULATIVESHIPPINGNOTALLOWED","kumulative Versandkosten nicht erlaubt.",
+"CUMULATIVESHIPPINGNOTALLOWED","kumulative Versandkosten nicht erlaubt."
 
 /* Picture Errors */
 "MAXPICTURESCOUNTREACHED","maximale Bilderanzahl erreicht"
@@ -581,7 +589,7 @@
 "NOPICTURES","keine Bilder"
 "INVALIDPICTUREINDEX","ungültiger Bildindex"
 "MAXLOGOPICTURESIZEREACHED","maximale Logogrösse erreicht"
-"ERRORRESIZINGLOGOPICTURE","Fehler bei der Grössenänderung des Logos",
+"ERRORRESIZINGLOGOPICTURE","Fehler bei der Grössenänderung des Logos"
 
 /* Customers Errors - DO NOT TRANSLATE */
 "NOTALLOWEDTOSELL","NOTALLOWEDTOSELL"

@@ -445,7 +445,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Get the store list of a product listing based on supported language
+     * Get the store list of a products listing based on supported language
      *
      * @param int|Diglin_Ricento_Model_Products_Listing $productsListing
      * @return array

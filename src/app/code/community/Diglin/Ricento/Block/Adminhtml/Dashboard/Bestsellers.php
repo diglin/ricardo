@@ -41,21 +41,23 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Bestsellers extends Mage_Adminhtm
 
     protected function _prepareColumns()
     {
+        $helper = Mage::helper('diglin_ricento');
+
         $this->addColumn('name', array(
-            'header'    => $this->__('Product Name'),
+            'header'    => $helper->__('Product Name'),
             'type'      => 'text',
             'index'     => 'product_name'
         ));
 
         $this->addColumn('sku', array(
-            'header'    => $this->__('SKU'),
+            'header'    => $helper->__('SKU'),
             'sortable'  => false,
             'type'      => 'text',
             'index'     => 'product_sku'
         ));
 
         $this->addColumn('price', array(
-            'header'    => $this->__('Price'),
+            'header'    => $helper->__('Price'),
             'sortable'  => false,
             'type'      => 'currency',
             'currency_code' => (string) Mage::getStoreConfig(Mage_Directory_Model_Currency::XML_PATH_CURRENCY_BASE),
@@ -63,7 +65,7 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Bestsellers extends Mage_Adminhtm
         ));
 
         $this->addColumn('qty', array(
-            'header'    => $this->__('Qty sold'),
+            'header'    => $helper->__('Qty sold'),
             'sortable'  => false,
             'index'     => 'qty',
             'type'      => 'number'

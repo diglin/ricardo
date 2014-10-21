@@ -28,7 +28,7 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Action extends Mage_Adminhtml
         }
         $id = (int)$this->getRequest()->getParam('id');
         if (!$id) {
-            $this->_getSession()->addError('Product Listing not found.');
+            $this->_getSession()->addError('Products Listing not found.');
             return false;
         }
 
