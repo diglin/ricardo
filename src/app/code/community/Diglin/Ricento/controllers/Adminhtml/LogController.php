@@ -14,6 +14,11 @@
  */
 class Diglin_Ricento_Adminhtml_LogController extends Diglin_Ricento_Controller_Adminhtml_Action
 {
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('ricento/log');
+    }
+
     protected function _initAction()
     {
         $this->loadLayout();

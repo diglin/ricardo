@@ -12,6 +12,11 @@ use Diglin\Ricardo\Services\ServiceAbstract;
 
 class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_Action
 {
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('ricento/config');
+    }
+
     public function confirmationAction()
     {
         $success = (int)$this->getRequest()->getParam('success', 0);

@@ -17,6 +17,11 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Action extends Mage_Adminhtml
         $this->setUsedModuleName('Diglin_Ricento');
     }
 
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('ricento/listing');
+    }
+
     /**
      * @return bool|Diglin_Ricento_Model_Products_Listing
      */

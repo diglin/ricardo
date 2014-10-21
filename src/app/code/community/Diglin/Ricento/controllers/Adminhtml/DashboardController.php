@@ -14,6 +14,11 @@
  */
 class Diglin_Ricento_Adminhtml_DashboardController extends Mage_Adminhtml_Controller_Action
 {
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('ricento/dashboard');
+    }
+
     /**
      * Ricento dashboard
      */
