@@ -99,8 +99,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'product_id=entity_id',
                 null,
                 'left'
-            )
-        ->distinct(true);
+            )->distinct(true);
 
         $productIds = $this->_getSelectedProducts();
         if (empty($productIds)) {
@@ -109,7 +108,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $collection->addFieldToFilter('entity_id', array('in'=>$productIds));
 
         $this->setCollection($collection);
-
         return parent::_prepareCollection();
     }
 
@@ -152,7 +150,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $this->addColumn('ricardo_article_id', array(
             'header'    => Mage::helper('diglin_ricento')->__('Ricardo Article ID'),
             'width'     => '120',
-            'index'     => 'ricardo_article_id'
+            'index'     => 'ricardo_article_id',
+            'type'      => 'number'
         ));
 
         $this->addColumn('qty', array(
@@ -266,12 +265,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     {
         $output = '';
         $value = htmlspecialchars_decode($value);
-        if ($column->getIndex() == 'status' && !empty($value)) {
-            switch ($value) {
-                case 'Error':
+        if ($column->getIndex() == 'status' && !empty($row->getStatus())) {
+            switch ($row->getStatus()) {
+                case 'error':
                     $output .= '<div id="message-errors"' . $row->getId() . ' class="message_errors">' . $value . '</div>';
                     break;
-                case 'Listed':
+                case 'listed':
                     $output .= '<div id="message-success"' . $row->getId() . ' class="message_success">' . $value . '</div>';
                     break;
                 default:
