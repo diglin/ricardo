@@ -22,7 +22,10 @@ class Diglin_Ricento_Model_Observer
 
     static $shouldAdd = true;
 
-    protected function getNamespacesToRegister()
+    /**
+     * @return array
+     */
+    protected function _getNamespacesToRegister()
     {
         $namespaces = array();
         $node = Mage::getConfig()->getNode(self::CONFIG_PATH_PSR0NAMESPACES);
@@ -45,7 +48,7 @@ class Diglin_Ricento_Model_Observer
             return;
         }
 
-        foreach ($this->getNamespacesToRegister() as $namespace) {
+        foreach ($this->_getNamespacesToRegister() as $namespace) {
             $namespace = str_replace('_', '/', $namespace);
             if (is_dir(Mage::getBaseDir('lib') . DS . $namespace)) {
                 $args = array($namespace, Mage::getBaseDir('lib') . DS . $namespace);
@@ -55,6 +58,7 @@ class Diglin_Ricento_Model_Observer
         }
 
         self::$shouldAdd = false;
+        return $this;
     }
 
     /**
@@ -66,6 +70,7 @@ class Diglin_Ricento_Model_Observer
      * - sales_order_item_save_commit_after
      *
      * @param Varien_Event_Observer $observer
+     * @return $this
      */
     public function decreaseInventory(Varien_Event_Observer $observer)
     {
@@ -98,6 +103,7 @@ class Diglin_Ricento_Model_Observer
                 $productItem->save();
             }
         }
+        return $this;
     }
 
     /**
@@ -105,6 +111,7 @@ class Diglin_Ricento_Model_Observer
      * - adminhtml_block_html_before
      *
      * @param Varien_Event_Observer $observer
+     * @return $this
      */
     public function disableFormField(Varien_Event_Observer $observer)
     {
@@ -114,6 +121,7 @@ class Diglin_Ricento_Model_Observer
             $block->getForm()->getElement('ricardo_username')->setDisabled(true);
             $block->getForm()->getElement('ricardo_customer_id')->setDisabled(true);
         }
+        return $this;
     }
 
     /**
@@ -121,6 +129,7 @@ class Diglin_Ricento_Model_Observer
      * - payment_info_block_prepare_specific_information
      *
      * @param Varien_Event_Observer $observer
+     * @return $this
      */
     public function paymentMethodsInformation(Varien_Event_Observer $observer)
     {
@@ -143,5 +152,29 @@ class Diglin_Ricento_Model_Observer
                     'methods' => $label));
             }
         }
+        return $this;
     }
+
+    /**
+     * Event
+     * - core_block_abstract_to_html_before
+     *
+     * @todo to finish
+     *
+     * @param Varien_Event_Observer $observer
+     * @return $this
+     */
+//    public function addSalesOrderGrid(Varien_Event_Observer $observer)
+//    {
+//        $block = $observer->getEvent()->getBlock();
+//        if ($block instanceof Mage_Adminhtml_Block_Sales_Order_Grid) {
+//            $block->addColumn('ricardo_username', array(
+//                'header' => Mage::helper('diglin_ricento')->__('Ricardo Username'),
+//                'index' => 'ricardo_username',
+//                'after' => 'billing_name'
+//            ));
+//        }
+//
+//        return $this;
+//    }
 }
