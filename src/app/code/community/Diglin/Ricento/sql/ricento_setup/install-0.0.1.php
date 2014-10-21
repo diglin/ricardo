@@ -85,8 +85,6 @@ $tableProductListingItems->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTE
         'product_id', $installer->getTable('catalog/product'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->addForeignKey($installer->getFkName('diglin_ricento/products_listing_item', 'products_listing_id', 'diglin_ricento/products_listing', 'entity_id'),
         'products_listing_id', $installer->getTable('diglin_ricento/products_listing'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
-    ->addIndex($installer->getIdxName('diglin_ricento/products_listing_item', array('product_id', 'products_listing_id')),
-        array('product_id', 'products_listing_id'), array('type' => 'unique'))
     ->setComment('Associated products for product listings');
 $installer->getConnection()->createTable($tableProductListingItems);
 

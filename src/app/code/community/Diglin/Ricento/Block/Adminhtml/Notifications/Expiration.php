@@ -20,7 +20,7 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Expiration extends Diglin_Ric
      */
     public function isEnabled($website = 0)
     {
-        return Mage::helper('diglin_ricento')->isEnabled($website);
+        return  Mage::helper('diglin_ricento')->isEnabled($website);
     }
 
     /**

@@ -29,7 +29,7 @@
             <global>
                 <merge_order>1</merge_order>
                 <decrease_inventory>0</decrease_inventory>
-                <shipping_calculation>highest_price</shipping_calculation>
+                <shipping_calculation>cumulative</shipping_calculation>
                 <email_account_creation>0</email_account_creation>
                 <email_order_creation>0</email_order_creation>
             </global>

@@ -111,7 +111,7 @@ class Diglin_Ricento_Helper_Price extends Mage_Core_Helper_Abstract
      */
     public function calcSelectionPrice($priceInfo, $productPrice)
     {
-        if($priceInfo['is_percent']) {
+        if ($priceInfo['is_percent']) {
             $ratio = $priceInfo['pricing_value']/100;
             $price = $productPrice * $ratio;
         } else {

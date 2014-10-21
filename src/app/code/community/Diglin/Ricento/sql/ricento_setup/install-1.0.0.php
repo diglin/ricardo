@@ -109,8 +109,6 @@ $tableProductListingItems
         'sales_options_id', $salesOptionsTable, 'entity_id', Varien_Db_Ddl_Table::ACTION_SET_NULL)
     ->addForeignKey($installer->getFkName('diglin_ricento/products_listing_item', 'rule_id', 'diglin_ricento/shipping_payment_rule', 'rule_id'),
         'rule_id', $shippingPaymentRuleTable, 'rule_id', Varien_Db_Ddl_Table::ACTION_SET_NULL)
-    ->addIndex($installer->getIdxName('diglin_ricento/products_listing_item', array('product_id', 'products_listing_id')),
-        array('product_id', 'products_listing_id'), array('type' => 'unique'))
     ->setComment('Associated products for products listing');
 
 $installer->getConnection()->createTable($tableProductListingItems);

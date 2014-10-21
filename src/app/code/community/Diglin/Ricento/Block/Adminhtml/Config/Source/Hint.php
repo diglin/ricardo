@@ -21,10 +21,11 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
      */
     public function render(Varien_Data_Form_Element_Abstract $element)
     {
+        $buttonSignUp = '';
         $website = $this->getRequest()->getParam('website');
         $websiteId = Mage::app()->getWebsite($website)->getId();
 
-        if (Mage::helper('diglin_ricento')->isConfigured($websiteId)) {
+        if (!Mage::helper('diglin_ricento')->isConfigured($websiteId)) {
             $buttonSignUp = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
                 'label'     => $this->__('Sign Up to Ricardo API'),
                 'onclick'   => "window.open('" . Mage::helper('diglin_ricento')->getRicardoSignupApiUrl() . "', '_blank');",

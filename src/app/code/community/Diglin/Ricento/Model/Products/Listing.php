@@ -81,8 +81,15 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
 
         if ($this->hasDataChanges() && $this->getStatus() != Diglin_Ricento_Helper_Data::STATUS_LISTED) {
             $this->setStatus(Diglin_Ricento_Helper_Data::STATUS_PENDING);
+
             // Be aware doing that doesn't trigger Magento events but it's faster
             $this->getProductsListingItemCollection()->updateStatusToAll(Diglin_Ricento_Helper_Data::STATUS_PENDING);
+
+            // Delete configurable product children, will be recreated when the check list process is done
+            Mage::getResourceModel('diglin_ricento/products_listing_item_collection')
+                ->addFieldToFilter('products_listing_id', $this->getId())
+                ->addFieldToFilter('parent_item_id', array('notnull' => 1))
+                ->walk('delete');
         }
 
         $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());

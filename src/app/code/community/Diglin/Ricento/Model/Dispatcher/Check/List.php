@@ -224,8 +224,8 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
          *
          * @var $item Diglin_Ricento_Model_Products_Listing_Item
          */
-        foreach ($collectionListingItem->getItems() as $item) {
-
+        foreach ($collectionListingItem->getItems() as $item)
+        {
             /**
              * Get all children products
              */

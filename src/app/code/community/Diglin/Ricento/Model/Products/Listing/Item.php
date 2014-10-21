@@ -116,11 +116,13 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             if (!$this->getParentProductId()) {
                 $this->setStatus(Diglin_Ricento_Helper_Data::STATUS_PENDING);
 
-                // Delete configurable product children, will be recreated when the check list process is done
-                $this->getCollection()
-                    ->addFieldToFilter('products_listing_id', $this->getProductsListingId())
-                    ->addFieldToFilter('parent_item_id', array('gt' => 0))
-                    ->walk('delete');
+                if ($this->getId()) {
+                    // Delete configurable product children, will be recreated when the check list process is done
+                    $this->getCollection()
+                        ->addFieldToFilter('products_listing_id', $this->getProductsListingId())
+                        ->addFieldToFilter('parent_item_id', $this->getId())
+                        ->walk('delete');
+                }
             }
         }
 
@@ -308,7 +310,9 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         // if child of configurable add the product variation depending on the options (options are ordered by position normally)
         if ($this->getParentProductId()) {
             foreach ($this->getAdditionalData()->getOptions() as $option) {
-                $productPrice += Mage::helper('diglin_ricento/price')->calcSelectionPrice($option, $productPrice);
+                if (isset($option['pricing_value'])) {
+                    $productPrice += Mage::helper('diglin_ricento/price')->calcSelectionPrice($option, $productPrice);
+                }
             }
         }
 

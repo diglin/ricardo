@@ -104,7 +104,8 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function isEnabled($website = 0)
     {
-        return self::getWebsiteConfigFlag(self::CFG_ENABLED, $website);
+        return (bool) Mage::getConfig()->getModuleConfig('Diglin_Ricento')->active
+        && self::getWebsiteConfigFlag(self::CFG_ENABLED, $website);
     }
 
     /**
