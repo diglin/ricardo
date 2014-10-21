@@ -92,6 +92,20 @@ class Api implements ApiInterface
         $return = json_decode(curl_exec($ch), true);
 
         if ($this->_debug) {
+
+            if (isset($curlOptions[CURLOPT_HTTPHEADER])) {
+                $anonHeaders = array();
+                foreach ($curlOptions[CURLOPT_HTTPHEADER] as $header) {
+                    if (strpos($header, 'Ricardo-') !== false) {
+                        $sub = strpos($header, ':');
+                        $anonHeaders[] = substr($header, 0, $sub) . ': XXXXXXXX';
+                    } else {
+                        $anonHeaders[] = $header;
+                    }
+                }
+                $curlOptions[CURLOPT_HTTPHEADER] = $anonHeaders;
+            }
+
             // It may take too much memory here as some parameter are pictures bytes
             $this->_lastDebug = array(
                 'curl_options' => $curlOptions,

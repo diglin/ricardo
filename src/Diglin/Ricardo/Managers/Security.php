@@ -197,6 +197,7 @@ class Security extends ManagerAbstract
             foreach ($query as &$item) {
                 list($key, $value) = explode('=', $item);
                 if ($key == 'partnerurl') {
+                    // Add the missing partner url parameter, it is returned empty
                     $value = $this->_serviceManager->getConfig()->getPartnerUrl();
                 }
                 $outQuery[$key] = $value;
