@@ -57,8 +57,8 @@
                 <keep_days>30</keep_days>
             </listing_logs>
             <rss>
-                <news_count>3</news_count>
-                <news_feed>http://www.tagesschau.de/xml/rss2</news_feed>
+                <news_count>4</news_count>
+                <news_feed>http://www.ricardo.ch/verkauferportal/de-ch/news.aspx?view=rss</news_feed>
             </rss>
         </ricento>
 

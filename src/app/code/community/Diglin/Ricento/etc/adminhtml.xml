@@ -13,7 +13,7 @@
 <config>
     <menu>
         <ricento translate="title" module="diglin_ricento">
-            <title>Ricardo</title>
+            <title>ricardo.ch</title>
             <class>ricardo_logo</class>
             <action>ricento/dashboard</action>
             <sort_order>31</sort_order>
