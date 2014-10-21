@@ -335,9 +335,12 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             /**
              * Do nothing if the same job is already running
              */
-            $collection->clear();
             $collection
                 ->getSelect()
+                ->join(array('jl' => $collection->getTable('diglin_ricento/sync_job_listing')),
+                    'jl.job_id = main_table.job_id', '*')
+                ->where('jl.products_listing_id = ?', $productListing->getId())
+                ->where('job_Type = ?', $jobType)
                 ->where('progress', array('in' => array(Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING, Diglin_Ricento_Model_Sync_Job::PROGRESS_RUNNING)));
 
             if ($collection->count() > 0) {
