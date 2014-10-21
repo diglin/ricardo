@@ -1,0 +1,75 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author      Sylvain Rayé <sylvain.raye at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Ricento
+ * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * @todo:
+ * - Provide in the mailto information about the user or shop
+ * - replace mailto with a form to allow to get the configuration/log of the user for the support
+ * - to translate
+ */
+?>
+<div class="content-header" style="visibility: visible;">
+    <table cellspacing="0">
+        <tbody>
+        <tr>
+            <td style="width: 50%;">
+                <h3 class="icon-head head-categories"><?php echo $this->getTitle() ?></h3>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="ricardo-support">
+    <div class="knowledge-base"><a href="http://diglin.zendesk.com/" target="_blank"><img src="<?php echo $this->getSkinUrl('ricento/images/KB.png'); ?>" title="Knowledge Base" alt="Knowledge Base" /></a></div>
+    <div class="contact"><a href="mailto:support@diglin.com?subject=Support for Ricento Extension"><img src="<?php echo $this->getSkinUrl('ricento/images/contact.png'); ?>" title="Contact" alt="Contact" /></a></div>
+    <div class="github"><a href="https://github.com/diglin/ricento" target="_blank"><img src="<?php echo $this->getSkinUrl('ricento/images/github.png'); ?>" title="Github" alt="Github" /></a></div>
+</div>
+<div class="clear"></div>
+<div class="ricardo-diglin">
+    <div class="logo">
+        <a href="http://www.ricardo.ch"><img src="<?php echo $this->getSkinUrl('ricento/images/ricardo@2x.png'); ?>"
+                                             width="290px"
+                                             title="ricardo.ch" alt="ricardo.ch" /></a>
+        <a href="http://www.diglin.com"><img src="<?php echo $this->getSkinUrl('ricento/images/diglin@2x.png'); ?>"
+                                             width="290px"
+                                             title="diglin.com ecommerce solutions" alt="diglin.com ecommerce solutions" /></a>
+        <div class="clear"></div>
+    </div>
+    <div class="information">
+        <h2>Version</h2>
+        <p>You use the version: <strong>Diglin_Ricento v.<?php echo Mage::getConfig()->getModuleConfig
+                ('Diglin_Ricento')->version; ?></strong></p>
+        <h2>License & support</h2>
+        <p>This extension has been realized for <a href="http://www.ricardo.ch">ricardo.ch</a> in collaboration with
+            <a href="http://www.diglin.com">Diglin GmbH</a>. This one is licensed under the <a href="http://opensource
+            .org/licenses/osl-3.0.php">OSL 3.0</a> license. <a href="http://www.ricardo.ch">ricardo.ch</a> or <a
+                href="http://www.diglin.com">Diglin GmbH</a> are not responsible for any damages or lost. Support may be provided free of
+            charge or against payment depending on the support needed e.g. Installation, Configuration,
+            Custom development, Problem due to conflict with other extensions or misusing,
+            etc. <a href="mailto:support@diglin.com?subject=Support for Ricento Extension">Contact us</a> for details
+            .</p>
+        <h2>Imprint</h2>
+        <div class="ricardo-imprint">
+            <p>ricardo.ch AG</p>
+            <p>General-Guisan-Strasse 8</p>
+            <p>6304 Zug</p>
+            <div class="clear"></div>
+        </div>
+        <div class="diglin-imprint">
+            <p>Diglin GmbH</p>
+            <p>Rütistrasse 14</p>
+            <p>8952 Schlieren</p>
+            <p>Tel: +41 78 695 66 43</p>
+            <p>Email: <a href="mailto:support@diglin.com?subject=Ricento Contact">Contact us</a></p>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>

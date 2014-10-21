@@ -536,3 +536,30 @@ table.allowed-combinations td {width: 50%; padding: 5px;}
     margin-bottom: 15px;
 }
 .ricento_news_description img {width:30%}
+
+.ricardo-support div img{
+    width: 31%;
+    margin: 1%;
+    float: left;
+    vertical-align: middle;
+}
+.ricardo-diglin {
+    margin: 15px;
+}
+.ricardo-diglin .logo {
+    width: 290px;
+    display: block;
+}
+
+.ricardo-diglin .logo img {
+    float: left;
+}
+
+.ricardo-diglin .information {
+    margin-left: 400px;
+    margin-right: 50px;
+}
+
+.ricardo-diglin .ricardo-imprint, .ricardo-diglin .diglin-imprint {width: 200px; height: 150px;}
+.ricardo-diglin .ricardo-imprint {float: left; margin-right: 50px}
+.ricardo-diglin .diglin-imprint {margin-left: 200px}

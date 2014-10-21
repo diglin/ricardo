@@ -55,6 +55,11 @@
                     <action>adminhtml/system_config/edit/section/ricento</action>
                     <sort_order>100</sort_order>
                 </config>
+                <support translate="title" module="diglin_ricento">
+                    <title>Support</title>
+                    <action>ricento/support</action>
+                    <sort_order>200</sort_order>
+                </support>
             </children>
         </ricento>
     </menu>
