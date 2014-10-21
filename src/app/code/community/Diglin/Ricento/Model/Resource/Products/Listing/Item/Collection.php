@@ -66,4 +66,26 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mag
         }
         return $this;
     }
+
+    /**
+     * Get only items collection being a configurable product
+     *
+     * @return $this
+     */
+    public function getProductsWithoutConfigurable()
+    {
+        if (!$this->_isProductTableJoined) {
+            $this
+                ->getSelect()
+                ->join(
+                    array('pl' => $this->getTable('catalog/product')),
+                    "pl.entity_id = main_table.product_id",
+                    array('product_type' => 'type_id')
+                )
+                ->where('type_id <> ?', Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE);
+
+            $this->_isProductTableJoined = true;
+        }
+        return $this;
+    }
 }
