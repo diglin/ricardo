@@ -92,7 +92,6 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_ERROR;
                     $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_ERROR));
                 }
-
             } catch (Exception $e) {
                 $this->_handleException($e, $sell);
                 $e = null;
@@ -130,6 +129,8 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
                 ->setStatus(Diglin_Ricento_Helper_Data::STATUS_LISTED)
                 ->save();
         }
+
+        unset($itemCollection);
 
         return $this;
     }

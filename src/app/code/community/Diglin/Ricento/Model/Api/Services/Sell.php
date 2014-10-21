@@ -76,6 +76,9 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
 
             $this->_handleSecurityException($e);
         }
+
+        unset($insertArticle);
+
         return $articleResult;
     }
 
@@ -86,6 +89,8 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
     }
 
     /**
+     * Not used
+     *
      * @param Diglin_Ricento_Model_Products_Listing_Item $item
      * @return array|bool
      */
@@ -140,6 +145,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
              * If it's closed/deleted or an error occurred, an exception is triggered
              */
             if (isset($result['IsClosed'])) {
+                unset($parameter);
                 return true;
             }
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {

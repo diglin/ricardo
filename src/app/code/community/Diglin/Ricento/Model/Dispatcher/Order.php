@@ -71,11 +71,16 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 ->save();
         }
 
+        unset($listingIds);
+        unset($readListingConnection);
+        unset($job);
+        unset($jobListing);
+
         return parent::proceed();
     }
 
     /**
-     * @return mixed|void
+     * @return $this|mixed
      */
     protected function _proceed()
     {
@@ -120,6 +125,10 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             $this->_itemMessage = null;
             $this->_itemStatus = null;
         }
+
+        unset($itemCollection);
+
+        return $this;
     }
 
     /**
@@ -291,6 +300,13 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             }
         }
 
+        unset($salesTransaction);
+        unset($soldArticlesParameter);
+        unset($sellerAccountService);
+        unset($soldArticles);
+        unset($productItem);
+        unset($customer);
+
         return true; // @todo it returns true also when no transaction have been done
     }
 
@@ -388,6 +404,9 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 $this->createNewOrder($transactions);
             }
         }
+
+        unset($transactionCollection);
+        unset($customerTransactions);
 
         return $this;
     }
