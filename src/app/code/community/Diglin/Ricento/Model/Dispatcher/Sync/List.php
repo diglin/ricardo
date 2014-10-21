@@ -225,7 +225,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
             ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (1 * 24 * 60 * 60)));
 
         $articles = $this->_getSellerAccount()->getUnsoldArticles($unsoldArticlesParameter);
-        if (count($articles) > 0) {
+        if (count($articles) > 0 && is_array($articles[0])) {
             $article = $this->_getHelper()->extractData($articles[0]);
         }
 

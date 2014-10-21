@@ -19,7 +19,7 @@ $installer->getConnection()->changeColumn($salesOptions, 'ricardo_category', 'ri
     'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
     'length' => 10,
     'nullable' => true,
-    'default' => '-1',
+    'default' => 0,
     'unsigned' => false,
     'comment' => 'Ricardo Category Id'));
 

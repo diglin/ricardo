@@ -40,7 +40,7 @@ $installer->getConnection()->createTable($tableApiTokens);
 
 $tableSalesOptions = $installer->getConnection()->newTable($salesOptionsTable);
 $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('primary' => true, 'auto_increment' => true, 'nullable' => false, 'unsigned' => true))
-    ->addColumn('ricardo_category', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('nullable' => true, 'unsigned' => false, 'default' => '-1'))
+    ->addColumn('ricardo_category', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('nullable' => true, 'unsigned' => false, 'default' => 0))
     ->addColumn('sales_type', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => false))
     ->addColumn('price_source_attribute_code', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
     ->addColumn('price_change', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('default' => 0))
