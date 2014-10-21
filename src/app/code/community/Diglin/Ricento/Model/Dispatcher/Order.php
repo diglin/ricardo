@@ -354,6 +354,9 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     protected function _proceedAfter()
     {
         $customerTransactions = array();
+        $mergeOrder = Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_MERGE_ORDER);
+
+        $delay = ($mergeOrder) ? 30 : 1;
 
         /**
          * Get transaction older than 30 minutes and when no order was created
@@ -363,11 +366,11 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         $transactionCollection
             ->getSelect()
             ->where('order_id IS NULL')
-            ->where('UNIX_TIMESTAMP(sold_at) + (30*60) < UNIX_TIMESTAMP(now())'); // 30 min past
+            ->where('UNIX_TIMESTAMP(sold_at) + ( ? * 60) < UNIX_TIMESTAMP(now())', (int) $delay); // 30 or 1 min past
 
         $inc = 0;
         foreach ($transactionCollection->getItems() as $transactionItem) {
-            if (Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_MERGE_ORDER)) {
+            if ($mergeOrder) {
                 $customerTransactions[$transactionItem->getCustomerId()][] = $transactionItem;
             } else {
                 $customerTransactions[++$inc] = $transactionItem;
@@ -457,14 +460,14 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
                 // Error with a product which is missing or have required options
                 if (is_string($quoteItem)) {
-                    Mage::throwException($quoteItem); // @todo - do we want really block the process at this level? Other solution to inform about the error
+                    Mage::throwException($quoteItem); // @todo - do we want really block the process at this level? Other solution to inform about the error?
                 }
 
                 /**
                  * 3. Set shipping information, price, etc
                  */
                 $shippingText = $transaction->getShippingText(); // @todo provide correct language
-                $shippingDescription = $transaction->getShippingDescription();  // @todo get shipping description in correct language
+                $shippingDescription = $transaction->getShippingDescription(); // @todo get shipping description in correct language
 
                 /**
                  * 4. Keep the complete transactions list for later use
