@@ -57,8 +57,6 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         $insertArticle = $item->getInsertArticleParameter();
 
         try {
-            // @todo insert for each associated products in case of configurable
-
             $start = microtime(true);
 
             $articleResult = parent::insertArticle($insertArticle);
@@ -83,7 +81,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
 
     public function updateArticle(Diglin_Ricento_Model_Products_Listing_Item $item)
     {
-        // @todo
+        // @todo when needed
         return $this;
     }
 

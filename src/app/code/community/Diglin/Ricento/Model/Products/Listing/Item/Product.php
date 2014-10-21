@@ -381,10 +381,6 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
         $subtitle = '';
 
-        if ($this->getTypeId($productId) == Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE) {
-            // @todo get subtitle from the current option
-        }
-
         foreach ($this->getStoresList($storeId) as $id) {
             $subtitle = $this->_getProductVarchar('ricardo_subtitle', $productId, $id);
             if ($subtitle) {

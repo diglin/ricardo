@@ -71,8 +71,6 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
 
                 $this->_getSession()->addSuccess($this->__('Your Ricardo account has been authorized to get access to the API.'));
 
-                // @todo add catch for security authorization exception
-
             } catch (Exception $e) {
                 Mage::logException($e);
                 Mage::log($securityService->getLastApiDebug($websiteId), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
