@@ -28,7 +28,7 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
         $collection = Mage::getResourceModel('diglin_ricento/api_token_collection');
         $collection
             ->join(array('website' => 'core/website'), 'website.website_id=main_table.website_id', array('website_name' => 'name'))
-            ->addFieldToSelect(array('entity_id', 'token', 'website_id'))
+            ->addFieldToSelect(array('entity_id', 'token', 'website_id', 'expiration_date'))
             ->addFieldToFilter('token_type', 'identified');
 
         $this->setCollection($collection);
@@ -49,6 +49,18 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
             'index'     => 'token',
             'type'      => 'text',
             'frame_callback' => array($this, 'secrecyToken')
+        ));
+
+        $dateFormatIso = Mage::app()->getLocale()->getDateTimeFormat(
+            Mage_Core_Model_Locale::FORMAT_TYPE_SHORT
+        );
+        $this->addColumn('expiration_date', array(
+            'header'    => $this->__('Expiration'),
+            'sortable'  => false,
+            'index'     => 'expiration_date',
+            'type'   => 'date',
+            'width'  => 100,
+            'format' => $dateFormatIso
         ));
 
         $this->addColumn('action', array(
