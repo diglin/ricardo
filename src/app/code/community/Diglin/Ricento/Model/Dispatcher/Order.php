@@ -261,7 +261,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     ->setWebsiteId($listing->getWebsiteId())
                     ->setCustomerId($customer->getId())
                     ->setAddressId($address->getId())
-                    ->setRicardoCustomerId($customer->getRicardoCustomerId())
+                    ->setRicardoCustomerId($customer->getRicardoId())
                     ->setRicardoArticleId($soldArticle->getArticleId())
                     ->setQty($transaction->getBuyerQuantity())
                     ->setViewCount($soldArticle->getViewCount())
@@ -324,9 +324,9 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 ->setConfirmation(null);
         }
 
-        if (!$customer->getRicardoCustomerId()) {
+        if (!$customer->getRicardoId()) {
             $customer
-                ->setRicardoCustomerId($buyer->getBuyerId())
+                ->setRicardoId($buyer->getBuyerId())
                 ->setRicardoUsername($buyer->getNickName());
         }
 
@@ -439,7 +439,6 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 /**
                  * 2. Add product and its information to the quote
                  */
-                //$unitPrice = $transaction->getTotalBidPrice() / $transaction->getQty();
                 $infoBuyRequest = new Varien_Object();
                 $infoBuyRequest
                     ->setQty($transaction->getQty())
@@ -455,8 +454,9 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     ->setSkipCheckRequiredOption(true);
 
                 $quoteItem = $quote->addProduct($product, $infoBuyRequest)
-                    ->setCustomPrice($transaction->getTotalBidPrice()) // Set unit custom price
-                    ->setOriginalCustomPrice($transaction->getTotalBidPrice()); // Set unit custom price;
+                    // Set unit custom price
+                    ->setCustomPrice($transaction->getTotalBidPrice())
+                    ->setOriginalCustomPrice($transaction->getTotalBidPrice());
 
                 // Error with a product which is missing or have required options
                 if (is_string($quoteItem)) {
@@ -477,7 +477,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
             if ($quote) {
                 /**
-                 * Define payment method and information
+                 * Define payment method and related information
                  */
                 $quote
                     ->setIsRicardo(1)
@@ -503,8 +503,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     ->setRicardoShippingMethod($shippingTransactionMethod);
 
                 $shipping = $quote->getShippingAddress();
-                $shipping
-                    ->setShippingMethod($shippingMethod . '_' . $shippingTransactionMethod);
+                $shipping->setShippingMethod($shippingMethod . '_' . $shippingTransactionMethod);
 
                 $sendCustomerNotification = Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_ORDER_CREATION_EMAIL, $storeId);
 

@@ -13,7 +13,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.32</version>
+            <version>0.0.33</version>
         </Diglin_Ricento>
     </modules>
 
@@ -278,6 +278,12 @@
                 <is_ricardo>
                     <to_order>*</to_order>
                 </is_ricardo>
+                <customer_ricardo_username>
+                    <to_order>*</to_order>
+                </customer_ricardo_username>
+                <customer_ricardo_id>
+                    <to_order>*</to_order>
+                </customer_ricardo_id>
             </sales_convert_quote>
         </fieldsets>
     </global>
