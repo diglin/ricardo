@@ -39,7 +39,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
      */
     public function proceed()
     {
-        $jobType = Diglin_Ricento_Model_Sync_Job::TYPE_SYNCLIST;
+        $jobType = $this->_jobType;
 
         $productsListingResource = Mage::getResourceModel('diglin_ricento/products_listing');
         $readListingConnection = $productsListingResource->getReadConnection();
