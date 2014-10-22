@@ -390,7 +390,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     /**
      * Start to list the product listing on ricardo platform if not already listed
      */
-    public function checkAndlistAction()
+    public function checkAndListAction()
     {
         $productListing = $this->_initListing();
 

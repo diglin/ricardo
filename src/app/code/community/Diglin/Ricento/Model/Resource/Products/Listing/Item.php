@@ -119,4 +119,23 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
             $bind,
             array($this->getIdFieldName() . ' = ?' => $itemId));
     }
+
+    /**
+     * Get only items collection being a configurable product
+     *
+     * @return $this
+     */
+    public function noConfigurableProductIncluded()
+    {
+        $this
+            ->getSelect()
+            ->join(
+                array('pl' => $this->getTable('catalog/product')),
+                "pl.entity_id = main_table.product_id",
+                array('product_type' => 'type_id')
+            )
+            ->where('type_id <> ?', Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE);
+
+        return $this;
+    }
 }

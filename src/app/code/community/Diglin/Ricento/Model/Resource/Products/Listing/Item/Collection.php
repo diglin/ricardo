@@ -20,6 +20,11 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mag
     protected $_isProductTableJoined = false;
 
     /**
+     * @var bool
+     */
+    protected $_isProductConfigurableTableJoined = false;
+
+    /**
      * Products_Listing_Item Collection Resource Constructor
      * @return void
      */
@@ -52,7 +57,7 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mag
      */
     public function getConfigurableProducts()
     {
-        if (!$this->_isProductTableJoined) {
+        if (!$this->_isProductConfigurableTableJoined) {
             $this
                 ->getSelect()
                 ->join(
@@ -62,7 +67,7 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mag
                 )
                 ->where('type_id = ?', Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE);
 
-            $this->_isProductTableJoined = true;
+            $this->_isProductConfigurableTableJoined = true;
         }
         return $this;
     }
