@@ -26,9 +26,10 @@ class Diglin_Ricento_Model_Resource_Sync_Job extends Diglin_Ricento_Model_Resour
     /**
      * @param $type
      * @param $productsListingId
+     * @param null $progress
      * @return string
      */
-    public function getSyncByTypeProductsListing($type, $productsListingId)
+    public function loadByTypeListingIdProgress($type, $productsListingId, $progress = null)
     {
         $readConnection = $this->_getReadAdapter();
 
@@ -39,6 +40,13 @@ class Diglin_Ricento_Model_Resource_Sync_Job extends Diglin_Ricento_Model_Resour
             ->where('sj.job_type = :job_type AND sjl.products_listing_id = :products_listing_id');
 
         $bind = array('job_type' => $type, 'products_listing_id' => (int) $productsListingId);
+
+        if (!is_null($progress)) {
+            if (!is_array($progress)) {
+                $progress = array($progress);
+            }
+            $select->where('sj.progress IN (?)', $progress);
+        }
 
         return $readConnection->fetchOne($select, $bind);
     }

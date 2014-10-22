@@ -321,11 +321,6 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         }
 
         try {
-            // Create a job to prepare the sync to Ricardo.ch
-
-            $job = Mage::getModel('diglin_ricento/sync_job');
-
-
             /**
              * Cleanup old pending job before to create a new similar one
              */
@@ -349,6 +344,9 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
                 return;
             }
 
+            // Create a job to prepare the sync to Ricardo.ch
+
+            $job = Mage::getModel('diglin_ricento/sync_job');
             $job
                 ->setJobType($jobType)
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)

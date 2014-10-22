@@ -230,7 +230,7 @@
         <ricento>
             <allow_product_types>
                 <simple />
-                <configurable />
+                <!--configurable /-->
                 <grouped />
             </allow_product_types>
 

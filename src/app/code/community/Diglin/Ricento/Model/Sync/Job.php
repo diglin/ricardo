@@ -90,11 +90,12 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
      *
      * @param string $type
      * @param int $productsListingId
+     * @param string|null $progress
      * @return $this|bool
      */
-    public function loadByJobTypeAndProductsListingId($type, $productsListingId)
+    public function loadByTypeListingIdProgress($type, $productsListingId, $progress = null)
     {
-        $jobId = $this->getResource()->getSyncByTypeProductsListing($type, $productsListingId);
+        $jobId = $this->getResource()->loadByTypeListingIdProgress($type, $productsListingId, $progress);
         if ($jobId) {
             $this->load($jobId);
             return $this;
