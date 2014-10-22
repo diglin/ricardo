@@ -54,7 +54,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     protected function _prepareCollection()
     {
         if ($this->getListing()->getId()) {
-            $this->setDefaultFilter(array('in_category'=>1));
+            $this->setDefaultFilter(array('in_category' => 1));
         }
 
         $collection = Mage::getResourceModel('catalog/product_collection')

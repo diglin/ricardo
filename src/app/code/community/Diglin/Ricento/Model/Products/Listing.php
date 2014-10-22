@@ -89,6 +89,7 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
             Mage::getResourceModel('diglin_ricento/products_listing_item_collection')
                 ->addFieldToFilter('products_listing_id', $this->getId())
                 ->addFieldToFilter('parent_item_id', array('notnull' => 1))
+                ->addFieldToFilter('ricardo_article_id', array('null' => 1))
                 ->walk('delete');
         }
 

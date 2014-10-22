@@ -325,23 +325,23 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
             $job = Mage::getModel('diglin_ricento/sync_job');
 
+
             /**
              * Cleanup old pending job before to create a new similar one
              */
-            $collection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
-
             Mage::getResourceModel('diglin_ricento/sync_job')->cleanupPendingJob($jobType, $productListing->getId());
 
             /**
              * Do nothing if the same job is already running
              */
+            $collection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
             $collection
                 ->getSelect()
                 ->join(array('jl' => $collection->getTable('diglin_ricento/sync_job_listing')),
                     'jl.job_id = main_table.job_id', '*')
                 ->where('jl.products_listing_id = ?', $productListing->getId())
                 ->where('job_Type = ?', $jobType)
-                ->where('progress', array('in' => array(Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING, Diglin_Ricento_Model_Sync_Job::PROGRESS_RUNNING)));
+                ->where('progress IN (?)', array(Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING, Diglin_Ricento_Model_Sync_Job::PROGRESS_RUNNING));
 
             if ($collection->count() > 0) {
                 $this->_getSession()->addNotice($this->__('A similar job is already running. This job won\'t be executed.'));
