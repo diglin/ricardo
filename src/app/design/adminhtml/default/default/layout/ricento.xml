@@ -55,7 +55,7 @@
                 <block type="core/text_list" name="ricento_dashboard_right" as="ricento.dashboard.right">
                     <block type="diglin_ricento/adminhtml_dashboard_lifetime" name="ricento_dashboard_lifetime"
                            as="ricento.dashboard.lifetime"
-                           template="ricento/dashboard/lifetime.phtml"/>
+                           template="ricento/dashboard/lifeturnover.phtml"/>
                     <block type="adminhtml/template" name="ricento_dashboard_turnover" as="ricento.dashboard.turnover"
                            template="ricento/dashboard/turnover.phtml">
                         <block type="diglin_ricento/adminhtml_dashboard_turnover" name="ricento_dashboard_turnover_graph" as="ricento.dashboard.turnover.graph" />
