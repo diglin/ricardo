@@ -44,12 +44,12 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
         foreach ($listingIds as $listingId) {
             $itemResource = Mage::getResourceModel('diglin_ricento/products_listing_item');
+
             $readConnection = $itemResource->getReadConnection();
             $select = $readConnection
                 ->select()
                 ->from($itemResource->getTable('diglin_ricento/products_listing_item'), 'item_id')
-                ->where('products_listing_id = :id')
-                ->where('status = :status');
+                ->where('products_listing_id = :id AND status = :status AND is_planned = 0');
 
             $binds = array('id' => $listingId, 'status' => Diglin_Ricento_Helper_Data::STATUS_LISTED);
             $countListedItems = count($readConnection->fetchAll($select, $binds));
@@ -65,6 +65,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             Mage::getResourceModel('diglin_ricento/sync_job')->cleanupPendingJob($this->_jobType, $listingId);
 
             $job = Mage::getModel('diglin_ricento/sync_job');
+            // pending progress doesn't make sense here as we cleanup before but keep it to be sure everything ok
             $job->loadByTypeListingIdProgress($jobType, $listingId, array(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING, Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING));
 
             if ($job->getId()) {
@@ -100,8 +101,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     protected function _proceed()
     {
         $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED));
-        $itemCollection
-            ->addFieldToFilter('is_planned', 0);
+        $itemCollection->addFieldToFilter('is_planned', 0);
 
         /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
         foreach ($itemCollection->getItems() as $item) {
