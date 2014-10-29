@@ -126,7 +126,7 @@
 "Product Subtitle will be cut after %s characters when published on ricardo.ch for store ""%s""","Produkt-Untertitel wird nach %s Zeichen abgeschnitten, wenn auf ricardo.ch für Store ""%s"" veröffentlicht."
 "Product Description will be cut after %s characters when published on ricardo.ch for store ""%s""","Produkt-Beschreibung wird nach %s Zeichen abgeschnitten, wenn auf ricardo.ch für Store ""%s"" veröffentlicht."
 "Custom Options are not supported. Those won\'t be synchronized into ricardo.ch.","Individuelle Optionen werden nicht unterstützt. Sie werden nicht zu ricardo.ch übertragen und ignoriert."
-"The product or its associated products is/are not in stock or doesn\'t have enough quantity in stock.","The product or its associated products is/are not in stock or doesn\'t have enough quantity in stock."
+"The product or its associated products is/are not in stock or doesn\'t have enough quantity in stock.","Das Hauptprodukt oder seine verknüpften Produkte sind nicht auf Lager oder der Lagerbestand ist nicht hoch genug."
 "Only %s currency is supported. No conversion will be done.","Nur die Währung %s wird unterstützt. Es wird keine Umrechnung vorgenommen."
 "You MUST define a ricardo category for this product. Check that you set it at products listing level or at Magento category level.","Sie müssen eine ricardo.ch-Kategorie für dieses Produkt wählen. Prüfen Sie, ob Sie das Produkt auf Produktlisting-Level oder Magento-Kategorie-Level gesetzt haben."
 "Payment and/or Shipping combination are not correct.","Zahlung und/oder Versand-Kombination sind nicht korrekt."
