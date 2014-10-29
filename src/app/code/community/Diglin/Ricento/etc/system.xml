@@ -20,7 +20,7 @@
     
     <sections>
         <ricento module="diglin_ricento" translate="label">
-            <label><![CDATA[<img width="16" height="16" style="vertical-align:middle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkY5RTRGREZEMTI3MTFFM0ExQkNBQjM2QkYxRTNDMjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkY5RTRGRTBEMTI3MTFFM0ExQkNBQjM2QkYxRTNDMjMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjlFNEZEREQxMjcxMUUzQTFCQ0FCMzZCRjFFM0MyMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjlFNEZERUQxMjcxMUUzQTFCQ0FCMzZCRjFFM0MyMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvtFcEUAAAc/SURBVHjapFZ5bBxX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"/> Ricardo]]></label>
+            <label><![CDATA[<img width="16" height="16" style="vertical-align:middle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkY5RTRGREZEMTI3MTFFM0ExQkNBQjM2QkYxRTNDMjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkY5RTRGRTBEMTI3MTFFM0ExQkNBQjM2QkYxRTNDMjMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCRjlFNEZEREQxMjcxMUUzQTFCQ0FCMzZCRjFFM0MyMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCRjlFNEZERUQxMjcxMUUzQTFCQ0FCMzZCRjFFM0MyMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvtFcEUAAAc/SURBVHjapFZ5bBxX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"/> ricardo.ch]]></label>
             <tab>diglin</tab>
             <frontend_type>text</frontend_type>
             <sort_order>110</sort_order>
@@ -119,7 +119,7 @@
                             <show_in_store>0</show_in_store>
                         </general_api_config>
                         <enabled module="diglin_ricento" translate="label comment">
-                            <label>Ricardo Extension enabled</label>
+                            <label>ricardo.ch Extension enabled</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>11</sort_order>
@@ -131,7 +131,7 @@
                             <label>Development Mode</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[If you enable this configuration, all API requests will be send to the Ricardo Sandbox instead to use the production servers. Be aware, you have to provide others partner Keys and Passwords specific for dev environment below.]]></comment>
+                            <comment><![CDATA[If you enable this configuration, all API requests will be send to the ricardo.ch Sandbox instead to use the production servers. Be aware, you have to provide others partner Keys and Passwords specific for dev environment below.]]></comment>
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -141,7 +141,7 @@
                             <label>Debug</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[Write into the var/log/ricento.log file all requests sent to the Ricardo API. Enable it to help us to suppport you and send this file to us if you have an issue. Your passwords will be anonymized.]]></comment>
+                            <comment><![CDATA[Write into the var/log/ricento.log file all requests sent to the ricardo.ch API. Enable it to help us to suppport you and send this file to us if you have an issue. Your passwords will be anonymized.]]></comment>
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -158,7 +158,7 @@
                             <!--<show_in_store>0</show_in_store>-->
                         <!--</simulate_authorization>-->
                         <!--<ricardo_account module="diglin_ricento" translate="label">-->
-                            <!--<label>Ricardo Account</label>-->
+                            <!--<label>ricardo.ch Account</label>-->
                             <!--<sort_order>3</sort_order>-->
                             <!--<frontend_model>diglin_ricento/adminhtml_config_source_heading</frontend_model>-->
                             <!--<show_in_default>1</show_in_default>-->
@@ -169,7 +169,7 @@
                             <!--</depends>-->
                         <!--</ricardo_account>-->
                         <!--<ricardo_username module="diglin_ricento" translate="label comment">-->
-                            <!--<label>Ricardo Username</label>-->
+                            <!--<label>ricardo.ch Username</label>-->
                             <!--<sort_order>5</sort_order>-->
                             <!--<frontend_type>text</frontend_type>-->
                             <!--<show_in_default>1</show_in_default>-->
@@ -182,7 +182,7 @@
                             <!--</depends>-->
                         <!--</ricardo_username>-->
                         <!--<ricardo_password module="diglin_ricento" translate="label comment">-->
-                            <!--<label>Ricardo Password</label>-->
+                            <!--<label>ricardo.ch Password</label>-->
                             <!--<sort_order>15</sort_order>-->
                             <!--<frontend_type>obscure</frontend_type>-->
                             <!--<backend_model>adminhtml/system_config_backend_encrypted</backend_model>-->
@@ -216,7 +216,7 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the ricardo.ch API to get this information. Click on the button at the top of this page]]></comment>
                             <depends>
                                 <enabled>1</enabled>
                                 <dev_mode>0</dev_mode>
@@ -231,7 +231,7 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[You have to sign up to the ricardo.ch API to get this information. Click on the button at the top of this page]]></comment>
                             <depends>
                                 <enabled>1</enabled>
                                 <dev_mode>0</dev_mode>
@@ -247,7 +247,7 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the ricardo.ch API to get this information. Click on the button at the top of this page]]></comment>
                             <depends>
                                 <enabled>1</enabled>
                                 <dev_mode>1</dev_mode>
@@ -262,7 +262,7 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[You have to sign up to the ricardo.ch API to get this information. Click on the button at the top of this page]]></comment>
                             <depends>
                                 <enabled>1</enabled>
                                 <dev_mode>1</dev_mode>
@@ -289,7 +289,7 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the ricardo.ch API to get this information. Click on the button at the top of this page]]></comment>
                             <depends>
                                 <enabled>1</enabled>
                                 <dev_mode>0</dev_mode>
@@ -304,7 +304,7 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[You have to sign up to the ricardo.ch API to get this information. Click on the button at the top of this page]]></comment>
                             <depends>
                                 <enabled>1</enabled>
                                 <dev_mode>0</dev_mode>
@@ -319,7 +319,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the ricardo.ch API to get this information. Click on the button at the top of this page]]></comment>
                             <depends>
                                 <enabled>1</enabled>
                                 <dev_mode>1</dev_mode>
@@ -334,7 +334,7 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <!--<frontend_class>required-entry</frontend_class>-->
-                            <comment><![CDATA[You have to sign up to the Ricardo API to get this information. Click on the button at the top of this page]]></comment>
+                            <comment><![CDATA[You have to sign up to the ricardo.ch API to get this information. Click on the button at the top of this page]]></comment>
                             <depends>
                                 <enabled>1</enabled>
                                 <dev_mode>1</dev_mode>
@@ -370,7 +370,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <comment><![CDATA[Under the menu Ricardo > Logs > Synchronization, you will find all jobs running like list your products, get the new sold articles, etc. Here you can clean the data after a period of time.]]></comment>
+                            <comment><![CDATA[Under the menu ricardo.ch > Logs > Synchronization, you will find all jobs running like list your products, get the new sold articles, etc. Here you can clean the data after a period of time.]]></comment>
                         </enabled>
                         <keep_days module="diglin_ricento" translate="label comment">
                             <label>Keep for X days</label>
@@ -397,7 +397,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <comment><![CDATA[Under the menu Ricardo > Logs > Listing, you will find all information related to a product after a job happened. Here you can clean the data after a period of time.]]></comment>
+                            <comment><![CDATA[Under the menu ricardo.ch > Logs > Listing, you will find all information related to a product after a job happened. Here you can clean the data after a period of time.]]></comment>
                         </enabled>
                         <keep_days module="diglin_ricento" translate="label comment">
                             <label>Keep for X days</label>
@@ -415,7 +415,7 @@
         <payment>
             <groups>
                 <ricento translate="label" module="diglin_ricento">
-                    <label>Ricardo API Payment Methods</label>
+                    <label>ricardo.ch API Payment Methods</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>999</sort_order>
                     <show_in_default>1</show_in_default>

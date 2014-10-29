@@ -20,10 +20,10 @@ class Diglin_Ricento_Adminhtml_AccountController extends Mage_Adminhtml_Controll
 
         $block
             ->setTemplate('ricento/iframe.phtml')
-            ->setTitle($this->__('Ricardo API Signup'))
+            ->setTitle($this->__('ricardo.ch API Signup'))
             ->setIframeUrl(Mage::helper('diglin_ricento')->getRicardoSignupApiUrl(false));
 
-        $ricardoLabel = $this->__('Ricardo');
+        $ricardoLabel = $this->__('ricardo.ch');
         $signupLabel = $this->__('API Signup');
 
         $this->_title($signupLabel);
@@ -42,10 +42,10 @@ class Diglin_Ricento_Adminhtml_AccountController extends Mage_Adminhtml_Controll
 
         $block
             ->setTemplate('ricento/iframe.phtml')
-            ->setTitle($this->__('Ricardo Assistant Portal'))
+            ->setTitle($this->__('ricardo.ch Assistant Portal'))
             ->setIframeUrl(Mage::helper('diglin_ricento')->getRicardoAssistantUrl());
 
-        $ricardoLabel = $this->__('Ricardo');
+        $ricardoLabel = $this->__('ricardo.ch');
         $assistantLabel = $this->__('Assistant Portal');
 
         $this->_title($assistantLabel);

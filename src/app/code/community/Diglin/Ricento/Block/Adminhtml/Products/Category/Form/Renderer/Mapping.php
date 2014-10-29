@@ -33,7 +33,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Category_Form_Renderer_Mapping
             . Mage::helper('adminhtml')->getUrl('ricento/products_category/mapping', array('id' => '#ID#'))
             . '\', $(\''. $this->getHtmlId() .'\'),  $(\''. $this->getHtmlId() .'_title\'))"'
             . ' id="'. $this->getHtmlId() .'_button">'
-            . Mage::helper('diglin_ricento')->__('Open Ricardo Category Window')
+            . Mage::helper('diglin_ricento')->__('Open ricardo.ch Category Window')
             . '</button>'."\n";
 
         $html .= ' <input id="'.$this->getHtmlId().'" name="'.$this->getName()

@@ -26,7 +26,7 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
             $websiteId = (int)$this->getRequest()->getParam('website');
 
             if (!is_numeric($websiteId) || is_null($websiteId)) {
-                $this->_getSession()->addError($this->__('The website code returned from Ricardo is not correct! Your authorization has not been saved on our side.'));
+                $this->_getSession()->addError($this->__('The website code returned from ricardo.ch is not correct! Your authorization has not been saved on our side.'));
                 $this->_redirect('adminhtml');
                 return;
             }
@@ -74,7 +74,7 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
                 // Cleanup as we do not need it and in any case we will have to generate it again.
                 $apiTokenTemp->delete();
 
-                $this->_getSession()->addSuccess($this->__('Your Ricardo account has been authorized to get access to the API.'));
+                $this->_getSession()->addSuccess($this->__('Your ricardo.ch account has been authorized to get access to the API.'));
 
             } catch (Exception $e) {
                 Mage::logException($e);
@@ -82,7 +82,7 @@ class Diglin_Ricento_Adminhtml_ApiController extends Mage_Adminhtml_Controller_A
                 $this->_getSession()->addError($this->__('An error occurred while saving the token. Please, check your log files.'));
             }
         } else {
-            $this->_getSession()->addError($this->__('Authorization was not successful on Ricardo side. Please, contact Ricardo to find out the reason.'));
+            $this->_getSession()->addError($this->__('Authorization was not successful on ricardo.ch side. Please, contact ricardo.ch to find out the reason.'));
         }
 
         $this->_redirect('adminhtml');

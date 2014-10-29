@@ -130,7 +130,7 @@ class Diglin_Ricento_Adminhtml_LogController extends Diglin_Ricento_Controller_A
 
                 $notDeleted = array_diff($jobs, $goingToBeDeleted);
                 if ($notDeleted) {
-                    $this->_getSession()->addNotice($this->__('The following job IDs have not been deleted because they are still running: ' . implode(',', $notDeleted)));
+                    $this->_getSession()->addNotice($this->__('The following job IDs have not been deleted because they are still running: %s', implode(',', $notDeleted)));
                 }
             }
         } catch (Exception $e) {

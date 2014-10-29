@@ -47,8 +47,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
         $fieldsetLang = $form->addFieldset('fieldset_lang', array('legend' => $this->__('Language')));
         $fieldsetLang->addField('publish_languages', 'select', array(
             'name'      => 'product_listing[publish_languages]',
-            'label'    => $this->__('Product languages to synchronize to Ricardo.ch'),
-            'note'     => $this->__('Ricardo.ch supports only two languages at the moment: German and French. You can set in which language you want to publish your product content (title, subtitle, description, etc).'),
+            'label'    => $this->__('Product languages to synchronize to ricardo.ch'),
+            'note'     => $this->__('ricardo.ch supports only two languages at the moment: German and French. You can set in which language you want to publish your product content (title, subtitle, description, etc).'),
             'values'   => Mage::getSingleton('diglin_ricento/config_source_languages')->getAllOptions(),
             'onchange' => 'generalForm.onChangeInput(this, [\''. implode('\',\'', $languages) .'\']);',
             'required' => true
@@ -57,13 +57,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_General
         $fieldsetLang->addField('default_language', 'select', array(
             'name'     => 'product_listing[default_language]',
             'label'    => $this->__('Default language to publish'),
-            'note'     => $this->__('Which language to publish by default to Ricardo.ch when the product content is not available in a language'),
+            'note'     => $this->__('Which language to publish by default to ricardo.ch when the product content is not available in a language?'),
             'values'   => Mage::getSingleton('diglin_ricento/config_source_languages')->getAllOptions(false),
             'required' => true
         ));
 
         foreach ($languages as $lang) {
-            $title = Mage::helper('catalog')->__('Store View for ' . ucwords(Mage::app()->getLocale()->getTranslation($lang, 'language')));
+            $title = Mage::helper('catalog')->__('Store View for %s', ucwords(Mage::app()->getLocale()->getTranslation($lang, 'language')));
             $fieldsetLang->addField('lang_store_id_'. $lang, 'select', array(
                 'name'      => 'product_listing[lang_store_id_]' . $lang,
                 'label'     => $title,

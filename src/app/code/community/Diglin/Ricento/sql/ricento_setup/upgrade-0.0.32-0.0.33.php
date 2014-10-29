@@ -32,7 +32,7 @@ $installer->getConnection()->addColumn($salesQuoteTable, 'customer_ricardo_id', 
     'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
     'nullable' => true,
     'unsigned' => true,
-    'comment' => 'Ricardo ID'));
+    'comment' => 'ricardo.ch ID'));
 
 /**
  * Add column to sales quote
@@ -41,13 +41,13 @@ $installer->getConnection()->addColumn($salesOrderTable, 'customer_ricardo_usern
     'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
     'length' => 255,
     'nullable' => true,
-    'comment' => 'Ricardo Username'));
+    'comment' => 'ricardo.ch Username'));
 
 $installer->getConnection()->addColumn($salesOrderTable, 'customer_ricardo_id', array(
     'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
     'nullable' => true,
     'unsigned' => true,
-    'comment' => 'Ricardo ID'));
+    'comment' => 'ricardo.ch ID'));
 
 // We do not care of existing data, it's a DEV version touching a restricted number of person
 $installer->removeAttribute('customer', 'ricardo_customer_id');
@@ -55,12 +55,12 @@ $installer->removeAttribute('customer', 'ricardo_customer_id');
 $installer->addAttribute('customer', 'ricardo_id', array(
     'type' => 'int',
     'input' => 'text',
-    'label' => 'Ricardo Customer ID',
+    'label' => 'ricardo.ch Customer ID',
     'required' => false,
     'user_defined' => true,
     'default' => '',
     'unique' => true,
-    'note' => 'Ricardo Customer ID imported from ricardo.ch',
+    'note' => 'ricardo.ch Customer ID imported from ricardo.ch',
     'visible' => true,
     'visible_on_front' => false,
     'frontend_class' => 'disabled'

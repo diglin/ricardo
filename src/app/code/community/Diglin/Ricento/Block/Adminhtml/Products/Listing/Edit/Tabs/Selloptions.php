@@ -46,11 +46,11 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCategory->addType('radios_extensible', Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_form_element_radios_extensible'));
         $fieldsetCategory->addField('ricardo_category_use_mapping', 'radios_extensible', array(
             'name' => 'sales_options[ricardo_category_use_mapping]',
-            'label' => $this->__('Ricardo Category'),
+            'label' => $this->__('ricardo.ch Category'),
             'separator' => ' ',
             'values' => array(
-                array('value' => 1, 'label' => $this->__('Use Magento / Ricardo Category mapping (if mapping does not exist, an error message will be triggered while preparing the synchronization to Ricardo)')),
-                array('value' => 0, 'label' => $this->__('Select Ricardo Category'), 'field' => array(
+                array('value' => 1, 'label' => $this->__('Use Magento / ricardo.ch Category mapping (if mapping does not exist, an error message will be triggered while preparing the synchronization to Ricardo)')),
+                array('value' => 0, 'label' => $this->__('Select ricardo.ch Category'), 'field' => array(
                     'ricardo_category', 'ricardo_category', array(
                         'name' => 'sales_options[ricardo_category]',
                         'label' => $this->__('Select the category'),
@@ -237,7 +237,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetCondition->addField('product_condition_use_attribute', 'select', array(
             'name' => 'sales_options[product_condition_use_attribute]',
             'label' => $this->__('Condition Product Source'),
-            'note'  => $this->__('Do you want to define the condition source from the Ricardo Condition Attribute if you defined it on product basis? Otherwise, if not found or you set here to "No", the default condition set above will be defined.'),
+            'note'  => $this->__('Do you want to define the condition source from the ricardo.ch Condition Attribute if you defined it on product basis? Otherwise, if not found or you set here to "No", the default condition set above will be defined.'),
             'values' => Mage::getSingleton('adminhtml/system_config_source_yesno')->toOptionArray()
         ));
 
@@ -292,7 +292,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[customization_template]',
             'label' => $this->__('Template'),
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_template')->getAllOptions(),
-            'note' => $this->__('To create one go to your <a href="%s">Ricardo account</a> into "My Sales".', Diglin_Ricento_Helper_Data::RICARDO_URL)
+            'note' => $this->__('To create one go to your <a href="%s">ricardo.ch account</a> into "My Sales".', Diglin_Ricento_Helper_Data::RICARDO_URL)
         ));
 
         /**

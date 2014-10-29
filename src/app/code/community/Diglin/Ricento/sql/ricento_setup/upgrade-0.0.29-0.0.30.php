@@ -22,7 +22,7 @@ $installer->getConnection()->addColumn($salesQuoteTable, 'is_ricardo', array(
     'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
     'nullable' => true,
     'unsigned' => true,
-    'comment' => 'Is Ricardo Transaction'));
+    'comment' => 'Is ricardo.ch Transaction'));
 
 /**
  * Add a column to sales/order table
@@ -33,6 +33,6 @@ $installer->getConnection()->addColumn($salesOrderTable, 'is_ricardo', array(
     'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
     'nullable' => true,
     'unsigned' => true,
-    'comment' => 'Is Ricardo Transaction'));
+    'comment' => 'Is ricardo.ch Transaction'));
 
 $installer->endSetup();

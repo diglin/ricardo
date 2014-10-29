@@ -15,8 +15,8 @@ $installer->startSetup();
 
 $connection = $installer->getConnection();
 $data = array(
-    array('ricardo_payment_canceled', 'Ricardo Payment Canceled'),
-    array('ricardo_payment_pending', 'Pending Ricardo Payment')
+    array('ricardo_payment_canceled', 'ricardo.ch Payment Canceled'),
+    array('ricardo_payment_pending', 'Pending ricardo.ch Payment')
 );
 $connection = $installer->getConnection()->insertArray(
     $installer->getTable('sales/order_status'),

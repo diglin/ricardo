@@ -31,7 +31,7 @@ Validation.addAllThese([
         }
         return false;
     }],
-    ['validate-ricardo-category', '<?php echo $this->__('You must select a Ricardo Category if you set this option'); ?>', function(fieldValue) {
+    ['validate-ricardo-category', '<?php echo $this->__('You must select a ricardo.ch Category if you set this option'); ?>', function(fieldValue) {
 
         var useMappingValue = Form.getInputs('edit_form','radio','sales_options[ricardo_category_use_mapping]').find(function(radio) {
             return radio.checked;

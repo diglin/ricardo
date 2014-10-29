@@ -15,6 +15,8 @@
 class Diglin_Ricento_Model_Filter extends Mage_Core_Model_Email_Template_Filter
 {
     /**
+     * Use for cms content or similar to get Adminhtml Url
+     *
      * @param $construction
      * @return string
      */

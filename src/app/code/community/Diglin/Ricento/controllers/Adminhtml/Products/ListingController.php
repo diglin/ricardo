@@ -104,7 +104,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->loadLayout();
             $this->renderLayout();
         } catch (Diglin_Ricento_Exception $e) {
-            $this->_getSession()->addError($this->__('The action you try to do, is not possible. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
+            $this->_getSession()->addError($this->__('The action you try to do, is not possible. You must authorize the API token. Please, go the <a href="%s">ricardo.ch Authorization</a> page to do the authorization process', $e->getValidationUrl()));
             $this->_redirectUrl($this->_getIndexUrl());
         }
     }
@@ -366,7 +366,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             return;
         } catch (Diglin_Ricento_Exception $e) {
             Mage::logException($e);
-            $this->_getSession()->addError($this->__('It\'s s not possible to start this job. You must authorize the API token. Please, go the <a href="%s">Ricardo Authorization</a> page to do the authorization process', $e->getValidationUrl()));
+            $this->_getSession()->addError($this->__('It\'s s not possible to start this job. You must authorize the API token. Please, go the <a href="%s">ricardo.ch Authorization</a> page to do the authorization process', $e->getValidationUrl()));
         } catch (Exception $e) {
             Mage::logException($e);
             $this->_getSession()->addError($this->__('An error occurred while starting this job. Please check your log file.'));

@@ -21,7 +21,7 @@ $tableApiTokens->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, ar
     ->addColumn('session_duration', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false))
     ->addColumn('session_expiration_date', Varien_Db_Ddl_Table::TYPE_DATETIME, null, array('nullable' => false))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_DATETIME, null, array('nullable' => false))
-    ->setComment('Tokens for Ricardo API');
+    ->setComment('Tokens for ricardo.ch API');
 $installer->getConnection()->createTable($tableApiTokens);
 
 $tableSalesOptions = $installer->getConnection()->newTable($installer->getTable('diglin_ricento/sales_options'));

@@ -24,7 +24,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Product_Condition_Source extends 
         $helper = Mage::helper('diglin_ricento');
 
         return array(
-            'ricardo_condition' => $helper->__('Ricardo Condition')
+            'ricardo_condition' => $helper->__('ricardo.ch Condition')
         );
     }
 }

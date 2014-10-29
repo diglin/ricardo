@@ -25,7 +25,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Rendere
     {
         $hasCustomOptions = $this->_getValue($row);
         if ($hasCustomOptions) {
-            $warningMessage = $this->__('The product has custom options, those will not be added to Ricardo!');
+            $warningMessage = $this->__('The product has custom options, those will not be added to ricardo.ch!');
             return
 <<<HTML
     <div class="diglin_ricento_warning_icon" title="{$warningMessage}">&nbsp;</div>

@@ -103,7 +103,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
             }
         }
 
-        return array($this->__('No Ricardo category found'));
+        return array($this->__('No ricardo.ch category found'));
     }
 
     /**

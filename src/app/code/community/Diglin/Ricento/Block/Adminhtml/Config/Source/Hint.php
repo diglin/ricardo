@@ -27,7 +27,7 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
 
         if (!Mage::helper('diglin_ricento')->isConfigured($websiteId)) {
             $buttonSignUp = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
-                'label'     => $this->__('Sign Up to Ricardo API'),
+                'label'     => $this->__('Sign Up to ricardo.ch API'),
                 'onclick'   => "window.open('" . Mage::helper('diglin_ricento')->getRicardoSignupApiUrl() . "', '_blank');",
                 'class'     => 'go',
                 'type'      => 'button',
@@ -37,7 +37,7 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
         }
 
         $buttonDashboard  = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
-            'label'     => $this->__('Ricardo Assistant'),
+            'label'     => $this->__('ricardo.ch Assistant'),
             'onclick'   => "window.open('". Mage::helper('diglin_ricento')->getRicardoAssistantUrl() ."', '_blank');",
             'class'     => 'go',
             'type'      => 'button',

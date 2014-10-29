@@ -78,7 +78,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
 
         if (!Mage::registry($key)) {
             if (!class_exists($this->_model)) {
-                Mage::throwException(Mage::helper('diglin_ricento')->__('Ricardo Service Model doesn\'t exists.'));
+                Mage::throwException(Mage::helper('diglin_ricento')->__('ricardo.ch Service Model doesn\'t exists.'));
             }
             Mage::register($key, new $this->_model($this->getServiceManager()));
         }
@@ -107,7 +107,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
         if (!Mage::registry($registryKey)) {
 
             if (!$helper->isConfigured($website)) {
-                Mage::throwException($helper->__('Ricardo API Credentials are not configured. Please, configure the extension before to proceed.'));
+                Mage::throwException($helper->__('ricardo.ch API Credentials are not configured. Please, configure the extension before to proceed.'));
             }
 
             if (!in_array($lang, $helper->getSupportedLang())) {
@@ -234,7 +234,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
             }
         } catch (\Diglin\Ricardo\Exceptions\CurlException $e) {
             Mage::logException($e);
-            throw new Exception($helper->__('Error while trying to connect to the Ricardo API. Please, check your log files.'));
+            throw new Exception($helper->__('Error while trying to connect to the ricardo.ch API. Please, check your log files.'));
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             $this->_updateCredentialToken();
             $this->_handleSecurityException($e);

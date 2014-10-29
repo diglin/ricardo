@@ -148,7 +148,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         ));
 
         $this->addColumn('ricardo_article_id', array(
-            'header'    => Mage::helper('diglin_ricento')->__('Ricardo Article ID'),
+            'header'    => Mage::helper('diglin_ricento')->__('ricardo.ch Article ID'),
             'width'     => '120',
             'index'     => 'ricardo_article_id',
             'type'      => 'number'

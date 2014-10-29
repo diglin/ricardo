@@ -35,7 +35,7 @@ $tableApiTokens->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, ar
     ->addColumn('session_expiration_date', Varien_Db_Ddl_Table::TYPE_DATETIME, null, array('nullable' => false))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
-    ->setComment('Tokens for Ricardo API');
+    ->setComment('Tokens for ricardo.ch API');
 $installer->getConnection()->createTable($tableApiTokens);
 
 $tableSalesOptions = $installer->getConnection()->newTable($salesOptionsTable);
@@ -157,7 +157,7 @@ $tableSync->addColumn('job_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('pri
     ->addColumn('ended_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP)
-    ->setComment('Ricardo synchronization job');
+    ->setComment('ricardo.ch synchronization job');
 
 $installer->getConnection()->createTable($tableSync);
 
@@ -174,7 +174,7 @@ $tableSyncListing
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT))
     ->addForeignKey($installer->getFkName('diglin_ricento/sync_job_listing', 'job_id', 'diglin_ricento/sync_job', 'job_id'),
         'job_id', $syncJobTable, 'job_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
-    ->setComment('Ricardo synchronization job for listing');
+    ->setComment('ricardo.ch synchronization job for listing');
 
 $installer->getConnection()->createTable($tableSyncListing);
 
@@ -194,7 +194,7 @@ $tableProdListingLogs
         'products_listing_id', $installer->getTable('diglin_ricento/products_listing'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->addForeignKey($installer->getFkName('diglin_ricento/listing_log', 'product_id', 'catalog/product', 'entity_id'),
         'product_id', $installer->getTable('catalog/product'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE)
-    ->setComment('Ricardo Products Listing logs');
+    ->setComment('ricardo.ch Products Listing logs');
 
 $installer->getConnection()->createTable($tableProdListingLogs);
 
@@ -249,7 +249,7 @@ $installer->getConnection()->addColumn($salesQuoteTable, 'is_ricardo', array(
     'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
     'nullable' => true,
     'unsigned' => true,
-    'comment' => 'Is Ricardo Transaction'));
+    'comment' => 'Is ricardo.ch Transaction'));
 
 /**
  * Add a column to sales/order table
@@ -260,7 +260,7 @@ $installer->getConnection()->addColumn($salesOrderTable, 'is_ricardo', array(
     'type' => Varien_Db_Ddl_Table::TYPE_SMALLINT,
     'nullable' => true,
     'unsigned' => true,
-    'comment' => 'Is Ricardo Transaction'));
+    'comment' => 'Is ricardo.ch Transaction'));
 
 $installer->endSetup();
 
@@ -273,8 +273,8 @@ $attributeGroupId = $installer->getAttributeGroupId($entityTypeId, $attributeSet
 $installer->addAttribute(Mage_Catalog_Model_Category::ENTITY, 'ricardo_category', array(
     'input_renderer'    => 'diglin_ricento/adminhtml_products_category_form_renderer_mapping',
     'type'              => 'int',
-    'label'             => 'Ricardo Category',
-    'note'              => 'Map this current Magento category with one of Ricardo. It will facilitate you the creation of product listing.',
+    'label'             => 'ricardo.ch Category',
+    'note'              => 'Map this current Magento category with one of ricardo.ch. It will facilitate you the creation of product listing.',
     'input'             => 'text',
     'global'            => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
     'required'          => false,
@@ -303,8 +303,8 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_title', ar
     'type'              => 'varchar',
     'backend'           => '',
     'frontend'          => '',
-    'label'             => 'Ricardo Title',
-    'note'              => 'Title is limited to 40 characters on Ricardo.ch, use this field instead of the product name to prevent any unwanted behavior. Normal product name will be used if this field is empty but will be cut to 40 chars on ricardo.ch.',
+    'label'             => 'ricardo.ch Title',
+    'note'              => 'Title is limited to 40 characters on ricardo.ch, use this field instead of the product name to prevent any unwanted behavior. Normal product name will be used if this field is empty but will be cut to 40 chars on ricardo.ch.',
     'input'             => 'text',
     'class'             => 'validate-length maximum-length-40',
     'source'            => '',
@@ -328,8 +328,8 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_subtitle',
     'type'              => 'varchar',
     'backend'           => '',
     'frontend'          => '',
-    'label'             => 'Ricardo Subtitle',
-    'note'              => 'Subtitle is limited to 60 characters on Ricardo.ch. Let empty if you don\'t need it.',
+    'label'             => 'ricardo.ch Subtitle',
+    'note'              => 'Subtitle is limited to 60 characters on ricardo.ch. Let empty if you don\'t need it.',
     'input'             => 'text',
     'class'             => 'validate-length maximum-length-60',
     'source'            => '',
@@ -353,8 +353,8 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_descriptio
     'type'              => 'text',
     'backend'           => '',
     'frontend'          => '',
-    'label'             => 'Ricardo Description',
-    'note'              => '65 000 characters Max. - Description of the product for Ricardo page. If empty, the default Magento description of your product will be taken.',
+    'label'             => 'ricardo.ch Description',
+    'note'              => '65 000 characters Max. - Description of the product for ricardo.ch page. If empty, the default Magento description of your product will be taken.',
     'input'             => 'textarea',
     'class'             => 'validate-length maximum-length-65000',
     'source'            => '',
@@ -403,12 +403,12 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_condition'
 $installer->addAttribute('customer', 'customer_ricardo_username', array(
     'type' => 'varchar',
     'input' => 'text',
-    'label' => 'Ricardo Username',
+    'label' => 'ricardo.ch Username',
     'required' => false,
     'user_defined' => false,
     'default' => '',
     'unique' => true,
-    'note' => 'Ricardo Username imported from ricardo.ch',
+    'note' => 'ricardo.ch Username imported from ricardo.ch',
     'visible' => true,
     'visible_on_front' => false,
     'frontend_class' => 'disabled'
@@ -417,12 +417,12 @@ $installer->addAttribute('customer', 'customer_ricardo_username', array(
 $installer->addAttribute('customer', 'customer_ricardo_id', array(
     'type' => 'int',
     'input' => 'text',
-    'label' => 'Ricardo Customer ID',
+    'label' => 'ricardo.ch Customer ID',
     'required' => false,
     'user_defined' => false,
     'default' => '',
     'unique' => true,
-    'note' => 'Ricardo Customer ID imported from ricardo.ch',
+    'note' => 'ricardo.ch Customer ID imported from ricardo.ch',
     'visible' => true,
     'visible_on_front' => false,
     'frontend_class' => 'disabled'
