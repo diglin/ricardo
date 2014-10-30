@@ -95,6 +95,11 @@ class Diglin_Ricento_Model_Sales_Options extends Mage_Core_Model_Abstract
     {
         parent::_beforeSave();
         $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
+
+        if ($this->isObjectNew()) {
+            $this->setCreatedAt(Mage::getSingleton('core/date')->gmtDate());
+        }
+
         return $this;
     }
 

@@ -67,6 +67,10 @@ class Diglin_Ricento_Model_Rule extends Mage_Core_Model_Abstract
 
         $this->_preparePaymentMethods(false);
 
+        if ($this->isObjectNew()) {
+            $this->setCreatedAt(Mage::getSingleton('core/date')->gmtDate());
+        }
+
         return $this;
     }
 

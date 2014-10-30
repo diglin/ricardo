@@ -128,6 +128,11 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         }
 
         $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
+
+        if ($this->isObjectNew()) {
+            $this->setCreatedAt(Mage::getSingleton('core/date')->gmtDate());
+        }
+
         return $this;
     }
 

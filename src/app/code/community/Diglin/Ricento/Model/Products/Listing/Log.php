@@ -77,4 +77,20 @@ class Diglin_Ricento_Model_Products_Listing_Log extends Mage_Core_Model_Abstract
         $sourceLog = Mage::getModel('diglin_ricento/config_source_products_listing_log')->toOptionHash();
         return $sourceLog[$this->getLogType()];
     }
+
+    /**
+     * @return Mage_Core_Model_Abstract
+     */
+    protected function _beforeSave()
+    {
+        parent::_beforeSave();
+
+        $this->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
+
+        if ($this->isObjectNew()) {
+            $this->setCreatedAt(Mage::getSingleton('core/date')->gmtDate());
+        }
+
+        return $this;
+    }
 }
