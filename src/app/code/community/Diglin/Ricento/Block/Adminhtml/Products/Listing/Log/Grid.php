@@ -113,6 +113,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
             'index'  => 'created_at',
             'type'   => 'date',
             'width'  => 200,
+            'gmtoffset' => true,
             'format' => $dateFormatIso
         ));
     }

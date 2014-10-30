@@ -125,7 +125,8 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     'product_id' => $item->getProductId(),
                     'message' => $this->_jsonEncode($this->_itemMessage),
                     'log_status' => $this->_itemStatus,
-                    'log_type' => $this->_logType
+                    'log_type' => $this->_logType,
+                    'created_at' => Mage::getSingleton('core/date')->gmtDate()
                 ));
             }
 

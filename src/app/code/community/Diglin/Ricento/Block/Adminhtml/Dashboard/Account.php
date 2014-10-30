@@ -60,6 +60,7 @@ class Diglin_Ricento_Block_Adminhtml_Dashboard_Account extends Mage_Adminhtml_Bl
             'index'     => 'expiration_date',
             'type'   => 'date',
             'width'  => 100,
+            'gmtoffset' => true,
             'format' => $dateFormatIso
         ));
 
