@@ -170,7 +170,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Log_Grid extends Mage_Admi
     {
         $class = '';
         if ($column->getIndex() == 'log_status' && !empty($value)) {
-            $class = 'class="' . strtolower($column->getIndex()) . '-' . strtolower($value) . '"';
+            $class = 'class="' . strtolower($column->getIndex()) . '-' . strtolower($row->getLogStatus()) . '"';
         }
 
         return '<div id="' . strtolower($column->getIndex()) . $row->getId() . '" ' . $class . '>' . $value . '</div>';
