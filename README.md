@@ -1,7 +1,7 @@
 # Introduction
 
-Diglin_Ricardo source code is a PHP Library to get access to the Ricardo.ch API which is a .NET Webservice sending Json or SOAP requests.
-With this library we handle only json requests as it is faster.
+The Diglin ricardo.ch source code is a PHP Library to get access to the ricardo.ch API which is a .NET Webservice sending Json or SOAP requests.
+With this library we handle only json requests.
 
 ## Installation
 
@@ -28,7 +28,7 @@ Add the following requirements into your composer.json at root project level. Yo
     "repositories" : [
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:ricento/diglin_ricardo.git"
+            "url": "git@github.com:diglin/ricardo.git"
         }
     ]
  }
@@ -51,7 +51,7 @@ Add the following requirements into your composer.json at root project level. Yo
         },
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:ricento/diglin_ricardo.git"
+            "url": "git@github.com:diglin/ricardo.git"
         }
     ],
     "extra" : {
