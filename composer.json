@@ -1,5 +1,5 @@
 {
-    "name":"diglin/diglin_ricento",
+    "name":"diglin/ricento",
     "type":"magento-module",
     "license":"proprietary",
     "homepage":"http://www.ricento.ch",
@@ -12,11 +12,11 @@
     "support": {
         "email": "support@diglin.com",
         "issues": "http://support.diglin.com/",
-        "source": "https://bitbucket.org/ricento/diglin_ricento"
+        "source": "https://github.com/diglin/ricento"
     },
     "require":{
         "magento-hackathon/magento-composer-installer":"2.*",
-        "diglin/ricardo": "dev-develop"
+        "diglin/ricardo": "1.*"
     },
     "require-dev": {
         "ivanchepurnyi/ecomdev_phpunit": "0.3.*"
@@ -24,7 +24,7 @@
     "repositories":[
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:ricento/diglin_ricardo.git"
+            "url": "git@github.com:diglin/ricento.git"
         }
     ]
 }
