@@ -486,12 +486,23 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
      */
     public function stopAction()
     {
-        if (!$this->_initListing()) {
+        $listing = $this->_initListing();
+        if (!$listing) {
             $this->_redirect('*/*/index');
             return;
         }
 
         $countListedItem = Mage::getResourceModel('diglin_ricento/products_listing_item')->countListedItems($this->_getListing()->getId());
+
+        if ($countListedItem == 0 && $listing->getStatus() == Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+            $listing
+                ->setStatus(Diglin_Ricento_Helper_Data::STATUS_STOPPED)
+                ->save();
+
+            $this->_getSession()->addError($this->__('The product list has been stopped.'));
+            $this->_redirect('*/*/index');
+            return;
+        }
 
         if ($countListedItem == 0) {
             $this->_getSession()->addError($this->__('Only listed product items can be stopped.'));

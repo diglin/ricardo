@@ -52,6 +52,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
 
             /**
              * We want items listed and planned because we want to get the new ricardo_article_id
+             * ricardo article id change when the product was planned and then is open for sale
              */
             $itemResource = Mage::getResourceModel('diglin_ricento/products_listing_item');
             $readConnection = $itemResource->getReadConnection();

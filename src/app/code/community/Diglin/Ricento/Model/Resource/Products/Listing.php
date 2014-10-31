@@ -46,4 +46,59 @@ class Diglin_Ricento_Model_Resource_Products_Listing extends Mage_Core_Model_Res
 
         return $readerConnection->fetchCol($select, $bind);
     }
+
+    /**
+     * @param $productsListingId
+     * @return $this
+     */
+    public function setStatusStop($productsListingId)
+    {
+        $readerConnection = $this->_getReadAdapter();
+
+        $select = $readerConnection->select()
+            ->from(array('pl' => $this->getTable('diglin_ricento/products_listing')))
+            ->where('pl.entity_id = :id')
+            ->joinLeft(
+                array('pli' => $this->getTable('diglin_ricento/products_listing_item')),
+                'pli.products_listing_id = pl.entity_id AND pl.status = "listed"',
+                array('item_status' => 'pli.status')
+            );
+
+        $binds  = array('id' => $productsListingId);
+
+        $rows = $readerConnection->fetchAll($select, $binds);
+        $lists = array();
+
+        foreach ($rows as $row) {
+            if ($row['item_status'] == Diglin_Ricento_Helper_Data::STATUS_STOPPED) {
+                $lists[$row['entity_id']]['stopped'] = true;
+            }
+            if ($row['item_status'] == Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+                $lists[$row['entity_id']]['listed'] = true;
+            }
+        }
+
+        foreach ($lists as $key => $list) {
+            if (!isset($lists[$key]['listed']) && isset($lists[$key]['stopped'])) {
+                $this->saveCurrentList($key, array('status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param int $listId
+     * @param array $bind
+     * @return int
+     */
+    public function saveCurrentList($listId, $bind)
+    {
+        $writeConection = $this->_getWriteAdapter();
+
+        return $writeConection->update(
+            $this->getMainTable(),
+            $bind,
+            array($this->getIdFieldName() . ' = ?' => $listId));
+    }
 }

@@ -54,6 +54,15 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
         foreach ($itemCollection->getItems() as $item) {
 
             try {
+                // We skip insert article with configurable product as we push its associated products
+                if ($item->getProduct()->isConfigurableType()) {
+                    $jobListing->saveCurrentJob(array(
+                        'total_proceed' => ++$this->_totalProceed,
+                        'last_item_id' => $item->getId()
+                    ));
+                    continue;
+                }
+
                 $stoppedArticle = $sell->stopArticle($item);
 
                 if ($stoppedArticle) {

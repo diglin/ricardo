@@ -121,20 +121,38 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
     }
 
     /**
-     * Get only items collection being a configurable product
-     *
+     * @param $productsListingId
      * @return $this
      */
-    public function noConfigurableProductIncluded()
+    public function setParentStatusStop($productsListingId)
     {
-        $this
-            ->getSelect()
-            ->join(
-                array('pl' => $this->getTable('catalog/product')),
-                "pl.entity_id = main_table.product_id",
-                array('product_type' => 'type_id')
-            )
-            ->where('type_id <> ?', Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE);
+        $readerConnection = $this->_getReadAdapter();
+
+        $select = $readerConnection->select()
+            ->from(array('pli' => $this->getTable('diglin_ricento/products_listing_item')), array( 'parent_id' => 'pli.parent_item_id', 'item_status' => 'pli.status'))
+            ->where('pli.products_listing_id = :id')
+            ->where('pli.parent_item_id IS NOT NULL')
+            ->joinLeft(array('plib' => $this->getTable('diglin_ricento/products_listing_item')), 'plib.item_id = pli.parent_item_id AND plib.status = "listed"');
+
+        $binds  = array('id' => $productsListingId);
+
+        $items = $readerConnection->fetchAll($select, $binds);
+        $parents = array();
+
+        foreach ($items as $item) {
+            if ($item['item_status'] == Diglin_Ricento_Helper_Data::STATUS_STOPPED) {
+                $parents[$item['parent_id']]['stopped'] = true;
+            }
+            if ($item['item_status'] == Diglin_Ricento_Helper_Data::STATUS_LISTED) {
+                $parents[$item['parent_id']]['listed'] = true;
+            }
+        }
+
+        foreach ($parents as $key => $parent) {
+            if (!isset($parents[$key]['listed']) && isset($parents[$key]['stopped'])) {
+                $this->saveCurrentItem($key, array('status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED));
+            }
+        }
 
         return $this;
     }
