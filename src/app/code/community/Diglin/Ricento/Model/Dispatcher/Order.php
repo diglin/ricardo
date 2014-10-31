@@ -304,7 +304,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     ->save();
 
                 /**
-                 * 6. Decrease the quantity at products listing item level
+                 * 6. Decrease the quantity at products listing item level and stop if needed
                  */
                 $productItem
                     ->setQtyInventory($productItem->getQtyInventory() - $salesTransaction->getQty());
@@ -371,6 +371,8 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             $customer->save();
         }
 
+        Mage::app()->getLocale()->emulate($storeId);
+
         if ($customer->isObjectNew() && Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_ACCOUNT_CREATION_EMAIL, $storeId)) {
             if ($customer->isConfirmationRequired()) {
                 $typeEmail = 'confirmation';
@@ -379,6 +381,8 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             }
             $customer->sendNewAccountEmail($typeEmail, '', $storeId);
         }
+
+        Mage::app()->getLocale()->revert();
 
         return $customer;
     }
@@ -424,6 +428,20 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 }
                 $this->createNewOrder($transactions);
             }
+        }
+
+        if ($this->_productsListingId) {
+            /**
+             * Set the status to stop of products having parent and when all other children are stopped
+             */
+            $itemResource = Mage::getResourceModel('diglin_ricento/products_listing_item');
+            $itemResource->setParentStatusStop($this->_productsListingId);
+
+            /**
+             * Stop the list if all products listing items are stopped
+             */
+            $listResource = Mage::getResourceModel('diglin_ricento/products_listing');
+            $listResource->setStatusStop($this->_productsListingId);
         }
 
         unset($transactionCollection);
