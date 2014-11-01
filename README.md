@@ -57,14 +57,9 @@ The extension is quite flexible, allowing you to define the settings at products
 ```
  {
     "require" : {
-        "magento-hackathon/magento-composer-installer": "*",
         "diglin/ricento": "1.*"
     },
     "repositories" : [
-        {
-            "type": "composer",
-            "url": "http://packages.firegento.com"
-        },
         {
             "type": "vcs",
             "url": "git@github.com:diglin/ricento.git"
