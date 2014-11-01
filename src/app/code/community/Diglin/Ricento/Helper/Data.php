@@ -132,7 +132,14 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     public function getConfigurationUrl($website = null)
     {
         $params = array();
-        if (!is_null($website)) {
+
+        if ($website instanceof Mage_Core_Model_Website) {
+            $websiteId = $website->getId();
+        } else {
+            $websiteId = $website;
+        }
+
+        if (!is_null($website) && $websiteId != 0) {
             $params = array('website' => Mage::app()->getWebsite($website)->getCode());
         }
         return Mage::helper('adminhtml')->getUrl('adminhtml/system_config/edit/section/ricento', $params);

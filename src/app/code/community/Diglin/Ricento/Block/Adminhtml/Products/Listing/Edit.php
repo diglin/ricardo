@@ -78,9 +78,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit extends Mage_Adminhtm
         if ($this->getListingId()) {
             return $this->__("Edit Products Listing '%s'", $this->escapeHtml(Mage::registry('products_listing')->getTitle()));
         }
-        else {
-            return $this->__('New Products Listing');
-        }
+        return $this->__('New Products Listing');
     }
 
     /**

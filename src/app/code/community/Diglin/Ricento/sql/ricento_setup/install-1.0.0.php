@@ -52,13 +52,13 @@ $tableSalesOptions->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4,
     ->addColumn('schedule_cycle_multiple_products', Varien_Db_Ddl_Table::TYPE_SMALLINT, 4, array('nullable' => true, 'default' => null))
     ->addColumn('schedule_overwrite_product_date_start', Varien_Db_Ddl_Table::TYPE_INTEGER, 1, array('unsigned' => true))
     ->addColumn('stock_management', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('default' => -1))
-    ->addColumn('customization_template', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => false, 'unsigned' => true, 'default' => 0))
+    ->addColumn('customization_template', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => true, 'unsigned' => false, 'default' => '-1'))
     ->addColumn('promotion_space', Varien_Db_Ddl_Table::TYPE_INTEGER, 2, array('nullable' => false, 'unsigned' => true, 'default' => 0))
     ->addColumn('promotion_start_page', Varien_Db_Ddl_Table::TYPE_INTEGER, 1, array('nullable' => false, 'default' => 0))
     ->addColumn('product_warranty', Varien_Db_Ddl_Table::TYPE_SMALLINT, 2, array('default' => 0, 'unsigned' => true, 'nullable' => false))
     ->addColumn('product_warranty_description_de', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
     ->addColumn('product_warranty_description_fr', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
-    ->addColumn('product_condition', Varien_Db_Ddl_Table::TYPE_VARCHAR, 50, array('nullable' => false))
+    ->addColumn('product_condition', Varien_Db_Ddl_Table::TYPE_VARCHAR, 50, array('nullable' => false, 'default' => 0))
     ->addColumn('product_condition_source_attribute_code', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array('nullable' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
     ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
@@ -89,12 +89,12 @@ $tableProductListingItems
     ->addColumn('parent_item_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('nullable' => true, 'unsigned' => true))
     ->addColumn('ricardo_article_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 10, array('unsigned' => true, 'nullable' => true))
     ->addColumn('is_planned', Varien_Db_Ddl_Table::TYPE_SMALLINT, null, array('unsigned' => true, 'nullable' => true))
-    ->addColumn('qty_inventory', Varien_Db_Ddl_Table::TYPE_DECIMAL, null, array('unsigned' => true, 'nullable' => true))
+    ->addColumn('qty_inventory', Varien_Db_Ddl_Table::TYPE_DECIMAL, '12,4', array('unsigned' => true, 'nullable' => true))
     ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('parent_product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true))
     ->addColumn('products_listing_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => false))
     ->addColumn('sales_options_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true, 'default' => null))
-    ->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true, 'default' => true))
+    ->addColumn('rule_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 4, array('unsigned' => true, 'nullable' => true, 'default' => null))
     ->addColumn('status', Varien_Db_Ddl_Table::TYPE_TEXT, 20, array('nullable' => false, 'default' => Diglin_Ricento_Helper_Data::STATUS_PENDING))
     ->addColumn('additional_data', Varien_Db_Ddl_Table::TYPE_TEXT, null, array('nullable' => true))
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => true, 'default' => null))
@@ -131,6 +131,13 @@ $tablePaymentRule
     ->addColumn('shipping_method', Varien_Db_Ddl_Table::TYPE_VARCHAR, 255, array(
         'nullable' => false
     ), 'Shipping Methods')
+    ->addColumn('shipping_package', Varien_Db_Ddl_Table::TYPE_SMALLINT, null, array(
+        'nullable' => true
+    ), 'Shipping Package')
+    ->addColumn('shipping_cumulative_fee', Varien_Db_Ddl_Table::TYPE_SMALLINT, null, array(
+        'nullable' => false,
+        'default' => 0
+    ), 'Shipping Cumulative Fee')
     ->addColumn('shipping_description_de', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
         'nullable' => true
     ), 'Shipping Description DE')

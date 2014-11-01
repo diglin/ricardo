@@ -27,7 +27,7 @@
 "Development Mode","Entwicklermodus"
 "If you enable this configuration, all API requests will be send to the ricardo.ch Sandbox instead to use the production servers. Be aware, you have to provide others partner Keys and Passwords specific for dev environment below.","Wenn Sie diese Funktion aktivieren, werden alle API-Anfragen an die ricardo.ch BETA Umgebubg verschickt. Stellen Sie sicher, dass Sie die dafür passenden API-Keys und Passwörter eingetragen haben."
 "Debug","Debug"
-"Write into the var/log/ricento.log file all requests sent to the ricardo.ch API. Enable it to help us to suppport you and send this file to us if you have an issue. Your passwords will be anonymized.","In diesem Modus werden alle Anfragen an die ricardo.ch-API in die Datei var/log/ricento.log geschrieben. Aktivieren Sie diesen Modus, wenn Sie Probleme haben und schicken Sie uns diese Datei zu. Damit können wir Ihnen helfen. Die Passwörter werden anonymisiert."
+"Write into the var/log/ricento.log file all requests sent to the ricardo.ch API. Enable it to help us to support you and send this file to us if you have an issue. Your passwords will be anonymized. Attention: the file size can grow quite fast.","In diesem Modus werden alle Anfragen an die ricardo.ch-API in die Datei var/log/ricento.log geschrieben. Aktivieren Sie diesen Modus, wenn Sie Probleme haben und schicken Sie uns diese Datei zu. Damit können wir Ihnen helfen. Die Passwörter werden anonymisiert. Achtung: Das Log Datei Größe kann schnell wachsen."
 "German API Token","Deutscher API Token"
 "PROD German Partner Key","PROD Deutscher Partner Schlüssel"
 "Partner Key has the following format '0F12345-1234-1234-1234-1234567890'. You have to sign up to the ricardo.ch API to get this information. Click on the button at the top of this page","Der Partner Schlüssel hat das folgende Format: '0F12345-1234-1234-1234-1234567890'. Sie müssen sich für die ricardo.ch API anmelden, um diesen Schlüssel zu bekommen. Klicken Sie dazu auf den Button oben auf der Seite."
@@ -396,16 +396,15 @@
 "Price","Preis"
 "Your ricardo.ch API Token","Ihre ricardo.ch API Token"
 
-"PREMIUMCATEGORYBRONZE"," ""Klein"""
-"PREMIUMCATEGORYSILVER"," ""Medium"""
-"PREMIUMCATEGORYGOLD"," ""Groß"""
+"PREMIUMCATEGORYBRONZE"," Klein"
+"PREMIUMCATEGORYSILVER"," "Medium"
+"PREMIUMCATEGORYGOLD"," "Groß"
 
 "TYPE_BANK_TRANSFER","Banküberweisung"
 "TYPE_CASH","Bar"
 "TYPE_CREDIT_CARD","Kreditkarte via ricardo.ch"
 "TYPE_OTHER", "Andere Zahlungsmethoden"
 
-/* Security Errors */
 "UNKNOWNPROPERTY","Unbekannter Besitzer"
 "CUSTOMERNOTARTICLEOWNER","Der Kunde darf das Produkt nicht bearbeiten, da er nicht der Besitzer ist."
 "CHECKPASSWORDWRONGPASSWORD","Das Passwort ist falsch."
@@ -429,7 +428,6 @@
 "METHODNOTALLOWED","Die Partnerschaft stimmt nicht mit der gewählten Methode überein."
 "TOKEN_AUTHORIZATION","Die Authorisierung muss nochmal durchgeführt werden"
 
-/* General Errors */
 "CLOSEAUCTIONFAILED","Auktion konnte nicht geschlossen werden"
 "CLOSECLASSIFIEDFAILED","Ein Produkt konnte nicht klassifiziert werden"
 "DELETEPLANNEDFAILED","Ein Produkt konnte nicht gelöscht werden"
@@ -444,7 +442,6 @@
 "LISTOFARTICLESEMPTY","Liste der Produkte ist leer"
 "UNKNOWNCATEGORYNAME","Kategoriename ist nicht bekannt"
 
-/* Article Errors */
 "EMPTYCOUNTRYID","Ein technischer Fehler ist aufgetreten. Wir bitten Sie um Entschuldigung. Bitte versuchen Sie es später nochmals oder kontaktieren Sie unseren Kundendienst."
 "EMPTYPARTNERID","Ein technischer Fehler ist aufgetreten. Wir bitten Sie um Entschuldigung. Bitte versuchen Sie es später nochmals oder kontaktieren Sie unseren Kundendienst."
 "EMPTYCATEGORY","Ein technischer Fehler ist aufgetreten. Wir bitten Sie um Entschuldigung. Bitte versuchen Sie es später nochmals oder kontaktieren Sie unseren Kundendienst."
@@ -581,7 +578,6 @@
 "WRONGPAYMENTMETHODS","falsche Zahlungsart"
 "CUMULATIVESHIPPINGNOTALLOWED","kumulative Versandkosten nicht erlaubt."
 
-/* Picture Errors */
 "MAXPICTURESCOUNTREACHED","maximale Bilderanzahl erreicht"
 "MAXPICTURESIZEREACHED","maximale Bildgröße erreicht"
 "ERRORRESIZINGPICTURE","Fehler bei der Grössenänderung der Bilder"
@@ -592,7 +588,6 @@
 "MAXLOGOPICTURESIZEREACHED","maximale Logogröße erreicht"
 "ERRORRESIZINGLOGOPICTURE","Fehler bei der Größenänderung des Logos"
 
-/* Customers Errors - DO NOT TRANSLATE */
 "NOTALLOWEDTOSELL","NOTALLOWEDTOSELL"
 "BILLINGERROR","BILLINGERROR"
 "GETCUSTOMERERROR","GETCUSTOMERERROR"

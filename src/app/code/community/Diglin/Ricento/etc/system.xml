@@ -141,7 +141,7 @@
                             <label>Debug</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[Write into the var/log/ricento.log file all requests sent to the ricardo.ch API. Enable it to help us to suppport you and send this file to us if you have an issue. Your passwords will be anonymized.]]></comment>
+                            <comment><![CDATA[Write into the var/log/ricento.log file all requests sent to the ricardo.ch API. Enable it to help us to support you and send this file to us if you have an issue. Your passwords will be anonymized. Attention: the file size can grow quite fast.]]></comment>
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>

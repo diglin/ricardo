@@ -46,4 +46,7 @@ $installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sync
 $installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sales_transaction'));
 $installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sync_job_listing'));
 
+$installer->getConnection()->delete($installer->getTable('sales/order_status'), 'status = "ricardo_payment_canceled"');
+$installer->getConnection()->delete($installer->getTable('sales/order_status'), 'status = "ricardo_payment_pending"');
+
 $installer->endSetup();

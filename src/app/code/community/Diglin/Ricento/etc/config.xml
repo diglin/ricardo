@@ -13,7 +13,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>0.0.33</version>
+            <version>1.0.0</version>
         </Diglin_Ricento>
     </modules>
 
@@ -225,7 +225,7 @@
         <ricento>
             <allow_product_types>
                 <simple />
-                <!--configurable /-->
+                <configurable />
                 <grouped />
             </allow_product_types>
 

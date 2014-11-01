@@ -47,25 +47,33 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Rendere
 
             if (count($statuses)) {
                 $value = '<ul><li>&nbsp;</li>' . implode($statuses) . '</ul>';
+            } else {
+                $value = $this->_decorate($value, $row);
             }
         } else {
-            $output = '';
-            $value = htmlspecialchars_decode($value);
-            switch ($row->getStatus()) {
-                case 'error':
-                    $output .= '<div id="message-errors-' . $row->getId() . '" class="message_errors">' . $value . '</div>';
-                    break;
-                case 'listed':
-                    $output .= '<div id="message-success-' . $row->getId() . '" class="message_success">' . $value . '</div>';
-                    break;
-                default:
-                    $output .= '<div id="message-warnings-' . $row->getId() . '" class="message_warnings">' . $value . '</div>';
-                    break;
-            }
-            $value = $output;
+            $value = $this->_decorate($value, $row);
         }
 
         return $value;
+    }
+
+    protected function _decorate($value, Varien_Object $row)
+    {
+        $output = '';
+        $value = htmlspecialchars_decode($value);
+        switch ($row->getStatus()) {
+            case 'error':
+                $output .= '<div id="message-errors-' . $row->getId() . '" class="message_errors">' . $value . '</div>';
+                break;
+            case 'listed':
+                $output .= '<div id="message-success-' . $row->getId() . '" class="message_success">' . $value . '</div>';
+                break;
+            default:
+                $output .= '<div id="message-warnings-' . $row->getId() . '" class="message_warnings">' . $value . '</div>';
+                break;
+        }
+
+        return $output;
     }
 
 }

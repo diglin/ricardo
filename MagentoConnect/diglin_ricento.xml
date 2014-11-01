@@ -1,0 +1,180 @@
+<_>
+   <form_key>ZwJaPJcMEH2CXP9I</form_key>
+   <name>diglin_ricento</name>
+   <channel>community</channel>
+   <version_ids>
+      <version_ids>2</version_ids>
+   </version_ids>
+   <summary>Sell your products from Magento to ricardo.ch and sync your order back into your shop to treat them.</summary>
+   <description>&lt;h3&gt;Four easy steps: Install, Configure, Select your products, List &lt;/h3&gt;
+				&lt;h2&gt;Description&lt;/h2&gt;
+			  &lt;p&gt;The Magento extension for ricardo.ch helps you easily to publish and sell your products on ricardo.ch marketplace offering you an additional stream of revenue.&lt;/p&gt;
+				&lt;p&gt;This extension replaces the ricardo assistant and deliver you the same features as this one but from your Magento shop, by synchronizing your Magento catalog to ricardo.ch. Orders passed on ricardo.ch are sent back to your shop, keeping all your orders in a unique place and making your daily business easier.&lt;/p&gt;
+				&lt;p&gt;With this extension, you can define a list of products to publish, set all payment and shipping rules supported by the ricardo.ch platform, choose the price variation and the type of sales (auction and/or direct sales), select the ricardo category where to publish, define product conditions or options to promote your products. &lt;/p&gt;
+				&lt;p&gt;The extension is quite flexible, allowing you to define the settings at products listing level or product listing item level. It offers you also the capability to publish your product data to the two supported ricardo.ch languages: german and french.&lt;/p&gt;
+				&lt;h2&gt;Main Features&lt;/h2&gt;
+				&lt;ul&gt;
+				    &lt;li&gt;Synchronize and sell your products to ricardo.ch marketplace (Magento -&amp;gt; ricardo.ch)&lt;/li&gt;
+                     &lt;li&gt;Create products listing to elaborate different sales options and rules&lt;/li&gt;
+                     &lt;li&gt;Configuration of the sales options and rules at products listing or products level&lt;/li&gt;
+                     &lt;li&gt;Add products to a products listing from selected categories or manual selection&lt;/li&gt;
+                     &lt;li&gt;Support of Magento product types: simple, grouped and configurable&lt;/li&gt;
+                     &lt;li&gt;Product data synchronization in French and/or German&lt;/li&gt;
+                     &lt;li&gt;Support for Swiss Franc currency&lt;/li&gt;
+                     &lt;li&gt;Pre-Check the product data and products listing configuration before to send to ricardo.ch&lt;/li&gt;
+                     &lt;li&gt;Cleanup of listing/synchronization jobs/orders logs after a period of time automatically after 30 days or a customized period&lt;/li&gt;
+                     &lt;li&gt;Preview before to list your products&lt;/li&gt;
+                     &lt;li&gt;Create the orders passed on ricardo.ch into your Magento shop&lt;/li&gt;
+                     &lt;li&gt;Merge orders of different articles from the same customer when he bought products in a period of 30min (Cross Selling)&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;h2&gt;Support&lt;/h2&gt;
+				&lt;ul&gt;
+					&lt;li&gt;Extension available on &lt;a href=&quot;http://www.magentocommerce.com/magento-connect/magento-extension-for-ricardo-ch-by-diglin.html&quot;&gt;MagentoConnect&lt;/a&gt;, &lt;a href=&quot;https://github.com/diglin/ricento&quot;&gt;Github&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a href=&quot;http://diglin.zendesk.com&quot;&gt;Documentation &amp;amp; FAQ&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;Email support: support at diglin.com - fees may apply - contact us for more information&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;h2&gt;About ricardo.ch&lt;/h2&gt;
+				&lt;p&gt;With around 700,000 current offers (auctions and fixed price), 2.5 million brand-name articles on &lt;a href=&quot;http://www.ricardoshops&quot;&gt;ricardoshops&lt;/a&gt;.ch, around 100,000 vehicles plus 35,000 parts and accessories on &lt;a href=&quot;http://www.autoricardo.ch&quot;&gt;autoricardo.ch&lt;/a&gt; and over 2.3 million members, ricardo.ch is the largest online marketplace in Switzerland. Every three minutes somebody buys an article on &lt;a href=&quot;http://www.ricardo.ch&quot;&gt;ricardo.ch&lt;/a&gt; using a mobile device. ricardo.ch AG employs over 140 people in Switzerland and is headquartered in Zug.&lt;/p&gt;
+				&lt;h2&gt;About Diglin&lt;/h2&gt;
+				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
+   <license>OSL v3.0</license>
+   <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
+   <version>1.0.0</version>
+   <stability>stable</stability>
+   <notes>1.0.0: First stable release with all features as listed here https://diglin.zendesk.com/hc/en-us/articles/201655852-Which-features-are-provided-</notes>
+   <authors>
+      <name>
+         <name>diglin</name>
+      </name>
+      <user>
+         <user>diglin</user>
+      </user>
+      <email>
+         <email>sly@diglin.com</email>
+      </email>
+   </authors>
+   <depends_php_min>5.3.2</depends_php_min>
+   <depends_php_max>5.5.17</depends_php_max>
+   <depends>
+      <package>
+         <name>
+            <name/>
+         </name>
+         <channel>
+            <channel/>
+         </channel>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+         <files>
+            <files>                </files>
+         </files>
+      </package>
+      <extension>
+         <name>
+            <name>Core</name>
+         </name>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+      </extension>
+   </depends>
+   <contents>
+      <target>
+         <target>magelocal</target>
+         <target>mageetc</target>
+         <target>magedesign</target>
+         <target>magedesign</target>
+         <target>mageskin</target>
+         <target>magecommunity</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+         <target>mageweb</target>
+         <target>magelib</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+         <target>magelocale</target>
+      </target>
+      <path>
+         <path/>
+         <path>modules/Diglin_Ricento.xml</path>
+         <path>adminhtml/default/default/layout/ricento.xml</path>
+         <path>adminhtml/default/default/template/ricento</path>
+         <path>adminhtml/default/default/ricento</path>
+         <path>Diglin/Ricento</path>
+         <path>en_US/Diglin_Ricento.csv</path>
+         <path>en_US/template/email/ricento</path>
+         <path>fr_FR/Diglin_Ricento.csv</path>
+         <path>fr_FR/template/email/ricento</path>
+         <path>js/ricento</path>
+         <path>Diglin/Ricardo</path>
+         <path>de_DE/Diglin_Ricento.csv</path>
+         <path>de_DE/template/email/ricento</path>
+         <path>de_CH/Diglin_Ricento.csv</path>
+         <path>de_CH/template/email/ricento</path>
+      </path>
+      <type>
+         <type>file</type>
+         <type>file</type>
+         <type>file</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>dir</type>
+      </type>
+      <include>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+         <include/>
+      </include>
+      <ignore>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+         <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore/>
+         <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore/>
+         <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore/>
+         <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore/>
+         <ignore>#^.svn|.git|.DS_Store#</ignore>
+      </ignore>
+   </contents>
+</_>
