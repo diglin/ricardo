@@ -405,12 +405,12 @@ $installer->addAttribute(Mage_Catalog_Model_Product::ENTITY, 'ricardo_condition'
     'apply_to'	=> 'simple,grouped,configurable'
 ));
 
-$installer->addAttribute('customer', 'customer_ricardo_username', array(
+$installer->addAttribute('customer', 'ricardo_username', array(
     'type' => 'varchar',
     'input' => 'text',
     'label' => 'ricardo.ch Username',
     'required' => false,
-    'user_defined' => false,
+    'user_defined' => true,
     'default' => '',
     'unique' => true,
     'note' => 'ricardo.ch Username imported from ricardo.ch',
@@ -419,12 +419,12 @@ $installer->addAttribute('customer', 'customer_ricardo_username', array(
     'frontend_class' => 'disabled'
 ));
 
-$installer->addAttribute('customer', 'customer_ricardo_id', array(
+$installer->addAttribute('customer', 'ricardo_id', array(
     'type' => 'int',
     'input' => 'text',
     'label' => 'ricardo.ch Customer ID',
     'required' => false,
-    'user_defined' => false,
+    'user_defined' => true,
     'default' => '',
     'unique' => true,
     'note' => 'ricardo.ch Customer ID imported from ricardo.ch',
@@ -433,12 +433,50 @@ $installer->addAttribute('customer', 'customer_ricardo_id', array(
     'frontend_class' => 'disabled'
 ));
 
+/**
+ * Add a column to sales/quote table
+ */
+$salesQuoteTable = $installer->getTable('sales/quote');
+$salesOrderTable = $installer->getTable('sales/order');
+
+/**
+ * Add column to sales quote
+ */
+$installer->getConnection()->addColumn($salesQuoteTable, 'customer_ricardo_username', array(
+    'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
+    'length' => 255,
+    'nullable' => true,
+    'comment' => 'Ricardo Username'));
+
+$installer->getConnection()->addColumn($salesQuoteTable, 'customer_ricardo_id', array(
+    'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
+    'nullable' => true,
+    'unsigned' => true,
+    'comment' => 'ricardo.ch ID'));
+
+/**
+ * Add column to sales quote
+ */
+$installer->getConnection()->addColumn($salesOrderTable, 'customer_ricardo_username', array(
+    'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
+    'length' => 255,
+    'nullable' => true,
+    'comment' => 'ricardo.ch Username'));
+
+$installer->getConnection()->addColumn($salesOrderTable, 'customer_ricardo_id', array(
+    'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
+    'nullable' => true,
+    'unsigned' => true,
+    'comment' => 'ricardo.ch ID'));
+
 Mage::getSingleton('eav/config')
-    ->getAttribute('customer', 'customer_ricardo_username')
-    ->setData('used_in_forms', array('adminhtml_customer'))
+    ->getAttribute('customer', 'ricardo_id')
+    ->setData('used_in_forms', array('adminhtml_customer', 'adminhtml_checkout'))
     ->save();
 
 Mage::getSingleton('eav/config')
-    ->getAttribute('customer', 'customer_ricardo_id')
-    ->setData('used_in_forms', array('adminhtml_customer'))
+    ->getAttribute('customer', 'ricardo_username')
+    ->setData('used_in_forms', array('adminhtml_customer', 'adminhtml_checkout'))
     ->save();
+
+$installer->endSetup();
