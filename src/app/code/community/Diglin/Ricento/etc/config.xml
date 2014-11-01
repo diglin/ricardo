@@ -132,11 +132,6 @@
                     <sync_job>
                         <table>ricento_sync_job</table>
                     </sync_job>
-                    <!-- at 0.0.21 Remove this table -->
-                    <sync_log>
-                        <table>ricento_sync_log</table>
-                    </sync_log>
-                    <!-- EOF -->
                     <sync_job_listing>
                         <table>ricento_sync_job_listing</table>
                     </sync_job_listing>

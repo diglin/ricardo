@@ -12,6 +12,8 @@
 /* @var $installer Mage_Core_Model_Resource_Setup */
 $installer = $this;
 
+$installer->startSetup();
+
 // Customer Attributes
 $installer->deleteTableRow($installer->getTable('eav_attribute'), 'attribute_code', 'ricardo_id');
 $installer->deleteTableRow($installer->getTable('eav_attribute'), 'attribute_code', 'ricardo_username');
@@ -43,3 +45,5 @@ $installer->getConnection()->dropTable($installer->getTable('diglin_ricento/ship
 $installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sync_job'));
 $installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sales_transaction'));
 $installer->getConnection()->dropTable($installer->getTable('diglin_ricento/sync_job_listing'));
+
+$installer->endSetup();

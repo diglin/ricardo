@@ -10,8 +10,6 @@
 /* @var $installer Mage_Catalog_Model_Resource_Setup */
 $installer = $this;
 
-// Implement sql and EAV changes from versions 0.0.1 to 0.0.32 until now (@todo finish to update here until version 1.0.0 will be officially ready to release)
-
 $installer->startSetup();
 
 $apiTokenTable = $installer->getTable('diglin_ricento/api_token');
@@ -432,12 +430,6 @@ $installer->addAttribute('customer', 'ricardo_id', array(
     'visible_on_front' => false,
     'frontend_class' => 'disabled'
 ));
-
-/**
- * Add a column to sales/quote table
- */
-$salesQuoteTable = $installer->getTable('sales/quote');
-$salesOrderTable = $installer->getTable('sales/order');
 
 /**
  * Add column to sales quote
