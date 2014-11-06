@@ -19,11 +19,15 @@ class Diglin_Ricento_Model_Entity_Attribute_Source_Conditions extends Mage_Eav_M
      */
     public function getAllOptions()
     {
-        if (is_null($this->_options)) {
+        // need to check if configured because it blocks users to edit product page until they receive API info
+        if (Mage::helper('diglin_ricento')->isConfigured()) {
+            if (is_null($this->_options)) {
 
-            $this->_options = Mage::getSingleton('diglin_ricento/config_source_sales_product_condition')->getAllOptions();
+                $this->_options = Mage::getSingleton('diglin_ricento/config_source_sales_product_condition')->getAllOptions();
+            }
+            return $this->_options;
         }
-        return $this->_options;
-    }
 
+        return array('label' => Mage::helper('diglin_ricento')->__('No Options because API not configured'), 'value' => '');
+    }
 }
