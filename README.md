@@ -1,4 +1,4 @@
-# Ricento - The Ricardo extension for Magento eCommerce Platform - Developed by Diglin GmbH
+# Ricento - The ricardo.ch extension for the Magento eCommerce Platform - Developed by Diglin GmbH
 
 ## Description
 
@@ -12,7 +12,7 @@ The extension is quite flexible, allowing you to define the settings at products
 
 ## System requirements
 
-- Ricardo API Token: please visit the [Ricardo API website](http://www.ricardo.ch/interface/)
+- ricardo.ch API Token: please visit the [Ricardo API website](http://www.ricardo.ch/interface/)
 - Magento CE 1.9.x (should work from version 1.6 but not yet tested - for EE, please contact us)
 - Minimum memory: 256MB - Recommended: 512MB
 - PHP >= 5.3.2
