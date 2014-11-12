@@ -1,5 +1,5 @@
 <_>
-   <form_key>ZwJaPJcMEH2CXP9I</form_key>
+   <form_key>YulnB4jyV0cy1qtO</form_key>
    <name>diglin_ricento</name>
    <channel>community</channel>
    <version_ids>
@@ -39,9 +39,10 @@
 				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.0.0</version>
+   <version>1.0.4</version>
    <stability>stable</stability>
-   <notes>1.0.0: First stable release with all features as listed here https://diglin.zendesk.com/hc/en-us/articles/201655852-Which-features-are-provided-</notes>
+   <notes>1.0.4: Allow Not visible product to be listed on ricardo.ch
+1.0.0: First stable release with all features as listed here https://diglin.zendesk.com/hc/en-us/articles/201655852-Which-features-are-provided-</notes>
    <authors>
       <name>
          <name>diglin</name>
@@ -54,7 +55,7 @@
       </email>
    </authors>
    <depends_php_min>5.3.2</depends_php_min>
-   <depends_php_max>5.5.17</depends_php_max>
+   <depends_php_max>5.6.0</depends_php_max>
    <depends>
       <package>
          <name>
@@ -70,7 +71,7 @@
             <max/>
          </max>
          <files>
-            <files>                </files>
+            <files>                  </files>
          </files>
       </package>
       <extension>
@@ -163,7 +164,7 @@
          <ignore/>
          <ignore/>
          <ignore>#^.svn|.git|.DS_Store#</ignore>
-         <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore/>
          <ignore>#^.svn|.git|.DS_Store#</ignore>
          <ignore/>
          <ignore>#^.svn|.git|.DS_Store#</ignore>
