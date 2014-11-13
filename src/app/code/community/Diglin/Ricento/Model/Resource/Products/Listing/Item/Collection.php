@@ -54,9 +54,8 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mag
                 $this->getSelect()
                     ->joinLeft(
                         array($alias => $attribute->getBackendTable()),
-                        'main_table.product_id = ' . $alias . '.entity_id',
-                        array($key => 'value'))
-                    ->where($alias . ".attribute_id IN ('" . $attribute->getId() . "')");
+                        'main_table.product_id = ' . $alias . '.entity_id AND ' . $alias . ".attribute_id = " . (int) $attribute->getId(),
+                        array($key => 'value'));
             }
 
             $this->getSelect()
@@ -75,6 +74,8 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mag
                     'option.product_id = main_table.product_id',
                     array('has_custom_options' => new Zend_Db_Expr('option.option_id IS NOT NULL'))
                 );
+
+            $this->getSelect()->group('main_table.item_id');
         }
 
         return parent::_beforeLoad();
