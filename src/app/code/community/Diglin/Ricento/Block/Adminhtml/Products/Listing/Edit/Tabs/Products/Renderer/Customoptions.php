@@ -23,14 +23,30 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Rendere
      */
     public function render(Varien_Object $row)
     {
-        $hasCustomOptions = $this->_getValue($row);
-        if ($hasCustomOptions) {
+        if ($row instanceof Diglin_Ricento_Model_Products_Listing_Item) {
+            $productId = $row->getProductId();
+        } else if ($row instanceof Mage_Catalog_Model_Product) {
+            $productId = $row->getId();
+        } else {
+            return '';
+        }
+
+        $optionsCollection = Mage::getResourceModel('catalog/product_option_collection');
+        $optionsCollection
+            ->getSelect()
+            ->from(array('option' => $optionsCollection->getTable('catalog/product_option')))
+            ->where('option.product_id = ?', $productId)
+            ->where('option.option_id IS NOT NULL')
+            ->group('option.product_id');
+
+        if (count($optionsCollection->getItems())) {
             $warningMessage = $this->__('The product has custom options, those will not be added to ricardo.ch!');
             return
-<<<HTML
-    <div class="diglin_ricento_warning_icon" title="{$warningMessage}">&nbsp;</div>
+                <<<HTML
+                    <div class="diglin_ricento_warning_icon" title="{$warningMessage}">&nbsp;</div>
 HTML;
         }
+
         return '';
     }
 

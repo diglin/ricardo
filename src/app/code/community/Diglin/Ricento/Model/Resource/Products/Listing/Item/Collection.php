@@ -68,14 +68,7 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mag
                     array('stock' => $this->getTable('cataloginventory/stock_item')),
                     'stock.product_id = main_table.product_id AND stock.stock_id = 1',
                     array( 'stock_qty' => 'qty')
-                )
-                ->joinLeft(
-                    array('option' => $this->getTable('catalog/product_option')),
-                    'option.product_id = main_table.product_id',
-                    array('has_custom_options' => new Zend_Db_Expr('option.option_id IS NOT NULL'))
                 );
-
-            $this->getSelect()->group('main_table.item_id');
         }
 
         return parent::_beforeLoad();
