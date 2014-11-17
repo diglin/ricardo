@@ -16,6 +16,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     extends Mage_Adminhtml_Block_Widget_Grid
 {
 
+    protected $_massactionBlockName = 'diglin_ricento/adminhtml_products_listing_edit_tabs_products_massaction';
+
     public function __construct()
     {
         parent::__construct();
@@ -59,13 +61,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         }
 
         $collection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
-        $collection->setAddAdditionalInformation(true);
-
-        $productIds = $this->_getSelectedProducts();
-        if (empty($productIds)) {
-            $productIds = 0;
-        }
-        $collection->addFieldToFilter('main_table.product_id', array('in' => $productIds));
+        $collection
+            ->setAddAdditionalInformation(true)
+            ->addFieldToFilter('main_table.products_listing_id', $this->getListing()->getId());
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -223,15 +221,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         ));
 
         return $this;
-    }
-
-    protected function _getSelectedProducts()
-    {
-        $products = $this->getRequest()->getPost('selected_products');
-        if (is_null($products)) {
-            $products = $this->getListing()->getProductIds(false);
-        }
-        return $products;
     }
 
     /**

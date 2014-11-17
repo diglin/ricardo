@@ -197,6 +197,7 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
             ->addFieldToFilter('product_id', array('in' => $productIds))
             ->addFieldToFilter('status', array('neq' => Diglin_Ricento_Helper_Data::STATUS_LISTED))
             ->count();
+
         if ($numberOfItemsToDelete) {
             $items->walk('delete');
         }
