@@ -75,5 +75,4 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Rendere
 
         return $output;
     }
-
 }

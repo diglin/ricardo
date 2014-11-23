@@ -151,6 +151,7 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             $this->_updateCredentialToken();
             Mage::logException($e);
+
             try {
                 $this->_handleSecurityException($e);
             } catch (\Diglin\Ricardo\Exceptions\GeneralException $e) {

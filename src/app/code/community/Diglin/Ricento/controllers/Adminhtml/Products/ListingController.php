@@ -94,7 +94,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     {
         $productsListing = $this->_initListing();
         if (!$productsListing) {
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 
@@ -116,6 +117,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     {
         $listingTitle = (string)$this->getRequest()->getPost('listing_title');
         $websiteId = (int)$this->getRequest()->getPost('website_id');
+
         if (empty($listingTitle) || empty($websiteId)) {
             $this->_getSession()->addError($this->__('Listing name and website must be specified.'));
             $this->_redirect('*/*/index');
@@ -181,8 +183,9 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         if ($data = $this->getRequest()->getPost()) {
             $listing = $this->_initListing();
             if (!$listing) {
-                $this->_redirect($this->_getIndexUrl());
-                return;
+                $this->_getSession()->addError('Products Listing not found.');
+                $this->_redirectUrl($this->_getIndexUrl());
+                return $this;
             }
             $listing->addData($data['product_listing']);
             try {
@@ -201,6 +204,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
                 $error = true;
             }
         }
+
         $this->_redirectUrl($this->_getEditUrl());
 
         // To block chaining, we return the error
@@ -248,12 +252,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     public function deleteAction()
     {
         if (!$this->_initListing()) {
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
+
         if ($this->_getListing()->getStatus() === Diglin_Ricento_Helper_Data::STATUS_LISTED) {
             $this->_getSession()->addError($this->__('Listed listings cannot be deleted. Stop the listing first.'));
-            $this->_redirect('*/*/index');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 
@@ -268,7 +274,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     public function addProductAction()
     {
         if (!$this->_initListing()) {
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
         $productIds = (array)$this->getRequest()->getPost('product', array());
@@ -288,21 +295,27 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     public function removeProductAction()
     {
         if (!$this->_initListing()) {
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
+
         if ($this->getRequest()->isPost()) {
-            $productIds = array_map('intval', (array)$this->getRequest()->getPost('product', array()));
+            $productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
         } else {
-            $productIds = array_map('intval', (array)$this->getRequest()->getParam('product', array()));
+            $productIds = array_map('intval', (array) $this->getRequest()->getParam('product', array()));
         }
+
         list($productsRemoved, $productsNotRemoved) = $this->_getListing()->removeProducts($productIds);
+
         if ($productsRemoved) {
             $this->_getSession()->addSuccess($this->__('%d products removed from listing', $productsRemoved));
         }
+
         if ($productsNotRemoved) {
             $this->_getSession()->addNotice($this->__('%d products are listed and could not be removed', $productsNotRemoved));
         }
+
         $this->_redirect('*/*/edit', array('id' => $this->_getListing()->getId()));
     }
 
@@ -316,7 +329,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
         if (!$this->isApiReady()) {
             $this->_getSession()->addError($this->__('The API token and configuration are not ready to allow this action. Please, check that your token is enabled and not going to expire.'));
-            $this->_redirect('*/*/index');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 
@@ -393,7 +406,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $productListing = $this->_initListing();
 
         if (!$productListing) {
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 
@@ -438,7 +452,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $productListing = $this->_initListing();
 
         if (!$productListing) {
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 
@@ -466,7 +481,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         $productListing = $this->_initListing();
 
         if (!$productListing) {
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 
@@ -488,7 +504,8 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
     {
         $listing = $this->_initListing();
         if (!$listing) {
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 

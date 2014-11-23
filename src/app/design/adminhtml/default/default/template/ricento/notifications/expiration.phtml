@@ -18,14 +18,14 @@ $website = Mage::app()->getWebsite();
 //$websites = Mage::app()->getWebsites();
 //foreach ($websites as $website) {
 ?>
-<?php if ($this->isEnabled($website) && $this->isApiConfigured($website) && $this->isApiGoExpire($website)): ?>
+<?php if ($this->getApiReady()): ?>
 <div class="notification-global">
     <?php if ($this->isApiCredentialTokenExist($website)): ?>
     <strong><?php echo $this->__('Your ricardo.ch API token credentials are going to expire in %s days for the website "%s".', $this->getExpirationNotificationDelay(), $website->getName());?></strong>
     <?php else: ?>
     <strong><?php echo $this->__('No ricardo.ch API Authorization have been found for the website "%s".', $website->getName());?></strong>
     <?php endif; ?>
-    <?php echo $this->__(' You have to authorize your account to get access to the ricardo.ch API thanks to the <a href="%s">Ricardo Authorization Page</a>. If you don\'t do it, your ricardo.ch extension and all related transactions with ricardo.ch will be blocked.',
+    <?php echo $this->__('You have to authorize your account to get access to the ricardo.ch API thanks to the <a href="%s">ricardo.ch Authorization Page</a>. If you don\'t do it, your ricardo.ch extension and all related transactions with ricardo.ch will be blocked.',
             $this->getValidationUrl($website)); ?>
     <?php echo $this->__('To hide this message, you have to <a href="%s">disable the extension</a>.', Mage::helper('diglin_ricento')->getConfigurationUrl($website)); ?>
 </div>
