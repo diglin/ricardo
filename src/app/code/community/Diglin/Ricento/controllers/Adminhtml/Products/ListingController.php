@@ -210,8 +210,10 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
 
         // To block chaining, we return the error
         if ($error) {
-            return $error;
+            return !$error;
         }
+
+        return true;
     }
 
     protected function _savingAllowed()
@@ -409,6 +411,10 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         if (!$productListing) {
             $this->_getSession()->addError('Products Listing not found.');
             $this->_redirectUrl($this->_getRefererUrl());
+            return;
+        }
+
+        if ($productListing->getStatus() != Diglin_Ricento_Helper_Data::STATUS_LISTED && !$this->saveAction()) {
             return;
         }
 
