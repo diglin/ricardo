@@ -39,7 +39,7 @@
                 <debug>0</debug>
                 <assistant_url>https://assistant.ricardo.ch</assistant_url>
                 <assistant_url_dev>https://ra.betaqxl.com/</assistant_url_dev>
-                <signup_url>http://api.ricardo.ch/request.php</signup_url>
+                <signup_url>http://www.ricardo.ch/interface/en-us/application.aspx</signup_url>
                 <simulate_authorization>0</simulate_authorization>
                 <email_notification>1</email_notification>
                 <!-- it's only possible one day before to renew the API token -->
