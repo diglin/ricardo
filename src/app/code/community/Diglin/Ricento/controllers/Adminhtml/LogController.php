@@ -119,9 +119,8 @@ class Diglin_Ricento_Adminhtml_LogController extends Diglin_Ricento_Controller_A
         try {
             if (is_array($jobs)) {
                 $jobCollection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
-                $jobCollection
-                    ->addFieldToFilter('job_id', array('in' => $jobs))
-                    ->addFieldToFilter('progress', array('neq' => Diglin_Ricento_Model_Sync_Job::PROGRESS_RUNNING));
+                $jobCollection->addFieldToFilter('job_id', array('in' => $jobs));
+//                    ->addFieldToFilter('progress', array('neq' => Diglin_Ricento_Model_Sync_Job::PROGRESS_RUNNING));
 
                 $goingToBeDeleted = $jobCollection->getAllIds();
 
