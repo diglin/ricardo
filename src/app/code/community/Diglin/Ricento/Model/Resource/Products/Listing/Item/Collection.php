@@ -39,41 +39,6 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection extends Mag
         $this->_init('diglin_ricento/products_listing_item');
     }
 
-    protected function _beforeLoad()
-    {
-        if ($this->getAddAdditionalInformation()) {
-            $config = Mage::getSingleton('eav/config');
-            $productAttributes = array(
-                'product_name' => 'name',
-                'price' => 'price',
-            );
-            foreach ($productAttributes as $key => $attributeCode) {
-                $alias = $attributeCode .  '_table';
-                $attribute = $config->getAttribute(Mage_Catalog_Model_Product::ENTITY, $attributeCode);
-
-                $this->getSelect()
-                    ->joinLeft(
-                        array($alias => $attribute->getBackendTable()),
-                        'main_table.product_id = ' . $alias . '.entity_id AND ' . $alias . ".attribute_id = " . (int) $attribute->getId(),
-                        array($key => 'value'));
-            }
-
-            $this->getSelect()
-                ->joinLeft(
-                    array('prod' => $this->getTable('catalog/product')),
-                    'main_table.product_id = prod.entity_id',
-                    array('type_id', 'product_sku' => 'sku')
-                )
-                ->joinLeft(
-                    array('stock' => $this->getTable('cataloginventory/stock_item')),
-                    'stock.product_id = main_table.product_id AND stock.stock_id = 1',
-                    array( 'stock_qty' => 'qty')
-                );
-        }
-
-        return parent::_beforeLoad();
-    }
-
     /**
      * @param $status
      * @return $this

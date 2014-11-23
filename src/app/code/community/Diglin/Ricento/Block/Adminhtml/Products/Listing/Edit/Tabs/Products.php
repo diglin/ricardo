@@ -16,16 +16,13 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     extends Mage_Adminhtml_Block_Widget_Grid
 {
 
-    protected $_massactionBlockName = 'diglin_ricento/adminhtml_products_listing_edit_tabs_products_massaction';
-
     public function __construct()
     {
         parent::__construct();
         $this->setId('products_listing_items');
-        $this->setDefaultSort('item_id');
+        $this->setDefaultSort('entity_id');
         $this->setDefaultDir('ASC');
         $this->setSaveParametersInSession(true);
-        $this->setMassactionIdFieldOnlyIndexValue(true);
         $this->setUseAjax(true);
     }
 
@@ -43,7 +40,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
      */
     public function getRowUrl($item)
     {
-        return $this->getUrl('*/products_listing_item/configure', array('id' => $this->getListing()->getId(), 'product' => $item->getProductId()));
+        return $this->getUrl('*/products_listing_item/configure', array('id' => $this->getListing()->getId(), 'product' => $item->getId()));
     }
 
     /**
@@ -60,10 +57,55 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             $this->setDefaultFilter(array('in_category' => 1));
         }
 
-        $collection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
-        $collection
-            ->setAddAdditionalInformation(true)
-            ->addFieldToFilter('main_table.products_listing_id', $this->getListing()->getId());
+        $collection = Mage::getResourceModel('catalog/product_collection')
+            ->addAttributeToSelect('name')
+            ->addAttributeToSelect('sku')
+            ->addAttributeToSelect('type_id')
+            ->addAttributeToSelect('price')
+            ->addWebsiteFilter($this->getListing()->getWebsiteId())
+            ->joinField('stock_qty',
+                'cataloginventory/stock_item',
+                'qty',
+                'product_id=entity_id',
+                '{{table}}.stock_id=1',
+                'left'
+            )->joinField('status',
+                'diglin_ricento/products_listing_item',
+                'status',
+                'product_id=entity_id',
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->joinField('sales_options_id',
+                'diglin_ricento/products_listing_item',
+                'sales_options_id',
+                'product_id=entity_id',
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->joinField('rule_id',
+                'diglin_ricento/products_listing_item',
+                'rule_id',
+                'product_id=entity_id',
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->joinField('ricardo_article_id',
+                'diglin_ricento/products_listing_item',
+                'ricardo_article_id',
+                'product_id=entity_id',
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->joinField('item_id',
+                'diglin_ricento/products_listing_item',
+                'item_id',
+                'product_id=entity_id',
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                'left'
+            )->distinct(true);
+
+        $productIds = $this->_getSelectedProducts();
+        if (empty($productIds)) {
+            $productIds = 0;
+        }
+        $collection->addFieldToFilter('entity_id', array('in'=>$productIds));
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -72,7 +114,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     protected function _prepareColumns()
     {
         $this->addColumn('item_id', array(
-            'header'    => Mage::helper('catalog')->__('ID'),
+            'header'    => Mage::helper('catalog')->__('Item ID'),
             'sortable'  => true,
             'filter'    => false,
             'width'     => '60',
@@ -80,60 +122,58 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             'type'      => 'number'
         ));
 
-        $this->addColumn('product_id', array(
+        $this->addColumn('entity_id', array(
             'header'    => Mage::helper('catalog')->__('Product ID'),
             'sortable'  => true,
             'filter'    => false,
             'width'     => '60',
-            'index'     => 'product_id',
+            'index'     => 'entity_id',
             'type'      => 'number'
         ));
 
-        $this->addColumn('product_name', array(
+        $this->addColumn('name', array(
             'header'    => Mage::helper('catalog')->__('Name'),
-            'index'     => 'product_name',
+            'index'     => 'name',
             'width'     => '300',
-            'filter_condition_callback' => array($this, '_filterGridCondition'),
             'renderer'  => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_listing_edit_tabs_products_renderer_name')
         ));
 
         $store = Mage::app()->getWebsite($this->getListing()->getWebsiteId())->getDefaultStore();
         $this->addColumn('price', array(
-            'header'=> Mage::helper('diglin_ricento')->__('Price Catalog'),
-            'type'  => 'price',
+            'header'        => Mage::helper('diglin_ricento')->__('Price Catalog'),
+            'type'          => 'price',
             'currency_code' => $store->getBaseCurrency()->getCode(),
-            'index' => 'price',
-            'sortable' => false,
-            'filter'    => false,
+            'index'         => 'price',
+            'sortable'      => false,
+            'filter'        => false,
         ));
-        $this->addColumn('type_id', array(
+        $this->addColumn('type', array(
             'header'    => Mage::helper('catalog')->__('Type'),
             'index'     => 'type_id',
             'width'     => '120',
             'type'      => 'options',
             'options'   => Mage::getSingleton('catalog/product_type')->getOptionArray(),
         ));
-        $this->addColumn('product_sku', array(
+        $this->addColumn('sku', array(
             'header'    => Mage::helper('catalog')->__('SKU'),
             'width'     => '120',
-            'index'     => 'product_sku',
-        	'filter_condition_callback' => array($this, '_filterGridCondition'),
+            'index'     => 'sku'
         ));
 
         $this->addColumn('ricardo_article_id', array(
             'header'    => Mage::helper('diglin_ricento')->__('ricardo.ch Article ID'),
             'width'     => '120',
             'index'     => 'ricardo_article_id',
-            'type'      => 'text',
+            'type'      => 'number',
             'renderer'  => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_listing_edit_tabs_products_renderer_article')
         ));
 
-        $this->addColumn('qty_inventory', array(
+        $this->addColumn('qty', array(
             'header'    => Mage::helper('catalog')->__('Inventory'),
             'type'      => 'number',
             'width'     => '1',
-            'index'     => 'qty_inventory',
-            'sortable' => false,
+            'index'     => 'stock_qty',
+            'sortable'  => false,
             'filter'    => false,
             'renderer'  => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_products_listing_edit_tabs_products_renderer_inventory')
         ));
@@ -167,7 +207,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'header'    => $this->__('Action'),
                 'width'     => '100px',
                 'type'      => 'action',
-                'getter'     => 'getProductId',
+                'getter'     => 'getId',
                 'actions'   => array(
                     array(
                         'caption' => $this->__('Preview'),
@@ -203,9 +243,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         return parent::_prepareColumns();
     }
 
+    /**
+     * @return $this|Mage_Adminhtml_Block_Widget_Grid
+     */
     protected function _prepareMassaction()
     {
-        $this->setMassactionIdField('product_id');
+        $this->setMassactionIdField('entity_id');
         $this->getMassactionBlock()->setFormFieldName('product');
         $this->getMassactionBlock()->setHideFormElement(true);
 
@@ -224,16 +267,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     }
 
     /**
-     * Retreive data from joined database table
-     *
-     * @param $collection
-     * @param string $column
+     * @return array|mixed
      */
-    protected function _filterGridCondition ($collection, $column)
+    protected function _getSelectedProducts()
     {
-        if (! $value = $column->getFilter()->getValue()) {
-            return;
+        $products = $this->getRequest()->getPost('selected_products');
+        if (is_null($products)) {
+            $products = $this->getListing()->getProductIds(false);
         }
-        $collection->addGridFilter($column);
+        return $products;
     }
 }
