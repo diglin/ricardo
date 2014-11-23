@@ -165,4 +165,8 @@
             <block type="adminhtml/template" name="sync_ajax_popup" as="sync_ajax_popup" template="ricento/sync/check/popup.phtml" />
         </reference>
     </ricento_sync_jobmessagepopup>
+
+    <ricento_products_listing_productsgrid>
+        <update handle="formkey"/>
+    </ricento_products_listing_productsgrid>
 </layout>

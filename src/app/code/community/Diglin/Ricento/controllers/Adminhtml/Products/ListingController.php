@@ -45,6 +45,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $noRender = true;
         }
 
+        $this->loadLayout();
 
         if ($noRender) {
             $content = json_encode(array('success' => false));

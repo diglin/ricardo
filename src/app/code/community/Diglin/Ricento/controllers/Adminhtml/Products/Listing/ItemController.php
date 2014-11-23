@@ -59,7 +59,8 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
     public function configureAction()
     {
         if (!$this->_initListing()) {
-            $this->_redirect('*/products_listing/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 
@@ -80,7 +81,8 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
     {
         if ($data = $this->getRequest()->getPost()) {
             if (!$this->_initListing()) {
-                $this->_redirect('*/products_listing/index');
+                $this->_getSession()->addError('Products Listing not found.');
+                $this->_redirectUrl($this->_getRefererUrl());
                 return;
             }
             $this->_initItems();
