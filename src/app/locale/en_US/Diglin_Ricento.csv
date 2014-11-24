@@ -651,3 +651,4 @@
 "No Options because API not configured","No Options because API not configured"
 "Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>.", "Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>."
 "Security error occurred with the ricardo API. Please, check your log files.", "Security error occurred with the ricardo API. Please, check your log files."
+"Error occurred with the API. Check if the API is correctly configured: %s","Error occurred with the API. Check if the API is correctly configured: %s"

@@ -23,6 +23,24 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Default extends Mage_Adminhtm
     }
 
     /**
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
+     * @return bool
+     */
+    public function isEnabled($website = 0)
+    {
+        return (bool) Mage::helper('diglin_ricento')->isEnabled($website);
+    }
+
+    /**
+     * @param null|string|bool|int|Mage_Core_Model_Website $website
+     * @return bool
+     */
+    public function isApiConfigured($website = 0)
+    {
+        return (bool) Mage::helper('diglin_ricento')->isConfigured($website);
+    }
+
+    /**
      * ACL validation before html generation
      *
      * @return string Notification content
@@ -34,9 +52,11 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Default extends Mage_Adminhtm
                 return parent::_toHtml();
             }
         } catch (\Diglin\Ricardo\Exceptions\CurlException $e) {
-            Mage::logException($e);
             // @todo Curl Error can happens here - the addError session method is maybe too late to be defined here
-            Mage::getSingleton('adminhtml/session')->addError($this->__('Error while trying to connect to the ricardo.ch API. Please, check your log files.'));
+            if ($this->isEnabled() && $this->isApiConfigured()) {
+                Mage::logException($e);
+                Mage::getSingleton('adminhtml/session')->addError($this->__('Error while trying to connect to the ricardo.ch API. Please, check your log files.'));
+            }
         }
 
         return '';
