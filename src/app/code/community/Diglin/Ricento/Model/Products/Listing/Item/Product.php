@@ -410,7 +410,8 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
         $descriptions = array(
             'ricardo_description',
-            'description'
+            'description',
+            'short_description'
         );
 
         $returnedDescription = null;
