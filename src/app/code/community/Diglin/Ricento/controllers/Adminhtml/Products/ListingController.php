@@ -523,14 +523,14 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
                 ->setStatus(Diglin_Ricento_Helper_Data::STATUS_STOPPED)
                 ->save();
 
-            $this->_getSession()->addError($this->__('The product list has been stopped.'));
-            $this->_redirect('*/*/index');
+            $this->_getSession()->addSuccess($this->__('The product list has been stopped.'));
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 
         if ($countListedItem == 0) {
             $this->_getSession()->addError($this->__('Only listed product items can be stopped.'));
-            $this->_redirect('*/*/index');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
 
