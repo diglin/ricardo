@@ -47,19 +47,26 @@ class Diglin_Ricento_Model_Api_Services_Security extends Diglin_Ricento_Model_Ap
      */
     public function getValidationUrl()
     {
-        $websiteId = $this->getCurrentWebsite()->getId();
-        $serviceModel = $this->getServiceModel();
-        $validationUrl = $serviceModel->getValidationUrl();
+        $validationUrl = '';
 
-        // Refresh the database cause of new data after getting validation url
-        $apiToken = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $websiteId);
-        $apiToken
-            ->setWebsiteId($websiteId)
-            ->setToken($serviceModel->getTemporaryToken())
-            ->setExpirationDate($serviceModel->getTemporaryTokenExpirationDate())
-            ->setTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY)
-            ->save();
+        try {
+            $websiteId = $this->getCurrentWebsite()->getId();
+            $serviceModel = $this->getServiceModel();
+            $validationUrl = $serviceModel->getValidationUrl();
 
+            // Refresh the database cause of new data after getting validation url
+            $apiToken = Mage::getModel('diglin_ricento/api_token')->loadByWebsiteAndTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY, $websiteId);
+            $apiToken
+                ->setWebsiteId($websiteId)
+                ->setToken($serviceModel->getTemporaryToken())
+                ->setExpirationDate($serviceModel->getTemporaryTokenExpirationDate())
+                ->setTokenType(ServiceAbstract::TOKEN_TYPE_TEMPORARY)
+                ->save();
+        } catch (Exception $e) {
+            Mage::logException($e);
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('diglin_ricento')->__('Security error occurred with the ricardo API. Please, check your log files.'));
+            $validationUrl = null;
+        }
         return $validationUrl;
     }
 }

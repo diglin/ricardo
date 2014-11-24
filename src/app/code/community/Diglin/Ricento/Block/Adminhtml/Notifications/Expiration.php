@@ -96,7 +96,7 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Expiration extends Diglin_Ric
         } catch (Exception $e) {
             $this->setApiReady(false);
             Mage::log($e->__toString(), Diglin_Ricento_Helper_Data::LOG_FILE);
-            Mage::getSingleton('core/session')->addError($this->__('Error occurred when established if the API is configured: %s', $e->__toString()));
+            Mage::getSingleton('adminhtml/session')->addError($this->__('Error occurred when established if the API is configured: %s', $e->__toString()));
         }
 
         return parent::_beforeToHtml();
