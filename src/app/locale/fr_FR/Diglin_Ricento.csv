@@ -391,6 +391,15 @@
 "No progress","No progress"
 "The product list has been stopped.","The product list has been stopped."
 
+"ricardo.ch Lifetime Sales","ricardo.ch Gesamtumsatz"
+"Turnover per month","Umsatz pro Monat"
+"Best Sellers","Meistverkaufte Produkte"
+"Qty sold", "Menge Verkauft"
+"Product Name","Produktname"
+"SKU","SKU"
+"Price","Preis"
+"Your ricardo.ch API Token","Ihre ricardo.ch API Token"
+
 "PREMIUMCATEGORYBRONZE", "Small"
 "PREMIUMCATEGORYSILVER", "Medium"
 "PREMIUMCATEGORYGOLD", "Big"
@@ -649,3 +658,5 @@
  "ACTIVATIONCODESTATUSMANUALLYBLOCKED","ACTIVATIONCODESTATUSMANUALLYBLOCKED"
 
 "No Options because API not configured","No Options because API not configured"
+"Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>.", "Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>."
+"Security error occurred with the ricardo API. Please, check your log files.", "Security error occurred with the ricardo API. Please, check your log files."

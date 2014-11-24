@@ -47,8 +47,6 @@ class Diglin_Ricento_Model_Api_Services_Security extends Diglin_Ricento_Model_Ap
      */
     public function getValidationUrl()
     {
-        $validationUrl = '';
-
         try {
             $websiteId = $this->getCurrentWebsite()->getId();
             $serviceModel = $this->getServiceModel();
