@@ -221,7 +221,7 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
         }
 
         /**
-         * Get all configurable product of a list
+         * Get all products of configurable products for a list
          *
          * @var $item Diglin_Ricento_Model_Products_Listing_Item
          */

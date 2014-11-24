@@ -23,11 +23,13 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
     {
         /* @var $itemCollection Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection */
         $itemCollection = Mage::getModel('diglin_ricento/products_listing_item')->getCollection();
+
         if ($this->getRequest()->isPost()) {
-            $this->_productIds = array_map('intval', (array)$this->getRequest()->getPost('product', array()));
+            $this->_productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
         } else {
             $this->_productIds = array_map('intval', explode(',', $this->getRequest()->getParam('product')));
         }
+
         if ($this->_productIds) {
             $itemCollection->addFieldToFilter('products_listing_id', $this->_getListing()->getId())
                 ->addFieldToFilter('product_id', array('in' => $this->_productIds));
@@ -35,6 +37,7 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
             $itemCollection->addFieldToFilter('item_id', array('in' => explode(',', $this->getRequest()->getPost('item_ids'))));
             $this->_productIds = $itemCollection->getColumnValues('product_id');
         }
+
         Mage::register('selected_items', $itemCollection->load());
 
         return $itemCollection;
@@ -56,14 +59,17 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
     public function configureAction()
     {
         if (!$this->_initListing()) {
-            $this->_redirect('*/products_listing/index');
+            $this->_getSession()->addError('Products Listing not found.');
+            $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
+
         if ($this->_initItems()->count() == 0) {
             $this->_getSession()->addError($this->__('No products selected.'));
             $this->_redirect('*/products_listing/edit', array('id' => $this->_getListing()->getId()));
             return;
         }
+
         $this->loadLayout();
         $this->renderLayout();
     }
@@ -75,7 +81,8 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
     {
         if ($data = $this->getRequest()->getPost()) {
             if (!$this->_initListing()) {
-                $this->_redirect('*/products_listing/index');
+                $this->_getSession()->addError('Products Listing not found.');
+                $this->_redirectUrl($this->_getRefererUrl());
                 return;
             }
             $this->_initItems();
@@ -177,9 +184,11 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
     public function previewAction()
     {
         if (!$this->_initListing()) {
+            $this->_getSession()->addError('Products Listing not found.');
             $this->_redirect('*/products_listing/index');
             return;
         }
+
         if ($this->_initItems()->count() == 0) {
             $this->_getSession()->addError($this->__('No products selected.'));
             $this->_redirect('*/products_listing/edit', array('id' => $this->_getListing()->getId()));

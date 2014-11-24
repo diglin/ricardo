@@ -61,11 +61,10 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             /**
              * Check that there is not already running job instead of creating a new one
              */
-
             Mage::getResourceModel('diglin_ricento/sync_job')->cleanupPendingJob($this->_jobType, $listingId);
 
-            $job = Mage::getModel('diglin_ricento/sync_job');
             // pending progress doesn't make sense here as we cleanup before but keep it to be sure everything ok
+            $job = Mage::getModel('diglin_ricento/sync_job');
             $job->loadByTypeListingIdProgress($jobType, $listingId, array(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING, Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING));
 
             if ($job->getId()) {

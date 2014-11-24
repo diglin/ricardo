@@ -36,7 +36,7 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Default extends Mage_Adminhtm
         } catch (\Diglin\Ricardo\Exceptions\CurlException $e) {
             Mage::logException($e);
             // @todo Curl Error can happens here - the addError session method is maybe too late to be defined here
-            Mage::getSingleton('admin/session')->addError($this->__('Error while trying to connect to the ricardo.ch API. Please, check your log files.'));
+            Mage::getSingleton('adminhtml/session')->addError($this->__('Error while trying to connect to the ricardo.ch API. Please, check your log files.'));
         }
 
         return '';
