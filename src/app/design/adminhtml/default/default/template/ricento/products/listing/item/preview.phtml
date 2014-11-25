@@ -21,7 +21,7 @@
         <div class="ricardo_subtitle"><h2><?php echo $this->getProduct()->getRicardoSubtitle(); ?></h2></div>
         <div class="product_container1">
             <div class="product_image">
-                <img src="<?php echo Mage::helper('catalog/image')->init($this->getProduct(), 'image')->resize(265); ?>" />
+                <?php echo $this->getProductImage(); ?>
                 <?php if (count($this->getGalleryImages()) > 0): ?>
                     <div class="more-views">
                         <h2><?php echo $this->__('More Views') ?></h2>
@@ -29,7 +29,7 @@
                             <?php foreach ($this->getGalleryImages() as $_image): ?>
                                 <li>
                                     <a href="#" onclick="popWin('<?php echo $this->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>">
-                                        <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(56); ?>" width="56" height="56" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
+                                        <?php echo $this->getProductImageThumbnail($_image); ?>
                                     </a>
                                 </li>
                             <?php endforeach; ?>

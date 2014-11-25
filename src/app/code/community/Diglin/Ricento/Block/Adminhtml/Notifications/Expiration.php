@@ -17,24 +17,6 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Expiration extends Diglin_Ric
     protected $_apiReady;
 
     /**
-     * @param null|string|bool|int|Mage_Core_Model_Website $website
-     * @return bool
-     */
-    public function isEnabled($website = 0)
-    {
-        return (bool) Mage::helper('diglin_ricento')->isEnabled($website);
-    }
-
-    /**
-     * @param null|string|bool|int|Mage_Core_Model_Website $website
-     * @return bool
-     */
-    public function isApiConfigured($website = 0)
-    {
-        return (bool) Mage::helper('diglin_ricento')->isConfigured($website);
-    }
-
-    /**
      * @param string|bool|int|Mage_Core_Model_Website $website
      * @return string
      */
@@ -95,8 +77,10 @@ class Diglin_Ricento_Block_Adminhtml_Notifications_Expiration extends Diglin_Ric
             }
         } catch (Exception $e) {
             $this->setApiReady(false);
-            Mage::log($e->__toString(), Diglin_Ricento_Helper_Data::LOG_FILE);
-            Mage::getSingleton('adminhtml/session')->addError($this->__('Error occurred when established if the API is configured: %s', $e->__toString()));
+            if ($this->isEnabled($website) && $this->isApiConfigured()) {
+                Mage::log($e->__toString(), Diglin_Ricento_Helper_Data::LOG_FILE);
+                Mage::getSingleton('adminhtml/session')->addError($this->__('Error occurred with the API. Check if the API is correctly configured: %s', $e->__toString()));
+            }
         }
 
         return parent::_beforeToHtml();

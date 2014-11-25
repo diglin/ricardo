@@ -102,8 +102,12 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
                 unset($data['sales_options']['product_warranty_description_de']);
                 unset($data['sales_options']['product_warranty_description_fr']);
             } else {
-                $data['sales_options']['product_warranty_description_de'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_description_de']), 0, 5000);
-                $data['sales_options']['product_warranty_description_fr'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_description_fr']), 0, 5000);
+                if (isset($data['sales_options']['product_warranty_description_de'])) {
+                    $data['sales_options']['product_warranty_description_de'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_description_de']), 0, 5000);
+                }
+                if (isset($data['sales_options']['product_warranty_description_fr'])) {
+                    $data['sales_options']['product_warranty_description_fr'] = mb_substr(Mage::helper('core')->escapeHtml($data['sales_options']['product_warranty_description_fr']), 0, 5000);
+                }
             }
         }
         if (!isset($data['sales_options']['promotion_start_page']) || empty($data['sales_options']['promotion_start_page'])) {

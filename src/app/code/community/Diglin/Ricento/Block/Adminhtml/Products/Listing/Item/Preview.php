@@ -333,4 +333,31 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Item_Preview extends Mage_
         }
         return $this->getUrl('catalog/product/gallery', $params);
     }
+
+    /**
+     * @return string
+     */
+    public function getProductImage()
+    {
+        try {
+            return '<img src="' . Mage::helper('catalog/image')->init($this->getProduct(), 'image')->resize(265). '" />';
+        } catch (Exception $e) {
+            Mage::logException($e);
+            Mage::getSingleton('adminhtml/session')->addError($e->__toString());
+        }
+
+        return '';
+    }
+
+    public function getProductImageThumbnail($_image)
+    {
+        try {
+            return '<img src="' . $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(56) . '" width="56" height="56" alt="' . $this->escapeHtml($_image->getLabel()) . '" />';
+        } catch (Exception $e) {
+            Mage::logException($e);
+            Mage::getSingleton('adminhtml/session')->addError($e->__toString());
+        }
+
+        return '';
+    }
 }
