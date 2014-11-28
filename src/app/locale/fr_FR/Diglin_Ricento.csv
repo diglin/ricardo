@@ -71,7 +71,7 @@
 "Order canceled on ricardo.ch side","Order canceled on ricardo.ch side"
 "Country Code is not available. Please contact the author of this extension or support.","Country Code is not available. Please contact the author of this extension or support."
 "Report: %d success, %d warning(s), %d error(s)","Report: %d success, %d warning(s), %d error(s)"
-"Successful products checked are going to be listed. To force to list products having a warning, please <a href=""%s"">clicking here</a>. Products with an error won\'t be synchronized, you have to fix the problem first.","Successful products checked are going to be listed. To force to list products having a warning, please <a href=""%s"">clicking here</a>. Products with an error won\'t be synchronized, you have to fix the problem first."
+"Successful products checked are going to be listed. To force to list products having a warning, please <a href=""%s"">clicking here</a>. Products with an error won't be synchronized, you have to fix the problem first.","Successful products checked are going to be listed. To force to list products having a warning, please <a href=""%s"">clicking here</a>. Products with an error won\'t be synchronized, you have to fix the problem first."
 "The product is now live on ricardo.ch","The product is now live on ricardo.ch"
 "Sorry, the product has not been sold","Sorry, the product has not been sold"
 "This item is already listed or has already a ricardo article Id. No insert done to ricardo.ch","This item is already listed or has already a ricardo article Id. No insert done to ricardo.ch"

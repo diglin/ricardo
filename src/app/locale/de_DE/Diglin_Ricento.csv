@@ -67,7 +67,7 @@
 "Order canceled on ricardo.ch side","Bezahlung wurd bei ricardo.ch storniert."
 "Country Code is not available. Please contact the author of this extension or support.","Ländercode ist nicht verfügbar. Bitte kontaktieren Sie den Autor dieses Moduls für Support."
 "Report: %d success, %d warning(s), %d error(s)","Report: %d erfolgreich, %d Warnung(en), %d Fehler"
-"Successful products checked are going to be listed. To force to list products having a warning, please <a href=""%s"">click here</a>. Products with an error won\'t be synchronized, you have to fix the problem first.","Erfolgreich geprüfte Produkte werden gelistet. Um Produkte mit Warnungen zu listen, klick Sie bitte <a href=""%s"">hier</a>. Produkte mit Fehlern werden nicht übertragen, Sie müssen die Fehler zuerst beheben."
+"Successful products checked are going to be listed. To force to list products having a warning, please <a href=""%s"">click here</a>. Products with an error won't be synchronized, you have to fix the problem first.","Erfolgreich geprüfte Produkte werden gelistet. Um Produkte mit Warnungen zu listen, klick Sie bitte <a href=""%s"">hier</a>. Produkte mit Fehlern werden nicht übertragen, Sie müssen die Fehler zuerst beheben."
 "The product is now live on ricardo.ch","Das Produkt ist nun live auf ricardo.ch."
 "Sorry, the product has not been sold","Sorry, das Produkt wurde nicht verkauft."
 "This item is already listed or has already a ricardo article Id. No insert done to ricardo.ch","Der Artikel ist bereits gelistet oder hat bereits eine Artikelnummer bei ricardo.ch."
