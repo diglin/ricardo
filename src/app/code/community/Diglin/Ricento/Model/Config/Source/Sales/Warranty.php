@@ -24,7 +24,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Warranty extends Diglin_Ricento_M
      */
     public function toOptionHash()
     {
-        if (empty($this->_warranties)) {
+        if (empty($this->_warranties) && Mage::helper('diglin_ricento')->isConfigured()) {
             $warranties = (array) Mage::getSingleton('diglin_ricento/api_services_system')->getWarranties();
 
             foreach ($warranties as $warranty) {

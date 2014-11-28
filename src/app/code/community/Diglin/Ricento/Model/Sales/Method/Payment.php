@@ -46,7 +46,7 @@ class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Metho
      */
     public function isAvailable($quote = null)
     {
-        if (!Mage::helper('core')->isModuleEnabled('Diglin_Ricento') || !Mage::helper('diglin_ricento')->isEnabled()) {
+        if (!Mage::helper('diglin_ricento')->isEnabledConfigured()) {
             return false;
         }
 
@@ -67,8 +67,8 @@ class Diglin_Ricento_Model_Sales_Method_Payment extends Mage_Payment_Model_Metho
      */
     public function isApplicableToQuote($quote, $checksBitMask)
     {
-        if (!Mage::helper('core')->isModuleEnabled('Diglin_Ricento') || !Mage::helper('diglin_ricento')->isEnabled()) {
-            return false;
+        if (!Mage::helper('diglin_ricento')->isEnabledConfigured()) {
+            return parent::isApplicableToQuote($quote, $checksBitMask);
         }
 
         if ($checksBitMask & self::CHECK_IS_RICARDO_ORDER) {

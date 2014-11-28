@@ -26,7 +26,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Product_Condition extends Diglin_
      */
     public function toOptionHash()
     {
-        if (empty($this->_articleConditions)) {
+        if (empty($this->_articleConditions) && Mage::helper('diglin_ricento')->isConfigured()) {
             $articleConditions = (array)Mage::getSingleton('diglin_ricento/api_services_system')->getArticleConditions();
 
             if (!empty($articleConditions)) {

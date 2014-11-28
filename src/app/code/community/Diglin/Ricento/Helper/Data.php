@@ -109,6 +109,15 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * @param int $website
+     * @return bool
+     */
+    public function isEnabledConfigured($website = 0)
+    {
+        return $this->isEnabled($website) && $this->isConfigured($website);
+    }
+
+    /**
      * Returns product types that are available in Ricento
      *
      * @return array [ type_id => type_id ]

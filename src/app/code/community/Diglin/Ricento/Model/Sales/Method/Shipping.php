@@ -38,7 +38,7 @@ class Diglin_Ricento_Model_Sales_Method_Shipping
      */
     public function collectRates(Mage_Shipping_Model_Rate_Request $request)
     {
-        if (!$this->getConfigFlag('active') || !Mage::helper('diglin_ricento')->isEnabled() || !Mage::helper('core')->isModuleEnabled('Diglin_Ricento')) {
+        if (!$this->getConfigFlag('active') || !Mage::helper('diglin_ricento')->isEnabled()) {
             return false;
         }
 
