@@ -96,7 +96,7 @@
             <div class="description">
                 <a name="description"></a>
                 <h2><?php echo $this->getProductItem()->getProductName(); ?></h2>
-                <p><?php echo $this->getProductItem()->getProductDescription(); ?></p>
+                <p><?php echo nl2br($this->getProductItem()->getProductDescription()); ?></p>
             </div>
             <div class="additional">
                 <a name="additional"></a>
