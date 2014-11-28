@@ -230,7 +230,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                  */
                 $endedAt = null;
 
-                if ($this->_currentJobListing->getTotalCount() == $this->_totalProceed) {
+                if ($this->_currentJobListing->getTotalCount() >= $this->_totalProceed) {
                     $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED;
                     $endedAt = Mage::getSingleton('core/date')->gmtDate();
 
