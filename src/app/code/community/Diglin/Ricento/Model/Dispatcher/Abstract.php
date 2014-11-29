@@ -392,7 +392,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
         $this->_itemMessage = array('errors' =>
             array(
                 $this->_getHelper()->__('Error Code: %d', $e->getCode()),
-                $this->_getHelper()->__($e->getMessage())
+                function_exists('mb_strcut') ? mb_strcut($this->_getHelper()->__($e->getMessage()), 0, 12 * 1024 * 1024) : $this->_getHelper()->__($e->getMessage())
             ));
 
         $this->_jobHasError = true;
