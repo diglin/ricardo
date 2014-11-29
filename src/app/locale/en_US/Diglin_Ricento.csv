@@ -135,7 +135,7 @@
 "You MUST define a ricardo category for this product. Check that you set it at products listing level or at Magento category level.","You MUST define a ricardo category for this product. Check that you set it at products listing level or at Magento category level."
 "Payment and/or Shipping combination are not correct.","Payment and/or Shipping combination are not correct."
 "You cannot have a starting price for an auction of %2$s when you set a direct sales with a product price of %1$s.","You cannot have a starting price for an auction of %2$s when you set a direct sales with a product price of %1$s."
-"Product Price of %s is incorrect for a direct sales. Price must be between %s and %s.","Product Price of %s is incorrect for a direct sales. Price must be between %s and %s."
+"Product Price of %s CHF is incorrect for a direct sales with credit card. Price must be between %s and %s.","Product Price of %s CHF is incorrect for a direct sales. Price must be between %s and %s."
 "The ending date is too early or too late. Minimum period allowed: %s days - Maximum period allowed: %s days","The ending date is too early or too late. Minimum period allowed: %s days - Maximum period allowed: %s days"
 "You cannot use the privilege spaces as you do not have any pictures for this product.","You cannot use the privilege spaces as you do not have any pictures for this product."
 "This increment value is not possible for this start price.","This increment value is not possible for this start price."
@@ -652,3 +652,4 @@
 "Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>.", "Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>."
 "Security error occurred with the ricardo API. Please, check your log files.", "Security error occurred with the ricardo API. Please, check your log files."
 "Error occurred with the API. Check if the API is correctly configured: %s","Error occurred with the API. Check if the API is correctly configured: %s"
+"Product Price of %s CHF is incorrect. Minimum price is %s.","Product Price of %s CHF is incorrect. Minimum price is %s."

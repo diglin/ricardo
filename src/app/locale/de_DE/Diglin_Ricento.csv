@@ -131,7 +131,7 @@
 "You MUST define a ricardo category for this product. Check that you set it at products listing level or at Magento category level.","Sie müssen eine ricardo.ch-Kategorie für dieses Produkt wählen. Prüfen Sie, ob Sie das Produkt auf Produktlisting-Level oder Magento-Kategorie-Level gesetzt haben."
 "Payment and/or Shipping combination are not correct.","Zahlung und/oder Versand-Kombination sind nicht korrekt."
 "You cannot have a starting price for an auction of %2$s when you set a direct sales with a product price of %1$s.","Sie können keinen Startpreis für eine Auktion von %2$s festlegen, wenn Sie ""Sofort-Kaufen"" mit dem Produktpreis von %1$s anbieten."
-"Product Price of %s is incorrect for a direct sales. Price must be between %s and %s.","Produktpreis von %s ist falsch für "Sofort-Kaufen". Der Preis muss zwischen %s und %s liegen."
+"Product Price of %s CHF is incorrect for a direct sales with credit card. Price must be between %s and %s.","Aus Sicherheitsgründen ist eine Kreditkarten-Zahlung bei Beträgen von CHF %s.- nicht möglich für ""Sofort-Kaufen"". Bitte wählen Sie andere Zahlungsmethoden oder passen Sie den Preis an. Der Preis muss zwischen %s und %s liegen."
 "The ending date is too early or too late. Minimum period allowed: %s days - Maximum period allowed: %s days","Das Enddatum ist zu früh oder zu spät. Minimale erlaubte Zeitspanne: %s Tage - maximale erlaubte Zeitspanne: %s Tage"
 "You cannot use the privilege spaces as you do not have any pictures for this product.","Sie können keine Sonderfelder nutzen, da Sie keine Bilder für dieses Produkt hinterlegt haben."
 "This increment value is not possible for this start price.","Der angegebene Erhöhungsschritt ist nicht möglich für diesen Startpreis."
@@ -657,3 +657,4 @@
 "Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>.", "Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>."
 "Security error occurred with the ricardo API. Please, check your log files.", "Security error occurred with the ricardo API. Please, check your log files."
 "Error occurred with the API. Check if the API is correctly configured: %s","Error occurred with the API. Check if the API is correctly configured: %s"
+"Product Price of %s CHF is incorrect. Minimum price is %s.","Produktpreis von %s CHF ist falsch. Minimum Preis ist %s."
