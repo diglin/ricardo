@@ -92,7 +92,6 @@ class Api implements ApiInterface
         $return = json_decode(curl_exec($ch), true);
 
         if ($this->_debug) {
-
             if (isset($curlOptions[CURLOPT_HTTPHEADER])) {
                 $anonHeaders = array();
                 foreach ($curlOptions[CURLOPT_HTTPHEADER] as $header) {
@@ -107,11 +106,13 @@ class Api implements ApiInterface
             }
 
             // It may take too much memory here as some parameter are pictures bytes
-            $this->_lastDebug = array(
-                'curl_options' => $curlOptions,
-                'params' => print_r($params, true),
-                'return' => $return
-            );
+            unset($curlOptions[CURLOPT_POSTFIELDS]);
+            $this->removePictureBytesData($params);
+            $this->_lastDebug = json_encode(array(
+                'curl_options'  => $curlOptions,
+                'params'        => $params,
+                'return'        => $return
+            ));
 
             if ($this->getConfig()->getLogFilePath()) {
                 $dir = dirname($this->getConfig()->getLogFilePath());
@@ -232,5 +233,31 @@ class Api implements ApiInterface
     {
         $this->_username = $this->_partnerKey;
         return $this;
+    }
+
+    /**
+     * @param array $params
+     * @return bool
+     */
+    public function removePictureBytesData(&$params)
+    {
+        $srchvalue = 'PictureBytes';
+        $foundkey = false;
+
+        if (is_array($params) && count($params) > 0) {
+            $foundkey = array_key_exists($srchvalue, $params);
+            if ($foundkey === false) {
+                foreach ($params as $key => &$value) {
+                    if (is_array($value) && count($value) > 0) {
+                        $this->removePictureBytesData($value);
+                    }
+                }
+            } else {
+                $params[$srchvalue] = array('Picture bytes deleted for debug');
+
+            }
+        }
+
+        return $foundkey;
     }
 }
