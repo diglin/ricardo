@@ -181,7 +181,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                 $message = array();
 
                 $this->_currentJobListing = Mage::getModel('diglin_ricento/sync_job_listing')->load($this->_currentJob->getId(), 'job_id');
-                $this->_productsListingId = (int)$this->_currentJobListing->getProductsListingId();
+                $this->_productsListingId = (int) $this->_currentJobListing->getProductsListingId();
                 $this->_totalProceed = (int)$this->_currentJobListing->getTotalProceed();
 
                 if (!$this->_productsListingId) {
@@ -231,7 +231,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                  */
                 $endedAt = null;
 
-                if ($this->_currentJobListing->getTotalCount() >= $this->_totalProceed) {
+                if ($this->_currentJobListing->getTotalCount() <= $this->_totalProceed) {
                     $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED;
                     $endedAt = Mage::getSingleton('core/date')->gmtDate();
 
