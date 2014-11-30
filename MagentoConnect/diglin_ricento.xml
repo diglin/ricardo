@@ -1,5 +1,5 @@
 <_>
-   <form_key>YulnB4jyV0cy1qtO</form_key>
+   <form_key>aSSrMEtjYH9ao65x</form_key>
    <name>diglin_ricento</name>
    <channel>community</channel>
    <version_ids>
@@ -39,10 +39,67 @@
 				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.0.4</version>
+   <version>1.0.8</version>
    <stability>stable</stability>
-   <notes>1.0.4: Allow Not visible product to be listed on ricardo.ch
-1.0.0: First stable release with all features as listed here https://diglin.zendesk.com/hc/en-us/articles/201655852-Which-features-are-provided-</notes>
+   <notes>## Version 1.0.8
+- b5f1afa Update translations file
+- c0d3fbb Fix issue with dispatcher and completed status
+- 27c48c9 Fix interface issue (invisible language was also required input) with language selection and payment method &quot;other&quot; which needs a payment description and shipping description field if shipping &quot;other&quot; is selected
+- 9e0be11 Improve debugging content when dispatcher mets errors
+- b994fa0 Improve grid translations for products
+- 84baa1b Change order of token DEV/PROD configuration fields
+- 868e576 Fix issue with product price max limit (should be only for &quot;Buy now&quot; and payment method with credit card)
+- 379a51b Fix issue with too long strings saved into DB if error occurred
+- 0eb9f8d Cosmetic code changes
+- 79ce926 Change translation
+- 356c909 Fix issue with job message and json encoding (some loop appeared in some use cases)
+- 738f316 Better judge if some values must be retrieved from the API depending if the extension is configured or not
+- cd34d94 Prevent loop when doing the dispatch
+- 14d3beb fix uninstall file txt with wrong language folder package
+- a5e6350 Fix translation issue in the sync grid
+- 90a2f7c Fix issue if extension is disabled with payment and shipping methods
+- 33055cc Add nl2br for description
+
+## Version 1.0.7
+- 42f18da Prevent warning messages for some variables, Prevent Exception when picture doesn&apos;t exist in preview, set per default the dev mode to 1 because user receives BETA API Token first and some people doesn&apos;t set correctly the configuration
+- 29767d9 Add more condition to display error in case of wrong API configuration and coming from banner notification
+- 57da567 Invite user to check his configuration if a problem occurs
+- c514cb0 Merge branch &apos;develop&apos;
+ 
+## Version 1.0.6
+- 6a6ca4f Do not set the status of the parent configurable product when list on ricardo.ch
+- eb0d25a Handle correctly errors if done in the backend notification banner
+- 68f812a add short description as fallback product description
+- bb0c931 change redirect url and add error message
+- c4fbe49 Check and List action: save also product listing information
+- 349218a Merge branch &apos;develop&apos; of git://github.com/diglin/ricento into develop
+- f467eb4 Fix issue with grid of products after filter reset (missing form key hidden field)
+- 4cc8e3b Revert changes done for RIC-102, display products item w/o any error
+- afb9215 Add new url to register to the API
+- c0b50e9 In case errors are coming from the API but it is at backend notification level, we catch the error and display it as session error message
+- 7d0c803 Merge branch &apos;develop&apos; of github.com:diglin/ricento into develop
+- 068a409 allow to delete a job even if it is running, fix some typo translations, allow to save when clicking on &quot;check and list&quot; button from a product listing
+
+## Version 1.0.5
+- c1b3c90 Merge branch &apos;develop&apos;
+- 9f59a2f Fix definitely issue RIC-102 with product grid display
+- 3c3547a Fix issue RIC-102: product grid display in product listing with some configuration provide error cause of the collection and duplicate items found
+- 5d1706e Merge pull request #1 from diglin/develop
+
+## Version 1.0.4
+- ebaec62 Remove the filter collection to not get &quot;not visible&quot; products. Don&apos;t remember the reason of this filter, hope it doesn&apos;t have consequence with order creation (normally no)
+- 90e2a93 Merge branch &apos;develop&apos;
+
+## Version 1.0.3
+- c55a6dd Fix issue with wrong store id, should not be website id while getting storeConfig
+- 00c2960 Update README.md
+
+## Version 1.0.2
+- 880dbfd Fix issue if API not yet configured and Product Edit Page is requested from the backend
+- 5841d06 Update gitsubmodule (replace bitbucket with github)
+- be2b77a Update readme file
+- 9384e3c Update doc
+</notes>
    <authors>
       <name>
          <name>diglin</name>
@@ -71,7 +128,7 @@
             <max/>
          </max>
          <files>
-            <files>                  </files>
+            <files>                    </files>
          </files>
       </package>
       <extension>
@@ -178,4 +235,8 @@
          <ignore>#^.svn|.git|.DS_Store#</ignore>
       </ignore>
    </contents>
+   <page>1</page>
+   <limit>200</limit>
+   <folder/>
+   <package/>
 </_>
