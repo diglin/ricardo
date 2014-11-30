@@ -415,6 +415,17 @@ Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
             paymentDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'payment_description_' + this.langs[i] + ']')[0];
 
             required = field.checked;
+            currentLang = $('product_listing_publish_languages').value;
+
+            switch (currentLang) {
+                case 'de':
+                case 'fr':
+                    if (this.langs[i] != currentLang) {
+                        required = false;
+                    }
+                    break;
+            }
+
             paymentDescription.disabled = !required;
             this.toggleRequired(paymentDescription, required, paymentDescriptionLabel);
         }
@@ -425,6 +436,17 @@ Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
             shippingDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'shipping_description_'  + this.langs[i] + ']')[0];
 
             required = (field.value == '0') ? 1 : 0;
+            currentLang = $('product_listing_publish_languages').value;
+
+            switch (currentLang) {
+                case 'de':
+                case 'fr':
+                    if (this.langs[i] != currentLang) {
+                        required = false;
+                    }
+                    break;
+            }
+
             shippingDescription.disabled = !required;
             this.toggleRequired(shippingDescription, required, shippingDescriptionLabel);
         }
@@ -432,7 +454,7 @@ Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
     initPackages: function(field, selected) {
         var deliveryId = field.value;
         var packages = JSON.parse(this.packageSizes);
-        var package = packages[deliveryId];
+        var packageShipping = packages[deliveryId];
         var select = $(this.htmlIdPrefix + 'shipping_package');
         select.removeClassName('hidden');
 
@@ -440,25 +462,25 @@ Ricento.RulesForm = Class.create (Ricento.salesOptionsForm, {
             select.removeChild(select.firstChild);
         }
 
-        if (package != undefined && package != null && package.length > 0) {
-            for (i = 0; i < package.length; ++i) {
+        if (packageShipping != undefined && packageShipping != null && packageShipping.length > 0) {
+            for (i = 0; i < packageShipping.length; ++i) {
                 var opt = document.createElement('option');
 
-                if (selected != undefined && selected == package[i].PackageSizeId) {
+                if (selected != undefined && selected == packageShipping[i].PackageSizeId) {
                     opt.selected = true;
                 }
-                opt.value = package[i].PackageSizeId;
-                opt.innerHTML = package[i].PackageSizeText;
+                opt.value = packageShipping[i].PackageSizeId;
+                opt.innerHTML = packageShipping[i].PackageSizeText;
                 var attribute = document.createAttribute('data-package-cost');
-                attribute.value = package[i].PackageSizeCost;
+                attribute.value = packageShipping[i].PackageSizeCost;
                 opt.setAttributeNode(attribute);
                 select.appendChild(opt);
                 if (i == 0 && selected == undefined ) {
-                    this._changePrice(package[i].PackageSizeCost);
+                    this._changePrice(packageShipping[i].PackageSizeCost);
                 }
             }
-        } else if (package > 0) {
-            this._changePrice(package);
+        } else if (packageShipping > 0) {
+            this._changePrice(packageShipping);
             select.addClassName('hidden');
         } else {
             this._changePrice(0);
@@ -593,7 +615,6 @@ Ricento.GeneralForm.prototype = {
                 });
                 $(self.htmlIdPrefix + 'lang_store_id_' + lang).disabled = false;
                 self._showHideLangFields(lang, 'block');
-
             } else if (e.value == 'all'){
                 self._showHideLangFields(lang, 'block');
             } else {
@@ -606,28 +627,34 @@ Ricento.GeneralForm.prototype = {
                 item.disabled = false;
             });
         }
+
+        rulesForm.togglePaymentDescription($('rules_payment_methods_0'));
     },
     _showHideLangFields: function(lang, displayStyle) {
+        rulesPaymentDescription = $('rules_payment_description_' + lang);
+        rulesShippingDescription = $('rules_shipping_description_' + lang);
+        salesOptionProductWarrantyDescription = $('sales_options_product_warranty_description_' + lang);
+
         $$('label[for=rules_payment_description_' + lang + ']')[0].setStyle({'display': displayStyle});
-        $('rules_payment_description_' + lang).setStyle({'display': displayStyle});
+        rulesPaymentDescription.setStyle({'display': displayStyle});
         $('note_payment_description_' + lang).setStyle({'display': displayStyle});
 
         $$('label[for=rules_shipping_description_' + lang + ']')[0].setStyle({'display': displayStyle});
-        $('rules_shipping_description_' + lang).setStyle({'display': displayStyle});
+        rulesShippingDescription.setStyle({'display': displayStyle});
         $('note_shipping_description_' + lang).setStyle({'display': displayStyle});
 
         $$('label[for=sales_options_product_warranty_description_' + lang + ']')[0].setStyle({'display': displayStyle});
-        $('sales_options_product_warranty_description_' + lang).setStyle({'display': displayStyle});
+        salesOptionProductWarrantyDescription .setStyle({'display': displayStyle});
         $('note_product_warranty_description_' + lang).setStyle({'display': displayStyle});
 
         if (displayStyle == 'none') {
-            $('rules_payment_description_' + lang).removeClassName('required-entry');
-            $('rules_shipping_description_' + lang).removeClassName('required-entry');
-            $('sales_options_product_warranty_description_' + lang).removeClassName('required-entry');
+            rulesPaymentDescription.removeClassName('required-entry');
+            rulesShippingDescription.removeClassName('required-entry');
+            salesOptionProductWarrantyDescription.removeClassName('required-entry');
         } else {
-            $('rules_payment_description_' + lang).addClassName('required-entry');
-            $('rules_shipping_description_' + lang).addClassName('required-entry');
-            $('sales_options_product_warranty_description_' + lang).addClassName('required-entry');
+            rulesPaymentDescription.addClassName('required-entry');
+            rulesShippingDescription.addClassName('required-entry');
+            salesOptionProductWarrantyDescription.addClassName('required-entry');
         }
     }
 };
