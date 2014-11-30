@@ -11,6 +11,7 @@
 
 use Diglin\Ricardo\Enums\System\LanguageId;
 use Diglin\Ricardo\Enums\PaymentMethods;
+
 /**
  * Class Diglin_Ricento_Helper_Data
  */
@@ -106,6 +107,15 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return (bool) Mage::getConfig()->getModuleConfig('Diglin_Ricento')->active
         && self::getWebsiteConfigFlag(self::CFG_ENABLED, $website);
+    }
+
+    /**
+     * @param int $website
+     * @return bool
+     */
+    public function isEnabledConfigured($website = 0)
+    {
+        return $this->isEnabled($website) && $this->isConfigured($website);
     }
 
     /**

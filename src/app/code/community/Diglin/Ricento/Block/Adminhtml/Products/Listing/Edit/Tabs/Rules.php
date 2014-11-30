@@ -55,10 +55,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
             'values' => Mage::getSingleton('diglin_ricento/config_source_rules_payment')->getAllOptions(),
             'class' => 'validate-payment-method-combination',
             'note' => $this->__('Combination possible: Cash, Bank transfer / Post, Other, Credit Card + Other, Credit Card + Bank transfer or Credit Card + Cash'),
-            'onchange' => 'rulesForm.togglePaymentDescription($(\''
-                . $htmlIdPrefix . 'payment_methods_'
-                . \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER . '\')); rulesForm.toggleStartPrice($(\'sales_options_sales_auction_start_price\'), \''
-                . \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD . '\');'
+            'onchange' => 'rulesForm.togglePaymentDescription($(\''. $htmlIdPrefix . 'payment_methods_'. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER . '\'));'
+                . 'rulesForm.toggleStartPrice($(\'sales_options_sales_auction_start_price\'), \''. \Diglin\Ricardo\Enums\PaymentMethods::TYPE_CREDIT_CARD . '\');'
         ));
         $fieldsetPayment->addField('payment_description_de', 'textarea', array(
             'name' => 'rules[payment_description_de]',
@@ -131,12 +129,12 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         $this->getForm()->setValues($this->getShippingPaymentRule());
         $this->getForm()->getElement('shipping_cumulative_fee')->setChecked((bool)$this->getShippingPaymentRule()->getShippingCumulativeFee());
 
-        $disableDescription = (!$this->getShippingPaymentRule()->getShippingMethod()) ? false : true;
+        $disableShippingDescription = (!$this->getShippingPaymentRule()->getShippingMethod()) ? false : true;
 
         $disablePaymentDescription = true;
         $methods = (array)$this->getShippingPaymentRule()->getPaymentMethods();
         foreach ($methods as $method) {
-            if ((int)$method === 0) {
+            if ((int)$method === \Diglin\Ricardo\Enums\PaymentMethods::TYPE_OTHER) {
                 $disablePaymentDescription = false;
                 break;
             }
@@ -145,9 +143,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Rules
         foreach ($supportedLanguages as $supportedLang) {
             $supportedLang = strtolower($supportedLang);
 
+            if ($supportedLang != $this->_getListing()->getPublishLanguages()
+                && $this->_getListing()->getPublishLanguages() != Diglin_Ricento_Helper_Data::LANG_ALL) {
+                $disableShippingDescription = true;
+                $disablePaymentDescription = true;
+            }
+
             $this->getForm()->getElement('shipping_description_' . $supportedLang)
-                ->setDisabled($disableDescription)
-                ->setRequired(!$disableDescription);
+                ->setDisabled($disableShippingDescription)
+                ->setRequired(!$disableShippingDescription);
+
+
             $this->getForm()->getElement('payment_description_' . $supportedLang)
                 ->setDisabled($disablePaymentDescription)
                 ->setRequired(!$disablePaymentDescription);

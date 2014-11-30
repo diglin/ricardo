@@ -24,7 +24,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Template extends Diglin_Ricento_M
      */
     public function toOptionHash()
     {
-        if (empty($this->_templates)) {
+        if (empty($this->_templates) && Mage::helper('diglin_ricento')->isConfigured()) {
             $templates = (array) Mage::getSingleton('diglin_ricento/api_services_selleraccount')->getTemplates();
 
             $this->_templates = array('-1' => Mage::helper('diglin_ricento')->__('None'));

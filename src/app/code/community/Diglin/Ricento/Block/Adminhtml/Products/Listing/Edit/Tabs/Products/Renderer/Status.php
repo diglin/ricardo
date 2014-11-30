@@ -27,19 +27,20 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Rendere
         if ($row->getTypeId() == Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE) {
             $itemCollection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
             $itemCollection->addFieldToFilter('parent_item_id', $row->getItemId());
+            $helper = Mage::helper('diglin_ricento');
 
             $statuses = array();
             foreach ($itemCollection->getItems() as $item) {
                 $output = '';
                 switch ($item->getStatus()) {
                     case 'error':
-                        $output .= '<span class="message_errors">' . $this->__($item->getStatus()) . '</span>';
+                        $output .= '<span class="message_errors">' . $helper->__('Stopped') . '</span>';
                         break;
                     case 'listed':
-                        $output .= '<span class="message_success">' . $this->__($item->getStatus()) . '</span>';
+                        $output .= '<span class="message_success">' . $helper->__('Listed') . '</span>';
                         break;
                     default:
-                        $output .= '<span class="message_warnings">' . $this->__($item->getStatus()) . '</span>';
+                        $output .= '<span class="message_warnings">' . $helper->__(ucwords($item->getStatus())) . '</span>';
                         break;
                 }
                 $statuses[] = '<li>' . $output . '</li>';

@@ -75,35 +75,35 @@ class Diglin_Ricento_Model_Observer
     public function decreaseInventory(Varien_Event_Observer $observer)
     {
         /* @var $item Mage_Sales_Model_Order_Item */
-        $item = $observer->getEvent()->getItem();
-
-        if (!Mage::helper('diglin_ricento')->getDecreaseInventory() || $item->getOrder()->getIsRicardo()) {
-            return;
-        }
-
-        $collection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection')
-            ->addFieldToFilter('product_id', $item->getProductId())
-            ->addFieldToFilter('status', Diglin_Ricento_Helper_Data::STATUS_LISTED)
-            ->addFieldToFilter('ricardo_article_id', new Zend_Db_Expr('not null'))
-            ->addFieldToFilter('is_planned', 0);
-
-        $sell = Mage::getSingleton('diglin_ricento/api_services_sell');
-
-        foreach ($collection->getItems() as $productItem) {
-            /**
-             * We cannot decrease below 1
-             */
-            $newQuantity = $productItem->getQtyInventory() - $item->getQtyOrdered();
-            if (!($newQuantity)) {
-
-                $productItem->setQtyInventory($newQuantity);
-
-                $sell->updateArticle($productItem);
-
-                $productItem->save();
-            }
-        }
-        return $this;
+//        $item = $observer->getEvent()->getItem();
+//
+//        if (!Mage::helper('diglin_ricento')->getDecreaseInventory() || $item->getOrder()->getIsRicardo()) {
+//            return;
+//        }
+//
+//        $collection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection')
+//            ->addFieldToFilter('product_id', $item->getProductId())
+//            ->addFieldToFilter('status', Diglin_Ricento_Helper_Data::STATUS_LISTED)
+//            ->addFieldToFilter('ricardo_article_id', new Zend_Db_Expr('not null'))
+//            ->addFieldToFilter('is_planned', 0);
+//
+//        $sell = Mage::getSingleton('diglin_ricento/api_services_sell');
+//
+//        foreach ($collection->getItems() as $productItem) {
+//            /**
+//             * We cannot decrease below 1
+//             */
+//            $newQuantity = $productItem->getQtyInventory() - $item->getQtyOrdered();
+//            if (!($newQuantity)) {
+//
+//                $productItem->setQtyInventory($newQuantity);
+//
+//                $sell->updateArticle($productItem);
+//
+//                $productItem->save();
+//            }
+//        }
+//        return $this;
     }
 
     /**
@@ -125,6 +125,8 @@ class Diglin_Ricento_Model_Observer
     }
 
     /**
+     * Retrieve payment information from a ricardo.ch order
+     *
      * Event
      * - payment_info_block_prepare_specific_information
      *

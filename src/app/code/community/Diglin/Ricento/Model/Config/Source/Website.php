@@ -24,9 +24,9 @@ class Diglin_Ricento_Model_Config_Source_Website extends Mage_Adminhtml_Model_Sy
         $helper = Mage::helper('diglin_ricento');
         $enabledRicentoWebsite = array();
 
-        foreach( $this->_websiteCollection as $website) {
-            if($helper->isConfigured($website) && $helper->isEnabled($website)) {
-               $enabledRicentoWebsite[] = $website;
+        foreach ($this->_websiteCollection as $website) {
+            if ($helper->isConfigured($website) && $helper->isEnabled($website)) {
+                $enabledRicentoWebsite[] = $website;
             }
         }
 

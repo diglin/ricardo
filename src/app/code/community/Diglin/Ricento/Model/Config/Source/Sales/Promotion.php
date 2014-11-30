@@ -23,7 +23,7 @@ class Diglin_Ricento_Model_Config_Source_Sales_Promotion extends Diglin_Ricento_
      */
     public function toOptionHash()
     {
-        if (empty($this->_promotions)) {
+        if (empty($this->_promotions) && Mage::helper('diglin_ricento')->isConfigured()) {
             $promotions = (array) Mage::getSingleton('diglin_ricento/api_services_system')->getPromotions(
                 Mage::helper('diglin_ricento')->getJsonDate(), \Diglin\Ricardo\Enums\System\CategoryArticleType::ALL, 1, 1
             );

@@ -72,7 +72,16 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
 
     protected function _afterLoad()
     {
-        $this->setJobMessage(Mage::helper('core')->jsonDecode($this->getData('job_message')));
+        try {
+            $jobMessage = $this->getData('job_message');
+            if (!is_array($jobMessage)) {
+                $this->setJobMessage(Mage::helper('core')->jsonDecode($jobMessage));
+            }
+        } catch (Exception $e) {
+            // keep going, do not block the script
+            Mage::logException($e);
+        }
+
         return parent::_afterLoad();
     }
 

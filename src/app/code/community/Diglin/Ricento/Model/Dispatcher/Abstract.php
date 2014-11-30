@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Diglin GmbH - Switzerland
  *
@@ -114,7 +115,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
         $jobsCollection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
         $jobsCollection
             ->addFieldToFilter('job_type', $type)
-            ->addFieldToFilter('progress', array('in' => (array) $progress));
+            ->addFieldToFilter('progress', array('in' => (array)$progress));
 
         return $jobsCollection;
     }
@@ -155,7 +156,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
             ->setPageSize($this->_limit)
             ->addFieldToFilter('status', array('in' => $statuses))
             ->addFieldToFilter('products_listing_id', array('eq' => $this->_productsListingId))
-            ->addFieldToFilter('item_id', array('gt' => (int) $lastItemId));
+            ->addFieldToFilter('item_id', array('gt' => (int)$lastItemId));
 
         return $itemCollection;
     }
@@ -181,7 +182,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 
                 $this->_currentJobListing = Mage::getModel('diglin_ricento/sync_job_listing')->load($this->_currentJob->getId(), 'job_id');
                 $this->_productsListingId = (int) $this->_currentJobListing->getProductsListingId();
-                $this->_totalProceed = (int) $this->_currentJobListing->getTotalProceed();
+                $this->_totalProceed = (int)$this->_currentJobListing->getTotalProceed();
 
                 if (!$this->_productsListingId) {
                     return $this;
@@ -230,7 +231,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                  */
                 $endedAt = null;
 
-                if ($this->_currentJobListing->getTotalCount() == $this->_totalProceed) {
+                if ($this->_currentJobListing->getTotalCount() <= $this->_totalProceed) {
                     $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED;
                     $endedAt = Mage::getSingleton('core/date')->gmtDate();
 
@@ -383,16 +384,17 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
      */
     protected function _handleException(Exception $e, $lastService = null)
     {
-        if ($this->_getHelper()->isDebugEnabled() && $lastService instanceof Diglin_Ricento_Model_Api_Services_Abstract) {
+        Mage::log("\n" . $e->__toString(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
+
+        if ($lastService instanceof Diglin_Ricento_Model_Api_Services_Abstract) {
             Mage::log($lastService->getLastApiDebug(), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
         }
 
-        Mage::log("\n" . $e->__toString(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
-
+        $message = $this->_getHelper()->__($e->getMessage());
         $this->_itemMessage = array('errors' =>
             array(
                 $this->_getHelper()->__('Error Code: %d', $e->getCode()),
-                $this->_getHelper()->__($e->getMessage())
+                function_exists('mb_strcut') ? mb_strcut($message, 0, 1024 * 1024) : $message
             ));
 
         $this->_jobHasError = true;

@@ -24,7 +24,7 @@ class Diglin_Ricento_Model_Config_Source_Categories extends Diglin_Ricento_Model
      */
     public function toOptionHash()
     {
-        if (empty($this->_categories)) {
+        if (empty($this->_categories) && Mage::helper('diglin_ricento')->isConfigured()) {
             $this->_categories = (array) Mage::getSingleton('diglin_ricento/api_services_system')->getCategories();
         }
 

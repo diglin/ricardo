@@ -92,7 +92,7 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
                 'product_title' => $item->getProductTitle(),
                 'products_listing_id' => $this->_productsListingId,
                 'product_id' => $item->getProductId(),
-                'message' => $this->_jsonEncode($this->_itemMessage),
+                'message' => (is_array($this->_itemMessage)) ? $this->_jsonEncode($this->_itemMessage) : $this->_itemMessage,
                 'log_status' => $this->_itemStatus,
                 'log_type' => $this->_logType,
                 'created_at' => Mage::getSingleton('core/date')->gmtDate()

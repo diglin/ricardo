@@ -26,7 +26,7 @@ class Diglin_Ricento_Model_Config_Source_Rules_Payment extends Diglin_Ricento_Mo
      */
     public function toOptionHash()
     {
-        if (empty($this->_paymentMethodsConditions)) {
+        if (empty($this->_paymentMethodsConditions) && Mage::helper('diglin_ricento')->isConfigured()) {
 
             $creditCardAvailable = Mage::helper('diglin_ricento')->isCardPaymentAllowed();
 

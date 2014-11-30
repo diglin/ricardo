@@ -168,11 +168,12 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
         $key = $this->_underscore(substr($method,3));
         $cacheKey = $key . Mage::registry('ricardo_api_lang');
         $profilerName = $this->_profilerPrefix . strtoupper($key);
+        $serviceModel = $this->getServiceModel();
 
         try {
             switch (substr($method, 0, 3)) {
                 case 'get' :
-                    if (method_exists($this->getServiceModel(), $method) && is_callable(array($this->getServiceModel(), $method), true)) {
+                    if (method_exists($serviceModel, $method) && is_callable(array($serviceModel, $method), true)) {
 
                         Varien_Profiler::start($profilerName);
 
@@ -183,7 +184,7 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                         }
 
                         if (empty($data) || !$this->getCanUseCache() || array_key_exists('ErrorCodes', $data)) {
-                            $data = call_user_func_array(array($this->getServiceModel(), $method), $args);
+                            $data = call_user_func_array(array($serviceModel, $method), $args);
                         }
 
                         $this->setData($key, $data);
@@ -200,13 +201,13 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                     }
                     break;
                 case 'set':
-                    if (method_exists($this->getServiceModel(), $method) && is_callable(array($this->getServiceModel(), $method), true)) {
+                    if (method_exists($serviceModel, $method) && is_callable(array($serviceModel, $method), true)) {
 
                         Varien_Profiler::start($profilerName);
 
                         $this->_prepareCredentialToken();
 
-                        call_user_func_array(array($this->getServiceModel(), $method), $args);
+                        call_user_func_array(array($serviceModel, $method), $args);
 
                         $this->_updateCredentialToken();
 
@@ -216,13 +217,13 @@ abstract class Diglin_Ricento_Model_Api_Services_Abstract extends Varien_Object
                     }
                     break;
                 default:
-                    if (method_exists($this->getServiceModel(), $method) && is_callable(array($this->getServiceModel(), $method), true)) {
+                    if (method_exists($serviceModel, $method) && is_callable(array($serviceModel, $method), true)) {
 
                         Varien_Profiler::start($profilerName);
 
                         $this->_prepareCredentialToken();
 
-                        $data = call_user_func_array(array($this->getServiceModel(), $method), $args);
+                        $data = call_user_func_array(array($serviceModel, $method), $args);
 
                         $this->_updateCredentialToken();
 
