@@ -50,3 +50,30 @@ $installer->getConnection()->delete($installer->getTable('sales/order_status'), 
 $installer->getConnection()->delete($installer->getTable('sales/order_status'), 'status = "ricardo_payment_pending"');
 
 $installer->endSetup();
+
+/*
+DELETE FROM MYPREFIX_eav_attribute WHERE attribute_code = 'ricardo_id';
+DELETE FROM MYPREFIX_eav_attribute WHERE attribute_code = 'ricardo_username';
+
+DELETE FROM MYPREFIX_eav_attribute WHERE attribute_code = 'ricardo_category';
+DELETE FROM MYPREFIX_eav_attribute WHERE attribute_code = 'ricardo_title';
+DELETE FROM MYPREFIX_eav_attribute WHERE attribute_code = 'ricardo_subtitle';
+DELETE FROM MYPREFIX_eav_attribute WHERE attribute_code = 'ricardo_description';
+DELETE FROM MYPREFIX_eav_attribute WHERE attribute_code = 'ricardo_condition';
+
+ALTER TABLE MYPREFIX_sales_flat_quote DROP COLUMN is_ricardo, DROP COLUMN customer_ricardo_id, DROP COLUMN customer_ricardo_username;
+ALTER TABLE MYPREFIX_sales_flat_order DROP COLUMN is_ricardo, DROP COLUMN customer_ricardo_id, DROP COLUMN customer_ricardo_username;
+
+DROP TABLE MYPREFIX_api_token;
+DROP TABLE MYPREFIX_products_listing;
+DROP TABLE MYPREFIX_products_listing_item;
+DROP TABLE MYPREFIX_listing_log;
+DROP TABLE MYPREFIX_sales_options;
+DROP TABLE MYPREFIX_shipping_payment_rule;
+DROP TABLE MYPREFIX_sync_job;
+DROP TABLE MYPREFIX_sales_transaction;
+DROP TABLE MYPREFIX_sync_job_listing;
+
+DELETE FROM MYPREFIX_sales_order_status WHERE status = 'ricardo_payment_canceled';
+DELETE FROM MYPREFIX_sales_order_status WHERE status = 'ricardo_payment_pending';
+*/
