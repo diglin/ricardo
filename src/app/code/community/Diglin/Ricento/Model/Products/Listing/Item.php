@@ -437,14 +437,17 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
 
                 // Prepare picture to set the content as byte array for the webservice
                 $imageContent = array_values(unpack('C*', file_get_contents($image['filepath'])));
+                $imageExtension = Helper::getPictureExtension($image['filepath']);
 
-                $picture = new ArticlePictureParameter();
-                $picture
-                    ->setPictureBytes($imageContent)
-                    ->setPictureExtension(Helper::getPictureExtension($image['filepath']))
-                    ->setPictureIndex(++$i);
+                if ($imageExtension) {
+                    $picture = new ArticlePictureParameter();
+                    $picture
+                        ->setPictureBytes($imageContent)
+                        ->setPictureExtension($imageExtension)
+                        ->setPictureIndex(++$i);
 
-                $insertArticleParameter->setPictures($picture);
+                    $insertArticleParameter->setPictures($picture);
+                }
                 $imageContent = null;
             }
         }
