@@ -514,7 +514,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
                 // Error with a product which is missing or have required options
                 if (is_string($quoteItem)) {
-                    Mage::throwException($quoteItem); // @todo - do we want really block the process at this level? Other solution to inform about the error?
+                    Mage::throwException($quoteItem); // @todo - do we really want to block the process at this level? Other solution to inform about the error?
                 }
 
                 $quoteItem

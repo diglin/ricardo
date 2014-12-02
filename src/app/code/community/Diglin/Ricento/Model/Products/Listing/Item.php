@@ -614,7 +614,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setArticleDescription($this->getProductDescription())
             ->setLanguageId(Mage::helper('diglin_ricento')->getRicardoLanguageIdFromLocaleCode($lang))
             // optional
-            ->setArticleSubtitle($this->getProductSubtitle()) // @todo if configurable product, use all options as subtitle value
+            ->setArticleSubtitle($this->getProductSubtitle())
             ->setDeliveryDescription($this->_shippingPaymentRule->getShippingDescription($lang))
             ->setPaymentDescription($this->_shippingPaymentRule->getPaymentDescription($lang))
             ->setWarrantyDescription($this->_salesOptions->getProductWarrantyDescription($lang));

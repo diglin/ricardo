@@ -115,7 +115,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
         $jobsCollection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
         $jobsCollection
             ->addFieldToFilter('job_type', $type)
-            ->addFieldToFilter('progress', array('in' => (array)$progress));
+            ->addFieldToFilter('progress', array('in' => (array) $progress));
 
         return $jobsCollection;
     }
@@ -156,7 +156,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
             ->setPageSize($this->_limit)
             ->addFieldToFilter('status', array('in' => $statuses))
             ->addFieldToFilter('products_listing_id', array('eq' => $this->_productsListingId))
-            ->addFieldToFilter('item_id', array('gt' => (int)$lastItemId));
+            ->addFieldToFilter('item_id', array('gt' => (int) $lastItemId));
 
         return $itemCollection;
     }
@@ -182,7 +182,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 
                 $this->_currentJobListing = Mage::getModel('diglin_ricento/sync_job_listing')->load($this->_currentJob->getId(), 'job_id');
                 $this->_productsListingId = (int) $this->_currentJobListing->getProductsListingId();
-                $this->_totalProceed = (int)$this->_currentJobListing->getTotalProceed();
+                $this->_totalProceed = (int) $this->_currentJobListing->getTotalProceed();
 
                 if (!$this->_productsListingId) {
                     return $this;
