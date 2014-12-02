@@ -86,10 +86,7 @@ class Diglin_Ricento_Model_Cron
             $daysKeep = (int)Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_CLEAN_JOBS_KEEP_DAYS);
 
             $jobsCollection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
-            $jobsCollection
-                ->getSelect()
-                ->from(array('job' => $jobsCollection->getMainTable()), '')
-                ->where('((TO_DAYS(job.created_at) + ? < TO_DAYS(now())))', $daysKeep);
+            $jobsCollection->getSelect()->where('((TO_DAYS(main_table.created_at) + ? < TO_DAYS(now())))', $daysKeep);
 
             $jobsCollection->walk('delete');
         }
@@ -106,10 +103,7 @@ class Diglin_Ricento_Model_Cron
             $daysKeep = (int)Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_CLEAN_LISTING_LOGS_KEEP_DAYS);
 
             $jobsCollection = Mage::getResourceModel('diglin_ricento/products_listing_log_collection');
-            $jobsCollection
-                ->getSelect()
-                ->from(array('log' => $jobsCollection->getMainTable()), '')
-                ->where('((TO_DAYS(log.created_at) + ? < TO_DAYS(now())))', $daysKeep);
+            $jobsCollection->getSelect()->where('((TO_DAYS(main_table.created_at) + ? < TO_DAYS(now())))', $daysKeep);
 
             $jobsCollection->walk('delete');
         }
