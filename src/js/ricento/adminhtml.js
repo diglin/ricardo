@@ -322,10 +322,12 @@ Ricento.salesOptionsForm.prototype = {
             this._showFieldset($('fieldset_toggle_buynow'));
         }
         if (salesType == 'buynow') {
-            var option = document.createElement("option");
-            option.text = untilsoldText;
-            option.value = untilsoldValue;
-            $(this.htmlIdPrefix + 'schedule_reactivation').add(option);
+            if (typeof untilsoldText != 'undefined') {
+                var option = document.createElement("option");
+                option.text = untilsoldText;
+                option.value = untilsoldValue;
+                $(this.htmlIdPrefix + 'schedule_reactivation').add(option);
+            }
             $(this.htmlIdPrefix + 'sales_auction_start_price').removeClassName(this.startPriceClass);
         } else {
             var options = $(this.htmlIdPrefix + 'schedule_reactivation').options;
