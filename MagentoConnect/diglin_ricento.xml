@@ -1,5 +1,5 @@
 <_>
-   <form_key>aSSrMEtjYH9ao65x</form_key>
+   <form_key>U7hYdwv1pl0cHzai</form_key>
    <name>diglin_ricento</name>
    <channel>community</channel>
    <version_ids>
@@ -39,9 +39,25 @@
 				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.0.8</version>
+   <version>1.0.9</version>
    <stability>stable</stability>
-   <notes>## Version 1.0.8
+   <notes>## Version 1.0.9
+- Fix issue with some optional API property set to 0 (like template Id)
+- 0c1eb42 Revert temporary success / error in dispatcher list , improve translations of string in product grid
+- 74c3284 Show a small message in sync grid while running or chunk running to allow to differentiate both kind of sync
+- 68eed7f Raise to 400 items to trigger in dispatch
+- 1d3a839 Prevent create a new job while having a chunk running sync list
+- 3241ef0 Change the way to handle the bucket of items in the dispatcher, fix a bug while triggering the order dispatcher and getting the list of listed items
+- adcbc59 Improve message display in sync grid
+- 6b6c45e Fix issue with &quot;Until Sold&quot; feature
+- 2f48ea4 Improve the way to set/get successful or error log item
+- 86fcc17 Display Product list name in the sync log grid instead to put it as message
+- 1219b09 Fix issue with products grid and configurable products having article inserted also as simple article
+- 95efdca Fix duplicate collection item error
+- 4d38ed3 Make the option Schedule Reactivation &quot;Until Sold&quot; better explicit and working
+- 03bc9cd Update code documentation
+- 658c9f6 In some cases, picture&apos;s extension is not recognized so change the logic to determine if it exists or not Catch Exception and log them in cron class
+## Version 1.0.8
 - b5f1afa Update translations file
 - c0d3fbb Fix issue with dispatcher and completed status
 - 27c48c9 Fix interface issue (invisible language was also required input) with language selection and payment method &quot;other&quot; which needs a payment description and shipping description field if shipping &quot;other&quot; is selected
@@ -128,7 +144,7 @@
             <max/>
          </max>
          <files>
-            <files>                    </files>
+            <files>                     </files>
          </files>
       </package>
       <extension>
@@ -235,8 +251,4 @@
          <ignore>#^.svn|.git|.DS_Store#</ignore>
       </ignore>
    </contents>
-   <page>1</page>
-   <limit>200</limit>
-   <folder/>
-   <package/>
 </_>
