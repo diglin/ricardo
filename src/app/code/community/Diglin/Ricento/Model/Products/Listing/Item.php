@@ -526,6 +526,8 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             $startDate = $this->_salesOptions->getScheduleDateStart();
         }
 
+        $untilSoldOut = ((int) $this->_salesOptions->getScheduleReactivation() === Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT);
+
         $customTemplate = ($this->_salesOptions->getCustomizationTemplate() >= 0) ? $this->_salesOptions->getCustomizationTemplate() : null;
 
         $articleInformation = new ArticleInformationParameter();
@@ -538,7 +540,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setInitialQuantity($this->getProductQty())
             ->setIsCustomerTemplate(false)
             ->setMainPictureId(1)
-            ->setMaxRelistCount($this->_salesOptions->getScheduleReactivation())
+            ->setMaxRelistCount((!$untilSoldOut) ? $this->_salesOptions->getScheduleReactivation() : 0)
             ->setWarrantyId($this->_salesOptions->getProductWarranty())
             ->setDeliveries($this->_getArticleDeliveryParameter())
             // optional
@@ -576,8 +578,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         }
 
         if ($salesType == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW) {
-            $soldOut = ($this->_salesOptions->getScheduleReactivation() === Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT) ? true : false;
-            $articleInformation->setIsRelistSoldOut($soldOut);
+            $articleInformation->setIsRelistSoldOut($untilSoldOut);
         }
 
         //** Promotions
