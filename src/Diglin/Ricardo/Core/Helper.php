@@ -31,7 +31,7 @@ class Helper
         }
 
         preg_match('/(\d{10})(\d{3})([\+\-]\d{4})/', $date, $matches);
-        return (int) $matches[1];
+        return (int)$matches[1];
     }
 
     /**
@@ -42,13 +42,13 @@ class Helper
      * @param string $unixTimestamp
      * @return string
      */
-    public static function getJsonDate ($unixTimestamp = null)
+    public static function getJsonDate($unixTimestamp = null)
     {
         if (is_null($unixTimestamp)) {
             $unixTimestamp = time();
         }
 
-        return '/Date(' . ($unixTimestamp  * 1000) . date('O') . ')/';
+        return '/Date(' . ($unixTimestamp * 1000) . date('O') . ')/';
     }
 
     /**
@@ -61,8 +61,7 @@ class Helper
     {
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-        switch (strtolower($extension))
-        {
+        switch (strtolower($extension)) {
             case 'jpg':
             case 'jpeg':
                 $return = PictureExtension::JPG;

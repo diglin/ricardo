@@ -80,7 +80,7 @@ abstract class ParameterAbstract implements \ArrayAccess
             }
 
             // skip empty value for properties which are optional
-            if (empty($value) && in_array(substr($property->getName(), 1, strlen($property->getName())), $this->_optionalProperties)) {
+            if (is_null($value) && in_array(substr($property->getName(), 1, strlen($property->getName())), $this->_optionalProperties)) {
                 continue;
             }
 

@@ -196,7 +196,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             ->setInternalReferences($internalReferencesB)
             ->setPaymentConditionIds(array($paymentConditions[0]['PaymentConditionId']))
             ->setPaymentMethodIds(array($paymentConditions[0]['PaymentMethods'][0]['PaymentMethodId']))
-            ->setTemplateId(null);
+            ->setTemplateId(0);
 
         if ($auction) {
             $articleInformation
