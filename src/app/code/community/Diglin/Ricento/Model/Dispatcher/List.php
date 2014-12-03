@@ -127,8 +127,8 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
              */
             $jobListing->saveCurrentJob(array(
                 'total_proceed' => ++$this->_totalProceed,
-                'total_success' => ($jobListing->getTotalSuccess() + $this->_totalSuccess),
-                'total_error' => ($jobListing->getTotalError() + $this->_totalError),
+                'total_success' => $this->_totalSuccess, //@todo update with the previous total_success in case of chunk_running
+                'total_error' => $this->_totalError,//@todo update with the previous total_success in case of chunk_running
                 'last_item_id' => $item->getId()
             ));
 
@@ -154,7 +154,7 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
      */
     protected function _getStatusMessage($jobStatus)
     {
-        return Mage::helper('diglin_ricento')->__('Report: %d success, %d error(s)', $this->_currentJobListing->getTotalSuccess(), $this->_currentJobListing->getTotalError());
+        return Mage::helper('diglin_ricento')->__('Report: %d success, %d error(s)', $this->_totalSuccess, $this->_totalError);
     }
 
     /**
