@@ -74,7 +74,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             $job
                 ->setJobType($jobType)
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
-                ->setJobMessage(array($job->getJobMessage()))
+                ->setJobMessage(array($job->getJobMessage(true)))
                 ->save();
 
             $jobListing = Mage::getModel('diglin_ricento/sync_job_listing');
@@ -132,7 +132,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             /**
              * Save the current information of the process to allow live display via ajax call
              */
-            $this->_currentJobListing->saveCurrentJob(array(
+            $jobListing->saveCurrentJob(array(
                 'total_proceed' => ++$this->_totalProceed,
                 'last_item_id' => $item->getId()
             ));

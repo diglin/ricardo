@@ -15,6 +15,11 @@
 class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Dispatcher_Abstract
 {
     /**
+     * @var null
+     */
+    protected $_limit = null;
+
+    /**
      * @var int
      */
     protected $_logType = Diglin_Ricento_Model_Products_Listing_Log::LOG_TYPE_CHECK;
@@ -171,7 +176,7 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
             $jobList
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
                 ->setJobType(Diglin_Ricento_Model_Sync_Job::TYPE_LIST)
-                ->setJobMessage(array($jobList->getJobMessage()))
+                ->setJobMessage(array($jobList->getJobMessage(true)))
                 ->save();
 
             $jobListingList = Mage::getModel('diglin_ricento/sync_job_listing');

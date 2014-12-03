@@ -167,7 +167,8 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     protected function _runJobs()
     {
         /**
-         * Get all pending jobs of specified type - the risk is very low to have for this collection a big quantity of data
+         * Get all pending jobs of specified type
+         * The risk is very low to have for this collection a big quantity of data
          */
         $jobsCollection = $this->_getJobCollection($this->_jobType,
             array(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING, Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING));
@@ -202,13 +203,11 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                     $this->_getListingLog()->cleanSpecificJob($this->_currentJob->getId());
                 }
 
-                $start = microtime(true);
-
                 /**
                  * All the Magic is here ...
                  */
+                $start = microtime(true);
                 $this->_proceed();
-
                 $end = microtime(true);
 
                 if ($helper->isDebugEnabled()) {
@@ -231,7 +230,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                  */
                 $endedAt = null;
 
-                if ($this->_currentJobListing->getTotalCount() <= $this->_totalProceed) {
+                if ($this->_totalProceed >= $this->_currentJobListing->getTotalCount()) {
                     $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED;
                     $endedAt = Mage::getSingleton('core/date')->gmtDate();
 
@@ -240,15 +239,15 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                         ->setTotalProceed($this->_totalProceed)
                         ->save();
 
-                    $message[] = $helper->__('The Job has finished with %s for the products listing <a href="%s" target="_blank">"%s"</a>. Please, view the <a href="%s">log</a> for details.',
-                        $typeError,
-                        $this->_getProductListingEditUrl(),
-                        $this->_getListing()->getTitle(),
-                        $this->_getLogListingUrl()
-                    );
+                    $completedMessage = $helper->__('The Job has finished with %s.', $typeError, $this->_getLogListingUrl());
+                    if ($this->_jobHasError) {
+                        $completedMessage .= ' ' . $helper->__('Please, view the <a href="%s">log</a> for details.');
+                    }
+
+                    $message[] = $completedMessage;
 
                 } else {
-                    $message = array_merge($message, (is_array($this->_currentJob->getJobMessage()) ? $this->_currentJob->getJobMessage() : array($this->_currentJob->getJobMessage())));
+                    $message[] = $this->_currentJob->getJobMessage(true);
                     $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING;
                 }
 

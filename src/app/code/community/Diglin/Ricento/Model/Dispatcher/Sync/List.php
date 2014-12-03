@@ -43,7 +43,8 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
 
         $productsListingResource = Mage::getResourceModel('diglin_ricento/products_listing');
         $readListingConnection = $productsListingResource->getReadConnection();
-        $select = $readListingConnection->select()
+        $select = $readListingConnection
+            ->select()
             ->from($productsListingResource->getTable('diglin_ricento/products_listing'), 'entity_id');
 
         $listingIds = $readListingConnection->fetchCol($select);
@@ -73,7 +74,7 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
             $job
                 ->setJobType($jobType)
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
-                ->setJobMessage(array($job->getJobMessage()))
+                ->setJobMessage(array($job->getJobMessage(true)))
                 ->save();
 
             $jobListing = Mage::getModel('diglin_ricento/sync_job_listing');
