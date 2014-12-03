@@ -23,6 +23,9 @@ class Diglin_Ricento_Block_Adminhtml_Sync_Log_Grid extends Mage_Adminhtml_Block_
     {
         /* @var $collection Diglin_Ricento_Model_Resource_Sync_Job_Collection */
         $collection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
+        $collection
+            ->join(array('sjl' => 'diglin_ricento/sync_job_listing'), 'sjl.job_id = main_table.job_id', 'products_listing_id')
+            ->join(array('pl' => 'diglin_ricento/products_listing'), 'pl.entity_id = sjl.products_listing_id', 'title');
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -46,6 +49,15 @@ class Diglin_Ricento_Block_Adminhtml_Sync_Log_Grid extends Mage_Adminhtml_Block_
             'type' => 'options',
             'width' => 150,
             'options'   => Mage::getSingleton('diglin_ricento/config_source_sync_type')->toOptionHash()
+        ));
+
+        $this->addColumn('title', array(
+            'header' => $this->__('List name') ,
+            'align' => 'left',
+            'index' => 'title',
+            'type' => 'text',
+            'width' => 150,
+            'renderer'  => Mage::getConfig()->getBlockClassName('diglin_ricento/adminhtml_sync_log_grid_renderer_title')
         ));
 
         $this->addColumn('job_message', array(
