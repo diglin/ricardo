@@ -99,7 +99,9 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
      */
     protected function _proceed()
     {
-        $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED));
+        $jobListing = $this->_currentJobListing;
+
+        $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED), $jobListing->getLastItemId());
         $itemCollection->addFieldToFilter('is_planned', 0);
 
         /* @var $item Diglin_Ricento_Model_Products_Listing_Item */

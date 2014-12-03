@@ -153,10 +153,13 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     {
         $itemCollection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
         $itemCollection
-            ->setPageSize($this->_limit)
             ->addFieldToFilter('status', array('in' => $statuses))
             ->addFieldToFilter('products_listing_id', array('eq' => $this->_productsListingId))
             ->addFieldToFilter('item_id', array('gt' => (int) $lastItemId));
+
+        if ($this->_limit) {
+            $itemCollection->setPageSize($this->_limit);
+        }
 
         return $itemCollection;
     }
