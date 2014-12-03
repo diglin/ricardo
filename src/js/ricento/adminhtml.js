@@ -235,7 +235,7 @@ Ricento.progressInterval = function (url, prefix) {
 
                 if (response.state == 'chunk_running' || response.state == 'running') {
                     progressElement.addClassName('sync-indicator');
-                    adviceElement.innerHTML = '';
+                    adviceElement.innerHTML = response.state_message;
                 } else if (response.state == 'completed') {
                     u.stop();
 
