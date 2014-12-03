@@ -18,6 +18,8 @@
  * @method int getLastItemId()
  * @method int getTotalCount()
  * @method int getTotalProceed()
+ * @method int getTotalSuccess()
+ * @method int getTotalError()
  * @method string getCreatedAt()
  * @method string getUpdatedAt()
  *
@@ -27,6 +29,8 @@
  * @method Diglin_Ricento_Model_Sync_Job_Listing setLastItemId(int $id)
  * @method Diglin_Ricento_Model_Sync_Job_Listing setTotalCount(int $total)
  * @method Diglin_Ricento_Model_Sync_Job_Listing setTotalProceed(int $proceed)
+ * @method Diglin_Ricento_Model_Sync_Job_Listing setTotalSuccess(int $success)
+ * @method Diglin_Ricento_Model_Sync_Job_Listing setTotalError(int $error)
  * @method Diglin_Ricento_Model_Sync_Job_Listing setUpdatedAt(string $date)
  */
 

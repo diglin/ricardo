@@ -103,6 +103,8 @@ class Diglin_Ricento_Model_Dispatcher_Stop extends Diglin_Ricento_Model_Dispatch
              */
             $jobListing->saveCurrentJob(array(
                 'total_proceed' => ++$this->_totalProceed,
+                'total_success' => ($jobListing->getTotalSuccess() + $this->_totalSuccess),
+                'total_error' => ($jobListing->getTotalError() + $this->_totalError),
                 'last_item_id' => $item->getId()
             ));
 

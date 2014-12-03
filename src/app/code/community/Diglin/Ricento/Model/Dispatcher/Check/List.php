@@ -138,6 +138,8 @@ class Diglin_Ricento_Model_Dispatcher_Check_List extends Diglin_Ricento_Model_Di
 
             $jobListing->saveCurrentJob(array(
                 'total_proceed' => ++$this->_totalProceed,
+                'total_success' => ($jobListing->getTotalSuccess() + $this->_totalSuccess),
+                'total_error' => ($jobListing->getTotalError() + $this->_totalError),
                 'last_item_id' => $item->getId()
             ));
 
