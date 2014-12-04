@@ -225,7 +225,10 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
                     $address = $customer->getDefaultBillingAddress();
 
-                    $street = $buyerAddress->getAddress1() . "\n" . $buyerAddress->getAddress2() . "\n" . $buyerAddress->getPostalBox();
+                    $street = $buyerAddress->getAddress1() . ' ' . $buyerAddress->getStreetNumber()
+                        . (($buyerAddress->getAddress2()) ? "\n" . $buyerAddress->getAddress2() : '')
+                        . (($buyerAddress->getPostalBox()) ? "\n" . $buyerAddress->getPostalBox() : '');
+                    
                     $postCode = $buyerAddress->getZipCode();
                     $city = $buyerAddress->getCity();
 
@@ -512,6 +515,10 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     ->load($transaction->getProductId())
                     ->setSkipCheckRequiredOption(true);
 
+                if (!$product->getId()) {
+                    continue;
+                }
+
                 $quoteItem = $quote->addProduct($product, $infoBuyRequest);
 
                 // Error with a product which is missing or have required options
@@ -625,6 +632,12 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             Mage::log("\n" . $e->__toString(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
             Mage::helper('diglin_ricento/tools')->sendAdminNotification($e->__toString());
 
+            /* @var $errors Mage_Core_Model_Message_Collection */
+            $errors = $this->_getSession()->getMessages(true);
+            if ($errors) {
+                Mage::log($errors, Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
+            }
+
             // Deactivate the last quote if a problem occur to prevent cart display in frontend to the customer
             $quote = $this->_getSession()->getQuote();
             $quote->setIsActive(false)
@@ -650,16 +663,6 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     protected function _getSession()
     {
         return Mage::getSingleton('adminhtml/session_quote');
-    }
-
-    /**
-     * Retrieve quote object
-     *
-     * @return Mage_Sales_Model_Quote
-     */
-    protected function _getQuote()
-    {
-        return $this->_getSession()->getQuote();
     }
 
     /**
