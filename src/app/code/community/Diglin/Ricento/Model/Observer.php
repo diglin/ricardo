@@ -179,4 +179,26 @@ class Diglin_Ricento_Model_Observer
 //
 //        return $this;
 //    }
+
+    /**
+     * Event
+     * - sales_quote_item_set_product
+     *
+     * We skipped custom option while processing an order via the ricardo.ch API
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function setSkipppedRequiredOption(Varien_Event_Observer $observer)
+    {
+        /* @var $product Mage_Catalog_Model_Product */
+        $product = $observer->getEvent()->getProduct();
+
+        /* @var $quoteItem Mage_Sales_Model_Quote_Item */
+        $quoteItem = $observer->getEvent()->getQuoteItem();
+
+        if ($quoteItem->getQuote() && $quoteItem->getQuote()->getIsRicardo()) {
+            $product->setSkipCheckRequiredOption(true);
+        }
+        return $this;
+    }
 }
