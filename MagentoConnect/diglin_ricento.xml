@@ -1,5 +1,5 @@
 <_>
-   <form_key>U7hYdwv1pl0cHzai</form_key>
+   <form_key>aXZKLMEAUQyBlsoA</form_key>
    <name>diglin_ricento</name>
    <channel>community</channel>
    <version_ids>
@@ -39,9 +39,16 @@
 				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.0.9</version>
+   <version>1.0.10</version>
    <stability>stable</stability>
-   <notes>## Version 1.0.9
+   <notes>## Version 1.0.10
+e2304ab Change the status of an item to stop if the item has not been sold. It will stop the complete list if all items are stopped.
+e2c0676 Set website Id while saving new customer even if store id was also provided to be sure that the user is saved into the correct website
+0d01b4a Fix missing log url in message
+ff1005c Skip required option when creating an order, also for custom option
+9b48ef6 Fix missing home number
+
+## Version 1.0.9
 - Fix issue with some optional API property set to 0 (like template Id)
 - 0c1eb42 Revert temporary success / error in dispatcher list , improve translations of string in product grid
 - 74c3284 Show a small message in sync grid while running or chunk running to allow to differentiate both kind of sync
@@ -144,7 +151,7 @@
             <max/>
          </max>
          <files>
-            <files>                     </files>
+            <files>                      </files>
          </files>
       </package>
       <extension>
