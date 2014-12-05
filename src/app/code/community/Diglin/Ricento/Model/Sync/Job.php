@@ -114,13 +114,14 @@ class Diglin_Ricento_Model_Sync_Job extends Diglin_Ricento_Model_Sync_Abstract
     }
 
     /**
-     * @return array
+     * @param bool $default
+     * @return mixed|string
      */
-    public function getJobMessage()
+    public function getJobMessage($default = false)
     {
         $helper = Mage::helper('diglin_ricento');
 
-        if ($this->getData('job_message')) {
+        if ($this->getData('job_message') && !$default) {
             return $this->getData('job_message');
         } else {
             switch ($this->getJobType()) {

@@ -73,31 +73,31 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'diglin_ricento/products_listing_item',
                 'status',
                 'product_id=entity_id',
-                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0) . ' AND at_status.parent_item_id IS NULL',
                 'left'
             )->joinField('sales_options_id',
                 'diglin_ricento/products_listing_item',
                 'sales_options_id',
                 'product_id=entity_id',
-                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0) . ' AND at_sales_options_id.parent_item_id IS NULL',
                 'left'
             )->joinField('rule_id',
                 'diglin_ricento/products_listing_item',
                 'rule_id',
                 'product_id=entity_id',
-                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0) . ' AND at_rule_id.parent_item_id IS NULL',
                 'left'
             )->joinField('ricardo_article_id',
                 'diglin_ricento/products_listing_item',
                 'ricardo_article_id',
                 'product_id=entity_id',
-                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0) . ' AND at_ricardo_article_id.parent_item_id IS NULL',
                 'left'
             )->joinField('item_id',
                 'diglin_ricento/products_listing_item',
                 'item_id',
                 'product_id=entity_id',
-                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0),
+                '{{table}}.products_listing_id='.(int) $this->getRequest()->getParam('id', 0) . ' AND at_item_id.parent_item_id IS NULL',
                 'left'
             )->distinct(true);
 
@@ -152,7 +152,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             'index'     => 'type_id',
             'width'     => '120',
             'type'      => 'options',
-            'options'   => Mage::getSingleton('catalog/product_type')->getOptionArray(),
+            'options'   => array_intersect_key(Mage::getSingleton('catalog/product_type')->getOptionArray(), Mage::helper('diglin_ricento')->getAllowedProductTypes()),
         ));
         $this->addColumn('sku', array(
             'header'    => Mage::helper('catalog')->__('SKU'),

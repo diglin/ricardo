@@ -366,7 +366,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $job
                 ->setJobType($jobType)
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
-                ->setJobMessage(array($job->getJobMessage()))
+                ->setJobMessage( (is_array($job->getJobMessage())) ? $job->getJobMessage() : array($job->getJobMessage()))
                 ->save();
 
             $jobListing = Mage::getModel('diglin_ricento/sync_job_listing');

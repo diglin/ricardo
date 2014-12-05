@@ -164,6 +164,8 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
      */
     protected function _validatePostData($data)
     {
+        $errors = array();
+
         if (empty($data['rules']['use_products_list_settings'])) {
             /* @var $rulesValidator Diglin_Ricento_Model_Validate_Rules_Methods */
             $rulesValidator = Mage::getModel('diglin_ricento/validate_rules_methods');
@@ -173,9 +175,8 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
             );
             if (!$rulesValidator->isValid($methods)) {
                 foreach ($rulesValidator->getMessages() as $message) {
-                    $this->_getSession()->addError($message);
+                    $errors[] = $message;
                 }
-                return false;
             }
         }
 
@@ -183,14 +184,24 @@ abstract class Diglin_Ricento_Controller_Adminhtml_Products_Listing extends Digl
             if (!empty($data['sales_options']['schedule_date_start'])) {
                 $startDateInfo = date_parse_from_format(Varien_Date::DATETIME_PHP_FORMAT, $data['sales_options']['schedule_date_start']);
                 if ($startDateInfo['error_count']) {
-                    $this->_getSession()->addError($this->__('Invalid start date.') . '<br>' . join ('<br>', $startDateInfo['errors']));
-                    return false;
+                    $errors[] = $this->__('Invalid start date.') . '<br>' . join ('<br>', $startDateInfo['errors']);
+
                 }
             }
             if ($data['sales_options']['schedule_period_days'] <= 0) {
-                $this->_getSession()->addError($this->__('The end date must be in the future.'));
-                return false;
+                $errors[] = $this->__('The end date must be in the future.');
             }
+        }
+
+        if (isset($data['sales_options']['schedule_reactivation'])
+        && $data['sales_options']['sales_type'] != Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW
+        && $data['sales_options']['schedule_reactivation'] == Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT) {
+            $errors[] = $this->__('You cannot reactivate a product until sold out when doing an auction sales type.');
+        }
+
+        if (count($errors)) {
+            $this->_getSession()->addError($this->__('Following error(s) appeared:') . '<br>' . join ('<br>', $errors));
+            return false;
         }
 
         return true;

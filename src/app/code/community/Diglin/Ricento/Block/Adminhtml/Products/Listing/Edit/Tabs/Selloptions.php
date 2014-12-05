@@ -99,7 +99,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[sales_auction_direct_buy]',
             'label' => $this->__('Allow Direct Buy'),
             'values' => Mage::getSingleton('eav/entity_attribute_source_boolean')->getAllOptions(),
-            'onchange' => "salesOptionsForm.showSalesTypeFieldsets('auction', this.value =='1'); salesOptionsForm.toggleStockManagement(this)",
+            'onchange' => "salesOptionsForm.showSalesTypeFieldsets('auction', this.value =='1', '". Mage::helper('diglin_ricento')->__('Until sold') ."', " . Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT . "); salesOptionsForm.toggleStockManagement(this)",
             'note' => $this->__('Fill in the fieldset "Buy now" below to define the direct price settings. <strong>Note</strong>: if set to "Yes", the stock management will be set to "Custom Qty" with a value of 1.')
         ));
 
@@ -200,7 +200,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         $fieldsetSchedule->addField('schedule_reactivation', 'select', array(
             'name' => 'sales_options[schedule_reactivation]',
             'label' => $this->__('Reactivation'),
-            'options' => $this->_getReactivationOptions()->toOptionHash()
+            'options' => $this->_getReactivationOptions()->toOptionHash(),
+            'note' => $this->__('<strong>Attention:</strong> you cannot use the option "Until Sold" if you select the Sales Type "Auction"'),
         ));
         // @todo cycle to implement
 //        $fieldsetSchedule->addField('schedule_cycle_multiple_products_random', 'radios_extensible', array(
@@ -345,9 +346,10 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
          * Add "Until Sold" option to the select input when it's buy now sales type
          */
         if ($this->getSalesOptions()->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW) {
-            $options = $this->getForm()->getElement('schedule_reactivation')->getOptions();
-            $options = array_merge($options, array(Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT => Mage::helper('diglin_ricento')->__('Until sold')));
-            $this->getForm()->getElement('schedule_reactivation')->setOptions($options);
+            $option = array('value' => Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT, 'label' => Mage::helper('diglin_ricento')->__('Until sold'));;
+            $scheduleReactivationValues = $this->getForm()->getElement('schedule_reactivation')->getValues();
+            $scheduleReactivationValues[] = $option;
+            $this->getForm()->getElement('schedule_reactivation')->setValues($scheduleReactivationValues);
         }
 
         /**

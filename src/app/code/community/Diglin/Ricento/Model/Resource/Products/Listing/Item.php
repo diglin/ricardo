@@ -121,6 +121,9 @@ class Diglin_Ricento_Model_Resource_Products_Listing_Item extends Mage_Core_Mode
     }
 
     /**
+     * Stop parent product item if all children products are stopped
+     * Probably deprecated because the parent configurable product should not have a changing status
+     *
      * @param $productsListingId
      * @return $this
      */

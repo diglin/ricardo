@@ -235,7 +235,7 @@ Ricento.progressInterval = function (url, prefix) {
 
                 if (response.state == 'chunk_running' || response.state == 'running') {
                     progressElement.addClassName('sync-indicator');
-                    adviceElement.innerHTML = '';
+                    adviceElement.innerHTML = response.state_message;
                 } else if (response.state == 'completed') {
                     u.stop();
 
@@ -322,10 +322,12 @@ Ricento.salesOptionsForm.prototype = {
             this._showFieldset($('fieldset_toggle_buynow'));
         }
         if (salesType == 'buynow') {
-            var option = document.createElement("option");
-            option.text = untilsoldText;
-            option.value = untilsoldValue;
-            $(this.htmlIdPrefix + 'schedule_reactivation').add(option);
+            if (typeof untilsoldText != 'undefined') {
+                var option = document.createElement("option");
+                option.text = untilsoldText;
+                option.value = untilsoldValue;
+                $(this.htmlIdPrefix + 'schedule_reactivation').add(option);
+            }
             $(this.htmlIdPrefix + 'sales_auction_start_price').removeClassName(this.startPriceClass);
         } else {
             var options = $(this.htmlIdPrefix + 'schedule_reactivation').options;

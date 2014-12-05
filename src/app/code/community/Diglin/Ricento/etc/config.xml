@@ -13,7 +13,7 @@
 <config>
     <modules>
         <Diglin_Ricento>
-            <version>1.0.8</version>
+            <version>1.0.10</version>
         </Diglin_Ricento>
     </modules>
 
@@ -220,6 +220,14 @@
                 </observers>
             </payment_info_block_prepare_specific_information>
 
+            <sales_quote_item_set_product>
+                <observers>
+                    <ricento_quote_item>
+                        <class>diglin_ricento/observer</class>
+                        <method>setSkipppedRequiredOption</method>
+                    </ricento_quote_item>
+                </observers>
+            </sales_quote_item_set_product>
         </events>
 
         <ricento>

@@ -79,11 +79,24 @@ class Diglin_Ricento_Adminhtml_SyncController extends Mage_Adminhtml_Controller_
                 $jobMessage = implode('<br>', $jobMessage);
             }
 
+            switch ($job->getProgress()) {
+                case Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING:
+                    $stateMessage = $this->__('Chunk Running');
+                    break;
+                case Diglin_Ricento_Model_Sync_Job::PROGRESS_RUNNING:
+                    $stateMessage = $this->__('Running');
+                    break;
+                default:
+                    $stateMessage = '';
+                    break;
+            }
+
             $response = array(
                 'percentage' => $percentDone,
                 'job_type' => $job->getJobType(),
                 'status' => ucfirst($job->getJobStatus()),
                 'state' => $job->getProgress(),
+                'state_message' => $stateMessage,
                 'message' => Mage::getSingleton('diglin_ricento/filter')->filter($jobMessage),
                 'started_at' => ($job->getStartedAt()) ? $locale->date($job->getStartedAt(), Varien_Date::DATETIME_INTERNAL_FORMAT)->toString($dateFormatIso) : '',
                 'ended_at' => ($job->getEndedAt()) ? $locale->date($job->getEndedAt(), Varien_Date::DATETIME_INTERNAL_FORMAT)->toString($dateFormatIso) : '',

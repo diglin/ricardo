@@ -74,7 +74,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             $job
                 ->setJobType($jobType)
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
-                ->setJobMessage(array($job->getJobMessage()))
+                ->setJobMessage(array($job->getJobMessage(true)))
                 ->save();
 
             $jobListing = Mage::getModel('diglin_ricento/sync_job_listing');
@@ -99,18 +99,36 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
      */
     protected function _proceed()
     {
-        $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED));
+        $article = null;
+        $isUnsold = false;
+        $jobListing = $this->_currentJobListing;
+
+        $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED), $jobListing->getLastItemId());
         $itemCollection->addFieldToFilter('is_planned', 0);
 
         /* @var $item Diglin_Ricento_Model_Products_Listing_Item */
         foreach ($itemCollection->getItems() as $item) {
 
             try {
-                $this->getSoldArticles(array($item->getRicardoArticleId()), $item);
+                $sold = $this->getSoldArticles(array($item->getRicardoArticleId()), $item);
+
+                if (!$sold) {
+                    $article = $this->_getUnsoldArticles($item);
+                    if (!is_null($article)) {
+                        $isUnsold = true;
+                    }
+                }
+
             } catch (Exception $e) {
                 $this->_handleException($e, Mage::getSingleton('diglin_ricento/api_services_selleraccount'));
                 $e = null;
                 // keep going for the next item - no break
+            }
+
+            if ($article && $article->getArticleId() && $isUnsold) {
+                $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
+                $this->_itemMessage = array('success' => $this->_getHelper()->__('Sorry, the product has not been sold'));
+                $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED, 'is_planned' => 0, 'ricardo_article_id' => $article->getArticleId()));
             }
 
             /**
@@ -132,7 +150,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             /**
              * Save the current information of the process to allow live display via ajax call
              */
-            $this->_currentJobListing->saveCurrentJob(array(
+            $jobListing->saveCurrentJob(array(
                 'total_proceed' => ++$this->_totalProceed,
                 'last_item_id' => $item->getId()
             ));
@@ -223,7 +241,10 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
                     $address = $customer->getDefaultBillingAddress();
 
-                    $street = $buyerAddress->getAddress1() . "\n" . $buyerAddress->getAddress2() . "\n" . $buyerAddress->getPostalBox();
+                    $street = $buyerAddress->getAddress1() . ' ' . $buyerAddress->getStreetNumber()
+                        . (($buyerAddress->getAddress2()) ? "\n" . $buyerAddress->getAddress2() : '')
+                        . (($buyerAddress->getPostalBox()) ? "\n" . $buyerAddress->getPostalBox() : '');
+
                     $postCode = $buyerAddress->getZipCode();
                     $city = $buyerAddress->getCity();
 
@@ -265,6 +286,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                         $customer->addAddress($address);
                     }
                 } else {
+                    Mage::log($transaction->getBuyer(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
                     throw new Exception($this->_getHelper()->__('Customer creation failed! Ricardo transaction cannot be added.'));
                 }
 
@@ -327,7 +349,11 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         unset($productItem);
         unset($customer);
 
-        return true; // @todo it returns true also when no transaction have been done
+        if ($this->_itemStatus == Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -357,6 +383,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 ->setEmail($buyer->getEmail())
                 ->setPassword($customer->generatePassword())
                 ->setStoreId($storeId)
+                ->setWebsiteId($websiteId)
                 ->setConfirmation(null);
         }
 
@@ -399,7 +426,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         $delay = ($mergeOrder) ? 30 : 1;
 
         /**
-         * Get transaction older than 30 minutes and when no order was created
+         * Get transaction older than 30 or 1 minutes and when no order was created
          * Those will be merged in one order if the customer is the same
          */
         $transactionCollection = Mage::getResourceModel('diglin_ricento/sales_transaction_collection');
@@ -418,7 +445,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         }
 
         /**
-         * Create new order
+         * Create new order for each customer
          */
         if (count($customerTransactions) > 0) {
             foreach ($customerTransactions as $transactions) {
@@ -510,11 +537,15 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     ->load($transaction->getProductId())
                     ->setSkipCheckRequiredOption(true);
 
+                if (!$product->getId()) {
+                    continue;
+                }
+
                 $quoteItem = $quote->addProduct($product, $infoBuyRequest);
 
                 // Error with a product which is missing or have required options
                 if (is_string($quoteItem)) {
-                    Mage::throwException($quoteItem); // @todo - do we want really block the process at this level? Other solution to inform about the error?
+                    Mage::throwException($quoteItem); // @todo - do we really want to block the process at this level? Other solution to inform about the error?
                 }
 
                 $quoteItem
@@ -623,6 +654,12 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
             Mage::log("\n" . $e->__toString(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
             Mage::helper('diglin_ricento/tools')->sendAdminNotification($e->__toString());
 
+            /* @var $errors Mage_Core_Model_Message_Collection */
+            $errors = $this->_getSession()->getMessages(true);
+            if ($errors) {
+                Mage::log($errors, Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
+            }
+
             // Deactivate the last quote if a problem occur to prevent cart display in frontend to the customer
             $quote = $this->_getSession()->getQuote();
             $quote->setIsActive(false)
@@ -648,16 +685,6 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
     protected function _getSession()
     {
         return Mage::getSingleton('adminhtml/session_quote');
-    }
-
-    /**
-     * Retrieve quote object
-     *
-     * @return Mage_Sales_Model_Quote
-     */
-    protected function _getQuote()
-    {
-        return $this->_getSession()->getQuote();
     }
 
     /**

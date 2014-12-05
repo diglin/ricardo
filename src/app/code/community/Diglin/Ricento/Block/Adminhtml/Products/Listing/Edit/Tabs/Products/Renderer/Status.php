@@ -61,16 +61,17 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products_Rendere
     protected function _decorate($value, Varien_Object $row)
     {
         $output = '';
+        $helper = Mage::helper('diglin_ricento');
         $value = htmlspecialchars_decode($value);
         switch ($row->getStatus()) {
             case 'error':
-                $output .= '<div id="message-errors-' . $row->getId() . '" class="message_errors">' . $value . '</div>';
+                $output .= '<div id="message-errors-' . $row->getId() . '" class="message_errors">' . $helper->__('Error') . '</div>';
                 break;
             case 'listed':
-                $output .= '<div id="message-success-' . $row->getId() . '" class="message_success">' . $value . '</div>';
+                $output .= '<div id="message-success-' . $row->getId() . '" class="message_success">' . $helper->__('Listed') . '</div>';
                 break;
             default:
-                $output .= '<div id="message-warnings-' . $row->getId() . '" class="message_warnings">' . $value . '</div>';
+                $output .= '<div id="message-warnings-' . $row->getId() . '" class="message_warnings">' . $helper->__(ucwords($value)) . '</div>';
                 break;
         }
 

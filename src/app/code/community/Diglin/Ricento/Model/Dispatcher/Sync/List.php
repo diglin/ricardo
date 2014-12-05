@@ -12,7 +12,6 @@
 use \Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use \Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter;
 use \Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter;
-use \Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter;
 
 /**
  * Class Diglin_Ricento_Model_Dispatcher_Sync_List
@@ -43,7 +42,8 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
 
         $productsListingResource = Mage::getResourceModel('diglin_ricento/products_listing');
         $readListingConnection = $productsListingResource->getReadConnection();
-        $select = $readListingConnection->select()
+        $select = $readListingConnection
+            ->select()
             ->from($productsListingResource->getTable('diglin_ricento/products_listing'), 'entity_id');
 
         $listingIds = $readListingConnection->fetchCol($select);
@@ -70,10 +70,16 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
             }
 
             $job = Mage::getModel('diglin_ricento/sync_job');
+            $job->loadByTypeListingIdProgress($jobType, $listingId, array(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING, Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING));
+
+            if ($job->getId()) {
+                continue;
+            }
+
             $job
                 ->setJobType($jobType)
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
-                ->setJobMessage(array($job->getJobMessage()))
+                ->setJobMessage(array($job->getJobMessage(true)))
                 ->save();
 
             $jobListing = Mage::getModel('diglin_ricento/sync_job_listing');
@@ -211,36 +217,5 @@ class Diglin_Ricento_Model_Dispatcher_Sync_List extends Diglin_Ricento_Model_Dis
         }
 
         return $article;
-    }
-
-    /**
-     * @param $item
-     * @return null|Varien_Object
-     */
-    protected function _getUnsoldArticles($item)
-    {
-        $article = null;
-        $unsoldArticlesParameter = new UnsoldArticlesParameter();
-
-        $unsoldArticlesParameter
-            ->setInternalReferenceFilter($item->getInternalReference())
-            ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (1 * 24 * 60 * 60)));
-
-        $articles = $this->_getSellerAccount()->getUnsoldArticles($unsoldArticlesParameter);
-        if (count($articles) > 0 && isset($articles[0]) && is_array($articles[0])) {
-            $article = $this->_getHelper()->extractData($articles[0]);
-        }
-
-        return $article;
-    }
-
-    /**
-     * @return Diglin_Ricento_Model_Api_Services_Selleraccount
-     */
-    protected function _getSellerAccount()
-    {
-        return Mage::getSingleton('diglin_ricento/api_services_selleraccount')
-            ->setCanUseCache(false)
-            ->setCurrentWebsite($this->_getListing()->getWebsiteId());
     }
 }

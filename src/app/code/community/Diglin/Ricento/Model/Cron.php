@@ -17,7 +17,7 @@ class Diglin_Ricento_Model_Cron
     protected $_syncProcess = array(
         //Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST, //** Check list before to sync to ricardo.ch - @deprecated move to Diglin_Ricento_Adminhtml_Products_ListingController to start quickly the check
         Diglin_Ricento_Model_Sync_Job::TYPE_LIST, //** List to ricardo.ch
-        Diglin_Ricento_Model_Sync_Job::TYPE_STOP,//** Stop the list on ricardo.ch if needed
+        Diglin_Ricento_Model_Sync_Job::TYPE_STOP, //** Stop the list on ricardo.ch if needed
         Diglin_Ricento_Model_Sync_Job::TYPE_RELIST //** Relist to ricardo.ch
     );
 
@@ -41,8 +41,12 @@ class Diglin_Ricento_Model_Cron
 
         // @todo check that the API token is not expired or that an error may occur, in this case send only once an email to the admin
 
-        foreach ($this->_syncProcess as $jobType) {
-            $this->dispatch($jobType);
+        try {
+            foreach ($this->_syncProcess as $jobType) {
+                $this->dispatch($jobType);
+            }
+        } catch (Exception $e) {
+            Mage::logException($e);
         }
     }
 
@@ -57,8 +61,12 @@ class Diglin_Ricento_Model_Cron
 
         ini_set('memory_limit', '512M');
 
-        foreach ($this->_asyncProcess as $jobType) {
-            $this->dispatch($jobType);
+        try {
+            foreach ($this->_asyncProcess as $jobType) {
+                $this->dispatch($jobType);
+            }
+        } catch (Exception $e) {
+            Mage::logException($e);
         }
 
         //** Cleanup
@@ -78,10 +86,7 @@ class Diglin_Ricento_Model_Cron
             $daysKeep = (int)Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_CLEAN_JOBS_KEEP_DAYS);
 
             $jobsCollection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
-            $jobsCollection
-                ->getSelect()
-                ->from(array('job' => $jobsCollection->getMainTable()), '')
-                ->where('((TO_DAYS(job.created_at) + ? < TO_DAYS(now())))', $daysKeep);
+            $jobsCollection->getSelect()->where('((TO_DAYS(main_table.created_at) + ? < TO_DAYS(now())))', $daysKeep);
 
             $jobsCollection->walk('delete');
         }
@@ -98,10 +103,7 @@ class Diglin_Ricento_Model_Cron
             $daysKeep = (int)Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_CLEAN_LISTING_LOGS_KEEP_DAYS);
 
             $jobsCollection = Mage::getResourceModel('diglin_ricento/products_listing_log_collection');
-            $jobsCollection
-                ->getSelect()
-                ->from(array('log' => $jobsCollection->getMainTable()), '')
-                ->where('((TO_DAYS(log.created_at) + ? < TO_DAYS(now())))', $daysKeep);
+            $jobsCollection->getSelect()->where('((TO_DAYS(main_table.created_at) + ? < TO_DAYS(now())))', $daysKeep);
 
             $jobsCollection->walk('delete');
         }
@@ -120,7 +122,7 @@ class Diglin_Ricento_Model_Cron
      * @param int $type
      * @return $this
      */
-    protected function dispatch ($type)
+    protected function dispatch($type)
     {
         return $this->_getDisptacher()->dispatch($type)->proceed();
     }

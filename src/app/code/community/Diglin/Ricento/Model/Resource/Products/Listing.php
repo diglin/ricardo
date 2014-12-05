@@ -48,6 +48,8 @@ class Diglin_Ricento_Model_Resource_Products_Listing extends Mage_Core_Model_Res
     }
 
     /**
+     * Stop product lists if all items are stopped
+     *
      * @param $productsListingId
      * @return $this
      */

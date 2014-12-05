@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Diglin GmbH - Switzerland
  *
@@ -9,12 +8,18 @@
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
+
+use \Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter;
+
+/**
+ * Class Diglin_Ricento_Model_Dispatcher_Abstract
+ */
 abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 {
     /**
      * @var int
      */
-    protected $_limit = 250;
+    protected $_limit = 400;
 
     /**
      * @var string
@@ -115,7 +120,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
         $jobsCollection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
         $jobsCollection
             ->addFieldToFilter('job_type', $type)
-            ->addFieldToFilter('progress', array('in' => (array)$progress));
+            ->addFieldToFilter('progress', array('in' => (array) $progress));
 
         return $jobsCollection;
     }
@@ -153,10 +158,13 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     {
         $itemCollection = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
         $itemCollection
-            ->setPageSize($this->_limit)
             ->addFieldToFilter('status', array('in' => $statuses))
             ->addFieldToFilter('products_listing_id', array('eq' => $this->_productsListingId))
-            ->addFieldToFilter('item_id', array('gt' => (int)$lastItemId));
+            ->addFieldToFilter('item_id', array('gt' => (int) $lastItemId));
+
+        if ($this->_limit) {
+            $itemCollection->setPageSize($this->_limit);
+        }
 
         return $itemCollection;
     }
@@ -167,7 +175,8 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     protected function _runJobs()
     {
         /**
-         * Get all pending jobs of specified type - the risk is very low to have for this collection a big quantity of data
+         * Get all pending jobs of specified type
+         * The risk is very low to have for this collection a big quantity of data
          */
         $jobsCollection = $this->_getJobCollection($this->_jobType,
             array(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING, Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING));
@@ -182,7 +191,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 
                 $this->_currentJobListing = Mage::getModel('diglin_ricento/sync_job_listing')->load($this->_currentJob->getId(), 'job_id');
                 $this->_productsListingId = (int) $this->_currentJobListing->getProductsListingId();
-                $this->_totalProceed = (int)$this->_currentJobListing->getTotalProceed();
+                $this->_totalProceed = (int) $this->_currentJobListing->getTotalProceed();
 
                 if (!$this->_productsListingId) {
                     return $this;
@@ -202,13 +211,11 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                     $this->_getListingLog()->cleanSpecificJob($this->_currentJob->getId());
                 }
 
-                $start = microtime(true);
-
                 /**
                  * All the Magic is here ...
                  */
+                $start = microtime(true);
                 $this->_proceed();
-
                 $end = microtime(true);
 
                 if ($helper->isDebugEnabled()) {
@@ -231,7 +238,7 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                  */
                 $endedAt = null;
 
-                if ($this->_currentJobListing->getTotalCount() <= $this->_totalProceed) {
+                if ($this->_totalProceed >= $this->_currentJobListing->getTotalCount()) {
                     $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_COMPLETED;
                     $endedAt = Mage::getSingleton('core/date')->gmtDate();
 
@@ -240,15 +247,15 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                         ->setTotalProceed($this->_totalProceed)
                         ->save();
 
-                    $message[] = $helper->__('The Job has finished with %s for the products listing <a href="%s" target="_blank">"%s"</a>. Please, view the <a href="%s">log</a> for details.',
-                        $typeError,
-                        $this->_getProductListingEditUrl(),
-                        $this->_getListing()->getTitle(),
-                        $this->_getLogListingUrl()
-                    );
+                    $completedMessage = $helper->__('The Job has finished with %s.', $typeError);
+                    if ($this->_jobHasError) {
+                        $completedMessage .= ' ' . $helper->__('Please, view the <a href="%s">log</a> for details.', $this->_getLogListingUrl());
+                    }
+
+                    $message[] = $completedMessage;
 
                 } else {
-                    $message = array_merge($message, (is_array($this->_currentJob->getJobMessage()) ? $this->_currentJob->getJobMessage() : array($this->_currentJob->getJobMessage())));
+                    $message[] = $this->_currentJob->getJobMessage(true);
                     $this->_progressStatus = Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING;
                 }
 
@@ -428,5 +435,36 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     protected function _getListing()
     {
         return Mage::getModel('diglin_ricento/products_listing')->load($this->_productsListingId);
+    }
+
+    /**
+     * @param $item
+     * @return null|Varien_Object
+     */
+    protected function _getUnsoldArticles($item)
+    {
+        $article = null;
+        $unsoldArticlesParameter = new UnsoldArticlesParameter();
+
+        $unsoldArticlesParameter
+            ->setInternalReferenceFilter($item->getInternalReference())
+            ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (1 * 24 * 60 * 60)));
+
+        $articles = $this->_getSellerAccount()->getUnsoldArticles($unsoldArticlesParameter);
+        if (count($articles) > 0 && isset($articles[0]) && is_array($articles[0])) {
+            $article = $this->_getHelper()->extractData($articles[0]);
+        }
+
+        return $article;
+    }
+
+    /**
+     * @return Diglin_Ricento_Model_Api_Services_Selleraccount
+     */
+    protected function _getSellerAccount()
+    {
+        return Mage::getSingleton('diglin_ricento/api_services_selleraccount')
+            ->setCanUseCache(false)
+            ->setCurrentWebsite($this->_getListing()->getWebsiteId());
     }
 }

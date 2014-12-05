@@ -89,7 +89,7 @@ The extension is quite flexible, allowing you to define the settings at products
 
 ## Uninstall
 
-The module install some data and changes in your database. Deinstalling the module will make some trouble cause of those data. You will need to remove those information by following the procedure below otherwise you will meet errors when using your shop.
+The module install some data and changes in your database. Deinstalling or deactivating the module will make some trouble cause of those data. You will need to remove those information by following the procedure below otherwise you will meet errors when using the Magento Backend It's a problem due to Magento, it's not related to the extension.
 
 ### Via MageTrashApp
 
@@ -108,7 +108,7 @@ Same as MagentoConnect, modman can only remove files but cannot cleanup your dat
 
 ### Manually
 
-Remove the files or folders:
+Remove the files or folders located into your Magento installation:
 ```
 app/etc/modules/Diglin_Ricento.xml
 app/code/community/Diglin/Ricento
@@ -126,7 +126,7 @@ app/locale/de_DE/Diglin_Ricento.csv
 app/locale/de_DE/template/email/ricento
 ```
 
-Cleanup your database (please add your table prefix if relevant)
+Cleanup your database by executing those queries (add your table prefix if relevant)
 ```
 DELETE FROM MYPREFIX_eav_attribute WHERE attribute_code = 'ricardo_id';
 DELETE FROM MYPREFIX_eav_attribute WHERE attribute_code = 'ricardo_username';
@@ -153,6 +153,10 @@ DROP TABLE MYPREFIX_sync_job_listing;
 DELETE FROM MYPREFIX_sales_order_status WHERE status = 'ricardo_payment_canceled';
 DELETE FROM MYPREFIX_sales_order_status WHERE status = 'ricardo_payment_pending';
 ```
+
+## Known Issues
+
+- Magento 1.6.x doesn't support jstranslator.xml, some strings generated for JS will be displayed in english
 
 ## Support / Author
 

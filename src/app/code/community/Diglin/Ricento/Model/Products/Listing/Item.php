@@ -437,14 +437,17 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
 
                 // Prepare picture to set the content as byte array for the webservice
                 $imageContent = array_values(unpack('C*', file_get_contents($image['filepath'])));
+                $imageExtension = Helper::getPictureExtension($image['filepath']);
 
-                $picture = new ArticlePictureParameter();
-                $picture
-                    ->setPictureBytes($imageContent)
-                    ->setPictureExtension(Helper::getPictureExtension($image['filepath']))
-                    ->setPictureIndex(++$i);
+                if ($imageExtension) {
+                    $picture = new ArticlePictureParameter();
+                    $picture
+                        ->setPictureBytes($imageContent)
+                        ->setPictureExtension($imageExtension)
+                        ->setPictureIndex(++$i);
 
-                $insertArticleParameter->setPictures($picture);
+                    $insertArticleParameter->setPictures($picture);
+                }
                 $imageContent = null;
             }
         }
@@ -523,6 +526,8 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             $startDate = $this->_salesOptions->getScheduleDateStart();
         }
 
+        $untilSoldOut = ((int) $this->_salesOptions->getScheduleReactivation() === Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT);
+
         $customTemplate = ($this->_salesOptions->getCustomizationTemplate() >= 0) ? $this->_salesOptions->getCustomizationTemplate() : null;
 
         $articleInformation = new ArticleInformationParameter();
@@ -535,7 +540,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setInitialQuantity($this->getProductQty())
             ->setIsCustomerTemplate(false)
             ->setMainPictureId(1)
-            ->setMaxRelistCount($this->_salesOptions->getScheduleReactivation())
+            ->setMaxRelistCount((!$untilSoldOut) ? $this->_salesOptions->getScheduleReactivation() : 0)
             ->setWarrantyId($this->_salesOptions->getProductWarranty())
             ->setDeliveries($this->_getArticleDeliveryParameter())
             // optional
@@ -573,8 +578,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         }
 
         if ($salesType == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW) {
-            $soldOut = ($this->_salesOptions->getScheduleReactivation() === Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT) ? true : false;
-            $articleInformation->setIsRelistSoldOut($soldOut);
+            $articleInformation->setIsRelistSoldOut($untilSoldOut);
         }
 
         //** Promotions
@@ -611,7 +615,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setArticleDescription($this->getProductDescription())
             ->setLanguageId(Mage::helper('diglin_ricento')->getRicardoLanguageIdFromLocaleCode($lang))
             // optional
-            ->setArticleSubtitle($this->getProductSubtitle()) // @todo if configurable product, use all options as subtitle value
+            ->setArticleSubtitle($this->getProductSubtitle())
             ->setDeliveryDescription($this->_shippingPaymentRule->getShippingDescription($lang))
             ->setPaymentDescription($this->_shippingPaymentRule->getPaymentDescription($lang))
             ->setWarrantyDescription($this->_salesOptions->getProductWarrantyDescription($lang));

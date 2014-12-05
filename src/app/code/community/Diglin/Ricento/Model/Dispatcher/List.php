@@ -94,6 +94,7 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
                     $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_NOTICE;
                     $this->_itemMessage = array('notice' => $this->_getHelper()->__('This item is already listed or has already a ricardo article Id. No insert done to ricardo.ch'));
                     $this->_jobHasSuccess = true;
+                    ++$this->_totalSuccess;
                     // no change needed for the item status
                 } else {
                     ++$this->_totalError;
@@ -126,6 +127,8 @@ class Diglin_Ricento_Model_Dispatcher_List extends Diglin_Ricento_Model_Dispatch
              */
             $jobListing->saveCurrentJob(array(
                 'total_proceed' => ++$this->_totalProceed,
+                'total_success' => $this->_totalSuccess, //@todo update with the previous total_success in case of chunk_running
+                'total_error' => $this->_totalError,//@todo update with the previous total_success in case of chunk_running
                 'last_item_id' => $item->getId()
             ));
 
