@@ -99,6 +99,8 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
      */
     protected function _proceed()
     {
+        $article = null;
+        $isUnsold = false;
         $jobListing = $this->_currentJobListing;
 
         $itemCollection = $this->_getItemCollection(array(Diglin_Ricento_Helper_Data::STATUS_LISTED), $jobListing->getLastItemId());
@@ -108,11 +110,25 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         foreach ($itemCollection->getItems() as $item) {
 
             try {
-                $this->getSoldArticles(array($item->getRicardoArticleId()), $item);
+                $sold = $this->getSoldArticles(array($item->getRicardoArticleId()), $item);
+
+                if (!$sold) {
+                    $article = $this->_getUnsoldArticles($item);
+                    if (!is_null($article)) {
+                        $isUnsold = true;
+                    }
+                }
+
             } catch (Exception $e) {
                 $this->_handleException($e, Mage::getSingleton('diglin_ricento/api_services_selleraccount'));
                 $e = null;
                 // keep going for the next item - no break
+            }
+
+            if ($article && $article->getArticleId() && $isUnsold) {
+                $this->_itemStatus = Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS;
+                $this->_itemMessage = array('success' => $this->_getHelper()->__('Sorry, the product has not been sold'));
+                $item->getResource()->saveCurrentItem($item->getId(), array('status' => Diglin_Ricento_Helper_Data::STATUS_STOPPED, 'is_planned' => 0, 'ricardo_article_id' => $article->getArticleId()));
             }
 
             /**
@@ -270,6 +286,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                         $customer->addAddress($address);
                     }
                 } else {
+                    Mage::log($transaction->getBuyer(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
                     throw new Exception($this->_getHelper()->__('Customer creation failed! Ricardo transaction cannot be added.'));
                 }
 
@@ -332,7 +349,11 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         unset($productItem);
         unset($customer);
 
-        return true; // @todo it returns true also when no transaction have been done
+        if ($this->_itemStatus == Diglin_Ricento_Model_Products_Listing_Log::STATUS_SUCCESS) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -405,7 +426,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         $delay = ($mergeOrder) ? 30 : 1;
 
         /**
-         * Get transaction older than 30 minutes and when no order was created
+         * Get transaction older than 30 or 1 minutes and when no order was created
          * Those will be merged in one order if the customer is the same
          */
         $transactionCollection = Mage::getResourceModel('diglin_ricento/sales_transaction_collection');
@@ -424,7 +445,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         }
 
         /**
-         * Create new order
+         * Create new order for each customer
          */
         if (count($customerTransactions) > 0) {
             foreach ($customerTransactions as $transactions) {

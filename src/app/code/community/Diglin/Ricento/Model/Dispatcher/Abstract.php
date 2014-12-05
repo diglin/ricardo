@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Diglin GmbH - Switzerland
  *
@@ -8,6 +7,12 @@
  * @package     Diglin_Ricento
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+use \Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter;
+
+/**
+ * Class Diglin_Ricento_Model_Dispatcher_Abstract
  */
 abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 {
@@ -430,5 +435,36 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
     protected function _getListing()
     {
         return Mage::getModel('diglin_ricento/products_listing')->load($this->_productsListingId);
+    }
+
+    /**
+     * @param $item
+     * @return null|Varien_Object
+     */
+    protected function _getUnsoldArticles($item)
+    {
+        $article = null;
+        $unsoldArticlesParameter = new UnsoldArticlesParameter();
+
+        $unsoldArticlesParameter
+            ->setInternalReferenceFilter($item->getInternalReference())
+            ->setMinimumEndDate($this->_getHelper()->getJsonDate(time() - (1 * 24 * 60 * 60)));
+
+        $articles = $this->_getSellerAccount()->getUnsoldArticles($unsoldArticlesParameter);
+        if (count($articles) > 0 && isset($articles[0]) && is_array($articles[0])) {
+            $article = $this->_getHelper()->extractData($articles[0]);
+        }
+
+        return $article;
+    }
+
+    /**
+     * @return Diglin_Ricento_Model_Api_Services_Selleraccount
+     */
+    protected function _getSellerAccount()
+    {
+        return Mage::getSingleton('diglin_ricento/api_services_selleraccount')
+            ->setCanUseCache(false)
+            ->setCurrentWebsite($this->_getListing()->getWebsiteId());
     }
 }
