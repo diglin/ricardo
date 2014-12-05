@@ -242,9 +242,9 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
                         ->setTotalProceed($this->_totalProceed)
                         ->save();
 
-                    $completedMessage = $helper->__('The Job has finished with %s.', $typeError, $this->_getLogListingUrl());
+                    $completedMessage = $helper->__('The Job has finished with %s.', $typeError);
                     if ($this->_jobHasError) {
-                        $completedMessage .= ' ' . $helper->__('Please, view the <a href="%s">log</a> for details.');
+                        $completedMessage .= ' ' . $helper->__('Please, view the <a href="%s">log</a> for details.', $this->_getLogListingUrl());
                     }
 
                     $message[] = $completedMessage;
