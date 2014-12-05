@@ -228,7 +228,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                     $street = $buyerAddress->getAddress1() . ' ' . $buyerAddress->getStreetNumber()
                         . (($buyerAddress->getAddress2()) ? "\n" . $buyerAddress->getAddress2() : '')
                         . (($buyerAddress->getPostalBox()) ? "\n" . $buyerAddress->getPostalBox() : '');
-                    
+
                     $postCode = $buyerAddress->getZipCode();
                     $city = $buyerAddress->getCity();
 
@@ -362,6 +362,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 ->setEmail($buyer->getEmail())
                 ->setPassword($customer->generatePassword())
                 ->setStoreId($storeId)
+                ->setWebsiteId($websiteId)
                 ->setConfirmation(null);
         }
 
