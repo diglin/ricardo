@@ -538,7 +538,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             ->setAvailabilityId($this->_shippingPaymentRule->getShippingAvailability())
             ->setCategoryId($this->getCategory())
             ->setInitialQuantity($this->getProductQty())
-            ->setIsCustomerTemplate(false)
+            ->setIsCustomerTemplate(((!is_null($customTemplate)) ? true : false))
             ->setMainPictureId(1)
             ->setMaxRelistCount((!$untilSoldOut) ? $this->_salesOptions->getScheduleReactivation() : 0)
             ->setWarrantyId($this->_salesOptions->getProductWarranty())

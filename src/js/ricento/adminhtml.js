@@ -362,6 +362,17 @@ Ricento.salesOptionsForm.prototype = {
             warrantyDescriptionLabel = $$('label[for='+ this.htmlIdPrefix + 'product_warranty_description_' + this.langs[i] + ']')[0];
 
             required = (field.value == '0') ? 1 : 0;
+            currentLang = $('product_listing_publish_languages').value;
+
+            switch (currentLang) {
+                case 'de':
+                case 'fr':
+                    if (this.langs[i] != currentLang) {
+                        required = false;
+                    }
+                    break;
+            }
+
             warrantyDescription.disabled = !required;
             this.toggleRequired(warrantyDescription, required, warrantyDescriptionLabel);
         }
