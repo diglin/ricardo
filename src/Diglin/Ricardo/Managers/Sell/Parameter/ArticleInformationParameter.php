@@ -315,6 +315,8 @@ class ArticleInformationParameter extends ParameterAbstract
     }
 
     /**
+     * Must be set to "true" if templateId is provided
+     *
      * @param boolean $isCustomerTemplate
      * @return $this
      */
@@ -477,6 +479,8 @@ class ArticleInformationParameter extends ParameterAbstract
     }
 
     /**
+     * setIsCustomerTemplate must be set to true if you set the templateId here
+     *
      * @param int $templateId
      * @return $this
      */

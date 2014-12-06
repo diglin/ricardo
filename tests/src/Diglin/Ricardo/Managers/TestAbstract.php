@@ -186,7 +186,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             ->setAvailabilityId($availabilities[0]['AvailabilityId'])
             ->setCategoryId(38828)
             ->setInitialQuantity(100)
-            ->setIsCustomerTemplate(false)
+            ->setIsCustomerTemplate(true)
             ->setMainPictureId(1)
             ->setMaxRelistCount(5)
             ->setWarrantyId($warranties[1]['WarrantyId'])
