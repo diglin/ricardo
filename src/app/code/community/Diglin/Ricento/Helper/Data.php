@@ -58,12 +58,6 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const CFG_CLEAN_JOBS_KEEP_DAYS          = 'ricento/cleanup_jobs/keep_days';
 
     /**
-     * Listing logs config
-     */
-    const CFG_CLEAN_LISTING_LOGS_ENABLED    = 'ricento/listing_logs/enabled';
-    const CFG_CLEAN_LISTING_LOGS_KEEP_DAYS  = 'ricento/listing_logs/keep_days';
-
-    /**
      * Common statuses for products listing and products listing item
      */
     const STATUS_PENDING    = 'pending';
@@ -85,6 +79,7 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
      * Payment Config
      */
     const PAYMENT_CURRENCY          = 'payment/ricento/currency';
+    const PAYMENT_BANK_INFO         = 'payment/ricento/bank_transfer_instructions';
 
     /**
      * Order Status

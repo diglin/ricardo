@@ -72,7 +72,6 @@ class Diglin_Ricento_Model_Cron
         //** Cleanup
 
         $this->_processCleanupJobs();
-        $this->_processCleanupListingLog();
     }
 
     /**
@@ -86,23 +85,6 @@ class Diglin_Ricento_Model_Cron
             $daysKeep = (int)Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_CLEAN_JOBS_KEEP_DAYS);
 
             $jobsCollection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
-            $jobsCollection->getSelect()->where('((TO_DAYS(main_table.created_at) + ? < TO_DAYS(now())))', $daysKeep);
-
-            $jobsCollection->walk('delete');
-        }
-        return $this;
-    }
-
-    /**
-     * Cleanup Products Listing Log after X days
-     * @return $this
-     */
-    protected function _processCleanupListingLog()
-    {
-        if (Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_CLEAN_LISTING_LOGS_ENABLED)) {
-            $daysKeep = (int)Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_CLEAN_LISTING_LOGS_KEEP_DAYS);
-
-            $jobsCollection = Mage::getResourceModel('diglin_ricento/products_listing_log_collection');
             $jobsCollection->getSelect()->where('((TO_DAYS(main_table.created_at) + ? < TO_DAYS(now())))', $daysKeep);
 
             $jobsCollection->walk('delete');

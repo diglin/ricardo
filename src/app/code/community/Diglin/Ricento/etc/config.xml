@@ -52,10 +52,6 @@
                 <enabled>1</enabled>
                 <keep_days>30</keep_days>
             </cleanup_jobs>
-            <listing_logs>
-                <enabled>1</enabled>
-                <keep_days>30</keep_days>
-            </listing_logs>
             <rss>
                 <news_count>4</news_count>
                 <news_feed_de>http://www.ricardo.ch/verkauferportal/de-ch/news.aspx?view=rss</news_feed_de>

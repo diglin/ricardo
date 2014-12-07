@@ -23,6 +23,10 @@
 <?php foreach ($_specificInfo['methods'] as $_value):?>
     <?php echo $_value ?>{{pdf_row_separator}}
 <?php endforeach; ?>
+<?php if (isset($_specificInfo['information'])): ?>
+    <?php echo $_specificInfo['information']; ?>{{pdf_row_separator}}
+<?php endif; ?>
+
 <?php endif;?>
 
 <?php echo implode($this->getChildPdfAsArray(), '{{pdf_row_separator}}') ?>

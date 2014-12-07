@@ -144,14 +144,19 @@ class Diglin_Ricento_Model_Observer
             $methods = explode(',', $additionalData->ricardo_payment_methods);
 
             $label = array();
+            $information = '';
             foreach ($methods as $method) {
+                if (\Diglin\Ricardo\Enums\PaymentMethods::TYPE_BANK_TRANSFER == $methods) {
+                    $information = Mage::getStoreConfig(Diglin_Ricento_Helper_Data::PAYMENT_BANK_INFO);
+                }
                 $label[] = Mage::helper('diglin_ricento')->__(\Diglin\Ricardo\Enums\PaymentMethods::getLabel($method));
             }
 
             if (!empty($label)) {
                 $transport->setData(array(
                     'bid_ids' => (isset($additionalData->ricardo_bid_ids)) ? $additionalData->ricardo_bid_ids : null,
-                    'methods' => $label));
+                    'methods' => $label,
+                    'information' => $information));
             }
         }
         return $this;
@@ -187,6 +192,7 @@ class Diglin_Ricento_Model_Observer
      * We skipped custom option while processing an order via the ricardo.ch API
      *
      * @param Varien_Event_Observer $observer
+     * @return $this
      */
     public function setSkipppedRequiredOption(Varien_Event_Observer $observer)
     {
