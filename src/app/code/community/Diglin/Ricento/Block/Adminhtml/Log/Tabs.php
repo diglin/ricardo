@@ -24,9 +24,9 @@ class Diglin_Ricento_Block_Adminhtml_Log_Tabs extends Mage_Adminhtml_Block_Widge
 
     protected function _prepareLayout()
     {
+        $this->addTab(self::TAB_SYNCHRONIZATION, $this->prepareTabSynchronization());
         $this->addTab(self::TAB_LISTING, $this->prepareTabListing());
         //$this->addTab(self::TAB_ORDER, $this->prepareTabOrder());
-        $this->addTab(self::TAB_SYNCHRONIZATION, $this->prepareTabSynchronization());
 
         $this->setActiveTab($this->getData('active_tab'));
 
