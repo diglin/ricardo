@@ -24,8 +24,9 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
         $buttonSignUp = '';
         $website = $this->getRequest()->getParam('website');
         $websiteId = Mage::app()->getWebsite($website)->getId();
+        $helper = Mage::helper('diglin_ricento');
 
-        if (!Mage::helper('diglin_ricento')->isConfigured($websiteId)) {
+        if (!$helper->isConfigured($websiteId)) {
             $buttonSignUp = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
                 'label'     => $this->__('Sign Up to ricardo.ch API'),
                 'onclick'   => "window.open('" . Mage::helper('diglin_ricento')->getRicardoSignupApiUrl() . "', '_blank');",
@@ -48,14 +49,16 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
         $buttonAuthorize = null;
 
         try {
-            $buttonAuthorize  = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
-                'label'     => $this->__('API Authorization'),
-                'onclick'   => "window.open('". Mage::helper('diglin_ricento/api')->getValidationUrl($websiteId) ."', '_blank');",
-                'class'     => 'go',
-                'type'      => 'button',
-                'id'        => 'ricardo-api-authorization',
-            ))
-                ->toHtml();
+            if ($helper->isConfigured($websiteId)) {
+                $buttonAuthorize  = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
+                    'label'     => $this->__('API Authorization'),
+                    'onclick'   => "window.open('". Mage::helper('diglin_ricento/api')->getValidationUrl($websiteId) ."', '_blank');",
+                    'class'     => 'go',
+                    'type'      => 'button',
+                    'id'        => 'ricardo-api-authorization',
+                ))
+                    ->toHtml();
+            }
         } catch (Exception $e) {
             // do nothing just don't display it as the key may be not yet configured.
         }
