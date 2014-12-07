@@ -10,16 +10,23 @@ With this extension, you can define a list of products to publish, set all payme
 
 The extension is quite flexible, allowing you to define the settings at products listing level or product listing item level. It offers you also the capability to publish your product data to the two supported ricardo.ch languages: german and french.
 
+## Support & Documentation
+
+- Knowledge Base & FAQ: [https://diglin.zendesk.com](https://diglin.zendesk.com)
+- Pull Requests: [https://github.com/diglin/ricento/issues](https://github.com/diglin/ricento/issues)
+- Submit tickets - Contact (fee may apply if it's not a bug, we will inform you): support /at/ diglin.com
+
 ## System requirements
 
+- [ricardo.ch](http://www.ricardo.ch/) account
 - ricardo.ch API Token: please visit the [Ricardo API website](http://www.ricardo.ch/interface/)
-- Magento CE 1.9.x (should work from version 1.6 but not yet tested - for EE, please contact us)
+- Magento CE >= 1.6.x to 1.9.x (for EE, please contact us)
 - Minimum memory: 256MB - Highly Recommended: 512MB
 - PHP >= 5.3.2
 - PHP Curl Library
-- Cron enabled and configured for Magento (set your cron at server level to a period of 5min to launch internal task related to the rircardo extension
+- Cron enabled and configured for Magento (set your cron at server level to a period of 5 min to launch internal task related to the rircardo extension
 */5 * * * * php path/to/my/magento/cron.php)
-- Base currency: CHF (currency convertion is not yet supported)
+- Base currency: CHF / Swiss Franc (currency conversion is not yet supported)
 
 ## Features
 
