@@ -14,7 +14,7 @@
  */
 class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ricento_Controller_Adminhtml_Products_Listing
 {
-    protected $_productIds = array();
+    protected $_itemIds = array();
 
     /**
      * @return Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection
@@ -25,17 +25,17 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
         $itemCollection = Mage::getModel('diglin_ricento/products_listing_item')->getCollection();
 
         if ($this->getRequest()->isPost()) {
-            $this->_productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
+            $this->_itemIds = array_map('intval', (array) $this->getRequest()->getPost('item', array()));
         } else {
-            $this->_productIds = array_map('intval', explode(',', $this->getRequest()->getParam('product')));
+            $this->_itemIds = array_map('intval', explode(',', $this->getRequest()->getParam('item')));
         }
 
-        if ($this->_productIds) {
+        if ($this->_itemIds) {
             $itemCollection->addFieldToFilter('products_listing_id', $this->_getListing()->getId())
-                ->addFieldToFilter('product_id', array('in' => $this->_productIds));
+                ->addFieldToFilter('item_id', array('in' => $this->_itemIds));
         } else {
             $itemCollection->addFieldToFilter('item_id', array('in' => explode(',', $this->getRequest()->getPost('item_ids'))));
-            $this->_productIds = $itemCollection->getColumnValues('product_id');
+            $this->_itemIds = $itemCollection->getColumnValues('item_id');
         }
 
         Mage::register('selected_items', $itemCollection->load());
@@ -167,7 +167,7 @@ class Diglin_Ricento_Adminhtml_Products_Listing_ItemController extends Diglin_Ri
      */
     protected function _getEditUrl()
     {
-        return $this->getUrl('*/*/configure', array('id' => $this->getRequest()->getParam('id'), 'product' => implode(',', $this->_productIds)));
+        return $this->getUrl('*/*/configure', array('id' => $this->getRequest()->getParam('id'), 'item' => implode(',', $this->_itemIds)));
     }
 
     /**

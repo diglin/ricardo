@@ -15,12 +15,13 @@
 class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
     extends Mage_Adminhtml_Block_Widget_Grid
 {
+    protected $_massactionBlockName = 'diglin_ricento/adminhtml_products_listing_edit_tabs_products_massaction';
 
     public function __construct()
     {
         parent::__construct();
         $this->setId('products_listing_items');
-        $this->setDefaultSort('entity_id');
+        $this->setDefaultSort('item_id');
         $this->setDefaultDir('ASC');
         $this->setSaveParametersInSession(true);
         $this->setUseAjax(true);
@@ -40,7 +41,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
      */
     public function getRowUrl($item)
     {
-        return $this->getUrl('*/products_listing_item/configure', array('id' => $this->getListing()->getId(), 'product' => $item->getId()));
+        return $this->getUrl('*/products_listing_item/configure', array('id' => $this->getListing()->getId(), 'product' => $item->getId(), 'item' => $item->getItemId()));
     }
 
     /**
@@ -106,6 +107,9 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             $productIds = 0;
         }
         $collection->addFieldToFilter('entity_id', array('in'=>$productIds));
+
+        $this->getColumn('massaction')->setUseIndex(true);
+
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -207,32 +211,32 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
                 'header'    => $this->__('Action'),
                 'width'     => '100px',
                 'type'      => 'action',
-                'getter'     => 'getId',
+                'getter'     => 'getItemId',
                 'actions'   => array(
                     array(
                         'caption' => $this->__('Preview'),
+                        'field'   => 'item',
                         'popup'   => true,
                         'url'     => array(
                             'base'=>'*/products_listing_item/preview',
                             'params' => array('id' => $this->getListing()->getId())
-                        ),
-                        'field'   => 'product'
+                        )
                     ),
                     array(
                         'caption' => $this->__('Configure'),
+                        'field'   => 'item',
                         'url'     => array(
                             'base'=>'*/products_listing_item/configure',
                             'params' => array('id' => $this->getListing()->getId())
-                        ),
-                        'field'   => 'product'
+                        )
                     ),
                     array(
                         'caption' => $this->__('Remove'),
+                        'field'   => 'item',
                         'url'     => array(
                             'base'   => '*/*/removeProduct',
                             'params' => array('id' => $this->getListing()->getId()),
                         ),
-                        'field'   => 'product',
                         'confirm' => $this->__('Are you sure to remove this/these product(s)?'),
                     ),
                 ),
@@ -248,8 +252,8 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
      */
     protected function _prepareMassaction()
     {
-        $this->setMassactionIdField('entity_id');
-        $this->getMassactionBlock()->setFormFieldName('product');
+        $this->setMassactionIdField('item_id');
+        $this->getMassactionBlock()->setFormFieldName('item');
         $this->getMassactionBlock()->setHideFormElement(true);
 
         $this->getMassactionBlock()->addItem('remove', array(
