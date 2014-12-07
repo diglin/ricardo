@@ -415,6 +415,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         }
 
         if ($productListing->getStatus() != Diglin_Ricento_Helper_Data::STATUS_LISTED && !$this->saveAction()) {
+            $this->_redirect('*/*/edit', array('id' => $productListing->getId()));
             return;
         }
 
