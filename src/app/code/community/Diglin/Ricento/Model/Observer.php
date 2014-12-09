@@ -146,7 +146,7 @@ class Diglin_Ricento_Model_Observer
             $label = array();
             $information = '';
             foreach ($methods as $method) {
-                if (\Diglin\Ricardo\Enums\PaymentMethods::TYPE_BANK_TRANSFER == $methods) {
+                if (\Diglin\Ricardo\Enums\PaymentMethods::TYPE_BANK_TRANSFER == $method) {
                     $information = Mage::getStoreConfig(Diglin_Ricento_Helper_Data::PAYMENT_BANK_INFO);
                 }
                 $label[] = Mage::helper('diglin_ricento')->__(\Diglin\Ricardo\Enums\PaymentMethods::getLabel($method));
