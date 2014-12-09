@@ -198,12 +198,12 @@
             </add_spl_autoloader>
 
             <!--<sales_order_item_save_commit_after>-->
-                <!--<observers>-->
-                    <!--<ricento_qty_decrease>-->
+            <!--<observers>-->
+            <!--<ricento_qty_decrease>-->
                         <!--<type>singleton</type>-->
                         <!--<class>diglin_ricento/observer</class>-->
-                        <!--<method>decreaseInventory</method>-->
-                    <!--</ricento_qty_decrease>-->
+            <!--<method>decreaseInventory</method>-->
+            <!--</ricento_qty_decrease>-->
                 <!--</observers>-->
             <!--</sales_order_item_save_commit_after>-->
 
@@ -334,6 +334,18 @@
             </ricento>
         </routers>
     </admin>
+
+    <frontend>
+        <translate>
+            <modules>
+                <diglin_ricento>
+                    <files>
+                        <default>Diglin_Ricento.csv</default>
+                    </files>
+                </diglin_ricento>
+            </modules>
+        </translate>
+    </frontend>
 
     <crontab>
         <jobs>

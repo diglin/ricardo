@@ -21,10 +21,10 @@
 <div class="ricardo-payment-info">
 <p><?php echo Mage::helper('diglin_ricento')->__('Transactions: <strong>%s</strong>', $_specificInfo['bid_ids']) ?></p>
 <?php endif; ?>
-<tr>
-    <td><?php echo implode(' / ', $_specificInfo['methods']) ?></td>
-    <?php if (isset($_specificInfo['information'])): ?><td><?php echo $_specificInfo['information']; ?></td><?php endif; ?>
-</tr>
+<ul>
+    <li><?php echo implode(' / ', $_specificInfo['methods']) ?></li>
+    <?php if (isset($_specificInfo['information'])): ?><li><?php echo $this->escapeHtml($_specificInfo['information']); ?></li><?php endif; ?>
+</ul>
 </div>
 <?php endif;?>
 

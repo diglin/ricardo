@@ -23,7 +23,7 @@
 <?php endif; ?>
 <ul>
     <li><?php echo implode(' / ', $_specificInfo['methods']) ?></li>
-    <?php if (isset($_specificInfo['information'])): ?><li><?php echo $_specificInfo['information']; ?></li><?php endif; ?>
+    <?php if (isset($_specificInfo['information'])): ?><li><?php echo $this->escapeHtml($_specificInfo['information']); ?></li><?php endif; ?>
 </ul>
 </div>
 <?php endif;?>
