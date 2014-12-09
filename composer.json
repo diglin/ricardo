@@ -54,6 +54,11 @@
                     "path":"adminhtml/default/default/template/ricento"
                 },
                 {
+                    "type":"magedesign",
+                    "structure":"dir",
+                    "path":"frontend/base/default/template/ricento"
+                },
+                {
                     "type":"mageskin",
                     "structure":"dir",
                     "path":"adminhtml/default/default/ricento"

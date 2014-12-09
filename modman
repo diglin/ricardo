@@ -2,6 +2,7 @@ src/app/etc/modules/Diglin_Ricento.xml app/etc/modules/Diglin_Ricento.xml
 src/app/code/community/Diglin/Ricento app/code/community/Diglin/Ricento
 src/app/design/adminhtml/default/default/layout/ricento.xml app/design/adminhtml/default/default/layout/ricento.xml
 src/app/design/adminhtml/default/default/template/ricento app/design/adminhtml/default/default/template/ricento
+src/app/design/frontend/base/default/template/ricento app/design/frontend/base/default/template/ricento
 src/skin/adminhtml/default/default/ricento skin/adminhtml/default/default/ricento
 src/js/ricento js/ricento
 
