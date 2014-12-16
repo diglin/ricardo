@@ -14,4 +14,7 @@ namespace Diglin\Ricardo\Exceptions;
  * Class PictureException
  * @package Diglin\Ricardo\Exceptions
  */
-class PictureException extends ExceptionAbstract {}
+class PictureException extends ExceptionAbstract
+{
+
+}

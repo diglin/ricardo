@@ -11,6 +11,10 @@
 
 namespace Diglin\Ricardo\Core;
 
+/**
+ * Interface ApiInterface
+ * @package Diglin\Ricardo\Core
+ */
 interface ApiInterface
 {
     /**

@@ -14,4 +14,7 @@ namespace Diglin\Ricardo\Exceptions;
  * Class GeneralException
  * @package Diglin\Ricardo\Exceptions
  */
-class GeneralException extends ExceptionAbstract {}
+class GeneralException extends ExceptionAbstract
+{
+
+}

@@ -16,10 +16,6 @@ use Diglin\Ricardo\Enums\Article\PromotionCode;
  * Class System
  * @package Diglin\Ricardo\Managers
  */
-/**
- * Class System
- * @package Diglin\Ricardo\Managers
- */
 class System extends ManagerAbstract
 {
     /**
@@ -236,7 +232,8 @@ class System extends ManagerAbstract
     public function getFirstChildsCategories($categoryId, $categoryBrandingFilter = 0, $onlyAllowToSell = true)
     {
         if (empty($this->_firstChildsCategories)) {
-            $this->_firstChildsCategories = $this->_proceed('FirstChildsCategories',
+            $this->_firstChildsCategories = $this->_proceed(
+                'FirstChildsCategories',
                 array(
                     'category_branding_filter' => $categoryBrandingFilter,
                     'only_allow_to_sell' => $onlyAllowToSell,
@@ -323,7 +320,8 @@ class System extends ManagerAbstract
     public function getPaymentMethods($onlyAllowToSell = true, $paymentConditionId = null)
     {
         if (empty($this->_paymentMethods)) {
-            $this->_paymentMethods = $this->_proceed('PaymentMethods',
+            $this->_paymentMethods = $this->_proceed(
+                'PaymentMethods',
                 array(
                     'only_allow_to_sell' => $onlyAllowToSell,
                     'payment_condition_id' => $paymentConditionId
@@ -354,7 +352,8 @@ class System extends ManagerAbstract
     public function getPromotions($articleStartDate, $articleType, $categoryId, $displayMandatory)
     {
         if (empty($this->_promotions)) {
-            $this->_promotions = $this->_proceed('Promotions',
+            $this->_promotions = $this->_proceed(
+                'Promotions',
                 array(
                     'article_start_date' => $articleStartDate,
                     'article_type' => $articleType,

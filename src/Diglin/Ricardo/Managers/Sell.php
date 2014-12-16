@@ -22,6 +22,10 @@ use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter;
 
+/**
+ * Class Sell
+ * @package Diglin\Ricardo\Managers
+ */
 class Sell extends ManagerAbstract
 {
     /**

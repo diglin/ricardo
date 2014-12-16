@@ -88,7 +88,7 @@ class Service
         }
 
         if (!($service instanceof ServiceAbstract) && !isset($this->_services[$serviceName])) {
-            $serviceClass = '\Diglin\Ricardo\Services\\'. $this->_getCleanServiceClassName($service);
+            $serviceClass = '\Diglin\Ricardo\Services\\' . $this->_getCleanServiceClassName($service);
             if (class_exists($serviceClass)) {
                 $service = new $serviceClass();
             }
@@ -128,6 +128,7 @@ class Service
         if (isset($this->_services[$service->getService()])) {
             $this->_services[$service->getService()] = $service;
         }
+
         return $this;
     }
 
@@ -145,6 +146,7 @@ class Service
             $this->_services[$serviceName] = null;
             unset($this->_services[$serviceName]);
         }
+
         return $this;
     }
 
@@ -156,6 +158,7 @@ class Service
         if (!$this->_securityManager) {
             $this->_securityManager = new Security($this, $this->getConfig()->getAllowValidationUrl());
         }
+
         return $this->_securityManager;
     }
 
@@ -166,6 +169,7 @@ class Service
     public function setSecurityManager($securityManager)
     {
         $this->_securityManager = $securityManager;
+
         return $this;
     }
 
@@ -194,15 +198,18 @@ class Service
             }
 
             if (empty($service['method'])) {
-                throw new \Exception(printf('Method "%s" of the service "%s" cannot be empty', $service['method'], $serviceName));
+                throw new \Exception(printf(
+                    'Method "%s" of the service "%s" cannot be empty',
+                    $service['method'],
+                    $serviceName
+                ));
             }
 
             if (!$this->_securityManager) {
                 $this->_securityManager = $this->getSecurityManager();
             }
 
-            switch ($serviceInstance->getTypeOfToken())
-            {
+            switch ($serviceInstance->getTypeOfToken()) {
                 case ServiceAbstract::TOKEN_TYPE_IDENTIFIED:
                     $token = $this->_securityManager->getToken(ServiceAbstract::TOKEN_TYPE_IDENTIFIED);
                     $this->getApi()
@@ -235,10 +242,16 @@ class Service
 
             if (!is_array($data)) {
                 throw new \Exception('No data returned from the ricardo.ch API.');
-            } else if (method_exists($serviceInstance, $getResultServiceMethod) && is_array($data) && !array_key_exists('ErrorCodes', $data)) {
-                return $serviceInstance->$getResultServiceMethod( (array) $data);
             } else {
-                return $data;
+                if (method_exists($serviceInstance, $getResultServiceMethod) && is_array($data) && !array_key_exists(
+                        'ErrorCodes',
+                        $data
+                    )
+                ) {
+                    return $serviceInstance->$getResultServiceMethod((array)$data);
+                } else {
+                    return $data;
+                }
             }
 
         } else {
@@ -255,7 +268,7 @@ class Service
      */
     protected function _getCleanServiceClassName($serviceClassName)
     {
-        return str_replace(' ', '', ucwords(str_replace('_', ' ',$serviceClassName)));
+        return str_replace(' ', '', ucwords(str_replace('_', ' ', $serviceClassName)));
     }
 
     /**
@@ -270,6 +283,7 @@ class Service
         if (!strpos($serviceName, 'Service')) {
             $serviceName .= 'Service';
         }
+
         return $serviceName;
     }
 
@@ -284,6 +298,7 @@ class Service
         if (strpos(strtolower($method), 'get') === false) {
             $method = 'get' . ucfirst($method);
         }
+
         return $method;
     }
 
@@ -298,6 +313,7 @@ class Service
         if (strpos($method, 'Result') === false) {
             $method .= 'Result';
         }
+
         return $method;
     }
 }

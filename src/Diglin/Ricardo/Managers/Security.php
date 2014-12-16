@@ -343,7 +343,7 @@ class Security extends ManagerAbstract
         curl_exec($ch);
 
         if (curl_errno($ch)) {
-            throw new \Exception ('Error to get the login form page to save Ricardo Authorization: ' . curl_errno($ch));
+            throw new \Exception('Error to get the login form page to save Ricardo Authorization: ' . curl_errno($ch));
         }
 
         // Step 2 - Send the user authentification to the web form to get the rights to use the credential token
@@ -381,7 +381,7 @@ class Security extends ManagerAbstract
         $return = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            throw new \Exception ('Error while saving the form into Ricardo Authorization page: ' . curl_errno($ch));
+            throw new \Exception('Error while saving the form into Ricardo Authorization page: ' . curl_errno($ch));
         }
 
         curl_close($ch);
@@ -605,6 +605,4 @@ class Security extends ManagerAbstract
     {
         return (bool) $this->_credentialTokenRefreshed;
     }
-
-
 }

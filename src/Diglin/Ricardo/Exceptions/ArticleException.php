@@ -14,4 +14,7 @@ namespace Diglin\Ricardo\Exceptions;
  * Class ArticleException
  * @package Diglin\Ricardo\Exceptions
  */
-class ArticleException extends ExceptionAbstract {}
+class ArticleException extends ExceptionAbstract
+{
+
+}

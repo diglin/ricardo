@@ -654,5 +654,4 @@ class Sell extends ServiceAbstract
     public function updatePlannedArticlePictures($updatePlannedArticlePicturesParameter)
     {
     }
-
 }

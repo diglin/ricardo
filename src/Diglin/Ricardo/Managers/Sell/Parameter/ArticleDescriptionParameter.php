@@ -195,6 +195,4 @@ class ArticleDescriptionParameter extends ParameterAbstract
     {
         return $this->_warrantyDescription;
     }
-
-
 }

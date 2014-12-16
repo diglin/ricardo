@@ -99,6 +99,4 @@ class AppendArticleDescriptionParameter extends ParameterAbstract
     {
         return $this->_descriptions;
     }
-
-
 }

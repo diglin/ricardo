@@ -10,6 +10,10 @@
  */
 namespace Diglin\Ricardo\Core;
 
+/**
+ * Interface ConfigInterface
+ * @package Diglin\Ricardo\Core
+ */
 interface ConfigInterface
 {
     /**

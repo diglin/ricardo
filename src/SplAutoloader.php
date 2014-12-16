@@ -16,6 +16,13 @@
  * @author Kris Wallsmith <kris.wallsmith@gmail.com>
  * @author Fabien Potencier <fabien.potencier@symfony-project.org>
  */
+
+namespace SplAutoloader;
+
+/**
+ * Class SplAutoloader
+ * @package SplAutoloader
+ */
 class SplAutoloader
 {
 
@@ -29,6 +36,7 @@ class SplAutoloader
      * specified namespace.
      *
      * @param string $ns The namespace to use.
+     * @param string $includePath
      */
     public function __construct($ns = null, $includePath = null)
     {

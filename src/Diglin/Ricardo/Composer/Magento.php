@@ -27,8 +27,8 @@ class Magento
             $magentoPath = $extras['magento-root-dir'];
             if (is_dir($magentoPath . 'lib')) {
                 if (is_dir($magentoPath . 'lib/Diglin/Ricardo')) {
-					self::_recursiveRmDir($magentoPath . 'lib/Diglin/Ricardo');
-				}
+                    self::_recursiveRmDir($magentoPath . 'lib/Diglin/Ricardo');
+                }
                 self::_recurseCopy(dirname(__DIR__), $magentoPath . 'lib/Diglin/Ricardo');
             }
         }

@@ -10,6 +10,10 @@
  */
 namespace Diglin\Ricardo\Managers;
 
+/**
+ * Class Customer
+ * @package Diglin\Ricardo\Managers
+ */
 class Customer extends ManagerAbstract
 {
     /**

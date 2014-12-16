@@ -14,4 +14,7 @@ namespace Diglin\Ricardo\Exceptions;
  * Class CurlException
  * @package Diglin\Ricardo\Exceptions
  */
-class CurlException extends ExceptionAbstract {}
+class CurlException extends ExceptionAbstract
+{
+
+}

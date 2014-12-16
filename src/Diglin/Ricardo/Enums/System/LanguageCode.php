@@ -22,9 +22,9 @@ class LanguageCode extends AbstractEnums
 
     const SWITZERLANDFRANDDE = 1;
 
-    const SWITZERLANDDE	= 2;
+    const SWITZERLANDDE    = 2;
 
-    const SWITZERLANDFR	= 3;
+    const SWITZERLANDFR    = 3;
 
     const DENMARK = 12;
 

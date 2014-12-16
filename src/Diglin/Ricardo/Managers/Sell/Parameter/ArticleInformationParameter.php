@@ -515,6 +515,4 @@ class ArticleInformationParameter extends ParameterAbstract
     {
         return (int) $this->_warrantyId;
     }
-
-
 }

@@ -14,4 +14,7 @@ namespace Diglin\Ricardo\Exceptions;
  * Class CustomerException
  * @package Diglin\Ricardo\Exceptions
  */
-class CustomerException extends ExceptionAbstract {}
+class CustomerException extends ExceptionAbstract
+{
+
+}

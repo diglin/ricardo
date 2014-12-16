@@ -10,6 +10,10 @@
  */
 namespace Diglin\Ricardo\Managers;
 
+/**
+ * Class ParameterAbstract
+ * @package Diglin\Ricardo\Managers
+ */
 abstract class ParameterAbstract implements \ArrayAccess
 {
     /**

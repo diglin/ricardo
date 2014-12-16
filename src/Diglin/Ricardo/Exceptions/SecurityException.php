@@ -15,4 +15,7 @@ namespace Diglin\Ricardo\Exceptions;
  * @package Diglin\Ricardo\Exceptions
  * @link https://ws.ricardo.ch/RicardoApi/documentation/html/T_Ricardo_Enums_SecurityErrors.htm
  */
-class SecurityException extends ExceptionAbstract {}
+class SecurityException extends ExceptionAbstract
+{
+
+}

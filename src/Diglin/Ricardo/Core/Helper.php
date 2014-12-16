@@ -12,6 +12,10 @@ namespace Diglin\Ricardo\Core;
 
 use Diglin\Ricardo\Enums\PictureExtension;
 
+/**
+ * Class Helper
+ * @package Diglin\Ricardo\Core
+ */
 class Helper
 {
     /**
