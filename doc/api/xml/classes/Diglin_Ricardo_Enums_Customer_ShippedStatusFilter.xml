@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\Customer\ShippedStatusFilter" namespace="Diglin\Ricardo\Enums\Customer" name="ShippedStatusFilter" abstract="false" final="false" start="20" end="39">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer" file="ShippedStatusFilter.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer/ShippedStatusFilter.php" size="916" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1207a4970013b6a1e9635fa3198b65c2e9ab73ce"/>
+  <docblock>
+    <description compact="Class ShippedStatusFilter"/>
+    <package value="Diglin\Ricardo\Enums\Customer"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
+  <constant name="ANY" value="0"/>
+  <constant name="SHIPPED" value="1"/>
+  <constant name="NOTSHIPPED" value="2"/>
+  <method name="getEnums" start="31" end="38" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <param variable="$value"/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
+        </return>
+      </docblock>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service" abstract="false" final="false" start="22" end="303">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo" file="Service.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Service.php" size="8794" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="b0c4fec68116094528526c6e1df86fd02c96f3f8"/>
+  <docblock>
+    <description compact="Class Service"/>
+    <package value="Diglin\Ricardo\Managers"/>
+  </docblock>
+  <member name="_services" type="array" visibility="protected" line="27">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_api" type="{unknown}" visibility="protected" line="32">
+    <docblock>
+      <description compact=""/>
+      <var type="object">
+        <type full="Diglin\Ricardo\Core\ApiInterface" namespace="Diglin\Ricardo\Core" name="ApiInterface"/>
+      </var>
+    </docblock>
+  </member>
+  <member name="_securityManager" type="{unknown}" visibility="protected" line="37">
+    <docblock>
+      <description compact=""/>
+      <var type="object">
+        <type full="Diglin\Ricardo\Managers\Security" namespace="Diglin\Ricardo\Managers" name="Security"/>
+      </var>
+    </docblock>
+  </member>
+  <constructor name="__construct" start="42" end="45" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="object" variable="$api">
+        <type full="Diglin\Ricardo\Core\ApiInterface" namespace="Diglin\Ricardo\Core" name="ApiInterface"/>
+      </param>
+    </docblock>
+    <parameter name="api" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Core\ApiInterface" namespace="Diglin\Ricardo\Core" name="ApiInterface"/>
+    </parameter>
+  </constructor>
+  <method name="getApi" start="52" end="55" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the API class"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Core\ApiInterface" namespace="Diglin\Ricardo\Core" name="ApiInterface"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getConfig" start="60" end="63" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Config" namespace="Diglin\Ricardo" name="Config"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getServices" start="70" end="73" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get all services"/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="add" start="82" end="106" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Add a service to the service manager"/>
+      <param type="object" variable="$service">
+        <type full="Diglin\Ricardo\string|ServiceAbstract" namespace="Diglin\Ricardo" name="string|ServiceAbstract"/>
+      </param>
+      <param type="object" variable="$return">
+        <type full="Diglin\Ricardo\bool" namespace="Diglin\Ricardo" name="bool"/>
+      </param>
+      <return type="object">
+        <type full="Diglin\Ricardo\$this" namespace="Diglin\Ricardo" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="service" byreference="false" type="{unknown}"/>
+    <parameter name="return" byreference="false" type="{unknown}" default="false"/>
+  </method>
+  <method name="get" start="114" end="117" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the instance of a specific service or get an array of available services"/>
+      <param type="string" variable="$serviceName"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\bool" namespace="Diglin\Ricardo" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="serviceName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="update" start="126" end="132" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Update the service into the service manager in case of properties changes for example"/>
+      <fixme value="Is it really useful?"/>
+      <param type="object" variable="$service">
+        <type full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract"/>
+      </param>
+      <return type="object">
+        <type full="Diglin\Ricardo\$this" namespace="Diglin\Ricardo" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="service" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract"/>
+    </parameter>
+  </method>
+  <method name="remove" start="140" end="149" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Remove a service from the service manager to free some memory"/>
+      <param type="string" variable="$serviceName"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\$this" namespace="Diglin\Ricardo" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="serviceName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getSecurityManager" start="154" end="160" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="object">
+        <type full="\Diglin\Ricardo\Managers\Security" namespace="\Diglin\Ricardo\Managers" name="Security"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="setSecurityManager" start="166" end="170" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="object" variable="$securityManager">
+        <type full="\Diglin\Ricardo\Managers\Security" namespace="\Diglin\Ricardo\Managers" name="Security"/>
+      </param>
+      <return type="object">
+        <type full="Diglin\Ricardo\$this" namespace="Diglin\Ricardo" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="securityManager" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="proceed" start="181" end="247" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Execute a method on the service and return an array"/>
+      <param type="string" variable="$serviceName"/>
+      <param type="string" variable="$serviceMethod"/>
+      <param type="object" variable="$arguments">
+        <type full="Diglin\Ricardo\array|string|null" namespace="Diglin\Ricardo" name="array|string|null"/>
+      </param>
+      <return type="mixed"/>
+      <throws type="object">
+        <type full="\Exception" namespace="" name="Exception"/>
+      </throws>
+    </docblock>
+    <parameter name="serviceName" byreference="false" type="{unknown}"/>
+    <parameter name="serviceMethod" byreference="false" type="{unknown}"/>
+    <parameter name="arguments" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="_getCleanServiceClassName" start="256" end="259" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Try to prevent some errors with the service name So replace all underscore or space in a service name"/>
+      <param type="string" variable="$serviceClassName"/>
+      <return type="mixed"/>
+    </docblock>
+    <parameter name="serviceClassName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="_getServiceName" start="267" end="274" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Retrieve the correct service class name"/>
+      <param type="string" variable="$serviceName"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\mixed|string" namespace="Diglin\Ricardo" name="mixed|string"/>
+      </return>
+    </docblock>
+    <parameter name="serviceName" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="_prepareServiceGetMethod" start="282" end="288" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Add 'get' to the method name"/>
+      <param type="string" variable="$method"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="method" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="_prepareServiceGetResultMethod" start="296" end="302" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Add 'get' to the method name and 'Result' at the end of the name"/>
+      <param variable="$method"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="method" byreference="false" type="{unknown}"/>
+  </method>
+</class>

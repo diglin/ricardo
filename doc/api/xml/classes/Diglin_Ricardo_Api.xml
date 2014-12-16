@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Api" namespace="Diglin\Ricardo" name="Api" abstract="false" final="false" start="24" end="263">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo" file="Api.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Api.php" size="6922" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="3721806362e4519575b2564d22e78cb9a3bff68a"/>
+  <docblock>
+    <description compact="Class Api">Prepare HTTP headers, send params, connect and get response from the API</description>
+    <package value="Diglin\Ricardo"/>
+  </docblock>
+  <implements full="Diglin\Ricardo\Core\ApiInterface" namespace="Diglin\Ricardo\Core" name="ApiInterface"/>
+  <member name="_config" type="{unknown}" visibility="protected" line="29">
+    <docblock>
+      <description compact=""/>
+      <var type="object">
+        <type full="Diglin\Ricardo\Core\ConfigInterface" namespace="Diglin\Ricardo\Core" name="ConfigInterface"/>
+      </var>
+    </docblock>
+  </member>
+  <member name="_username" type="{unknown}" visibility="protected" line="34">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_partnerKey" type="{unknown}" visibility="protected" line="39">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_debug" type="{unknown}" default="false" visibility="protected" line="44">
+    <docblock>
+      <description compact=""/>
+      <var type="object">
+        <type full="Diglin\Ricardo\bool" namespace="Diglin\Ricardo" name="bool"/>
+      </var>
+    </docblock>
+  </member>
+  <member name="_lastDebug" type="array" visibility="protected" line="49">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_shouldSetPass" type="{unknown}" default="true" visibility="protected" line="54">
+    <docblock>
+      <description compact=""/>
+      <var type="object">
+        <type full="Diglin\Ricardo\bool" namespace="Diglin\Ricardo" name="bool"/>
+      </var>
+    </docblock>
+  </member>
+  <constructor name="__construct" start="56" end="64" abstract="false" final="false" static="false" visibility="public">
+    <parameter name="config" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Core\ConfigInterface" namespace="Diglin\Ricardo\Core" name="ConfigInterface"/>
+    </parameter>
+  </constructor>
+  <method name="connect" start="75" end="133" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Connect to the Ricardo API depending of the service and method to be used"/>
+      <param description="Ricardo API Service" type="string" variable="$service"/>
+      <param description="Ricardo API Method" type="string" variable="$method"/>
+      <param description="API Parameters" type="array" variable="$params"/>
+      <return description="$result" type="mixed"/>
+      <throws type="object">
+        <type full="\Exception" namespace="" name="Exception"/>
+      </throws>
+    </docblock>
+    <parameter name="service" byreference="false" type="{unknown}"/>
+    <parameter name="method" byreference="false" type="{unknown}"/>
+    <parameter name="params" byreference="false" type="array"/>
+    <inline>
+      <comment value="It may take too much memory here as some parameter are pictures bytes" line="108"/>
+    </inline>
+  </method>
+  <method name="_addHeaders" start="140" end="153" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Set correct HTTP headers for the API"/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getConfig" start="160" end="163" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the configuration class of the API"/>
+      <return type="object">
+        <type full="\Diglin\Ricardo\Config" namespace="\Diglin\Ricardo" name="Config"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="setUsername" start="172" end="176" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Username is in fact the API key but we call it username to be homogeneous with the header naming convention"/>
+      <param type="mixed" variable="$username"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\$this" namespace="Diglin\Ricardo" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="username" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getUsername" start="183" end="186" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the username"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="setShouldSetPass" start="194" end="198" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set if the pass should be send or not"/>
+      <param type="boolean" variable="$boolean"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\$this" namespace="Diglin\Ricardo" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="boolean" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getShouldSetPass" start="205" end="208" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get if the pass should be send or not"/>
+      <return type="boolean"/>
+    </docblock>
+  </method>
+  <method name="getLastDebug" start="216" end="224" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the content of the headers and content of one or more API calls"/>
+      <param type="object" variable="$flush">
+        <type full="Diglin\Ricardo\bool" namespace="Diglin\Ricardo" name="bool"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="flush" byreference="false" type="{unknown}" default="false"/>
+  </method>
+  <method name="revertUsername" start="232" end="236" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="The username can be a token or the partner ID.">In some cases it is needed to get back the partner ID</description>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="removePictureBytesData" start="242" end="262" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="array" variable="$params"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\bool" namespace="Diglin\Ricardo" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="params" byreference="true" type="{unknown}"/>
+  </method>
+  <interface full="Diglin\Ricardo\Core\ApiInterface" namepsace="Diglin\Ricardo\Core" name="ApiInterface">
+    <method name="connect" start="24" end="24" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Connect to the API"/>
+        <param type="string" variable="$service"/>
+        <param type="string" variable="$method"/>
+        <param type="array" variable="$params"/>
+        <return type="mixed"/>
+      </docblock>
+      <parameter name="service" byreference="false" type="{unknown}"/>
+      <parameter name="method" byreference="false" type="{unknown}"/>
+      <parameter name="params" byreference="false" type="array"/>
+    </method>
+    <method name="getConfig" start="31" end="31" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get the config of the API"/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+    <method name="setShouldSetPass" start="39" end="39" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Set if the pass should be sent or not"/>
+        <param type="boolean" variable="$boolean"/>
+        <return type="mixed"/>
+      </docblock>
+      <parameter name="boolean" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getShouldSetPass" start="46" end="46" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get if the pass should be sent or not"/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+  </interface>
+</class>

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+  <head>
+    <title>phpDox - Diglin\Ricardo\Services\SellerAccount</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html#Diglin_Ricardo_Services">Diglin\Ricardo\Services</a>
+          </li>
+          <li class="separator">SellerAccount</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#tasks">Tasks</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>Diglin\Ricardo\Services\</small>SellerAccount</h1>
+        <h4>Class SellerAccount</h4>
+        <p>Refers to the account as a seller:<br/>get all open articles, get sold articles, get articles that haven't been sold, etc</p>
+        <ul/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class SellerAccount
+                extends <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">ServiceAbstract</a>
+            {<br/><ul class="none"><li>// Inherited constants from <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">ServiceAbstract</a></li><li>const <a href="#TOKEN_TYPE_ANONYMOUS">TOKEN_TYPE_ANONYMOUS</a> = 'anonymous';</li><li>const <a href="#TOKEN_TYPE_IDENTIFIED">TOKEN_TYPE_IDENTIFIED</a> = 'identified';</li><li>const <a href="#TOKEN_TYPE_ANTIFORGERY">TOKEN_TYPE_ANTIFORGERY</a> = 'antiforgery';</li><li>const <a href="#TOKEN_TYPE_TEMPORARY">TOKEN_TYPE_TEMPORARY</a> = 'temporary';</li><li>const <a href="#TOKEN_TYPE_DEFAULT">TOKEN_TYPE_DEFAULT</a> = '';</li></ul><ul class="none"><li>// members</li><li>protected
+                         <a href="#members">$_service</a>;
+                    </li><li>protected
+                         <a href="#members">$_typeOfToken</a>;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Services\ServiceAbstract">ServiceAbstract</span></li><li>protected
+                             <a href="#members">$_service</a>;
+                        </li><li>protected
+                             <a href="#members">$_typeOfToken</a>;
+                        </li></ul><ul class="none"><li>// methods</li><li>public void <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/addCardPaymentOption.html">addCardPaymentOption</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/assertArticleModification.html">assertArticleModification</a>()
+                    </li><li>public bool <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/assertArticleModificationResult.html">assertArticleModificationResult</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getArticle.html">getArticle</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getArticleResult.html">getArticleResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getArticles.html">getArticles</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getArticlesResult.html">getArticlesResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getClosedArticles.html">getClosedArticles</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getClosedArticlesResult.html">getClosedArticlesResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getOpenArticle.html">getOpenArticle</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getOpenArticleResult.html">getOpenArticleResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getOpenArticles.html">getOpenArticles</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getOpenArticlesResult.html">getOpenArticlesResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPaymentOptions.html">getPaymentOptions</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPaymentOptionsResult.html">getPaymentOptionsResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedArticle.html">getPlannedArticle</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedArticleResult.html">getPlannedArticleResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedArticles.html">getPlannedArticles</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedArticlesResult.html">getPlannedArticlesResult</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedPictures.html">getPlannedPictures</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedPicturesResult.html">getPlannedPicturesResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSellerPackages.html">getSellerPackages</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSellerPackagesResult.html">getSellerPackagesResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSoldArticle.html">getSoldArticle</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSoldArticleResult.html">getSoldArticleResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSoldArticles.html">getSoldArticles</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSoldArticlesResult.html">getSoldArticlesResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getTemplates.html">getTemplates</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getTemplatesResult.html">getTemplatesResult</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getUnsoldArticle.html">getUnsoldArticle</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getUnsoldArticleResult.html">getUnsoldArticleResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getUnsoldArticles.html">getUnsoldArticles</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getUnsoldArticlesResult.html">getUnsoldArticlesResult</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/insertAnswer.html">insertAnswer</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/insertSellerPackage.html">insertSellerPackage</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/removeCardPaymentOption.html">removeCardPaymentOption</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/setCumulativeShipping.html">setCumulativeShipping</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/setPremiumPackageAutomaticReactivation.html">setPremiumPackageAutomaticReactivation</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="Diglin\Ricardo\Services\ServiceAbstract">ServiceAbstract</span></li><li>public string <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getService.html">getService</a>()
+                        </li><li>public string <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getTypeOfToken.html">getTypeOfToken</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">Diglin\Ricardo\Services\ServiceAbstract</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="tasks">Tasks</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Line</th>
+              <th>Task</th>
+            </tr>
+          </thead>
+          <tr>
+            <td class="nummeric">345+</td>
+            <td/>
+          </tr>
+          <tr>
+            <td class="nummeric">537+</td>
+            <td/>
+          </tr>
+          <tr>
+            <td class="nummeric">550+</td>
+            <td/>
+          </tr>
+          <tr>
+            <td class="nummeric">563+</td>
+            <td/>
+          </tr>
+          <tr>
+            <td class="nummeric">576+</td>
+            <td/>
+          </tr>
+          <tr>
+            <td class="nummeric">589+</td>
+            <td/>
+          </tr>
+        </table>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="TOKEN_TYPE_ANONYMOUS">TOKEN_TYPE_ANONYMOUS</td>
+              <td>'anonymous'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_IDENTIFIED">TOKEN_TYPE_IDENTIFIED</td>
+              <td>'identified'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_ANTIFORGERY">TOKEN_TYPE_ANTIFORGERY</td>
+              <td>'antiforgery'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_TEMPORARY">TOKEN_TYPE_TEMPORARY</td>
+              <td>'temporary'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_DEFAULT">TOKEN_TYPE_DEFAULT</td>
+              <td>''</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="_service"><strong>$_service</strong>
+                —
+                string</li>
+            <li id="_service"><strong>$_service</strong>
+                —
+                string</li>
+            <li id="_typeOfToken"><strong>$_typeOfToken</strong>
+                —
+                string</li>
+            <li id="_typeOfToken"><strong>$_typeOfToken</strong>
+                —
+                string</li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="addCardPaymentOption"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/addCardPaymentOption.html">addCardPaymentOption()</a>
+                — Adds the card payment option to specified articles parameters</li>
+            <li id="assertArticleModification"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/assertArticleModification.html">assertArticleModification()</a>
+                — Asserts the article modification parameters</li>
+            <li id="assertArticleModificationResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/assertArticleModificationResult.html">assertArticleModificationResult()</a>
+                — Get if the article can be modified or not</li>
+            <li id="getArticle"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getArticle.html">getArticle()</a>
+                — Gets an article parameter</li>
+            <li id="getArticleResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getArticleResult.html">getArticleResult()</a>
+                — Gets an article result.</li>
+            <li id="getArticles"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getArticles.html">getArticles()</a>
+                — Get all auctions by date and type parameters</li>
+            <li id="getArticlesResult">
+              <a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getArticlesResult.html">getArticlesResult()</a>
+            </li>
+            <li id="getClosedArticles"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getClosedArticles.html">getClosedArticles()</a>
+                — Get all articles that were closed by customer parameters</li>
+            <li id="getClosedArticlesResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getClosedArticlesResult.html">getClosedArticlesResult()</a>
+                — Result to get all articles that were closed by customer</li>
+            <li id="getOpenArticle"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getOpenArticle.html">getOpenArticle()</a>
+                — Gets an open article parameter</li>
+            <li id="getOpenArticleResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getOpenArticleResult.html">getOpenArticleResult()</a>
+                — Gets an open article result</li>
+            <li id="getOpenArticles"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getOpenArticles.html">getOpenArticles()</a>
+                — Gets open articles parameter</li>
+            <li id="getOpenArticlesResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getOpenArticlesResult.html">getOpenArticlesResult()</a>
+                — Gets open articles result</li>
+            <li id="getPaymentOptions"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPaymentOptions.html">getPaymentOptions()</a>
+                — Gets the payment options for a seller parameter</li>
+            <li id="getPaymentOptionsResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPaymentOptionsResult.html">getPaymentOptionsResult()</a>
+                — Gets the payment conditions and payment function associated result</li>
+            <li id="getPlannedArticle"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedArticle.html">getPlannedArticle()</a>
+                — Gets planned articles parameter</li>
+            <li id="getPlannedArticleResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedArticleResult.html">getPlannedArticleResult()</a>
+                — Result gets planned articles result</li>
+            <li id="getPlannedArticles"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedArticles.html">getPlannedArticles()</a>
+                — Gets the planned articles parameter</li>
+            <li id="getPlannedArticlesResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedArticlesResult.html">getPlannedArticlesResult()</a>
+                — Gets the planned articles result</li>
+            <li id="getPlannedPictures"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedPictures.html">getPlannedPictures()</a>
+                — Gets the planned pictures parameter</li>
+            <li id="getPlannedPicturesResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getPlannedPicturesResult.html">getPlannedPicturesResult()</a>
+                — Gets the planned pictures result</li>
+            <li id="getSellerPackages"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSellerPackages.html">getSellerPackages()</a>
+                — Gets list of customer's listing packages(normally should be just one item) parameter</li>
+            <li id="getSellerPackagesResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSellerPackagesResult.html">getSellerPackagesResult()</a>
+                — Get Seller Package Result</li>
+            <li id="getSoldArticle"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSoldArticle.html">getSoldArticle()</a>
+                — Gets the sold article parameter</li>
+            <li id="getSoldArticleResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSoldArticleResult.html">getSoldArticleResult()</a>
+                — Get Sold Article Result</li>
+            <li id="getSoldArticles"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSoldArticles.html">getSoldArticles()</a>
+                — Gets the sold articles parameter</li>
+            <li id="getSoldArticlesResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getSoldArticlesResult.html">getSoldArticlesResult()</a>
+                — Get Sold Articles Result</li>
+            <li id="getTemplates"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getTemplates.html">getTemplates()</a>
+                — Get available article templates parameter</li>
+            <li id="getTemplatesResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getTemplatesResult.html">getTemplatesResult()</a>
+                — Get the list of templates available Result</li>
+            <li id="getUnsoldArticle"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getUnsoldArticle.html">getUnsoldArticle()</a>
+                — Gets the unsold article parameter</li>
+            <li id="getUnsoldArticleResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getUnsoldArticleResult.html">getUnsoldArticleResult()</a>
+                — Get Unsold Article Result</li>
+            <li id="getUnsoldArticles"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getUnsoldArticles.html">getUnsoldArticles()</a>
+                — Gets the unsold articles parameter</li>
+            <li id="getUnsoldArticlesResult"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/getUnsoldArticlesResult.html">getUnsoldArticlesResult()</a>
+                — Get the unsold articles result</li>
+            <li id="insertAnswer"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/insertAnswer.html">insertAnswer()</a>
+                — Inserts the answer.</li>
+            <li id="insertSellerPackage"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/insertSellerPackage.html">insertSellerPackage()</a>
+                — Inserts selected by customer listing package</li>
+            <li id="removeCardPaymentOption"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/removeCardPaymentOption.html">removeCardPaymentOption()</a>
+                — Removes the card payment option from specified articles.</li>
+            <li id="setCumulativeShipping"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/setCumulativeShipping.html">setCumulativeShipping()</a>
+                — Sets if the article has cumulative shipping.</li>
+            <li id="setPremiumPackageAutomaticReactivation"><a title="Diglin\Ricardo\Services\SellerAccount" href="../classes/Diglin_Ricardo_Services_SellerAccount/setPremiumPackageAutomaticReactivation.html">setPremiumPackageAutomaticReactivation()</a>
+                — Change the automatic reactivation for a premium package</li>
+          </ul>
+          <h3>Inherited from <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">Diglin\Ricardo\Services\ServiceAbstract</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getService"><a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getService.html">getService()</a>
+                — Get the current name of the API service</li>
+            <li id="getTypeOfToken"><a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getTypeOfToken.html">getTypeOfToken()</a>
+                — Get the type of token needed for this service &lt;pre&gt; It can be: - anonymous - identified - antiforgery - empty &lt;/pre&gt;</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2014-10-06T14:19:17+02:00 (commit #<span title="7223496ae04d5acb52e0f4e021d4a9e13759a8b0">7223496</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Fix Get Article and Get SoldArticle service</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-28T11:22:59+02:00 (commit #<span title="3e11a2cf9148ee20ec7e06905b6b86a0c74ea70d">3e11a2c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-18T14:18:38+02:00 (commit #<span title="0593ee89437d26f12e89627c0e52c284ebd4e810">0593ee8</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-76] Implement the logic to know if the credit card is available for an account. Update unit test</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-04T17:15:35+02:00 (commit #<span title="9286388a2893f89fc2f3ca688531dbefb59d1c2c">9286388</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[]RIC-38 Add log implementation for unit test, structure differently enumeration classes, update the constant of the enums in the different classes</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-14T00:05:50+02:00 (commit #<span title="058821611ff92af4f77ea19f886f5d361e07a5ea">0588216</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Add additional methods to services and their test</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-10T20:21:39+02:00 (commit #<span title="164547974d0c1690cbfff5c4a798ed2f12dd56ec">1645479</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Standardize enumeration classes, add security errors enums</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-10T20:18:28+02:00 (commit #<span title="fc0e52a4043db31cb3c07623682501bc882d064e">fc0e52a</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Standardize namespace use</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-09T12:47:21+02:00 (commit #<span title="f472debd391be90a8345c5ed7c578f211fb8c9dd">f472deb</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Implements getSellerPackages Service</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-30T20:54:56+02:00 (commit #<span title="63608a63b3a74cd426d3f520aed669489ea7dd62">63608a6</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Simplify date format, work on timestamp base UTC+0</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-07T18:37:00+02:00 (commit #<span title="b901694c09fc9c3380210d8feefad047a55e3229">b901694</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] [FEATURE|WIP]  Add SellerAccount Service Ricardo API, SellerAccount Manager for the PHP library &amp; Tests - Not all methods are implemented because it's quite long and we may not need all methods at the moment</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-22T17:08:27+02:00 (commit #<span title="61fc8b6df04819f8d5d73266fd716afcacae4a9d">61fc8b6</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
+Add a way to configure the unit test, documentation exist to configure it thanks to a readme file
+Implement the security protocol at the manager level</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-15T22:30:44+02:00 (commit #<span title="6b76b24f27d71efc3a3fa7baf8a44521632e1e71">6b76b24</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>change folders structure, add script specific for Magento to allow to install the library into it</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-15T13:58:22+02:00 (commit #<span title="e3161ff937f72b4307f87e1d8be097aa33dee6dd">e3161ff</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>init commit</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Managers\Security" namespace="Diglin\Ricardo\Managers" name="Security" abstract="false" final="false" start="27" end="610">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Managers" file="Security.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Security.php" size="17804" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="09f9dd6a48dab197e7b9bafddaa1a75d7a6b6306"/>
+  <docblock>
+    <description compact="Class Security">Do the bridge with the Security service class and its data</description>
+    <package value="Diglin\Ricardo"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Managers\ManagerAbstract" namespace="Diglin\Ricardo\Managers" name="ManagerAbstract"/>
+  <member name="_serviceName" type="string" default="'security'" visibility="protected" line="32">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_allowSimulateAuthorization" type="{unknown}" visibility="protected" line="37">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_temporaryToken" type="{unknown}" visibility="protected" line="42">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_temporaryTokenExpirationDate" type="{unknown}" visibility="protected" line="47">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_validationUrl" type="{unknown}" default="null" visibility="protected" line="52">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_anonymousToken" type="{unknown}" visibility="protected" line="57">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_anonymousTokenExpirationDate" type="{unknown}" visibility="protected" line="62">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_credentialToken" type="{unknown}" visibility="protected" line="72">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_credentialTokenExpirationDate" type="{unknown}" visibility="protected" line="77">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_credentialTokenSessionDuration" type="{unknown}" visibility="protected" line="82">
+    <docblock>
+      <description compact=""/>
+      <var type="int"/>
+    </docblock>
+  </member>
+  <member name="_credentialTokenSessionStart" type="{unknown}" visibility="protected" line="87">
+    <docblock>
+      <description compact=""/>
+      <var type="int"/>
+    </docblock>
+  </member>
+  <member name="_credentialTokenRefreshed" type="{unknown}" default="false" visibility="protected" line="92">
+    <docblock>
+      <description compact=""/>
+      <var type="object">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </var>
+    </docblock>
+  </member>
+  <member name="_antiforgeryToken" type="{unknown}" visibility="protected" line="97">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_antiforgeryTokenExpirationDate" type="{unknown}" visibility="protected" line="102">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <constructor name="__construct" start="108" end="112" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="object" variable="$serviceManager">
+        <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+      </param>
+      <param type="object" variable="$allowSimulateAuthorization">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </param>
+    </docblock>
+    <parameter name="serviceManager" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+    </parameter>
+    <parameter name="allowSimulateAuthorization" byreference="false" type="{unknown}" default="false"/>
+  </constructor>
+  <method name="getToken" start="120" end="136" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the token depending of the type wished"/>
+      <param variable="$typeOfToken"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\bool|mixed|string" namespace="Diglin\Ricardo\Managers" name="bool|mixed|string"/>
+      </return>
+    </docblock>
+    <parameter name="typeOfToken" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAnonymousToken" start="143" end="158" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the anonymous token and set internally the expiration date for this anonymous token"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\string|array" namespace="Diglin\Ricardo\Managers" name="string|array"/>
+      </return>
+    </docblock>
+    <inline>
+      <comment value="$this-&gt;_anonymousTokenSessionDuration = $result['SessionDuration'];" line="152"/>
+    </inline>
+  </method>
+  <method name="getTemporaryToken" start="166" end="182" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the temporary token, set internally the expiration date for this temporary token and the validation url"/>
+      <param type="object" variable="$refresh">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </param>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\string|array" namespace="Diglin\Ricardo\Managers" name="string|array"/>
+      </return>
+    </docblock>
+    <parameter name="refresh" byreference="false" type="{unknown}" default="false"/>
+  </method>
+  <method name="parseValidationUrl" start="190" end="218" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Example: https://www.ch.betaqxl.com/apiconnect/login/index?token=XXXXX-XXXX-XXXX-XXXX-XXXXXXX&amp;countryId=2&amp;partnershipId=XXXX&amp;partnerurl="/>
+      <param type="string" variable="$url"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="url" byreference="false" type="{unknown}"/>
+    <inline>
+      <comment value="Add the missing partner url parameter, it is returned empty" line="200"/>
+    </inline>
+  </method>
+  <method name="getCredentialToken" start="227" end="255" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the token credential, set internally expiration date and session duration Refresh the token if necessary"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\string|array" namespace="Diglin\Ricardo\Managers" name="string|array"/>
+      </return>
+      <throws type="object">
+        <type full="Diglin\Ricardo\Exceptions\SecurityException" namespace="Diglin\Ricardo\Exceptions" name="SecurityException"/>
+      </throws>
+    </docblock>
+    <inline>
+      <comment value="Temporary Token must be created before to simulate the authorization or getting the token credential" line="233"/>
+      <comment xmlns="http://xml.phpdox.net/src#" value="MUST get the returned variable in case of DB saved or Authorization process has been done" line="234"/>
+      <comment value="in minutes" line="248"/>
+      <comment value="in seconds" line="249"/>
+    </inline>
+  </method>
+  <method name="getAntiforgeryToken" start="260" end="270" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="refreshToken" start="278" end="293" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="If the session duration period has expired, the token must be refreshed"/>
+      <param type="object" variable="$token">
+        <type full="Diglin\Ricardo\Managers\string|null" namespace="Diglin\Ricardo\Managers" name="string|null"/>
+      </param>
+      <return description="| array" type="string"/>
+    </docblock>
+    <parameter name="token" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="isDateExpired" start="302" end="311" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Check if the date in parameter is expired or not The parameter must be a json date"/>
+      <param description="'/Date(123456789+0200)/'" type="string" variable="$jsonExpirationDate"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="jsonExpirationDate" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="simulateValidationUrl" start="320" end="390" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="The simulation of the authorization process is for development purpose"/>
+      <param type="string" variable="$url"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\bool|mixed" namespace="Diglin\Ricardo\Managers" name="bool|mixed"/>
+      </return>
+      <throws type="object">
+        <type full="\Exception" namespace="" name="Exception"/>
+      </throws>
+    </docblock>
+    <parameter name="url" byreference="false" type="string" default="''"/>
+    <inline>
+      <comment value="Example: https://www.ch.betaqxl.com/apiconnect/login/index?token=XXXXX-XXXX-XXXX-XXXX-XXXXXXX&amp;countryId=2&amp;partnershipId=XXXX&amp;partnerurl=" line="322"/>
+      <comment value="Step 1 - Call the login page to init the cookies" line="331"/>
+      <comment value="Step 2 - Send the user authentification to the web form to get the rights to use the credential token" line="349"/>
+      <comment value="Dismantle the validation url to get the host and the parameters" line="350"/>
+      <comment value="Create the post action form url" line="355"/>
+    </inline>
+  </method>
+  <method name="setAnonymousToken" start="398" end="402" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set the anonymous token, useful in case of data coming from saved DB"/>
+      <param variable="$token"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="token" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setCredentialToken" start="410" end="414" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set the credential token, useful in case of data coming from saved DB"/>
+      <param type="mixed" variable="$tokenCredential"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="tokenCredential" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setTemporaryToken" start="422" end="426" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set the temporary token, useful in case of data coming from saved DB"/>
+      <param type="mixed" variable="$temporaryToken"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="temporaryToken" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setAntiforgeryToken" start="433" end="436" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set the antiforgery token, useful in case of data coming from saved DB"/>
+      <param type="string" variable="$antiforgeryToken"/>
+    </docblock>
+    <parameter name="antiforgeryToken" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setAllowSimulateAuthorization" start="443" end="446" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Allow or not to simulate the authorization process"/>
+      <param type="object" variable="$allow">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </param>
+    </docblock>
+    <parameter name="allow" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAllowSimulateAuthorization" start="453" end="456" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get if allow or not to simulate the authorization process"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="setAnonymousTokenExpirationDate" start="464" end="468" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set the anonymous token expiration date, useful in case of data coming from saved DB"/>
+      <param type="mixed" variable="$anonymousTokenExpirationDate"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="anonymousTokenExpirationDate" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAnonymousTokenExpirationDate" start="470" end="473" abstract="false" final="false" static="false" visibility="public"/>
+  <method name="setCredentialTokenExpirationDate" start="481" end="485" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set the credential token expiration date, useful in case of data coming from saved DB"/>
+      <param type="mixed" variable="$tokenCredentialExpirationDate"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="tokenCredentialExpirationDate" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getCredentialTokenExpirationDate" start="492" end="495" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the credential token expiration date"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setTemporaryTokenExpirationDate" start="503" end="507" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set the temporary token expiration date, useful in case of data coming from saved DB"/>
+      <param type="mixed" variable="$temporaryTokenExpirationDate"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="temporaryTokenExpirationDate" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTemporaryTokenExpirationDate" start="514" end="517" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the temporary token expiration date"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setAntiforgeryTokenExpirationDate" start="525" end="529" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set the antiforgery token expiration date, useful in case of data coming from saved DB"/>
+      <param type="string" variable="$antiforgeryTokenExpirationDate"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="antiforgeryTokenExpirationDate" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getAntiforgeryTokenExpirationDate" start="536" end="539" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the antiforgery token expiration date"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="setCredentialTokenSessionDuration" start="545" end="549" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="int" variable="$tokenCredentialSessionDuration"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="tokenCredentialSessionDuration" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getCredentialTokenSessionDuration" start="554" end="557" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="int"/>
+    </docblock>
+  </method>
+  <method name="setCredentialTokenSessionStart" start="563" end="567" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="int" variable="$tokenCredentialSessionStart"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="tokenCredentialSessionStart" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getCredentialTokenSessionStart" start="572" end="575" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="int"/>
+    </docblock>
+  </method>
+  <method name="getValidationUrl" start="583" end="589" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the validation Url"/>
+      <param type="object" variable="$refresh">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </param>
+      <return type="string"/>
+    </docblock>
+    <parameter name="refresh" byreference="false" type="{unknown}" default="false"/>
+  </method>
+  <method name="setIsCredentialTokenRefreshed" start="595" end="599" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="boolean" variable="$credentialTokenRefreshed"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="credentialTokenRefreshed" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getIsCredentialTokenRefreshed" start="604" end="607" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="boolean"/>
+    </docblock>
+  </method>
+  <parent full="Diglin\Ricardo\Managers\ManagerAbstract" namepsace="Diglin\Ricardo\Managers" name="ManagerAbstract">
+    <member name="_serviceName" type="{unknown}" visibility="protected" line="29">
+      <docblock>
+        <description compact=""/>
+        <var type="string"/>
+      </docblock>
+    </member>
+    <member name="_serviceManager" type="{unknown}" visibility="protected" line="34">
+      <docblock>
+        <description compact=""/>
+        <var type="object">
+          <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+        </var>
+      </docblock>
+    </member>
+    <member name="_helper" type="{unknown}" visibility="protected" line="39">
+      <docblock>
+        <description compact=""/>
+        <var type="object">
+          <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
+        </var>
+      </docblock>
+    </member>
+    <constructor name="__construct" start="44" end="47" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <param type="object" variable="$serviceManager">
+          <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+        </param>
+      </docblock>
+      <parameter name="serviceManager" byreference="false" type="object">
+        <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+      </parameter>
+    </constructor>
+    <method name="getHelper" start="52" end="58" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="_proceed" start="67" end="105" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact=""/>
+        <param type="string" variable="$method"/>
+        <param type="mixed" variable="$parameters"/>
+        <return type="array"/>
+        <throws type="object">
+          <type full="\Exception" namespace="" name="Exception"/>
+        </throws>
+        <throws type="object">
+          <type full="Diglin\Ricardo\Exceptions\SecurityException" namespace="Diglin\Ricardo\Exceptions" name="SecurityException"/>
+        </throws>
+      </docblock>
+      <parameter name="method" byreference="false" type="{unknown}"/>
+      <parameter name="parameters" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="extractError" start="113" end="140" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Extract code error and type from API call"/>
+        <param type="array" variable="$result"/>
+        <throw value="\Exception"/>
+      </docblock>
+      <parameter name="result" byreference="false" type="array"/>
+    </method>
+    <method name="getServiceManager" start="145" end="148" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="getTypeOfToken" start="153" end="156" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

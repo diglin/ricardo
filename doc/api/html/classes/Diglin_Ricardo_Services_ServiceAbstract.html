@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+  <head>
+    <title>phpDox - Diglin\Ricardo\Services\ServiceAbstract</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html#Diglin_Ricardo_Services">Diglin\Ricardo\Services</a>
+          </li>
+          <li class="separator">ServiceAbstract</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>Diglin\Ricardo\Services\</small>ServiceAbstract</h1>
+        <h4>Class ServiceAbstract</h4>
+        <p/>
+        <ul/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class ServiceAbstract
+            {<br/><ul class="none"><li>// constants</li><li>const TOKEN_TYPE_ANONYMOUS = 'anonymous';</li><li>const TOKEN_TYPE_IDENTIFIED = 'identified';</li><li>const TOKEN_TYPE_ANTIFORGERY = 'antiforgery';</li><li>const TOKEN_TYPE_TEMPORARY = 'temporary';</li><li>const TOKEN_TYPE_DEFAULT = '';</li></ul><ul class="none"><li>// members</li><li>protected
+                         <a href="#members">$_service</a>;
+                    </li><li>protected
+                         <a href="#members">$_typeOfToken</a>;
+                    </li></ul><ul class="none"><li>// methods</li><li>public string <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getService.html">getService</a>()
+                    </li><li>public string <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getTypeOfToken.html">getTypeOfToken</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extended by</h4>
+          <ul>
+            <li>
+              <a href="../classes/Diglin_Ricardo_Services_Customer.html">Diglin\Ricardo\Services\Customer</a>
+            </li>
+            <li>
+              <a href="../classes/Diglin_Ricardo_Services_Security.html">Diglin\Ricardo\Services\Security</a>
+            </li>
+            <li>
+              <a href="../classes/Diglin_Ricardo_Services_Sell.html">Diglin\Ricardo\Services\Sell</a>
+            </li>
+            <li>
+              <a href="../classes/Diglin_Ricardo_Services_SellerAccount.html">Diglin\Ricardo\Services\SellerAccount</a>
+            </li>
+            <li>
+              <a href="../classes/Diglin_Ricardo_Services_System.html">Diglin\Ricardo\Services\System</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="TOKEN_TYPE_ANONYMOUS">TOKEN_TYPE_ANONYMOUS</td>
+              <td>'anonymous'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_IDENTIFIED">TOKEN_TYPE_IDENTIFIED</td>
+              <td>'identified'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_ANTIFORGERY">TOKEN_TYPE_ANTIFORGERY</td>
+              <td>'antiforgery'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_TEMPORARY">TOKEN_TYPE_TEMPORARY</td>
+              <td>'temporary'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_DEFAULT">TOKEN_TYPE_DEFAULT</td>
+              <td>''</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="_service"><strong>$_service</strong>
+                —
+                string</li>
+            <li id="_typeOfToken"><strong>$_typeOfToken</strong>
+                —
+                string</li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="getService"><a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getService.html">getService()</a>
+                — Get the current name of the API service</li>
+            <li id="getTypeOfToken"><a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getTypeOfToken.html">getTypeOfToken()</a>
+                — Get the type of token needed for this service &lt;pre&gt; It can be: - anonymous - identified - antiforgery - empty &lt;/pre&gt;</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2014-10-20T13:39:26+02:00 (commit #<span title="177d7305faf9bbdffe4ad1b81475a23c583e8eed">177d730</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>update</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-28T11:22:59+02:00 (commit #<span title="3e11a2cf9148ee20ec7e06905b6b86a0c74ea70d">3e11a2c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-02T19:31:08+02:00 (commit #<span title="550d2e18b35a83c430a87e9adb40779e5fe65176">550d2e1</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Implement error management with an automatic detection of exception class</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-22T17:08:27+02:00 (commit #<span title="61fc8b6df04819f8d5d73266fd716afcacae4a9d">61fc8b6</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
+Add a way to configure the unit test, documentation exist to configure it thanks to a readme file
+Implement the security protocol at the manager level</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-15T22:30:44+02:00 (commit #<span title="6b76b24f27d71efc3a3fa7baf8a44521632e1e71">6b76b24</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>change folders structure, add script specific for Magento to allow to install the library into it</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-15T13:58:22+02:00 (commit #<span title="e3161ff937f72b4307f87e1d8be097aa33dee6dd">e3161ff</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>init commit</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

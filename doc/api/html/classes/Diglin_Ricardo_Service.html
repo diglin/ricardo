@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+  <head>
+    <title>phpDox - Diglin\Ricardo\Service</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html#Diglin_Ricardo">Diglin\Ricardo</a>
+          </li>
+          <li class="separator">Service</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>Diglin\Ricardo\</small>Service</h1>
+        <h4>Class Service</h4>
+        <p/>
+        <ul/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class Service
+            {<br/><ul class="none"><li>// members</li><li>protected
+                         <a href="#members">$_services</a>;
+                    </li><li>protected <span title="Diglin\Ricardo\Core\ApiInterface">ApiInterface</span>
+                         <a href="#members">$_api</a>;
+                    </li><li>protected <span title="Diglin\Ricardo\Managers\Security">Security</span>
+                         <a href="#members">$_securityManager</a>;
+                    </li></ul><ul class="none"><li>// methods</li><li>public void <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/__construct.html">__construct</a>()
+                    </li><li>public ApiInterface <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getApi.html">getApi</a>()
+                    </li><li>public Config <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getConfig.html">getConfig</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getServices.html">getServices</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/add.html">add</a>()
+                    </li><li>public bool <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/get.html">get</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/update.html">update</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/remove.html">remove</a>()
+                    </li><li>public Security <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getSecurityManager.html">getSecurityManager</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/setSecurityManager.html">setSecurityManager</a>()
+                    </li><li>public mixed <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/proceed.html">proceed</a>()
+                    </li><li>protected mixed <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/_getCleanServiceClassName.html">_getCleanServiceClassName</a>()
+                    </li><li>protected mixed|string <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/_getServiceName.html">_getServiceName</a>()
+                    </li><li>protected string <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/_prepareServiceGetMethod.html">_prepareServiceGetMethod</a>()
+                    </li><li>protected string <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/_prepareServiceGetResultMethod.html">_prepareServiceGetResultMethod</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>PHPMessDetector</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Rule</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td>181 - 247</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
+              </td>
+              <td>The method proceed() has a Cyclomatic Complexity of 14. The configured cyclomatic complexity threshold is 10.</td>
+            </tr>
+            <tr>
+              <td>181 - 247</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#npathcomplexity" target="_blank" title="Code Size Rules">NPathComplexity</a>
+              </td>
+              <td>The method proceed() has an NPath complexity of 301. The configured NPath complexity threshold is 200.</td>
+            </tr>
+          </table>
+        </div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="_api"><strong>$_api</strong>
+                —
+                <a href="#">Diglin\Ricardo\Core\ApiInterface</a></li>
+            <li id="_securityManager"><strong>$_securityManager</strong>
+                —
+                <a href="#">Diglin\Ricardo\Managers\Security</a></li>
+            <li id="_services"><strong>$_services</strong>
+                —
+                array</li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>protected</h4>
+          <ul>
+            <li id="_getCleanServiceClassName"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/_getCleanServiceClassName.html">_getCleanServiceClassName()</a>
+                — Try to prevent some errors with the service name So replace all underscore or space in a service name</li>
+            <li id="_getServiceName"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/_getServiceName.html">_getServiceName()</a>
+                — Retrieve the correct service class name</li>
+            <li id="_prepareServiceGetMethod"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/_prepareServiceGetMethod.html">_prepareServiceGetMethod()</a>
+                — Add 'get' to the method name</li>
+            <li id="_prepareServiceGetResultMethod"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/_prepareServiceGetResultMethod.html">_prepareServiceGetResultMethod()</a>
+                — Add 'get' to the method name and 'Result' at the end of the name</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="__construct">
+              <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/__construct.html">__construct()</a>
+            </li>
+            <li id="add"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/add.html">add()</a>
+                — Add a service to the service manager</li>
+            <li id="get"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/get.html">get()</a>
+                — Get the instance of a specific service or get an array of available services</li>
+            <li id="getApi"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getApi.html">getApi()</a>
+                — Get the API class</li>
+            <li id="getConfig">
+              <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getConfig.html">getConfig()</a>
+            </li>
+            <li id="getSecurityManager">
+              <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getSecurityManager.html">getSecurityManager()</a>
+            </li>
+            <li id="getServices"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getServices.html">getServices()</a>
+                — Get all services</li>
+            <li id="proceed"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/proceed.html">proceed()</a>
+                — Execute a method on the service and return an array</li>
+            <li id="remove"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/remove.html">remove()</a>
+                — Remove a service from the service manager to free some memory</li>
+            <li id="setSecurityManager">
+              <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/setSecurityManager.html">setSecurityManager()</a>
+            </li>
+            <li id="update"><a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/update.html">update()</a>
+                — Update the service into the service manager in case of properties changes for example</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2014-11-29T21:35:16+01:00 (commit #<span title="b245fb055b34264e30cd7d73aaa54553bca654b1">b245fb0</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Remove PictureBytes when debug data is returned. Prevent problems</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-10-20T13:39:26+02:00 (commit #<span title="177d7305faf9bbdffe4ad1b81475a23c583e8eed">177d730</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>update</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-28T11:29:08+02:00 (commit #<span title="d7d665e9a762d1c89d92a699e7e4fa98e37f2e36">d7d665e</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Verbose exception in case of error from the ricardo API</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-28T11:22:59+02:00 (commit #<span title="3e11a2cf9148ee20ec7e06905b6b86a0c74ea70d">3e11a2c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-14T22:13:45+02:00 (commit #<span title="cda6bb1628c8f76085eaf114eb28a11aefa5e5ad">cda6bb1</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>API changes and test</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-07T17:07:03+02:00 (commit #<span title="00bd23100f7d332171693b6ebe3680822d3479c7">00bd231</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Insert Article Implementation and test</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-10T20:29:51+02:00 (commit #<span title="b1da29a1558e55152eae971ac7b92100b2580b5b">b1da29a</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Implement a logic to detect what kind of security errors happens</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-10T20:18:28+02:00 (commit #<span title="fc0e52a4043db31cb3c07623682501bc882d064e">fc0e52a</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Standardize namespace use</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-02T19:31:08+02:00 (commit #<span title="550d2e18b35a83c430a87e9adb40779e5fe65176">550d2e1</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Implement error management with an automatic detection of exception class</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-01T16:00:09+02:00 (commit #<span title="3df2f7d99e5a35b3fe19e4b9ace54a62df8a59ec">3df2f7d</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Change the simulation authorization process implementation and update unit test</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-31T09:47:35+02:00 (commit #<span title="0ed14cbdf56217f474e06dddfe47c5d0d3cb0945">0ed14cb</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC_38] Add tests</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-30T22:51:54+02:00 (commit #<span title="bf0e20ff3e3430842c9ba1887f5b282fa9f98db7">bf0e20f</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Some small refactoring/improvements and cleanup</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-30T08:40:28+02:00 (commit #<span title="af46dabe99eac977956744c477576e894c62fa6c">af46dab</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Test Exceptions</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-11T02:01:39+02:00 (commit #<span title="6a5232fb89b7e2bfbc1288bab408cf5922c195b5">6a5232f</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Move the Service class to a different folder to prevent misunderstanding with the classes in the manager folder</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-07T18:27:40+02:00 (commit #<span title="3b6fa9d1919f85d5f74d0b324539fc20f1f31133">3b6fa9d</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-01T13:49:07+02:00 (commit #<span title="37b2bde51d21c48ebfee0965392e33ef3d90bedb">37b2bde</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-22T17:08:27+02:00 (commit #<span title="61fc8b6df04819f8d5d73266fd716afcacae4a9d">61fc8b6</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
+Add a way to configure the unit test, documentation exist to configure it thanks to a readme file
+Implement the security protocol at the manager level</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-15T22:30:44+02:00 (commit #<span title="6b76b24f27d71efc3a3fa7baf8a44521632e1e71">6b76b24</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>change folders structure, add script specific for Magento to allow to install the library into it</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-15T13:58:22+02:00 (commit #<span title="e3161ff937f72b4307f87e1d8be097aa33dee6dd">e3161ff</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>init commit</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

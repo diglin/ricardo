@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+  <head>
+    <title>phpDox - Zend_Config_Writer_Yaml</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">Zend_Config_Writer_Yaml</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#tasks">Tasks</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>\</small>Zend_Config_Writer_Yaml</h1>
+        <h4/>
+        <p/>
+        <ul>
+          <li>Copyright: Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)</li>
+          <li>License: http://framework.zend.com/license/new-bsd     New BSD License</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class Zend_Config_Writer_Yaml
+                extends <a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract.html">Zend_Config_Writer_FileAbstract</a>
+            {<br/><ul class="none"><li>// members</li><li>protected <span title="callable">callable</span>
+                         <a href="#members">$_yamlEncoder</a>;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Zend_Config_Writer_FileAbstract">Zend_Config_Writer_FileAbstract</span></li><li>protected
+                             <a href="#members">$_filename</a>;
+                        </li><li>protected
+                             <a href="#members">$_exclusiveLock</a>;
+                        </li></ul><ul class="none"><li>// Inherited members from <span title="Zend_Config_Writer">Zend_Config_Writer</span></li><li>protected
+                             <a href="#members">$_skipOptions</a>;
+                        </li><li>protected Zend_Config
+                             <a href="#members">$_config</a>;
+                        </li></ul><ul class="none"><li>// methods</li><li>public callable <a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/getYamlEncoder.html">getYamlEncoder</a>()
+                    </li><li>public Zend_Config_Yaml <a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/setYamlEncoder.html">setYamlEncoder</a>()
+                    </li><li>public string <a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/render.html">render</a>()
+                    </li><li>public static string <a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/encode.html">encode</a>()
+                    </li><li>protected static string <a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/_encodeYaml.html">_encodeYaml</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="Zend_Config_Writer_FileAbstract">Zend_Config_Writer_FileAbstract</span></li><li>public Zend_Config_Writer_Array <a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract/setFilename.html">setFilename</a>()
+                        </li><li>public Zend_Config_Writer_Array <a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract/setExclusiveLock.html">setExclusiveLock</a>()
+                        </li><li>public void <a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract/write.html">write</a>()
+                        </li><li>public string <a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract/render.html">render</a>()
+                        </li></ul><ul class="none"><li>// Inherited methods from <span title="Zend_Config_Writer">Zend_Config_Writer</span></li><li>public void <a title="Zend_Config_Writer" href="../classes/Zend_Config_Writer/__construct.html">__construct</a>()
+                        </li><li>public Zend_Config_Writer <a title="Zend_Config_Writer" href="../classes/Zend_Config_Writer/setConfig.html">setConfig</a>()
+                        </li><li>public Zend_Config_Writer <a title="Zend_Config_Writer" href="../classes/Zend_Config_Writer/setOptions.html">setOptions</a>()
+                        </li><li>public abstract void <a title="Zend_Config_Writer" href="../classes/Zend_Config_Writer/write.html">write</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a href="../classes/Zend_Config_Writer_FileAbstract.html">Zend_Config_Writer_FileAbstract</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="tasks">Tasks</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Line</th>
+              <th>Task</th>
+            </tr>
+          </thead>
+          <tr>
+            <td class="nummeric">130+</td>
+            <td>For 2.0 this should be redone into an abstract method.</td>
+          </tr>
+        </table>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="_config"><strong>$_config</strong>
+                —
+                <a href="#">Zend_Config</a><br/><span class="indent">Config object to write</span></li>
+            <li id="_exclusiveLock"><strong>$_exclusiveLock</strong>
+                —
+                boolean<br/><span class="indent">Wether to exclusively lock the file or not</span></li>
+            <li id="_filename"><strong>$_filename</strong>
+                —
+                string<br/><span class="indent">Filename to write to</span></li>
+            <li id="_skipOptions"><strong>$_skipOptions</strong>
+                —
+                array<br/><span class="indent">Option keys to skip when calling setOptions()</span></li>
+            <li id="_yamlEncoder"><strong>$_yamlEncoder</strong>
+                —
+                <a href="#">callable</a><br/><span class="indent">What to call when we need to decode some YAML?</span></li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>protected</h4>
+          <ul>
+            <li id="_encodeYaml"><a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/_encodeYaml.html">_encodeYaml()</a>
+                — Service function for encoding YAML</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="encode"><a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/encode.html">encode()</a>
+                — Very dumb YAML encoder</li>
+            <li id="getYamlEncoder"><a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/getYamlEncoder.html">getYamlEncoder()</a>
+                — Get callback for decoding YAML</li>
+            <li id="render"><a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/render.html">render()</a>
+                — Render a Zend_Config into a YAML config string.</li>
+            <li id="setYamlEncoder"><a title="Zend_Config_Writer_Yaml" href="../classes/Zend_Config_Writer_Yaml/setYamlEncoder.html">setYamlEncoder()</a>
+                — Set callback for decoding YAML</li>
+          </ul>
+          <h3>Inherited from <a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract.html">Zend_Config_Writer_FileAbstract</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="render"><a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract/render.html">render()</a>
+                — Render a Zend_Config into a config file string.</li>
+            <li id="setExclusiveLock"><a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract/setExclusiveLock.html">setExclusiveLock()</a>
+                — Set wether to exclusively lock the file or not</li>
+            <li id="setFilename"><a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract/setFilename.html">setFilename()</a>
+                — Set the target filename</li>
+            <li id="write"><a title="Zend_Config_Writer_FileAbstract" href="../classes/Zend_Config_Writer_FileAbstract/write.html">write()</a>
+                — Write configuration to file.</li>
+          </ul>
+          <h3>Inherited from <a title="Zend_Config_Writer" href="../classes/Zend_Config_Writer.html">Zend_Config_Writer</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="setConfig"><a title="Zend_Config_Writer" href="../classes/Zend_Config_Writer/setConfig.html">setConfig()</a>
+                — Set options via a Zend_Config instance</li>
+            <li id="setOptions"><a title="Zend_Config_Writer" href="../classes/Zend_Config_Writer/setOptions.html">setOptions()</a>
+                — Set options via an array</li>
+            <li id="write"><a title="Zend_Config_Writer" href="../classes/Zend_Config_Writer/write.html">write()</a>
+                — Write a Zend_Config object to it's target</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2014-09-29T11:07:23+02:00 (commit #<span title="15b41ee70d68a3fbaca371cb42ba7ed7f330afe9">15b41ee</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre>Add dependency library Zend_Config. Useful only for Unit Testing</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

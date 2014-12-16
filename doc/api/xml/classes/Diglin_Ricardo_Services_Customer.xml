@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Services\Customer" namespace="Diglin\Ricardo\Services" name="Customer" abstract="false" final="false" start="17" end="89">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Services" file="Customer.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Services/Customer.php" size="2247" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="12e0919530c9a287f4cad9a6813137222332122e"/>
+  <docblock>
+    <description compact="Class Customer"/>
+    <package value="Diglin\Ricardo\Services"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract"/>
+  <member name="_service" type="string" default="'CustomerService'" visibility="protected" line="22">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_IDENTIFIED" visibility="protected" line="27">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <method name="getCustomerInformation" start="32" end="38" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getCustomerInformationResult" start="82" end="88" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Array (      [Addresses] =&gt; Array      (       [0] =&gt; Array           (               [Address1] =&gt;               [Address2] =&gt;               [City] =&gt;               [Country] =&gt; 2               [PostalBox] =&gt;               [StreetNumber] =&gt;               [ZipCode] =&gt;           )      )      [CustomerId] =&gt; 123456789       [Infos] =&gt; Array       (       [ActivityStatus] =&gt; 0       [BirthDate] =&gt; /Date(329004000000+0200)/       [CompanyName] =&gt;       [CountryId] =&gt; 2       [CreationDate] =&gt; /Date(1293993568500+0100)/       [Email] =&gt;       [FirstName] =&gt;       [Gender] =&gt; m       [IsBuyerOnly] =&gt;       [LanguageId] =&gt; 3       [LastLoginDate] =&gt; /Date(1410991140000+0200)/       [LastName] =&gt;       [Mobile] =&gt;       [NickName] =&gt;       [PartnerId] =&gt;       [Phone] =&gt;       [RegionId] =&gt; 2       [SellerType] =&gt; 1   )"/>
+      <param variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\bool" namespace="Diglin\Ricardo\Services" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <parent full="Diglin\Ricardo\Services\ServiceAbstract" namepsace="Diglin\Ricardo\Services" name="ServiceAbstract">
+    <constant name="TOKEN_TYPE_ANONYMOUS" value="'anonymous'"/>
+    <constant name="TOKEN_TYPE_IDENTIFIED" value="'identified'"/>
+    <constant name="TOKEN_TYPE_ANTIFORGERY" value="'antiforgery'"/>
+    <constant name="TOKEN_TYPE_TEMPORARY" value="'temporary'"/>
+    <constant name="TOKEN_TYPE_DEFAULT" value="''"/>
+    <member name="_service" type="string" default="''" visibility="protected" line="29">
+      <docblock>
+        <description compact=""/>
+        <var type="string"/>
+      </docblock>
+    </member>
+    <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="34">
+      <docblock>
+        <description compact=""/>
+        <var type="string"/>
+      </docblock>
+    </member>
+    <method name="getService" start="41" end="44" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get the current name of the API service"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="getTypeOfToken" start="58" end="61" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get the type of token needed for this service &lt;pre&gt; It can be: - anonymous - identified - antiforgery - empty &lt;/pre&gt;"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

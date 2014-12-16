@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+  <head>
+    <title>phpDox - Zend_Config_Ini</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">Zend_Config_Ini</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>\</small>Zend_Config_Ini</h1>
+        <h4/>
+        <p/>
+        <ul>
+          <li>Copyright: Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)</li>
+          <li>License: http://framework.zend.com/license/new-bsd     New BSD License</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class Zend_Config_Ini
+                extends <a title="Zend_Config" href="../classes/Zend_Config.html">Zend_Config</a>
+            {<br/><ul class="none"><li>// members</li><li>protected
+                         <a href="#members">$_nestSeparator</a>;
+                    </li><li>protected
+                         <a href="#members">$_sectionSeparator</a>;
+                    </li><li>protected
+                         <a href="#members">$_skipExtends</a>;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Zend_Config">Zend_Config</span></li><li>protected
+                             <a href="#members">$_allowModifications</a>;
+                        </li><li>protected
+                             <a href="#members">$_index</a>;
+                        </li><li>protected
+                             <a href="#members">$_count</a>;
+                        </li><li>protected
+                             <a href="#members">$_data</a>;
+                        </li><li>protected
+                             <a href="#members">$_skipNextIteration</a>;
+                        </li><li>protected
+                             <a href="#members">$_loadedSection</a>;
+                        </li><li>protected
+                             <a href="#members">$_extends</a>;
+                        </li><li>protected
+                             <a href="#members">$_loadFileErrorStr</a>;
+                        </li></ul><ul class="none"><li>// methods</li><li>public void <a title="Zend_Config_Ini" href="../classes/Zend_Config_Ini/__construct.html">__construct</a>()
+                    </li><li>protected array <a title="Zend_Config_Ini" href="../classes/Zend_Config_Ini/_parseIniFile.html">_parseIniFile</a>()
+                    </li><li>protected array <a title="Zend_Config_Ini" href="../classes/Zend_Config_Ini/_loadIniFile.html">_loadIniFile</a>()
+                    </li><li>protected array <a title="Zend_Config_Ini" href="../classes/Zend_Config_Ini/_processSection.html">_processSection</a>()
+                    </li><li>protected array <a title="Zend_Config_Ini" href="../classes/Zend_Config_Ini/_processKey.html">_processKey</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="Zend_Config">Zend_Config</span></li><li>public void <a title="Zend_Config" href="../classes/Zend_Config/__construct.html">__construct</a>()
+                        </li><li>public mixed <a title="Zend_Config" href="../classes/Zend_Config/get.html">get</a>()
+                        </li><li>public mixed <a title="Zend_Config" href="../classes/Zend_Config/__get.html">__get</a>()
+                        </li><li>public void <a title="Zend_Config" href="../classes/Zend_Config/__set.html">__set</a>()
+                        </li><li>public void <a title="Zend_Config" href="../classes/Zend_Config/__clone.html">__clone</a>()
+                        </li><li>public array <a title="Zend_Config" href="../classes/Zend_Config/toArray.html">toArray</a>()
+                        </li><li>public boolean <a title="Zend_Config" href="../classes/Zend_Config/__isset.html">__isset</a>()
+                        </li><li>public void <a title="Zend_Config" href="../classes/Zend_Config/__unset.html">__unset</a>()
+                        </li><li>public int <a title="Zend_Config" href="../classes/Zend_Config/count.html">count</a>()
+                        </li><li>public mixed <a title="Zend_Config" href="../classes/Zend_Config/current.html">current</a>()
+                        </li><li>public mixed <a title="Zend_Config" href="../classes/Zend_Config/key.html">key</a>()
+                        </li><li>public void <a title="Zend_Config" href="../classes/Zend_Config/next.html">next</a>()
+                        </li><li>public void <a title="Zend_Config" href="../classes/Zend_Config/rewind.html">rewind</a>()
+                        </li><li>public boolean <a title="Zend_Config" href="../classes/Zend_Config/valid.html">valid</a>()
+                        </li><li>public mixed <a title="Zend_Config" href="../classes/Zend_Config/getSectionName.html">getSectionName</a>()
+                        </li><li>public boolean <a title="Zend_Config" href="../classes/Zend_Config/areAllSectionsLoaded.html">areAllSectionsLoaded</a>()
+                        </li><li>public Zend_Config <a title="Zend_Config" href="../classes/Zend_Config/merge.html">merge</a>()
+                        </li><li>public void <a title="Zend_Config" href="../classes/Zend_Config/setReadOnly.html">setReadOnly</a>()
+                        </li><li>public boolean <a title="Zend_Config" href="../classes/Zend_Config/readOnly.html">readOnly</a>()
+                        </li><li>public array <a title="Zend_Config" href="../classes/Zend_Config/getExtends.html">getExtends</a>()
+                        </li><li>public void <a title="Zend_Config" href="../classes/Zend_Config/setExtend.html">setExtend</a>()
+                        </li><li>protected void <a title="Zend_Config" href="../classes/Zend_Config/_assertValidExtend.html">_assertValidExtend</a>()
+                        </li><li>protected void <a title="Zend_Config" href="../classes/Zend_Config/_loadFileErrorHandler.html">_loadFileErrorHandler</a>()
+                        </li><li>protected array <a title="Zend_Config" href="../classes/Zend_Config/_arrayMergeRecursive.html">_arrayMergeRecursive</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a href="../classes/Zend_Config.html">Zend_Config</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>PHPMessDetector</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Rule</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td>101 - 160</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
+              </td>
+              <td>The method __construct() has a Cyclomatic Complexity of 13. The configured cyclomatic complexity threshold is 10.</td>
+            </tr>
+          </table>
+        </div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="_allowModifications"><strong>$_allowModifications</strong>
+                —
+                boolean<br/><span class="indent">Whether in-memory modifications to configuration data are allowed</span></li>
+            <li id="_count"><strong>$_count</strong>
+                —
+                integer<br/><span class="indent">Number of elements in configuration data</span></li>
+            <li id="_data"><strong>$_data</strong>
+                —
+                array<br/><span class="indent">Contains array of configuration data</span></li>
+            <li id="_extends"><strong>$_extends</strong>
+                —
+                array<br/><span class="indent">This is used to track section inheritance. The keys are names of sections that extend other sections, and the values are the extended sections.</span></li>
+            <li id="_index"><strong>$_index</strong>
+                —
+                integer<br/><span class="indent">Iteration index</span></li>
+            <li id="_loadFileErrorStr"><strong>$_loadFileErrorStr</strong>
+                —
+                string<br/><span class="indent">Load file error string.</span></li>
+            <li id="_loadedSection"><strong>$_loadedSection</strong>
+                —
+                mixed<br/><span class="indent">Contains which config file sections were loaded. This is null if all sections were loaded, a string name if one section is loaded and an array of string names if multiple sections were loaded.</span></li>
+            <li id="_nestSeparator"><strong>$_nestSeparator</strong>
+                —
+                string<br/><span class="indent">String that separates nesting levels of configuration data identifiers</span></li>
+            <li id="_sectionSeparator"><strong>$_sectionSeparator</strong>
+                —
+                string<br/><span class="indent">String that separates the parent section name</span></li>
+            <li id="_skipExtends"><strong>$_skipExtends</strong>
+                —
+                boolean<br/><span class="indent">Whether to skip extends or not</span></li>
+            <li id="_skipNextIteration"><strong>$_skipNextIteration</strong>
+                —
+                boolean<br/><span class="indent">Used when unsetting values during iteration to ensure we do not skip the next element</span></li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>protected</h4>
+          <ul>
+            <li id="_loadIniFile"><a title="Zend_Config_Ini" href="../classes/Zend_Config_Ini/_loadIniFile.html">_loadIniFile()</a>
+                — Load the ini file and preprocess the section separator (':' in the section name (that is used for section extension) so that the resultant array has the correct section names and the extension information is stored in a sub-key called ';extends'. We use ';extends' as this can never be a valid key name in an INI file that has been loaded using parse_ini_file().</li>
+            <li id="_parseIniFile"><a title="Zend_Config_Ini" href="../classes/Zend_Config_Ini/_parseIniFile.html">_parseIniFile()</a>
+                — Load the INI file from disk using parse_ini_file(). Use a private error handler to convert any loading errors into a Zend_Config_Exception</li>
+            <li id="_processKey"><a title="Zend_Config_Ini" href="../classes/Zend_Config_Ini/_processKey.html">_processKey()</a>
+                — Assign the key's value to the property list. Handles the nest separator for sub-properties.</li>
+            <li id="_processSection"><a title="Zend_Config_Ini" href="../classes/Zend_Config_Ini/_processSection.html">_processSection()</a>
+                — Process each element in the section and handle the ";extends" inheritance key. Passes control to _processKey() to handle the nest separator sub-property syntax that may be used within the key name.</li>
+          </ul>
+          <h3>Inherited from <a title="Zend_Config" href="../classes/Zend_Config.html">Zend_Config</a></h3>
+          <h4>protected</h4>
+          <ul>
+            <li id="_arrayMergeRecursive"><a title="Zend_Config" href="../classes/Zend_Config/_arrayMergeRecursive.html">_arrayMergeRecursive()</a>
+                — Merge two arrays recursively, overwriting keys of the same name in $firstArray with the value in $secondArray.</li>
+            <li id="_assertValidExtend"><a title="Zend_Config" href="../classes/Zend_Config/_assertValidExtend.html">_assertValidExtend()</a>
+                — Throws an exception if $extendingSection may not extend $extendedSection, and tracks the section extension if it is valid.</li>
+            <li id="_loadFileErrorHandler"><a title="Zend_Config" href="../classes/Zend_Config/_loadFileErrorHandler.html">_loadFileErrorHandler()</a>
+                — Handle any errors from simplexml_load_file or parse_ini_file</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="__clone"><a title="Zend_Config" href="../classes/Zend_Config/__clone.html">__clone()</a>
+                — Deep clone of this instance to ensure that nested Zend_Configs are also cloned.</li>
+            <li id="__get"><a title="Zend_Config" href="../classes/Zend_Config/__get.html">__get()</a>
+                — Magic function so that $obj-&gt;value will work.</li>
+            <li id="__isset"><a title="Zend_Config" href="../classes/Zend_Config/__isset.html">__isset()</a>
+                — Support isset() overloading on PHP 5.1</li>
+            <li id="__set"><a title="Zend_Config" href="../classes/Zend_Config/__set.html">__set()</a>
+                — Only allow setting of a property if $allowModifications was set to true on construction. Otherwise, throw an exception.</li>
+            <li id="__unset"><a title="Zend_Config" href="../classes/Zend_Config/__unset.html">__unset()</a>
+                — Support unset() overloading on PHP 5.1</li>
+            <li id="areAllSectionsLoaded"><a title="Zend_Config" href="../classes/Zend_Config/areAllSectionsLoaded.html">areAllSectionsLoaded()</a>
+                — Returns true if all sections were loaded</li>
+            <li id="count"><a title="Zend_Config" href="../classes/Zend_Config/count.html">count()</a>
+                — Defined by Countable interface</li>
+            <li id="current"><a title="Zend_Config" href="../classes/Zend_Config/current.html">current()</a>
+                — Defined by Iterator interface</li>
+            <li id="get"><a title="Zend_Config" href="../classes/Zend_Config/get.html">get()</a>
+                — Retrieve a value and return $default if there is no element set.</li>
+            <li id="getExtends"><a title="Zend_Config" href="../classes/Zend_Config/getExtends.html">getExtends()</a>
+                — Get the current extends</li>
+            <li id="getSectionName"><a title="Zend_Config" href="../classes/Zend_Config/getSectionName.html">getSectionName()</a>
+                — Returns the section name(s) loaded.</li>
+            <li id="key"><a title="Zend_Config" href="../classes/Zend_Config/key.html">key()</a>
+                — Defined by Iterator interface</li>
+            <li id="merge"><a title="Zend_Config" href="../classes/Zend_Config/merge.html">merge()</a>
+                — Merge another Zend_Config with this one. The items in $merge will override the same named items in the current config.</li>
+            <li id="next"><a title="Zend_Config" href="../classes/Zend_Config/next.html">next()</a>
+                — Defined by Iterator interface</li>
+            <li id="readOnly"><a title="Zend_Config" href="../classes/Zend_Config/readOnly.html">readOnly()</a>
+                — Returns if this Zend_Config object is read only or not.</li>
+            <li id="rewind"><a title="Zend_Config" href="../classes/Zend_Config/rewind.html">rewind()</a>
+                — Defined by Iterator interface</li>
+            <li id="setExtend"><a title="Zend_Config" href="../classes/Zend_Config/setExtend.html">setExtend()</a>
+                — Set an extend for Zend_Config_Writer</li>
+            <li id="setReadOnly"><a title="Zend_Config" href="../classes/Zend_Config/setReadOnly.html">setReadOnly()</a>
+                — Prevent any more modifications being made to this instance. Useful after merge() has been used to merge multiple Zend_Config objects into one object which should then not be modified again.</li>
+            <li id="toArray"><a title="Zend_Config" href="../classes/Zend_Config/toArray.html">toArray()</a>
+                — Return an associative array of the stored data.</li>
+            <li id="valid"><a title="Zend_Config" href="../classes/Zend_Config/valid.html">valid()</a>
+                — Defined by Iterator interface</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2014-09-29T11:07:23+02:00 (commit #<span title="15b41ee70d68a3fbaca371cb42ba7ed7f330afe9">15b41ee</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre>Add dependency library Zend_Config. Useful only for Unit Testing</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

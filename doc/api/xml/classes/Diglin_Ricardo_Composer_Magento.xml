@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Composer\Magento" namespace="Diglin\Ricardo\Composer" name="Magento" abstract="false" final="false" start="15" end="90">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Composer" file="Magento.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Composer/Magento.php" size="2681" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="852497c50639b2146885e8ad6643f88da0148912"/>
+  <method name="postPackageAction" start="22" end="35" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact="Copy the Diglin Ricardo Library into the appropriate Magento lib folder"/>
+      <param type="object" variable="$event">
+        <type full="Composer\Script\PackageEvent" namespace="Composer\Script" name="PackageEvent"/>
+      </param>
+    </docblock>
+    <parameter name="event" byreference="false" type="object">
+      <type full="Composer\Script\PackageEvent" namespace="Composer\Script" name="PackageEvent"/>
+    </parameter>
+  </method>
+  <method name="cleanPackageAction" start="42" end="52" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact="Remove the installed library Diglin Ricardo from the lib Magento folder"/>
+      <param type="object" variable="$event">
+        <type full="Composer\Script\PackageEvent" namespace="Composer\Script" name="PackageEvent"/>
+      </param>
+    </docblock>
+    <parameter name="event" byreference="false" type="object">
+      <type full="Composer\Script\PackageEvent" namespace="Composer\Script" name="PackageEvent"/>
+    </parameter>
+  </method>
+  <method name="_recurseCopy" start="60" end="74" abstract="false" final="false" static="true" visibility="protected">
+    <docblock>
+      <description compact="Copy recursively the source to a target"/>
+      <param type="string" variable="$src"/>
+      <param type="string" variable="$dst"/>
+    </docblock>
+    <parameter name="src" byreference="false" type="{unknown}"/>
+    <parameter name="dst" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="_recursiveRmDir" start="82" end="89" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact="Remove directory recursively"/>
+      <param variable="$dir"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Composer\bool" namespace="Diglin\Ricardo\Composer" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="dir" byreference="false" type="{unknown}"/>
+  </method>
+</class>

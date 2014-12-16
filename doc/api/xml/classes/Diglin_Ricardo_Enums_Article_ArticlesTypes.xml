@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\Article\ArticlesTypes" namespace="Diglin\Ricardo\Enums\Article" name="ArticlesTypes" abstract="false" final="false" start="19" end="67">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article" file="ArticlesTypes.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article/ArticlesTypes.php" size="1883" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="132791341de3fdfd15ba736b7503dd3fef9130bc"/>
+  <docblock>
+    <description compact="Class ArticlesTypes"/>
+    <package value="Diglin\Ricardo\Enums\Article"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
+  <constant name="ALL" value="0"/>
+  <constant name="VEHICLES" value="1"/>
+  <constant name="CORE" value="2"/>
+  <constant name="ACCESSORIES" value="3"/>
+  <constant name="CARS" value="4"/>
+  <constant name="BIKES" value="5"/>
+  <constant name="OTHERS" value="6"/>
+  <constant name="UTILITIES" value="7"/>
+  <constant name="CARSANDBIKES" value="8"/>
+  <method name="getEnums" start="53" end="66" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <param variable="$value"/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
+        </return>
+      </docblock>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

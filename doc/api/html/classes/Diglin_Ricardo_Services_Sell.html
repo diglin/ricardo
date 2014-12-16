@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+  <head>
+    <title>phpDox - Diglin\Ricardo\Services\Sell</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html#Diglin_Ricardo_Services">Diglin\Ricardo\Services</a>
+          </li>
+          <li class="separator">Sell</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>Diglin\Ricardo\Services\</small>Sell</h1>
+        <h4>Class Sell</h4>
+        <p>This service is to be used to manage your articles as a seller: you can list, relist, modify, close an article ...</p>
+        <ul/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class Sell
+                extends <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">ServiceAbstract</a>
+            {<br/><ul class="none"><li>// Inherited constants from <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">ServiceAbstract</a></li><li>const <a href="#TOKEN_TYPE_ANONYMOUS">TOKEN_TYPE_ANONYMOUS</a> = 'anonymous';</li><li>const <a href="#TOKEN_TYPE_IDENTIFIED">TOKEN_TYPE_IDENTIFIED</a> = 'identified';</li><li>const <a href="#TOKEN_TYPE_ANTIFORGERY">TOKEN_TYPE_ANTIFORGERY</a> = 'antiforgery';</li><li>const <a href="#TOKEN_TYPE_TEMPORARY">TOKEN_TYPE_TEMPORARY</a> = 'temporary';</li><li>const <a href="#TOKEN_TYPE_DEFAULT">TOKEN_TYPE_DEFAULT</a> = '';</li></ul><ul class="none"><li>// members</li><li>protected
+                         <a href="#members">$_service</a>;
+                    </li><li>protected
+                         <a href="#members">$_typeOfToken</a>;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Services\ServiceAbstract">ServiceAbstract</span></li><li>protected
+                             <a href="#members">$_service</a>;
+                        </li><li>protected
+                             <a href="#members">$_typeOfToken</a>;
+                        </li></ul><ul class="none"><li>// methods</li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/addArticlePictures.html">addArticlePictures</a>()
+                    </li><li>public bool <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/addArticlePicturesResult.html">addArticlePicturesResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/appendArticleDescription.html">appendArticleDescription</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/appendArticleDescriptionResult.html">appendArticleDescriptionResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeArticle.html">closeArticle</a>()
+                    </li><li>public array|bool <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeArticleResult.html">closeArticleResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeArticles.html">closeArticles</a>()
+                    </li><li>public array|bool <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeArticlesResult.html">closeArticlesResult</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeClassified.html">closeClassified</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeClassifieds.html">closeClassifieds</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/deletePlannedArticle.html">deletePlannedArticle</a>()
+                    </li><li>public array|bool <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/deletePlannedArticleResult.html">deletePlannedArticleResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/deletePlannedArticles.html">deletePlannedArticles</a>()
+                    </li><li>public array|bool <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/deletePlannedArticlesResult.html">deletePlannedArticlesResult</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/getArticleFee.html">getArticleFee</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/getUpdateArticleFee.html">getUpdateArticleFee</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/getUpdateClassifiedFee.html">getUpdateClassifiedFee</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertArticle.html">insertArticle</a>()
+                    </li><li>public array|bool <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertArticleResult.html">insertArticleResult</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertArticles.html">insertArticles</a>()
+                    </li><li>public array|bool <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertArticlesResult.html">insertArticlesResult</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertClassified.html">insertClassified</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertClassifieds.html">insertClassifieds</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertPreviewConvertedClassified.html">insertPreviewConvertedClassified</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/ocrRecognize.html">ocrRecognize</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistArticle.html">relistArticle</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistArticles.html">relistArticles</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistArticlesWithoutModification.html">relistArticlesWithoutModification</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistArticleWithoutModification.html">relistArticleWithoutModification</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistClassified.html">relistClassified</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistClassifieds.html">relistClassifieds</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistClassifiedsWithoutModification.html">relistClassifiedsWithoutModification</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistClassifiedWithoutModification.html">relistClassifiedWithoutModification</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/tesseractRecognize.html">tesseractRecognize</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticle.html">updateArticle</a>()
+                    </li><li>public bool|array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticleResult.html">updateArticleResult</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticleBuyNowPrice.html">updateArticleBuyNowPrice</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticleBuyNowQuantity.html">updateArticleBuyNowQuantity</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticleBuyNowRelistCount.html">updateArticleBuyNowRelistCount</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticlePictures.html">updateArticlePictures</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticlePicturesResult.html">updateArticlePicturesResult</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateClassified.html">updateClassified</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateClassifiedPictures.html">updateClassifiedPictures</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updatePlannedArticle.html">updatePlannedArticle</a>()
+                    </li><li>public void <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updatePlannedArticlePictures.html">updatePlannedArticlePictures</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="Diglin\Ricardo\Services\ServiceAbstract">ServiceAbstract</span></li><li>public string <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getService.html">getService</a>()
+                        </li><li>public string <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getTypeOfToken.html">getTypeOfToken</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">Diglin\Ricardo\Services\ServiceAbstract</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="TOKEN_TYPE_ANONYMOUS">TOKEN_TYPE_ANONYMOUS</td>
+              <td>'anonymous'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_IDENTIFIED">TOKEN_TYPE_IDENTIFIED</td>
+              <td>'identified'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_ANTIFORGERY">TOKEN_TYPE_ANTIFORGERY</td>
+              <td>'antiforgery'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_TEMPORARY">TOKEN_TYPE_TEMPORARY</td>
+              <td>'temporary'</td>
+            </tr>
+            <tr>
+              <td id="TOKEN_TYPE_DEFAULT">TOKEN_TYPE_DEFAULT</td>
+              <td>''</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="_service"><strong>$_service</strong>
+                —
+                string</li>
+            <li id="_service"><strong>$_service</strong>
+                —
+                string</li>
+            <li id="_typeOfToken"><strong>$_typeOfToken</strong>
+                —
+                string</li>
+            <li id="_typeOfToken"><strong>$_typeOfToken</strong>
+                —
+                string</li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="addArticlePictures"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/addArticlePictures.html">addArticlePictures()</a>
+                — Adds the article pictures.</li>
+            <li id="addArticlePicturesResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/addArticlePicturesResult.html">addArticlePicturesResult()</a>
+                — Get the article fee</li>
+            <li id="appendArticleDescription"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/appendArticleDescription.html">appendArticleDescription()</a>
+                — Appends the article description.</li>
+            <li id="appendArticleDescriptionResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/appendArticleDescriptionResult.html">appendArticleDescriptionResult()</a>
+                — Nothing to return normally, we keep for errors or to have consistent API</li>
+            <li id="closeArticle"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeArticle.html">closeArticle()</a>
+                — Closes the article.</li>
+            <li id="closeArticleResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeArticleResult.html">closeArticleResult()</a>
+                — Get the result of the closed article</li>
+            <li id="closeArticles"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeArticles.html">closeArticles()</a>
+                — Closes a list of articles.</li>
+            <li id="closeArticlesResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeArticlesResult.html">closeArticlesResult()</a>
+                — Get the result of the closed articles</li>
+            <li id="closeClassified"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeClassified.html">closeClassified()</a>
+                — Closes the classified.</li>
+            <li id="closeClassifieds"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/closeClassifieds.html">closeClassifieds()</a>
+                — Closes list of classified.</li>
+            <li id="deletePlannedArticle"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/deletePlannedArticle.html">deletePlannedArticle()</a>
+                — Deletes the planned article.</li>
+            <li id="deletePlannedArticleResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/deletePlannedArticleResult.html">deletePlannedArticleResult()</a>
+                — Get the result of the deleted article</li>
+            <li id="deletePlannedArticles"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/deletePlannedArticles.html">deletePlannedArticles()</a>
+                — Deletes the planned articles.</li>
+            <li id="deletePlannedArticlesResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/deletePlannedArticlesResult.html">deletePlannedArticlesResult()</a>
+                — Get the result of the deleted articles</li>
+            <li id="getArticleFee"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/getArticleFee.html">getArticleFee()</a>
+                — Gets the article fee.</li>
+            <li id="getUpdateArticleFee"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/getUpdateArticleFee.html">getUpdateArticleFee()</a>
+                — Gets the update article fee.</li>
+            <li id="getUpdateClassifiedFee"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/getUpdateClassifiedFee.html">getUpdateClassifiedFee()</a>
+                — Gets the update classified fee.</li>
+            <li id="insertArticle"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertArticle.html">insertArticle()</a>
+                — Inserts an article or a planned article</li>
+            <li id="insertArticleResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertArticleResult.html">insertArticleResult()</a>
+                — Get the article result data</li>
+            <li id="insertArticles"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertArticles.html">insertArticles()</a>
+                — Inserts a list of articles or a planned articles. This method is currently not fully usable to external partners</li>
+            <li id="insertArticlesResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertArticlesResult.html">insertArticlesResult()</a>
+                — Get the article result data</li>
+            <li id="insertClassified"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertClassified.html">insertClassified()</a>
+                — Inserts the classified.</li>
+            <li id="insertClassifieds"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertClassifieds.html">insertClassifieds()</a>
+                — Insert a list of classified items. This method is currently not fully usable to external partners</li>
+            <li id="insertPreviewConvertedClassified"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/insertPreviewConvertedClassified.html">insertPreviewConvertedClassified()</a>
+                — Inserts the preview converted classified.</li>
+            <li id="ocrRecognize"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/ocrRecognize.html">ocrRecognize()</a>
+                — Ocrs recognition.</li>
+            <li id="relistArticle">
+              <a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistArticle.html">relistArticle()</a>
+            </li>
+            <li id="relistArticleWithoutModification"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistArticleWithoutModification.html">relistArticleWithoutModification()</a>
+                — Relists the article without modifing it.</li>
+            <li id="relistArticles"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistArticles.html">relistArticles()</a>
+                — Relists the auction articles. This method is currently not fully usable to external partners</li>
+            <li id="relistArticlesWithoutModification"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistArticlesWithoutModification.html">relistArticlesWithoutModification()</a>
+                — Relists the auction articles without modification. This method is currently not fully usable to external partners</li>
+            <li id="relistClassified"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistClassified.html">relistClassified()</a>
+                — Relists the classified.</li>
+            <li id="relistClassifiedWithoutModification"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistClassifiedWithoutModification.html">relistClassifiedWithoutModification()</a>
+                — Relists the classified Without Modification.</li>
+            <li id="relistClassifieds"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistClassifieds.html">relistClassifieds()</a>
+                — Relists the classified articles. This method is currently not fully usable to external partners</li>
+            <li id="relistClassifiedsWithoutModification"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/relistClassifiedsWithoutModification.html">relistClassifiedsWithoutModification()</a>
+                — Relists the classified article without modification. This method is currently not fully usable to external partners</li>
+            <li id="tesseractRecognize"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/tesseractRecognize.html">tesseractRecognize()</a>
+                — Ocrs recognition.</li>
+            <li id="updateArticle"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticle.html">updateArticle()</a>
+                — Updates the article.</li>
+            <li id="updateArticleBuyNowPrice"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticleBuyNowPrice.html">updateArticleBuyNowPrice()</a>
+                — Updates the article buy now price.</li>
+            <li id="updateArticleBuyNowQuantity"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticleBuyNowQuantity.html">updateArticleBuyNowQuantity()</a>
+                — Updates the article buy now quantity.</li>
+            <li id="updateArticleBuyNowRelistCount"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticleBuyNowRelistCount.html">updateArticleBuyNowRelistCount()</a>
+                — Updates the article buy now relist count.</li>
+            <li id="updateArticlePictures"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticlePictures.html">updateArticlePictures()</a>
+                — Updates the article pictures.</li>
+            <li id="updateArticlePicturesResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticlePicturesResult.html">updateArticlePicturesResult()</a>
+                — Nothing to return normally, we keep for errors or to have consistent API</li>
+            <li id="updateArticleResult"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateArticleResult.html">updateArticleResult()</a>
+                — Get the article result data</li>
+            <li id="updateClassified"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateClassified.html">updateClassified()</a>
+                — Updates the classified.</li>
+            <li id="updateClassifiedPictures"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updateClassifiedPictures.html">updateClassifiedPictures()</a>
+                — Update classified pictures'</li>
+            <li id="updatePlannedArticle"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updatePlannedArticle.html">updatePlannedArticle()</a>
+                — Updates the planned article.</li>
+            <li id="updatePlannedArticlePictures"><a title="Diglin\Ricardo\Services\Sell" href="../classes/Diglin_Ricardo_Services_Sell/updatePlannedArticlePictures.html">updatePlannedArticlePictures()</a>
+                — Upd</li>
+          </ul>
+          <h3>Inherited from <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">Diglin\Ricardo\Services\ServiceAbstract</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getService"><a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getService.html">getService()</a>
+                — Get the current name of the API service</li>
+            <li id="getTypeOfToken"><a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getTypeOfToken.html">getTypeOfToken()</a>
+                — Get the type of token needed for this service &lt;pre&gt; It can be: - anonymous - identified - antiforgery - empty &lt;/pre&gt;</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2014-09-28T11:30:04+02:00 (commit #<span title="207ba4bcace9aaeb29d9cda05cfe37183aa02bc5">207ba4b</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Add doc block in some classes</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-28T11:22:59+02:00 (commit #<span title="3e11a2cf9148ee20ec7e06905b6b86a0c74ea70d">3e11a2c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-17T09:13:14+02:00 (commit #<span title="1a0d069d559c2ee3b28f04a33dcb0ab5aeb808ca">1a0d069</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Relist article implementation (still in progress because the parameters signature doesn't seem to be correct)</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-14T22:13:45+02:00 (commit #<span title="cda6bb1628c8f76085eaf114eb28a11aefa5e5ad">cda6bb1</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>API changes and test</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-07T17:07:03+02:00 (commit #<span title="00bd23100f7d332171693b6ebe3680822d3479c7">00bd231</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Insert Article Implementation and test</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-04T17:17:23+02:00 (commit #<span title="bed18eec2aaf70d0369b923db8f082c92847a167">bed18ee</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Start the implementation of SellService, add parameter abstract and their classes to facilitate data manipulation of parameters between the lib and ricardo API</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

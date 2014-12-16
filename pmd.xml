@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pmd version="@project.version@" timestamp="2014-12-16T12:10:48+01:00">
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/ArticleErrors.php">
+    <violation beginline="158" endline="297" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Diglin\Ricardo\Enums" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="ArticleErrors" method="getEnums" priority="3">
+      The phpmd\node\methodnode getEnums() has 140 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/ParameterAbstract.php">
+    <violation beginline="51" endline="91" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ParameterAbstract" method="getDataProperties" priority="3">
+      The method getDataProperties() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Security.php">
+    <violation beginline="27" endline="610" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="Security" priority="3">
+      The class Security has an overall complexity of 78 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="190" endline="218" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Security" method="parseValidationUrl" priority="3">
+      The method parseValidationUrl() has a Cyclomatic Complexity of 14. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="190" endline="218" rule="NPathComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="Security" method="parseValidationUrl" priority="3">
+      The method parseValidationUrl() has an NPath complexity of 7812500. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="320" endline="390" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Security" method="simulateValidationUrl" priority="3">
+      The method simulateValidationUrl() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="320" endline="390" rule="NPathComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="Security" method="simulateValidationUrl" priority="3">
+      The method simulateValidationUrl() has an NPath complexity of 6000. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell.php">
+    <violation beginline="25" endline="146" rule="TooManyMethods" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="Sell" priority="3">
+      The class Sell has 11 methods. Consider refactoring Sell to keep number of methods under 10.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/ArticleInformationParameter.php">
+    <violation beginline="19" endline="520" rule="TooManyFields" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers\Sell\Parameter" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanyfields" class="ArticleInformationParameter" priority="3">
+      The class ArticleInformationParameter has 22 fields. Consider to redesign ArticleInformationParameter to keep the number of fields under 15.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/SoldArticlesParameter.php">
+    <violation beginline="26" endline="466" rule="TooManyFields" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers\SellerAccount\Parameter" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanyfields" class="SoldArticlesParameter" priority="3">
+      The class SoldArticlesParameter has 18 fields. Consider to redesign SoldArticlesParameter to keep the number of fields under 15.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/System.php">
+    <violation beginline="23" endline="606" rule="TooManyFields" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanyfields" class="System" priority="3">
+      The class System has 22 fields. Consider to redesign System to keep the number of fields under 15.
+    </violation>
+    <violation beginline="23" endline="606" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Managers" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="System" priority="3">
+      The class System has an overall complexity of 64 which is very high. The configured complexity threshold is 50.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Service.php">
+    <violation beginline="181" endline="247" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Service" method="proceed" priority="3">
+      The method proceed() has a Cyclomatic Complexity of 14. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="181" endline="247" rule="NPathComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="Service" method="proceed" priority="3">
+      The method proceed() has an NPath complexity of 301. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Services/Sell.php">
+    <violation beginline="32" endline="658" rule="ExcessivePublicCount" ruleset="Code Size Rules" package="Diglin\Ricardo\Services" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivepubliccount" class="Sell" priority="3">
+      The class Sell has 45 public methods and attributes. Consider to reduce the number of public items under 45.
+    </violation>
+    <violation beginline="32" endline="658" rule="TooManyMethods" ruleset="Code Size Rules" package="Diglin\Ricardo\Services" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="Sell" priority="3">
+      The class Sell has 42 methods. Consider refactoring Sell to keep number of methods under 10.
+    </violation>
+    <violation beginline="32" endline="658" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Services" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="Sell" priority="3">
+      The class Sell has an overall complexity of 56 which is very high. The configured complexity threshold is 50.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Services/SellerAccount.php">
+    <violation beginline="31" endline="596" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Services" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="SellerAccount" priority="3">
+      The class SellerAccount has an overall complexity of 64 which is very high. The configured complexity threshold is 50.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Diglin/Ricardo/Services/System.php">
+    <violation beginline="21" endline="1218" rule="ExcessiveClassLength" ruleset="Code Size Rules" package="Diglin\Ricardo\Services" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasslength" class="System" priority="3">
+      The class System has 1198 lines of code. Current threshold is 1000. Avoid really long classes.
+    </violation>
+    <violation beginline="21" endline="1218" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Services" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="System" priority="3">
+      The class System has an overall complexity of 108 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="971" endline="996" rule="NPathComplexity" ruleset="Code Size Rules" package="Diglin\Ricardo\Services" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="System" method="getPromotions" priority="3">
+      The method getPromotions() has an NPath complexity of 627. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Zend/Config.php">
+    <violation beginline="29" endline="484" rule="TooManyMethods" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="Zend_Config" priority="3">
+      The class Zend_Config has 19 methods. Consider refactoring Zend_Config to keep number of methods under 10.
+    </violation>
+    <violation beginline="29" endline="484" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="Zend_Config" priority="3">
+      The class Zend_Config has an overall complexity of 55 which is very high. The configured complexity threshold is 50.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Zend/Config/Ini.php">
+    <violation beginline="101" endline="160" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Zend_Config_Ini" method="__construct" priority="3">
+      The method __construct() has a Cyclomatic Complexity of 13. The configured cyclomatic complexity threshold is 10.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Zend/Config/Json.php">
+    <violation beginline="82" endline="174" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Zend_Config_Json" method="__construct" priority="3">
+      The method __construct() has a Cyclomatic Complexity of 22. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="82" endline="174" rule="NPathComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="Zend_Config_Json" method="__construct" priority="3">
+      The method __construct() has an NPath complexity of 2880. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Zend/Config/Xml.php">
+    <violation beginline="78" endline="146" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Zend_Config_Xml" method="__construct" priority="3">
+      The method __construct() has a Cyclomatic Complexity of 15. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="78" endline="146" rule="NPathComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="Zend_Config_Xml" method="__construct" priority="3">
+      The method __construct() has an NPath complexity of 432. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="189" endline="295" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Zend_Config_Xml" method="_toArray" priority="3">
+      The method _toArray() has a Cyclomatic Complexity of 27. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="189" endline="295" rule="NPathComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="Zend_Config_Xml" method="_toArray" priority="3">
+      The method _toArray() has an NPath complexity of 9800. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="189" endline="295" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="Zend_Config_Xml" method="_toArray" priority="3">
+      The phpmd\node\methodnode _toArray() has 107 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+  </file>
+  <file name="/rissip/github/ricardo/src/Zend/Config/Yaml.php">
+    <violation beginline="35" endline="415" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="Zend_Config_Yaml" priority="3">
+      The class Zend_Config_Yaml has an overall complexity of 58 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="131" endline="231" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Zend_Config_Yaml" method="__construct" priority="3">
+      The method __construct() has a Cyclomatic Complexity of 22. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="131" endline="231" rule="NPathComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="Zend_Config_Yaml" method="__construct" priority="3">
+      The method __construct() has an NPath complexity of 864. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="131" endline="231" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="Zend_Config_Yaml" method="__construct" priority="3">
+      The phpmd\node\methodnode __construct() has 101 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+    <violation beginline="288" endline="352" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Zend_Config" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="Zend_Config_Yaml" method="_decodeYaml" priority="3">
+      The method _decodeYaml() has a Cyclomatic Complexity of 12. The configured cyclomatic complexity threshold is 10.
+    </violation>
+  </file>
+</pmd>

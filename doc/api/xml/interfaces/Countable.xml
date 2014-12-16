@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src#" full="Countable" namespace="" name="Countable">
+  <method name="count" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Count elements of an object"/>
+      <return type="int"/>
+    </docblock>
+  </method>
+<implementor full="Diglin\Ricardo\Config" namespace="Diglin\Ricardo" name="Config"/><implementor full="Zend_Config_Ini" namespace="" name="Zend_Config_Ini"/><implementor full="Zend_Config_Json" namespace="" name="Zend_Config_Json"/><implementor full="Zend_Config_Xml" namespace="" name="Zend_Config_Xml"/><implementor full="Zend_Config_Yaml" namespace="" name="Zend_Config_Yaml"/><implementor full="Zend_Config" namespace="" name="Zend_Config"/></interface>

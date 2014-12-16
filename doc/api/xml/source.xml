@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<source xmlns="http://xml.phpdox.net/src#">
+  <dir name="src">
+    <dir name="Diglin">
+      <dir name="Ricardo">
+        <file name="Api.php" size="6922" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="3721806362e4519575b2564d22e78cb9a3bff68a"/>
+        <dir name="Composer">
+          <file name="Magento.php" size="2681" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="852497c50639b2146885e8ad6643f88da0148912"/>
+        </dir>
+        <file name="Config.php" size="2694" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="44b16a524c5c23dce6dcc65eeb0358fd5e84b65c"/>
+        <dir name="Core">
+          <file name="ApiInterface.php" size="1001" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1e213916ba4cb8beb770e27b6451b94d31af370c"/>
+          <file name="ConfigInterface.php" size="759" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="78204f96f2751f07bd7e21a58e792ccd6d3b7eb8"/>
+          <file name="Helper.php" size="2120" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="a16a72d81856aeea2f03a85cef4ad9d0143aac8c"/>
+        </dir>
+        <dir name="Enums">
+          <file name="AbstractEnums.php" size="1017" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="28b9ddf5f0250045443920bb13be2c31946c32c1"/>
+          <dir name="Article">
+            <file name="ArticlesTypes.php" size="1883" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="132791341de3fdfd15ba736b7503dd3fef9130bc"/>
+            <file name="CloseListStatus.php" size="1140" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="59cf24d9512b27318fe8d77a8156aa626c5b78c3"/>
+            <file name="InternalReferenceType.php" size="750" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="ff25b2fd6504d041bd6eeab289e234e3df8ba349"/>
+            <file name="PromotionCode.php" size="4050" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0c19ade396c1333021fe07b732d33ff26af46268"/>
+            <file name="Warranty.php" size="820" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5e269e5a4d67fc409580cc94fdbb12949da8558a"/>
+          </dir>
+          <file name="ArticleErrors.php" size="19564" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="2781443a57110368606897874f2fa5e35fbf86d0"/>
+          <dir name="Customer">
+            <file name="ArticleTypeFilter.php" size="1294" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="ae9d2fdcccf9cd95eb7e41d5110f3193e377c710"/>
+            <file name="OpenArticlesSortBy.php" size="2853" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="45e5fc91fb7fca256ad546888caeede336d49cf2"/>
+            <file name="PaidStatusFilter.php" size="892" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="18eb7172c43147eafa7dc5312647f0c3d858d7b5"/>
+            <file name="ShippedStatusFilter.php" size="916" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1207a4970013b6a1e9635fa3198b65c2e9ab73ce"/>
+            <file name="SoldArticlesSortBy.php" size="4478" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="8ee62b5530c6ca5dc4a171b3bc66d5542ba1a792"/>
+          </dir>
+          <file name="CustomerErrors.php" size="8205" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1c83c94b40ba247117531ac142fc838051741cfd"/>
+          <file name="GeneralErrors.php" size="2750" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="66a41cad22a50ab037005e2f2acf7dbbdf9fa090"/>
+          <file name="PaymentMethods.php" size="967" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="acd43234cbe20c3235def9834a610b8a467ba908"/>
+          <file name="PictureErrors.php" size="1688" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="ef4ad02d8699655390058b4bf7d4d0045f86f4e5"/>
+          <file name="PictureExtension.php" size="749" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="84a810284831aa5d73600d7e99d3d773d716277d"/>
+          <file name="SecurityErrors.php" size="3514" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a4a4087d3eec15eb007aa1f644a7fabf244ca50e"/>
+          <dir name="System">
+            <file name="CategoryArticleType.php" size="1062" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1b6e8a73683ac58be45fb9484fd0ad9185d4d04e"/>
+            <file name="CategoryBrandingFilter.php" size="1022" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="761720ef7737836795bc3286aaf9bb7209eeb11c"/>
+            <file name="LanguageCode.php" size="1340" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6a45bc8d01ef3f052590692626603ec3494d54bb"/>
+            <file name="LanguageId.php" size="882" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6468eb430369f8bc04dabe0b3a6e0f9d5b8f7683"/>
+          </dir>
+        </dir>
+        <dir name="Exceptions">
+          <file name="ArticleException.php" size="473" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="49f9ada5f7aec562192372db4d4b1ac430159f25"/>
+          <file name="CurlException.php" size="467" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="16ae7dde847b6dfb88c58fb4e2737cb25d4762de"/>
+          <file name="CustomerException.php" size="475" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="e0161500b023bc9576d8656e67818df04dd20730"/>
+          <file name="ExceptionAbstract.php" size="1324" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6eb17cd1fb421c76b8f63282bcd913403caf8e54"/>
+          <file name="GeneralException.php" size="473" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="38a4ab7a6d2478f46b9cef6613be6907c6987d54"/>
+          <file name="PictureException.php" size="473" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0de40c78a12e0a7091836db1bb48511bab3c9738"/>
+          <file name="SecurityException.php" size="571" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="c4cb56bca66d077c08c084c7c1cdd704be95e76c"/>
+        </dir>
+        <dir name="Managers">
+          <file name="Customer.php" size="805" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="7b9fb006214c7fa8453804cdbe89cd732928753b"/>
+          <file name="ManagerAbstract.php" size="4559" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5cbc8500690e8a03c4cdbb31f31c4328018990a1"/>
+          <file name="ParameterAbstract.php" size="5050" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="e38960bb867e45076d65c91aea5f947a484ff178"/>
+          <file name="Security.php" size="17804" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="09f9dd6a48dab197e7b9bafddaa1a75d7a6b6306"/>
+          <dir name="Sell">
+            <dir name="Parameter">
+              <file name="AddArticlePicturesParameter.php" size="2187" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="32db577acbb3fd920ee85b12d372a689dfcf5652"/>
+              <file name="AppendArticleDescriptionParameter.php" size="2228" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="188a71d87f835aec1eeec2c156a05cada6466d41"/>
+              <file name="AppendDescriptionParameter.php" size="1780" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="44eea076eeaa9b859c3de89a6e46a7038f428542"/>
+              <file name="ArticleDeliveryParameter.php" size="2950" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="c440a870914e5ac9a047edeee8fd653fc41dc67a"/>
+              <file name="ArticleDescriptionParameter.php" size="4085" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1bafe266d3e6a0bab4d0d255ce02043025d885f2"/>
+              <file name="ArticleInformationParameter.php" size="10317" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="eacb558542128a6a11ae0f0df6bd4ff231bd66d3"/>
+              <file name="ArticleInternalReferenceParameter.php" size="1629" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="fe429f3fae3bff4faf356998944507b3568d66a2"/>
+              <file name="ArticlePictureParameter.php" size="1897" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="dfe0ac293497a64908cc8d0f956221f64f285693"/>
+              <file name="CloseArticleParameter.php" size="1473" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="34d7f1b00939914f7a6452a55eecfc58a44c806a"/>
+              <file name="CloseArticlesParameter.php" size="1771" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5377b401e6f8f0e02153ed74b38e247b0c3b5e2b"/>
+              <file name="DeletePlannedArticleParameter.php" size="2007" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="f19687bb02f9d539c2c70febe01f79febf6744fd"/>
+              <file name="DeletePlannedArticlesParameter.php" size="1807" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="38f6ddd556aa88bf59fbf026001f46b3d08c343d"/>
+              <file name="InsertArticleParameter.php" size="4778" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="d90185c8d987c06575f5de528500726950cce2c1"/>
+              <file name="InsertArticlesParameter.php" size="1636" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="72c2eeebc160eb48be0b1693aab63d21a96a4af9"/>
+              <file name="UpdateArticleParameter.php" size="3448" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="958827ea4958e4c171cc4af0dfedede3527627a0"/>
+              <file name="UpdateArticlePicturesParameter.php" size="2711" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="16ecf67783ab86ea7fb540e9322b9a80c1987eaf"/>
+            </dir>
+          </dir>
+          <file name="Sell.php" size="4261" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="2bff0a5d505e72aa9a2ad091254fdda07ee028ce"/>
+          <dir name="SellerAccount">
+            <dir name="Parameter">
+              <file name="ArticlesParameter.php" size="2641" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a4849a8a7c3d7861b4bf84e5b1e205f7004c7a73"/>
+              <file name="ClosedArticlesParameter.php" size="1702" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="c1349857466d3e3274072c2d5b54fba9149408b6"/>
+              <file name="OpenArticlesParameter.php" size="5669" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="98746f6939b40cd9c3a160ab18b3ee93b5d40c34"/>
+              <file name="PlannedArticleParameter.php" size="2027" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="e6b5f21fd6a7c7ddbbd065b5e79abbdd66e104e7"/>
+              <file name="PlannedArticlesParameter.php" size="3757" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="b3a0815218e93d71bcd80ab99b3cfc90289c3ab9"/>
+              <file name="SoldArticlesParameter.php" size="9093" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="f50d461e69c6c3255dea7b35eb695cbf35b489ba"/>
+              <file name="UnsoldArticlesParameter.php" size="5717" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="272d173407fb648cba0cf38bb1d4dc50ad0cbd8c"/>
+            </dir>
+          </dir>
+          <file name="SellerAccount.php" size="6239" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="cca6590257f08bea94fe157a620a8099db5add49"/>
+          <file name="System.php" size="13617" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a00014524fe83c19d5bdb7e7259f75826cbcbab0"/>
+        </dir>
+        <file name="Service.php" size="8794" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="b0c4fec68116094528526c6e1df86fd02c96f3f8"/>
+        <dir name="Services">
+          <file name="Customer.php" size="2247" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="12e0919530c9a287f4cad9a6813137222332122e"/>
+          <file name="Security.php" size="8124" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="d18ae9c58ad714f7195c3c9d4f8bdb6c668cc3c3"/>
+          <file name="Sell.php" size="17378" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="074ac317e96e2683698f40825d790d49a3951ef9"/>
+          <file name="SellerAccount.php" size="15317" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="db67cd8abe62bb3c5efe4803f2da31d5d2f7b6a7"/>
+          <file name="ServiceAbstract.php" size="1317" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="319080d69fb827b8c14ac135bd5be1d338a1dd71"/>
+          <file name="System.php" size="32729" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="61d5b11a59ee9b6de711001f54741669a9e06e75"/>
+        </dir>
+      </dir>
+    </dir>
+    <file name="SplAutoloader.php" size="3848" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5d7d0dfcdb846d056ee3d421db55a4d690d10800"/>
+    <dir name="Zend">
+      <dir name="Config">
+        <file name="Exception.php" size="1092" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="7dd25661d6845de62c3a928c9db042b4bc24beae"/>
+        <file name="Ini.php" size="10865" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="ba552066fca9b572856849b57887be0f394fb7d2"/>
+        <file name="Json.php" size="8382" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0c80c703a5a4e12b01b33f20ec0776cf186b0f44"/>
+        <dir name="Writer">
+          <file name="Array.php" size="1634" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="662c596ddec7b9b645eee750a263bf3a3b9cb1ef"/>
+          <file name="FileAbstract.php" size="3477" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6b8548f1f19cc704fb62f1c56cfc37195309fcc2"/>
+          <file name="Ini.php" size="5745" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0a30827c700d251a3b71bebd2ec36c2316781ad9"/>
+          <file name="Json.php" size="3024" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="212d39150a6c700f3c8e1954549ba950ebc9608b"/>
+          <file name="Xml.php" size="4142" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="3bdd42ff5fde5dd9eafee6c2c3d671fdbfc072f5"/>
+          <file name="Yaml.php" size="4142" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="c6de05888e1b4757a3c69f07f53c9f5e3c718a03"/>
+        </dir>
+        <file name="Writer.php" size="2475" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a56f80b991f0a9552964ed315f51dd7cae2de236"/>
+        <file name="Xml.php" size="11380" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="9a03b3cc0aab1cab2bc4b2a6c11a89c49b1dd168"/>
+        <file name="Yaml.php" size="13297" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="21a1000fb1bb76937020887bc477675235363b6b"/>
+      </dir>
+      <file name="Config.php" size="12962" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="3b08a16c7e6470f4e134b3625c022a5204b31e21"/>
+      <file name="Exception.php" size="2557" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6cbfd61e22eeb058844c3cf49749a2f2cc6637b6"/>
+    </dir>
+  </dir>
+</source>

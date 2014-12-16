@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Zend_Config" namespace="" name="Zend_Config" abstract="false" final="false" start="29" end="484">
+  <file path="/rissip/github/ricardo/src/Zend" file="Config.php" realpath="/rissip/github/ricardo/src/Zend/Config.php" size="12962" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="3b08a16c7e6470f4e134b3625c022a5204b31e21"/>
+  <docblock>
+    <description compact=""/>
+    <category value="Zend"/>
+    <package value="Zend_Config"/>
+    <copyright value="Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)"/>
+    <license name="http://framework.zend.com/license/new-bsd     New BSD License"/>
+  </docblock>
+  <implements full="Countable" namespace="" name="Countable"/>
+  <implements full="Iterator" namespace="" name="Iterator"/>
+  <member name="_allowModifications" type="{unknown}" visibility="protected" line="36">
+    <docblock>
+      <description compact="Whether in-memory modifications to configuration data are allowed"/>
+      <var type="boolean"/>
+    </docblock>
+  </member>
+  <member name="_index" type="{unknown}" visibility="protected" line="43">
+    <docblock>
+      <description compact="Iteration index"/>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="_count" type="{unknown}" visibility="protected" line="50">
+    <docblock>
+      <description compact="Number of elements in configuration data"/>
+      <var type="integer"/>
+    </docblock>
+  </member>
+  <member name="_data" type="{unknown}" visibility="protected" line="57">
+    <docblock>
+      <description compact="Contains array of configuration data"/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_skipNextIteration" type="{unknown}" visibility="protected" line="65">
+    <docblock>
+      <description compact="Used when unsetting values during iteration to ensure we do not skip the next element"/>
+      <var type="boolean"/>
+    </docblock>
+  </member>
+  <member name="_loadedSection" type="{unknown}" visibility="protected" line="74">
+    <docblock>
+      <description compact="Contains which config file sections were loaded. This is null if all sections were loaded, a string name if one section is loaded and an array of string names if multiple sections were loaded."/>
+      <var type="mixed"/>
+    </docblock>
+  </member>
+  <member name="_extends" type="array" visibility="protected" line="82">
+    <docblock>
+      <description compact="This is used to track section inheritance. The keys are names of sections that extend other sections, and the values are the extended sections."/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_loadFileErrorStr" type="{unknown}" default="null" visibility="protected" line="91">
+    <docblock>
+      <description compact="Load file error string.">Is null if there was no error while file loading</description>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <constructor name="__construct" start="105" end="119" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Zend_Config provides a property based interface to an array. The data are read-only unless $allowModifications is set to true on construction.">Zend_Config also implements Countable and Iterator to
+facilitate easy access to the data.</description>
+      <param type="array" variable="$array"/>
+      <param type="boolean" variable="$allowModifications"/>
+      <return type="object">
+        <type full="void" namespace="" name="void"/>
+      </return>
+    </docblock>
+    <parameter name="array" byreference="false" type="array"/>
+    <parameter name="allowModifications" byreference="false" type="{unknown}" default="false"/>
+  </constructor>
+  <method name="get" start="128" end="135" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve a value and return $default if there is no element set."/>
+      <param type="string" variable="$name"/>
+      <param type="mixed" variable="$default"/>
+      <return type="mixed"/>
+    </docblock>
+    <parameter name="name" byreference="false" type="{unknown}"/>
+    <parameter name="default" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="__get" start="143" end="146" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Magic function so that $obj-&gt;value will work."/>
+      <param type="string" variable="$name"/>
+      <return type="mixed"/>
+    </docblock>
+    <parameter name="name" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="__set" start="157" end="171" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Only allow setting of a property if $allowModifications was set to true on construction. Otherwise, throw an exception."/>
+      <param type="string" variable="$name"/>
+      <param type="mixed" variable="$value"/>
+      <throws type="object">
+        <type full="Zend_Config_Exception" namespace="" name="Zend_Config_Exception"/>
+      </throws>
+      <return type="object">
+        <type full="void" namespace="" name="void"/>
+      </return>
+    </docblock>
+    <parameter name="name" byreference="false" type="{unknown}"/>
+    <parameter name="value" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="__clone" start="179" end="190" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Deep clone of this instance to ensure that nested Zend_Configs are also cloned."/>
+      <return type="object">
+        <type full="void" namespace="" name="void"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="toArray" start="197" end="209" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Return an associative array of the stored data."/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="__isset" start="217" end="220" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Support isset() overloading on PHP 5.1"/>
+      <param type="string" variable="$name"/>
+      <return type="boolean"/>
+    </docblock>
+    <parameter name="name" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="__unset" start="229" end="241" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Support unset() overloading on PHP 5.1"/>
+      <param type="string" variable="$name"/>
+      <throws type="object">
+        <type full="Zend_Config_Exception" namespace="" name="Zend_Config_Exception"/>
+      </throws>
+      <return type="object">
+        <type full="void" namespace="" name="void"/>
+      </return>
+    </docblock>
+    <parameter name="name" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="count" start="248" end="251" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Defined by Countable interface"/>
+      <return type="int"/>
+    </docblock>
+  </method>
+  <method name="current" start="258" end="262" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Defined by Iterator interface"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="key" start="269" end="272" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Defined by Iterator interface"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="next" start="278" end="286" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Defined by Iterator interface"/>
+    </docblock>
+  </method>
+  <method name="rewind" start="292" end="297" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Defined by Iterator interface"/>
+    </docblock>
+  </method>
+  <method name="valid" start="304" end="307" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Defined by Iterator interface"/>
+      <return type="boolean"/>
+    </docblock>
+  </method>
+  <method name="getSectionName" start="314" end="320" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns the section name(s) loaded."/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="areAllSectionsLoaded" start="327" end="330" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns true if all sections were loaded"/>
+      <return type="boolean"/>
+    </docblock>
+  </method>
+  <method name="merge" start="341" end="360" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Merge another Zend_Config with this one. The items in $merge will override the same named items in the current config."/>
+      <param type="object" variable="$merge">
+        <type full="Zend_Config" namespace="" name="Zend_Config"/>
+      </param>
+      <return type="object">
+        <type full="Zend_Config" namespace="" name="Zend_Config"/>
+      </return>
+    </docblock>
+    <parameter name="merge" byreference="false" type="object">
+      <type full="\\Zend_Config" namespace="\" name="Zend_Config"/>
+    </parameter>
+  </method>
+  <method name="setReadOnly" start="368" end="376" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Prevent any more modifications being made to this instance. Useful after merge() has been used to merge multiple Zend_Config objects into one object which should then not be modified again."/>
+    </docblock>
+  </method>
+  <method name="readOnly" start="383" end="386" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns if this Zend_Config object is read only or not."/>
+      <return type="boolean"/>
+    </docblock>
+  </method>
+  <method name="getExtends" start="393" end="396" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the current extends"/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="setExtend" start="405" end="412" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set an extend for Zend_Config_Writer"/>
+      <param type="string" variable="$extendingSection"/>
+      <param type="string" variable="$extendedSection"/>
+      <return type="object">
+        <type full="void" namespace="" name="void"/>
+      </return>
+    </docblock>
+    <parameter name="extendingSection" byreference="false" type="{unknown}"/>
+    <parameter name="extendedSection" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="_assertValidExtend" start="423" end="437" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Throws an exception if $extendingSection may not extend $extendedSection, and tracks the section extension if it is valid."/>
+      <param type="string" variable="$extendingSection"/>
+      <param type="string" variable="$extendedSection"/>
+      <throws type="object">
+        <type full="Zend_Config_Exception" namespace="" name="Zend_Config_Exception"/>
+      </throws>
+      <return type="object">
+        <type full="void" namespace="" name="void"/>
+      </return>
+    </docblock>
+    <parameter name="extendingSection" byreference="false" type="{unknown}"/>
+    <parameter name="extendedSection" byreference="false" type="{unknown}"/>
+    <inline>
+      <comment value="detect circular section inheritance" line="425"/>
+      <comment value="@see Zend_Config_Exception" line="429"/>
+      <comment value="remember that this section extends another section" line="435"/>
+    </inline>
+  </method>
+  <method name="_loadFileErrorHandler" start="447" end="454" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Handle any errors from simplexml_load_file or parse_ini_file"/>
+      <param type="integer" variable="$errno"/>
+      <param type="string" variable="$errstr"/>
+      <param type="string" variable="$errfile"/>
+      <param type="integer" variable="$errline"/>
+    </docblock>
+    <parameter name="errno" byreference="false" type="{unknown}"/>
+    <parameter name="errstr" byreference="false" type="{unknown}"/>
+    <parameter name="errfile" byreference="false" type="{unknown}"/>
+    <parameter name="errline" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="_arrayMergeRecursive" start="464" end="483" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Merge two arrays recursively, overwriting keys of the same name in $firstArray with the value in $secondArray."/>
+      <param description="First array" type="mixed" variable="$firstArray"/>
+      <param description="Second array to merge into first array" type="mixed" variable="$secondArray"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="firstArray" byreference="false" type="{unknown}"/>
+    <parameter name="secondArray" byreference="false" type="{unknown}"/>
+  </method>
+  <extender full="Diglin\Ricardo\Config" namespace="Diglin\Ricardo" name="Config"/>
+  <extender full="Zend_Config_Ini" namespace="" name="Zend_Config_Ini"/>
+  <extender full="Zend_Config_Json" namespace="" name="Zend_Config_Json"/>
+  <extender full="Zend_Config_Xml" namespace="" name="Zend_Config_Xml"/>
+  <extender full="Zend_Config_Yaml" namespace="" name="Zend_Config_Yaml"/>
+  <interface full="Countable" namepsace="" name="Countable">
+    <method name="count" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Count elements of an object"/>
+      <return type="int"/>
+    </docblock>
+  </method>
+  </interface>
+  <interface full="Iterator" namepsace="" name="Iterator">
+    <extends full="Traversable" namespace="" name="Traversable"/>
+    <method name="current" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Return the current element"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+    <method name="key" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Return the key of the current element"/>
+      <return type="scalar"/>
+    </docblock>
+  </method>
+    <method name="next" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Move forward to next element">Moves the current position to the next element.</description>
+      <return type="void"/>
+    </docblock>
+  </method>
+    <method name="rewind" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Rewind the Iterator to the first element">Rewinds back to the first element of the Iterator.</description>
+      <return type="void"/>
+    </docblock>
+  </method>
+    <method name="valid" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Checks if current position is valid"/>
+      <return type="boolean"/>
+    </docblock>
+  </method>
+  </interface>
+</class>

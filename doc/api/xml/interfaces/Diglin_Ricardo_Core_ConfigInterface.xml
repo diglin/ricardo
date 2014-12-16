@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Core\ConfigInterface" namespace="Diglin\Ricardo\Core" name="ConfigInterface" abstract="false" final="false" start="13" end="35">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Core" file="ConfigInterface.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Core/ConfigInterface.php" size="759" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="78204f96f2751f07bd7e21a58e792ccd6d3b7eb8"/>
+  <method name="getHost" start="20" end="20" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the Ricardo host configuration"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="getPartnershipKey" start="27" end="27" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the Partnership ID configuration"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="getPartnershipPasswd" start="34" end="34" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the Partnership Password configuration"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <implementor full="Diglin\Ricardo\Config" namespace="Diglin\Ricardo" name="Config"/>
+</interface>

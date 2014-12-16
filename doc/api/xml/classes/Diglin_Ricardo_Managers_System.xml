@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Managers\System" namespace="Diglin\Ricardo\Managers" name="System" abstract="false" final="false" start="23" end="606">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Managers" file="System.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/System.php" size="13617" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a00014524fe83c19d5bdb7e7259f75826cbcbab0"/>
+  <docblock>
+    <description compact="Class System"/>
+    <package value="Diglin\Ricardo\Managers"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Managers\ManagerAbstract" namespace="Diglin\Ricardo\Managers" name="ManagerAbstract"/>
+  <member name="_serviceName" type="string" default="'system'" visibility="protected" line="28">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_errorCodes" type="{unknown}" visibility="protected" line="33">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_articleConditions" type="{unknown}" visibility="protected" line="38">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_availabilities" type="{unknown}" visibility="protected" line="43">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_categories" type="{unknown}" visibility="protected" line="48">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_category" type="{unknown}" visibility="protected" line="53">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_countries" type="{unknown}" visibility="protected" line="58">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_countryIsoCode" type="{unknown}" visibility="protected" line="63">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_deliveryConditions" type="{unknown}" visibility="protected" line="68">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_firstChildsCategories" type="{unknown}" visibility="protected" line="73">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_languages" type="{unknown}" visibility="protected" line="78">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_packages" type="{unknown}" visibility="protected" line="83">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_parentsCategories" type="{unknown}" visibility="protected" line="88">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_partnerConfigurations" type="{unknown}" visibility="protected" line="93">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_paymentConditions" type="{unknown}" visibility="protected" line="98">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_paymentConditionsAndMethods" type="{unknown}" visibility="protected" line="103">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_paymentMethods" type="{unknown}" visibility="protected" line="108">
+    <docblock>
+      <description compact=""/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_phonePrefixes" type="{unknown}" visibility="protected" line="113">
+    <docblock>
+      <description compact=""/>
+      <var/>
+    </docblock>
+  </member>
+  <member name="_promotions" type="{unknown}" visibility="protected" line="118">
+    <docblock>
+      <description compact=""/>
+      <var/>
+    </docblock>
+  </member>
+  <member name="_regions" type="{unknown}" visibility="protected" line="123">
+    <docblock>
+      <description compact=""/>
+      <var/>
+    </docblock>
+  </member>
+  <member name="_templates" type="{unknown}" visibility="protected" line="128">
+    <docblock>
+      <description compact=""/>
+      <var/>
+    </docblock>
+  </member>
+  <member name="_warranties" type="{unknown}" visibility="protected" line="133">
+    <docblock>
+      <description compact=""/>
+      <var/>
+    </docblock>
+  </member>
+  <method name="getAllErrorsCodes" start="138" end="149" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getArticleConditions" start="155" end="161" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="object" variable="$isGroup">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="isGroup" byreference="false" type="{unknown}" default="false"/>
+  </method>
+  <method name="getAvailabilities" start="166" end="172" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getCategories" start="179" end="185" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="int" variable="$categoryBrandingFilter"/>
+      <param type="object" variable="$onlyAllowToSell">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="categoryBrandingFilter" byreference="false" type="integer" default="0"/>
+    <parameter name="onlyAllowToSell" byreference="false" type="{unknown}" default="true"/>
+  </method>
+  <method name="getCategory" start="191" end="197" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param variable="$categoryId"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="categoryId" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getCountries" start="202" end="208" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getCountryIso" start="214" end="217" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="string" variable="$ip"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="ip" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getDeliveryConditions" start="222" end="228" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getFirstChildsCategories" start="236" end="248" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param variable="$categoryId"/>
+      <param type="int" variable="$categoryBrandingFilter"/>
+      <param type="object" variable="$onlyAllowToSell">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="categoryId" byreference="false" type="{unknown}"/>
+    <parameter name="categoryBrandingFilter" byreference="false" type="integer" default="0"/>
+    <parameter name="onlyAllowToSell" byreference="false" type="{unknown}" default="true"/>
+  </method>
+  <method name="getLanguages" start="253" end="259" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getPackages" start="264" end="270" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getParentsCategories" start="276" end="282" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param variable="$categoryId"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="categoryId" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getPartnerConfigurations" start="287" end="293" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getPaymentConditions" start="299" end="305" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="object" variable="$paymentMethodId">
+        <type full="Diglin\Ricardo\Managers\int|null" namespace="Diglin\Ricardo\Managers" name="int|null"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="paymentMethodId" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="getPaymentConditionsAndMethods" start="310" end="316" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getPaymentMethods" start="323" end="334" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="object" variable="$onlyAllowToSell">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </param>
+      <param type="int" variable="$paymentConditionId"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="onlyAllowToSell" byreference="false" type="{unknown}" default="true"/>
+    <parameter name="paymentConditionId" byreference="false" type="{unknown}" default="null"/>
+  </method>
+  <method name="getPhonePrefixes" start="339" end="345" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="getPromotions" start="354" end="371" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="string" variable="$articleStartDate"/>
+      <param variable="$articleType"/>
+      <param type="int" variable="$categoryId"/>
+      <param type="object" variable="$displayMandatory">
+        <type full="Diglin\Ricardo\Managers\bool" namespace="Diglin\Ricardo\Managers" name="bool"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="articleStartDate" byreference="false" type="{unknown}"/>
+    <parameter name="articleType" byreference="false" type="{unknown}"/>
+    <parameter name="categoryId" byreference="false" type="{unknown}"/>
+    <parameter name="displayMandatory" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getRegions" start="377" end="385" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="int" variable="$countryId"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="countryId" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTemplates" start="390" end="396" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="getWarranties" start="401" end="407" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="setArticleConditions" start="413" end="417" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$articleConditions"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="articleConditions" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setAvailabilities" start="423" end="427" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$availabilities"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="availabilities" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setCategories" start="433" end="437" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$categories"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="categories" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setCategory" start="443" end="447" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$category"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="category" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setCountries" start="453" end="456" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$countries"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="countries" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setDeliveryConditions" start="462" end="465" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$deliveryConditions"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="deliveryConditions" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setFirstChildsCategories" start="471" end="475" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$firstChildsCategories"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="firstChildsCategories" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setLanguages" start="481" end="485" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$languages"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="languages" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setPackages" start="491" end="495" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$packages"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="packages" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setParentsCategories" start="501" end="505" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$parentsCategories"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="parentsCategories" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setPartnerConfiguration" start="511" end="515" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$partnerConfiguration"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="partnerConfiguration" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setPaymentConditions" start="521" end="525" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$paymentConditions"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="paymentConditions" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setPaymentConditionsAndMethods" start="531" end="535" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$paymentConditionsAndMethods"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="paymentConditionsAndMethods" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setPaymentMethods" start="541" end="545" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="array" variable="$paymentMethods"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="paymentMethods" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setPartnerConfigurations" start="551" end="555" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="array" variable="$partnerConfigurations"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="partnerConfigurations" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setPhonePrefixes" start="561" end="565" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$phonePrefixes"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="phonePrefixes" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setPromotions" start="571" end="575" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$promotions"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="promotions" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setRegions" start="581" end="585" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$regions"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="regions" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setTemplates" start="591" end="595" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$templates"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="templates" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setWarranties" start="601" end="605" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param type="mixed" variable="$warranties"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Managers\$this" namespace="Diglin\Ricardo\Managers" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="warranties" byreference="false" type="{unknown}"/>
+  </method>
+  <parent full="Diglin\Ricardo\Managers\ManagerAbstract" namepsace="Diglin\Ricardo\Managers" name="ManagerAbstract">
+    <member name="_serviceName" type="{unknown}" visibility="protected" line="29">
+      <docblock>
+        <description compact=""/>
+        <var type="string"/>
+      </docblock>
+    </member>
+    <member name="_serviceManager" type="{unknown}" visibility="protected" line="34">
+      <docblock>
+        <description compact=""/>
+        <var type="object">
+          <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+        </var>
+      </docblock>
+    </member>
+    <member name="_helper" type="{unknown}" visibility="protected" line="39">
+      <docblock>
+        <description compact=""/>
+        <var type="object">
+          <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
+        </var>
+      </docblock>
+    </member>
+    <constructor name="__construct" start="44" end="47" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <param type="object" variable="$serviceManager">
+          <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+        </param>
+      </docblock>
+      <parameter name="serviceManager" byreference="false" type="object">
+        <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+      </parameter>
+    </constructor>
+    <method name="getHelper" start="52" end="58" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="_proceed" start="67" end="105" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact=""/>
+        <param type="string" variable="$method"/>
+        <param type="mixed" variable="$parameters"/>
+        <return type="array"/>
+        <throws type="object">
+          <type full="\Exception" namespace="" name="Exception"/>
+        </throws>
+        <throws type="object">
+          <type full="Diglin\Ricardo\Exceptions\SecurityException" namespace="Diglin\Ricardo\Exceptions" name="SecurityException"/>
+        </throws>
+      </docblock>
+      <parameter name="method" byreference="false" type="{unknown}"/>
+      <parameter name="parameters" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="extractError" start="113" end="140" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Extract code error and type from API call"/>
+        <param type="array" variable="$result"/>
+        <throw value="\Exception"/>
+      </docblock>
+      <parameter name="result" byreference="false" type="array"/>
+    </method>
+    <method name="getServiceManager" start="145" end="148" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="getTypeOfToken" start="153" end="156" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

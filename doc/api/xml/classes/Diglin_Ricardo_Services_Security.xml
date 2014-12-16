@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Services\Security" namespace="Diglin\Ricardo\Services" name="Security" abstract="false" final="false" start="22" end="289">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Services" file="Security.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Services/Security.php" size="8124" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="d18ae9c58ad714f7195c3c9d4f8bdb6c668cc3c3"/>
+  <docblock>
+    <description compact="Class Security">Ricardo SecurityService API
+Manage Token generation</description>
+    <package value="Diglin\Ricardo\Services"/>
+    <link value="https://ws.ricardo.ch/RicardoApi/documentation/html/Methods_T_Ricardo_Contracts_ISecurityService.htm"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract"/>
+  <constant name="VALIDATION_SAVE_PATH" value="'/apiconnect/login/saveinfo/saveinfo'"/>
+  <member name="_service" type="string" default="'SecurityService'" visibility="protected" line="29">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_DEFAULT" visibility="protected" line="34">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <method name="getAnonymousTokenCredential" start="43" end="49" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Some Ricardo API Services don't need to have a registered token like SystemService, ArticleService, SearchService, BrandingService but they need an anonymous token"/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getAnonymousTokenCredentialResult" start="79" end="86" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the result fo the API call to get the anonymous token">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "GetAnonymousTokenCredentialResult": {
+     "TokenCredential": {
+      "SessionDuration":0,
+      "TokenCredentialKey":"[ANONYMOUS_TOKEN]",
+      "TokenExpirationDate":"\/Date(3453314340000+0200)\/"
+     }
+    }
+ }
+&lt;/pre&gt;
+
+Array returned:
+&lt;pre&gt;
+array(
+    'SessionDuration',
+    'TokenCredentialKey',
+    'TokenExpirationDate'
+);
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="getTemporaryCredential" start="94" end="100" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Ask for temporary credential for very first time use. Return a validationUrl where to redirect a user to autorize the application and Temporary Key."/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getTemporaryCredentialResult" start="132" end="139" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the result of the temporary credential.">Take care here, the user will have to be redirected to validate it thanks to the validationUrl variable
+
+
+The Ricardo API returns:
+&lt;pre&gt;
+{
+    "CreateTemporaryCredentialResult": {
+      "TemporaryCredential": {
+        "ExpirationDate": "\/Date(1385462160000+0100)\/",
+        "TemporaryCredentialKey": "[TEMPORARY_TOKEN]",
+        "ValidationUrl": "http://www.ch.betaqxl.com/ApiConnect/Login/Index?token=XXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX&amp;countryId=2&amp;partnershipId=XXXX&amp;partnerurl=http://www.myshop.com/mypage/"
+      }
+    }
+  }
+&lt;/pre&gt;
+
+Array returned:
+&lt;pre&gt;
+array(
+    'ExpirationDate',
+    'TemporaryCredentialKey',
+    'ValidationUrl'
+);
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTokenCredential" start="148" end="154" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Ask for the &quot;real&quot; token, providing the [TEMPORARY_TOKEN] received from the method createTemporaryCredential and also as a get parameter when user is returning from the validationURl."/>
+      <param type="string" variable="$temporaryCredentialKey"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="temporaryCredentialKey" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTokenCredentialResult" start="184" end="191" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the result of the token credential">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "CreateTokenCredentialResult": {
+      "TokenCredential": {
+        "SessionDuration": 30,
+        "TokenCredentialKey": "[REAL_TOKEN]",
+        "TokenExpirationDate": "\/Date(1386664920000+0100)\/"
+      }
+    }
+  }
+&lt;/pre&gt;
+
+Array returned:
+&lt;pre&gt;
+array(
+    'SessionDuration',
+    'TokenCredentialKey',
+    'TokenExpirationDate'
+);
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getRefreshTokenCredential" start="201" end="207" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="After the SessionDuration timeout, the token need to be refreshed You will get a new token credential in return. If TokenExpirationDate is above of the current date, you will have to create again a temporary credential (sic!)"/>
+      <param type="string" variable="$tokenCredentialKey"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="tokenCredentialKey" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getRefreshTokenCredentialResult" start="235" end="242" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the refreshed the token">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "RefreshTokenCredentialResult": {
+      "TokenCredential": {
+        "SessionDuration": 30,
+        "TokenCredentialKey": "[REAL_TOKEN]",
+        "TokenExpirationDate": "\/Date(1386664920000+0100)\/"
+      }
+    }
+  }
+&lt;/pre&gt;
+
+Array returned:
+&lt;pre&gt;
+array(
+    'TokenCredentialKey'
+);
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="getAntiforgeryToken" start="249" end="255" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Some API methods needs an antiforgery token to prevent Man-In-The-Middle attack"/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getAntiforgeryTokenResult" start="281" end="288" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the antiforgery token">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "CreateAntiforgeryTokenResult": {
+        "AntiforgeryTokenKey": "[REAL_TOKEN]",
+        "TokenExpirationDate": "\/Date(1386664920000+0100)\/"
+    }
+  }
+&lt;/pre&gt;
+
+Array returned:
+&lt;pre&gt;
+array(
+    'AntiforgeryTokenKey'
+    'TokenExpirationDate'
+);
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <parent full="Diglin\Ricardo\Services\ServiceAbstract" namepsace="Diglin\Ricardo\Services" name="ServiceAbstract">
+    <constant name="TOKEN_TYPE_ANONYMOUS" value="'anonymous'"/>
+    <constant name="TOKEN_TYPE_IDENTIFIED" value="'identified'"/>
+    <constant name="TOKEN_TYPE_ANTIFORGERY" value="'antiforgery'"/>
+    <constant name="TOKEN_TYPE_TEMPORARY" value="'temporary'"/>
+    <constant name="TOKEN_TYPE_DEFAULT" value="''"/>
+    <member name="_service" type="string" default="''" visibility="protected" line="29">
+      <docblock>
+        <description compact=""/>
+        <var type="string"/>
+      </docblock>
+    </member>
+    <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="34">
+      <docblock>
+        <description compact=""/>
+        <var type="string"/>
+      </docblock>
+    </member>
+    <method name="getService" start="41" end="44" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get the current name of the API service"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="getTypeOfToken" start="58" end="61" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get the type of token needed for this service &lt;pre&gt; It can be: - anonymous - identified - antiforgery - empty &lt;/pre&gt;"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

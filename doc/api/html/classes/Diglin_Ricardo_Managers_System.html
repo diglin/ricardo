@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+  <head>
+    <title>phpDox - Diglin\Ricardo\Managers\System</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html#Diglin_Ricardo_Managers">Diglin\Ricardo\Managers</a>
+          </li>
+          <li class="separator">System</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>Diglin\Ricardo\Managers\</small>System</h1>
+        <h4>Class System</h4>
+        <p/>
+        <ul/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class System
+                extends <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract.html">ManagerAbstract</a>
+            {<br/><ul class="none"><li>// members</li><li>protected
+                         <a href="#members">$_serviceName</a>;
+                    </li><li>protected
+                         <a href="#members">$_errorCodes</a>;
+                    </li><li>protected
+                         <a href="#members">$_articleConditions</a>;
+                    </li><li>protected
+                         <a href="#members">$_availabilities</a>;
+                    </li><li>protected
+                         <a href="#members">$_categories</a>;
+                    </li><li>protected
+                         <a href="#members">$_category</a>;
+                    </li><li>protected
+                         <a href="#members">$_countries</a>;
+                    </li><li>protected
+                         <a href="#members">$_countryIsoCode</a>;
+                    </li><li>protected
+                         <a href="#members">$_deliveryConditions</a>;
+                    </li><li>protected
+                         <a href="#members">$_firstChildsCategories</a>;
+                    </li><li>protected
+                         <a href="#members">$_languages</a>;
+                    </li><li>protected
+                         <a href="#members">$_packages</a>;
+                    </li><li>protected
+                         <a href="#members">$_parentsCategories</a>;
+                    </li><li>protected
+                         <a href="#members">$_partnerConfigurations</a>;
+                    </li><li>protected
+                         <a href="#members">$_paymentConditions</a>;
+                    </li><li>protected
+                         <a href="#members">$_paymentConditionsAndMethods</a>;
+                    </li><li>protected
+                         <a href="#members">$_paymentMethods</a>;
+                    </li><li>protected
+                         <a href="#members">$_phonePrefixes</a>;
+                    </li><li>protected
+                         <a href="#members">$_promotions</a>;
+                    </li><li>protected
+                         <a href="#members">$_regions</a>;
+                    </li><li>protected
+                         <a href="#members">$_templates</a>;
+                    </li><li>protected
+                         <a href="#members">$_warranties</a>;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Managers\ManagerAbstract">ManagerAbstract</span></li><li>protected
+                             <a href="#members">$_serviceName</a>;
+                        </li><li>protected Service
+                             <a href="#members">$_serviceManager</a>;
+                        </li><li>protected Helper
+                             <a href="#members">$_helper</a>;
+                        </li></ul><ul class="none"><li>// methods</li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getAllErrorsCodes.html">getAllErrorsCodes</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getArticleConditions.html">getArticleConditions</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getAvailabilities.html">getAvailabilities</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getCategories.html">getCategories</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getCategory.html">getCategory</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getCountries.html">getCountries</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getCountryIso.html">getCountryIso</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getDeliveryConditions.html">getDeliveryConditions</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getFirstChildsCategories.html">getFirstChildsCategories</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getLanguages.html">getLanguages</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPackages.html">getPackages</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getParentsCategories.html">getParentsCategories</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPartnerConfigurations.html">getPartnerConfigurations</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPaymentConditions.html">getPaymentConditions</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPaymentConditionsAndMethods.html">getPaymentConditionsAndMethods</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPaymentMethods.html">getPaymentMethods</a>()
+                    </li><li>public mixed <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPhonePrefixes.html">getPhonePrefixes</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPromotions.html">getPromotions</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getRegions.html">getRegions</a>()
+                    </li><li>public mixed <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getTemplates.html">getTemplates</a>()
+                    </li><li>public mixed <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getWarranties.html">getWarranties</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setArticleConditions.html">setArticleConditions</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setAvailabilities.html">setAvailabilities</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setCategories.html">setCategories</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setCategory.html">setCategory</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setCountries.html">setCountries</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setDeliveryConditions.html">setDeliveryConditions</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setFirstChildsCategories.html">setFirstChildsCategories</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setLanguages.html">setLanguages</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPackages.html">setPackages</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setParentsCategories.html">setParentsCategories</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPartnerConfiguration.html">setPartnerConfiguration</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPaymentConditions.html">setPaymentConditions</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPaymentConditionsAndMethods.html">setPaymentConditionsAndMethods</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPaymentMethods.html">setPaymentMethods</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPartnerConfigurations.html">setPartnerConfigurations</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPhonePrefixes.html">setPhonePrefixes</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPromotions.html">setPromotions</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setRegions.html">setRegions</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setTemplates.html">setTemplates</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setWarranties.html">setWarranties</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="Diglin\Ricardo\Managers\ManagerAbstract">ManagerAbstract</span></li><li>public void <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/__construct.html">__construct</a>()
+                        </li><li>public Helper <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/getHelper.html">getHelper</a>()
+                        </li><li>protected array <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/_proceed.html">_proceed</a>()
+                        </li><li>protected void <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/extractError.html">extractError</a>()
+                        </li><li>public Service <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/getServiceManager.html">getServiceManager</a>()
+                        </li><li>public string <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/getTypeOfToken.html">getTypeOfToken</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a href="../classes/Diglin_Ricardo_Managers_ManagerAbstract.html">Diglin\Ricardo\Managers\ManagerAbstract</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="_articleConditions"><strong>$_articleConditions</strong>
+                —
+                array</li>
+            <li id="_availabilities"><strong>$_availabilities</strong>
+                —
+                array</li>
+            <li id="_categories"><strong>$_categories</strong>
+                —
+                array</li>
+            <li id="_category"><strong>$_category</strong>
+                —
+                array</li>
+            <li id="_countries"><strong>$_countries</strong>
+                —
+                array</li>
+            <li id="_countryIsoCode"><strong>$_countryIsoCode</strong>
+                —
+                array</li>
+            <li id="_deliveryConditions"><strong>$_deliveryConditions</strong>
+                —
+                array</li>
+            <li id="_errorCodes"><strong>$_errorCodes</strong>
+                —
+                array</li>
+            <li id="_firstChildsCategories"><strong>$_firstChildsCategories</strong>
+                —
+                array</li>
+            <li id="_helper"><strong>$_helper</strong>
+                —
+                <a href="#">Diglin\Ricardo\Core\Helper</a></li>
+            <li id="_languages"><strong>$_languages</strong>
+                —
+                array</li>
+            <li id="_packages"><strong>$_packages</strong>
+                —
+                array</li>
+            <li id="_parentsCategories"><strong>$_parentsCategories</strong>
+                —
+                array</li>
+            <li id="_partnerConfigurations"><strong>$_partnerConfigurations</strong>
+                —
+                array</li>
+            <li id="_paymentConditions"><strong>$_paymentConditions</strong>
+                —
+                array</li>
+            <li id="_paymentConditionsAndMethods"><strong>$_paymentConditionsAndMethods</strong>
+                —
+                array</li>
+            <li id="_paymentMethods"><strong>$_paymentMethods</strong>
+                —
+                array</li>
+            <li id="_phonePrefixes"><strong>$_phonePrefixes</strong>
+                —
+                </li>
+            <li id="_promotions"><strong>$_promotions</strong>
+                —
+                </li>
+            <li id="_regions"><strong>$_regions</strong>
+                —
+                </li>
+            <li id="_serviceManager"><strong>$_serviceManager</strong>
+                —
+                <a href="#">Diglin\Ricardo\Service</a></li>
+            <li id="_serviceName"><strong>$_serviceName</strong>
+                —
+                string</li>
+            <li id="_serviceName"><strong>$_serviceName</strong>
+                —
+                string</li>
+            <li id="_templates"><strong>$_templates</strong>
+                —
+                </li>
+            <li id="_warranties"><strong>$_warranties</strong>
+                —
+                </li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="getAllErrorsCodes">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getAllErrorsCodes.html">getAllErrorsCodes()</a>
+            </li>
+            <li id="getArticleConditions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getArticleConditions.html">getArticleConditions()</a>
+            </li>
+            <li id="getAvailabilities">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getAvailabilities.html">getAvailabilities()</a>
+            </li>
+            <li id="getCategories">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getCategories.html">getCategories()</a>
+            </li>
+            <li id="getCategory">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getCategory.html">getCategory()</a>
+            </li>
+            <li id="getCountries">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getCountries.html">getCountries()</a>
+            </li>
+            <li id="getCountryIso">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getCountryIso.html">getCountryIso()</a>
+            </li>
+            <li id="getDeliveryConditions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getDeliveryConditions.html">getDeliveryConditions()</a>
+            </li>
+            <li id="getFirstChildsCategories">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getFirstChildsCategories.html">getFirstChildsCategories()</a>
+            </li>
+            <li id="getLanguages">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getLanguages.html">getLanguages()</a>
+            </li>
+            <li id="getPackages">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPackages.html">getPackages()</a>
+            </li>
+            <li id="getParentsCategories">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getParentsCategories.html">getParentsCategories()</a>
+            </li>
+            <li id="getPartnerConfigurations">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPartnerConfigurations.html">getPartnerConfigurations()</a>
+            </li>
+            <li id="getPaymentConditions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPaymentConditions.html">getPaymentConditions()</a>
+            </li>
+            <li id="getPaymentConditionsAndMethods">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPaymentConditionsAndMethods.html">getPaymentConditionsAndMethods()</a>
+            </li>
+            <li id="getPaymentMethods">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPaymentMethods.html">getPaymentMethods()</a>
+            </li>
+            <li id="getPhonePrefixes">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPhonePrefixes.html">getPhonePrefixes()</a>
+            </li>
+            <li id="getPromotions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getPromotions.html">getPromotions()</a>
+            </li>
+            <li id="getRegions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getRegions.html">getRegions()</a>
+            </li>
+            <li id="getTemplates">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getTemplates.html">getTemplates()</a>
+            </li>
+            <li id="getWarranties">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getWarranties.html">getWarranties()</a>
+            </li>
+            <li id="setArticleConditions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setArticleConditions.html">setArticleConditions()</a>
+            </li>
+            <li id="setAvailabilities">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setAvailabilities.html">setAvailabilities()</a>
+            </li>
+            <li id="setCategories">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setCategories.html">setCategories()</a>
+            </li>
+            <li id="setCategory">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setCategory.html">setCategory()</a>
+            </li>
+            <li id="setCountries">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setCountries.html">setCountries()</a>
+            </li>
+            <li id="setDeliveryConditions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setDeliveryConditions.html">setDeliveryConditions()</a>
+            </li>
+            <li id="setFirstChildsCategories">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setFirstChildsCategories.html">setFirstChildsCategories()</a>
+            </li>
+            <li id="setLanguages">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setLanguages.html">setLanguages()</a>
+            </li>
+            <li id="setPackages">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPackages.html">setPackages()</a>
+            </li>
+            <li id="setParentsCategories">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setParentsCategories.html">setParentsCategories()</a>
+            </li>
+            <li id="setPartnerConfiguration">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPartnerConfiguration.html">setPartnerConfiguration()</a>
+            </li>
+            <li id="setPartnerConfigurations">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPartnerConfigurations.html">setPartnerConfigurations()</a>
+            </li>
+            <li id="setPaymentConditions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPaymentConditions.html">setPaymentConditions()</a>
+            </li>
+            <li id="setPaymentConditionsAndMethods">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPaymentConditionsAndMethods.html">setPaymentConditionsAndMethods()</a>
+            </li>
+            <li id="setPaymentMethods">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPaymentMethods.html">setPaymentMethods()</a>
+            </li>
+            <li id="setPhonePrefixes">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPhonePrefixes.html">setPhonePrefixes()</a>
+            </li>
+            <li id="setPromotions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setPromotions.html">setPromotions()</a>
+            </li>
+            <li id="setRegions">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setRegions.html">setRegions()</a>
+            </li>
+            <li id="setTemplates">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setTemplates.html">setTemplates()</a>
+            </li>
+            <li id="setWarranties">
+              <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/setWarranties.html">setWarranties()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract.html">Diglin\Ricardo\Managers\ManagerAbstract</a></h3>
+          <h4>protected</h4>
+          <ul>
+            <li id="_proceed">
+              <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/_proceed.html">_proceed()</a>
+            </li>
+            <li id="extractError"><a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/extractError.html">extractError()</a>
+                — Extract code error and type from API call</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="getHelper">
+              <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/getHelper.html">getHelper()</a>
+            </li>
+            <li id="getServiceManager">
+              <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/getServiceManager.html">getServiceManager()</a>
+            </li>
+            <li id="getTypeOfToken">
+              <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract/getTypeOfToken.html">getTypeOfToken()</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2014-10-06T14:18:46+02:00 (commit #<span title="40224e64adb66743303ebe7e04df331ba05f922b">40224e6</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Implement method service GetCountriesIso but it's useless. No Data returned and parameter is not what we need</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-28T11:22:59+02:00 (commit #<span title="3e11a2cf9148ee20ec7e06905b6b86a0c74ea70d">3e11a2c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-04T17:15:35+02:00 (commit #<span title="9286388a2893f89fc2f3ca688531dbefb59d1c2c">9286388</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[]RIC-38 Add log implementation for unit test, structure differently enumeration classes, update the constant of the enums in the different classes</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-14T21:22:32+02:00 (commit #<span title="5102ec261e9ed6622b90a7222bd113bf133f7d50">5102ec2</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Add label to promotions based on its enums</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-08-14T00:05:50+02:00 (commit #<span title="058821611ff92af4f77ea19f886f5d361e07a5ea">0588216</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-38] Add additional methods to services and their test</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-07T18:27:40+02:00 (commit #<span title="3b6fa9d1919f85d5f74d0b324539fc20f1f31133">3b6fa9d</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-07-01T13:49:07+02:00 (commit #<span title="37b2bde51d21c48ebfee0965392e33ef3d90bedb">37b2bde</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

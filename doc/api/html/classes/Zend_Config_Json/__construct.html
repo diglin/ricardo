@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - Test Method</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../../classes.html#"/>
+          </li>
+          <li class="separator">
+            <a title="Zend_Config_Json" href="../../classes/Zend_Config_Json.html">Zend_Config_Json</a>
+          </li>
+          <li class="separator">__construct</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1><small>Zend_Config_Json::</small>__construct</h1>
+        <h4>Loads the section $section from the config file encoded as JSON</h4>
+        <p>Sections are defined as properties of the main object
+
+In order to extend another section, a section defines the "_extends"
+property having a value of the section name from which the extending
+section inherits values.
+
+Note that the keys in $section will override any keys of the same
+name in the sections that have been included via "_extends".</p>
+        <ul/>
+        <h2>Signature</h2>
+        <div class="styled synopsis">
+          <code>public function __construct(string
+        $json,
+            [mixed
+        $section = null,
+            [boolean
+        $options = false]] )
+            </code>
+        </div>
+        <h2>Parameters</h2>
+        <dl class="styled">
+          <dt>
+            <code>$json</code>
+          </dt>
+          <dd>JSON file or string to process</dd>
+          <dt>
+            <code>$section</code>
+          </dt>
+          <dd>Section to process</dd>
+          <dt>
+            <code>$options</code>
+          </dt>
+          <dd>Whether modifiacations are allowed at runtime</dd>
+        </dl>
+        <h2>Errors/Exceptions</h2>
+        <dl class="styled">
+          <dt>
+            <code>
+              <a title="Zend_Config_Exception" href="../../classes/Zend_Config_Exception.html">Zend_Config_Exception</a>
+            </code>
+          </dt>
+          <dd>When JSON text is not set or cannot be loaded</dd>
+          <dt>
+            <code>
+              <a title="Zend_Config_Exception" href="../../classes/Zend_Config_Exception.html">Zend_Config_Exception</a>
+            </code>
+          </dt>
+          <dd>When section $sectionName cannot be found in $json</dd>
+        </dl>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>PHPMessDetector</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Rule</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td>82 - 174</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
+              </td>
+              <td>The method __construct() has a Cyclomatic Complexity of 22. The configured cyclomatic complexity threshold is 10.</td>
+            </tr>
+            <tr>
+              <td>82 - 174</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#npathcomplexity" target="_blank" title="Code Size Rules">NPathComplexity</a>
+              </td>
+              <td>The method __construct() has an NPath complexity of 2880. The configured NPath complexity threshold is 200.</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

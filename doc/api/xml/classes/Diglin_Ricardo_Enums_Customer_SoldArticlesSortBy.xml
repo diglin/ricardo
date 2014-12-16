@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\Customer\SoldArticlesSortBy" namespace="Diglin\Ricardo\Enums\Customer" name="SoldArticlesSortBy" abstract="false" final="false" start="19" end="109">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer" file="SoldArticlesSortBy.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer/SoldArticlesSortBy.php" size="4478" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="8ee62b5530c6ca5dc4a171b3bc66d5542ba1a792"/>
+  <docblock>
+    <description compact="Class SoldArticlesSortBy"/>
+    <package value="Diglin\Ricardo\Enums\Customer"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
+  <constant name="SORTBYARTICLEID" value="1"/>
+  <constant name="SORTBYTITLE" value="2"/>
+  <constant name="SORTBYINTERNALREFERENCE" value="3"/>
+  <constant name="SORTBYQUANTITY" value="4"/>
+  <constant name="SORTBYVIEWCOUNT" value="5"/>
+  <constant name="SORTBYOBSERVERCOUNT" value="6"/>
+  <constant name="SORTBYBIDCOUNT" value="7"/>
+  <constant name="SORTBYSTARTPRICE" value="8"/>
+  <constant name="SORTBYBUYNOWPRICE" value="9"/>
+  <constant name="SORTBYBUYERNICK" value="10"/>
+  <constant name="SORTBYCURRENTPRICE" value="11"/>
+  <constant name="SORTBYENDDATE" value="12"/>
+  <constant name="SORTBYREPOSTCOUNT" value="13"/>
+  <constant name="SORTBYSTARTDATE" value="14"/>
+  <constant name="SORTBYCATEGORY" value="16"/>
+  <constant name="SORTBYSHIPPINGFEES" value="17"/>
+  <constant name="SORTBYCOMPANYNAME" value="18"/>
+  <constant name="SORTBYFIRSTNAME" value="19"/>
+  <constant name="SORTBYADDRESS1" value="20"/>
+  <constant name="SORTBYADDRESS2" value="21"/>
+  <constant name="SORTBYPOSTBOX" value="22"/>
+  <constant name="SORTBYZIPCODE" value="23"/>
+  <constant name="SORTBYCITY" value="24"/>
+  <constant name="SORTBYCOUNTRY" value="25"/>
+  <constant name="ORTBYEMAIL" value="26"/>
+  <constant name="SORTBYPHONENUMBER" value="27"/>
+  <constant name="SORTBYMOBILEPHONE" value="28"/>
+  <method name="getEnums" start="78" end="108" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <param variable="$value"/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
+        </return>
+      </docblock>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

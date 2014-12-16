@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums" abstract="true" final="false" start="13" end="48">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums" file="AbstractEnums.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/AbstractEnums.php" size="1017" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="28b9ddf5f0250045443920bb13be2c31946c32c1"/>
+  <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param variable="$value"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="value" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <extender full="Diglin\Ricardo\Enums\Article\ArticlesTypes" namespace="Diglin\Ricardo\Enums\Article" name="ArticlesTypes"/>
+  <extender full="Diglin\Ricardo\Enums\Article\CloseListStatus" namespace="Diglin\Ricardo\Enums\Article" name="CloseListStatus"/>
+  <extender full="Diglin\Ricardo\Enums\Article\InternalReferenceType" namespace="Diglin\Ricardo\Enums\Article" name="InternalReferenceType"/>
+  <extender full="Diglin\Ricardo\Enums\Article\PromotionCode" namespace="Diglin\Ricardo\Enums\Article" name="PromotionCode"/>
+  <extender full="Diglin\Ricardo\Enums\Article\Warranty" namespace="Diglin\Ricardo\Enums\Article" name="Warranty"/>
+  <extender full="Diglin\Ricardo\Enums\ArticleErrors" namespace="Diglin\Ricardo\Enums" name="ArticleErrors"/>
+  <extender full="Diglin\Ricardo\Enums\Customer\ArticleTypeFilter" namespace="Diglin\Ricardo\Enums\Customer" name="ArticleTypeFilter"/>
+  <extender full="Diglin\Ricardo\Enums\Customer\OpenArticlesSortBy" namespace="Diglin\Ricardo\Enums\Customer" name="OpenArticlesSortBy"/>
+  <extender full="Diglin\Ricardo\Enums\Customer\PaidStatusFilter" namespace="Diglin\Ricardo\Enums\Customer" name="PaidStatusFilter"/>
+  <extender full="Diglin\Ricardo\Enums\Customer\ShippedStatusFilter" namespace="Diglin\Ricardo\Enums\Customer" name="ShippedStatusFilter"/>
+  <extender full="Diglin\Ricardo\Enums\Customer\SoldArticlesSortBy" namespace="Diglin\Ricardo\Enums\Customer" name="SoldArticlesSortBy"/>
+  <extender full="Diglin\Ricardo\Enums\CustomerErrors" namespace="Diglin\Ricardo\Enums" name="CustomerErrors"/>
+  <extender full="Diglin\Ricardo\Enums\GeneralErrors" namespace="Diglin\Ricardo\Enums" name="GeneralErrors"/>
+  <extender full="Diglin\Ricardo\Enums\PaymentMethods" namespace="Diglin\Ricardo\Enums" name="PaymentMethods"/>
+  <extender full="Diglin\Ricardo\Enums\PictureErrors" namespace="Diglin\Ricardo\Enums" name="PictureErrors"/>
+  <extender full="Diglin\Ricardo\Enums\PictureExtension" namespace="Diglin\Ricardo\Enums" name="PictureExtension"/>
+  <extender full="Diglin\Ricardo\Enums\SecurityErrors" namespace="Diglin\Ricardo\Enums" name="SecurityErrors"/>
+  <extender full="Diglin\Ricardo\Enums\System\CategoryArticleType" namespace="Diglin\Ricardo\Enums\System" name="CategoryArticleType"/>
+  <extender full="Diglin\Ricardo\Enums\System\CategoryBrandingFilter" namespace="Diglin\Ricardo\Enums\System" name="CategoryBrandingFilter"/>
+  <extender full="Diglin\Ricardo\Enums\System\LanguageCode" namespace="Diglin\Ricardo\Enums\System" name="LanguageCode"/>
+  <extender full="Diglin\Ricardo\Enums\System\LanguageId" namespace="Diglin\Ricardo\Enums\System" name="LanguageId"/>
+</class>

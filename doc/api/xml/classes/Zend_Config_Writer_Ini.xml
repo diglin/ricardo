@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Zend_Config_Writer_Ini" namespace="" name="Zend_Config_Writer_Ini" abstract="false" final="false" start="33" end="193">
+  <file path="/rissip/github/ricardo/src/Zend/Config/Writer" file="Ini.php" realpath="/rissip/github/ricardo/src/Zend/Config/Writer/Ini.php" size="5745" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0a30827c700d251a3b71bebd2ec36c2316781ad9"/>
+  <docblock>
+    <description compact=""/>
+    <category value="Zend"/>
+    <package value="Zend_Config"/>
+    <copyright value="Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)"/>
+    <license name="http://framework.zend.com/license/new-bsd     New BSD License"/>
+  </docblock>
+  <extends full="Zend_Config_Writer_FileAbstract" namespace="" name="Zend_Config_Writer_FileAbstract"/>
+  <member name="_nestSeparator" type="string" default="'.'" visibility="protected" line="40">
+    <docblock>
+      <description compact="String that separates nesting levels of configuration data identifiers"/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_renderWithoutSections" type="{unknown}" default="false" visibility="protected" line="47">
+    <docblock>
+      <description compact="If true the ini string is rendered in the global namespace without sections."/>
+      <var type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </var>
+    </docblock>
+  </member>
+  <method name="setNestSeparator" start="55" end="60" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set the nest separator"/>
+      <param type="string" variable="$filename"/>
+      <return type="object">
+        <type full="Zend_Config_Writer_Ini" namespace="" name="Zend_Config_Writer_Ini"/>
+      </return>
+    </docblock>
+    <parameter name="separator" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="setRenderWithoutSections" start="71" end="75" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set if rendering should occour without sections or not.">If set to true, the INI file is rendered without sections completely
+into the global namespace of the INI file.</description>
+      <param type="object" variable="$withoutSections">
+        <type full="bool" namespace="" name="bool"/>
+      </param>
+      <return type="object">
+        <type full="Zend_Config_Writer_Ini" namespace="" name="Zend_Config_Writer_Ini"/>
+      </return>
+    </docblock>
+    <parameter name="withoutSections" byreference="false" type="{unknown}" default="true"/>
+  </method>
+  <method name="render" start="83" end="116" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Render a Zend_Config into a INI config string."/>
+      <since value="1.10"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="_addBranch" start="124" end="142" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Add a branch to an INI string recursively"/>
+      <param type="object" variable="$config">
+        <type full="Zend_Config" namespace="" name="Zend_Config"/>
+      </param>
+      <return type="object">
+        <type full="void" namespace="" name="void"/>
+      </return>
+    </docblock>
+    <parameter name="config" byreference="false" type="object">
+      <type full="\\Zend_Config" namespace="\" name="Zend_Config"/>
+    </parameter>
+    <parameter name="parents" byreference="false" type="array"/>
+  </method>
+  <method name="_prepareValue" start="150" end="163" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Prepare a value for INI"/>
+      <param type="mixed" variable="$value"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="value" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="_sortRootElements" start="173" end="192" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Root elements that are not assigned to any section needs to be on the top of config."/>
+      <see value="http://framework.zend.com/issues/browse/ZF-6289"/>
+      <param type="object">
+        <type full="Zend_Config" namespace="" name="Zend_Config"/>
+      </param>
+      <return type="object">
+        <type full="Zend_Config" namespace="" name="Zend_Config"/>
+      </return>
+    </docblock>
+    <parameter name="config" byreference="false" type="object">
+      <type full="\\Zend_Config" namespace="\" name="Zend_Config"/>
+    </parameter>
+    <inline>
+      <comment value="remove sections from config array" line="178"/>
+      <comment value="readd sections to the end" line="186"/>
+    </inline>
+  </method>
+  <parent full="Zend_Config_Writer_FileAbstract" namepsace="" name="Zend_Config_Writer_FileAbstract">
+    <extends full="Zend_Config_Writer" namespace="" name="Zend_Config_Writer"/>
+    <member name="_filename" type="{unknown}" default="null" visibility="protected" line="40">
+      <docblock>
+        <description compact="Filename to write to"/>
+        <var type="string"/>
+      </docblock>
+    </member>
+    <member name="_exclusiveLock" type="{unknown}" default="false" visibility="protected" line="47">
+      <docblock>
+        <description compact="Wether to exclusively lock the file or not"/>
+        <var type="boolean"/>
+      </docblock>
+    </member>
+    <method name="setFilename" start="55" end="60" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Set the target filename"/>
+        <param type="string" variable="$filename"/>
+        <return type="object">
+          <type full="Zend_Config_Writer_Array" namespace="" name="Zend_Config_Writer_Array"/>
+        </return>
+      </docblock>
+      <parameter name="filename" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="setExclusiveLock" start="68" end="73" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Set wether to exclusively lock the file or not"/>
+        <param type="boolean" variable="$exclusiveLock"/>
+        <return type="object">
+          <type full="Zend_Config_Writer_Array" namespace="" name="Zend_Config_Writer_Array"/>
+        </return>
+      </docblock>
+      <parameter name="exclusiveLock" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="write" start="83" end="121" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Write configuration to file."/>
+        <param type="string" variable="$filename"/>
+        <param type="object" variable="$config">
+          <type full="Zend_Config" namespace="" name="Zend_Config"/>
+        </param>
+        <param type="object" variable="$exclusiveLock">
+          <type full="bool" namespace="" name="bool"/>
+        </param>
+        <return type="object">
+          <type full="void" namespace="" name="void"/>
+        </return>
+      </docblock>
+      <parameter name="filename" byreference="false" type="{unknown}" default="null"/>
+      <parameter name="config" byreference="false" type="object" default="null">
+        <type full="\\Zend_Config" namespace="\" name="Zend_Config"/>
+      </parameter>
+      <parameter name="exclusiveLock" byreference="false" type="{unknown}" default="null"/>
+    </method>
+    <method name="render" start="130" end="133" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Render a Zend_Config into a config file string."/>
+        <since value="1.10"/>
+        <todo value="For 2.0 this should be redone into an abstract method."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+  <parent full="Zend_Config_Writer" namepsace="" name="Zend_Config_Writer">
+    <member name="_skipOptions" type="array" visibility="protected" line="35">
+      <docblock>
+        <description compact="Option keys to skip when calling setOptions()"/>
+        <var type="array"/>
+      </docblock>
+    </member>
+    <member name="_config" type="{unknown}" default="null" visibility="protected" line="44">
+      <docblock>
+        <description compact="Config object to write"/>
+        <var type="object">
+          <type full="Zend_Config" namespace="" name="Zend_Config"/>
+        </var>
+      </docblock>
+    </member>
+    <constructor name="__construct" start="53" end="58" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Create a new adapter">$options can only be passed as array or be omitted</description>
+        <param type="object" variable="$options">
+          <type full="null|array" namespace="" name="null|array"/>
+        </param>
+      </docblock>
+      <parameter name="options" byreference="false" type="array" default="null"/>
+    </constructor>
+    <method name="setConfig" start="66" end="71" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Set options via a Zend_Config instance"/>
+        <param type="object" variable="$config">
+          <type full="Zend_Config" namespace="" name="Zend_Config"/>
+        </param>
+        <return type="object">
+          <type full="Zend_Config_Writer" namespace="" name="Zend_Config_Writer"/>
+        </return>
+      </docblock>
+      <parameter name="config" byreference="false" type="object">
+        <type full="\\Zend_Config" namespace="\" name="Zend_Config"/>
+      </parameter>
+    </method>
+    <method name="setOptions" start="79" end="93" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Set options via an array"/>
+        <param type="array" variable="$options"/>
+        <return type="object">
+          <type full="Zend_Config_Writer" namespace="" name="Zend_Config_Writer"/>
+        </return>
+      </docblock>
+      <parameter name="options" byreference="false" type="array"/>
+    </method>
+    <method name="write" start="100" end="100" abstract="true" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Write a Zend_Config object to it's target"/>
+        <return type="object">
+          <type full="void" namespace="" name="void"/>
+        </return>
+      </docblock>
+    </method>
+  </parent>
+</class>

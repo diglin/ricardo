@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\SecurityErrors" namespace="Diglin\Ricardo\Enums" name="SecurityErrors" abstract="false" final="false" start="13" end="93">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums" file="SecurityErrors.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/SecurityErrors.php" size="3514" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a4a4087d3eec15eb007aa1f644a7fabf244ca50e"/>
+  <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
+  <constant name="UNKNOWNPROPERTY" value="0"/>
+  <constant name="CUSTOMERNOTARTICLEOWNER" value="1"/>
+  <constant name="CHECKPASSWORDWRONGPASSWORD" value="2"/>
+  <constant name="CHECKPASSWORDBLACKLISTEDIP" value="3"/>
+  <constant name="CHECKPASSWORDBANNEDCUSTOMER" value="4"/>
+  <constant name="CHECKPASSWORDCLOSEDCUSTOMER" value="5"/>
+  <constant name="LOGADMINFAILED" value="6"/>
+  <constant name="TOKENERROR" value="7"/>
+  <constant name="TOKENEXPIRED" value="8"/>
+  <constant name="ANONYMOUSNOTALLOWED" value="9"/>
+  <constant name="TEMPORAYCREDENTIALEXPIRED" value="10"/>
+  <constant name="TEMPORAYCREDENTIALUNVALIDATED" value="11"/>
+  <constant name="SESSIONEXPIRED" value="12"/>
+  <constant name="UPDATEPASSWORDPOLICYINVALID" value="13"/>
+  <constant name="AFTOKENERROR" value="14"/>
+  <constant name="UNKNOWNPARTNERSHIP" value="15"/>
+  <constant name="CHECKPASSWORDPENDINGEMAILVALIDATION" value="16"/>
+  <constant name="VALIDATECUSTOMERADDRESSDISABLED" value="17"/>
+  <constant name="ACCOUNTBANNED" value="18"/>
+  <constant name="ACCOUNTCLOSED" value="19"/>
+  <constant name="METHODNOTALLOWED" value="20"/>
+  <constant name="TOKEN_AUTHORIZATION" value="100"/>
+  <method name="getEnums" start="66" end="92" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <param variable="$value"/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
+        </return>
+      </docblock>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

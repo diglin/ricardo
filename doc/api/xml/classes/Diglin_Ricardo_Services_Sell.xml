@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Services\Sell" namespace="Diglin\Ricardo\Services" name="Sell" abstract="false" final="false" start="32" end="658">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Services" file="Sell.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Services/Sell.php" size="17378" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="074ac317e96e2683698f40825d790d49a3951ef9"/>
+  <docblock>
+    <description compact="Class Sell">This service is to be used to manage your articles as a seller: you can list, relist, modify, close an article ...</description>
+    <package value="Diglin\Ricardo\Services"/>
+    <link value="https://ws.ricardo.ch/RicardoApi/documentation/html/T_Ricardo_Contracts_ISellService.htm"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract"/>
+  <member name="_service" type="string" default="'SellService'" visibility="protected" line="37">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_IDENTIFIED" visibility="protected" line="42">
+    <docblock>
+      <description compact=""/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <method name="addArticlePictures" start="50" end="56" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Adds the article pictures."/>
+      <param type="object" variable="$addArticlePicturesParameter">
+        <type full="Diglin\Ricardo\Managers\Sell\Parameter\AddArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AddArticlePicturesParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="addArticlePicturesParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\AddArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AddArticlePicturesParameter"/>
+    </parameter>
+  </method>
+  <method name="addArticlePicturesResult" start="73" end="79" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the article fee">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "AddArticlePicturesResult": {
+      "ArticleFee": "float"
+    }
+  }
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\bool" namespace="Diglin\Ricardo\Services" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="appendArticleDescription" start="87" end="93" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Appends the article description."/>
+      <param type="object" variable="$appendArticleDescriptionParameter">
+        <type full="Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendArticleDescriptionParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="appendArticleDescriptionParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendArticleDescriptionParameter"/>
+    </parameter>
+  </method>
+  <method name="appendArticleDescriptionResult" start="101" end="104" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Nothing to return normally, we keep for errors or to have consistent API"/>
+      <param type="array" variable="$data"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="closeArticle" start="112" end="118" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Closes the article."/>
+      <param type="object" variable="$closeArticleParameter">
+        <type full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticleParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="closeArticleParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticleParameter"/>
+    </parameter>
+  </method>
+  <method name="closeArticleResult" start="136" end="142" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the result of the closed article">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "CloseArticleResult": {
+      "ArticleNr": "int"
+      "IsClosed": "bool"
+    }
+  }
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\array|bool" namespace="Diglin\Ricardo\Services" name="array|bool"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="closeArticles" start="150" end="156" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Closes a list of articles."/>
+      <param type="object" variable="$closeArticlesParameter">
+        <type full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticlesParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="closeArticlesParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticlesParameter"/>
+    </parameter>
+  </method>
+  <method name="closeArticlesResult" start="180" end="187" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the result of the closed articles">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "CloseArticlesResult":
+     "CloseArticleResults":
+         [{
+         "ArticleNr": "int"
+         "IsClosed": "bool"
+         },
+         {
+         "ArticleNr": "int"
+         "IsClosed": "bool"
+         }]
+  }
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\array|bool" namespace="Diglin\Ricardo\Services" name="array|bool"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="closeClassified" start="194" end="196" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Closes the classified."/>
+      <param variable="$closeClassifiedParameter"/>
+    </docblock>
+    <parameter name="closeClassifiedParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="closeClassifieds" start="203" end="205" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Closes list of classified."/>
+      <param variable="$closeClassifiedsParameter"/>
+    </docblock>
+    <parameter name="closeClassifiedsParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="deletePlannedArticle" start="213" end="220" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Deletes the planned article."/>
+      <param type="object" variable="$deletePlannedArticleParameter">
+        <type full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticleParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="deletePlannedArticleParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticleParameter"/>
+    </parameter>
+  </method>
+  <method name="deletePlannedArticleResult" start="239" end="245" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the result of the deleted article">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "DeletePlannedArticleResult": {
+      "PlannedArticleId": "int"
+      "PlannedIndex": "int"
+      "IsClosed": "bool"
+    }
+  }
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\array|bool" namespace="Diglin\Ricardo\Services" name="array|bool"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="deletePlannedArticles" start="253" end="260" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Deletes the planned articles."/>
+      <param type="object" variable="$deletePlannedArticleParameter">
+        <type full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticlesParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="deletePlannedArticleParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticlesParameter"/>
+    </parameter>
+  </method>
+  <method name="deletePlannedArticlesResult" start="280" end="286" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the result of the deleted articles">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "DeletePlannedArticlesResult":
+      "DeleteResults": [{
+          "PlannedArticleId": "int"
+          "PlannedIndex": "int"
+         "IsClosed": "bool"
+         }]
+  }
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\array|bool" namespace="Diglin\Ricardo\Services" name="array|bool"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="getArticleFee" start="293" end="295" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Gets the article fee."/>
+      <param variable="$getArticleFeeParameter"/>
+    </docblock>
+    <parameter name="getArticleFeeParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getUpdateArticleFee" start="302" end="304" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Gets the update article fee."/>
+      <param variable="$getUpdateArticleFeeParameter"/>
+    </docblock>
+    <parameter name="getUpdateArticleFeeParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getUpdateClassifiedFee" start="311" end="313" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Gets the update classified fee."/>
+      <param variable="$getUpdateClassifiedFeeParameter"/>
+    </docblock>
+    <parameter name="getUpdateClassifiedFeeParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="insertArticle" start="321" end="327" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Inserts an article or a planned article"/>
+      <param variable="$insertArticleParameter"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="insertArticleParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="InsertArticleParameter"/>
+    </parameter>
+  </method>
+  <method name="insertArticleResult" start="355" end="361" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the article result data">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "InsertArticleResult": {
+      "ArticleFee": [{
+         "ListingFee": "float"
+         "TotalFee": "float"
+         "PromotionFees": [{
+             "PromotionFee": "float"
+             "PromotionId":  "int"
+         }]
+       }]
+      "ArticleId": "int"
+      "CarDealerArticleId": "int"
+      "ErrorCodes": "int" ArticleErrors
+      "PlannedArticleId": "int"
+    }
+  }
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\array|bool" namespace="Diglin\Ricardo\Services" name="array|bool"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="insertArticles" start="369" end="375" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Inserts a list of articles or a planned articles. This method is currently not fully usable to external partners"/>
+      <param type="object" variable="$insertArticlesParameter">
+        <type full="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="InsertArticlesParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="insertArticlesParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="InsertArticlesParameter"/>
+    </parameter>
+  </method>
+  <method name="insertArticlesResult" start="397" end="403" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the article result data">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "InsertArticlesResult": {
+     "Results": [{
+         "ArticleFee": "float"
+         "ArticleId": "int"
+         "CarDealerArticleId": "int"
+         "ErrorCodes": "int" ArticleErrors
+         "PlannedArticleId": "int"
+     }]
+  }
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\array|bool" namespace="Diglin\Ricardo\Services" name="array|bool"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="insertClassified" start="410" end="412" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Inserts the classified."/>
+      <param variable="$insertClassifiedParameter"/>
+    </docblock>
+    <parameter name="insertClassifiedParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="insertClassifieds" start="419" end="421" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Insert a list of classified items. This method is currently not fully usable to external partners"/>
+      <param variable="$insertClassifiedsParameter"/>
+    </docblock>
+    <parameter name="insertClassifiedsParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="insertPreviewConvertedClassified" start="428" end="430" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Inserts the preview converted classified."/>
+      <param variable="$insertPreviewConvertedClassifiedParameter"/>
+    </docblock>
+    <parameter name="insertPreviewConvertedClassifiedParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="ocrRecognize" start="437" end="439" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Ocrs recognition."/>
+      <param variable="$ocrRecognizesParameter"/>
+    </docblock>
+    <parameter name="ocrRecognizesParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="relistArticle" start="445" end="454" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <param variable="$parameters"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="parameters" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="relistArticles" start="462" end="468" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Relists the auction articles. This method is currently not fully usable to external partners"/>
+      <param type="array" variable="$articleIds"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="articleIds" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="relistArticlesWithoutModification" start="475" end="477" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Relists the auction articles without modification. This method is currently not fully usable to external partners"/>
+      <param variable="$relistArticlesWithoutModificationParameter"/>
+    </docblock>
+    <parameter name="relistArticlesWithoutModificationParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="relistArticleWithoutModification" start="484" end="486" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Relists the article without modifing it."/>
+      <param variable="$relistArticleWithoutModificationParameter"/>
+    </docblock>
+    <parameter name="relistArticleWithoutModificationParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="relistClassified" start="493" end="495" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Relists the classified."/>
+      <param variable="$relistClassifiedParameter"/>
+    </docblock>
+    <parameter name="relistClassifiedParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="relistClassifieds" start="502" end="504" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Relists the classified articles. This method is currently not fully usable to external partners"/>
+      <param variable="$relistClassifiedsParameter"/>
+    </docblock>
+    <parameter name="relistClassifiedsParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="relistClassifiedsWithoutModification" start="511" end="513" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Relists the classified article without modification. This method is currently not fully usable to external partners"/>
+      <param variable="$relistClassifiedsWithoutModificationParameter"/>
+    </docblock>
+    <parameter name="relistClassifiedsWithoutModificationParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="relistClassifiedWithoutModification" start="520" end="522" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Relists the classified Without Modification."/>
+      <param variable="$relistClassifiedWithoutModificationParameter"/>
+    </docblock>
+    <parameter name="relistClassifiedWithoutModificationParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="tesseractRecognize" start="529" end="531" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Ocrs recognition."/>
+      <param variable="$ocrRecognizesParameter"/>
+    </docblock>
+    <parameter name="ocrRecognizesParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="updateArticle" start="539" end="545" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Updates the article."/>
+      <param type="object" variable="$updateArticleParameter">
+        <type full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticleParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="updateArticleParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticleParameter"/>
+    </parameter>
+  </method>
+  <method name="updateArticleResult" start="562" end="568" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the article result data">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "UpdateArticleResult": {
+      "ArticleFee": "float"
+    }
+  }
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\bool|array" namespace="Diglin\Ricardo\Services" name="bool|array"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="array"/>
+  </method>
+  <method name="updateArticleBuyNowPrice" start="575" end="577" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Updates the article buy now price."/>
+      <param variable="$updateArticleBuyNowPriceParameter"/>
+    </docblock>
+    <parameter name="updateArticleBuyNowPriceParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="updateArticleBuyNowQuantity" start="584" end="586" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Updates the article buy now quantity."/>
+      <param variable="$updateArticleBuyNowQuantityParameter"/>
+    </docblock>
+    <parameter name="updateArticleBuyNowQuantityParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="updateArticleBuyNowRelistCount" start="593" end="595" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Updates the article buy now relist count."/>
+      <param variable="$updateArticleBuyNowRelistCountParameter"/>
+    </docblock>
+    <parameter name="updateArticleBuyNowRelistCountParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="updateArticlePictures" start="603" end="609" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Updates the article pictures."/>
+      <param type="object" variable="$updateArticlePicturesParameter">
+        <type full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticlePicturesParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="updateArticlePicturesParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticlePicturesParameter"/>
+    </parameter>
+  </method>
+  <method name="updateArticlePicturesResult" start="617" end="620" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Nothing to return normally, we keep for errors or to have consistent API"/>
+      <param variable="$data"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="updateClassified" start="627" end="629" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Updates the classified."/>
+      <param variable="$updateClassifiedParameter"/>
+    </docblock>
+    <parameter name="updateClassifiedParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="updateClassifiedPictures" start="636" end="638" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Update classified pictures'"/>
+      <param variable="$updateClassifiedPicturesParameter"/>
+    </docblock>
+    <parameter name="updateClassifiedPicturesParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="updatePlannedArticle" start="645" end="647" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Updates the planned article."/>
+      <param variable="$updatePlannedArticleParameter"/>
+    </docblock>
+    <parameter name="updatePlannedArticleParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="updatePlannedArticlePictures" start="654" end="656" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Upd"/>
+      <param variable="$updatePlannedArticlePicturesParameter"/>
+    </docblock>
+    <parameter name="updatePlannedArticlePicturesParameter" byreference="false" type="{unknown}"/>
+  </method>
+  <parent full="Diglin\Ricardo\Services\ServiceAbstract" namepsace="Diglin\Ricardo\Services" name="ServiceAbstract">
+    <constant name="TOKEN_TYPE_ANONYMOUS" value="'anonymous'"/>
+    <constant name="TOKEN_TYPE_IDENTIFIED" value="'identified'"/>
+    <constant name="TOKEN_TYPE_ANTIFORGERY" value="'antiforgery'"/>
+    <constant name="TOKEN_TYPE_TEMPORARY" value="'temporary'"/>
+    <constant name="TOKEN_TYPE_DEFAULT" value="''"/>
+    <member name="_service" type="string" default="''" visibility="protected" line="29">
+      <docblock>
+        <description compact=""/>
+        <var type="string"/>
+      </docblock>
+    </member>
+    <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="34">
+      <docblock>
+        <description compact=""/>
+        <var type="string"/>
+      </docblock>
+    </member>
+    <method name="getService" start="41" end="44" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get the current name of the API service"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="getTypeOfToken" start="58" end="61" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get the type of token needed for this service &lt;pre&gt; It can be: - anonymous - identified - antiforgery - empty &lt;/pre&gt;"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

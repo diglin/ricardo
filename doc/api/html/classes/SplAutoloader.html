@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+  <head>
+    <title>phpDox - SplAutoloader</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">SplAutoloader</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>\</small>SplAutoloader</h1>
+        <h4>SplClassLoader implementation that implements the technical interoperability standards for PHP 5.3 namespaces and class names.</h4>
+        <p>http://groups.google.com/group/php-standards/web/final-proposal<br/><br/>// Example which loads classes for the Doctrine Common package in the<br/>// Doctrine\Common namespace.<br/>$classLoader = new SplClassLoader('Doctrine\Common', '/path/to/doctrine');<br/>    $classLoader-&gt;register();</p>
+        <ul>
+          <li>Author: Jonathan H. Wage &lt;jonwage@gmail.com&gt;</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class SplAutoloader
+            {<br/><ul class="none"><li>// members</li><li>private
+                         <a href="#members">$_fileExtension</a>;
+                    </li><li>private
+                         <a href="#members">$_namespace</a>;
+                    </li><li>private
+                         <a href="#members">$_includePath</a>;
+                    </li><li>private
+                         <a href="#members">$_namespaceSeparator</a>;
+                    </li></ul><ul class="none"><li>// methods</li><li>public void <a title="SplAutoloader" href="../classes/SplAutoloader/__construct.html">__construct</a>()
+                    </li><li>public void <a title="SplAutoloader" href="../classes/SplAutoloader/setNamespaceSeparator.html">setNamespaceSeparator</a>()
+                    </li><li>public void <a title="SplAutoloader" href="../classes/SplAutoloader/getNamespaceSeparator.html">getNamespaceSeparator</a>()
+                    </li><li>public void <a title="SplAutoloader" href="../classes/SplAutoloader/setIncludePath.html">setIncludePath</a>()
+                    </li><li>public string <a title="SplAutoloader" href="../classes/SplAutoloader/getIncludePath.html">getIncludePath</a>()
+                    </li><li>public void <a title="SplAutoloader" href="../classes/SplAutoloader/setFileExtension.html">setFileExtension</a>()
+                    </li><li>public string <a title="SplAutoloader" href="../classes/SplAutoloader/getFileExtension.html">getFileExtension</a>()
+                    </li><li>public void <a title="SplAutoloader" href="../classes/SplAutoloader/register.html">register</a>()
+                    </li><li>public void <a title="SplAutoloader" href="../classes/SplAutoloader/unregister.html">unregister</a>()
+                    </li><li>public void <a title="SplAutoloader" href="../classes/SplAutoloader/loadClass.html">loadClass</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>private</h4>
+          <ul class="members">
+            <li id="_fileExtension">
+              <strong>$_fileExtension</strong>
+            </li>
+            <li id="_includePath">
+              <strong>$_includePath</strong>
+            </li>
+            <li id="_namespace">
+              <strong>$_namespace</strong>
+            </li>
+            <li id="_namespaceSeparator">
+              <strong>$_namespaceSeparator</strong>
+            </li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="__construct"><a title="SplAutoloader" href="../classes/SplAutoloader/__construct.html">__construct()</a>
+                — Creates a new &lt;tt&gt;SplClassLoader&lt;/tt&gt; that loads classes of the specified namespace.</li>
+            <li id="getFileExtension"><a title="SplAutoloader" href="../classes/SplAutoloader/getFileExtension.html">getFileExtension()</a>
+                — Gets the file extension of class files in the namespace of this class loader.</li>
+            <li id="getIncludePath"><a title="SplAutoloader" href="../classes/SplAutoloader/getIncludePath.html">getIncludePath()</a>
+                — Gets the base include path for all class files in the namespace of this class loader.</li>
+            <li id="getNamespaceSeparator"><a title="SplAutoloader" href="../classes/SplAutoloader/getNamespaceSeparator.html">getNamespaceSeparator()</a>
+                — Gets the namespace seperator used by classes in the namespace of this class loader.</li>
+            <li id="loadClass"><a title="SplAutoloader" href="../classes/SplAutoloader/loadClass.html">loadClass()</a>
+                — Loads the given class or interface.</li>
+            <li id="register"><a title="SplAutoloader" href="../classes/SplAutoloader/register.html">register()</a>
+                — Installs this class loader on the SPL autoload stack.</li>
+            <li id="setFileExtension"><a title="SplAutoloader" href="../classes/SplAutoloader/setFileExtension.html">setFileExtension()</a>
+                — Sets the file extension of class files in the namespace of this class loader.</li>
+            <li id="setIncludePath"><a title="SplAutoloader" href="../classes/SplAutoloader/setIncludePath.html">setIncludePath()</a>
+                — Sets the base include path for all class files in the namespace of this class loader.</li>
+            <li id="setNamespaceSeparator"><a title="SplAutoloader" href="../classes/SplAutoloader/setNamespaceSeparator.html">setNamespaceSeparator()</a>
+                — Sets the namespace separator used by classes in the namespace of this class loader.</li>
+            <li id="unregister"><a title="SplAutoloader" href="../classes/SplAutoloader/unregister.html">unregister()</a>
+                — Uninstalls this class loader from the SPL autoloader stack.</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2014-06-15T22:30:44+02:00 (commit #<span title="6b76b24f27d71efc3a3fa7baf8a44521632e1e71">6b76b24</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>change folders structure, add script specific for Magento to allow to install the library into it</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-06-15T13:58:22+02:00 (commit #<span title="e3161ff937f72b4307f87e1d8be097aa33dee6dd">e3161ff</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>init commit</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

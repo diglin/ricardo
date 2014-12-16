@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src#" full="ArrayAccess" namespace="" name="ArrayAccess">
+  <method name="offsetExists" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Whether a offset exists">Whether or not an offset exists.</description>
+      <return type="boolean"/>
+    </docblock>
+    <parameter name="offset" optional="false" byreference="false" type="object" class="mixed"/>
+  </method>
+  <method name="offsetGet" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Offset to retrieve">Returns the value at specified offset.</description>
+      <return type="mixed"/>
+    </docblock>
+    <parameter name="offset" optional="false" byreference="false" type="object" class="mixed"/>
+  </method>
+  <method name="offsetSet" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Offset to set"/>
+      <return type="void"/>
+    </docblock>
+    <parameter name="offset" optional="false" byreference="false" type="object" class="mixed"/>
+    <parameter name="value" optional="false" byreference="false" type="object" class="mixed"/>
+  </method>
+  <method name="offsetUnset" abstract="false" static="false" visibility="public" final="false">
+    <docblock>
+      <description compact="Offset to unset">Unsets an offset.</description>
+      <return type="void"/>
+    </docblock>
+    <parameter name="offset" optional="false" byreference="false" type="object" class="mixed"/>
+  </method>
+<implementor full="Diglin\Ricardo\Managers\ParameterAbstract" namespace="Diglin\Ricardo\Managers" name="ParameterAbstract"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\AddArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AddArticlePicturesParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendArticleDescriptionParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\AppendDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendDescriptionParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleDeliveryParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleDescriptionParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInformationParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInternalReferenceParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticlePictureParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticleParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticlesParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticleParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticlesParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="InsertArticleParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="InsertArticlesParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticleParameter"/><implementor full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticlePicturesParameter"/><implementor full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ArticlesParameter"/><implementor full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ClosedArticlesParameter"/><implementor full="Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="OpenArticlesParameter"/><implementor full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticleParameter"/><implementor full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticlesParameter"/><implementor full="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="SoldArticlesParameter"/><implementor full="Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="UnsoldArticlesParameter"/></interface>

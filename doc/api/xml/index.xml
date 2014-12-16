@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index xmlns="http://xml.phpdox.net/src#">
+  <namespace name="Diglin\Ricardo">
+    <class name="Api" src="/rissip/github/ricardo/src/Diglin/Ricardo/Api.php" description="Class Api" xml="classes/Diglin_Ricardo_Api.xml"/>
+    <class name="Config" src="/rissip/github/ricardo/src/Diglin/Ricardo/Config.php" description="Class Config" xml="classes/Diglin_Ricardo_Config.xml"/>
+    <class name="Service" src="/rissip/github/ricardo/src/Diglin/Ricardo/Service.php" description="Class Service" xml="classes/Diglin_Ricardo_Service.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Composer">
+    <class name="Magento" src="/rissip/github/ricardo/src/Diglin/Ricardo/Composer/Magento.php" xml="classes/Diglin_Ricardo_Composer_Magento.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Core">
+    <interface name="ApiInterface" src="/rissip/github/ricardo/src/Diglin/Ricardo/Core/ApiInterface.php" xml="interfaces/Diglin_Ricardo_Core_ApiInterface.xml"/>
+    <interface name="ConfigInterface" src="/rissip/github/ricardo/src/Diglin/Ricardo/Core/ConfigInterface.php" xml="interfaces/Diglin_Ricardo_Core_ConfigInterface.xml"/>
+    <class name="Helper" src="/rissip/github/ricardo/src/Diglin/Ricardo/Core/Helper.php" xml="classes/Diglin_Ricardo_Core_Helper.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Enums">
+    <class name="AbstractEnums" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/AbstractEnums.php" xml="classes/Diglin_Ricardo_Enums_AbstractEnums.xml"/>
+    <class name="ArticleErrors" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/ArticleErrors.php" description="Class ArticleErrors" xml="classes/Diglin_Ricardo_Enums_ArticleErrors.xml"/>
+    <class name="CustomerErrors" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/CustomerErrors.php" xml="classes/Diglin_Ricardo_Enums_CustomerErrors.xml"/>
+    <class name="GeneralErrors" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/GeneralErrors.php" description="Class GeneralErrors" xml="classes/Diglin_Ricardo_Enums_GeneralErrors.xml"/>
+    <class name="PaymentMethods" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/PaymentMethods.php" xml="classes/Diglin_Ricardo_Enums_PaymentMethods.xml"/>
+    <class name="PictureErrors" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/PictureErrors.php" xml="classes/Diglin_Ricardo_Enums_PictureErrors.xml"/>
+    <class name="PictureExtension" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/PictureExtension.php" xml="classes/Diglin_Ricardo_Enums_PictureExtension.xml"/>
+    <class name="SecurityErrors" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/SecurityErrors.php" xml="classes/Diglin_Ricardo_Enums_SecurityErrors.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Enums\Article">
+    <class name="ArticlesTypes" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article/ArticlesTypes.php" description="Class ArticlesTypes" xml="classes/Diglin_Ricardo_Enums_Article_ArticlesTypes.xml"/>
+    <class name="CloseListStatus" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article/CloseListStatus.php" description="Class CloseListStatus" xml="classes/Diglin_Ricardo_Enums_Article_CloseListStatus.xml"/>
+    <class name="InternalReferenceType" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article/InternalReferenceType.php" description="Class PromotionCode" xml="classes/Diglin_Ricardo_Enums_Article_InternalReferenceType.xml"/>
+    <class name="PromotionCode" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article/PromotionCode.php" description="Class PromotionCode" xml="classes/Diglin_Ricardo_Enums_Article_PromotionCode.xml"/>
+    <class name="Warranty" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article/Warranty.php" description="Class Warranty" xml="classes/Diglin_Ricardo_Enums_Article_Warranty.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Enums\Customer">
+    <class name="ArticleTypeFilter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer/ArticleTypeFilter.php" description="Class ArticleTypeFilter" xml="classes/Diglin_Ricardo_Enums_Customer_ArticleTypeFilter.xml"/>
+    <class name="OpenArticlesSortBy" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer/OpenArticlesSortBy.php" description="Class OpenArticlesSortBy" xml="classes/Diglin_Ricardo_Enums_Customer_OpenArticlesSortBy.xml"/>
+    <class name="PaidStatusFilter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer/PaidStatusFilter.php" description="Class PaidStatusFilter" xml="classes/Diglin_Ricardo_Enums_Customer_PaidStatusFilter.xml"/>
+    <class name="ShippedStatusFilter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer/ShippedStatusFilter.php" description="Class ShippedStatusFilter" xml="classes/Diglin_Ricardo_Enums_Customer_ShippedStatusFilter.xml"/>
+    <class name="SoldArticlesSortBy" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer/SoldArticlesSortBy.php" description="Class SoldArticlesSortBy" xml="classes/Diglin_Ricardo_Enums_Customer_SoldArticlesSortBy.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Enums\System">
+    <class name="CategoryArticleType" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/System/CategoryArticleType.php" description="Class CategoryArticleType" xml="classes/Diglin_Ricardo_Enums_System_CategoryArticleType.xml"/>
+    <class name="CategoryBrandingFilter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/System/CategoryBrandingFilter.php" description="Class CategoryBrandingFilter" xml="classes/Diglin_Ricardo_Enums_System_CategoryBrandingFilter.xml"/>
+    <class name="LanguageCode" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/System/LanguageCode.php" description="Class LanguageCode" xml="classes/Diglin_Ricardo_Enums_System_LanguageCode.xml"/>
+    <class name="LanguageId" src="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/System/LanguageId.php" description="Class LanguageId" xml="classes/Diglin_Ricardo_Enums_System_LanguageId.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Exceptions">
+    <class name="ArticleException" src="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions/ArticleException.php" description="Class ArticleException" xml="classes/Diglin_Ricardo_Exceptions_ArticleException.xml"/>
+    <class name="CurlException" src="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions/CurlException.php" description="Class CurlException" xml="classes/Diglin_Ricardo_Exceptions_CurlException.xml"/>
+    <class name="CustomerException" src="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions/CustomerException.php" description="Class CustomerException" xml="classes/Diglin_Ricardo_Exceptions_CustomerException.xml"/>
+    <class name="ExceptionAbstract" src="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions/ExceptionAbstract.php" description="Class ExceptionAbstract" xml="classes/Diglin_Ricardo_Exceptions_ExceptionAbstract.xml"/>
+    <class name="GeneralException" src="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions/GeneralException.php" description="Class GeneralException" xml="classes/Diglin_Ricardo_Exceptions_GeneralException.xml"/>
+    <class name="PictureException" src="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions/PictureException.php" description="Class PictureException" xml="classes/Diglin_Ricardo_Exceptions_PictureException.xml"/>
+    <class name="SecurityException" src="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions/SecurityException.php" description="Class SecurityException" xml="classes/Diglin_Ricardo_Exceptions_SecurityException.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Managers">
+    <class name="Customer" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Customer.php" xml="classes/Diglin_Ricardo_Managers_Customer.xml"/>
+    <class name="ManagerAbstract" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/ManagerAbstract.php" description="Class ManagerAbstract" xml="classes/Diglin_Ricardo_Managers_ManagerAbstract.xml"/>
+    <class name="ParameterAbstract" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/ParameterAbstract.php" xml="classes/Diglin_Ricardo_Managers_ParameterAbstract.xml"/>
+    <class name="Security" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Security.php" description="Class Security" xml="classes/Diglin_Ricardo_Managers_Security.xml"/>
+    <class name="Sell" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell.php" xml="classes/Diglin_Ricardo_Managers_Sell.xml"/>
+    <class name="SellerAccount" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount.php" description="Class SellerAccount" xml="classes/Diglin_Ricardo_Managers_SellerAccount.xml"/>
+    <class name="System" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/System.php" description="Class System" xml="classes/Diglin_Ricardo_Managers_System.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Managers\Sell\Parameter">
+    <class name="AddArticlePicturesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/AddArticlePicturesParameter.php" description="Class AddArticlePicturesParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_AddArticlePicturesParameter.xml"/>
+    <class name="AppendArticleDescriptionParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/AppendArticleDescriptionParameter.php" description="Class AppendArticleDescriptionParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_AppendArticleDescriptionParameter.xml"/>
+    <class name="AppendDescriptionParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/AppendDescriptionParameter.php" description="Class AppendDescriptionParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_AppendDescriptionParameter.xml"/>
+    <class name="ArticleDeliveryParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/ArticleDeliveryParameter.php" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_ArticleDeliveryParameter.xml"/>
+    <class name="ArticleDescriptionParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/ArticleDescriptionParameter.php" description="Class ArticleInformationParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_ArticleDescriptionParameter.xml"/>
+    <class name="ArticleInformationParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/ArticleInformationParameter.php" description="Class ArticleInformationParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_ArticleInformationParameter.xml"/>
+    <class name="ArticleInternalReferenceParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/ArticleInternalReferenceParameter.php" description="Class ArticleInternalReferenceParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_ArticleInternalReferenceParameter.xml"/>
+    <class name="ArticlePictureParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/ArticlePictureParameter.php" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_ArticlePictureParameter.xml"/>
+    <class name="CloseArticleParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/CloseArticleParameter.php" description="Class CloseArticleParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_CloseArticleParameter.xml"/>
+    <class name="CloseArticlesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/CloseArticlesParameter.php" description="Class CloseArticlesParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_CloseArticlesParameter.xml"/>
+    <class name="DeletePlannedArticleParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/DeletePlannedArticleParameter.php" description="Class DeletePlannedArticleParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_DeletePlannedArticleParameter.xml"/>
+    <class name="DeletePlannedArticlesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/DeletePlannedArticlesParameter.php" description="Class DeletePlannedArticlesParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_DeletePlannedArticlesParameter.xml"/>
+    <class name="InsertArticleParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/InsertArticleParameter.php" description="Class InsertArticleParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticleParameter.xml"/>
+    <class name="InsertArticlesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/InsertArticlesParameter.php" description="Class InsertArticlesParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter.xml"/>
+    <class name="UpdateArticleParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/UpdateArticleParameter.php" description="Class UpdateArticleParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_UpdateArticleParameter.xml"/>
+    <class name="UpdateArticlePicturesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/UpdateArticlePicturesParameter.php" description="Class UpdateArticlePicturesParameter" xml="classes/Diglin_Ricardo_Managers_Sell_Parameter_UpdateArticlePicturesParameter.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Managers\SellerAccount\Parameter">
+    <class name="ArticlesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/ArticlesParameter.php" description="Class ArticlesParameter" xml="classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_ArticlesParameter.xml"/>
+    <class name="ClosedArticlesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/ClosedArticlesParameter.php" description="Class ClosedArticlesParameter" xml="classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_ClosedArticlesParameter.xml"/>
+    <class name="OpenArticlesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/OpenArticlesParameter.php" description="Class OpenArticlesParameter" xml="classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_OpenArticlesParameter.xml"/>
+    <class name="PlannedArticleParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/PlannedArticleParameter.php" description="Class PlannedArticleParameter" xml="classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_PlannedArticleParameter.xml"/>
+    <class name="PlannedArticlesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/PlannedArticlesParameter.php" description="Class PlannedArticlesParameter" xml="classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_PlannedArticlesParameter.xml"/>
+    <class name="SoldArticlesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/SoldArticlesParameter.php" description="Class SoldArticlesParameter" xml="classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter.xml"/>
+    <class name="UnsoldArticlesParameter" src="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/UnsoldArticlesParameter.php" description="Class UnsoldArticlesParameter Required properties must be sent to ricardo API but can be null" xml="classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_UnsoldArticlesParameter.xml"/>
+  </namespace>
+  <namespace name="Diglin\Ricardo\Services">
+    <class name="Customer" src="/rissip/github/ricardo/src/Diglin/Ricardo/Services/Customer.php" description="Class Customer" xml="classes/Diglin_Ricardo_Services_Customer.xml"/>
+    <class name="Security" src="/rissip/github/ricardo/src/Diglin/Ricardo/Services/Security.php" description="Class Security" xml="classes/Diglin_Ricardo_Services_Security.xml"/>
+    <class name="Sell" src="/rissip/github/ricardo/src/Diglin/Ricardo/Services/Sell.php" description="Class Sell" xml="classes/Diglin_Ricardo_Services_Sell.xml"/>
+    <class name="SellerAccount" src="/rissip/github/ricardo/src/Diglin/Ricardo/Services/SellerAccount.php" description="Class SellerAccount" xml="classes/Diglin_Ricardo_Services_SellerAccount.xml"/>
+    <class name="ServiceAbstract" src="/rissip/github/ricardo/src/Diglin/Ricardo/Services/ServiceAbstract.php" description="Class ServiceAbstract" xml="classes/Diglin_Ricardo_Services_ServiceAbstract.xml"/>
+    <class name="System" src="/rissip/github/ricardo/src/Diglin/Ricardo/Services/System.php" description="Class System" xml="classes/Diglin_Ricardo_Services_System.xml"/>
+  </namespace>
+  <namespace name="">
+    <class name="SplAutoloader" src="/rissip/github/ricardo/src/SplAutoloader.php" description="SplClassLoader implementation that implements the technical interoperability standards for PHP 5.3 namespaces and class names." xml="classes/SplAutoloader.xml"/>
+    <class name="Zend_Config_Exception" src="/rissip/github/ricardo/src/Zend/Config/Exception.php" xml="classes/Zend_Config_Exception.xml"/>
+    <class name="Zend_Config_Ini" src="/rissip/github/ricardo/src/Zend/Config/Ini.php" xml="classes/Zend_Config_Ini.xml"/>
+    <class name="Zend_Config_Json" src="/rissip/github/ricardo/src/Zend/Config/Json.php" description="JSON Adapter for Zend_Config" xml="classes/Zend_Config_Json.xml"/>
+    <class name="Zend_Config_Writer_Array" src="/rissip/github/ricardo/src/Zend/Config/Writer/Array.php" xml="classes/Zend_Config_Writer_Array.xml"/>
+    <class name="Zend_Config_Writer_FileAbstract" src="/rissip/github/ricardo/src/Zend/Config/Writer/FileAbstract.php" description="Abstract File Writer" xml="classes/Zend_Config_Writer_FileAbstract.xml"/>
+    <class name="Zend_Config_Writer_Ini" src="/rissip/github/ricardo/src/Zend/Config/Writer/Ini.php" xml="classes/Zend_Config_Writer_Ini.xml"/>
+    <class name="Zend_Config_Writer_Json" src="/rissip/github/ricardo/src/Zend/Config/Writer/Json.php" xml="classes/Zend_Config_Writer_Json.xml"/>
+    <class name="Zend_Config_Writer_Xml" src="/rissip/github/ricardo/src/Zend/Config/Writer/Xml.php" xml="classes/Zend_Config_Writer_Xml.xml"/>
+    <class name="Zend_Config_Writer_Yaml" src="/rissip/github/ricardo/src/Zend/Config/Writer/Yaml.php" xml="classes/Zend_Config_Writer_Yaml.xml"/>
+    <class name="Zend_Config_Writer" src="/rissip/github/ricardo/src/Zend/Config/Writer.php" xml="classes/Zend_Config_Writer.xml"/>
+    <class name="Zend_Config_Xml" src="/rissip/github/ricardo/src/Zend/Config/Xml.php" description="XML Adapter for Zend_Config" xml="classes/Zend_Config_Xml.xml"/>
+    <class name="Zend_Config_Yaml" src="/rissip/github/ricardo/src/Zend/Config/Yaml.php" description="YAML Adapter for Zend_Config" xml="classes/Zend_Config_Yaml.xml"/>
+    <class name="Zend_Config" src="/rissip/github/ricardo/src/Zend/Config.php" xml="classes/Zend_Config.xml"/>
+    <class name="Zend_Exception" src="/rissip/github/ricardo/src/Zend/Exception.php" xml="classes/Zend_Exception.xml"/>
+    <interface name="Countable" xml="interfaces/Countable.xml"/>
+    <interface name="Iterator" xml="interfaces/Iterator.xml"/>
+    <class name="Exception" xml="classes/Exception.xml"/>
+    <interface name="ArrayAccess" xml="interfaces/ArrayAccess.xml"/>
+  </namespace>
+</index>

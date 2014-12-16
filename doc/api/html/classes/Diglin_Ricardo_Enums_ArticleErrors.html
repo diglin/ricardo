@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+  <head>
+    <title>phpDox - Diglin\Ricardo\Enums\ArticleErrors</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../reports.html">Reports</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html#Diglin_Ricardo_Enums">Diglin\Ricardo\Enums</a>
+          </li>
+          <li class="separator">ArticleErrors</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>Diglin\Ricardo\Enums\</small>ArticleErrors</h1>
+        <h4>Class ArticleErrors</h4>
+        <p/>
+        <ul/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class ArticleErrors
+                extends <a title="Diglin\Ricardo\Enums\AbstractEnums" href="../classes/Diglin_Ricardo_Enums_AbstractEnums.html">AbstractEnums</a>
+            {<br/><ul class="none"><li>// constants</li><li>const EMPTYCOUNTRYID = 1;</li><li>const EMPTYPARTNERID = 2;</li><li>const EMPTYCATEGORY = 3;</li><li>const EMPTYRELISINFOS = 4;</li><li>const EMPTYCUSTOMER = 5;</li><li>const UNKNOWNPARTNERID = 6;</li><li>const UNKONWNCATEGORYID = 7;</li><li>const INVALIDDURATION = 8;</li><li>const RELISTCOUNTEXCEEDED = 9;</li><li>const STARTPRICETOOHIGH = 10;</li><li>const STARTPRICETOOLOW = 11;</li><li>const INVALIDARTICLETYPEFORCATEGORY = 12;</li><li>const CATEGORYNOTFINAL = 13;</li><li>const CATEGORYDEDICATEDTOUSERS = 14;</li><li>const INVALIDTEMPLATEID = 15;</li><li>const EMPTYTITLE = 16;</li><li>const EMPTYDESCRIPTION = 17;</li><li>const EMPTYSUBTITLE = 18;</li><li>const TOOLONGTITLE = 19;</li><li>const TOOLONGDESCRIPTION = 20;</li><li>const TOOLONGSUBTITLE = 21;</li><li>const EMPTYPAYMENTDESCRIPTION = 22;</li><li>const TOOLONGPAYMENTDESCRIPTION = 23;</li><li>const EMPTYDELIVERYDESCRIPTION = 24;</li><li>const TOOLONGDELIVERYDESCRIPTION = 25;</li><li>const EMPTYWARRANTYDESCRIPTION = 26;</li><li>const TOOLONGWARRANTYDESCRIPTION = 27;</li><li>const INCREMENTNOTDEFINED = 28;</li><li>const INVALIDINCREMENT = 29;</li><li>const QUANTITYTOOLOW = 30;</li><li>const QUANTITYTOOHIGH = 31;</li><li>const NOPAYMENTMETHOD = 32;</li><li>const NODELIVERYCONDITION = 33;</li><li>const DELIVERYCOSTTOOHIGH = 34;</li><li>const MANUALINCREMENTNOTALLOWED = 35;</li><li>const PLANNEDSCHEDULETOOLOW = 36;</li><li>const PLANNEDSCHEDULETOOHIGH = 37;</li><li>const REFERENCETOOLONG = 38;</li><li>const INVALIDQUANTITYFORAUCTIONBUYNOW = 39;</li><li>const BUYNOWLOWERTHANSTARTPRICE = 40;</li><li>const RICARDOPAYNOCARSANDBIKES = 41;</li><li>const RICARDOPAYWRONGPAYMENTCONDITIONS = 42;</li><li>const RICARDOPAYPRICETOOHIGH = 43;</li><li>const RICARDOPAYWALLETBLOCKED = 44;</li><li>const MAXPICTURESIZEREACHED = 45;</li><li>const ERRORRESIZINGPICTURE = 46;</li><li>const MAXPICTURESCOUNTREACHED = 48;</li><li>const INVALIDPROMOTION = 49;</li><li>const INVALIDPROMOTIONCOMBINATION = 50;</li><li>const NOTCLOSED = 51;</li><li>const EMPTYARTICLEINFOS = 52;</li><li>const EMPTYDELIVERY = 53;</li><li>const EMPTYPROMOTIONS = 54;</li><li>const EMPTYDESCRIPTIONS = 55;</li><li>const UPDATEARTICLEERROR = 56;</li><li>const MULTIPLEUPDATENOTALLOWED = 57;</li><li>const UPDATEARTICLECANTRETREIVEARTICLEINFORMATIONS = 58;</li><li>const UPDATEARTICLECANTRETREIVECATEGORY = 59;</li><li>const UPDATEARTICLECANTUPDATEDESCRIPTION = 60;</li><li>const ARTICLEHASBIDS = 61;</li><li>const INVALIDPICTUREEXTENSTION = 62;</li><li>const LANGUAGEIDNOTSET = 63;</li><li>const SETLIVEERROR = 64;</li><li>const ARTICLENOTFOUND = 65;</li><li>const EMPTYPICTURES = 66;</li><li>const UPDATEFAILEDCOULDNOTLOCKARTICLE = 67;</li><li>const UPDATEFAILEDONARTICLETABLE = 68;</li><li>const UPDATEFAILEDFORSTARTDATE = 69;</li><li>const UPDATEFAILEDCOULDNOTDELETEOLDIMAGES = 70;</li><li>const UPDATEFAILEDFORIMAGES = 71;</li><li>const UPDATEFAILEDCOULDNOTDELETEOLDDESCRIPTIONS = 72;</li><li>const UPDATEFAILEDFORDESCRIPTIONS = 73;</li><li>const UPDATEFAILEDCOULDNOTDELETEOLDLIST = 74;</li><li>const UPDATEFAILEDFORLIST = 75;</li><li>const INSERTPREVIEWARTICLEERROR = 76;</li><li>const ONEPRICEMUSTBESET = 77;</li><li>const PICTUREBASEDPROMOTIONNEEDPICTURE = 78;</li><li>const SUBTITLEMUSTBESETFORSUBTITLEPROMOTION = 79;</li><li>const NOPAYMENTCONDITIONSELECTED = 80;</li><li>const QUANTITYCANTINCREASE = 81;</li><li>const STARTPRICECANTINCREASE = 82;</li><li>const BUYNOWPRICECANTINCREASE = 83;</li><li>const PROMOTIONCANTBEREMOVEDONUPDATE = 84;</li><li>const PROMOTIONCANTBEDOWNGRADED = 85;</li><li>const DURATIONCHANGESTOOMANY = 86;</li><li>const CANTPURCHASEWITHBUYNOW = 87;</li><li>const UNABLETOUPDATEQUANTITY = 88;</li><li>const UNABLETOUPDATERELISTCOUNT = 89;</li><li>const BUYNOWPROMOTIONNEEDED = 90;</li><li>const INVALIDMAXRELISTCOUNT = 92;</li><li>const RELISTSOLDOUTAUCTIONNOTALLOWED = 93;</li><li>const SUBTITLEALTERNATIVELANGUAGEISEMPTY = 94;</li><li>const DELIVERYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY = 95;</li><li>const PAYMENTDESCRIPTIONALTERNATIVELANGUAGEISEMPTY = 96;</li><li>const WARRANTYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY = 97;</li><li>const TITLEALTERNATIVELANGUAGEISEMPTY = 98;</li><li>const DESCRIPTIONALTERNATIVELANGUAGEISEMPTY = 99;</li><li>const SUBTITLEMAINLANGUAGEISEMPTY = 100;</li><li>const DELIVERYDESCRIPTIONMAINLANGUAGEISEMPTY = 101;</li><li>const PAYMENTDESCRIPTIONMAINLANGUAGEISEMPTY = 102;</li><li>const WARRANTYDESCRIPTIONMAINLANGUAGEISEMPTY = 103;</li><li>const TITLEMAINLANGUAGEISEMPTY = 104;</li><li>const DESCRIPTIONMAINLANGUAGEISEMPTY = 105;</li><li>const CLOSED = 106;</li><li>const TOOLONGMAINTITLE = 107;</li><li>const TOOLONGMAINDESCRIPTION = 108;</li><li>const TOOLONGMAINSUBTITLE = 109;</li><li>const TOOLONGALTERNATIVETITLE = 110;</li><li>const TOOLONGALTERNATIVEDESCRIPTION = 111;</li><li>const TOOLONGALTERNATIVESUBTITLE = 112;</li><li>const TOOLONGMAINPAYMENTDESCRIPTION = 113;</li><li>const TOOLONGALTERNATIVEPAYMENTDESCRIPTION = 114;</li><li>const TOOLONGMAINWARRANTYDESCRIPTION = 115;</li><li>const TOOLONGALTERNATIVEWARRANTYDESCRIPTION = 116;</li><li>const TOOLONGMAINDELIVERYDESCRIPTION = 117;</li><li>const TOOLONGALTERNATIVEDELIVERYDESCRIPTION = 118;</li><li>const BUYNOWPRICETOOLOW = 119;</li><li>const BUYNOWPROMOTIONNOTALLOWED = 120;</li><li>const CANTUPDATEPICTUREONARTICLEWITHBID = 121;</li><li>const HTMLTAGSNOTALLOWED = 122;</li><li>const WRONGPAYMENTCONDITIONS = 123;</li><li>const EMPTYPAYMENTCONDITIONIDS = 124;</li><li>const NODETAILS = 125;</li><li>const ARTICLEALREADYHASCARDPAYMENT = 126;</li><li>const ERRORINSERTINGCARDPAYMENT = 127;</li><li>const ARTICLEDOESNOTHAVECARDPAYMENT = 128;</li><li>const ERRORREMOVINGCARDPAYMENT = 129;</li><li>const RICARDOPAYNOTACTIVATED = 130;</li><li>const EMPTYPAYMENTMETHODSIDS = 131;</li><li>const EMPTYARTICLEID = 132;</li><li>const INVALIDCARDCOMBINATIONWITHDELIVERYCONDITION = 133;</li><li>const NUMBEROFARTICLELIMITED = 134;</li><li>const PAYMENTMETHODNEEDALTERNATEONE = 135;</li><li>const WRONGPAYMENTMETHODS = 136;</li><li>const CUMULATIVESHIPPINGNOTALLOWED = 137;</li></ul><ul class="none"><li>// methods</li><li>public static array <a title="Diglin\Ricardo\Enums\ArticleErrors" href="../classes/Diglin_Ricardo_Enums_ArticleErrors/getEnums.html">getEnums</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="Diglin\Ricardo\Enums\AbstractEnums">AbstractEnums</span></li><li>public static array <a title="Diglin\Ricardo\Enums\AbstractEnums" href="../classes/Diglin_Ricardo_Enums_AbstractEnums/getEnums.html">getEnums</a>()
+                        </li><li>public static bool <a title="Diglin\Ricardo\Enums\AbstractEnums" href="../classes/Diglin_Ricardo_Enums_AbstractEnums/getLabel.html">getLabel</a>()
+                        </li><li>public static array <a title="Diglin\Ricardo\Enums\AbstractEnums" href="../classes/Diglin_Ricardo_Enums_AbstractEnums/getValues.html">getValues</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a href="../classes/Diglin_Ricardo_Enums_AbstractEnums.html">Diglin\Ricardo\Enums\AbstractEnums</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>PHPMessDetector</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Rule</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td>158 - 297</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#excessivemethodlength" target="_blank" title="Code Size Rules">ExcessiveMethodLength</a>
+              </td>
+              <td>The phpmd\node\methodnode getEnums() has 140 lines of code. Current threshold is set to 100. Avoid really long methods.</td>
+            </tr>
+          </table>
+        </div>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="EMPTYCOUNTRYID">EMPTYCOUNTRYID</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td id="EMPTYPARTNERID">EMPTYPARTNERID</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td id="EMPTYCATEGORY">EMPTYCATEGORY</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td id="EMPTYRELISINFOS">EMPTYRELISINFOS</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td id="EMPTYCUSTOMER">EMPTYCUSTOMER</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td id="UNKNOWNPARTNERID">UNKNOWNPARTNERID</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td id="UNKONWNCATEGORYID">UNKONWNCATEGORYID</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td id="INVALIDDURATION">INVALIDDURATION</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td id="RELISTCOUNTEXCEEDED">RELISTCOUNTEXCEEDED</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td id="STARTPRICETOOHIGH">STARTPRICETOOHIGH</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td id="STARTPRICETOOLOW">STARTPRICETOOLOW</td>
+              <td>11</td>
+            </tr>
+            <tr>
+              <td id="INVALIDARTICLETYPEFORCATEGORY">INVALIDARTICLETYPEFORCATEGORY</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td id="CATEGORYNOTFINAL">CATEGORYNOTFINAL</td>
+              <td>13</td>
+            </tr>
+            <tr>
+              <td id="CATEGORYDEDICATEDTOUSERS">CATEGORYDEDICATEDTOUSERS</td>
+              <td>14</td>
+            </tr>
+            <tr>
+              <td id="INVALIDTEMPLATEID">INVALIDTEMPLATEID</td>
+              <td>15</td>
+            </tr>
+            <tr>
+              <td id="EMPTYTITLE">EMPTYTITLE</td>
+              <td>16</td>
+            </tr>
+            <tr>
+              <td id="EMPTYDESCRIPTION">EMPTYDESCRIPTION</td>
+              <td>17</td>
+            </tr>
+            <tr>
+              <td id="EMPTYSUBTITLE">EMPTYSUBTITLE</td>
+              <td>18</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGTITLE">TOOLONGTITLE</td>
+              <td>19</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGDESCRIPTION">TOOLONGDESCRIPTION</td>
+              <td>20</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGSUBTITLE">TOOLONGSUBTITLE</td>
+              <td>21</td>
+            </tr>
+            <tr>
+              <td id="EMPTYPAYMENTDESCRIPTION">EMPTYPAYMENTDESCRIPTION</td>
+              <td>22</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGPAYMENTDESCRIPTION">TOOLONGPAYMENTDESCRIPTION</td>
+              <td>23</td>
+            </tr>
+            <tr>
+              <td id="EMPTYDELIVERYDESCRIPTION">EMPTYDELIVERYDESCRIPTION</td>
+              <td>24</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGDELIVERYDESCRIPTION">TOOLONGDELIVERYDESCRIPTION</td>
+              <td>25</td>
+            </tr>
+            <tr>
+              <td id="EMPTYWARRANTYDESCRIPTION">EMPTYWARRANTYDESCRIPTION</td>
+              <td>26</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGWARRANTYDESCRIPTION">TOOLONGWARRANTYDESCRIPTION</td>
+              <td>27</td>
+            </tr>
+            <tr>
+              <td id="INCREMENTNOTDEFINED">INCREMENTNOTDEFINED</td>
+              <td>28</td>
+            </tr>
+            <tr>
+              <td id="INVALIDINCREMENT">INVALIDINCREMENT</td>
+              <td>29</td>
+            </tr>
+            <tr>
+              <td id="QUANTITYTOOLOW">QUANTITYTOOLOW</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td id="QUANTITYTOOHIGH">QUANTITYTOOHIGH</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td id="NOPAYMENTMETHOD">NOPAYMENTMETHOD</td>
+              <td>32</td>
+            </tr>
+            <tr>
+              <td id="NODELIVERYCONDITION">NODELIVERYCONDITION</td>
+              <td>33</td>
+            </tr>
+            <tr>
+              <td id="DELIVERYCOSTTOOHIGH">DELIVERYCOSTTOOHIGH</td>
+              <td>34</td>
+            </tr>
+            <tr>
+              <td id="MANUALINCREMENTNOTALLOWED">MANUALINCREMENTNOTALLOWED</td>
+              <td>35</td>
+            </tr>
+            <tr>
+              <td id="PLANNEDSCHEDULETOOLOW">PLANNEDSCHEDULETOOLOW</td>
+              <td>36</td>
+            </tr>
+            <tr>
+              <td id="PLANNEDSCHEDULETOOHIGH">PLANNEDSCHEDULETOOHIGH</td>
+              <td>37</td>
+            </tr>
+            <tr>
+              <td id="REFERENCETOOLONG">REFERENCETOOLONG</td>
+              <td>38</td>
+            </tr>
+            <tr>
+              <td id="INVALIDQUANTITYFORAUCTIONBUYNOW">INVALIDQUANTITYFORAUCTIONBUYNOW</td>
+              <td>39</td>
+            </tr>
+            <tr>
+              <td id="BUYNOWLOWERTHANSTARTPRICE">BUYNOWLOWERTHANSTARTPRICE</td>
+              <td>40</td>
+            </tr>
+            <tr>
+              <td id="RICARDOPAYNOCARSANDBIKES">RICARDOPAYNOCARSANDBIKES</td>
+              <td>41</td>
+            </tr>
+            <tr>
+              <td id="RICARDOPAYWRONGPAYMENTCONDITIONS">RICARDOPAYWRONGPAYMENTCONDITIONS</td>
+              <td>42</td>
+            </tr>
+            <tr>
+              <td id="RICARDOPAYPRICETOOHIGH">RICARDOPAYPRICETOOHIGH</td>
+              <td>43</td>
+            </tr>
+            <tr>
+              <td id="RICARDOPAYWALLETBLOCKED">RICARDOPAYWALLETBLOCKED</td>
+              <td>44</td>
+            </tr>
+            <tr>
+              <td id="MAXPICTURESIZEREACHED">MAXPICTURESIZEREACHED</td>
+              <td>45</td>
+            </tr>
+            <tr>
+              <td id="ERRORRESIZINGPICTURE">ERRORRESIZINGPICTURE</td>
+              <td>46</td>
+            </tr>
+            <tr>
+              <td id="MAXPICTURESCOUNTREACHED">MAXPICTURESCOUNTREACHED</td>
+              <td>48</td>
+            </tr>
+            <tr>
+              <td id="INVALIDPROMOTION">INVALIDPROMOTION</td>
+              <td>49</td>
+            </tr>
+            <tr>
+              <td id="INVALIDPROMOTIONCOMBINATION">INVALIDPROMOTIONCOMBINATION</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td id="NOTCLOSED">NOTCLOSED</td>
+              <td>51</td>
+            </tr>
+            <tr>
+              <td id="EMPTYARTICLEINFOS">EMPTYARTICLEINFOS</td>
+              <td>52</td>
+            </tr>
+            <tr>
+              <td id="EMPTYDELIVERY">EMPTYDELIVERY</td>
+              <td>53</td>
+            </tr>
+            <tr>
+              <td id="EMPTYPROMOTIONS">EMPTYPROMOTIONS</td>
+              <td>54</td>
+            </tr>
+            <tr>
+              <td id="EMPTYDESCRIPTIONS">EMPTYDESCRIPTIONS</td>
+              <td>55</td>
+            </tr>
+            <tr>
+              <td id="UPDATEARTICLEERROR">UPDATEARTICLEERROR</td>
+              <td>56</td>
+            </tr>
+            <tr>
+              <td id="MULTIPLEUPDATENOTALLOWED">MULTIPLEUPDATENOTALLOWED</td>
+              <td>57</td>
+            </tr>
+            <tr>
+              <td id="UPDATEARTICLECANTRETREIVEARTICLEINFORMATIONS">UPDATEARTICLECANTRETREIVEARTICLEINFORMATIONS</td>
+              <td>58</td>
+            </tr>
+            <tr>
+              <td id="UPDATEARTICLECANTRETREIVECATEGORY">UPDATEARTICLECANTRETREIVECATEGORY</td>
+              <td>59</td>
+            </tr>
+            <tr>
+              <td id="UPDATEARTICLECANTUPDATEDESCRIPTION">UPDATEARTICLECANTUPDATEDESCRIPTION</td>
+              <td>60</td>
+            </tr>
+            <tr>
+              <td id="ARTICLEHASBIDS">ARTICLEHASBIDS</td>
+              <td>61</td>
+            </tr>
+            <tr>
+              <td id="INVALIDPICTUREEXTENSTION">INVALIDPICTUREEXTENSTION</td>
+              <td>62</td>
+            </tr>
+            <tr>
+              <td id="LANGUAGEIDNOTSET">LANGUAGEIDNOTSET</td>
+              <td>63</td>
+            </tr>
+            <tr>
+              <td id="SETLIVEERROR">SETLIVEERROR</td>
+              <td>64</td>
+            </tr>
+            <tr>
+              <td id="ARTICLENOTFOUND">ARTICLENOTFOUND</td>
+              <td>65</td>
+            </tr>
+            <tr>
+              <td id="EMPTYPICTURES">EMPTYPICTURES</td>
+              <td>66</td>
+            </tr>
+            <tr>
+              <td id="UPDATEFAILEDCOULDNOTLOCKARTICLE">UPDATEFAILEDCOULDNOTLOCKARTICLE</td>
+              <td>67</td>
+            </tr>
+            <tr>
+              <td id="UPDATEFAILEDONARTICLETABLE">UPDATEFAILEDONARTICLETABLE</td>
+              <td>68</td>
+            </tr>
+            <tr>
+              <td id="UPDATEFAILEDFORSTARTDATE">UPDATEFAILEDFORSTARTDATE</td>
+              <td>69</td>
+            </tr>
+            <tr>
+              <td id="UPDATEFAILEDCOULDNOTDELETEOLDIMAGES">UPDATEFAILEDCOULDNOTDELETEOLDIMAGES</td>
+              <td>70</td>
+            </tr>
+            <tr>
+              <td id="UPDATEFAILEDFORIMAGES">UPDATEFAILEDFORIMAGES</td>
+              <td>71</td>
+            </tr>
+            <tr>
+              <td id="UPDATEFAILEDCOULDNOTDELETEOLDDESCRIPTIONS">UPDATEFAILEDCOULDNOTDELETEOLDDESCRIPTIONS</td>
+              <td>72</td>
+            </tr>
+            <tr>
+              <td id="UPDATEFAILEDFORDESCRIPTIONS">UPDATEFAILEDFORDESCRIPTIONS</td>
+              <td>73</td>
+            </tr>
+            <tr>
+              <td id="UPDATEFAILEDCOULDNOTDELETEOLDLIST">UPDATEFAILEDCOULDNOTDELETEOLDLIST</td>
+              <td>74</td>
+            </tr>
+            <tr>
+              <td id="UPDATEFAILEDFORLIST">UPDATEFAILEDFORLIST</td>
+              <td>75</td>
+            </tr>
+            <tr>
+              <td id="INSERTPREVIEWARTICLEERROR">INSERTPREVIEWARTICLEERROR</td>
+              <td>76</td>
+            </tr>
+            <tr>
+              <td id="ONEPRICEMUSTBESET">ONEPRICEMUSTBESET</td>
+              <td>77</td>
+            </tr>
+            <tr>
+              <td id="PICTUREBASEDPROMOTIONNEEDPICTURE">PICTUREBASEDPROMOTIONNEEDPICTURE</td>
+              <td>78</td>
+            </tr>
+            <tr>
+              <td id="SUBTITLEMUSTBESETFORSUBTITLEPROMOTION">SUBTITLEMUSTBESETFORSUBTITLEPROMOTION</td>
+              <td>79</td>
+            </tr>
+            <tr>
+              <td id="NOPAYMENTCONDITIONSELECTED">NOPAYMENTCONDITIONSELECTED</td>
+              <td>80</td>
+            </tr>
+            <tr>
+              <td id="QUANTITYCANTINCREASE">QUANTITYCANTINCREASE</td>
+              <td>81</td>
+            </tr>
+            <tr>
+              <td id="STARTPRICECANTINCREASE">STARTPRICECANTINCREASE</td>
+              <td>82</td>
+            </tr>
+            <tr>
+              <td id="BUYNOWPRICECANTINCREASE">BUYNOWPRICECANTINCREASE</td>
+              <td>83</td>
+            </tr>
+            <tr>
+              <td id="PROMOTIONCANTBEREMOVEDONUPDATE">PROMOTIONCANTBEREMOVEDONUPDATE</td>
+              <td>84</td>
+            </tr>
+            <tr>
+              <td id="PROMOTIONCANTBEDOWNGRADED">PROMOTIONCANTBEDOWNGRADED</td>
+              <td>85</td>
+            </tr>
+            <tr>
+              <td id="DURATIONCHANGESTOOMANY">DURATIONCHANGESTOOMANY</td>
+              <td>86</td>
+            </tr>
+            <tr>
+              <td id="CANTPURCHASEWITHBUYNOW">CANTPURCHASEWITHBUYNOW</td>
+              <td>87</td>
+            </tr>
+            <tr>
+              <td id="UNABLETOUPDATEQUANTITY">UNABLETOUPDATEQUANTITY</td>
+              <td>88</td>
+            </tr>
+            <tr>
+              <td id="UNABLETOUPDATERELISTCOUNT">UNABLETOUPDATERELISTCOUNT</td>
+              <td>89</td>
+            </tr>
+            <tr>
+              <td id="BUYNOWPROMOTIONNEEDED">BUYNOWPROMOTIONNEEDED</td>
+              <td>90</td>
+            </tr>
+            <tr>
+              <td id="INVALIDMAXRELISTCOUNT">INVALIDMAXRELISTCOUNT</td>
+              <td>92</td>
+            </tr>
+            <tr>
+              <td id="RELISTSOLDOUTAUCTIONNOTALLOWED">RELISTSOLDOUTAUCTIONNOTALLOWED</td>
+              <td>93</td>
+            </tr>
+            <tr>
+              <td id="SUBTITLEALTERNATIVELANGUAGEISEMPTY">SUBTITLEALTERNATIVELANGUAGEISEMPTY</td>
+              <td>94</td>
+            </tr>
+            <tr>
+              <td id="DELIVERYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY">DELIVERYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY</td>
+              <td>95</td>
+            </tr>
+            <tr>
+              <td id="PAYMENTDESCRIPTIONALTERNATIVELANGUAGEISEMPTY">PAYMENTDESCRIPTIONALTERNATIVELANGUAGEISEMPTY</td>
+              <td>96</td>
+            </tr>
+            <tr>
+              <td id="WARRANTYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY">WARRANTYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY</td>
+              <td>97</td>
+            </tr>
+            <tr>
+              <td id="TITLEALTERNATIVELANGUAGEISEMPTY">TITLEALTERNATIVELANGUAGEISEMPTY</td>
+              <td>98</td>
+            </tr>
+            <tr>
+              <td id="DESCRIPTIONALTERNATIVELANGUAGEISEMPTY">DESCRIPTIONALTERNATIVELANGUAGEISEMPTY</td>
+              <td>99</td>
+            </tr>
+            <tr>
+              <td id="SUBTITLEMAINLANGUAGEISEMPTY">SUBTITLEMAINLANGUAGEISEMPTY</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td id="DELIVERYDESCRIPTIONMAINLANGUAGEISEMPTY">DELIVERYDESCRIPTIONMAINLANGUAGEISEMPTY</td>
+              <td>101</td>
+            </tr>
+            <tr>
+              <td id="PAYMENTDESCRIPTIONMAINLANGUAGEISEMPTY">PAYMENTDESCRIPTIONMAINLANGUAGEISEMPTY</td>
+              <td>102</td>
+            </tr>
+            <tr>
+              <td id="WARRANTYDESCRIPTIONMAINLANGUAGEISEMPTY">WARRANTYDESCRIPTIONMAINLANGUAGEISEMPTY</td>
+              <td>103</td>
+            </tr>
+            <tr>
+              <td id="TITLEMAINLANGUAGEISEMPTY">TITLEMAINLANGUAGEISEMPTY</td>
+              <td>104</td>
+            </tr>
+            <tr>
+              <td id="DESCRIPTIONMAINLANGUAGEISEMPTY">DESCRIPTIONMAINLANGUAGEISEMPTY</td>
+              <td>105</td>
+            </tr>
+            <tr>
+              <td id="CLOSED">CLOSED</td>
+              <td>106</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGMAINTITLE">TOOLONGMAINTITLE</td>
+              <td>107</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGMAINDESCRIPTION">TOOLONGMAINDESCRIPTION</td>
+              <td>108</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGMAINSUBTITLE">TOOLONGMAINSUBTITLE</td>
+              <td>109</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGALTERNATIVETITLE">TOOLONGALTERNATIVETITLE</td>
+              <td>110</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGALTERNATIVEDESCRIPTION">TOOLONGALTERNATIVEDESCRIPTION</td>
+              <td>111</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGALTERNATIVESUBTITLE">TOOLONGALTERNATIVESUBTITLE</td>
+              <td>112</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGMAINPAYMENTDESCRIPTION">TOOLONGMAINPAYMENTDESCRIPTION</td>
+              <td>113</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGALTERNATIVEPAYMENTDESCRIPTION">TOOLONGALTERNATIVEPAYMENTDESCRIPTION</td>
+              <td>114</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGMAINWARRANTYDESCRIPTION">TOOLONGMAINWARRANTYDESCRIPTION</td>
+              <td>115</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGALTERNATIVEWARRANTYDESCRIPTION">TOOLONGALTERNATIVEWARRANTYDESCRIPTION</td>
+              <td>116</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGMAINDELIVERYDESCRIPTION">TOOLONGMAINDELIVERYDESCRIPTION</td>
+              <td>117</td>
+            </tr>
+            <tr>
+              <td id="TOOLONGALTERNATIVEDELIVERYDESCRIPTION">TOOLONGALTERNATIVEDELIVERYDESCRIPTION</td>
+              <td>118</td>
+            </tr>
+            <tr>
+              <td id="BUYNOWPRICETOOLOW">BUYNOWPRICETOOLOW</td>
+              <td>119</td>
+            </tr>
+            <tr>
+              <td id="BUYNOWPROMOTIONNOTALLOWED">BUYNOWPROMOTIONNOTALLOWED</td>
+              <td>120</td>
+            </tr>
+            <tr>
+              <td id="CANTUPDATEPICTUREONARTICLEWITHBID">CANTUPDATEPICTUREONARTICLEWITHBID</td>
+              <td>121</td>
+            </tr>
+            <tr>
+              <td id="HTMLTAGSNOTALLOWED">HTMLTAGSNOTALLOWED</td>
+              <td>122</td>
+            </tr>
+            <tr>
+              <td id="WRONGPAYMENTCONDITIONS">WRONGPAYMENTCONDITIONS</td>
+              <td>123</td>
+            </tr>
+            <tr>
+              <td id="EMPTYPAYMENTCONDITIONIDS">EMPTYPAYMENTCONDITIONIDS</td>
+              <td>124</td>
+            </tr>
+            <tr>
+              <td id="NODETAILS">NODETAILS</td>
+              <td>125</td>
+            </tr>
+            <tr>
+              <td id="ARTICLEALREADYHASCARDPAYMENT">ARTICLEALREADYHASCARDPAYMENT</td>
+              <td>126</td>
+            </tr>
+            <tr>
+              <td id="ERRORINSERTINGCARDPAYMENT">ERRORINSERTINGCARDPAYMENT</td>
+              <td>127</td>
+            </tr>
+            <tr>
+              <td id="ARTICLEDOESNOTHAVECARDPAYMENT">ARTICLEDOESNOTHAVECARDPAYMENT</td>
+              <td>128</td>
+            </tr>
+            <tr>
+              <td id="ERRORREMOVINGCARDPAYMENT">ERRORREMOVINGCARDPAYMENT</td>
+              <td>129</td>
+            </tr>
+            <tr>
+              <td id="RICARDOPAYNOTACTIVATED">RICARDOPAYNOTACTIVATED</td>
+              <td>130</td>
+            </tr>
+            <tr>
+              <td id="EMPTYPAYMENTMETHODSIDS">EMPTYPAYMENTMETHODSIDS</td>
+              <td>131</td>
+            </tr>
+            <tr>
+              <td id="EMPTYARTICLEID">EMPTYARTICLEID</td>
+              <td>132</td>
+            </tr>
+            <tr>
+              <td id="INVALIDCARDCOMBINATIONWITHDELIVERYCONDITION">INVALIDCARDCOMBINATIONWITHDELIVERYCONDITION</td>
+              <td>133</td>
+            </tr>
+            <tr>
+              <td id="NUMBEROFARTICLELIMITED">NUMBEROFARTICLELIMITED</td>
+              <td>134</td>
+            </tr>
+            <tr>
+              <td id="PAYMENTMETHODNEEDALTERNATEONE">PAYMENTMETHODNEEDALTERNATEONE</td>
+              <td>135</td>
+            </tr>
+            <tr>
+              <td id="WRONGPAYMENTMETHODS">WRONGPAYMENTMETHODS</td>
+              <td>136</td>
+            </tr>
+            <tr>
+              <td id="CUMULATIVESHIPPINGNOTALLOWED">CUMULATIVESHIPPINGNOTALLOWED</td>
+              <td>137</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>public</h4>
+          <ul>
+            <li id="getEnums">
+              <a title="Diglin\Ricardo\Enums\ArticleErrors" href="../classes/Diglin_Ricardo_Enums_ArticleErrors/getEnums.html">getEnums()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="Diglin\Ricardo\Enums\AbstractEnums" href="../classes/Diglin_Ricardo_Enums_AbstractEnums.html">Diglin\Ricardo\Enums\AbstractEnums</a></h3>
+          <h4>public</h4>
+          <ul>
+            <li id="getEnums">
+              <a title="Diglin\Ricardo\Enums\AbstractEnums" href="../classes/Diglin_Ricardo_Enums_AbstractEnums/getEnums.html">getEnums()</a>
+            </li>
+            <li id="getLabel">
+              <a title="Diglin\Ricardo\Enums\AbstractEnums" href="../classes/Diglin_Ricardo_Enums_AbstractEnums/getLabel.html">getLabel()</a>
+            </li>
+            <li id="getValues">
+              <a title="Diglin\Ricardo\Enums\AbstractEnums" href="../classes/Diglin_Ricardo_Enums_AbstractEnums/getValues.html">getValues()</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2014-09-28T11:22:59+02:00 (commit #<span title="3e11a2cf9148ee20ec7e06905b6b86a0c74ea70d">3e11a2c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-09-14T22:08:58+02:00 (commit #<span title="3af969093cb695fba82b2ac477429da8aee595fd">3af9690</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre>Add Enums, Exceptions, Parameters classes</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

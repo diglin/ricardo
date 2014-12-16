@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\Customer\PaidStatusFilter" namespace="Diglin\Ricardo\Enums\Customer" name="PaidStatusFilter" abstract="false" final="false" start="20" end="39">
+  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer" file="PaidStatusFilter.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer/PaidStatusFilter.php" size="892" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="18eb7172c43147eafa7dc5312647f0c3d858d7b5"/>
+  <docblock>
+    <description compact="Class PaidStatusFilter"/>
+    <package value="Diglin\Ricardo\Enums\Customer"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
+  <constant name="ANY" value="0"/>
+  <constant name="PAID" value="1"/>
+  <constant name="NOTPAID" value="2"/>
+  <method name="getEnums" start="31" end="38" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description compact=""/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <param variable="$value"/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
+        </return>
+      </docblock>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description compact=""/>
+        <return type="array"/>
+      </docblock>
+    </method>
+  </parent>
+</class>
