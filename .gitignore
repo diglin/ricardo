@@ -1,6 +1,6 @@
 .DS_Store
 .idea
+atlassian-ide-plugin.xml
 
 tests/conf/config.ini
-atlassian-ide-plugin.xml
-api.log
+tests/log/api.log
