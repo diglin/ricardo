@@ -57,7 +57,8 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
                 throw new \Exception('Missing Config.ini file');
             }
 
-            $config = parse_ini_file(__DIR__ . '/../../../../conf/config.ini', true);
+            $config = parse_ini_file($configIniFile, true);
+            $config['GERMAN']['log_path'] = $this->getLogPath();
 
             if (isset($config['GERMAN'])) {
                 $this->_serviceManager = new Service(new Api(new Config($config['GERMAN'])));
@@ -108,9 +109,23 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
         return;
     }
 
+    /**
+     * @return string
+     */
+    protected function getLogPath()
+    {
+        return  __DIR__ . '/../../../../log/api.log';
+    }
+
+    /**
+     * Log content into log file
+     *
+     * @param $content
+     * @return $this
+     */
     protected function log($content)
     {
-        $filename = __DIR__ . '/../../../../log/api.log';
+        $filename = $this->getLogPath();
         $handle = fopen($filename, 'a+');
 
         $time = date('Y-m-d H:i:s') . "\n";
@@ -122,9 +137,9 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
         return $this;
     }
 
-
-
     /**
+     * Generate Random String for Test
+     *
      * @param int $length
      * @return string
      */
