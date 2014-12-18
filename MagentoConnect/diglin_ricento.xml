@@ -1,5 +1,5 @@
 <_>
-   <form_key>aXZKLMEAUQyBlsoA</form_key>
+   <form_key>TSQHU5fRidWMJV53</form_key>
    <name>diglin_ricento</name>
    <channel>community</channel>
    <version_ids>
@@ -39,9 +39,21 @@
 				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.0.10</version>
+   <version>1.0.12</version>
    <stability>stable</stability>
-   <notes>## Version 1.0.10
+   <notes>## Version 1.0.12
+7485ad0 Prevent Exception while editing product if API problem appear while conditions options
+2927622 Add translation for frontend, change payment info template
+29069ea Fix wrong variable name for payment method instruction
+1738457 add payment block info in frontend area too for email generated from backend
+259f885 Fix issue with products grid and massaction
+8d37514 Update readme file
+ea18812 Redirect to edit page if error occur
+0fe5a3c Implement Bank information display if ricardo.ch payment method Bank transfer is used, Remove the cleanup listing log as it is duplicate with the job cleanup
+9cd82a8 Change order of the tab display 1) Synchronization 2) Listing Log instead of the opposite
+bc809c0 Fix random security error message on fresh install
+
+## Version 1.0.10
 e2304ab Change the status of an item to stop if the item has not been sold. It will stop the complete list if all items are stopped.
 e2c0676 Set website Id while saving new customer even if store id was also provided to be sure that the user is saved into the correct website
 0d01b4a Fix missing log url in message
@@ -151,7 +163,7 @@ ff1005c Skip required option when creating an order, also for custom option
             <max/>
          </max>
          <files>
-            <files>                      </files>
+            <files>                       </files>
          </files>
       </package>
       <extension>
@@ -172,6 +184,7 @@ ff1005c Skip required option when creating an order, also for custom option
          <target>mageetc</target>
          <target>magedesign</target>
          <target>magedesign</target>
+         <target>magedesign</target>
          <target>mageskin</target>
          <target>magecommunity</target>
          <target>magelocale</target>
@@ -190,6 +203,7 @@ ff1005c Skip required option when creating an order, also for custom option
          <path>modules/Diglin_Ricento.xml</path>
          <path>adminhtml/default/default/layout/ricento.xml</path>
          <path>adminhtml/default/default/template/ricento</path>
+         <path>frontend/base/default/template/ricento</path>
          <path>adminhtml/default/default/ricento</path>
          <path>Diglin/Ricento</path>
          <path>en_US/Diglin_Ricento.csv</path>
@@ -220,8 +234,10 @@ ff1005c Skip required option when creating an order, also for custom option
          <type>dir</type>
          <type>file</type>
          <type>dir</type>
+         <type>file</type>
       </type>
       <include>
+         <include/>
          <include/>
          <include/>
          <include/>
@@ -256,6 +272,7 @@ ff1005c Skip required option when creating an order, also for custom option
          <ignore>#^.svn|.git|.DS_Store#</ignore>
          <ignore/>
          <ignore>#^.svn|.git|.DS_Store#</ignore>
+         <ignore/>
       </ignore>
    </contents>
 </_>
