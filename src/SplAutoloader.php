@@ -17,8 +17,6 @@
  * @author Fabien Potencier <fabien.potencier@symfony-project.org>
  */
 
-namespace SplAutoloader;
-
 /**
  * Class SplAutoloader
  * @package SplAutoloader
