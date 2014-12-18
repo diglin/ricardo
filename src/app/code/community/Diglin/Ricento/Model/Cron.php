@@ -18,7 +18,7 @@ class Diglin_Ricento_Model_Cron
         //Diglin_Ricento_Model_Sync_Job::TYPE_CHECK_LIST, //** Check list before to sync to ricardo.ch - @deprecated move to Diglin_Ricento_Adminhtml_Products_ListingController to start quickly the check
         Diglin_Ricento_Model_Sync_Job::TYPE_LIST, //** List to ricardo.ch
         Diglin_Ricento_Model_Sync_Job::TYPE_STOP, //** Stop the list on ricardo.ch if needed
-        Diglin_Ricento_Model_Sync_Job::TYPE_RELIST //** Relist to ricardo.ch
+        //Diglin_Ricento_Model_Sync_Job::TYPE_RELIST //** Relist to ricardo.ch
     );
 
     protected $_asyncProcess = array(
@@ -31,7 +31,7 @@ class Diglin_Ricento_Model_Cron
      */
     public function process()
     {
-        if (!Mage::helper('diglin_ricento')->isEnabled()) { // @fixme potential problem with multishop
+        if (!Mage::helper('diglin_ricento')->isEnabled()) {
             return;
         }
 
@@ -55,7 +55,7 @@ class Diglin_Ricento_Model_Cron
      */
     public function async()
     {
-        if (!Mage::helper('diglin_ricento')->isEnabled()) { // @fixme potential problem with multishop
+        if (!Mage::helper('diglin_ricento')->isEnabled()) {
             return;
         }
 

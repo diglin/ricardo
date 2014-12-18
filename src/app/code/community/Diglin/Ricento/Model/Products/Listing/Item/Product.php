@@ -784,7 +784,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
 
         /**
          * Calculate price with incl tax if price catalog doesn't include it
-         * @todo improve performance - Loading product is bad idea
+         * @todo improve performance - Loading product is bad idea (we just need getTaxPercent and getTaxClassId)
          */
         if ($withTax) {
             $price = Mage::helper('tax')->getPrice($this->getMagentoProduct(), $price, true, null, null, null, $this->_defaultStoreId);
