@@ -183,13 +183,14 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     public function getSalesOptions()
     {
         if (!$this->_salesOptions) {
-            $this->_salesOptions = Mage::getModel('diglin_ricento/sales_options');
             if ($this->getSalesOptionsId()) {
+                $this->_salesOptions = Mage::getModel('diglin_ricento/sales_options');
                 $this->_salesOptions->load($this->getSalesOptionsId());
             } elseif ($this->getLoadFallbackOptions()) {
                 $this->_salesOptions = $this->getProductsListing()->getSalesOptions();
             }
         }
+
         return $this->_salesOptions;
     }
 
@@ -199,8 +200,8 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     public function getShippingPaymentRule()
     {
         if (!$this->_shippingPaymentRule) {
-            $this->_shippingPaymentRule = Mage::getModel('diglin_ricento/rule');
             if ($this->getRuleId()) {
+                $this->_shippingPaymentRule = Mage::getModel('diglin_ricento/rule');
                 $this->_shippingPaymentRule->load($this->getRuleId());
             } elseif ($this->getLoadFallbackOptions()) {
                 $this->_shippingPaymentRule = $this->getProductsListing()->getShippingPaymentRule();
@@ -215,7 +216,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
     public function getProductsListing()
     {
         if (empty($this->_productsListing) || !$this->_productsListing->getId()) {
-            $this->_productsListing = Mage::getSingleton('diglin_ricento/products_listing')->load($this->getProductsListingId());
+            $this->_productsListing = Mage::getModel('diglin_ricento/products_listing')->load($this->getProductsListingId());
         }
         return $this->_productsListing;
     }
@@ -431,10 +432,12 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         //** Article Images
 
         $images = (array) $this->getProduct()->getImages($this->getBaseProductId());
+        $images = array();
         $i = 0;
+        $hash = array();
         foreach ($images as $image) {
-            if (isset($image['filepath']) && file_exists($image['filepath'])) {
-
+            $hashImage = md5($image['filepath']);
+            if (isset($image['filepath']) && file_exists($image['filepath']) && !isset($hash[$hashImage])) {
                 // Prepare picture to set the content as byte array for the webservice
                 $imageContent = array_values(unpack('C*', file_get_contents($image['filepath'])));
                 $imageExtension = Helper::getPictureExtension($image['filepath']);
@@ -449,6 +452,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
                     $insertArticleParameter->setPictures($picture);
                 }
                 $imageContent = null;
+                $hash[$hashImage] = true;
             }
         }
 

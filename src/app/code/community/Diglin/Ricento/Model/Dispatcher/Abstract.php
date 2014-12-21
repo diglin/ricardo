@@ -275,6 +275,15 @@ abstract class Diglin_Ricento_Model_Dispatcher_Abstract
 
                 $this->_currentJob = null;
                 $this->_currentJobListing = null;
+                $this->_itemMessage = null;
+                $this->_itemStatus = false;
+                $this->_productsListingId = null;
+                $this->_totalError = 0;
+                $this->_totalProceed = 0;
+                $this->_totalSuccess = 0;
+                $this->_jobHasError = false;
+                $this->_jobHasSuccess = false;
+                $this->_jobHasWarning = false;
             }
         } catch (Exception $e) {
             Mage::log("\n" . $e->__toString(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
