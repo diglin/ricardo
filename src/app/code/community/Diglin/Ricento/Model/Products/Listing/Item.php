@@ -432,7 +432,6 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         //** Article Images
 
         $images = (array) $this->getProduct()->getImages($this->getBaseProductId());
-        $images = array();
         $i = 0;
         $hash = array();
         foreach ($images as $image) {
