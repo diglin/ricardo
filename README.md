@@ -13,8 +13,9 @@ The extension is quite flexible, allowing you to define the settings at products
 ## Support & Documentation
 
 - Knowledge Base & FAQ: [https://diglin.zendesk.com](https://diglin.zendesk.com)
+- PDF Documentation [https://raw.githubusercontent.com/diglin/ricento/master/doc/Documentation.pdf](https://raw.githubusercontent.com/diglin/ricento/master/doc/Documentation.pdf)
 - Pull Requests: [https://github.com/diglin/ricento/issues](https://github.com/diglin/ricento/issues)
-- Submit tickets - Contact (fee may apply if it's not a bug, we will inform you): support /at/ diglin.com
+- Submit tickets - Contact (fee may apply if it's not a bug, we will inform you): support /at/ diglin.com - [read more about it](https://diglin.zendesk.com/hc/en-us/articles/201655882-Is-the-extension-free-)
 
 ## System requirements
 
@@ -165,10 +166,8 @@ DELETE FROM MYPREFIX_sales_order_status WHERE status = 'ricardo_payment_pending'
 
 - Magento 1.6.x doesn't support jstranslator.xml, some strings generated for JS will be displayed in english
 
-## Support / Author
+## Author
 
-* [Documentation & FAQ](https://diglin.zendesk.com)
-* Contact for support is: support at diglin.com (fee may apply - [read more about it](https://diglin.zendesk.com/hc/en-us/articles/201655882-Is-the-extension-free-))
 * Diglin GmbH
 * http://www.diglin.com/
 * [@diglin_](https://twitter.com/diglin_)
