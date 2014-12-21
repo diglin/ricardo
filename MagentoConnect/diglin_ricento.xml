@@ -1,5 +1,5 @@
 <_>
-   <form_key>TSQHU5fRidWMJV53</form_key>
+   <form_key>O4IBlo0BZcWmJei4</form_key>
    <name>diglin_ricento</name>
    <channel>community</channel>
    <version_ids>
@@ -39,9 +39,12 @@
 				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.0.12</version>
+   <version>1.0.13</version>
    <stability>stable</stability>
-   <notes>## Version 1.0.12
+   <notes>## Version 1.0.13
+Important fix for price products (and sales options &amp; rules in general) when several listing processes running at same time
+
+## Version 1.0.12
 7485ad0 Prevent Exception while editing product if API problem appear while conditions options
 2927622 Add translation for frontend, change payment info template
 29069ea Fix wrong variable name for payment method instruction
@@ -163,7 +166,7 @@ ff1005c Skip required option when creating an order, also for custom option
             <max/>
          </max>
          <files>
-            <files>                       </files>
+            <files>                        </files>
          </files>
       </package>
       <extension>
