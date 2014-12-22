@@ -1,5 +1,5 @@
 <_>
-   <form_key>k9UlUXznlkfL3pD4</form_key>
+   <form_key>QGAY8sXEfRHBE9ok</form_key>
    <name>diglin_ricento</name>
    <channel>community</channel>
    <version_ids>
@@ -39,9 +39,12 @@
 				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.0.13.1</version>
+   <version>1.0.14</version>
    <stability>stable</stability>
-   <notes>## Version 1.0.13
+   <notes>## Version 1.0.14
+Fix an issue revealed after fixes done in version 1.0.13 related to getting sales options and rules from products listing item during getting new orders
+
+## Version 1.0.13
 Important fix for price products (and sales options &amp; rules in general) when several listing processes running at same time
 
 ## Version 1.0.12
@@ -166,7 +169,7 @@ ff1005c Skip required option when creating an order, also for custom option
             <max/>
          </max>
          <files>
-            <files>                            </files>
+            <files>                             </files>
          </files>
       </package>
       <extension>
@@ -278,8 +281,4 @@ ff1005c Skip required option when creating an order, also for custom option
          <ignore/>
       </ignore>
    </contents>
-   <page>1</page>
-   <limit>200</limit>
-   <folder/>
-   <package/>
 </_>
