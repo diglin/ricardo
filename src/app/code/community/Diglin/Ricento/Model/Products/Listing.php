@@ -212,8 +212,7 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
     public function getSalesOptions()
     {
         if (!$this->_salesOptions) {
-            $this->_salesOptions = Mage::getModel('diglin_ricento/sales_options');
-            $this->_salesOptions->load($this->getSalesOptionsId());
+            $this->_salesOptions = Mage::getModel('diglin_ricento/sales_options')->load($this->getSalesOptionsId());
         }
         return $this->_salesOptions;
     }
@@ -224,8 +223,7 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
     public function getShippingPaymentRule()
     {
         if (!$this->_shippingPaymentRule) {
-            $this->_shippingPaymentRule = Mage::getModel('diglin_ricento/rule');
-            $this->_shippingPaymentRule->load($this->getRuleId());
+            $this->_shippingPaymentRule = Mage::getModel('diglin_ricento/rule')->load($this->getRuleId());
         }
         return $this->_shippingPaymentRule;
     }

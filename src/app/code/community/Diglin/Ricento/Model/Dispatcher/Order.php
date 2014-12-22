@@ -187,8 +187,9 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
         $sellerAccountService->setCurrentWebsite($this->_getListing()->getWebsiteId());
 
         $soldArticles = $sellerAccountService->getSoldArticles($soldArticlesParameter);
-
         $soldArticles = array_reverse($soldArticles);
+
+        $productItem->setLoadFallbackOptions(true);
 
         foreach ($soldArticles as $soldArticle) {
 
