@@ -52,6 +52,17 @@ The extension is quite flexible, allowing you to define the settings at products
 
 - You can install the current stable version via [MagentoConnect Website](http://www.magentocommerce.com/magento-connect/magento-extension-for-ricardo-ch-by-diglin.html)
 
+### Manually
+
+```
+git clone https://github.com/diglin/ricento.git
+git submodule init
+git submodule fetch
+```
+
+Then copy the files and folders in the corresponding Magento folders
+Do not forget the folder "lib"
+
 ### Via modman
 
 - Install [modman](https://github.com/colinmollenhour/modman)
@@ -122,6 +133,7 @@ app/etc/modules/Diglin_Ricento.xml
 app/code/community/Diglin/Ricento
 app/design/adminhtml/default/default/layout/ricento.xml
 app/design/adminhtml/default/default/template/ricento
+app/design/frontend/base/default/template/ricento
 skin/adminhtml/default/default/ricento
 js/ricento
 app/locale/en_US/Diglin_Ricento.csv
