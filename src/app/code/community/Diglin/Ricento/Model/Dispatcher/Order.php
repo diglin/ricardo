@@ -546,7 +546,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
                 // Error with a product which is missing or have required options
                 if (is_string($quoteItem)) {
-                    Mage::throwException($quoteItem); // @todo - do we really want to block the process at this level? Other solution to inform about the error?
+                    Mage::throwException($quoteItem);
                 }
 
                 $quoteItem
@@ -635,7 +635,8 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 //                        $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, Diglin_Ricento_Helper_Data::ORDER_STATUS_CANCEL, $this->_getHelper()->__('Order canceled on ricardo.ch side'), false);
 //                    }
 
-                    $quote->setIsActive(false)
+                    $quote
+                        ->setIsActive(false)
                         ->save();
 
                     /**
@@ -651,9 +652,19 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                 Mage::app()->getLocale()->revert();
             }
         } catch (Exception $e) {
+
+            if (!isset($transaction) || !($transaction instanceof Diglin_Ricento_Model_Sales_Transaction)) {
+                $transaction = new Varien_Object();
+            }
+            if (!isset($product) || !($product instanceof Mage_Catalog_Model_Product)) {
+                $product = new Varien_Object();
+            }
+
             // We store and send the exception but don't block the rest of the process
             Mage::log("\n" . $e->__toString(), Zend_Log::ERR, Diglin_Ricento_Helper_Data::LOG_FILE);
-            Mage::helper('diglin_ricento/tools')->sendAdminNotification($e->__toString());
+            Mage::helper('diglin_ricento/tools')->sendAdminNotification('Error with ricardo Transaction ID: ' . $transaction->getBidId() . ' - Product ID:' . $product->getId() . "\n" . $e->__toString());
+
+            //@todo set that the job has an error and save the information in the product listing log
 
             /* @var $errors Mage_Core_Model_Message_Collection */
             $errors = $this->_getSession()->getMessages(true);
