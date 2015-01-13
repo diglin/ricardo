@@ -178,7 +178,7 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
      * @param array $productIds
      * @return int[] Returns two values: [number of removed products, number of not removed listed products]
      */
-    public function removeProducts(array $productIds)
+    public function removeProductsByProductIds(array $productIds)
     {
         /** @var $items Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection */
         $items = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
@@ -195,6 +195,40 @@ class Diglin_Ricento_Model_Products_Listing extends Mage_Core_Model_Abstract
         $items = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
         $numberOfItemsToDelete = $items->addFieldToFilter('products_listing_id', $this->getId())
             ->addFieldToFilter('product_id', array('in' => $productIds))
+            ->addFieldToFilter('status', array('neq' => Diglin_Ricento_Helper_Data::STATUS_LISTED))
+            ->count();
+
+        if ($numberOfItemsToDelete) {
+            $items->walk('delete');
+        }
+
+        $itemResource->commit();
+        return array($numberOfItemsToDelete, $numberOfListedItems);
+    }
+
+    /**
+     * Removes items by item id
+     *
+     * @param array $itemIds
+     * @return int[] Returns two values: [number of removed products, number of not removed listed products]
+     */
+    public function removeProductsByItemIds(array $itemIds)
+    {
+        /** @var $items Diglin_Ricento_Model_Resource_Products_Listing_Item_Collection */
+        $items = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
+
+        /** @var $itemResource Diglin_Ricento_Model_Resource_Products_Listing_Item */
+        $itemResource = Mage::getResourceModel('diglin_ricento/products_listing_item');
+        $itemResource->beginTransaction();
+
+        $numberOfListedItems = $items->addFieldToFilter('products_listing_id', $this->getId())
+            ->addFieldToFilter('item_id', array('in' => $itemIds))
+            ->addFieldToFilter('status', Diglin_Ricento_Helper_Data::STATUS_LISTED)
+            ->getSize();
+
+        $items = Mage::getResourceModel('diglin_ricento/products_listing_item_collection');
+        $numberOfItemsToDelete = $items->addFieldToFilter('products_listing_id', $this->getId())
+            ->addFieldToFilter('item_id', array('in' => $itemIds))
             ->addFieldToFilter('status', array('neq' => Diglin_Ricento_Helper_Data::STATUS_LISTED))
             ->count();
 
