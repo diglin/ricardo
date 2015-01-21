@@ -31,8 +31,6 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
      */
     public function proceed()
     {
-        $jobType = Diglin_Ricento_Model_Sync_Job::TYPE_ORDER;
-
         $productsListingResource = Mage::getResourceModel('diglin_ricento/products_listing');
 
         $readListingConnection = $productsListingResource->getReadConnection();
@@ -65,14 +63,14 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
 
             // pending progress doesn't make sense here as we cleanup before but keep it to be sure everything ok
             $job = Mage::getModel('diglin_ricento/sync_job');
-            $job->loadByTypeListingIdProgress($jobType, $listingId, array(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING, Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING));
+            $job->loadByTypeListingIdProgress($this->_jobType, $listingId, array(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING, Diglin_Ricento_Model_Sync_Job::PROGRESS_CHUNK_RUNNING));
 
             if ($job->getId()) {
                 continue;
             }
 
             $job
-                ->setJobType($jobType)
+                ->setJobType($this->_jobType)
                 ->setProgress(Diglin_Ricento_Model_Sync_Job::PROGRESS_PENDING)
                 ->setJobMessage(array($job->getJobMessage(true)))
                 ->save();
