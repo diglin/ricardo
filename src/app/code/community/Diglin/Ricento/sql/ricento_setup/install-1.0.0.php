@@ -302,7 +302,7 @@ $installer->addAttributeToGroup(
 
 // Create Catalog Product Enttities
 
-$ricardoGroup = 'Ricardo';
+$ricardoGroup = 'ricardo.ch';
 
 $entityTypeId = $installer->getEntityTypeId(Mage_Catalog_Model_Product::ENTITY);
 $attributeSetId   = $installer->getDefaultAttributeSetId($entityTypeId);
@@ -445,7 +445,7 @@ $installer->getConnection()->addColumn($salesQuoteTable, 'customer_ricardo_usern
     'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
     'length' => 255,
     'nullable' => true,
-    'comment' => 'Ricardo Username'));
+    'comment' => 'ricardo.ch Username'));
 
 $installer->getConnection()->addColumn($salesQuoteTable, 'customer_ricardo_id', array(
     'type' => Varien_Db_Ddl_Table::TYPE_INTEGER,
