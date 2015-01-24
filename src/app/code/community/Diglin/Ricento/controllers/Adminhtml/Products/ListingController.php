@@ -281,7 +281,7 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
             $this->_redirectUrl($this->_getRefererUrl());
             return;
         }
-        $productIds = (array)$this->getRequest()->getPost('product', array());
+        $productIds = (array) $this->getRequest()->getPost('product', array());
         $productsAdded = 0;
         foreach ($productIds as $productId) {
             if ($this->_getListing()->addProduct((int)$productId)) {
@@ -304,12 +304,12 @@ class Diglin_Ricento_Adminhtml_Products_ListingController extends Diglin_Ricento
         }
 
         if ($this->getRequest()->isPost()) {
-            $productIds = array_map('intval', (array) $this->getRequest()->getPost('product', array()));
+            $productIds = array_map('intval', (array) $this->getRequest()->getPost('item', array()));
         } else {
-            $productIds = array_map('intval', (array) $this->getRequest()->getParam('product', array()));
+            $productIds = array_map('intval', (array) $this->getRequest()->getParam('item', array()));
         }
 
-        list($productsRemoved, $productsNotRemoved) = $this->_getListing()->removeProducts($productIds);
+        list($productsRemoved, $productsNotRemoved) = $this->_getListing()->removeProductsByItemIds($productIds);
 
         if ($productsRemoved) {
             $this->_getSession()->addSuccess($this->__('%d products removed from listing', $productsRemoved));
