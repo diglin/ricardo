@@ -296,7 +296,7 @@
 "Use custom qty","Use custom qty"
 "Customization","Customization"
 "Template","Template"
-"To create one go to your <a href=""%s"">ricardo.ch account</a> into ""My Sales"".","To create one go to your <a href=""%s"">ricardo.ch account</a> into ""My Sales""."
+"To create one go to your <a onclick=""window.open(\'%s\')"">ricardo.ch account</a> into ""My Sales"".","To create one go to your <a onclick=""window.open(\'%s\')"">ricardo.ch account</a> into ""My Sales""."
 "Promotion","Promotion"
 "Privilege Space","Privilege Space"
 "Privilege space on main category page and search results. More information about this feature <a onclick=\"window.open('%s');\">here</a>","Privilege space on main category page and search results. More information about this feature <a onclick=\"window.open('%s');\">here</a>"

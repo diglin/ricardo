@@ -292,7 +292,7 @@
 "Use custom qty","Nutze spezifizierte Menge"
 "Customization","Spezifizierung"
 "Template","Template"
-"To create one go to your <a href=""%s"">ricardo.ch account</a> into ""My Sales"".","Um eines zu erstellen, gehen Sie zu Ihrem <a href=""%s"">ricardo.ch Konto</a> in ""Meine Verkäufe""."
+"To create one go to your <a onclick=""window.open(\'%s\')"">ricardo.ch account</a> into ""My Sales"".","Um eines zu erstellen, gehen Sie zu Ihrem <a href=""%s"">ricardo.ch Konto</a> in ""Meine Verkäufe""."
 "Promotion","Promotion"
 "Privilege Space","Promo-Fenster"
 "Privilege space on main category page and search results. More information about this feature <a onclick=\window.open('%s');\"">here</a>""","Promo-Fenster auf der Hauptkategorieseite und Suchergebnisse. Mehr Informationen über dieses Feature finden Sie <a onclick=\window.open('%s');\"">hier</a>"""

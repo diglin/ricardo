@@ -293,7 +293,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[customization_template]',
             'label' => $this->__('Template'),
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_template')->getAllOptions(),
-            'note' => $this->__('To create one go to your <a href="%s">ricardo.ch account</a> into "My Sales".', Diglin_Ricento_Helper_Data::RICARDO_URL)
+            'note' => $this->__('To create one go to your <a onclick="window.open(\'%s\')">ricardo.ch account</a> into "My Sales".', Diglin_Ricento_Helper_Data::RICARDO_URL)
         ));
 
         /**
