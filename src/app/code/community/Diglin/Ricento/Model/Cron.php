@@ -84,10 +84,19 @@ class Diglin_Ricento_Model_Cron
         if (Mage::getStoreConfigFlag(Diglin_Ricento_Helper_Data::CFG_CLEAN_JOBS_ENABLED)) {
             $daysKeep = (int)Mage::getStoreConfig(Diglin_Ricento_Helper_Data::CFG_CLEAN_JOBS_KEEP_DAYS);
 
-            $jobsCollection = Mage::getResourceModel('diglin_ricento/sync_job_collection');
-            $jobsCollection->getSelect()->where('((TO_DAYS(main_table.created_at) + ? < TO_DAYS(now())))', $daysKeep);
+            try {
+                $coreResource = Mage::getSingleton('core/resource');
+                $write = $coreResource->getConnection('core_write');
 
-            $jobsCollection->walk('delete');
+                $select = $write->select()
+                    ->from(array('main_table' => $coreResource->getTableName('ricento_sync_job')))
+                    ->where('((TO_DAYS(main_table.created_at) + ?) < TO_DAYS(now()))', $daysKeep);
+
+                $query = $select->deleteFromSelect('main_table');
+                $write->query($query);
+            } catch (Exception $e) {
+                Mage::logException($e);
+            }
         }
         return $this;
     }
