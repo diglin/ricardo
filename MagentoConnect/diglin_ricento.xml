@@ -1,5 +1,5 @@
 <_>
-   <form_key>QGAY8sXEfRHBE9ok</form_key>
+   <form_key>lynxKosfLYvn0oWt</form_key>
    <name>diglin_ricento</name>
    <channel>community</channel>
    <version_ids>
@@ -39,32 +39,42 @@
 				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.0.14</version>
+   <version>1.0.15</version>
    <stability>stable</stability>
-   <notes>## Version 1.0.14
-Fix an issue revealed after fixes done in version 1.0.13 related to getting sales options and rules from products listing item during getting new orders
+   <notes>## Version 1.0.15
+- 8cc97f0 [ENHANCE] Delete old jobs in the SQL way (no collection), speed up the delete and may prevent mysql error
+- 571d315 Open new window for a link located into the product list and jumping into ricardo.ch website
+- d6be0f1 [BUGFIX] Change the translation string from Ricardo to ricardo.ch
+- 195c744 Cosmetic code improvements
+- ddd1ff0 Fix an issue with deleting product item from a listing
+- 7a71702 Revert deleted xml file to generate magento connect package
+- 7fc6abb Update order dispatcher to get error messages
+- 6804aba Update Hint.php
+
+## Version 1.0.14
+- Fix an issue revealed after fixes done in version 1.0.13 related to getting sales options and rules from products listing item during getting new orders
 
 ## Version 1.0.13
-Important fix for price products (and sales options &amp; rules in general) when several listing processes running at same time
+- Important fix for price products (and sales options &amp; rules in general) when several listing processes running at same time
 
 ## Version 1.0.12
-7485ad0 Prevent Exception while editing product if API problem appear while conditions options
-2927622 Add translation for frontend, change payment info template
-29069ea Fix wrong variable name for payment method instruction
-1738457 add payment block info in frontend area too for email generated from backend
-259f885 Fix issue with products grid and massaction
-8d37514 Update readme file
-ea18812 Redirect to edit page if error occur
-0fe5a3c Implement Bank information display if ricardo.ch payment method Bank transfer is used, Remove the cleanup listing log as it is duplicate with the job cleanup
-9cd82a8 Change order of the tab display 1) Synchronization 2) Listing Log instead of the opposite
-bc809c0 Fix random security error message on fresh install
+- 7485ad0 Prevent Exception while editing product if API problem appear while conditions options
+- 2927622 Add translation for frontend, change payment info template
+- 29069ea Fix wrong variable name for payment method instruction
+- 1738457 add payment block info in frontend area too for email generated from backend
+- 259f885 Fix issue with products grid and massaction
+- 8d37514 Update readme file
+- ea18812 Redirect to edit page if error occur
+- 0fe5a3c Implement Bank information display if ricardo.ch payment method Bank transfer is used, Remove the cleanup listing log as it is duplicate with the job cleanup
+- 9cd82a8 Change order of the tab display 1) Synchronization 2) Listing Log instead of the opposite
+- bc809c0 Fix random security error message on fresh install
 
 ## Version 1.0.10
-e2304ab Change the status of an item to stop if the item has not been sold. It will stop the complete list if all items are stopped.
-e2c0676 Set website Id while saving new customer even if store id was also provided to be sure that the user is saved into the correct website
-0d01b4a Fix missing log url in message
-ff1005c Skip required option when creating an order, also for custom option
-9b48ef6 Fix missing home number
+- e2304ab Change the status of an item to stop if the item has not been sold. It will stop the complete list if all items are stopped.
+- e2c0676 Set website Id while saving new customer even if store id was also provided to be sure that the user is saved into the correct website
+- 0d01b4a Fix missing log url in message
+- ff1005c Skip required option when creating an order, also for custom option
+- 9b48ef6 Fix missing home number
 
 ## Version 1.0.9
 - Fix issue with some optional API property set to 0 (like template Id)
@@ -82,6 +92,7 @@ ff1005c Skip required option when creating an order, also for custom option
 - 4d38ed3 Make the option Schedule Reactivation &quot;Until Sold&quot; better explicit and working
 - 03bc9cd Update code documentation
 - 658c9f6 In some cases, picture&apos;s extension is not recognized so change the logic to determine if it exists or not Catch Exception and log them in cron class
+
 ## Version 1.0.8
 - b5f1afa Update translations file
 - c0d3fbb Fix issue with dispatcher and completed status
@@ -139,8 +150,7 @@ ff1005c Skip required option when creating an order, also for custom option
 - 880dbfd Fix issue if API not yet configured and Product Edit Page is requested from the backend
 - 5841d06 Update gitsubmodule (replace bitbucket with github)
 - be2b77a Update readme file
-- 9384e3c Update doc
-</notes>
+- 9384e3c Update doc</notes>
    <authors>
       <name>
          <name>diglin</name>
@@ -169,7 +179,7 @@ ff1005c Skip required option when creating an order, also for custom option
             <max/>
          </max>
          <files>
-            <files>                             </files>
+            <files>                              </files>
          </files>
       </package>
       <extension>

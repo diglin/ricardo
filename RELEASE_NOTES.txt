@@ -1,3 +1,55 @@
+## Version 1.0.15
+- 8cc97f0 [ENHANCE] Delete old jobs in the SQL way (no collection), speed up the delete and may prevent mysql error
+- 571d315 Open new window for a link located into the product list and jumping into ricardo.ch website
+- d6be0f1 [BUGFIX] Change the translation string from Ricardo to ricardo.ch
+- 195c744 Cosmetic code improvements
+- ddd1ff0 Fix an issue with deleting product item from a listing
+- 7a71702 Revert deleted xml file to generate magento connect package
+- 7fc6abb Update order dispatcher to get error messages
+- 6804aba Update Hint.php
+
+## Version 1.0.14
+- Fix an issue revealed after fixes done in version 1.0.13 related to getting sales options and rules from products listing item during getting new orders
+
+## Version 1.0.13
+- Important fix for price products (and sales options & rules in general) when several listing processes running at same time
+
+## Version 1.0.12
+- 7485ad0 Prevent Exception while editing product if API problem appear while conditions options
+- 2927622 Add translation for frontend, change payment info template
+- 29069ea Fix wrong variable name for payment method instruction
+- 1738457 add payment block info in frontend area too for email generated from backend
+- 259f885 Fix issue with products grid and massaction
+- 8d37514 Update readme file
+- ea18812 Redirect to edit page if error occur
+- 0fe5a3c Implement Bank information display if ricardo.ch payment method Bank transfer is used, Remove the cleanup listing log as it is duplicate with the job cleanup
+- 9cd82a8 Change order of the tab display 1) Synchronization 2) Listing Log instead of the opposite
+- bc809c0 Fix random security error message on fresh install
+
+## Version 1.0.10
+- e2304ab Change the status of an item to stop if the item has not been sold. It will stop the complete list if all items are stopped.
+- e2c0676 Set website Id while saving new customer even if store id was also provided to be sure that the user is saved into the correct website
+- 0d01b4a Fix missing log url in message
+- ff1005c Skip required option when creating an order, also for custom option
+- 9b48ef6 Fix missing home number
+
+## Version 1.0.9
+- Fix issue with some optional API property set to 0 (like template Id)
+- 0c1eb42 Revert temporary success / error in dispatcher list , improve translations of string in product grid
+- 74c3284 Show a small message in sync grid while running or chunk running to allow to differentiate both kind of sync
+- 68eed7f Raise to 400 items to trigger in dispatch
+- 1d3a839 Prevent create a new job while having a chunk running sync list
+- 3241ef0 Change the way to handle the bucket of items in the dispatcher, fix a bug while triggering the order dispatcher and getting the list of listed items
+- adcbc59 Improve message display in sync grid
+- 6b6c45e Fix issue with "Until Sold" feature
+- 2f48ea4 Improve the way to set/get successful or error log item
+- 86fcc17 Display Product list name in the sync log grid instead to put it as message
+- 1219b09 Fix issue with products grid and configurable products having article inserted also as simple article
+- 95efdca Fix duplicate collection item error
+- 4d38ed3 Make the option Schedule Reactivation "Until Sold" better explicit and working
+- 03bc9cd Update code documentation
+- 658c9f6 In some cases, picture's extension is not recognized so change the logic to determine if it exists or not Catch Exception and log them in cron class
+
 ## Version 1.0.8
 - b5f1afa Update translations file
 - c0d3fbb Fix issue with dispatcher and completed status
