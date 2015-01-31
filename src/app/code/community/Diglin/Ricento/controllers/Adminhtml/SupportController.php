@@ -1,11 +1,11 @@
 <?php
 /**
- * Diglin GmbH - Switzerland
+ * ricardo.ch AG - Switzerland
  *
  * @author Sylvain Rayé <support at diglin.com>
  * @category    Ricento
  * @package     Ricento_
- * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2014 ricardo.ch AG (http://www.ricardo.ch)
  */ 
 class Diglin_Ricento_Adminhtml_SupportController extends Mage_Adminhtml_Controller_Action
 {
