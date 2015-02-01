@@ -643,4 +643,28 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
 
         return $allowedTags;
     }
+
+    /**
+     * Return value with unit annotation into bytes
+     *
+     * @param $val
+     * @return int|string
+     */
+    public function getBytes($val)
+    {
+        $val = trim($val);
+        $last = strtolower($val[strlen($val) - 1]);
+        switch ($last) {
+            // The 'G' modifier is available since PHP 5.1.0
+            case 'g':
+                $val *= 1024;
+            case 'm':
+                $val *= 1024;
+            case 'k':
+                $val *= 1024;
+        }
+
+        return $val;
+    }
+
 }
