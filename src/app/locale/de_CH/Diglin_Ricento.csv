@@ -240,7 +240,7 @@
 "Free shipping","kostenloser Versand"
 "Is Shipping fee cumulative","Sind Versandkosten kumulativ"
 "If you select this option, the shipping fee will be calculate for each sold product.","Wenn Sie diese Option wählen, werden die Versandkosten für jedes verkaufte Produkt einzelnd berechnet."
-"e.g. an article is sold with a quantity of 3 to one customer and the shipping fee is 15 CHF. Total Shipping fee is 45 CHF. Let it empty if you don\'t such an option.","z. B. ein Artikel wird mit der Menge 3 von einem Kunden gekauft und die Versandkosten liegen bei jeweils 15 CHF. Die Versandkosten sind dann insgesamt 45 CHF. Lassen Sie das Feld leer, wenn Sie diese Option nicht wählen möchten."
+"e.g. an article is sold with a quantity of 3 to one customer and the shipping fee is 15 CHF. Total Shipping fee is 45 CHF. Let it empty if you don't such an option.","z. B. ein Artikel wird mit der Menge 3 von einem Kunden gekauft und die Versandkosten liegen bei jeweils 15 CHF. Die Versandkosten sind dann insgesamt 45 CHF. Lassen Sie das Feld leer, wenn Sie diese Option nicht wählen möchten."
 "Shipping Availability","Verfügbarkeit des Artikels"
 "Shipping Description German","Versandbeschreibung deutsch"
 "Characters: %s. Max. 5 000 characters","Zeichen: %s. Max. 5 000 Zeichen"
