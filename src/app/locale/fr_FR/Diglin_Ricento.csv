@@ -256,7 +256,6 @@
 "Select ricardo.ch Category","Select ricardo.ch Category"
 "Select the category","Select the category"
 "Type of sales","Type of sales"
-"Until Sold","Until Sold"
 "Start price","Start price"
 "Range from Fr. 0.05 to Fr. 1 000 000. If Credit card payment method available and enabled, the range is from Fr. 0.05 to Fr. 2 999.95.","Range from Fr. 0.05 to Fr. 1 000 000. If Credit card payment method available and enabled, the range is from Fr. 0.05 to Fr. 2 999.95."
 "Increment","Increment"
@@ -658,7 +657,7 @@
 "CREDITLIMITEXCEEDED","Credit limit exceeded. Please contact ricardo.ch"
 "ACTIVATIONCODESTATUSMANUALLYBLOCKED","ACTIVATIONCODESTATUSMANUALLYBLOCKED"
 
-"No Options because API not configured","No Options because API not configured"
+"No Options because API is not configured","No Options because API is not configured"
 "No Options because API has a problem","No Options because API has a problem"
 "Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>.", "Security error occurred with the ricardo API. Please, check your log files and your <a href=""%s"">API configuration</a>."
 "Security error occurred with the ricardo API. Please, check your log files.", "Security error occurred with the ricardo API. Please, check your log files."
@@ -666,4 +665,4 @@
 "Product Price of %s CHF is incorrect. Minimum price is %s.","Product Price of %s CHF is incorrect. Minimum price is %s."
 "You cannot reactivate a product until sold out when doing an auction sales type.","You cannot reactivate a product until sold out when doing an auction sales type."
 "Following error(s) appeared:","Following error(s) appeared:"
-"<strong>Attention:</strong> you cannot use the option ""Until Sold"" if you select the Sales Type ""Auction""","<strong>Attention:</strong> you cannot use the option ""Until Sold"" if you select the Sales Type ""Auction"""
+"<strong>Attention:</strong> you cannot use the option ""Until sold"" if you select the Sales Type ""Auction""","<strong>Attention:</strong> you cannot use the option ""Until sold"" if you select the Sales Type ""Auction"""
