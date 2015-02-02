@@ -48,7 +48,12 @@ class Diglin_Ricento_Model_Sales_Method_Shipping
 
         if ($request->getAllItems()) {
             foreach ($request->getAllItems() as $item) {
-                $value = $item->getOptionByCode('info_buyRequest')->getValue();
+                $infoBuyRequest = $item->getOptionByCode('info_buyRequest');
+                if (!($infoBuyRequest instanceof Varien_Object)) {
+                    break;
+                }
+
+                $value = $infoBuyRequest->getValue();
                 $params = unserialize($value);
                 $price = 0;
 
