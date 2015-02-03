@@ -22,10 +22,10 @@ interface ApiInterface
      *
      * @param string $service
      * @param string $method
-     * @param array $params
+     * @param array|string $params
      * @return mixed
      */
-    public function connect($service, $method, array $params);
+    public function connect($service, $method, $params);
 
     /**
      * Get the config of the API

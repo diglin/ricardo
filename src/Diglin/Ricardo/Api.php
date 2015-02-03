@@ -68,11 +68,11 @@ class Api implements ApiInterface
      *
      * @param string $service Ricardo API Service
      * @param string $method Ricardo API Method
-     * @param array $params API Parameters
+     * @param array|string $params API Parameters
      * @return mixed $result
      * @throws \Exception
      */
-    public function connect($service, $method, array $params)
+    public function connect($service, $method, $params)
     {
         if (!$this->getConfig()->getHost()) {
             throw new \Exception('Configuration Host not set.');
@@ -82,7 +82,7 @@ class Api implements ApiInterface
             CURLOPT_URL => 'https://' . $this->getConfig()->getHost() . '/ricardoapi/' . $service . '.Json.svc/' . $method,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POST => 1,
-            CURLOPT_POSTFIELDS => json_encode($params),
+            CURLOPT_POSTFIELDS => ((is_array($params)) ? json_encode($params) : $params),
             CURLOPT_HTTPHEADER => $this->_addHeaders(),
             CURLOPT_RETURNTRANSFER => true
         );
@@ -128,6 +128,8 @@ class Api implements ApiInterface
         }
 
         curl_close($ch);
+
+        unset($params);
 
         return $return;
     }
