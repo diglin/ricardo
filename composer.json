@@ -1,6 +1,6 @@
 {
     "name": "diglin/ricardo",
-    "license": "OSL-3.0",
+    "licenses": ["MIT","GPL-3.0"],
     "description": "PHP Library to get access to the Ricardo.ch API",
     "keywords": ["Ricardo", "Library", "PHP", "Diglin", "API"],
     "homepage": "http://www.diglin.com",
