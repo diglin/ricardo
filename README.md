@@ -10,6 +10,11 @@ With this extension, you can define a list of products to publish, set all payme
 
 The extension is quite flexible, allowing you to define the settings at products listing level or product listing item level. It offers you also the capability to publish your product data to the two supported ricardo.ch languages: german and french.
 
+## License
+
+This extension is licensed under OSL v.3.0
+Some classes and javascript contain a MIT license.
+
 ## Support & Documentation
 
 - Knowledge Base & FAQ: [https://diglin.zendesk.com](https://diglin.zendesk.com)
