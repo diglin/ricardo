@@ -608,7 +608,7 @@ class Diglin_Ricento_Model_Dispatcher_Order extends Diglin_Ricento_Model_Dispatc
                         ->setCustomer($quote->getCustomer())
                         ->setCustomerId($quote->getCustomer()->getId());
 
-                    /* @var $order Mage_Sales_Model_Order */
+                    /* @var $order Mage_Adminhtml_Model_Sales_Order_Create */
                     $order = $this->_getOrderCreateModel()
                         ->initRuleData()
                         ->collectShippingRates()
