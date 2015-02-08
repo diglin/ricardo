@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Diglin
+ * ricardo.ch AG - Switzerland
  *
+ * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
- * @copyright   Copyright (c) 2011-2014 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2014 ricardo.ch AG (http://www.ricardo.ch)
  */
 -->
 <layout>

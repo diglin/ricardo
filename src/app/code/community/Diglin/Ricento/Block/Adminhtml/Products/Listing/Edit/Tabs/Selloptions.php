@@ -1,11 +1,11 @@
 <?php
 /**
- * Diglin GmbH - Switzerland
+ * ricardo.ch AG - Switzerland
  *
  * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
- * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2014 ricardo.ch AG (http://www.ricardo.ch)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -71,7 +71,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'required' => true,
             'label' => $this->__('Type of sales'),
             'values' => Mage::getSingleton('diglin_ricento/config_source_sales_type')->getAllOptions(),
-            'onchange' => "salesOptionsForm.showSalesTypeFieldsets(this.value, $('" . $htmlIdPrefix . "sales_auction_direct_buy').value == '1', '". $this->__('Until Sold') ."', ". Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT .")"
+            'onchange' => "salesOptionsForm.showSalesTypeFieldsets(this.value, $('" . $htmlIdPrefix . "sales_auction_direct_buy').value == '1', '". $this->__('Until sold') ."', ". Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT .")"
         ));
 
         $fieldsetTypeAuction = $form->addFieldset('fieldset_type_auction', array(
@@ -201,7 +201,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
             'name' => 'sales_options[schedule_reactivation]',
             'label' => $this->__('Reactivation'),
             'options' => $this->_getReactivationOptions()->toOptionHash(),
-            'note' => $this->__('<strong>Attention:</strong> you cannot use the option "Until Sold" if you select the Sales Type "Auction"'),
+            'note' => $this->__('<strong>Attention:</strong> you cannot use the option "Until sold" if you select the Sales Type "Auction"'),
         ));
         // @todo cycle to implement
 //        $fieldsetSchedule->addField('schedule_cycle_multiple_products_random', 'radios_extensible', array(
@@ -343,7 +343,7 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Selloptions
         }
 
         /**
-         * Add "Until Sold" option to the select input when it's buy now sales type
+         * Add "Until sold" option to the select input when it's buy now sales type
          */
         if ($this->getSalesOptions()->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW) {
             $option = array('value' => Diglin_Ricento_Model_Config_Source_Sales_Reactivation::SOLDOUT, 'label' => Mage::helper('diglin_ricento')->__('Until sold'));;

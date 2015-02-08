@@ -1,11 +1,11 @@
 <?php
 /**
- * Diglin GmbH - Switzerland
+ * ricardo.ch AG - Switzerland
  *
  * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
- * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2014 ricardo.ch AG (http://www.ricardo.ch)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -431,26 +431,38 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
 
         //** Article Images
 
+        $helper = Mage::helper('diglin_ricento');
         $images = (array) $this->getProduct()->getImages($this->getBaseProductId());
         $i = 0;
         $hash = array();
+
         foreach ($images as $image) {
+
+            if ($i >= 8) { break; }; // Do not set more than 9 pictures
+
             $hashImage = md5($image['filepath']);
             if (isset($image['filepath']) && file_exists($image['filepath']) && !isset($hash[$hashImage])) {
+
+                if (!$helper->checkMemory($image['filepath'])) {
+                    Mage::log(Mage::helper('diglin_ricento')->__('Image insertion skipped for memory protection: %s', $image['filepath']), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE, true);
+                    break;
+                }
+
                 // Prepare picture to set the content as byte array for the webservice
-                $imageContent = array_values(unpack('C*', file_get_contents($image['filepath'])));
                 $imageExtension = Helper::getPictureExtension($image['filepath']);
 
                 if ($imageExtension) {
                     $picture = new ArticlePictureParameter();
                     $picture
-                        ->setPictureBytes($imageContent)
+                        // we encode in Json to minimize memory consumption
+                        ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($image['filepath'])))))
                         ->setPictureExtension($imageExtension)
                         ->setPictureIndex(++$i);
 
                     $insertArticleParameter->setPictures($picture);
                 }
-                $imageContent = null;
+
+                unset($picture);
                 $hash[$hashImage] = true;
             }
         }

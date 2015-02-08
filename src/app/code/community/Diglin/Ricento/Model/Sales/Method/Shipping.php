@@ -1,11 +1,11 @@
 <?php
 /**
- * Diglin GmbH - Switzerland
+ * ricardo.ch AG - Switzerland
  *
  * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
- * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2014 ricardo.ch AG (http://www.ricardo.ch)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -48,7 +48,12 @@ class Diglin_Ricento_Model_Sales_Method_Shipping
 
         if ($request->getAllItems()) {
             foreach ($request->getAllItems() as $item) {
-                $value = $item->getOptionByCode('info_buyRequest')->getValue();
+                $infoBuyRequest = $item->getOptionByCode('info_buyRequest');
+                if (!($infoBuyRequest instanceof Varien_Object)) {
+                    break;
+                }
+
+                $value = $infoBuyRequest->getValue();
                 $params = unserialize($value);
                 $price = 0;
 

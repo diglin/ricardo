@@ -1,11 +1,11 @@
 <?php
 /**
- * Diglin GmbH - Switzerland
+ * ricardo.ch AG - Switzerland
  *
  * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
- * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2014 ricardo.ch AG (http://www.ricardo.ch)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -32,7 +32,7 @@ class Diglin_Ricento_Model_Entity_Attribute_Source_Conditions extends Mage_Eav_M
                 return $this->_options;
             }
 
-            return array('label' => Mage::helper('diglin_ricento')->__('No Options because API not configured'), 'value' => '');
+            return array('label' => Mage::helper('diglin_ricento')->__('No Options because API is not configured'), 'value' => '');
         } catch (Exception $e) {
             Mage::logException($e);
             Mage::getSingleton('core/session')->addError('No ricardo.ch condition options retrieved cause of an API problem');

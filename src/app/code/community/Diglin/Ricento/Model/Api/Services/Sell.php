@@ -1,11 +1,11 @@
 <?php
 /**
- * Diglin GmbH - Switzerland
+ * ricardo.ch AG - Switzerland
  *
  * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
- * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2014 ricardo.ch AG (http://www.ricardo.ch)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -54,17 +54,16 @@ class Diglin_Ricento_Model_Api_Services_Sell extends Diglin_Ricento_Model_Api_Se
     public function insertArticle(Diglin_Ricento_Model_Products_Listing_Item $item)
     {
         $articleResult = array();
-        $insertArticle = $item->getInsertArticleParameter();
 
         try {
             $start = microtime(true);
+            $insertArticle = $item->getInsertArticleParameter();
 
             $articleResult = parent::insertArticle($insertArticle);
 
             if (Mage::helper('diglin_ricento')->isDebugEnabled()) {
                 Mage::log('Time to insert article ' . (microtime(true) - $start) . ' sec', Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE);
             }
-
         } catch (\Diglin\Ricardo\Exceptions\ExceptionAbstract $e) {
             $this->_updateCredentialToken();
             Mage::logException($e);

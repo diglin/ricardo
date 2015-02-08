@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Diglin GmbH - Switzerland
+ * ricardo.ch AG - Switzerland
  *
  * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
  * @package     Diglin_Ricento
- * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ * @copyright   Copyright (c) 2014 ricardo.ch AG (http://www.ricardo.ch)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 -->
@@ -37,7 +37,7 @@
                 <enabled>1</enabled>
                 <dev_mode>1</dev_mode>
                 <debug>0</debug>
-                <assistant_url>https://assistant.ricardo.ch</assistant_url>
+                <assistant_url>https://www.ricardo.ch/verkauferportal/</assistant_url>
                 <assistant_url_dev>https://ra.betaqxl.com/</assistant_url_dev>
                 <signup_url>http://www.ricardo.ch/interface/en-us/application.aspx</signup_url>
                 <simulate_authorization>0</simulate_authorization>
