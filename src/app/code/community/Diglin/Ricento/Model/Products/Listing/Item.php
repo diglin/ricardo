@@ -431,12 +431,11 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
 
         //** Article Images
 
-        $memoryLimit = Mage::helper('diglin_ricento')->getBytes(ini_get('memory_limit'));
-        $limitMemory = ($memoryLimit - (($memoryLimit * 20) / 100));
-
+        $helper = Mage::helper('diglin_ricento');
         $images = (array) $this->getProduct()->getImages($this->getBaseProductId());
         $i = 0;
         $hash = array();
+
         foreach ($images as $image) {
 
             if ($i >= 8) { break; }; // Do not set more than 9 pictures
@@ -444,31 +443,25 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             $hashImage = md5($image['filepath']);
             if (isset($image['filepath']) && file_exists($image['filepath']) && !isset($hash[$hashImage])) {
 
-                // Warning: picture of ~100Kb take ~20MB RAM Memory unpacked
-                $imageSize = strlen(file_get_contents($image['filepath']));
-                $imageSizeUnpacked = $imageSize * 200;
-                $currentMemoryUsage = memory_get_usage();
-
-                if ($currentMemoryUsage + $imageSizeUnpacked > $limitMemory) {
-                    Mage::log(Mage::helper('diglin_ricento')->__('Image insertion skipped for memory protection reason %s', $image['filepath']), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE, true);
+                if ($helper->getMemoryLimit() > ($helper->getMemoryUsage() + $helper->getNeedMemoryForFile($image['filepath'])) || $helper->getMemoryLimit() == -1) {
+                    Mage::log(Mage::helper('diglin_ricento')->__('Image insertion skipped for memory protection: %s', $image['filepath']), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE, true);
                     break;
                 }
 
                 // Prepare picture to set the content as byte array for the webservice
-                $imageContent = array_values(unpack('C*', file_get_contents($image['filepath'])));
                 $imageExtension = Helper::getPictureExtension($image['filepath']);
 
                 if ($imageExtension) {
                     $picture = new ArticlePictureParameter();
                     $picture
-                        ->setPictureBytes($imageContent)
+                        // we encode in Json to minimize memory consumption
+                        ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($image['filepath'])))))
                         ->setPictureExtension($imageExtension)
                         ->setPictureIndex(++$i);
 
                     $insertArticleParameter->setPictures($picture);
                 }
 
-                unset($imageContent);
                 unset($picture);
                 $hash[$hashImage] = true;
             }

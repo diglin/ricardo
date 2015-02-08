@@ -645,26 +645,71 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Return value with unit annotation into bytes
-     *
-     * @param $val
-     * @return int|string
+     * @param string $file
+     * @return bool
      */
-    public function getBytes($val)
+    public function checkMemory($file)
     {
-        $val = trim($val);
-        $last = strtolower($val[strlen($val) - 1]);
-        switch ($last) {
-            // The 'G' modifier is available since PHP 5.1.0
-            case 'g':
-                $val *= 1024;
-            case 'm':
-                $val *= 1024;
-            case 'k':
-                $val *= 1024;
-        }
-
-        return $val;
+        return $this->getMemoryLimit() > ($this->getMemoryUsage() + $this->getNeedMemoryForFile($file)) || $this->getMemoryLimit() == -1;
     }
 
+    /**
+     * @return string
+     */
+    public function getMemoryLimit()
+    {
+        $memoryLimit = trim(strtoupper(ini_get('memory_limit')));
+
+        if (!isSet($memoryLimit[0])){
+            $memoryLimit = "128M";
+        }
+
+        if (substr($memoryLimit, -1) == 'K') {
+            return substr($memoryLimit, 0, -1) * 1024;
+        }
+        if (substr($memoryLimit, -1) == 'M') {
+            return substr($memoryLimit, 0, -1) * 1024 * 1024;
+        }
+        if (substr($memoryLimit, -1) == 'G') {
+            return substr($memoryLimit, 0, -1) * 1024 * 1024 * 1024;
+        }
+        return $memoryLimit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMemoryUsage()
+    {
+        if (function_exists('memory_get_usage')) {
+            return memory_get_usage();
+        }
+        return 0;
+    }
+
+    /**
+     * @param string $file
+     * @return float|int
+     */
+    public function getNeedMemoryForFile($file)
+    {
+        if (!file_exists($file) || !is_file($file)) {
+            return 0;
+        }
+
+        $imageInfo = getimagesize($file);
+
+        if (!isset($imageInfo[0]) || !isset($imageInfo[1])) {
+            return 0;
+        }
+        if (!isset($imageInfo['channels'])) {
+            // if there is no info about this parameter lets set it for maximum
+            $imageInfo['channels'] = 4;
+        }
+        if (!isset($imageInfo['bits'])) {
+            // if there is no info about this parameter lets set it for maximum
+            $imageInfo['bits'] = 8;
+        }
+        return round(($imageInfo[0] * $imageInfo[1] * $imageInfo['bits'] * $imageInfo['channels'] / 8 + Pow(2, 16)) * 1.65);
+    }
 }
