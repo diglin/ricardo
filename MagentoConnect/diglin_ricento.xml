@@ -1,5 +1,5 @@
 <_>
-   <form_key>lynxKosfLYvn0oWt</form_key>
+   <form_key>doefbMG89KhqjKMk</form_key>
    <name>diglin_ricento</name>
    <channel>community</channel>
    <version_ids>
@@ -39,9 +39,24 @@
 				&lt;p&gt;&lt;a href=&quot;http://www.diglin.com&quot;&gt;Diglin&lt;/a&gt; is the Swiss eCommerce Agency per excellence, realizing your eCommerce project with success. It will accompany along the whole life of your eCommerce project at any levels: conception, realization, design, marketing, logistic, data treatment and management, resource optimization, cost efficiency, increase in turnover, etc. Diglin concentrates its activities mainly with the solutions Magento (eCommerce), OroCRM (CRM) and Akeneo (PIM) and work with its partners highly qualified to provide you the best solutions regarding your needs. &lt;/p&gt;</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.0.15</version>
+   <version>1.0.16</version>
    <stability>stable</stability>
-   <notes>## Version 1.0.15
+   <notes>## Version 1.0.16
+- 077aced Fix issue with wrong memory test at picture level
+- 4fb9f9f Change comment
+- 0acd985 Improve memory consumption due to images and expected bytes array on ricardo API side
+- 411b1b8 Change url for the ricardo assistant on production
+- 05d9364 Update README for license information
+- 947efb5 Factorize some process in order creation
+- 970f5ee Update translation string
+- ccc9802 Update translation string &quot;Until sold&quot;
+- 73aadc0 [ENHANCE] Seems that external extension instantiate the shipping class, as it is outside of the order scope, an object is missing and provide an error. We fixed it even if we don&apos;t support externa
+- b161609 [ENHANCE] Prevent memory consumption due to the size of pictures and the fact that we need to unpack the pictures bytes to create bytes array for the ricardo.ch API
+- 41e95ee Update Copyright to ricardo.ch AG (keep same license)
+- 128b28d Update config.xml version
+- 29b5e61 Update language string key in CSV files
+
+## Version 1.0.15
 - 8cc97f0 [ENHANCE] Delete old jobs in the SQL way (no collection), speed up the delete and may prevent mysql error
 - 571d315 Open new window for a link located into the product list and jumping into ricardo.ch website
 - d6be0f1 [BUGFIX] Change the translation string from Ricardo to ricardo.ch
@@ -179,7 +194,7 @@
             <max/>
          </max>
          <files>
-            <files>                              </files>
+            <files>                                  </files>
          </files>
       </package>
       <extension>
