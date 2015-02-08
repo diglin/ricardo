@@ -25,7 +25,7 @@ use Diglin\Ricardo\Managers\ParameterAbstract;
 class ArticlePictureParameter extends ParameterAbstract
 {
     /**
-     * @var string
+     * @var array
      */
     protected $_pictureBytes; // required
 

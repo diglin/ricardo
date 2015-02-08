@@ -78,7 +78,7 @@ class Api implements ApiInterface
      *
      * @param string $service Ricardo API Service
      * @param string $method Ricardo API Method
-     * @param array $params API Parameters
+     * @param array|string $params API Parameters
      * @return mixed $result
      * @throws \Exception
      */
@@ -92,9 +92,11 @@ class Api implements ApiInterface
             CURLOPT_URL => 'https://' . $this->getConfig()->getHost() . '/ricardoapi/' . $service . '.Json.svc/' . $method,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POST => 1,
-            CURLOPT_POSTFIELDS => json_encode($params),
+            CURLOPT_POSTFIELDS => $this->jsonEncode($params),
             CURLOPT_HTTPHEADER => $this->_addHeaders(),
-            CURLOPT_RETURNTRANSFER => true
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSLVERSION => 6,
+            CURLOPT_SSL_CIPHER_LIST => 'TLSv1'
         );
 
         $ch = curl_init();
@@ -138,6 +140,8 @@ class Api implements ApiInterface
         }
 
         curl_close($ch);
+
+        unset($params);
 
         return $return;
     }
@@ -269,5 +273,42 @@ class Api implements ApiInterface
         }
 
         return $foundkey;
+    }
+
+    /**
+     * We implement our own json encode function to allow to have value having [...]
+     * as string and to prevent to be kept as a string when formatted as json
+     *
+     * @param $val
+     * @return string
+     */
+    public function jsonEncode($val)
+    {
+        if (is_string($val) && strpos($val, '[') !== false && strpos($val, ']') === strlen($val) - 1) return addslashes($val);
+        if (is_string($val)) return '"' . addslashes($val) . '"';
+        if (is_numeric($val)) return $val;
+        if ($val === null) return 'null';
+        if ($val === true) return 'true';
+        if ($val === false) return 'false';
+
+        $assoc = false;
+        $i = 0;
+        foreach ($val as $k => $v) {
+            if ($k !== $i++) {
+                $assoc = true;
+                break;
+            }
+        }
+        $res = array();
+        foreach ($val as $k => $v) {
+            $v = $this->jsonEncode($v);
+            if ($assoc) {
+                $k = '"' . addslashes($k) . '"';
+                $v = $k . ':' . $v;
+            }
+            $res[] = $v;
+        }
+        $res = implode(',', $res);
+        return ($assoc) ? '{' . $res . '}' : '[' . $res . ']';
     }
 }
