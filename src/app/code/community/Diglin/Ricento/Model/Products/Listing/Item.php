@@ -443,7 +443,7 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
             $hashImage = md5($image['filepath']);
             if (isset($image['filepath']) && file_exists($image['filepath']) && !isset($hash[$hashImage])) {
 
-                if ($helper->getMemoryLimit() > ($helper->getMemoryUsage() + $helper->getNeedMemoryForFile($image['filepath'])) || $helper->getMemoryLimit() == -1) {
+                if (!$helper->checkMemory($image['filepath'])) {
                     Mage::log(Mage::helper('diglin_ricento')->__('Image insertion skipped for memory protection: %s', $image['filepath']), Zend_Log::DEBUG, Diglin_Ricento_Helper_Data::LOG_FILE, true);
                     break;
                 }
