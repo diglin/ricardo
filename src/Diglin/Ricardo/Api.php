@@ -72,7 +72,7 @@ class Api implements ApiInterface
      * @return mixed $result
      * @throws \Exception
      */
-    public function connect($service, $method, $params)
+    public function connect($service, $method, array $params)
     {
         if (!$this->getConfig()->getHost()) {
             throw new \Exception('Configuration Host not set.');
@@ -82,7 +82,7 @@ class Api implements ApiInterface
             CURLOPT_URL => 'https://' . $this->getConfig()->getHost() . '/ricardoapi/' . $service . '.Json.svc/' . $method,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POST => 1,
-            CURLOPT_POSTFIELDS => ((is_array($params)) ? json_encode($params) : $params),
+            CURLOPT_POSTFIELDS => $this->jsonEncode($params),
             CURLOPT_HTTPHEADER => $this->_addHeaders(),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSLVERSION => 6,
@@ -263,5 +263,42 @@ class Api implements ApiInterface
         }
 
         return $foundkey;
+    }
+
+    /**
+     * We implement our own json encode function to allow to have value having [...]
+     * as string and to prevent to be kept as a string when formatted as json
+     *
+     * @param $val
+     * @return string
+     */
+    public function jsonEncode($val)
+    {
+        if (is_string($val) && strpos($val, '[') !== false && strpos($val, ']') === strlen($val) - 1) return addslashes($val);
+        if (is_string($val)) return '"' . addslashes($val) . '"';
+        if (is_numeric($val)) return $val;
+        if ($val === null) return 'null';
+        if ($val === true) return 'true';
+        if ($val === false) return 'false';
+
+        $assoc = false;
+        $i = 0;
+        foreach ($val as $k => $v) {
+            if ($k !== $i++) {
+                $assoc = true;
+                break;
+            }
+        }
+        $res = array();
+        foreach ($val as $k => $v) {
+            $v = $this->jsonEncode($v);
+            if ($assoc) {
+                $k = '"' . addslashes($k) . '"';
+                $v = $k . ':' . $v;
+            }
+            $res[] = $v;
+        }
+        $res = implode(',', $res);
+        return ($assoc) ? '{' . $res . '}' : '[' . $res . ']';
     }
 }
