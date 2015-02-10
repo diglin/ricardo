@@ -53,7 +53,7 @@ class Diglin_Ricento_Block_Adminhtml_Config_Source_Hint
         $buttonAuthorize = null;
 
         try {
-            if ($helper->isConfigured($websiteId)) {
+            if ($helper->isConfigured($websiteId) && $helper->isEnabled($websiteId)) {
                 $buttonAuthorize  = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
                     'label'     => $this->__('API Authorization'),
                     'onclick'   => "window.open('". Mage::helper('diglin_ricento/api')->getValidationUrl($websiteId) ."', '_blank');",

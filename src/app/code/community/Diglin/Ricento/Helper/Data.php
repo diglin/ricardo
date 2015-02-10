@@ -72,8 +72,8 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const RICARDO_URL       = 'http://www.ricardo.ch';
     const RICARDO_URL_HELP_PROMOTION = 'http://www.ricardo.ch/ueber-uns/gebühren/einstelloptionen'; //@todo make it for french too
 
-    const NODE_DISPATCHER_TYPES = 'global/ricento/dispatcher/types';
-    const NODE_PRODUCT_TYPES    = 'global/ricento/allow_product_types';
+    const NODE_DISPATCHER_TYPES     = 'global/ricento/dispatcher/types';
+    const NODE_PRODUCT_TYPES        = 'global/ricento/allow_product_types';
 
     /**
      * Payment Config
@@ -84,8 +84,8 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Order Status
      */
-    const ORDER_STATUS_PENDING = 'pending_ricento';
-    const ORDER_STATUS_CANCEL = 'canceled_ricento';
+    const ORDER_STATUS_PENDING      = 'pending_ricento';
+    const ORDER_STATUS_CANCEL       = 'canceled_ricento';
 
     /**
      * @var Mage_Directory_Model_Currency
