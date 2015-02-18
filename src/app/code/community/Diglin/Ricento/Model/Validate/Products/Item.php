@@ -163,6 +163,7 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
 
         $salesOptions = $item->getSalesOptions();
         $productPrice = $item->getProductPrice();
+
         if ($salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::AUCTION && $salesOptions->getSalesAuctionDirectBuy()) {
             $startPrice = $salesOptions->getSalesAuctionStartPrice();
             $minPrice = ($startPrice < 0.1) ? 0.1 : $startPrice;
@@ -175,7 +176,9 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
             }
         }
 
-        if (($salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW || $salesOptions->getSalesAuctionDirectBuy()) && in_array(PaymentMethods::TYPE_CREDIT_CARD, $rules->getPaymentMethods())) {
+        if (($salesOptions->getSalesType() == Diglin_Ricento_Model_Config_Source_Sales_Type::BUYNOW || $salesOptions->getSalesAuctionDirectBuy())
+            && in_array(PaymentMethods::TYPE_CREDIT_CARD, $rules->getPaymentMethods())
+        ) {
             $betweenValidator  = new Zend_Validate_Between(
                 array(
                     'min' => self::BUYNOW_MINPRICE_FIXPRICE,
@@ -183,11 +186,12 @@ class Diglin_Ricento_Model_Validate_Products_Item extends Zend_Validate_Abstract
                     'inclusive' => true
                 )
             );
+
             if (!$betweenValidator->isValid($productPrice)) {
                 // Error - Price not allowed
                 $this->_errors[] = $helper->__('Product Price of %s CHF is incorrect for a direct sales with credit card. Price must be between %s and %s.', $productPrice, self::BUYNOW_MINPRICE_FIXPRICE, self::BUYNOW_MAXPRICE_FIXPRICE);
             }
-        } else if($productPrice < self::BUYNOW_MINPRICE_FIXPRICE) {
+        } else if ($productPrice < self::BUYNOW_MINPRICE_FIXPRICE) {
             $this->_errors[] = $helper->__('Product Price of %s CHF is incorrect. Minimum price is %s.', self::BUYNOW_MINPRICE_FIXPRICE);
         }
 
