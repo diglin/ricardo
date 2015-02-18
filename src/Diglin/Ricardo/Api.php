@@ -284,8 +284,8 @@ class Api implements ApiInterface
      */
     public function jsonEncode($val)
     {
-        if (is_string($val) && strpos($val, '[') !== false && strpos($val, ']') === strlen($val) - 1) return addslashes($val);
-        if (is_string($val)) return '"' . addslashes($val) . '"';
+        if (is_string($val) && strpos($val, '[') !== false && strpos($val, ']') === strlen($val) - 1) return json_encode($val);
+        if (is_string($val)) return json_encode($val);
         if (is_numeric($val)) return $val;
         if ($val === null) return 'null';
         if ($val === true) return 'true';
@@ -303,7 +303,7 @@ class Api implements ApiInterface
         foreach ($val as $k => $v) {
             $v = $this->jsonEncode($v);
             if ($assoc) {
-                $k = '"' . addslashes($k) . '"';
+                $k = json_encode($k);
                 $v = $k . ':' . $v;
             }
             $res[] = $v;
