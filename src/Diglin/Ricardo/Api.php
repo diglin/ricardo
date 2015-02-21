@@ -95,7 +95,7 @@ class Api implements ApiInterface
             CURLOPT_POSTFIELDS => $this->jsonEncode($params),
             CURLOPT_HTTPHEADER => $this->_addHeaders(),
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_SSLVERSION => 6,
+            CURLOPT_SSLVERSION => 0,
             CURLOPT_SSL_CIPHER_LIST => 'TLSv1'
         );
 
@@ -120,7 +120,7 @@ class Api implements ApiInterface
             // It may take too much memory here as some parameter are pictures bytes
             unset($curlOptions[CURLOPT_POSTFIELDS]);
             $this->removePictureBytesData($params);
-            $this->_lastDebug = json_encode(array(
+            $this->_lastDebug = $this->jsonEncode(array(
                 'curl_options'  => $curlOptions,
                 'params'        => $params,
                 'return'        => $return
@@ -284,7 +284,7 @@ class Api implements ApiInterface
      */
     public function jsonEncode($val)
     {
-        if (is_string($val) && strpos($val, '[') !== false && strpos($val, ']') === strlen($val) - 1) return json_encode($val);
+        if (is_string($val) && strpos($val, '[') !== false && strpos($val, ']') === strlen($val) - 1) return $val;
         if (is_string($val)) return json_encode($val);
         if (is_numeric($val)) return $val;
         if ($val === null) return 'null';
