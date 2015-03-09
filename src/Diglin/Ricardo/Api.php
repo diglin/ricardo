@@ -95,8 +95,7 @@ class Api implements ApiInterface
             CURLOPT_POSTFIELDS => $this->jsonEncode($params),
             CURLOPT_HTTPHEADER => $this->_addHeaders(),
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_SSLVERSION => 0,
-            CURLOPT_SSL_CIPHER_LIST => 'TLSv1'
+            CURLOPT_SSLVERSION => 0
         );
 
         $ch = curl_init();
