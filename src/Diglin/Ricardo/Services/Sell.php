@@ -26,6 +26,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\GetArticlesFeeParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
@@ -266,7 +267,6 @@ class Sell extends ServiceAbstract
             'method' => 'DeletePlannedArticles',
             'params' => array('deletePlannedArticlesParameter' => $deletePlannedArticleParameter->getDataProperties())
         );
-
     }
 
     /**
@@ -299,9 +299,62 @@ class Sell extends ServiceAbstract
      * Gets the article fee.
      *
      * @param $getArticleFeeParameter
+     * @return array
      */
     public function getArticleFee($getArticleFeeParameter)
     {
+    }
+
+    public function getArticleFeeResult($getArticleFeeParameter)
+    {
+    }
+
+    /**
+     * @param GetArticlesFeeParameter $getArticlesFeeParameter
+     * @return array
+     */
+    public function getArticlesFee(GetArticlesFeeParameter $getArticlesFeeParameter)
+    {
+        return array(
+            'method' => 'GetArticlesFee',
+            'params' => array('getArticlesFeeParameter' => $getArticlesFeeParameter->getDataProperties())
+        );
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     *
+     * [0] => Array
+        (
+            [CoveredByPLP] =>
+            [ListingFee] => 0
+            [PromotionFees] => Array
+                (
+                    [0] => Array
+                        (
+                            [PromotionFee] => 0
+                            [PromotionId] => 4194304
+                        )
+
+                    [1] => Array
+                        (
+                            [PromotionFee] => 0
+                            [PromotionId] => 8388608
+                        )
+                   [...] => ...
+
+                )
+
+            [TotalFee] => 5
+        )
+     */
+    public function getArticlesFeeResult(array $data)
+    {
+        if (isset($data['GetArticlesFeeResult']) && isset($data['GetArticlesFeeResult']['ArticlesFee'])) {
+            return $data['GetArticlesFeeResult']['ArticlesFee'];
+        }
+        return false;
     }
 
     /**

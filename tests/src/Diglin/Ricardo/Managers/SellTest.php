@@ -33,6 +33,8 @@ use Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\GetArticleFeeParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\GetArticlesFeeParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
 
@@ -184,12 +186,34 @@ class SellTest extends TestAbstract
         $this->assertArrayHasKey('IsClosed', $result, 'Result does not have IsClosed Key');
     }
 
-    public function testRelistArticle()
+    public function RelistArticle()
     {
-        $articleId = 729014362;
+//        $articleId = 729014362;
+//
+//        $relist = $this->_sellManager->relistArticle($articleId);
+//
+//        $this->outputContent($relist, 'Relist Article: ', true);
+    }
 
-        $relist = $this->_sellManager->relistArticle($articleId);
+    public function testGetArticlesFee()
+    {
+        $articleFeeParameter = new GetArticleFeeParameter();
+        $articleFeeParameter
+            ->setArticleCondition(1)
+            ->setBuyNowPrice(400.00)
+            ->setCategoryId(69995)
+            ->setExcludeListingFees(true)
+            ->setInitialQuantity(4)
+            ->setPictureCount(0)
+            ->setPromotionIds(array(256))
+            ->setStartDate(Helper::getJsonDate(time() + 60*60))
+            ->setStartPrice(230);
 
-        $this->outputContent($relist, 'Relist Article: ', true);
+        $articlesFeeParameter = new GetArticlesFeeParameter();
+        $articlesFeeParameter->setArticlesDetails($articleFeeParameter);
+        $articlesFeeParameter->setArticlesDetails($articleFeeParameter);
+
+        $articlesFee = $this->_sellManager->getArticlesFee($articlesFeeParameter);
+        $this->outputContent($articlesFee, 'Inserted Buy Now Article with start now: ', true);
     }
 }

@@ -241,7 +241,8 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
                 $articleInformation
                     ->setPromotionIds(array(
                         PromotionCode::BUYNOW
-                    ));
+                    ))
+                    ->setInitialQuantity(1);
             }
         }
 
@@ -267,7 +268,6 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
 
         if (file_exists($filename)) {
             $imageContent = array_values(unpack('C*', file_get_contents($filename)));
-
         }
 
         $pictures = new ArticlePictureParameter();
