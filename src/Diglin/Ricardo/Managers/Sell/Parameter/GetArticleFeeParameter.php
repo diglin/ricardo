@@ -148,7 +148,7 @@ class GetArticleFeeParameter extends ParameterAbstract
      */
     public function getExcludeListingFees()
     {
-        return (bool) $this->_excludeListingFees;
+        return ($this->_excludeListingFees) ? 1 : 0;
     }
 
     /**
