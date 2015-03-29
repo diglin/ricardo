@@ -52,6 +52,13 @@ class DeletePlannedArticleParameter extends ParameterAbstract
     );
 
     /**
+     * @var array
+     */
+    protected $_optionalProperties = array(
+        'plannedIndex'
+    );
+
+    /**
      * @param string $antiforgeryToken
      * @return $this
      */

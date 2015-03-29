@@ -65,11 +65,11 @@ class CloseArticlesParameter extends ParameterAbstract
     }
 
     /**
-     * @param CloseArticleParameter $articleIds
+     * @param int|array $articleIds
      * @param bool $clear
      * @return $this
      */
-    public function setArticleIds(CloseArticleParameter $articleIds = null, $clear = false)
+    public function setArticleIds($articleIds = null, $clear = false)
     {
         if ($clear) {
             $this->_articleIds = array();
@@ -79,7 +79,12 @@ class CloseArticlesParameter extends ParameterAbstract
             return $this;
         }
 
-        $this->_articleIds[] = $articleIds;
+        if (is_numeric($articleIds)) {
+            $this->_articleIds[] = $articleIds;
+        } else if (is_array($articleIds)) {
+            $this->_articleIds += $articleIds;
+        }
+
         return $this;
     }
 
