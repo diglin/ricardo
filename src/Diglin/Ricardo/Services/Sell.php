@@ -448,7 +448,9 @@ class Sell extends ServiceAbstract
      *          "ArticleFee": "float"
      *          "ArticleId": "int"
      *          "CarDealerArticleId": "int"
+     *          "CorrelationKey": "int"
      *          "ErrorCodes": "int" ArticleErrors
+     *          "ErrorCodesType": "int" @see https://ws.ricardo.ch/RicardoApi/documentation/html/T_Ricardo_Enums_Errors_ErrorList.htm
      *          "PlannedArticleId": "int"
      *      }]
      *   }

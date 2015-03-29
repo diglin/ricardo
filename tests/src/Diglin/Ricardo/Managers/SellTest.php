@@ -114,21 +114,33 @@ class SellTest extends TestAbstract
     {
         $insertArticles = new InsertArticlesParameter();
 
-        $insertArticles->setArticles($this->getArticle());
-        $insertArticles->setArticles($this->getArticle());
-
         try {
-            $result = $this->_sellManager->insertArticles($insertArticles);
+            $flush = false;
+            for ($j = 0; $j < 2; $j++) { // Insert 5 x 5 articles
+
+                $totalInserted = 5; // to limit memory usage
+
+                for ($i = 0; $i < $totalInserted; $i++) {
+                    $insertArticles->setArticles($this->getBaseInsertArticleWithTracking(), $flush);
+                    $flush = false;
+
+                    if ($i == ($totalInserted - 1)) {
+                        $insertArticles->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken());
+                        $result = $this->_sellManager->insertArticles($insertArticles);
+                        $flush = true;
+
+                        $this->assertCount($totalInserted, $result, $totalInserted . ' inserted articles were expected.');
+                        $this->assertArrayHasKey('PlannedArticleId', $result[0], 'Article does not have an article ID');
+                        $this->assertArrayHasKey('ArticleFee', $result[0], 'Article does not have any article fee');
+
+                        $this->outputContent($result, 'Insert Articles: ');
+                    }
+                }
+            }
         } catch (\Exception $e) {
             $this->getLastApiDebug(true, false, true);
             throw $e;
         }
-
-        $this->assertCount(2, $result, 'Two inserted article was expected.');
-        $this->assertArrayHasKey('PlannedArticleId', $result[0], 'Article does not have an article ID');
-        $this->assertArrayHasKey('ArticleFee', $result[0], 'Article does not have any article fee');
-
-        $this->outputContent($result, 'Insert Articles: ');
 
         return array(
             $result[0]['PlannedArticleId'],

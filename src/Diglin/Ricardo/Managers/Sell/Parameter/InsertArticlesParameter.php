@@ -36,13 +36,14 @@ class InsertArticlesParameter extends ParameterAbstract
     /**
      * @var array
      */
-    protected $_articles = array(); // required
+    protected $_articlesToInsert = array(); // required
 
     /**
      * @var array
      */
     protected $_requiredProperties = array(
-        'articles',
+        'antiforgeryToken',
+        'articlesToInsert'
     );
 
     /**
@@ -64,24 +65,47 @@ class InsertArticlesParameter extends ParameterAbstract
     }
 
     /**
+     * @deprecated
+     *
      * @param InsertArticleParameter $articles
      * @param bool $clear
      * @return $this
      */
     public function setArticles(InsertArticleParameter $articles, $clear = false)
     {
+        $this->setArticlesToInsert($articles, $clear);
+        return $this;
+    }
+
+    /**
+     * @deprected
+     *
+     * @return array
+     */
+    public function getArticles()
+    {
+        return $this->getArticlesToInsert();
+    }
+
+    /**
+     * @param InsertArticleParameter $articles
+     * @param bool $clear
+     * @return $this
+     */
+    public function setArticlesToInsert(InsertArticleParameter $articles, $clear = false)
+    {
         if ($clear) {
-            $this->_articles = array();
+            $this->_articlesToInsert = array();
         }
-        $this->_articles[] = $articles;
+        $this->_articlesToInsert[] = $articles;
         return $this;
     }
 
     /**
      * @return array
      */
-    public function getArticles()
+    public function getArticlesToInsert()
     {
-        return $this->_articles;
+        return $this->_articlesToInsert;
     }
 }
