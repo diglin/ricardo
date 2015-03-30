@@ -175,9 +175,6 @@ class SellerAccountTest extends TestAbstract
             $closesParameter->setArticleIds($article);
         }
 
-        $closesParameter->setArticleIds('745019660');
-        $closesParameter->setArticleIds('744973334');
-
         $results = $sell->closeArticles($closesParameter);
 
         parent::outputContent($results, 'Closed Articles: ');
