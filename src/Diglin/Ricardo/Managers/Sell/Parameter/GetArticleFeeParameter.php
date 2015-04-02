@@ -184,7 +184,7 @@ class GetArticleFeeParameter extends ParameterAbstract
      */
     public function getPictureCount()
     {
-        return $this->_pictureCount;
+        return (int) $this->_pictureCount;
     }
 
     /**
