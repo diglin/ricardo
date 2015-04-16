@@ -111,6 +111,8 @@ class SystemTest extends TestAbstract
         $this->assertArrayHasKey('CategoryId', $result[0], 'Category data structure is wrong');
         $this->assertLessThanOrEqual(800, $numberOfCategories, 'Number of categories too high comparaed to the one expected - 800'); // category_branding_filter set to 2, decrease the number of categories
 
+        self::outputContent($result[10], 'Categorie position 10: ');
+
         return $result[10]['CategoryId'];
     }
 

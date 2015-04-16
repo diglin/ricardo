@@ -150,6 +150,16 @@ class SoldArticlesParameter extends ParameterAbstract
     /**
      * @var array
      */
+    protected $_excludedTransactionIdsFilter = array();
+
+    /**
+     * @var array
+     */
+    protected $_transactionIdsFilter = array();
+
+    /**
+     * @var array
+     */
     protected $_requiredProperties = array(
         'articleTitleFilter',
         'articleTypeFilter',
@@ -170,6 +180,8 @@ class SoldArticlesParameter extends ParameterAbstract
         'minimumEndDate',
         'paidStatusFilter',
         'shippedStatusFilter',
+        'excludedTransactionIdsFilter',
+        'transactionIdsFilter'
     );
 
     /**
@@ -472,5 +484,41 @@ class SoldArticlesParameter extends ParameterAbstract
     public function getShippedStatusFilter()
     {
         return (int) $this->_shippedStatusFilter;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTransactionIdsFilter()
+    {
+        return $this->_transactionIdsFilter;
+    }
+
+    /**
+     * @param array $transactionIdsFilter
+     * @return $this
+     */
+    public function setTransactionIdsFilter($transactionIdsFilter)
+    {
+        $this->_transactionIdsFilter = $transactionIdsFilter;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExcludedTransactionIdsFilter()
+    {
+        return $this->_excludedTransactionIdsFilter;
+    }
+
+    /**
+     * @param array $excludedTransactionIdsFilter
+     * @return $this
+     */
+    public function setExcludedTransactionIdsFilter($excludedTransactionIdsFilter)
+    {
+        $this->_excludedTransactionIdsFilter = $excludedTransactionIdsFilter;
+        return $this;
     }
 }

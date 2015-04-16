@@ -26,6 +26,8 @@ use Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use Diglin\Ricardo\Enums\Article\CloseListStatus;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\ClosePlannedArticleParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter;
@@ -108,11 +110,11 @@ class SellerAccountTest extends TestAbstract
         $articles = array();
 
         $sell = new Sell($this->getServiceManager());
-        $result = $sell->insertArticle($this->getArticle(false, true, true));
-        $articles[] = $result['ArticleId'];
 
-        $result = $sell->insertArticle($this->getArticle(false, true, true));
-        $articles[] = $result['ArticleId'];
+        for ($i = 0; $i < 2; $i++) {
+            $result = $sell->insertArticle($this->getArticle(false, true, true));
+            $articles[] = $result['ArticleId'];
+        }
 
         $articleParameter = new ArticlesParameter();
         $articleParameter
@@ -127,18 +129,108 @@ class SellerAccountTest extends TestAbstract
         $this->assertArrayHasKey('ArticleId', $result[0], 'No article ID found');
         $this->assertArrayHasKey('ArticleInformationLimit', $result[0], 'Get Articles has no article information limit');
 
-        $closeParameter = new CloseArticleParameter();
-        $closeParameter
-            ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken())
-            ->setArticleId($articles[0]);
+        $closesParameter = new CloseArticlesParameter();
+        $closesParameter->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken());
 
-        $sell->closeArticle($closeParameter);
+        foreach ($articles as $article) {
+            $closesParameter->setArticleIds($article);
+        }
 
-        $closeParameter
-            ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken())
-            ->setArticleId($articles[1]);
+        $sell->closeArticles($closesParameter);
+    }
 
-        $sell->closeArticle($closeParameter);
+    public function testCloseArticles()
+    {
+        $articles = array();
+        $totalItems = 2;
+
+        $sell = new Sell($this->getServiceManager());
+
+        for ($i = 0; $i < $totalItems; $i++) {
+            $result = $sell->insertArticle($this->getArticle(false, true, true));
+            $articles[] = $result['ArticleId'];
+        }
+
+        $closesParameter = new CloseArticlesParameter();
+        $closesParameter->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken());
+
+        foreach ($articles as $article) {
+            $closesParameter->setArticleIds($article);
+        }
+
+        $results = $sell->closeArticles($closesParameter);
+
+        parent::outputContent($results, 'Closed Articles: ');
+
+        foreach ($results as $result) {
+            $this->assertGreaterThanOrEqual($totalItems, count($result), 'No result found');
+            $this->assertArrayHasKey('ArticleNr', $result, 'No article ID found');
+            $this->assertArrayHasKey('IsClosed', $result, 'Article has no close information');
+        }
+
+        $closesParameter = new CloseArticlesParameter();
+        $closesParameter->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken());
+
+        foreach ($articles as $article) {
+            $closesParameter->setArticleIds($article);
+        }
+
+        $results = $sell->closeArticles($closesParameter);
+
+        parent::outputContent($results, 'Closed Articles: ');
+
+        foreach ($results as $result) {
+            $this->assertArrayHasKey('IsClosed', $result, 'IsClosed Key not found');
+            $this->assertTrue((bool) $result['IsClosed'], 'Article is still open');
+        }
+    }
+
+    public function testDeletePlannedArticles()
+    {
+        $articles = array();
+        $totalItems = 2;
+
+        $sell = new Sell($this->getServiceManager());
+
+        for ($i = 0; $i < $totalItems; $i++) {
+            $result = $sell->insertArticle($this->getArticle(false, true, false));
+            $articles[] = $result['ArticleId'];
+        }
+
+        $deletePlannedArticlesParameter = new DeletePlannedArticlesParameter();
+        $deletePlannedArticlesParameter->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken());
+
+        foreach ($articles as $article) {
+            $closePlanned = new ClosePlannedArticleParameter();
+            $closePlanned->setPlannedArticleId($article);
+            $deletePlannedArticlesParameter->setArticles($closePlanned);
+        }
+
+        $results = $sell->deletePlannedArticles($deletePlannedArticlesParameter);
+
+        parent::outputContent($results, 'Delete Planned Articles: ');
+
+        foreach ($results as $result) {
+            $this->assertGreaterThanOrEqual($totalItems, count($result), 'No result found');
+            $this->assertArrayHasKey('PlannedArticleId', $result, 'PlannedArticleId not found');
+            $this->assertArrayHasKey('IsClosed', $result, 'IsClosed Key not found');
+        }
+
+        foreach ($articles as $article) {
+            $closePlanned = new ClosePlannedArticleParameter();
+            $closePlanned->setPlannedArticleId($article);
+            $deletePlannedArticlesParameter->setArticles($closePlanned);
+        }
+
+        $deletePlannedArticlesParameter->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken());
+        $results = $sell->deletePlannedArticles($deletePlannedArticlesParameter);
+
+        parent::outputContent($results, 'Delete Planned Articles: ');
+
+        foreach ($results as $result) {
+            $this->assertArrayHasKey('PlannedArticleId', $result, 'PlannedArticleId Key not found');
+            $this->assertArrayHasKey('IsClosed', $result, 'IsClosed Key not found');
+        }
     }
 
     public function testGetTemplates()

@@ -27,6 +27,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\GetArticlesFeeParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
@@ -148,13 +149,30 @@ class Sell extends ManagerAbstract
         return $result['ArticleFee'];
     }
 
+
     /**
      * @param UpdateArticlePicturesParameter $parameter
      * @return $this
+     * @throws \Diglin\Ricardo\Exceptions\ExceptionAbstract
+     * @throws \Diglin\Ricardo\Exceptions\SecurityException
+     * @throws \Exception
      */
     public function updateArticlePictures(UpdateArticlePicturesParameter $parameter)
     {
         $this->_proceed('UpdateArticlePictures', $parameter); // no value returned
         return $this;
+    }
+
+    /**
+     * @param GetArticlesFeeParameter $parameter
+     * @return $this
+     * @throws \Diglin\Ricardo\Exceptions\ExceptionAbstract
+     * @throws \Diglin\Ricardo\Exceptions\SecurityException
+     * @throws \Exception
+     * @return array
+     */
+    public function getArticlesFee(GetArticlesFeeParameter $parameter)
+    {
+        return $this->_proceed('ArticlesFee', $parameter);
     }
 }

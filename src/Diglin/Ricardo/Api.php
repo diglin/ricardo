@@ -129,7 +129,7 @@ class Api implements ApiInterface
                 $dir = dirname($this->getConfig()->getLogFilePath());
                 @mkdir($dir, 0775);
                 if (is_writable($dir . DIRECTORY_SEPARATOR)) {
-                    file_put_contents($this->getConfig()->getLogFilePath(), print_r($this->_lastDebug, true), FILE_APPEND);
+                    file_put_contents($this->getConfig()->getLogFilePath(), print_r($this->_lastDebug, true) . "\n", FILE_APPEND);
                 }
             }
         }

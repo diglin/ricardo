@@ -20,9 +20,10 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-use \Diglin\Ricardo\Config;
-use \Diglin\Ricardo\Api;
-use \Diglin\Ricardo\Service;
+use Diglin\Ricardo\Config;
+use Diglin\Ricardo\Api;
+use Diglin\Ricardo\Managers\Sell\Parameter\BaseInsertArticleWithTrackingParameter;
+use Diglin\Ricardo\Service;
 
 use Diglin\Ricardo\Core\Helper;
 use Diglin\Ricardo\Enums\Article\InternalReferenceType;
@@ -173,10 +174,11 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
     {
         $insertArticleParameter = new InsertArticleParameter();
 
+        // Following lines commented to test memory allocation and decrease the number of request done on ricardo
         $system = new System($this->getServiceManager());
         $conditions = $system->getArticleConditions(false);
         $availabilities = $system->getAvailabilities();
-        //$categories = $system->getCategories(CategoryBrandingFilter::ONLYBRANDING);
+//        $categories = $system->getCategories(CategoryBrandingFilter::ONLYBRANDING);
         $warranties = $system->getWarranties();
         $paymentConditions = $system->getPaymentConditionsAndMethods();
         $deliveryConditions = $system->getDeliveryConditions();
@@ -187,9 +189,11 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             // required
             ->setDeliveryCost(5)
             ->setIsDeliveryFree(0)
+//            ->setDeliveryId(1)
             ->setDeliveryId($deliveryConditions[0]['DeliveryConditionId'])
             ->setIsCumulativeShipping(1)
             // optional
+//            ->setDeliveryPackageSizeId(1);
             ->setDeliveryPackageSizeId($deliveryConditions[0]['PackageSizes'][0]['PackageSizeId']);
 
         $internalReferences = new ArticleInternalReferenceParameter();
@@ -207,10 +211,10 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
         $articleInformation
             // required
             ->setArticleConditionId($conditions[0]['ArticleConditionId'])
-            ->setArticleDuration(3 * 24 * 60) // 8 days
+            ->setArticleDuration(8 * 24 * 60) // 7 days
             ->setAvailabilityId($availabilities[0]['AvailabilityId'])
-            ->setCategoryId(68791)
-            ->setInitialQuantity(10)
+            ->setCategoryId(38828)
+            ->setInitialQuantity(100)
             ->setIsCustomerTemplate(true)
             ->setMainPictureId(1)
             ->setMaxRelistCount(5)
@@ -241,7 +245,8 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
                 $articleInformation
                     ->setPromotionIds(array(
                         PromotionCode::BUYNOW
-                    ));
+                    ))
+                    ->setInitialQuantity(1);
             }
         }
 
@@ -256,33 +261,172 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             ->setArticleTitle('My Product ' . $this->_generateRandomString(20))
             ->setArticleDescription($this->_generateRandomString(2000))
             ->setLanguageId($partnerConfiguration['LanguageId'])
+//            ->setLanguageId(2)
             // optional
             ->setArticleSubtitle($this->_generateRandomString(60))
             ->setDeliveryDescription($this->_generateRandomString(2000))
             ->setPaymentDescription($this->_generateRandomString(2000))
             ->setWarrantyDescription($this->_generateRandomString(2000));
 
-        $imageContent = '';
-        $filename = __DIR__ . '/../../../media/pictures/22-syncmaster-lcd-monitor.jpg';
+//        $filename = __DIR__ . '/../../../media/pictures/hallgerdur_black_f-1.jpg'; // 4MB Picture - Take ~1GB RAM Memory when encoded with json_encode / > ~1GB RAM when not json encoded (Memory limit reached) !!!
+//        $filename = __DIR__ . '/../../../media/pictures/46325.JPG'; // 2MB Picture - Take ~500 MB RAM Memory when encoded with json_encode / ~1GB RAM when not json encoded !!!
+//        $filename = __DIR__ . '/../../../media/pictures/22-syncmaster-lcd-monitor.jpg'; // 40 KB
+        $filename = __DIR__ . '/../../../media/pictures/46325-500k.jpg'; // 500 KB
 
-        if (file_exists($filename)) {
-            $imageContent = array_values(unpack('C*', file_get_contents($filename)));
+        if (file_exists($filename) && false) {
+            for ($i = 1; $i < 3; $i++) {
+//            $imageContent = array_values(unpack('C*', file_get_contents($filename)));
 
+                $pictures = new ArticlePictureParameter();
+                $pictures
+//                ->setPictureBytes($imageContent)
+                    ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($filename)))))// save 10 MB Memory with a picture of 40 KB
+                    ->setPictureExtension(Helper::getPictureExtension($filename))
+                    ->setPictureIndex($i);
+
+                $insertArticleParameter->setPictures($pictures);
+            }
         }
-
-        $pictures = new ArticlePictureParameter();
-        $pictures
-            ->setPictureBytes($imageContent)
-            ->setPictureExtension(Helper::getPictureExtension($filename))
-            ->setPictureIndex(1);
 
         $antiforgeryToken = $this->getServiceManager()->getSecurityManager()->getAntiforgeryToken();
         $insertArticleParameter
             ->setAntiforgeryToken($antiforgeryToken)
             ->setArticleInformation($articleInformation)
             ->setDescriptions($descriptions)
-            ->setPictures($pictures)
             ->setIsUpdateArticle(false);
+
+        return $insertArticleParameter;
+    }
+
+    /**
+     * @param bool $auction
+     * @param bool $buynow
+     * @param bool $startNow
+     * @return InsertArticleParameter
+     */
+    protected function getBaseInsertArticleWithTracking($auction = true, $buynow = false, $startNow = false)
+    {
+        $insertArticleParameter = new BaseInsertArticleWithTrackingParameter();
+
+        // Following lines commented to test memory allocation and decrease the number of request done on ricardo
+//        $system = new System($this->getServiceManager());
+//        $conditions = $system->getArticleConditions(false);
+//        $availabilities = $system->getAvailabilities();
+        //$categories = $system->getCategories(CategoryBrandingFilter::ONLYBRANDING);
+//        $warranties = $system->getWarranties();
+//        $paymentConditions = $system->getPaymentConditionsAndMethods();
+//        $deliveryConditions = $system->getDeliveryConditions();
+//        $partnerConfiguration = $system->getPartnerConfigurations();
+
+        $delivery = new ArticleDeliveryParameter();
+        $delivery
+            // required
+            ->setDeliveryCost(5)
+            ->setIsDeliveryFree(0)
+            ->setDeliveryId(1)
+//            ->setDeliveryId($deliveryConditions[0]['DeliveryConditionId'])
+            ->setIsCumulativeShipping(1)
+            // optional
+            ->setDeliveryPackageSizeId(1);
+//            ->setDeliveryPackageSizeId($deliveryConditions[0]['PackageSizes'][0]['PackageSizeId']);
+
+        $internalReferences = new ArticleInternalReferenceParameter();
+        $internalReferences
+            ->setInternalReferenceTypeId(InternalReferenceType::SELLERSPECIFIC)
+            ->setInternalReferenceValue('01234567890123456789');
+//            ->setInternalReferenceValue('##PL##123##IT##456##SKU##MY_MAGENTO_SKU');
+
+        $internalReferencesB = new ArticleInternalReferenceParameter();
+        $internalReferencesB
+            ->setInternalReferenceTypeId(InternalReferenceType::SELLERSPECIFIC)
+            ->setInternalReferenceValue('98765432109876543210');
+
+        $articleInformation = new ArticleInformationParameter();
+        $articleInformation
+            // required
+//            ->setArticleConditionId($conditions[0]['ArticleConditionId'])
+            ->setArticleConditionId(1)
+            ->setArticleDuration(8 * 24 * 60) // 7 days
+//            ->setAvailabilityId($availabilities[0]['AvailabilityId'])
+            ->setAvailabilityId(0)
+            ->setCategoryId(38828)
+            ->setInitialQuantity(100)
+            ->setIsCustomerTemplate(true)
+            ->setMainPictureId(1)
+            ->setMaxRelistCount(5)
+//            ->setWarrantyId($warranties[1]['WarrantyId'])
+            ->setWarrantyId(1)
+            ->setDeliveries($delivery)
+            // optional
+            ->setInternalReferences($internalReferences)
+            ->setInternalReferences($internalReferencesB)
+//            ->setPaymentConditionIds(array($paymentConditions[0]['PaymentConditionId']))
+            ->setPaymentConditionIds(array(5))
+//            ->setPaymentMethodIds(array($paymentConditions[0]['PaymentMethods'][0]['PaymentMethodId']))
+            ->setPaymentMethodIds(array(8192))
+            ->setTemplateId(0);
+
+        if ($auction) {
+            $articleInformation
+                ->setIncrement(5)
+                ->setStartPrice(5);
+        }
+
+        if ($auction && !$startNow) {
+            $articleInformation
+                ->setStartDate(Helper::getJsonDate(time() + 60*60));
+        }
+
+        if ($buynow) {
+            $articleInformation->setBuyNowPrice(20);
+
+            if ($auction) {
+                $articleInformation
+                    ->setPromotionIds(array(PromotionCode::BUYNOW))
+                    ->setInitialQuantity(1);
+            }
+        }
+
+        if (!$auction && $buynow) {
+            $articleInformation->setIsRelistSoldOut(true);
+        }
+
+        $descriptions = new ArticleDescriptionParameter();
+        $descriptions
+            // required
+            ->setArticleTitle('My Product ' . $this->_generateRandomString(20))
+            ->setArticleDescription($this->_generateRandomString(2000))
+//            ->setLanguageId($partnerConfiguration['LanguageId'])
+            ->setLanguageId(2)
+            // optional
+            ->setArticleSubtitle($this->_generateRandomString(60))
+            ->setDeliveryDescription($this->_generateRandomString(2000))
+            ->setPaymentDescription($this->_generateRandomString(2000))
+            ->setWarrantyDescription($this->_generateRandomString(2000));
+
+//        $filename = __DIR__ . '/../../../media/pictures/hallgerdur_black_f-1.jpg'; // 4MB Picture - Take ~1GB RAM Memory when encoded with json_encode / > ~1GB RAM when not json encoded (Memory limit reached) !!!
+//        $filename = __DIR__ . '/../../../media/pictures/46325.JPG'; // 2MB Picture - Take ~500 MB RAM Memory when encoded with json_encode / ~1GB RAM when not json encoded !!!
+//        $filename = __DIR__ . '/../../../media/pictures/22-syncmaster-lcd-monitor.jpg'; // 40 KB
+        $filename = __DIR__ . '/../../../media/pictures/46325-500k.jpg'; // 500 KB
+
+        if (file_exists($filename)) {
+            for ($i = 1; $i < 3; $i++) {
+
+                $pictures = new ArticlePictureParameter();
+                $pictures
+                    ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($filename)))))// save 10 MB Memory with a picture of 40 KB
+                    ->setPictureExtension(Helper::getPictureExtension($filename))
+                    ->setPictureIndex($i);
+
+                $insertArticleParameter->setPictures($pictures);
+            }
+        }
+
+        $insertArticleParameter
+            ->setArticleInformation($articleInformation)
+            ->setDescriptions($descriptions)
+            ->setIsUpdateArticle(false)
+            ->setCorrelationKey(Helper::guid());
 
         return $insertArticleParameter;
     }
