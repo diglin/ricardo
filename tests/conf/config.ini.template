@@ -4,7 +4,7 @@ partnership_key = YOUR_PARTNER_KEY
 partnership_passwd = 'YOUR_PARTNER_PASS'
 partner_url = YOUR_WEBSITE_URL
 allow_authorization_simulation = true
-# Only if you need to simulate the authorization process
+; Only if you need to simulate the authorization process
 customer_username = YOUR_RICARDO_USERNAME
 customer_password = 'YOUR_RICARDO_PASSWORD'
 debug = true
@@ -16,7 +16,7 @@ partnership_key = YOUR_PARTNER_KEY
 partnership_passwd = 'YOUR_PARTNER_PASS'
 partner_url = YOUR_WEBSITE_URL
 allow_authorization_simulation = true
-# Only if you need to simulate the authorization process
+; Only if you need to simulate the authorization process
 customer_username = YOUR_RICARDO_USERNAME
 customer_password = 'YOUR_RICARDO_PASSWORD'
 debug = true

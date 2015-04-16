@@ -52,7 +52,7 @@ class SystemTest extends TestAbstract
      */
     protected function generateErrorCodesEnumsAndCSV($result)
     {
-        $output = $csv = $enums = $log = '';
+        $csv = $enums = $log = '';
         foreach ($result as $namespace => $errors) {
             $csv = '';
             $output = $namespace . "\n";

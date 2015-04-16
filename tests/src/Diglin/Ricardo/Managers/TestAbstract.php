@@ -207,10 +207,10 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
         $articleInformation
             // required
             ->setArticleConditionId($conditions[0]['ArticleConditionId'])
-            ->setArticleDuration(8 * 24 * 60) // 7 days
+            ->setArticleDuration(3 * 24 * 60) // 8 days
             ->setAvailabilityId($availabilities[0]['AvailabilityId'])
-            ->setCategoryId(38828)
-            ->setInitialQuantity(100)
+            ->setCategoryId(68791)
+            ->setInitialQuantity(10)
             ->setIsCustomerTemplate(true)
             ->setMainPictureId(1)
             ->setMaxRelistCount(5)
@@ -225,13 +225,13 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
 
         if ($auction) {
             $articleInformation
-                ->setIncrement(5)
-                ->setStartPrice(5);
+                ->setIncrement(1)
+                ->setStartPrice(10);
         }
 
         if ($auction && !$startNow) {
             $articleInformation
-                ->setStartDate(Helper::getJsonDate(time() + 60*60));
+                ->setStartDate(Helper::getJsonDate(time() + 2*60*60));
         }
 
         if ($buynow) {
