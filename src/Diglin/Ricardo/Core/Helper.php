@@ -62,7 +62,7 @@ class Helper
             $unixTimestamp = time();
         }
 
-        return '/Date(' . ($unixTimestamp * 1000) . date('O') . ')/';
+        return '/Date(' . $unixTimestamp . '000' . date('O') . ')/'; // do not use int cause of issue on 32bit OS
     }
 
     /**
