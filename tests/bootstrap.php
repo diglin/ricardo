@@ -20,6 +20,5 @@
  */
 set_include_path(get_include_path() . PATH_SEPARATOR . realpath(dirname(__DIR__) . '/tests/src'));
 
-require_once __DIR__ . '/../src/SplAutoloader.php';
-$autoload = new SplAutoloader(null, realpath(dirname(__DIR__) . '/src'));
-$autoload->register();
+$loader = require __DIR__ . '/../vendor/autoload.php';
+$loader->add('Diglin\\Ricardo', __DIR__ . '/src');

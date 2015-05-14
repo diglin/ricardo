@@ -4,3 +4,4 @@ atlassian-ide-plugin.xml
 
 tests/conf/config.ini
 tests/log/api.log
+vendor

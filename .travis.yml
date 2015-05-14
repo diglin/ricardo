@@ -1,0 +1,14 @@
+language: php
+php:
+- '5.4'
+- '5.5'
+
+script:
+
+#- openssl aes-256-cbc -K $encrypted_eb16aa114041_key -iv $encrypted_eb16aa114041_iv
+#  -in bin/drupal.org.key.enc -out ~/.ssh/id_rsa -d
+#- chmod 400 ~/.ssh/id_rsa
+#- bash ./bin/mirror-to-drupal.org.sh
+
+notifications:
+  email: false

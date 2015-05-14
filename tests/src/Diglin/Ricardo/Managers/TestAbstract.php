@@ -41,6 +41,10 @@ use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
 
+/**
+ * Class TestAbstract
+ * @package Diglin\Ricardo\Managers
+ */
 abstract class TestAbstract extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -125,7 +129,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
      */
     protected function getLogPath()
     {
-        return  __DIR__ . '/../../../../log/api.log';
+        return __DIR__ . '/../../../../log/api.log';
     }
 
     /**
@@ -211,7 +215,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
         $articleInformation
             // required
             ->setArticleConditionId($conditions[0]['ArticleConditionId'])
-            ->setArticleDuration(8 * 24 * 60) // 7 days
+            ->setArticleDuration(8 * 24 * 60)// 7 days
             ->setAvailabilityId($availabilities[0]['AvailabilityId'])
             ->setCategoryId(38828)
             ->setInitialQuantity(100)
@@ -235,7 +239,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
 
         if ($auction && !$startNow) {
             $articleInformation
-                ->setStartDate(Helper::getJsonDate(time() + 2*60*60));
+                ->setStartDate(Helper::getJsonDate(time() + 2 * 60 * 60));
         }
 
         if ($buynow) {
@@ -346,7 +350,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             // required
 //            ->setArticleConditionId($conditions[0]['ArticleConditionId'])
             ->setArticleConditionId(1)
-            ->setArticleDuration(8 * 24 * 60) // 7 days
+            ->setArticleDuration(8 * 24 * 60)// 7 days
 //            ->setAvailabilityId($availabilities[0]['AvailabilityId'])
             ->setAvailabilityId(0)
             ->setCategoryId(38828)
@@ -374,7 +378,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
 
         if ($auction && !$startNow) {
             $articleInformation
-                ->setStartDate(Helper::getJsonDate(time() + 60*60));
+                ->setStartDate(Helper::getJsonDate(time() + 60 * 60));
         }
 
         if ($buynow) {
@@ -429,5 +433,38 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             ->setCorrelationKey(Helper::guid());
 
         return $insertArticleParameter;
+    }
+
+    /**
+     * @param $result
+     */
+    protected function generateErrorCodesEnumsAndCSV($result)
+    {
+        $csv = $enums = $log = '';
+        foreach ($result as $namespace => $errors) {
+            $csv = '';
+            $output = $namespace . "\n";
+            $enums = '
+                /**
+     * @return array
+     */
+    public static function getEnums()
+    {
+        return array(
+            ';
+
+            foreach ($errors as $error) {
+                $errorText = strtoupper($error['ErrorText']);
+                $output .= 'const ' . $errorText . ' = ' . $error['ErrorId'] . ';' . "\n";
+                $csv .= '"' . $errorText . '",' . '"' . $errorText . '"' . "\n";
+                $enums .= "array('label' => '" . $errorText . "', 'value' => self::" . $errorText . ")," . "\n";
+            }
+
+            $enums .= ');
+    }';
+            $log .= $output . "\n\n" . $enums . "\n\n" . $csv . "\n\n";
+        }
+
+        $this->log($log . "\n\n");
     }
 }

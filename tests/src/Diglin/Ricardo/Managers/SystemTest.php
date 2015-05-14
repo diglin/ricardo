@@ -44,40 +44,7 @@ class SystemTest extends TestAbstract
 
         //$this->generateEnumsClassAndCSV($result);
 
-        //$this->outputContent($result, 'Error Codes: ');
-    }
-
-    /**
-     * @param $result
-     */
-    protected function generateErrorCodesEnumsAndCSV($result)
-    {
-        $csv = $enums = $log = '';
-        foreach ($result as $namespace => $errors) {
-            $csv = '';
-            $output = $namespace . "\n";
-            $enums = '
-                /**
-     * @return array
-     */
-    public static function getEnums()
-    {
-        return array(
-            ';
-
-            foreach ($errors as $error) {
-                $errorText = strtoupper($error['ErrorText']);
-                $output .= 'const ' . $errorText . ' = ' . $error['ErrorId'] . ';' . "\n";
-                $csv .= '"'. $errorText . '",' . '"' . $errorText . '"' . "\n";
-                $enums .= "array('label' => '". $errorText ."', 'value' => self::". $errorText .")," . "\n";
-            }
-
-            $enums .= ');
-    }';
-            $log .= $output . "\n\n" . $enums . "\n\n" . $csv . "\n\n";
-        }
-
-        $this->log($log . "\n\n");
+        $this->outputContent($result, 'Error Codes: ');
     }
 
     public function testGetArticleConditions()
