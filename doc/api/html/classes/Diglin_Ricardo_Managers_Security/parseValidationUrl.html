@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pu="http://schema.phpunit.de/coverage/1.0" lang="en">
   <head>
     <title>phpDox - Test Method</title>
     <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../../reports.html">Reports</a>
+          <a href="../../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -55,6 +55,15 @@
           <li>
             <a href="#synopsis">Synopsis</a>
           </li>
+          <li>
+            <a href="#parameter">Parameter</a>
+          </li>
+          <li>
+            <a href="#return">Return</a>
+          </li>
+          <li>
+            <a href="../../source/Diglin/Ricardo/Managers/Security.php.html#line200">Source</a>
+          </li>
         </ul>
       </nav>
       <section>
@@ -62,20 +71,20 @@
         <h4>Example: https://www.ch.betaqxl.com/apiconnect/login/index?token=XXXXX-XXXX-XXXX-XXXX-XXXXXXX&amp;countryId=2&amp;partnershipId=XXXX&amp;partnerurl=</h4>
         <p/>
         <ul/>
-        <h2>Signature</h2>
+        <h2 id="signature">Signature</h2>
         <div class="styled synopsis">
           <code>public function parseValidationUrl(string
         $url )
             </code>
         </div>
-        <h2>Parameters</h2>
+        <h2 id="parameterlist">Parameters</h2>
         <dl class="styled">
-          <dt>
-            <code>$url</code>
-          </dt>
+          <dt><code>$url</code>
+                —
+                string</dt>
           <dd/>
         </dl>
-        <h2>Returns</h2>
+        <h2 id="return">Returns</h2>
         <dl class="styled">
           <dt>string</dt>
           <dd/>
@@ -92,14 +101,14 @@
               </tr>
             </thead>
             <tr>
-              <td>190 - 218</td>
+              <td class="line">200 - 228</td>
               <td>
                 <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
               </td>
               <td>The method parseValidationUrl() has a Cyclomatic Complexity of 14. The configured cyclomatic complexity threshold is 10.</td>
             </tr>
             <tr>
-              <td>190 - 218</td>
+              <td class="line">200 - 228</td>
               <td>
                 <a href="http://phpmd.org/rules/codesize.html#npathcomplexity" target="_blank" title="Code Size Rules">NPathComplexity</a>
               </td>
@@ -110,7 +119,7 @@
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Enums\SearchErrors" namespace="Diglin\Ricardo\Enums" name="SearchErrors" abstract="false" final="false" start="24" end="58">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Enums" file="SearchErrors.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/SearchErrors.php" size="2886" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="2e922f9836b2deaafaec225711890d30946d7f6b" relative="Diglin/Ricardo/Enums/SearchErrors.php"/>
+  <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
+  <constant type="integer" name="EMPTYSENTENCE" value="1"/>
+  <constant type="integer" name="NOCATEGORYFOUND" value="2"/>
+  <constant type="integer" name="BASESEARCHPARAMETERSEMPTY" value="3"/>
+  <constant type="integer" name="PAGENUMBERTOOSMALL" value="4"/>
+  <constant type="integer" name="PAGESIZETOOSMALL" value="5"/>
+  <constant type="integer" name="NORESULTFOUND" value="6"/>
+  <constant type="integer" name="SITENUMBERISNOTSET" value="7"/>
+  <constant type="integer" name="UNIVERSEMISS" value="8"/>
+  <constant type="integer" name="NUMBEROFARTICLESINCORECT" value="9"/>
+  <constant type="integer" name="NOTACCESSORYCATEGORY" value="10"/>
+  <constant type="integer" name="INCORRECTSELLERID" value="11"/>
+  <method name="getEnums" start="42" end="57" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="28" end="31" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description/>
+        <return type="array"/>
+      </docblock>
+    </method>
+    <method name="getLabel" start="37" end="45" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description/>
+        <param variable="$value"/>
+        <return type="object">
+          <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
+        </return>
+      </docblock>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getValues" start="50" end="57" abstract="false" final="false" static="true" visibility="public">
+      <docblock>
+        <description/>
+        <return type="array"/>
+      </docblock>
+    </method>
+  </parent>
+</class>

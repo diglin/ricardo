@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\Article\Warranty" namespace="Diglin\Ricardo\Enums\Article" name="Warranty" abstract="false" final="false" start="19" end="35">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article" file="Warranty.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article/Warranty.php" size="820" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5e269e5a4d67fc409580cc94fdbb12949da8558a"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Enums\Article\Warranty" namespace="Diglin\Ricardo\Enums\Article" name="Warranty" abstract="false" final="false" start="29" end="45">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/Article" file="Warranty.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/Article/Warranty.php" size="1329" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="8f76feaf72752f8994379c755f241ea79368488d" relative="Diglin/Ricardo/Enums/Article/Warranty.php"/>
   <docblock>
     <description compact="Class Warranty"/>
     <package value="Diglin\Ricardo\Enums\Article"/>
   </docblock>
   <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
-  <constant name="FOLLOW_CONDITION" value="0"/>
-  <constant name="NONE" value="1"/>
-  <method name="getEnums" start="28" end="34" abstract="false" final="false" static="true" visibility="public">
+  <constant type="integer" name="FOLLOW_CONDITION" value="0"/>
+  <constant type="integer" name="NONE" value="1"/>
+  <method name="getEnums" start="38" end="44" abstract="false" final="false" static="true" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
-    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="28" end="31" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+    <method name="getLabel" start="37" end="45" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param variable="$value"/>
         <return type="object">
           <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
@@ -31,9 +31,9 @@
       </docblock>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+    <method name="getValues" start="50" end="57" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>

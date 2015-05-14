@@ -22,6 +22,10 @@ namespace Diglin\Ricardo\Managers\Sell\Parameter;
 
 use Diglin\Ricardo\Managers\ParameterAbstract;
 
+/**
+ * Class ArticlePictureParameter
+ * @package Diglin\Ricardo\Managers\Sell\Parameter
+ */
 class ArticlePictureParameter extends ParameterAbstract
 {
     /**

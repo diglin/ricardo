@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Exception" namespace="" name="Exception">
+<class xmlns="http://xml.phpdox.net/src" full="Exception" namespace="" name="Exception">
   <member name="message" static="false" visibility="protected">
     <default>null</default>
     <docblock>
@@ -91,4 +91,4 @@
       <return type="void"/>
     </docblock>
   </method>
-<extender full="Diglin\Ricardo\Exceptions\ArticleException" namespace="Diglin\Ricardo\Exceptions" name="ArticleException"/><extender full="Diglin\Ricardo\Exceptions\CurlException" namespace="Diglin\Ricardo\Exceptions" name="CurlException"/><extender full="Diglin\Ricardo\Exceptions\CustomerException" namespace="Diglin\Ricardo\Exceptions" name="CustomerException"/><extender full="Diglin\Ricardo\Exceptions\ExceptionAbstract" namespace="Diglin\Ricardo\Exceptions" name="ExceptionAbstract"/><extender full="Diglin\Ricardo\Exceptions\GeneralException" namespace="Diglin\Ricardo\Exceptions" name="GeneralException"/><extender full="Diglin\Ricardo\Exceptions\PictureException" namespace="Diglin\Ricardo\Exceptions" name="PictureException"/><extender full="Diglin\Ricardo\Exceptions\SecurityException" namespace="Diglin\Ricardo\Exceptions" name="SecurityException"/><extender full="Zend_Config_Exception" namespace="" name="Zend_Config_Exception"/><extender full="Zend_Exception" namespace="" name="Zend_Exception"/></class>
+<extenders><extender full="Diglin\Ricardo\Exceptions\ArticleException" namespace="Diglin\Ricardo\Exceptions" name="ArticleException"/><extender full="Diglin\Ricardo\Exceptions\CurlException" namespace="Diglin\Ricardo\Exceptions" name="CurlException"/><extender full="Diglin\Ricardo\Exceptions\CustomerException" namespace="Diglin\Ricardo\Exceptions" name="CustomerException"/><extender full="Diglin\Ricardo\Exceptions\ExceptionAbstract" namespace="Diglin\Ricardo\Exceptions" name="ExceptionAbstract"/><extender full="Diglin\Ricardo\Exceptions\GeneralException" namespace="Diglin\Ricardo\Exceptions" name="GeneralException"/><extender full="Diglin\Ricardo\Exceptions\PictureException" namespace="Diglin\Ricardo\Exceptions" name="PictureException"/><extender full="Diglin\Ricardo\Exceptions\SearchException" namespace="Diglin\Ricardo\Exceptions" name="SearchException"/><extender full="Diglin\Ricardo\Exceptions\SecurityException" namespace="Diglin\Ricardo\Exceptions" name="SecurityException"/><extender full="Diglin\Ricardo\Exceptions\TechnicalException" namespace="Diglin\Ricardo\Exceptions" name="TechnicalException"/></extenders></class>

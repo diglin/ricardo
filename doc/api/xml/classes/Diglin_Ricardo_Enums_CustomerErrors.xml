@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\CustomerErrors" namespace="Diglin\Ricardo\Enums" name="CustomerErrors" abstract="false" final="false" start="13" end="152">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums" file="CustomerErrors.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/CustomerErrors.php" size="8205" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1c83c94b40ba247117531ac142fc838051741cfd"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Enums\CustomerErrors" namespace="Diglin\Ricardo\Enums" name="CustomerErrors" abstract="false" final="false" start="23" end="162">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Enums" file="CustomerErrors.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/CustomerErrors.php" size="8714" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="34fdd63e7e141f94ee1b291bfb1f4b43c050be2c" relative="Diglin/Ricardo/Enums/CustomerErrors.php"/>
   <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
-  <constant name="NOTALLOWEDTOSELL" value="1"/>
-  <constant name="BILLINGERROR" value="2"/>
-  <constant name="GETCUSTOMERERROR" value="3"/>
-  <constant name="NEEDTOCHANGEPASSWORDERROR" value="4"/>
-  <constant name="GETACCOUNTPREFERENCESERROR" value="5"/>
-  <constant name="INVALIDARGUMENTS" value="6"/>
-  <constant name="EMPTYCOUNTRYID" value="7"/>
-  <constant name="EMPTYNICKNAME" value="8"/>
-  <constant name="EMPTYIPADDRESS" value="9"/>
-  <constant name="EMPTYEMAIL" value="10"/>
-  <constant name="EMPTYCUSTOMERID" value="11"/>
-  <constant name="EMPTYGUID" value="12"/>
-  <constant name="NICKNAMEISNOTUNIQUE" value="13"/>
-  <constant name="EMAILISNOTUNIQUE" value="14"/>
-  <constant name="EMPTYFIRSTNAME" value="15"/>
-  <constant name="TOOLONGFIRSTNAME" value="16"/>
-  <constant name="EMPTYLASTNAME" value="17"/>
-  <constant name="TOOLONGLASTNAME" value="18"/>
-  <constant name="TOOLONGNICKNAME" value="19"/>
-  <constant name="TOOLONGEMAIL" value="20"/>
-  <constant name="MUSTBEOVER18" value="21"/>
-  <constant name="EMPTYADDRESS1" value="22"/>
-  <constant name="TOOLONGADDRESS1" value="23"/>
-  <constant name="TOOLONGADDRESS2" value="24"/>
-  <constant name="TOOLONGSTREETNR" value="25"/>
-  <constant name="TOOLONGPOSTALBOX" value="26"/>
-  <constant name="EMPTYZIPCODE" value="27"/>
-  <constant name="TOOLONGZIPCODE" value="28"/>
-  <constant name="EMPTYCITY" value="29"/>
-  <constant name="TOOLONGCITY" value="30"/>
-  <constant name="EMPTYCANTONID" value="31"/>
-  <constant name="EMPTYPHONENUMBER" value="32"/>
-  <constant name="TOOLONGPHONENUMBER" value="33"/>
-  <constant name="INVALIDNICKNAME" value="34"/>
-  <constant name="INVALIDEMAIL" value="35"/>
-  <constant name="INVALIDSTREETNR" value="36"/>
-  <constant name="INVALIDZIPCODE" value="37"/>
-  <constant name="INVALIDPHONENUMBER" value="38"/>
-  <constant name="EMPTYPASSWORD" value="39"/>
-  <constant name="COMPANYDETAILSNOTFULL" value="40"/>
-  <constant name="TOOLONGCOMPANYNAME" value="41"/>
-  <constant name="TOOLONGCOMPANYVATNUMBER" value="42"/>
-  <constant name="TOOLONGCOMPANYREGISTRYNUMBER" value="43"/>
-  <constant name="INVALIDVALIDATIONKEY" value="44"/>
-  <constant name="UNABLETOVALIDATE" value="45"/>
-  <constant name="MAXNUMBEROFCALLSTOAUTOMATICALLYVALIDATEUSERINFORMATION" value="46"/>
-  <constant name="EMPTYSTREETNR" value="47"/>
-  <constant name="NOTCARDEALER" value="48"/>
-  <constant name="PASSWORDCOMPLEXITY" value="49"/>
-  <constant name="UNABLETOUPDATE" value="50"/>
-  <constant name="EMPTYNEWEMAIL" value="51"/>
-  <constant name="EMPTYNEWNICK" value="52"/>
-  <constant name="VALIDATIONKEYEXPIRED" value="53"/>
-  <constant name="TOOMANYPREMIUMPACKAGES" value="54"/>
-  <constant name="CARDPAYMENTOPTIONNOTAVAILABLE" value="55"/>
-  <constant name="CUSTOMERBANNED" value="56"/>
-  <constant name="BUYERNOTFROMCHORLI" value="57"/>
-  <constant name="BUYERNORDVNORAC" value="58"/>
-  <constant name="EMPTYCUSTOMERINFOS" value="59"/>
-  <constant name="EMPTYMEMBERPREFERENCES" value="60"/>
-  <constant name="EMPTYADDRESSES" value="61"/>
-  <constant name="UNABLETOINSERT" value="62"/>
-  <constant name="CREDITLIMITEXCEEDED" value="63"/>
-  <constant name="ACTIVATIONCODESTATUSMANUALLYBLOCKED" value="64"/>
-  <method name="getEnums" start="83" end="151" abstract="false" final="false" static="true" visibility="public">
+  <constant type="integer" name="NOTALLOWEDTOSELL" value="1"/>
+  <constant type="integer" name="BILLINGERROR" value="2"/>
+  <constant type="integer" name="GETCUSTOMERERROR" value="3"/>
+  <constant type="integer" name="NEEDTOCHANGEPASSWORDERROR" value="4"/>
+  <constant type="integer" name="GETACCOUNTPREFERENCESERROR" value="5"/>
+  <constant type="integer" name="INVALIDARGUMENTS" value="6"/>
+  <constant type="integer" name="EMPTYCOUNTRYID" value="7"/>
+  <constant type="integer" name="EMPTYNICKNAME" value="8"/>
+  <constant type="integer" name="EMPTYIPADDRESS" value="9"/>
+  <constant type="integer" name="EMPTYEMAIL" value="10"/>
+  <constant type="integer" name="EMPTYCUSTOMERID" value="11"/>
+  <constant type="integer" name="EMPTYGUID" value="12"/>
+  <constant type="integer" name="NICKNAMEISNOTUNIQUE" value="13"/>
+  <constant type="integer" name="EMAILISNOTUNIQUE" value="14"/>
+  <constant type="integer" name="EMPTYFIRSTNAME" value="15"/>
+  <constant type="integer" name="TOOLONGFIRSTNAME" value="16"/>
+  <constant type="integer" name="EMPTYLASTNAME" value="17"/>
+  <constant type="integer" name="TOOLONGLASTNAME" value="18"/>
+  <constant type="integer" name="TOOLONGNICKNAME" value="19"/>
+  <constant type="integer" name="TOOLONGEMAIL" value="20"/>
+  <constant type="integer" name="MUSTBEOVER18" value="21"/>
+  <constant type="integer" name="EMPTYADDRESS1" value="22"/>
+  <constant type="integer" name="TOOLONGADDRESS1" value="23"/>
+  <constant type="integer" name="TOOLONGADDRESS2" value="24"/>
+  <constant type="integer" name="TOOLONGSTREETNR" value="25"/>
+  <constant type="integer" name="TOOLONGPOSTALBOX" value="26"/>
+  <constant type="integer" name="EMPTYZIPCODE" value="27"/>
+  <constant type="integer" name="TOOLONGZIPCODE" value="28"/>
+  <constant type="integer" name="EMPTYCITY" value="29"/>
+  <constant type="integer" name="TOOLONGCITY" value="30"/>
+  <constant type="integer" name="EMPTYCANTONID" value="31"/>
+  <constant type="integer" name="EMPTYPHONENUMBER" value="32"/>
+  <constant type="integer" name="TOOLONGPHONENUMBER" value="33"/>
+  <constant type="integer" name="INVALIDNICKNAME" value="34"/>
+  <constant type="integer" name="INVALIDEMAIL" value="35"/>
+  <constant type="integer" name="INVALIDSTREETNR" value="36"/>
+  <constant type="integer" name="INVALIDZIPCODE" value="37"/>
+  <constant type="integer" name="INVALIDPHONENUMBER" value="38"/>
+  <constant type="integer" name="EMPTYPASSWORD" value="39"/>
+  <constant type="integer" name="COMPANYDETAILSNOTFULL" value="40"/>
+  <constant type="integer" name="TOOLONGCOMPANYNAME" value="41"/>
+  <constant type="integer" name="TOOLONGCOMPANYVATNUMBER" value="42"/>
+  <constant type="integer" name="TOOLONGCOMPANYREGISTRYNUMBER" value="43"/>
+  <constant type="integer" name="INVALIDVALIDATIONKEY" value="44"/>
+  <constant type="integer" name="UNABLETOVALIDATE" value="45"/>
+  <constant type="integer" name="MAXNUMBEROFCALLSTOAUTOMATICALLYVALIDATEUSERINFORMATION" value="46"/>
+  <constant type="integer" name="EMPTYSTREETNR" value="47"/>
+  <constant type="integer" name="NOTCARDEALER" value="48"/>
+  <constant type="integer" name="PASSWORDCOMPLEXITY" value="49"/>
+  <constant type="integer" name="UNABLETOUPDATE" value="50"/>
+  <constant type="integer" name="EMPTYNEWEMAIL" value="51"/>
+  <constant type="integer" name="EMPTYNEWNICK" value="52"/>
+  <constant type="integer" name="VALIDATIONKEYEXPIRED" value="53"/>
+  <constant type="integer" name="TOOMANYPREMIUMPACKAGES" value="54"/>
+  <constant type="integer" name="CARDPAYMENTOPTIONNOTAVAILABLE" value="55"/>
+  <constant type="integer" name="CUSTOMERBANNED" value="56"/>
+  <constant type="integer" name="BUYERNOTFROMCHORLI" value="57"/>
+  <constant type="integer" name="BUYERNORDVNORAC" value="58"/>
+  <constant type="integer" name="EMPTYCUSTOMERINFOS" value="59"/>
+  <constant type="integer" name="EMPTYMEMBERPREFERENCES" value="60"/>
+  <constant type="integer" name="EMPTYADDRESSES" value="61"/>
+  <constant type="integer" name="UNABLETOINSERT" value="62"/>
+  <constant type="integer" name="CREDITLIMITEXCEEDED" value="63"/>
+  <constant type="integer" name="ACTIVATIONCODESTATUSMANUALLYBLOCKED" value="64"/>
+  <method name="getEnums" start="93" end="161" abstract="false" final="false" static="true" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
-    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="28" end="31" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+    <method name="getLabel" start="37" end="45" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param variable="$value"/>
         <return type="object">
           <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
@@ -89,9 +89,9 @@
       </docblock>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+    <method name="getValues" start="50" end="57" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>

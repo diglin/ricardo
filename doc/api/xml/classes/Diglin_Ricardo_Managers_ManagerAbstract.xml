@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Managers\ManagerAbstract" namespace="Diglin\Ricardo\Managers" name="ManagerAbstract" abstract="true" final="false" start="24" end="157">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Managers" file="ManagerAbstract.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/ManagerAbstract.php" size="4559" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5cbc8500690e8a03c4cdbb31f31c4328018990a1"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Managers\ManagerAbstract" namespace="Diglin\Ricardo\Managers" name="ManagerAbstract" abstract="true" final="false" start="34" end="167">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Managers" file="ManagerAbstract.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/ManagerAbstract.php" size="5068" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="6fe599b91b65f4cbc18b47c390e0202982781c9d" relative="Diglin/Ricardo/Managers/ManagerAbstract.php"/>
   <docblock>
     <description compact="Class ManagerAbstract"/>
     <package value="Diglin\Ricardo\Managers"/>
   </docblock>
-  <member name="_serviceName" type="{unknown}" visibility="protected" line="29">
+  <member name="_serviceName" visibility="protected" line="39">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_serviceManager" type="{unknown}" visibility="protected" line="34">
+  <member name="_serviceManager" visibility="protected" line="44">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="object">
         <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
       </var>
     </docblock>
   </member>
-  <member name="_helper" type="{unknown}" visibility="protected" line="39">
+  <member name="_helper" visibility="protected" line="49">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="object">
         <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
       </var>
     </docblock>
   </member>
-  <constructor name="__construct" start="44" end="47" abstract="false" final="false" static="false" visibility="public">
+  <constructor name="__construct" start="54" end="57" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="object" variable="$serviceManager">
         <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
       </param>
@@ -38,17 +38,17 @@
       <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
     </parameter>
   </constructor>
-  <method name="getHelper" start="52" end="58" abstract="false" final="false" static="false" visibility="public">
+  <method name="getHelper" start="62" end="68" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="object">
         <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
       </return>
     </docblock>
   </method>
-  <method name="_proceed" start="67" end="105" abstract="false" final="false" static="false" visibility="protected">
+  <method name="_proceed" start="77" end="115" abstract="false" final="false" static="false" visibility="protected">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="string" variable="$method"/>
       <param type="mixed" variable="$parameters"/>
       <return type="array"/>
@@ -60,9 +60,9 @@
       </throws>
     </docblock>
     <parameter name="method" byreference="false" type="{unknown}"/>
-    <parameter name="parameters" byreference="false" type="{unknown}" default="null"/>
+    <parameter name="parameters" byreference="false" type="{unknown}" default="" constant="null"/>
   </method>
-  <method name="extractError" start="113" end="140" abstract="false" final="false" static="false" visibility="protected">
+  <method name="extractError" start="123" end="150" abstract="false" final="false" static="false" visibility="protected">
     <docblock>
       <description compact="Extract code error and type from API call"/>
       <param type="array" variable="$result"/>
@@ -70,23 +70,26 @@
     </docblock>
     <parameter name="result" byreference="false" type="array"/>
   </method>
-  <method name="getServiceManager" start="145" end="148" abstract="false" final="false" static="false" visibility="public">
+  <method name="getServiceManager" start="155" end="158" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="object">
         <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
       </return>
     </docblock>
   </method>
-  <method name="getTypeOfToken" start="153" end="156" abstract="false" final="false" static="false" visibility="public">
+  <method name="getTypeOfToken" start="163" end="166" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="string"/>
     </docblock>
   </method>
-  <extender full="Diglin\Ricardo\Managers\Customer" namespace="Diglin\Ricardo\Managers" name="Customer"/>
-  <extender full="Diglin\Ricardo\Managers\Security" namespace="Diglin\Ricardo\Managers" name="Security"/>
-  <extender full="Diglin\Ricardo\Managers\Sell" namespace="Diglin\Ricardo\Managers" name="Sell"/>
-  <extender full="Diglin\Ricardo\Managers\SellerAccount" namespace="Diglin\Ricardo\Managers" name="SellerAccount"/>
-  <extender full="Diglin\Ricardo\Managers\System" namespace="Diglin\Ricardo\Managers" name="System"/>
+  <extenders>
+    <extender full="Diglin\Ricardo\Managers\Customer" namespace="Diglin\Ricardo\Managers" name="Customer"/>
+    <extender full="Diglin\Ricardo\Managers\Search" namespace="Diglin\Ricardo\Managers" name="Search"/>
+    <extender full="Diglin\Ricardo\Managers\Security" namespace="Diglin\Ricardo\Managers" name="Security"/>
+    <extender full="Diglin\Ricardo\Managers\Sell" namespace="Diglin\Ricardo\Managers" name="Sell"/>
+    <extender full="Diglin\Ricardo\Managers\SellerAccount" namespace="Diglin\Ricardo\Managers" name="SellerAccount"/>
+    <extender full="Diglin\Ricardo\Managers\System" namespace="Diglin\Ricardo\Managers" name="System"/>
+  </extenders>
 </class>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>phpDox - Diglin\Ricardo\Services\System</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../reports.html">Reports</a>
+          <a href="../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -70,6 +70,9 @@
           <li>
             <a href="#history">History</a>
           </li>
+          <li>
+            <a href="../source/Diglin/Ricardo/Services/System.php.html#line31">Source</a>
+          </li>
         </ul>
       </nav>
       <section>
@@ -80,14 +83,12 @@
         <h2 id="synopsis">Synopsis</h2>
         <div class="synopsis">class System
                 extends <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">ServiceAbstract</a>
-            {<br/><ul class="none"><li>// Inherited constants from <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">ServiceAbstract</a></li><li>const <a href="#TOKEN_TYPE_ANONYMOUS">TOKEN_TYPE_ANONYMOUS</a> = 'anonymous';</li><li>const <a href="#TOKEN_TYPE_IDENTIFIED">TOKEN_TYPE_IDENTIFIED</a> = 'identified';</li><li>const <a href="#TOKEN_TYPE_ANTIFORGERY">TOKEN_TYPE_ANTIFORGERY</a> = 'antiforgery';</li><li>const <a href="#TOKEN_TYPE_TEMPORARY">TOKEN_TYPE_TEMPORARY</a> = 'temporary';</li><li>const <a href="#TOKEN_TYPE_DEFAULT">TOKEN_TYPE_DEFAULT</a> = '';</li></ul><ul class="none"><li>// members</li><li>protected
-                         <a href="#members">$_service</a>;
-                    </li><li>protected
-                         <a href="#members">$_typeOfToken</a>;
-                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Services\ServiceAbstract">ServiceAbstract</span></li><li>protected
-                             <a href="#members">$_service</a>;
-                        </li><li>protected
-                             <a href="#members">$_typeOfToken</a>;
+            {<br/><ul class="none"><li>// Inherited constants from <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">ServiceAbstract</a></li><li>const <a href="#TOKEN_TYPE_ANONYMOUS">TOKEN_TYPE_ANONYMOUS</a> = 'anonymous';</li><li>const <a href="#TOKEN_TYPE_IDENTIFIED">TOKEN_TYPE_IDENTIFIED</a> = 'identified';</li><li>const <a href="#TOKEN_TYPE_ANTIFORGERY">TOKEN_TYPE_ANTIFORGERY</a> = 'antiforgery';</li><li>const <a href="#TOKEN_TYPE_TEMPORARY">TOKEN_TYPE_TEMPORARY</a> = 'temporary';</li><li>const <a href="#TOKEN_TYPE_DEFAULT">TOKEN_TYPE_DEFAULT</a> = '';</li></ul><ul class="none"><li>// members</li><li>protected string <a href="#members">$_service</a> =
+                        'SystemService';
+                    </li><li>protected string <a href="#members">$_typeOfToken</a> =
+                        self::TOKEN_TYPE_ANONYMOUS;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Services\ServiceAbstract">ServiceAbstract</span></li><li>protected string <a href="#members">$_service</a>;
+                        </li><li>protected string <a href="#members">$_typeOfToken</a>;
                         </li></ul><ul class="none"><li>// methods</li><li>public array <a title="Diglin\Ricardo\Services\System" href="../classes/Diglin_Ricardo_Services_System/getAllErrorsCodes.html">getAllErrorsCodes</a>()
                     </li><li>public array <a title="Diglin\Ricardo\Services\System" href="../classes/Diglin_Ricardo_Services_System/getAllErrorsCodesResult.html">getAllErrorsCodesResult</a>()
                     </li><li>public array <a title="Diglin\Ricardo\Services\System" href="../classes/Diglin_Ricardo_Services_System/getArticleConditions.html">getArticleConditions</a>()
@@ -140,7 +141,7 @@
           <h4>Extends</h4>
           <ul>
             <li>
-              <a href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">Diglin\Ricardo\Services\ServiceAbstract</a>
+              <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract.html">Diglin\Ricardo\Services\ServiceAbstract</a>
             </li>
           </ul>
         </div>
@@ -156,7 +157,7 @@
               </tr>
             </thead>
             <tr>
-              <td>971 - 996</td>
+              <td class="line">981 - 1006</td>
               <td>
                 <a href="http://phpmd.org/rules/codesize.html#npathcomplexity" target="_blank" title="Code Size Rules">NPathComplexity</a>
               </td>
@@ -314,13 +315,33 @@
         <h2 id="history">History</h2>
         <ul class="styled history">
           <li>
+            <h3>2015-02-05T13:02:27+01:00 (commit #<span title="17cc8fe2d7fb02ee28ad33b68b9966652ce28dff">17cc8fe</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change license from OSL v3 to GPL v3</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-12-16T12:45:07+01:00 (commit #<span title="ec26574bac4de7e66aa27c9d98df19f1ac110fe7">ec26574</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre class="wrapped">PSR2 compliant</pre>
+            </div>
+          </li>
+          <li>
             <h3>2014-10-06T14:18:46+02:00 (commit #<span title="40224e64adb66743303ebe7e04df331ba05f922b">40224e6</span>)</h3>
             <div>
               <p>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Implement method service GetCountriesIso but it's useless. No Data returned and parameter is not what we need</pre>
+              <pre class="wrapped">Implement method service GetCountriesIso but it's useless. No Data returned and parameter is not what we need</pre>
             </div>
           </li>
           <li>
@@ -330,7 +351,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+              <pre class="wrapped">Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
             </div>
           </li>
           <li>
@@ -340,7 +361,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>API changes and test</pre>
+              <pre class="wrapped">API changes and test</pre>
             </div>
           </li>
           <li>
@@ -350,7 +371,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Add additional methods to services and their test</pre>
+              <pre class="wrapped">[RIC-38] Add additional methods to services and their test</pre>
             </div>
           </li>
           <li>
@@ -360,7 +381,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Standardize namespace use</pre>
+              <pre class="wrapped">Standardize namespace use</pre>
             </div>
           </li>
           <li>
@@ -370,7 +391,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
+              <pre class="wrapped">[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
             </div>
           </li>
           <li>
@@ -380,7 +401,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
+              <pre class="wrapped">Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
             </div>
           </li>
           <li>
@@ -390,7 +411,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
+              <pre class="wrapped">Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
 Add a way to configure the unit test, documentation exist to configure it thanks to a readme file
 Implement the security protocol at the manager level</pre>
             </div>
@@ -399,7 +420,7 @@ Implement the security protocol at the manager level</pre>
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>

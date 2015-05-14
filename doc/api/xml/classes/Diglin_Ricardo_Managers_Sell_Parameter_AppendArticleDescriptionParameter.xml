@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendArticleDescriptionParameter" abstract="false" final="false" start="19" end="104">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter" file="AppendArticleDescriptionParameter.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/AppendArticleDescriptionParameter.php" size="2228" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="188a71d87f835aec1eeec2c156a05cada6466d41"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendArticleDescriptionParameter" abstract="false" final="false" start="29" end="112">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter" file="AppendArticleDescriptionParameter.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/AppendArticleDescriptionParameter.php" size="2735" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="e941e89e5ec9eb445949ce7317ab1b4e16763d4f" relative="Diglin/Ricardo/Managers/Sell/Parameter/AppendArticleDescriptionParameter.php"/>
   <docblock>
     <description compact="Class AppendArticleDescriptionParameter"/>
     <package value="Diglin\Ricardo\Managers\Sell\Parameter"/>
   </docblock>
   <extends full="Diglin\Ricardo\Managers\ParameterAbstract" namespace="Diglin\Ricardo\Managers" name="ParameterAbstract"/>
-  <member name="_antiforgeryToken" type="{unknown}" visibility="protected" line="24">
+  <member name="_antiforgeryToken" visibility="protected" line="34">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_articleId" type="{unknown}" visibility="protected" line="29">
+  <member name="_articleId" visibility="protected" line="39">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_descriptions" type="array" visibility="protected" line="34">
+  <member name="_descriptions" type="array" default="" visibility="protected" line="44">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var description="of AppendDescriptionParameter" type="array"/>
     </docblock>
   </member>
-  <member name="_requiredProperties" type="array" visibility="protected" line="39">
+  <member name="_requiredProperties" type="array" default="" visibility="protected" line="49">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <method name="setAntiforgeryToken" start="49" end="53" abstract="false" final="false" static="false" visibility="public">
+  <method name="setAntiforgeryToken" start="59" end="63" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="string" variable="$antiforgeryToken"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -40,15 +40,15 @@
     </docblock>
     <parameter name="antiforgeryToken" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getAntiforgeryToken" start="58" end="61" abstract="false" final="false" static="false" visibility="public">
+  <method name="getAntiforgeryToken" start="68" end="71" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="string"/>
     </docblock>
   </method>
-  <method name="setArticleId" start="67" end="71" abstract="false" final="false" static="false" visibility="public">
+  <method name="setArticleId" start="77" end="81" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$articleId"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -56,15 +56,15 @@
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getArticleId" start="76" end="79" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleId" start="86" end="89" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setDescriptions" start="86" end="93" abstract="false" final="false" static="false" visibility="public">
+  <method name="setDescriptions" start="96" end="103" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="object" variable="$descriptions">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\AppendDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendDescriptionParameter"/>
       </param>
@@ -78,49 +78,47 @@
     <parameter name="descriptions" byreference="false" type="object">
       <type full="Diglin\Ricardo\Managers\Sell\Parameter\AppendDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendDescriptionParameter"/>
     </parameter>
-    <parameter name="clear" byreference="false" type="{unknown}" default="false"/>
+    <parameter name="clear" byreference="false" type="boolean" default="false"/>
   </method>
-  <method name="getDescriptions" start="98" end="101" abstract="false" final="false" static="false" visibility="public">
+  <method name="getDescriptions" start="108" end="111" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return description="of \Diglin\Ricardo\Managers\Sell\Parameter\AppendDescriptionParameter" type="array"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Managers\ParameterAbstract" namepsace="Diglin\Ricardo\Managers" name="ParameterAbstract">
-    <member name="_requiredProperties" type="array" visibility="protected" line="23">
+  <parent full="Diglin\Ricardo\Managers\ParameterAbstract" namespace="Diglin\Ricardo\Managers" name="ParameterAbstract">
+    <implements full="ArrayAccess" namespace="" name="ArrayAccess"/>
+    <member name="_requiredProperties" type="array" default="" visibility="protected" line="37">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="array"/>
       </docblock>
     </member>
-    <member name="_optionalProperties" type="array" visibility="protected" line="28">
+    <member name="_optionalProperties" type="array" default="" visibility="protected" line="42">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="array"/>
       </docblock>
     </member>
-    <method name="getRequiredProperties" start="33" end="36" abstract="false" final="false" static="false" visibility="public">
+    <method name="getRequiredProperties" start="47" end="50" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getOptionalProperties" start="41" end="44" abstract="false" final="false" static="false" visibility="public">
+    <method name="getOptionalProperties" start="55" end="58" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getDataProperties" start="51" end="91" abstract="false" final="false" static="false" visibility="public">
+    <method name="getDataProperties" start="65" end="105" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Get all properties of a class as an array to be send or use properly by the ricardo.ch API"/>
         <return type="array"/>
       </docblock>
-      <inline>
-        <comment value="skip empty value for properties which are optional" line="82"/>
-      </inline>
     </method>
-    <method name="_normalizeProperty" start="99" end="105" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_normalizeProperty" start="113" end="119" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Normalize the property from &quot;_myProperty&quot; to &quot;MyProperty&quot;"/>
         <param variable="$name"/>
@@ -128,7 +126,7 @@
       </docblock>
       <parameter name="name" byreference="false" type="{unknown}"/>
     </method>
-    <method name="_getGetterMethod" start="113" end="116" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_getGetterMethod" start="127" end="130" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Get the getter method name"/>
         <param variable="$name"/>
@@ -136,7 +134,7 @@
       </docblock>
       <parameter name="name" byreference="false" type="{unknown}"/>
     </method>
-    <method name="_getSetterMethod" start="124" end="127" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_getSetterMethod" start="138" end="141" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Get the setter method name"/>
         <param variable="$name"/>
@@ -144,7 +142,7 @@
       </docblock>
       <parameter name="name" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetSet" start="136" end="144" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetSet" start="150" end="158" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetSet()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetset.php"/>
@@ -154,7 +152,7 @@
       <parameter name="offset" byreference="false" type="{unknown}"/>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetExists" start="153" end="161" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetExists" start="167" end="175" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetExists()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetexists.php"/>
@@ -163,7 +161,7 @@
       </docblock>
       <parameter name="offset" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetUnset" start="169" end="177" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetUnset" start="183" end="191" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetUnset()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetunset.php"/>
@@ -171,7 +169,7 @@
       </docblock>
       <parameter name="offset" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetGet" start="186" end="194" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetGet" start="200" end="208" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetGet()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetget.php"/>
@@ -181,7 +179,7 @@
       <parameter name="offset" byreference="false" type="{unknown}"/>
     </method>
   </parent>
-  <interface full="ArrayAccess" namepsace="" name="ArrayAccess">
+  <interface full="ArrayAccess" namespace="" name="ArrayAccess">
     <method name="offsetExists" abstract="false" static="false" visibility="public" final="false">
     <docblock>
       <description compact="Whether a offset exists">Whether or not an offset exists.</description>

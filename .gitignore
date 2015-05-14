@@ -1,6 +1,6 @@
 .DS_Store
 .idea
-atlassian-ide-plugin.xml
+codesniffer_report.csv
 
 tests/conf/config.ini
 tests/log/api.log

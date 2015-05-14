@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>phpDox - Diglin\Ricardo\Service</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../reports.html">Reports</a>
+          <a href="../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -64,6 +64,9 @@
           <li>
             <a href="#history">History</a>
           </li>
+          <li>
+            <a href="../source/Diglin/Ricardo/Service.php.html#line32">Source</a>
+          </li>
         </ul>
       </nav>
       <section>
@@ -73,12 +76,10 @@
         <ul/>
         <h2 id="synopsis">Synopsis</h2>
         <div class="synopsis">class Service
-            {<br/><ul class="none"><li>// members</li><li>protected
-                         <a href="#members">$_services</a>;
-                    </li><li>protected <span title="Diglin\Ricardo\Core\ApiInterface">ApiInterface</span>
-                         <a href="#members">$_api</a>;
-                    </li><li>protected <span title="Diglin\Ricardo\Managers\Security">Security</span>
-                         <a href="#members">$_securityManager</a>;
+            {<br/><ul class="none"><li>// members</li><li>protected array <a href="#members">$_services</a> =
+                        ;
+                    </li><li>protected <span title="Diglin\Ricardo\Core\ApiInterface">ApiInterface</span> <a href="#members">$_api</a>;
+                    </li><li>protected <span title="Diglin\Ricardo\Managers\Security">Security</span> <a href="#members">$_securityManager</a>;
                     </li></ul><ul class="none"><li>// methods</li><li>public void <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/__construct.html">__construct</a>()
                     </li><li>public ApiInterface <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getApi.html">getApi</a>()
                     </li><li>public Config <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service/getConfig.html">getConfig</a>()
@@ -109,14 +110,14 @@
               </tr>
             </thead>
             <tr>
-              <td>181 - 247</td>
+              <td class="line">195 - 270</td>
               <td>
                 <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
               </td>
               <td>The method proceed() has a Cyclomatic Complexity of 14. The configured cyclomatic complexity threshold is 10.</td>
             </tr>
             <tr>
-              <td>181 - 247</td>
+              <td class="line">195 - 270</td>
               <td>
                 <a href="http://phpmd.org/rules/codesize.html#npathcomplexity" target="_blank" title="Code Size Rules">NPathComplexity</a>
               </td>
@@ -130,10 +131,10 @@
           <ul class="members">
             <li id="_api"><strong>$_api</strong>
                 —
-                <a href="#">Diglin\Ricardo\Core\ApiInterface</a></li>
+                <a title="Diglin\Ricardo\Core\ApiInterface" href="../classes/Diglin_Ricardo_Core_ApiInterface.html">Diglin\Ricardo\Core\ApiInterface</a></li>
             <li id="_securityManager"><strong>$_securityManager</strong>
                 —
-                <a href="#">Diglin\Ricardo\Managers\Security</a></li>
+                <a title="Diglin\Ricardo\Managers\Security" href="../classes/Diglin_Ricardo_Managers_Security.html">Diglin\Ricardo\Managers\Security</a></li>
             <li id="_services"><strong>$_services</strong>
                 —
                 array</li>
@@ -185,13 +186,33 @@
         <h2 id="history">History</h2>
         <ul class="styled history">
           <li>
+            <h3>2015-02-05T13:02:27+01:00 (commit #<span title="17cc8fe2d7fb02ee28ad33b68b9966652ce28dff">17cc8fe</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change license from OSL v3 to GPL v3</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-12-16T12:45:07+01:00 (commit #<span title="ec26574bac4de7e66aa27c9d98df19f1ac110fe7">ec26574</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre class="wrapped">PSR2 compliant</pre>
+            </div>
+          </li>
+          <li>
             <h3>2014-11-29T21:35:16+01:00 (commit #<span title="b245fb055b34264e30cd7d73aaa54553bca654b1">b245fb0</span>)</h3>
             <div>
               <p>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Remove PictureBytes when debug data is returned. Prevent problems</pre>
+              <pre class="wrapped">Remove PictureBytes when debug data is returned. Prevent problems</pre>
             </div>
           </li>
           <li>
@@ -201,7 +222,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>update</pre>
+              <pre class="wrapped">update</pre>
             </div>
           </li>
           <li>
@@ -211,7 +232,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Verbose exception in case of error from the ricardo API</pre>
+              <pre class="wrapped">Verbose exception in case of error from the ricardo API</pre>
             </div>
           </li>
           <li>
@@ -221,7 +242,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+              <pre class="wrapped">Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
             </div>
           </li>
           <li>
@@ -231,7 +252,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>API changes and test</pre>
+              <pre class="wrapped">API changes and test</pre>
             </div>
           </li>
           <li>
@@ -241,7 +262,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Insert Article Implementation and test</pre>
+              <pre class="wrapped">[RIC-38] Insert Article Implementation and test</pre>
             </div>
           </li>
           <li>
@@ -251,7 +272,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Implement a logic to detect what kind of security errors happens</pre>
+              <pre class="wrapped">[RIC-38] Implement a logic to detect what kind of security errors happens</pre>
             </div>
           </li>
           <li>
@@ -261,7 +282,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Standardize namespace use</pre>
+              <pre class="wrapped">Standardize namespace use</pre>
             </div>
           </li>
           <li>
@@ -271,7 +292,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Implement error management with an automatic detection of exception class</pre>
+              <pre class="wrapped">[RIC-38] Implement error management with an automatic detection of exception class</pre>
             </div>
           </li>
           <li>
@@ -281,7 +302,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Change the simulation authorization process implementation and update unit test</pre>
+              <pre class="wrapped">[RIC-38] Change the simulation authorization process implementation and update unit test</pre>
             </div>
           </li>
           <li>
@@ -291,7 +312,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC_38] Add tests</pre>
+              <pre class="wrapped">[RIC_38] Add tests</pre>
             </div>
           </li>
           <li>
@@ -301,7 +322,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Some small refactoring/improvements and cleanup</pre>
+              <pre class="wrapped">[RIC-38] Some small refactoring/improvements and cleanup</pre>
             </div>
           </li>
           <li>
@@ -311,7 +332,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Test Exceptions</pre>
+              <pre class="wrapped">[RIC-38] Test Exceptions</pre>
             </div>
           </li>
           <li>
@@ -321,7 +342,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Move the Service class to a different folder to prevent misunderstanding with the classes in the manager folder</pre>
+              <pre class="wrapped">[RIC-38] Move the Service class to a different folder to prevent misunderstanding with the classes in the manager folder</pre>
             </div>
           </li>
           <li>
@@ -331,7 +352,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
+              <pre class="wrapped">[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
             </div>
           </li>
           <li>
@@ -341,7 +362,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
+              <pre class="wrapped">Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
             </div>
           </li>
           <li>
@@ -351,7 +372,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
+              <pre class="wrapped">Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
 Add a way to configure the unit test, documentation exist to configure it thanks to a readme file
 Implement the security protocol at the manager level</pre>
             </div>
@@ -363,7 +384,7 @@ Implement the security protocol at the manager level</pre>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>change folders structure, add script specific for Magento to allow to install the library into it</pre>
+              <pre class="wrapped">change folders structure, add script specific for Magento to allow to install the library into it</pre>
             </div>
           </li>
           <li>
@@ -373,14 +394,14 @@ Implement the security protocol at the manager level</pre>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>init commit</pre>
+              <pre class="wrapped">init commit</pre>
             </div>
           </li>
         </ul>
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>

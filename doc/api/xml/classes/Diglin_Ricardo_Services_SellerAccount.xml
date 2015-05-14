@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Services\SellerAccount" namespace="Diglin\Ricardo\Services" name="SellerAccount" abstract="false" final="false" start="31" end="596">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Services" file="SellerAccount.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Services/SellerAccount.php" size="15317" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="db67cd8abe62bb3c5efe4803f2da31d5d2f7b6a7"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Services\SellerAccount" namespace="Diglin\Ricardo\Services" name="SellerAccount" abstract="false" final="false" start="41" end="606">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Services" file="SellerAccount.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Services/SellerAccount.php" size="15810" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="260c6993aff64cae3510ae1636c7a328353e7627" relative="Diglin/Ricardo/Services/SellerAccount.php"/>
   <docblock>
     <description compact="Class SellerAccount">Refers to the account as a seller:
 get all open articles, get sold articles, get articles that haven't been sold, etc</description>
@@ -8,24 +8,24 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     <link value="https://ws.ricardo.ch/RicardoApi/documentation/html/Methods_T_Ricardo_Contracts_ISellerAccountService.htm"/>
   </docblock>
   <extends full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract"/>
-  <member name="_service" type="string" default="'SellerAccountService'" visibility="protected" line="36">
+  <member name="_service" type="string" default="'SellerAccountService'" visibility="protected" line="46">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_IDENTIFIED" visibility="protected" line="41">
+  <member name="_typeOfToken" type="{unknown}" default="" constant="self::TOKEN_TYPE_IDENTIFIED" visibility="protected" line="51">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="string"/>
     </docblock>
   </member>
-  <method name="addCardPaymentOption" start="46" end="65" abstract="false" final="false" static="false" visibility="public">
+  <method name="addCardPaymentOption" start="56" end="75" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Adds the card payment option to specified articles parameters"/>
     </docblock>
   </method>
-  <method name="assertArticleModification" start="73" end="81" abstract="false" final="false" static="false" visibility="public">
+  <method name="assertArticleModification" start="83" end="91" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Asserts the article modification parameters"/>
       <param variable="$articleId"/>
@@ -33,7 +33,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="assertArticleModificationResult" start="98" end="104" abstract="false" final="false" static="false" visibility="public">
+  <method name="assertArticleModificationResult" start="108" end="114" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get if the article can be modified or not">The Ricardo API returns:
 &lt;pre&gt;
@@ -50,13 +50,13 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getArticle" start="109" end="117" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticle" start="119" end="127" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets an article parameter"/>
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getArticleResult" start="125" end="131" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleResult" start="135" end="141" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets an article result."/>
       <param type="array" variable="$data"/>
@@ -64,7 +64,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getArticles" start="139" end="145" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticles" start="149" end="155" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get all auctions by date and type parameters"/>
       <param type="object" variable="$parameter">
@@ -76,15 +76,15 @@ get all open articles, get sold articles, get articles that haven't been sold, e
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getArticlesResult" start="151" end="157" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticlesResult" start="161" end="167" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="array" variable="$data"/>
       <return type="array"/>
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getClosedArticles" start="165" end="171" abstract="false" final="false" static="false" visibility="public">
+  <method name="getClosedArticles" start="175" end="181" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get all articles that were closed by customer parameters"/>
       <param type="object" variable="$parameter">
@@ -96,7 +96,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ClosedArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getClosedArticlesResult" start="179" end="185" abstract="false" final="false" static="false" visibility="public">
+  <method name="getClosedArticlesResult" start="189" end="195" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Result to get all articles that were closed by customer"/>
       <param type="array" variable="$data"/>
@@ -104,7 +104,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getOpenArticle" start="193" end="199" abstract="false" final="false" static="false" visibility="public">
+  <method name="getOpenArticle" start="203" end="209" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets an open article parameter"/>
       <param type="int" variable="$articleId"/>
@@ -112,7 +112,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getOpenArticleResult" start="207" end="213" abstract="false" final="false" static="false" visibility="public">
+  <method name="getOpenArticleResult" start="217" end="223" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets an open article result"/>
       <param type="array" variable="$data"/>
@@ -120,7 +120,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getOpenArticles" start="221" end="227" abstract="false" final="false" static="false" visibility="public">
+  <method name="getOpenArticles" start="231" end="237" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets open articles parameter"/>
       <param type="object" variable="$parameter">
@@ -132,7 +132,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="OpenArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getOpenArticlesResult" start="235" end="241" abstract="false" final="false" static="false" visibility="public">
+  <method name="getOpenArticlesResult" start="245" end="251" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets open articles result"/>
       <param type="array" variable="$data"/>
@@ -140,7 +140,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPaymentOptions" start="250" end="256" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentOptions" start="260" end="266" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the payment options for a seller parameter"/>
       <param type="int" variable="$customerId"/>
@@ -148,7 +148,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="customerId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getPaymentOptionsResult" start="276" end="282" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentOptionsResult" start="286" end="292" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the payment conditions and payment function associated result">The Ricardo API returns:
 &lt;pre&gt;
@@ -166,7 +166,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPlannedArticle" start="290" end="296" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPlannedArticle" start="300" end="306" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets planned articles parameter"/>
       <param type="object" variable="$parameter">
@@ -178,7 +178,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticleParameter"/>
     </parameter>
   </method>
-  <method name="getPlannedArticleResult" start="304" end="310" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPlannedArticleResult" start="314" end="320" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Result gets planned articles result"/>
       <param type="array" variable="$data"/>
@@ -186,7 +186,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPlannedArticles" start="318" end="324" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPlannedArticles" start="328" end="334" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the planned articles parameter"/>
       <param type="object" variable="$parameter">
@@ -198,7 +198,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticleParameter"/>
     </parameter>
   </method>
-  <method name="getPlannedArticlesResult" start="332" end="338" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPlannedArticlesResult" start="342" end="348" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the planned articles result"/>
       <param variable="$data"/>
@@ -206,13 +206,13 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPlannedPictures" start="345" end="351" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPlannedPictures" start="355" end="361" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the planned pictures parameter"/>
-      <todo value=""/>
+      <todo/>
     </docblock>
   </method>
-  <method name="getPlannedPicturesResult" start="359" end="365" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPlannedPicturesResult" start="369" end="375" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the planned pictures result"/>
       <param type="array" variable="$data"/>
@@ -220,13 +220,13 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getSellerPackages" start="372" end="380" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSellerPackages" start="382" end="390" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets list of customer's listing packages(normally should be just one item) parameter"/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getSellerPackagesResult" start="388" end="394" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSellerPackagesResult" start="398" end="404" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get Seller Package Result"/>
       <param type="array" variable="$data"/>
@@ -234,7 +234,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getSoldArticle" start="402" end="408" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSoldArticle" start="412" end="418" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the sold article parameter"/>
       <param variable="$articleId"/>
@@ -242,7 +242,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getSoldArticleResult" start="416" end="422" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSoldArticleResult" start="426" end="432" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get Sold Article Result"/>
       <param type="array" variable="$data"/>
@@ -250,7 +250,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getSoldArticles" start="430" end="436" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSoldArticles" start="440" end="446" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the sold articles parameter"/>
       <param type="object" variable="$parameter">
@@ -262,7 +262,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="SoldArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getSoldArticlesResult" start="444" end="450" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSoldArticlesResult" start="454" end="460" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get Sold Articles Result"/>
       <param type="array" variable="$data"/>
@@ -270,13 +270,13 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getTemplates" start="457" end="463" abstract="false" final="false" static="false" visibility="public">
+  <method name="getTemplates" start="467" end="473" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get available article templates parameter"/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getTemplatesResult" start="471" end="477" abstract="false" final="false" static="false" visibility="public">
+  <method name="getTemplatesResult" start="481" end="487" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the list of templates available Result"/>
       <param type="array"/>
@@ -284,13 +284,13 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getUnsoldArticle" start="482" end="488" abstract="false" final="false" static="false" visibility="public">
+  <method name="getUnsoldArticle" start="492" end="498" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the unsold article parameter"/>
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getUnsoldArticleResult" start="496" end="502" abstract="false" final="false" static="false" visibility="public">
+  <method name="getUnsoldArticleResult" start="506" end="512" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get Unsold Article Result"/>
       <param type="array" variable="$data"/>
@@ -298,7 +298,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getUnsoldArticles" start="510" end="516" abstract="false" final="false" static="false" visibility="public">
+  <method name="getUnsoldArticles" start="520" end="526" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the unsold articles parameter"/>
       <param type="object" variable="$parameter">
@@ -310,7 +310,7 @@ get all open articles, get sold articles, get articles that haven't been sold, e
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="UnsoldArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getUnsoldArticlesResult" start="524" end="530" abstract="false" final="false" static="false" visibility="public">
+  <method name="getUnsoldArticlesResult" start="534" end="540" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the unsold articles result"/>
       <param type="array" variable="$data"/>
@@ -318,61 +318,61 @@ get all open articles, get sold articles, get articles that haven't been sold, e
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="insertAnswer" start="537" end="543" abstract="false" final="false" static="false" visibility="public">
+  <method name="insertAnswer" start="547" end="553" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Inserts the answer."/>
-      <todo value=""/>
+      <todo/>
     </docblock>
   </method>
-  <method name="insertSellerPackage" start="550" end="556" abstract="false" final="false" static="false" visibility="public">
+  <method name="insertSellerPackage" start="560" end="566" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Inserts selected by customer listing package"/>
-      <todo value=""/>
+      <todo/>
     </docblock>
   </method>
-  <method name="removeCardPaymentOption" start="563" end="569" abstract="false" final="false" static="false" visibility="public">
+  <method name="removeCardPaymentOption" start="573" end="579" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Removes the card payment option from specified articles."/>
-      <todo value=""/>
+      <todo/>
     </docblock>
   </method>
-  <method name="setCumulativeShipping" start="576" end="582" abstract="false" final="false" static="false" visibility="public">
+  <method name="setCumulativeShipping" start="586" end="592" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Sets if the article has cumulative shipping."/>
-      <todo value=""/>
+      <todo/>
     </docblock>
   </method>
-  <method name="setPremiumPackageAutomaticReactivation" start="589" end="595" abstract="false" final="false" static="false" visibility="public">
+  <method name="setPremiumPackageAutomaticReactivation" start="599" end="605" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Change the automatic reactivation for a premium package"/>
-      <todo value=""/>
+      <todo/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Services\ServiceAbstract" namepsace="Diglin\Ricardo\Services" name="ServiceAbstract">
-    <constant name="TOKEN_TYPE_ANONYMOUS" value="'anonymous'"/>
-    <constant name="TOKEN_TYPE_IDENTIFIED" value="'identified'"/>
-    <constant name="TOKEN_TYPE_ANTIFORGERY" value="'antiforgery'"/>
-    <constant name="TOKEN_TYPE_TEMPORARY" value="'temporary'"/>
-    <constant name="TOKEN_TYPE_DEFAULT" value="''"/>
-    <member name="_service" type="string" default="''" visibility="protected" line="29">
+  <parent full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract">
+    <constant type="{unknown}" name="TOKEN_TYPE_ANONYMOUS" value="'anonymous'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_IDENTIFIED" value="'identified'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_ANTIFORGERY" value="'antiforgery'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_TEMPORARY" value="'temporary'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_DEFAULT" value="''"/>
+    <member name="_service" type="string" default="''" visibility="protected" line="39">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="string"/>
       </docblock>
     </member>
-    <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="34">
+    <member name="_typeOfToken" type="{unknown}" default="" constant="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="44">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="string"/>
       </docblock>
     </member>
-    <method name="getService" start="41" end="44" abstract="false" final="false" static="false" visibility="public">
+    <method name="getService" start="51" end="54" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Get the current name of the API service"/>
         <return type="string"/>
       </docblock>
     </method>
-    <method name="getTypeOfToken" start="58" end="61" abstract="false" final="false" static="false" visibility="public">
+    <method name="getTypeOfToken" start="68" end="71" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Get the type of token needed for this service &lt;pre&gt; It can be: - anonymous - identified - antiforgery - empty &lt;/pre&gt;"/>
         <return type="string"/>

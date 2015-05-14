@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<source xmlns="http://xml.phpdox.net/token">
+  <file xmlns="http://xml.phpdox.net/src" path="/www-data/git/ricardo/src/Diglin/Ricardo/Managers" file="Search.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/Search.php" size="1400" time="2015-05-14T23:21:09+02:00" unixtime="1431638469" sha1="9e82146414419a450a063818da5a74b7495956f2" relative="Diglin/Ricardo/Managers/Search.php"/>
+  <line no="1">
+    <token name="T_OPEN_TAG">&lt;?php</token>
+  </line>
+  <line no="2">
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="3">
+    <token name="T_DOC_COMMENT"> * Diglin GmbH - Switzerland</token>
+  </line>
+  <line no="4">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="5">
+    <token name="T_DOC_COMMENT"> * This file is part of a Diglin GmbH module.</token>
+  </line>
+  <line no="6">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="7">
+    <token name="T_DOC_COMMENT"> * This Diglin GmbH module is free software; you can redistribute it and/or</token>
+  </line>
+  <line no="8">
+    <token name="T_DOC_COMMENT"> * modify it under the terms of the GNU General Public License version 3 as</token>
+  </line>
+  <line no="9">
+    <token name="T_DOC_COMMENT"> * published by the Free Software Foundation.</token>
+  </line>
+  <line no="10">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="11">
+    <token name="T_DOC_COMMENT"> * This script is distributed in the hope that it will be useful, but WITHOUT</token>
+  </line>
+  <line no="12">
+    <token name="T_DOC_COMMENT"> * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS</token>
+  </line>
+  <line no="13">
+    <token name="T_DOC_COMMENT"> * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</token>
+  </line>
+  <line no="14">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="15">
+    <token name="T_DOC_COMMENT"> * @author      Sylvain Ray&#xE9; &lt;support at diglin.com&gt;</token>
+  </line>
+  <line no="16">
+    <token name="T_DOC_COMMENT"> * @category    Diglin</token>
+  </line>
+  <line no="17">
+    <token name="T_DOC_COMMENT"> * @package     Diglin_Ricardo</token>
+  </line>
+  <line no="18">
+    <token name="T_DOC_COMMENT"> * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)</token>
+  </line>
+  <line no="19">
+    <token name="T_DOC_COMMENT"> * @license     http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)</token>
+  </line>
+  <line no="20">
+    <token name="T_DOC_COMMENT"> */</token>
+  </line>
+  <line no="21"/>
+  <line no="22">
+    <token name="T_NAMESPACE">namespace</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="23"/>
+  <line no="24">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Search</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">GetCategoryBestMatchParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="25"/>
+  <line no="26">
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="27">
+    <token name="T_DOC_COMMENT"> * Class Search</token>
+  </line>
+  <line no="28">
+    <token name="T_DOC_COMMENT"> * @package Diglin\Ricardo\Managers</token>
+  </line>
+  <line no="29">
+    <token name="T_DOC_COMMENT"> */</token>
+  </line>
+  <line no="30">
+    <token name="T_CLASS">class</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Search</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_EXTENDS">extends</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">ManagerAbstract</token>
+  </line>
+  <line no="31">
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="32">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="33">
+    <token name="T_DOC_COMMENT">     * @var string</token>
+  </line>
+  <line no="34">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="35">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PROTECTED">protected</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$_serviceName</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_EQUAL">=</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'search'</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="36"/>
+  <line no="37">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="38">
+    <token name="T_DOC_COMMENT">     * Get Category Best Match</token>
+  </line>
+  <line no="39">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="40">
+    <token name="T_DOC_COMMENT">     * @param GetCategoryBestMatchParameter $parameter</token>
+  </line>
+  <line no="41">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="42">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="43">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">getCategoryBestMatch</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">GetCategoryBestMatchParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$parameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="44">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="45">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$this</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">_proceed</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CategoryBestMatch'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$parameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="46">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="47">
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+</source>

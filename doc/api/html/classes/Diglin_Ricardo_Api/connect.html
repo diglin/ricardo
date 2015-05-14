@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pu="http://schema.phpunit.de/coverage/1.0" lang="en">
   <head>
     <title>phpDox - Test Method</title>
     <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../../reports.html">Reports</a>
+          <a href="../../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -55,6 +55,21 @@
           <li>
             <a href="#synopsis">Synopsis</a>
           </li>
+          <li>
+            <a href="#parameter">Parameter</a>
+          </li>
+          <li>
+            <a href="#return">Return</a>
+          </li>
+          <li>
+            <a href="#throws">Throws</a>
+          </li>
+          <li>
+            <a href="#interface">Interface</a>
+          </li>
+          <li>
+            <a href="../../source/Diglin/Ricardo/Api.php.html#line85">Source</a>
+          </li>
         </ul>
       </nav>
       <section>
@@ -62,7 +77,7 @@
         <h4>Connect to the Ricardo API depending of the service and method to be used</h4>
         <p/>
         <ul/>
-        <h2>Signature</h2>
+        <h2 id="signature">Signature</h2>
         <div class="styled synopsis">
           <code>public function connect(string
         $service,
@@ -72,27 +87,27 @@
         $params )
             </code>
         </div>
-        <h2>Parameters</h2>
+        <h2 id="parameterlist">Parameters</h2>
         <dl class="styled">
-          <dt>
-            <code>$service</code>
-          </dt>
+          <dt><code>$service</code>
+                —
+                string</dt>
           <dd>Ricardo API Service</dd>
-          <dt>
-            <code>$method</code>
-          </dt>
+          <dt><code>$method</code>
+                —
+                string</dt>
           <dd>Ricardo API Method</dd>
-          <dt>
-            <code>$params</code>
-          </dt>
-          <dd>API Parameters</dd>
+          <dt><code>$params</code>
+                —
+                array</dt>
+          <dd>API Parameters<br/><br/><br/>      </dd>
         </dl>
-        <h2>Returns</h2>
+        <h2 id="return">Returns</h2>
         <dl class="styled">
           <dt>mixed</dt>
           <dd>$result</dd>
         </dl>
-        <h2>Errors/Exceptions</h2>
+        <h2 id="throws">Errors/Exceptions</h2>
         <dl class="styled">
           <dt>
             <code>
@@ -101,16 +116,36 @@
           </dt>
           <dd/>
         </dl>
-        <h2>Defined by Interface</h2>
+        <h2 id="interface">Defined by Interface</h2>
         <p class="styled">
           <code>
-            <a title="Diglin\Ricardo\Core\ApiInterface" href="../../classes/Diglin_Ricardo_Core_ApiInterface.html">ApiInterface</a>
+            <a title="Diglin\Ricardo\Core\ApiInterface" href="../../interfaces/Diglin_Ricardo_Core_ApiInterface.html">ApiInterface</a>
           </code>
         </p>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>PHPMessDetector</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Rule</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td class="line">85 - 148</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
+              </td>
+              <td>The method connect() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.</td>
+            </tr>
+          </table>
+        </div>
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>

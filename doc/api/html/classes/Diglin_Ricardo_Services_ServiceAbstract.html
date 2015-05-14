@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>phpDox - Diglin\Ricardo\Services\ServiceAbstract</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../reports.html">Reports</a>
+          <a href="../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -53,9 +53,6 @@
             <a href="#synopsis">Synopsis</a>
           </li>
           <li>
-            <a href="#hierarchy">Hierarchy</a>
-          </li>
-          <li>
             <a href="#constants">Constants</a>
           </li>
           <li>
@@ -67,6 +64,9 @@
           <li>
             <a href="#history">History</a>
           </li>
+          <li>
+            <a href="../source/Diglin/Ricardo/Services/ServiceAbstract.php.html#line28">Source</a>
+          </li>
         </ul>
       </nav>
       <section>
@@ -76,36 +76,15 @@
         <ul/>
         <h2 id="synopsis">Synopsis</h2>
         <div class="synopsis">class ServiceAbstract
-            {<br/><ul class="none"><li>// constants</li><li>const TOKEN_TYPE_ANONYMOUS = 'anonymous';</li><li>const TOKEN_TYPE_IDENTIFIED = 'identified';</li><li>const TOKEN_TYPE_ANTIFORGERY = 'antiforgery';</li><li>const TOKEN_TYPE_TEMPORARY = 'temporary';</li><li>const TOKEN_TYPE_DEFAULT = '';</li></ul><ul class="none"><li>// members</li><li>protected
-                         <a href="#members">$_service</a>;
-                    </li><li>protected
-                         <a href="#members">$_typeOfToken</a>;
+            {<br/><ul class="none"><li>// constants</li><li>const TOKEN_TYPE_ANONYMOUS = 'anonymous';</li><li>const TOKEN_TYPE_IDENTIFIED = 'identified';</li><li>const TOKEN_TYPE_ANTIFORGERY = 'antiforgery';</li><li>const TOKEN_TYPE_TEMPORARY = 'temporary';</li><li>const TOKEN_TYPE_DEFAULT = '';</li></ul><ul class="none"><li>// members</li><li>protected string <a href="#members">$_service</a> =
+                        '';
+                    </li><li>protected string <a href="#members">$_typeOfToken</a> =
+                        self::TOKEN_TYPE_ANONYMOUS;
                     </li></ul><ul class="none"><li>// methods</li><li>public string <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getService.html">getService</a>()
                     </li><li>public string <a title="Diglin\Ricardo\Services\ServiceAbstract" href="../classes/Diglin_Ricardo_Services_ServiceAbstract/getTypeOfToken.html">getTypeOfToken</a>()
                     </li></ul>
 
             }<br/></div>
-        <h2 id="hierarchy">Hierarchy</h2>
-        <div class="styled">
-          <h4>Extended by</h4>
-          <ul>
-            <li>
-              <a href="../classes/Diglin_Ricardo_Services_Customer.html">Diglin\Ricardo\Services\Customer</a>
-            </li>
-            <li>
-              <a href="../classes/Diglin_Ricardo_Services_Security.html">Diglin\Ricardo\Services\Security</a>
-            </li>
-            <li>
-              <a href="../classes/Diglin_Ricardo_Services_Sell.html">Diglin\Ricardo\Services\Sell</a>
-            </li>
-            <li>
-              <a href="../classes/Diglin_Ricardo_Services_SellerAccount.html">Diglin\Ricardo\Services\SellerAccount</a>
-            </li>
-            <li>
-              <a href="../classes/Diglin_Ricardo_Services_System.html">Diglin\Ricardo\Services\System</a>
-            </li>
-          </ul>
-        </div>
         <h2 id="constants">Constants</h2>
         <table class="styled">
           <thead>
@@ -162,13 +141,43 @@
         <h2 id="history">History</h2>
         <ul class="styled history">
           <li>
+            <h3>2015-02-08T17:14:11+01:00 (commit #<span title="13512ed93f536d485a0585fd290141f4189e6b06">13512ed</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">code normalizing</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-05T13:02:27+01:00 (commit #<span title="17cc8fe2d7fb02ee28ad33b68b9966652ce28dff">17cc8fe</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change license from OSL v3 to GPL v3</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-12-16T12:45:07+01:00 (commit #<span title="ec26574bac4de7e66aa27c9d98df19f1ac110fe7">ec26574</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre class="wrapped">PSR2 compliant</pre>
+            </div>
+          </li>
+          <li>
             <h3>2014-10-20T13:39:26+02:00 (commit #<span title="177d7305faf9bbdffe4ad1b81475a23c583e8eed">177d730</span>)</h3>
             <div>
               <p>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>update</pre>
+              <pre class="wrapped">update</pre>
             </div>
           </li>
           <li>
@@ -178,7 +187,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+              <pre class="wrapped">Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
             </div>
           </li>
           <li>
@@ -188,7 +197,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Implement error management with an automatic detection of exception class</pre>
+              <pre class="wrapped">[RIC-38] Implement error management with an automatic detection of exception class</pre>
             </div>
           </li>
           <li>
@@ -198,7 +207,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
+              <pre class="wrapped">Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
 Add a way to configure the unit test, documentation exist to configure it thanks to a readme file
 Implement the security protocol at the manager level</pre>
             </div>
@@ -210,7 +219,7 @@ Implement the security protocol at the manager level</pre>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>change folders structure, add script specific for Magento to allow to install the library into it</pre>
+              <pre class="wrapped">change folders structure, add script specific for Magento to allow to install the library into it</pre>
             </div>
           </li>
           <li>
@@ -220,14 +229,14 @@ Implement the security protocol at the manager level</pre>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>init commit</pre>
+              <pre class="wrapped">init commit</pre>
             </div>
           </li>
         </ul>
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>

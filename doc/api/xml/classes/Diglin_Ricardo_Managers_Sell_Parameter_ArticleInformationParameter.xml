@@ -1,136 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInformationParameter" abstract="false" final="false" start="19" end="520">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter" file="ArticleInformationParameter.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/ArticleInformationParameter.php" size="10317" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="eacb558542128a6a11ae0f0df6bd4ff231bd66d3"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInformationParameter" abstract="false" final="false" start="29" end="528">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter" file="ArticleInformationParameter.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/Sell/Parameter/ArticleInformationParameter.php" size="10824" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="affc7fd6208c189e9b4539bcf231052638ceb751" relative="Diglin/Ricardo/Managers/Sell/Parameter/ArticleInformationParameter.php"/>
   <docblock>
     <description compact="Class ArticleInformationParameter"/>
     <package value="Diglin\Ricardo\Managers\Sell"/>
   </docblock>
   <extends full="Diglin\Ricardo\Managers\ParameterAbstract" namespace="Diglin\Ricardo\Managers" name="ParameterAbstract"/>
-  <member name="_articleConditionId" type="{unknown}" visibility="protected" line="24">
+  <member name="_articleConditionId" visibility="protected" line="34">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_articleDuration" type="{unknown}" visibility="protected" line="29">
+  <member name="_articleDuration" visibility="protected" line="39">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_availabilityId" type="{unknown}" visibility="protected" line="34">
+  <member name="_availabilityId" visibility="protected" line="44">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_buyNowPrice" type="{unknown}" visibility="protected" line="39">
+  <member name="_buyNowPrice" visibility="protected" line="49">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="float"/>
     </docblock>
   </member>
-  <member name="_categoryId" type="{unknown}" visibility="protected" line="44">
+  <member name="_categoryId" visibility="protected" line="54">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_deliveries" type="array" visibility="protected" line="49">
+  <member name="_deliveries" type="array" default="" visibility="protected" line="59">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var description="of ArticleDeliveryParameter" type="array"/>
     </docblock>
   </member>
-  <member name="_increment" type="{unknown}" default="null" visibility="protected" line="54">
+  <member name="_increment" type="{unknown}" default="" constant="null" visibility="protected" line="64">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_initialQuantity" type="{unknown}" visibility="protected" line="59">
+  <member name="_initialQuantity" visibility="protected" line="69">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_internalReferences" type="array" visibility="protected" line="64">
+  <member name="_internalReferences" type="array" default="" visibility="protected" line="74">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <member name="_isCustomerTemplate" type="{unknown}" visibility="protected" line="69">
+  <member name="_isCustomerTemplate" visibility="protected" line="79">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="boolean"/>
     </docblock>
   </member>
-  <member name="_isRelistSoldOut" type="{unknown}" visibility="protected" line="74">
+  <member name="_isRelistSoldOut" visibility="protected" line="84">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="boolean"/>
     </docblock>
   </member>
-  <member name="_mainPictureId" type="{unknown}" visibility="protected" line="79">
+  <member name="_mainPictureId" visibility="protected" line="89">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_maxRelistCount" type="{unknown}" visibility="protected" line="84">
+  <member name="_maxRelistCount" visibility="protected" line="94">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_paymentConditionIds" type="{unknown}" visibility="protected" line="89">
+  <member name="_paymentConditionIds" visibility="protected" line="99">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <member name="_paymentMethodIds" type="{unknown}" visibility="protected" line="94">
+  <member name="_paymentMethodIds" visibility="protected" line="104">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <member name="_promotionIds" type="{unknown}" visibility="protected" line="99">
+  <member name="_promotionIds" visibility="protected" line="109">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <member name="_startDate" type="{unknown}" visibility="protected" line="104">
+  <member name="_startDate" visibility="protected" line="114">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_startPrice" type="{unknown}" default="null" visibility="protected" line="109">
+  <member name="_startPrice" type="{unknown}" default="" constant="null" visibility="protected" line="119">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="float"/>
     </docblock>
   </member>
-  <member name="_templateId" type="{unknown}" visibility="protected" line="114">
+  <member name="_templateId" visibility="protected" line="124">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_warrantyId" type="{unknown}" visibility="protected" line="119">
+  <member name="_warrantyId" visibility="protected" line="129">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_requiredProperties" type="array" visibility="protected" line="121"/>
-  <member name="_optionalProperties" type="array" visibility="protected" line="136"/>
-  <method name="setArticleConditionId" start="151" end="155" abstract="false" final="false" static="false" visibility="public">
+  <member name="_requiredProperties" type="array" default="" visibility="protected" line="131"/>
+  <member name="_optionalProperties" type="array" default="" visibility="protected" line="146"/>
+  <method name="setArticleConditionId" start="161" end="165" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$articleConditionId"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -138,15 +138,15 @@
     </docblock>
     <parameter name="articleConditionId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getArticleConditionId" start="160" end="163" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleConditionId" start="170" end="173" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setArticleDuration" start="169" end="173" abstract="false" final="false" static="false" visibility="public">
+  <method name="setArticleDuration" start="179" end="183" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$articleDuration"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -154,15 +154,15 @@
     </docblock>
     <parameter name="articleDuration" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getArticleDuration" start="178" end="181" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleDuration" start="188" end="191" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setAvailabilityId" start="187" end="191" abstract="false" final="false" static="false" visibility="public">
+  <method name="setAvailabilityId" start="197" end="201" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$availabilityId"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -170,15 +170,15 @@
     </docblock>
     <parameter name="availabilityId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getAvailabilityId" start="196" end="199" abstract="false" final="false" static="false" visibility="public">
+  <method name="getAvailabilityId" start="206" end="209" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setBuyNowPrice" start="205" end="209" abstract="false" final="false" static="false" visibility="public">
+  <method name="setBuyNowPrice" start="215" end="219" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="float" variable="$buyNowPrice"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -186,15 +186,15 @@
     </docblock>
     <parameter name="buyNowPrice" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getBuyNowPrice" start="214" end="217" abstract="false" final="false" static="false" visibility="public">
+  <method name="getBuyNowPrice" start="224" end="227" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="float"/>
     </docblock>
   </method>
-  <method name="setCategoryId" start="223" end="227" abstract="false" final="false" static="false" visibility="public">
+  <method name="setCategoryId" start="233" end="237" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$categoryId"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -202,15 +202,15 @@
     </docblock>
     <parameter name="categoryId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getCategoryId" start="232" end="235" abstract="false" final="false" static="false" visibility="public">
+  <method name="getCategoryId" start="242" end="245" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setDeliveries" start="242" end="249" abstract="false" final="false" static="false" visibility="public">
+  <method name="setDeliveries" start="252" end="259" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="object" variable="$deliveries">
         <type full="\Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter" namespace="\Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleDeliveryParameter"/>
       </param>
@@ -224,17 +224,17 @@
     <parameter name="deliveries" byreference="false" type="object">
       <type full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleDeliveryParameter"/>
     </parameter>
-    <parameter name="clear" byreference="false" type="{unknown}" default="false"/>
+    <parameter name="clear" byreference="false" type="boolean" default="false"/>
   </method>
-  <method name="getDeliveries" start="254" end="257" abstract="false" final="false" static="false" visibility="public">
+  <method name="getDeliveries" start="264" end="267" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return description="of \Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter" type="array"/>
     </docblock>
   </method>
-  <method name="setIncrement" start="263" end="267" abstract="false" final="false" static="false" visibility="public">
+  <method name="setIncrement" start="273" end="277" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$increment"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -242,15 +242,15 @@
     </docblock>
     <parameter name="increment" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getIncrement" start="272" end="275" abstract="false" final="false" static="false" visibility="public">
+  <method name="getIncrement" start="282" end="285" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setInitialQuantity" start="281" end="285" abstract="false" final="false" static="false" visibility="public">
+  <method name="setInitialQuantity" start="291" end="295" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$initialQuantity"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -258,15 +258,15 @@
     </docblock>
     <parameter name="initialQuantity" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getInitialQuantity" start="290" end="293" abstract="false" final="false" static="false" visibility="public">
+  <method name="getInitialQuantity" start="300" end="303" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setInternalReferences" start="300" end="307" abstract="false" final="false" static="false" visibility="public">
+  <method name="setInternalReferences" start="310" end="317" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="object" variable="$internalReferences">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInternalReferenceParameter"/>
       </param>
@@ -280,17 +280,17 @@
     <parameter name="internalReferences" byreference="false" type="object">
       <type full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInternalReferenceParameter"/>
     </parameter>
-    <parameter name="clear" byreference="false" type="{unknown}" default="false"/>
+    <parameter name="clear" byreference="false" type="boolean" default="false"/>
   </method>
-  <method name="getInternalReferences" start="312" end="315" abstract="false" final="false" static="false" visibility="public">
+  <method name="getInternalReferences" start="322" end="325" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="object">
         <type full="\Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter" namespace="\Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInternalReferenceParameter"/>
       </return>
     </docblock>
   </method>
-  <method name="setIsCustomerTemplate" start="323" end="327" abstract="false" final="false" static="false" visibility="public">
+  <method name="setIsCustomerTemplate" start="333" end="337" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Must be set to &quot;true&quot; if templateId is provided"/>
       <param type="boolean" variable="$isCustomerTemplate"/>
@@ -300,15 +300,15 @@
     </docblock>
     <parameter name="isCustomerTemplate" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getIsCustomerTemplate" start="332" end="335" abstract="false" final="false" static="false" visibility="public">
+  <method name="getIsCustomerTemplate" start="342" end="345" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="boolean"/>
     </docblock>
   </method>
-  <method name="setIsRelistSoldOut" start="341" end="345" abstract="false" final="false" static="false" visibility="public">
+  <method name="setIsRelistSoldOut" start="351" end="355" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="boolean" variable="$isRelistSoldOut"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -316,15 +316,15 @@
     </docblock>
     <parameter name="isRelistSoldOut" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getIsRelistSoldOut" start="350" end="353" abstract="false" final="false" static="false" visibility="public">
+  <method name="getIsRelistSoldOut" start="360" end="363" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="boolean"/>
     </docblock>
   </method>
-  <method name="setMainPictureId" start="359" end="363" abstract="false" final="false" static="false" visibility="public">
+  <method name="setMainPictureId" start="369" end="373" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$mainPictureId"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -332,15 +332,15 @@
     </docblock>
     <parameter name="mainPictureId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getMainPictureId" start="368" end="371" abstract="false" final="false" static="false" visibility="public">
+  <method name="getMainPictureId" start="378" end="381" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setMaxRelistCount" start="377" end="381" abstract="false" final="false" static="false" visibility="public">
+  <method name="setMaxRelistCount" start="387" end="391" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$maxRelistCount"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -348,15 +348,15 @@
     </docblock>
     <parameter name="maxRelistCount" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getMaxRelistCount" start="386" end="389" abstract="false" final="false" static="false" visibility="public">
+  <method name="getMaxRelistCount" start="396" end="399" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setPaymentConditionIds" start="395" end="399" abstract="false" final="false" static="false" visibility="public">
+  <method name="setPaymentConditionIds" start="405" end="409" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="array" variable="$paymentConditionIds"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -364,15 +364,15 @@
     </docblock>
     <parameter name="paymentConditionIds" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getPaymentConditionIds" start="404" end="407" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentConditionIds" start="414" end="417" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="setPaymentMethodIds" start="413" end="417" abstract="false" final="false" static="false" visibility="public">
+  <method name="setPaymentMethodIds" start="423" end="427" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="array" variable="$paymentMethodIds"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -380,15 +380,15 @@
     </docblock>
     <parameter name="paymentMethodIds" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getPaymentMethodIds" start="422" end="425" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentMethodIds" start="432" end="435" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="setPromotionIds" start="431" end="435" abstract="false" final="false" static="false" visibility="public">
+  <method name="setPromotionIds" start="441" end="445" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="array" variable="$promotionIds"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -396,15 +396,15 @@
     </docblock>
     <parameter name="promotionIds" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getPromotionIds" start="440" end="443" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPromotionIds" start="450" end="453" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="setStartDate" start="449" end="453" abstract="false" final="false" static="false" visibility="public">
+  <method name="setStartDate" start="459" end="463" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="string" variable="$startDate"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -412,15 +412,15 @@
     </docblock>
     <parameter name="startDate" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getStartDate" start="458" end="461" abstract="false" final="false" static="false" visibility="public">
+  <method name="getStartDate" start="468" end="471" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="string"/>
     </docblock>
   </method>
-  <method name="setStartPrice" start="467" end="471" abstract="false" final="false" static="false" visibility="public">
+  <method name="setStartPrice" start="477" end="481" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="float" variable="$startPrice"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -428,13 +428,13 @@
     </docblock>
     <parameter name="startPrice" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getStartPrice" start="476" end="479" abstract="false" final="false" static="false" visibility="public">
+  <method name="getStartPrice" start="486" end="489" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="float"/>
     </docblock>
   </method>
-  <method name="setTemplateId" start="487" end="491" abstract="false" final="false" static="false" visibility="public">
+  <method name="setTemplateId" start="497" end="501" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="setIsCustomerTemplate must be set to true if you set the templateId here"/>
       <param type="int" variable="$templateId"/>
@@ -444,17 +444,17 @@
     </docblock>
     <parameter name="templateId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getTemplateId" start="496" end="499" abstract="false" final="false" static="false" visibility="public">
+  <method name="getTemplateId" start="506" end="509" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\int|null" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="int|null"/>
       </return>
     </docblock>
   </method>
-  <method name="setWarrantyId" start="505" end="509" abstract="false" final="false" static="false" visibility="public">
+  <method name="setWarrantyId" start="515" end="519" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$warrantyId"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\Sell\Parameter\$this" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="$this"/>
@@ -462,47 +462,45 @@
     </docblock>
     <parameter name="warrantyId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getWarrantyId" start="514" end="517" abstract="false" final="false" static="false" visibility="public">
+  <method name="getWarrantyId" start="524" end="527" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Managers\ParameterAbstract" namepsace="Diglin\Ricardo\Managers" name="ParameterAbstract">
-    <member name="_requiredProperties" type="array" visibility="protected" line="23">
+  <parent full="Diglin\Ricardo\Managers\ParameterAbstract" namespace="Diglin\Ricardo\Managers" name="ParameterAbstract">
+    <implements full="ArrayAccess" namespace="" name="ArrayAccess"/>
+    <member name="_requiredProperties" type="array" default="" visibility="protected" line="37">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="array"/>
       </docblock>
     </member>
-    <member name="_optionalProperties" type="array" visibility="protected" line="28">
+    <member name="_optionalProperties" type="array" default="" visibility="protected" line="42">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="array"/>
       </docblock>
     </member>
-    <method name="getRequiredProperties" start="33" end="36" abstract="false" final="false" static="false" visibility="public">
+    <method name="getRequiredProperties" start="47" end="50" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getOptionalProperties" start="41" end="44" abstract="false" final="false" static="false" visibility="public">
+    <method name="getOptionalProperties" start="55" end="58" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getDataProperties" start="51" end="91" abstract="false" final="false" static="false" visibility="public">
+    <method name="getDataProperties" start="65" end="105" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Get all properties of a class as an array to be send or use properly by the ricardo.ch API"/>
         <return type="array"/>
       </docblock>
-      <inline>
-        <comment value="skip empty value for properties which are optional" line="82"/>
-      </inline>
     </method>
-    <method name="_normalizeProperty" start="99" end="105" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_normalizeProperty" start="113" end="119" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Normalize the property from &quot;_myProperty&quot; to &quot;MyProperty&quot;"/>
         <param variable="$name"/>
@@ -510,7 +508,7 @@
       </docblock>
       <parameter name="name" byreference="false" type="{unknown}"/>
     </method>
-    <method name="_getGetterMethod" start="113" end="116" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_getGetterMethod" start="127" end="130" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Get the getter method name"/>
         <param variable="$name"/>
@@ -518,7 +516,7 @@
       </docblock>
       <parameter name="name" byreference="false" type="{unknown}"/>
     </method>
-    <method name="_getSetterMethod" start="124" end="127" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_getSetterMethod" start="138" end="141" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Get the setter method name"/>
         <param variable="$name"/>
@@ -526,7 +524,7 @@
       </docblock>
       <parameter name="name" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetSet" start="136" end="144" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetSet" start="150" end="158" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetSet()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetset.php"/>
@@ -536,7 +534,7 @@
       <parameter name="offset" byreference="false" type="{unknown}"/>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetExists" start="153" end="161" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetExists" start="167" end="175" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetExists()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetexists.php"/>
@@ -545,7 +543,7 @@
       </docblock>
       <parameter name="offset" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetUnset" start="169" end="177" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetUnset" start="183" end="191" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetUnset()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetunset.php"/>
@@ -553,7 +551,7 @@
       </docblock>
       <parameter name="offset" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetGet" start="186" end="194" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetGet" start="200" end="208" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetGet()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetget.php"/>
@@ -563,7 +561,7 @@
       <parameter name="offset" byreference="false" type="{unknown}"/>
     </method>
   </parent>
-  <interface full="ArrayAccess" namepsace="" name="ArrayAccess">
+  <interface full="ArrayAccess" namespace="" name="ArrayAccess">
     <method name="offsetExists" abstract="false" static="false" visibility="public" final="false">
     <docblock>
       <description compact="Whether a offset exists">Whether or not an offset exists.</description>

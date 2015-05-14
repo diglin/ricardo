@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Exceptions\ArticleException" namespace="Diglin\Ricardo\Exceptions" name="ArticleException" abstract="false" final="false" start="17" end="17">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions" file="ArticleException.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions/ArticleException.php" size="473" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="49f9ada5f7aec562192372db4d4b1ac430159f25"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Exceptions\ArticleException" namespace="Diglin\Ricardo\Exceptions" name="ArticleException" abstract="false" final="false" start="27" end="30">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Exceptions" file="ArticleException.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Exceptions/ArticleException.php" size="984" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="21623d2aff4d012909b1d8a086d10efa53e4e685" relative="Diglin/Ricardo/Exceptions/ArticleException.php"/>
   <docblock>
     <description compact="Class ArticleException"/>
     <package value="Diglin\Ricardo\Exceptions"/>
   </docblock>
   <extends full="Diglin\Ricardo\Exceptions\ExceptionAbstract" namespace="Diglin\Ricardo\Exceptions" name="ExceptionAbstract"/>
-  <parent full="Diglin\Ricardo\Exceptions\ExceptionAbstract" namepsace="Diglin\Ricardo\Exceptions" name="ExceptionAbstract">
+  <parent full="Diglin\Ricardo\Exceptions\ExceptionAbstract" namespace="Diglin\Ricardo\Exceptions" name="ExceptionAbstract">
     <extends full="Exception" namespace="" name="Exception"/>
-    <constructor name="__construct" start="20" end="24" abstract="false" final="false" static="false" visibility="public">
+    <constructor name="__construct" start="30" end="34" abstract="false" final="false" static="false" visibility="public">
       <parameter name="message" byreference="false" type="string" default="&quot;&quot;"/>
       <parameter name="code" byreference="false" type="integer" default="0"/>
-      <parameter name="previous" byreference="false" type="object" default="null">
+      <parameter name="previous" byreference="false" type="{unknown}" default="" constant="null">
         <type full="Exception" namespace="" name="Exception"/>
       </parameter>
     </constructor>
-    <method name="_getMessage" start="31" end="46" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_getMessage" start="41" end="56" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param variable="$code"/>
         <param type="string" variable="$defaultMessage"/>
         <return type="object">
@@ -28,7 +28,7 @@
       <parameter name="defaultMessage" byreference="false" type="string" default="''"/>
     </method>
   </parent>
-  <parent full="Exception" namepsace="" name="Exception">
+  <parent full="Exception" namespace="" name="Exception">
     <member name="message" static="false" visibility="protected">
     <default>null</default>
     <docblock>

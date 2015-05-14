@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Services\System" namespace="Diglin\Ricardo\Services" name="System" abstract="false" final="false" start="21" end="1218">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Services" file="System.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Services/System.php" size="32729" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="61d5b11a59ee9b6de711001f54741669a9e06e75"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Services\System" namespace="Diglin\Ricardo\Services" name="System" abstract="false" final="false" start="31" end="1228">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Services" file="System.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Services/System.php" size="33238" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="257d9a71481baafd42727bc55a1c05d9ee8e8f75" relative="Diglin/Ricardo/Services/System.php"/>
   <docblock>
     <description compact="Class System">This service exposes referential data about the ricardo's system, for example available languages, list of categories, list of possible packages</description>
     <package value="Diglin\Ricardo\Services"/>
     <link value="https://ws.ricardo.ch/RicardoApi/documentation/html/Methods_T_Ricardo_Contracts_ISystemService.htm"/>
   </docblock>
   <extends full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract"/>
-  <member name="_service" type="string" default="'SystemService'" visibility="protected" line="26">
+  <member name="_service" type="string" default="'SystemService'" visibility="protected" line="36">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="31">
+  <member name="_typeOfToken" type="{unknown}" default="" constant="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="41">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="string"/>
     </docblock>
   </member>
-  <method name="getAllErrorsCodes" start="38" end="44" abstract="false" final="false" static="false" visibility="public">
+  <method name="getAllErrorsCodes" start="48" end="54" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets all errors code list."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getAllErrorsCodesResult" start="67" end="73" abstract="false" final="false" static="false" visibility="public">
+  <method name="getAllErrorsCodesResult" start="77" end="83" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the result article conditions list">The Ricardo API returns:
 &lt;pre&gt;
@@ -46,13 +46,13 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getArticleConditions" start="93" end="106" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleConditions" start="103" end="116" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the article conditions list"/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getArticleConditionsResult" start="132" end="138" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleConditionsResult" start="142" end="148" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the result article conditions list">The Ricardo API returns:
 &lt;pre&gt;
@@ -76,13 +76,13 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getAvailabilities" start="145" end="151" abstract="false" final="false" static="false" visibility="public">
+  <method name="getAvailabilities" start="155" end="161" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the product availabilities."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getAvailabilitiesResult" start="175" end="182" abstract="false" final="false" static="false" visibility="public">
+  <method name="getAvailabilitiesResult" start="185" end="192" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the product availabilities.">The Ricardo API returns:
 &lt;pre&gt;
@@ -104,13 +104,13 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getCategories" start="193" end="208" abstract="false" final="false" static="false" visibility="public">
+  <method name="getCategories" start="203" end="218" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the categories list AllCategories: - 0 = Doesn't filter any categories - 1 = Filter the categories without branding ones - 2 = Filter categories to get only the branding ones"/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getCategoriesResult" start="248" end="255" abstract="false" final="false" static="false" visibility="public">
+  <method name="getCategoriesResult" start="258" end="265" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the categories list result">The Ricardo API returns:
 &lt;pre&gt;
@@ -148,7 +148,7 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getCategory" start="263" end="269" abstract="false" final="false" static="false" visibility="public">
+  <method name="getCategory" start="273" end="279" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get a category"/>
       <param type="int" variable="$categoryId"/>
@@ -156,7 +156,7 @@
     </docblock>
     <parameter name="categoryId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getCategoryResult" start="297" end="304" abstract="false" final="false" static="false" visibility="public">
+  <method name="getCategoryResult" start="307" end="314" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get a category result">The Ricardo API returns:
 &lt;pre&gt;
@@ -182,13 +182,13 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getCountries" start="311" end="317" abstract="false" final="false" static="false" visibility="public">
+  <method name="getCountries" start="321" end="327" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the countries."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getCountriesResult" start="341" end="348" abstract="false" final="false" static="false" visibility="public">
+  <method name="getCountriesResult" start="351" end="358" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the countries result">The Ricardo API returns:
 &lt;pre&gt;
@@ -210,16 +210,16 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getCountryIso" start="358" end="364" abstract="false" final="false" static="false" visibility="public">
+  <method name="getCountryIso" start="368" end="374" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the 2 letter country ISO."/>
-      <FIXME value="seems to not work on Ricardo side"/>
+      <fixme value="seems to not work on Ricardo side"/>
       <param type="string" variable="$ip"/>
       <return type="array"/>
     </docblock>
     <parameter name="ip" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getCountryIsoResult" start="388" end="395" abstract="false" final="false" static="false" visibility="public">
+  <method name="getCountryIsoResult" start="398" end="405" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the 2 letter country ISO result">The Ricardo API returns:
 &lt;pre&gt;
@@ -241,13 +241,13 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getDeliveryConditions" start="402" end="408" abstract="false" final="false" static="false" visibility="public">
+  <method name="getDeliveryConditions" start="412" end="418" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the delivery conditions."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getDeliveryConditionsResult" start="456" end="463" abstract="false" final="false" static="false" visibility="public">
+  <method name="getDeliveryConditionsResult" start="466" end="473" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the delivery conditions result">The Ricardo API returns:
 &lt;pre&gt;
@@ -293,13 +293,13 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getFirstChildsCategories" start="470" end="491" abstract="false" final="false" static="false" visibility="public">
+  <method name="getFirstChildsCategories" start="480" end="501" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the first childs categories."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getFirstChildsCategoriesResult" start="531" end="538" abstract="false" final="false" static="false" visibility="public">
+  <method name="getFirstChildsCategoriesResult" start="541" end="548" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the first childs categories result">The Ricardo API returns:
 &lt;pre&gt;
@@ -337,13 +337,13 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getLanguages" start="580" end="586" abstract="false" final="false" static="false" visibility="public">
+  <method name="getLanguages" start="590" end="596" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the languages."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getLanguagesResult" start="612" end="619" abstract="false" final="false" static="false" visibility="public">
+  <method name="getLanguagesResult" start="622" end="629" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the languages result">The Ricardo API returns:
 &lt;pre&gt;
@@ -367,7 +367,7 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPackages" start="627" end="633" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPackages" start="637" end="643" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets list of listing packages"/>
       <param type="int" variable="$packageType"/>
@@ -375,7 +375,7 @@
     </docblock>
     <parameter name="packageType" byreference="false" type="integer" default="0"/>
   </method>
-  <method name="getPackagesResult" start="659" end="666" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPackagesResult" start="669" end="676" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the languages result">The Ricardo API returns:
 &lt;pre&gt;
@@ -399,7 +399,7 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getParentsCategories" start="674" end="680" abstract="false" final="false" static="false" visibility="public">
+  <method name="getParentsCategories" start="684" end="690" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the parents categories."/>
       <param type="int" variable="$categoryId"/>
@@ -407,7 +407,7 @@
     </docblock>
     <parameter name="categoryId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getParentsCategoriesResult" start="720" end="727" abstract="false" final="false" static="false" visibility="public">
+  <method name="getParentsCategoriesResult" start="730" end="737" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the parents categories result">The Ricardo API returns:
 &lt;pre&gt;
@@ -445,13 +445,13 @@
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPartnerConfigurations" start="734" end="740" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPartnerConfigurations" start="744" end="750" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the partner configurations."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getPartnerConfigurationsResult" start="778" end="785" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPartnerConfigurationsResult" start="788" end="795" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the partner configuration result">The Ricardo API returns:
 &lt;pre&gt;
@@ -487,18 +487,18 @@ Array
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPaymentConditions" start="793" end="801" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentConditions" start="803" end="811" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the payment conditions."/>
       <param type="int" variable="$paymentMethodId"/>
       <return type="array"/>
     </docblock>
-    <parameter name="paymentMethodId" byreference="false" type="{unknown}" default="null"/>
+    <parameter name="paymentMethodId" byreference="false" type="{unknown}" default="" constant="null"/>
     <inline>
-      <comment value="$paymentMethodId has no effect on the Ricardo API side ! @fixme" line="795"/>
+      <comment value="$paymentMethodId has no effect on the Ricardo API side ! @fixme" line="805"/>
     </inline>
   </method>
-  <method name="getPaymentConditionsResult" start="822" end="829" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentConditionsResult" start="832" end="839" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the payment conditions result">The Ricardo API returns:
 &lt;pre&gt;
@@ -517,18 +517,18 @@ Array
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPaymentConditionsAndMethods" start="837" end="845" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentConditionsAndMethods" start="847" end="855" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the payment conditions and payment function associated."/>
       <param type="int" variable="$paymentMethodId"/>
       <return type="array"/>
     </docblock>
-    <parameter name="paymentMethodId" byreference="false" type="{unknown}" default="null"/>
+    <parameter name="paymentMethodId" byreference="false" type="{unknown}" default="" constant="null"/>
     <inline>
-      <comment value="$paymentMethodId has no effect on the Ricardo API side ! @fixme" line="839"/>
+      <comment value="$paymentMethodId has no effect on the Ricardo API side ! @fixme" line="849"/>
     </inline>
   </method>
-  <method name="getPaymentConditionsAndMethodsResult" start="866" end="873" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentConditionsAndMethodsResult" start="876" end="883" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the payment conditions and payment function associated result">The Ricardo API returns:
 &lt;pre&gt;
@@ -547,16 +547,16 @@ Array
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPaymentMethods" start="880" end="897" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentMethods" start="890" end="907" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the payment methods."/>
       <return type="array"/>
     </docblock>
     <inline>
-      <comment value="$paymentConditionId has no effect on the Ricardo API side ! @fixme" line="882"/>
+      <comment value="$paymentConditionId has no effect on the Ricardo API side ! @fixme" line="892"/>
     </inline>
   </method>
-  <method name="getPaymentMethodsResult" start="917" end="924" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentMethodsResult" start="927" end="934" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the payment methods result">The Ricardo API returns:
 &lt;pre&gt;
@@ -574,13 +574,13 @@ Array
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPhonePrefixes" start="931" end="937" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPhonePrefixes" start="941" end="947" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the phone prefixes."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getPhonePrefixesResult" start="957" end="964" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPhonePrefixesResult" start="967" end="974" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the phone prefixes result">The Ricardo API returns:
 &lt;pre&gt;
@@ -598,16 +598,16 @@ Array
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getPromotions" start="971" end="996" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPromotions" start="981" end="1006" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the promotions."/>
       <return type="array"/>
     </docblock>
     <inline>
-      <comment value="All: 0, Auction: 1, BuyNow: 2, Classified: 3" line="974"/>
+      <comment value="All: 0, Auction: 1, BuyNow: 2, Classified: 3" line="984"/>
     </inline>
   </method>
-  <method name="getPromotionsResult" start="1018" end="1025" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPromotionsResult" start="1028" end="1035" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the phone prefixes result">The Ricardo API returns:
 &lt;pre&gt;
@@ -627,13 +627,13 @@ Array
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getRegions" start="1032" end="1047" abstract="false" final="false" static="false" visibility="public">
+  <method name="getRegions" start="1042" end="1057" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the regions."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getRegionsResult" start="1067" end="1074" abstract="false" final="false" static="false" visibility="public">
+  <method name="getRegionsResult" start="1077" end="1084" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the regions result">The Ricardo API returns:
 &lt;pre&gt;
@@ -651,13 +651,13 @@ Array
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getTemplates" start="1081" end="1087" abstract="false" final="false" static="false" visibility="public">
+  <method name="getTemplates" start="1091" end="1097" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the template."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getTemplatesResult" start="1110" end="1117" abstract="false" final="false" static="false" visibility="public">
+  <method name="getTemplatesResult" start="1120" end="1127" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the template result">The Ricardo API returns:
 &lt;pre&gt;
@@ -678,13 +678,13 @@ Array
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <method name="getWarranties" start="1124" end="1130" abstract="false" final="false" static="false" visibility="public">
+  <method name="getWarranties" start="1134" end="1140" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the warranties."/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getWarrantiesResult" start="1150" end="1157" abstract="false" final="false" static="false" visibility="public">
+  <method name="getWarrantiesResult" start="1160" end="1167" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the warranties result">The Ricardo API returns:
 &lt;pre&gt;
@@ -702,31 +702,31 @@ Array
     </docblock>
     <parameter name="data" byreference="false" type="array"/>
   </method>
-  <parent full="Diglin\Ricardo\Services\ServiceAbstract" namepsace="Diglin\Ricardo\Services" name="ServiceAbstract">
-    <constant name="TOKEN_TYPE_ANONYMOUS" value="'anonymous'"/>
-    <constant name="TOKEN_TYPE_IDENTIFIED" value="'identified'"/>
-    <constant name="TOKEN_TYPE_ANTIFORGERY" value="'antiforgery'"/>
-    <constant name="TOKEN_TYPE_TEMPORARY" value="'temporary'"/>
-    <constant name="TOKEN_TYPE_DEFAULT" value="''"/>
-    <member name="_service" type="string" default="''" visibility="protected" line="29">
+  <parent full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract">
+    <constant type="{unknown}" name="TOKEN_TYPE_ANONYMOUS" value="'anonymous'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_IDENTIFIED" value="'identified'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_ANTIFORGERY" value="'antiforgery'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_TEMPORARY" value="'temporary'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_DEFAULT" value="''"/>
+    <member name="_service" type="string" default="''" visibility="protected" line="39">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="string"/>
       </docblock>
     </member>
-    <member name="_typeOfToken" type="{unknown}" default="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="34">
+    <member name="_typeOfToken" type="{unknown}" default="" constant="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="44">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="string"/>
       </docblock>
     </member>
-    <method name="getService" start="41" end="44" abstract="false" final="false" static="false" visibility="public">
+    <method name="getService" start="51" end="54" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Get the current name of the API service"/>
         <return type="string"/>
       </docblock>
     </method>
-    <method name="getTypeOfToken" start="58" end="61" abstract="false" final="false" static="false" visibility="public">
+    <method name="getTypeOfToken" start="68" end="71" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Get the type of token needed for this service &lt;pre&gt; It can be: - anonymous - identified - antiforgery - empty &lt;/pre&gt;"/>
         <return type="string"/>

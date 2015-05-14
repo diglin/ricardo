@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Services\Search" namespace="Diglin\Ricardo\Services" name="Search" abstract="false" final="false" start="30" end="82">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Services" file="Search.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Services/Search.php" size="2477" time="2015-05-14T23:20:31+02:00" unixtime="1431638431" sha1="8e19a8e23c20789e85501dd5d60ed5de8b542e10" relative="Diglin/Ricardo/Services/Search.php"/>
+  <docblock>
+    <description compact="Class Search"/>
+    <package value="Diglin\Ricardo\Services"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract"/>
+  <member name="_service" type="string" default="'SearchService'" visibility="protected" line="35">
+    <docblock>
+      <description/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <member name="_typeOfToken" type="{unknown}" default="" constant="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="40">
+    <docblock>
+      <description/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <method name="getCategoryBestMatch" start="48" end="55" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get Category Best Match"/>
+      <param type="object" variable="$getCategoryBestMatchParameter">
+        <type full="Diglin\Ricardo\Managers\Search\Parameter\GetCategoryBestMatchParameter" namespace="Diglin\Ricardo\Managers\Search\Parameter" name="GetCategoryBestMatchParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="getCategoryBestMatchParameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Search\Parameter\GetCategoryBestMatchParameter" namespace="Diglin\Ricardo\Managers\Search\Parameter" name="GetCategoryBestMatchParameter"/>
+    </parameter>
+    <inline>
+      <comment value="there is a typo error into the documentation for &quot;getCategoryBestMatchParamter&quot;, keep it here too" line="50"/>
+    </inline>
+  </method>
+  <method name="getCategoryBestMatchResult" start="75" end="81" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the best category result">The Ricardo API returns:
+&lt;pre&gt;
+{
+    "GetCategoryBestMatchResult": {
+      "CategoriesBestMatch": [
+         "CategoryId": "int",
+         "CategoryName": "string",
+       ],[],...
+    }
+  }
+&lt;/pre&gt;</description>
+      <param type="array" variable="$data"/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Services\bool|array" namespace="Diglin\Ricardo\Services" name="bool|array"/>
+      </return>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+  <parent full="Diglin\Ricardo\Services\ServiceAbstract" namespace="Diglin\Ricardo\Services" name="ServiceAbstract">
+    <constant type="{unknown}" name="TOKEN_TYPE_ANONYMOUS" value="'anonymous'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_IDENTIFIED" value="'identified'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_ANTIFORGERY" value="'antiforgery'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_TEMPORARY" value="'temporary'"/>
+    <constant type="{unknown}" name="TOKEN_TYPE_DEFAULT" value="''"/>
+    <member name="_service" type="string" default="''" visibility="protected" line="39">
+    <docblock>
+      <description/>
+      <var type="string"/>
+    </docblock>
+  </member>
+    <member name="_typeOfToken" type="{unknown}" default="" constant="self::TOKEN_TYPE_ANONYMOUS" visibility="protected" line="44">
+    <docblock>
+      <description/>
+      <var type="string"/>
+    </docblock>
+  </member>
+    <method name="getService" start="51" end="54" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the current name of the API service"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+    <method name="getTypeOfToken" start="68" end="71" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get the type of token needed for this service &lt;pre&gt; It can be: - anonymous - identified - antiforgery - empty &lt;/pre&gt;"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  </parent>
+</class>

@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\Article\PromotionCode" namespace="Diglin\Ricardo\Enums\Article" name="PromotionCode" abstract="false" final="false" start="19" end="135">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article" file="PromotionCode.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Article/PromotionCode.php" size="4050" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0c19ade396c1333021fe07b732d33ff26af46268"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Enums\Article\PromotionCode" namespace="Diglin\Ricardo\Enums\Article" name="PromotionCode" abstract="false" final="false" start="29" end="145">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/Article" file="PromotionCode.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/Article/PromotionCode.php" size="4559" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="fc336a59b8c76795ac323992763c7e4a44a1c62a" relative="Diglin/Ricardo/Enums/Article/PromotionCode.php"/>
   <docblock>
     <description compact="Class PromotionCode"/>
     <package value="Diglin\Ricardo\Enums\Article"/>
   </docblock>
   <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
-  <constant name="SUBTITLE" value="1"/>
-  <constant name="BUYNOW" value="2"/>
-  <constant name="PREMIUMHOMEPAGE" value="4"/>
-  <constant name="SHOWCASE" value="8"/>
-  <constant name="THUMBNAIL" value="16"/>
-  <constant name="MYARTICLES" value="32"/>
-  <constant name="AUTOMATICINCREMENT" value="64"/>
-  <constant name="PREMIUMCATEGORYBRONZE" value="128"/>
-  <constant name="PREMIUMCATEGORYSILVER" value="256"/>
-  <constant name="PREMIUMCATEGORYGOLD" value="512"/>
-  <constant name="PICTURE1" value="1024"/>
-  <constant name="PICTURE2" value="2048"/>
-  <constant name="PICTURE3" value="4096"/>
-  <constant name="PICTURE4" value="8192"/>
-  <constant name="PICTURE5" value="16384"/>
-  <constant name="PICTURE6" value="32768"/>
-  <constant name="PICTURE7" value="65536"/>
-  <constant name="PICTURE8" value="131072"/>
-  <constant name="PICTURE9" value="262144"/>
-  <constant name="PICTURE10" value="524288"/>
-  <constant name="LOGINUSER" value="1048576"/>
-  <constant name="PERSONALHOMEPAGE" value="2097152"/>
-  <constant name="BOLD" value="4194304"/>
-  <constant name="HIGHLIGHT" value="8388608"/>
-  <constant name="PREMIUMCATEGORY" value="16777216"/>
-  <constant name="PLANNEDARTICLE" value="33554432"/>
-  <method name="getEnums" start="104" end="134" abstract="false" final="false" static="true" visibility="public">
+  <constant type="integer" name="SUBTITLE" value="1"/>
+  <constant type="integer" name="BUYNOW" value="2"/>
+  <constant type="integer" name="PREMIUMHOMEPAGE" value="4"/>
+  <constant type="integer" name="SHOWCASE" value="8"/>
+  <constant type="integer" name="THUMBNAIL" value="16"/>
+  <constant type="integer" name="MYARTICLES" value="32"/>
+  <constant type="integer" name="AUTOMATICINCREMENT" value="64"/>
+  <constant type="integer" name="PREMIUMCATEGORYBRONZE" value="128"/>
+  <constant type="integer" name="PREMIUMCATEGORYSILVER" value="256"/>
+  <constant type="integer" name="PREMIUMCATEGORYGOLD" value="512"/>
+  <constant type="integer" name="PICTURE1" value="1024"/>
+  <constant type="integer" name="PICTURE2" value="2048"/>
+  <constant type="integer" name="PICTURE3" value="4096"/>
+  <constant type="integer" name="PICTURE4" value="8192"/>
+  <constant type="integer" name="PICTURE5" value="16384"/>
+  <constant type="integer" name="PICTURE6" value="32768"/>
+  <constant type="integer" name="PICTURE7" value="65536"/>
+  <constant type="integer" name="PICTURE8" value="131072"/>
+  <constant type="integer" name="PICTURE9" value="262144"/>
+  <constant type="integer" name="PICTURE10" value="524288"/>
+  <constant type="integer" name="LOGINUSER" value="1048576"/>
+  <constant type="integer" name="PERSONALHOMEPAGE" value="2097152"/>
+  <constant type="integer" name="BOLD" value="4194304"/>
+  <constant type="integer" name="HIGHLIGHT" value="8388608"/>
+  <constant type="integer" name="PREMIUMCATEGORY" value="16777216"/>
+  <constant type="integer" name="PLANNEDARTICLE" value="33554432"/>
+  <method name="getEnums" start="114" end="144" abstract="false" final="false" static="true" visibility="public">
     <docblock>
       <description compact="Return the list of current enums"/>
       <return type="array"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
-    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="28" end="31" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+    <method name="getLabel" start="37" end="45" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param variable="$value"/>
         <return type="object">
           <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
@@ -55,9 +55,9 @@
       </docblock>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+    <method name="getValues" start="50" end="57" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>

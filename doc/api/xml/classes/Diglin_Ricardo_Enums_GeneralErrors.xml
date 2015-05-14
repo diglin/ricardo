@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\GeneralErrors" namespace="Diglin\Ricardo\Enums" name="GeneralErrors" abstract="false" final="false" start="18" end="67">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums" file="GeneralErrors.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/GeneralErrors.php" size="2750" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="66a41cad22a50ab037005e2f2acf7dbbdf9fa090"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Enums\GeneralErrors" namespace="Diglin\Ricardo\Enums" name="GeneralErrors" abstract="false" final="false" start="28" end="77">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Enums" file="GeneralErrors.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/GeneralErrors.php" size="3259" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="1c74b437c17c7d09da73378279cd2ac08f468de0" relative="Diglin/Ricardo/Enums/GeneralErrors.php"/>
   <docblock>
     <description compact="Class GeneralErrors"/>
     <package value="Diglin\Ricardo\Enums"/>
   </docblock>
   <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
-  <constant name="CLOSEAUCTIONFAILED" value="1"/>
-  <constant name="CLOSECLASSIFIEDFAILED" value="2"/>
-  <constant name="DELETEPLANNEDFAILED" value="3"/>
-  <constant name="COUNTRYORPARTNERNOTDEFINED" value="4"/>
-  <constant name="UNKNOWNCATEGORYID" value="5"/>
-  <constant name="UNSUPPORTEDLANGUAGEID" value="6"/>
-  <constant name="ARTICLENOTFOUND" value="7"/>
-  <constant name="CUSTOMERNOTFOUND" value="8"/>
-  <constant name="EMPTYIPADDRESS" value="9"/>
-  <constant name="TECHNICALPROBLEM" value="10"/>
-  <constant name="ARTICLESAMOUNTLIMIT" value="11"/>
-  <constant name="LISTOFARTICLESEMPTY" value="12"/>
-  <constant name="UNKNOWNCATEGORYNAME" value="13"/>
-  <method name="getEnums" start="49" end="66" abstract="false" final="false" static="true" visibility="public">
+  <constant type="integer" name="CLOSEAUCTIONFAILED" value="1"/>
+  <constant type="integer" name="CLOSECLASSIFIEDFAILED" value="2"/>
+  <constant type="integer" name="DELETEPLANNEDFAILED" value="3"/>
+  <constant type="integer" name="COUNTRYORPARTNERNOTDEFINED" value="4"/>
+  <constant type="integer" name="UNKNOWNCATEGORYID" value="5"/>
+  <constant type="integer" name="UNSUPPORTEDLANGUAGEID" value="6"/>
+  <constant type="integer" name="ARTICLENOTFOUND" value="7"/>
+  <constant type="integer" name="CUSTOMERNOTFOUND" value="8"/>
+  <constant type="integer" name="EMPTYIPADDRESS" value="9"/>
+  <constant type="integer" name="TECHNICALPROBLEM" value="10"/>
+  <constant type="integer" name="ARTICLESAMOUNTLIMIT" value="11"/>
+  <constant type="integer" name="LISTOFARTICLESEMPTY" value="12"/>
+  <constant type="integer" name="UNKNOWNCATEGORYNAME" value="13"/>
+  <method name="getEnums" start="59" end="76" abstract="false" final="false" static="true" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
-    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="28" end="31" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+    <method name="getLabel" start="37" end="45" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param variable="$value"/>
         <return type="object">
           <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
@@ -42,9 +42,9 @@
       </docblock>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+    <method name="getValues" start="50" end="57" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>

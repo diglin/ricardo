@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Managers\Search" namespace="Diglin\Ricardo\Managers" name="Search" abstract="false" final="false" start="30" end="47">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Managers" file="Search.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/Search.php" size="1400" time="2015-05-14T23:21:09+02:00" unixtime="1431638469" sha1="9e82146414419a450a063818da5a74b7495956f2" relative="Diglin/Ricardo/Managers/Search.php"/>
+  <docblock>
+    <description compact="Class Search"/>
+    <package value="Diglin\Ricardo\Managers"/>
+  </docblock>
+  <extends full="Diglin\Ricardo\Managers\ManagerAbstract" namespace="Diglin\Ricardo\Managers" name="ManagerAbstract"/>
+  <member name="_serviceName" type="string" default="'search'" visibility="protected" line="35">
+    <docblock>
+      <description/>
+      <var type="string"/>
+    </docblock>
+  </member>
+  <method name="getCategoryBestMatch" start="43" end="46" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get Category Best Match"/>
+      <param type="object" variable="$parameter">
+        <type full="Diglin\Ricardo\Managers\Search\Parameter\GetCategoryBestMatchParameter" namespace="Diglin\Ricardo\Managers\Search\Parameter" name="GetCategoryBestMatchParameter"/>
+      </param>
+      <return type="array"/>
+    </docblock>
+    <parameter name="parameter" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Managers\Search\Parameter\GetCategoryBestMatchParameter" namespace="Diglin\Ricardo\Managers\Search\Parameter" name="GetCategoryBestMatchParameter"/>
+    </parameter>
+  </method>
+  <parent full="Diglin\Ricardo\Managers\ManagerAbstract" namespace="Diglin\Ricardo\Managers" name="ManagerAbstract">
+    <member name="_serviceName" visibility="protected" line="39">
+    <docblock>
+      <description/>
+      <var type="string"/>
+    </docblock>
+  </member>
+    <member name="_serviceManager" visibility="protected" line="44">
+    <docblock>
+      <description/>
+      <var type="object">
+        <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+      </var>
+    </docblock>
+  </member>
+    <member name="_helper" visibility="protected" line="49">
+    <docblock>
+      <description/>
+      <var type="object">
+        <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
+      </var>
+    </docblock>
+  </member>
+    <constructor name="__construct" start="54" end="57" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description/>
+      <param type="object" variable="$serviceManager">
+        <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+      </param>
+    </docblock>
+    <parameter name="serviceManager" byreference="false" type="object">
+      <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+    </parameter>
+  </constructor>
+    <method name="getHelper" start="62" end="68" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
+      </return>
+    </docblock>
+  </method>
+    <method name="_proceed" start="77" end="115" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description/>
+      <param type="string" variable="$method"/>
+      <param type="mixed" variable="$parameters"/>
+      <return type="array"/>
+      <throws type="object">
+        <type full="\Exception" namespace="" name="Exception"/>
+      </throws>
+      <throws type="object">
+        <type full="Diglin\Ricardo\Exceptions\SecurityException" namespace="Diglin\Ricardo\Exceptions" name="SecurityException"/>
+      </throws>
+    </docblock>
+    <parameter name="method" byreference="false" type="{unknown}"/>
+    <parameter name="parameters" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+    <method name="extractError" start="123" end="150" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Extract code error and type from API call"/>
+      <param type="array" variable="$result"/>
+      <throw value="\Exception"/>
+    </docblock>
+    <parameter name="result" byreference="false" type="array"/>
+  </method>
+    <method name="getServiceManager" start="155" end="158" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description/>
+      <return type="object">
+        <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
+      </return>
+    </docblock>
+  </method>
+    <method name="getTypeOfToken" start="163" end="166" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  </parent>
+</class>

@@ -1,162 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\ArticleErrors" namespace="Diglin\Ricardo\Enums" name="ArticleErrors" abstract="false" final="false" start="17" end="298">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums" file="ArticleErrors.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/ArticleErrors.php" size="19564" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="2781443a57110368606897874f2fa5e35fbf86d0"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Enums\ArticleErrors" namespace="Diglin\Ricardo\Enums" name="ArticleErrors" abstract="false" final="false" start="27" end="308">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Enums" file="ArticleErrors.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/ArticleErrors.php" size="20073" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="9b73dd7f73c371000ce53e002b5c8a0cf2233637" relative="Diglin/Ricardo/Enums/ArticleErrors.php"/>
   <docblock>
     <description compact="Class ArticleErrors"/>
     <package value="Diglin\Ricardo\Enums"/>
   </docblock>
   <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
-  <constant name="EMPTYCOUNTRYID" value="1"/>
-  <constant name="EMPTYPARTNERID" value="2"/>
-  <constant name="EMPTYCATEGORY" value="3"/>
-  <constant name="EMPTYRELISINFOS" value="4"/>
-  <constant name="EMPTYCUSTOMER" value="5"/>
-  <constant name="UNKNOWNPARTNERID" value="6"/>
-  <constant name="UNKONWNCATEGORYID" value="7"/>
-  <constant name="INVALIDDURATION" value="8"/>
-  <constant name="RELISTCOUNTEXCEEDED" value="9"/>
-  <constant name="STARTPRICETOOHIGH" value="10"/>
-  <constant name="STARTPRICETOOLOW" value="11"/>
-  <constant name="INVALIDARTICLETYPEFORCATEGORY" value="12"/>
-  <constant name="CATEGORYNOTFINAL" value="13"/>
-  <constant name="CATEGORYDEDICATEDTOUSERS" value="14"/>
-  <constant name="INVALIDTEMPLATEID" value="15"/>
-  <constant name="EMPTYTITLE" value="16"/>
-  <constant name="EMPTYDESCRIPTION" value="17"/>
-  <constant name="EMPTYSUBTITLE" value="18"/>
-  <constant name="TOOLONGTITLE" value="19"/>
-  <constant name="TOOLONGDESCRIPTION" value="20"/>
-  <constant name="TOOLONGSUBTITLE" value="21"/>
-  <constant name="EMPTYPAYMENTDESCRIPTION" value="22"/>
-  <constant name="TOOLONGPAYMENTDESCRIPTION" value="23"/>
-  <constant name="EMPTYDELIVERYDESCRIPTION" value="24"/>
-  <constant name="TOOLONGDELIVERYDESCRIPTION" value="25"/>
-  <constant name="EMPTYWARRANTYDESCRIPTION" value="26"/>
-  <constant name="TOOLONGWARRANTYDESCRIPTION" value="27"/>
-  <constant name="INCREMENTNOTDEFINED" value="28"/>
-  <constant name="INVALIDINCREMENT" value="29"/>
-  <constant name="QUANTITYTOOLOW" value="30"/>
-  <constant name="QUANTITYTOOHIGH" value="31"/>
-  <constant name="NOPAYMENTMETHOD" value="32"/>
-  <constant name="NODELIVERYCONDITION" value="33"/>
-  <constant name="DELIVERYCOSTTOOHIGH" value="34"/>
-  <constant name="MANUALINCREMENTNOTALLOWED" value="35"/>
-  <constant name="PLANNEDSCHEDULETOOLOW" value="36"/>
-  <constant name="PLANNEDSCHEDULETOOHIGH" value="37"/>
-  <constant name="REFERENCETOOLONG" value="38"/>
-  <constant name="INVALIDQUANTITYFORAUCTIONBUYNOW" value="39"/>
-  <constant name="BUYNOWLOWERTHANSTARTPRICE" value="40"/>
-  <constant name="RICARDOPAYNOCARSANDBIKES" value="41"/>
-  <constant name="RICARDOPAYWRONGPAYMENTCONDITIONS" value="42"/>
-  <constant name="RICARDOPAYPRICETOOHIGH" value="43"/>
-  <constant name="RICARDOPAYWALLETBLOCKED" value="44"/>
-  <constant name="MAXPICTURESIZEREACHED" value="45"/>
-  <constant name="ERRORRESIZINGPICTURE" value="46"/>
-  <constant name="MAXPICTURESCOUNTREACHED" value="48"/>
-  <constant name="INVALIDPROMOTION" value="49"/>
-  <constant name="INVALIDPROMOTIONCOMBINATION" value="50"/>
-  <constant name="NOTCLOSED" value="51"/>
-  <constant name="EMPTYARTICLEINFOS" value="52"/>
-  <constant name="EMPTYDELIVERY" value="53"/>
-  <constant name="EMPTYPROMOTIONS" value="54"/>
-  <constant name="EMPTYDESCRIPTIONS" value="55"/>
-  <constant name="UPDATEARTICLEERROR" value="56"/>
-  <constant name="MULTIPLEUPDATENOTALLOWED" value="57"/>
-  <constant name="UPDATEARTICLECANTRETREIVEARTICLEINFORMATIONS" value="58"/>
-  <constant name="UPDATEARTICLECANTRETREIVECATEGORY" value="59"/>
-  <constant name="UPDATEARTICLECANTUPDATEDESCRIPTION" value="60"/>
-  <constant name="ARTICLEHASBIDS" value="61"/>
-  <constant name="INVALIDPICTUREEXTENSTION" value="62"/>
-  <constant name="LANGUAGEIDNOTSET" value="63"/>
-  <constant name="SETLIVEERROR" value="64"/>
-  <constant name="ARTICLENOTFOUND" value="65"/>
-  <constant name="EMPTYPICTURES" value="66"/>
-  <constant name="UPDATEFAILEDCOULDNOTLOCKARTICLE" value="67"/>
-  <constant name="UPDATEFAILEDONARTICLETABLE" value="68"/>
-  <constant name="UPDATEFAILEDFORSTARTDATE" value="69"/>
-  <constant name="UPDATEFAILEDCOULDNOTDELETEOLDIMAGES" value="70"/>
-  <constant name="UPDATEFAILEDFORIMAGES" value="71"/>
-  <constant name="UPDATEFAILEDCOULDNOTDELETEOLDDESCRIPTIONS" value="72"/>
-  <constant name="UPDATEFAILEDFORDESCRIPTIONS" value="73"/>
-  <constant name="UPDATEFAILEDCOULDNOTDELETEOLDLIST" value="74"/>
-  <constant name="UPDATEFAILEDFORLIST" value="75"/>
-  <constant name="INSERTPREVIEWARTICLEERROR" value="76"/>
-  <constant name="ONEPRICEMUSTBESET" value="77"/>
-  <constant name="PICTUREBASEDPROMOTIONNEEDPICTURE" value="78"/>
-  <constant name="SUBTITLEMUSTBESETFORSUBTITLEPROMOTION" value="79"/>
-  <constant name="NOPAYMENTCONDITIONSELECTED" value="80"/>
-  <constant name="QUANTITYCANTINCREASE" value="81"/>
-  <constant name="STARTPRICECANTINCREASE" value="82"/>
-  <constant name="BUYNOWPRICECANTINCREASE" value="83"/>
-  <constant name="PROMOTIONCANTBEREMOVEDONUPDATE" value="84"/>
-  <constant name="PROMOTIONCANTBEDOWNGRADED" value="85"/>
-  <constant name="DURATIONCHANGESTOOMANY" value="86"/>
-  <constant name="CANTPURCHASEWITHBUYNOW" value="87"/>
-  <constant name="UNABLETOUPDATEQUANTITY" value="88"/>
-  <constant name="UNABLETOUPDATERELISTCOUNT" value="89"/>
-  <constant name="BUYNOWPROMOTIONNEEDED" value="90"/>
-  <constant name="INVALIDMAXRELISTCOUNT" value="92"/>
-  <constant name="RELISTSOLDOUTAUCTIONNOTALLOWED" value="93"/>
-  <constant name="SUBTITLEALTERNATIVELANGUAGEISEMPTY" value="94"/>
-  <constant name="DELIVERYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY" value="95"/>
-  <constant name="PAYMENTDESCRIPTIONALTERNATIVELANGUAGEISEMPTY" value="96"/>
-  <constant name="WARRANTYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY" value="97"/>
-  <constant name="TITLEALTERNATIVELANGUAGEISEMPTY" value="98"/>
-  <constant name="DESCRIPTIONALTERNATIVELANGUAGEISEMPTY" value="99"/>
-  <constant name="SUBTITLEMAINLANGUAGEISEMPTY" value="100"/>
-  <constant name="DELIVERYDESCRIPTIONMAINLANGUAGEISEMPTY" value="101"/>
-  <constant name="PAYMENTDESCRIPTIONMAINLANGUAGEISEMPTY" value="102"/>
-  <constant name="WARRANTYDESCRIPTIONMAINLANGUAGEISEMPTY" value="103"/>
-  <constant name="TITLEMAINLANGUAGEISEMPTY" value="104"/>
-  <constant name="DESCRIPTIONMAINLANGUAGEISEMPTY" value="105"/>
-  <constant name="CLOSED" value="106"/>
-  <constant name="TOOLONGMAINTITLE" value="107"/>
-  <constant name="TOOLONGMAINDESCRIPTION" value="108"/>
-  <constant name="TOOLONGMAINSUBTITLE" value="109"/>
-  <constant name="TOOLONGALTERNATIVETITLE" value="110"/>
-  <constant name="TOOLONGALTERNATIVEDESCRIPTION" value="111"/>
-  <constant name="TOOLONGALTERNATIVESUBTITLE" value="112"/>
-  <constant name="TOOLONGMAINPAYMENTDESCRIPTION" value="113"/>
-  <constant name="TOOLONGALTERNATIVEPAYMENTDESCRIPTION" value="114"/>
-  <constant name="TOOLONGMAINWARRANTYDESCRIPTION" value="115"/>
-  <constant name="TOOLONGALTERNATIVEWARRANTYDESCRIPTION" value="116"/>
-  <constant name="TOOLONGMAINDELIVERYDESCRIPTION" value="117"/>
-  <constant name="TOOLONGALTERNATIVEDELIVERYDESCRIPTION" value="118"/>
-  <constant name="BUYNOWPRICETOOLOW" value="119"/>
-  <constant name="BUYNOWPROMOTIONNOTALLOWED" value="120"/>
-  <constant name="CANTUPDATEPICTUREONARTICLEWITHBID" value="121"/>
-  <constant name="HTMLTAGSNOTALLOWED" value="122"/>
-  <constant name="WRONGPAYMENTCONDITIONS" value="123"/>
-  <constant name="EMPTYPAYMENTCONDITIONIDS" value="124"/>
-  <constant name="NODETAILS" value="125"/>
-  <constant name="ARTICLEALREADYHASCARDPAYMENT" value="126"/>
-  <constant name="ERRORINSERTINGCARDPAYMENT" value="127"/>
-  <constant name="ARTICLEDOESNOTHAVECARDPAYMENT" value="128"/>
-  <constant name="ERRORREMOVINGCARDPAYMENT" value="129"/>
-  <constant name="RICARDOPAYNOTACTIVATED" value="130"/>
-  <constant name="EMPTYPAYMENTMETHODSIDS" value="131"/>
-  <constant name="EMPTYARTICLEID" value="132"/>
-  <constant name="INVALIDCARDCOMBINATIONWITHDELIVERYCONDITION" value="133"/>
-  <constant name="NUMBEROFARTICLELIMITED" value="134"/>
-  <constant name="PAYMENTMETHODNEEDALTERNATEONE" value="135"/>
-  <constant name="WRONGPAYMENTMETHODS" value="136"/>
-  <constant name="CUMULATIVESHIPPINGNOTALLOWED" value="137"/>
-  <method name="getEnums" start="158" end="297" abstract="false" final="false" static="true" visibility="public">
+  <constant type="integer" name="EMPTYCOUNTRYID" value="1"/>
+  <constant type="integer" name="EMPTYPARTNERID" value="2"/>
+  <constant type="integer" name="EMPTYCATEGORY" value="3"/>
+  <constant type="integer" name="EMPTYRELISINFOS" value="4"/>
+  <constant type="integer" name="EMPTYCUSTOMER" value="5"/>
+  <constant type="integer" name="UNKNOWNPARTNERID" value="6"/>
+  <constant type="integer" name="UNKONWNCATEGORYID" value="7"/>
+  <constant type="integer" name="INVALIDDURATION" value="8"/>
+  <constant type="integer" name="RELISTCOUNTEXCEEDED" value="9"/>
+  <constant type="integer" name="STARTPRICETOOHIGH" value="10"/>
+  <constant type="integer" name="STARTPRICETOOLOW" value="11"/>
+  <constant type="integer" name="INVALIDARTICLETYPEFORCATEGORY" value="12"/>
+  <constant type="integer" name="CATEGORYNOTFINAL" value="13"/>
+  <constant type="integer" name="CATEGORYDEDICATEDTOUSERS" value="14"/>
+  <constant type="integer" name="INVALIDTEMPLATEID" value="15"/>
+  <constant type="integer" name="EMPTYTITLE" value="16"/>
+  <constant type="integer" name="EMPTYDESCRIPTION" value="17"/>
+  <constant type="integer" name="EMPTYSUBTITLE" value="18"/>
+  <constant type="integer" name="TOOLONGTITLE" value="19"/>
+  <constant type="integer" name="TOOLONGDESCRIPTION" value="20"/>
+  <constant type="integer" name="TOOLONGSUBTITLE" value="21"/>
+  <constant type="integer" name="EMPTYPAYMENTDESCRIPTION" value="22"/>
+  <constant type="integer" name="TOOLONGPAYMENTDESCRIPTION" value="23"/>
+  <constant type="integer" name="EMPTYDELIVERYDESCRIPTION" value="24"/>
+  <constant type="integer" name="TOOLONGDELIVERYDESCRIPTION" value="25"/>
+  <constant type="integer" name="EMPTYWARRANTYDESCRIPTION" value="26"/>
+  <constant type="integer" name="TOOLONGWARRANTYDESCRIPTION" value="27"/>
+  <constant type="integer" name="INCREMENTNOTDEFINED" value="28"/>
+  <constant type="integer" name="INVALIDINCREMENT" value="29"/>
+  <constant type="integer" name="QUANTITYTOOLOW" value="30"/>
+  <constant type="integer" name="QUANTITYTOOHIGH" value="31"/>
+  <constant type="integer" name="NOPAYMENTMETHOD" value="32"/>
+  <constant type="integer" name="NODELIVERYCONDITION" value="33"/>
+  <constant type="integer" name="DELIVERYCOSTTOOHIGH" value="34"/>
+  <constant type="integer" name="MANUALINCREMENTNOTALLOWED" value="35"/>
+  <constant type="integer" name="PLANNEDSCHEDULETOOLOW" value="36"/>
+  <constant type="integer" name="PLANNEDSCHEDULETOOHIGH" value="37"/>
+  <constant type="integer" name="REFERENCETOOLONG" value="38"/>
+  <constant type="integer" name="INVALIDQUANTITYFORAUCTIONBUYNOW" value="39"/>
+  <constant type="integer" name="BUYNOWLOWERTHANSTARTPRICE" value="40"/>
+  <constant type="integer" name="RICARDOPAYNOCARSANDBIKES" value="41"/>
+  <constant type="integer" name="RICARDOPAYWRONGPAYMENTCONDITIONS" value="42"/>
+  <constant type="integer" name="RICARDOPAYPRICETOOHIGH" value="43"/>
+  <constant type="integer" name="RICARDOPAYWALLETBLOCKED" value="44"/>
+  <constant type="integer" name="MAXPICTURESIZEREACHED" value="45"/>
+  <constant type="integer" name="ERRORRESIZINGPICTURE" value="46"/>
+  <constant type="integer" name="MAXPICTURESCOUNTREACHED" value="48"/>
+  <constant type="integer" name="INVALIDPROMOTION" value="49"/>
+  <constant type="integer" name="INVALIDPROMOTIONCOMBINATION" value="50"/>
+  <constant type="integer" name="NOTCLOSED" value="51"/>
+  <constant type="integer" name="EMPTYARTICLEINFOS" value="52"/>
+  <constant type="integer" name="EMPTYDELIVERY" value="53"/>
+  <constant type="integer" name="EMPTYPROMOTIONS" value="54"/>
+  <constant type="integer" name="EMPTYDESCRIPTIONS" value="55"/>
+  <constant type="integer" name="UPDATEARTICLEERROR" value="56"/>
+  <constant type="integer" name="MULTIPLEUPDATENOTALLOWED" value="57"/>
+  <constant type="integer" name="UPDATEARTICLECANTRETREIVEARTICLEINFORMATIONS" value="58"/>
+  <constant type="integer" name="UPDATEARTICLECANTRETREIVECATEGORY" value="59"/>
+  <constant type="integer" name="UPDATEARTICLECANTUPDATEDESCRIPTION" value="60"/>
+  <constant type="integer" name="ARTICLEHASBIDS" value="61"/>
+  <constant type="integer" name="INVALIDPICTUREEXTENSTION" value="62"/>
+  <constant type="integer" name="LANGUAGEIDNOTSET" value="63"/>
+  <constant type="integer" name="SETLIVEERROR" value="64"/>
+  <constant type="integer" name="ARTICLENOTFOUND" value="65"/>
+  <constant type="integer" name="EMPTYPICTURES" value="66"/>
+  <constant type="integer" name="UPDATEFAILEDCOULDNOTLOCKARTICLE" value="67"/>
+  <constant type="integer" name="UPDATEFAILEDONARTICLETABLE" value="68"/>
+  <constant type="integer" name="UPDATEFAILEDFORSTARTDATE" value="69"/>
+  <constant type="integer" name="UPDATEFAILEDCOULDNOTDELETEOLDIMAGES" value="70"/>
+  <constant type="integer" name="UPDATEFAILEDFORIMAGES" value="71"/>
+  <constant type="integer" name="UPDATEFAILEDCOULDNOTDELETEOLDDESCRIPTIONS" value="72"/>
+  <constant type="integer" name="UPDATEFAILEDFORDESCRIPTIONS" value="73"/>
+  <constant type="integer" name="UPDATEFAILEDCOULDNOTDELETEOLDLIST" value="74"/>
+  <constant type="integer" name="UPDATEFAILEDFORLIST" value="75"/>
+  <constant type="integer" name="INSERTPREVIEWARTICLEERROR" value="76"/>
+  <constant type="integer" name="ONEPRICEMUSTBESET" value="77"/>
+  <constant type="integer" name="PICTUREBASEDPROMOTIONNEEDPICTURE" value="78"/>
+  <constant type="integer" name="SUBTITLEMUSTBESETFORSUBTITLEPROMOTION" value="79"/>
+  <constant type="integer" name="NOPAYMENTCONDITIONSELECTED" value="80"/>
+  <constant type="integer" name="QUANTITYCANTINCREASE" value="81"/>
+  <constant type="integer" name="STARTPRICECANTINCREASE" value="82"/>
+  <constant type="integer" name="BUYNOWPRICECANTINCREASE" value="83"/>
+  <constant type="integer" name="PROMOTIONCANTBEREMOVEDONUPDATE" value="84"/>
+  <constant type="integer" name="PROMOTIONCANTBEDOWNGRADED" value="85"/>
+  <constant type="integer" name="DURATIONCHANGESTOOMANY" value="86"/>
+  <constant type="integer" name="CANTPURCHASEWITHBUYNOW" value="87"/>
+  <constant type="integer" name="UNABLETOUPDATEQUANTITY" value="88"/>
+  <constant type="integer" name="UNABLETOUPDATERELISTCOUNT" value="89"/>
+  <constant type="integer" name="BUYNOWPROMOTIONNEEDED" value="90"/>
+  <constant type="integer" name="INVALIDMAXRELISTCOUNT" value="92"/>
+  <constant type="integer" name="RELISTSOLDOUTAUCTIONNOTALLOWED" value="93"/>
+  <constant type="integer" name="SUBTITLEALTERNATIVELANGUAGEISEMPTY" value="94"/>
+  <constant type="integer" name="DELIVERYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY" value="95"/>
+  <constant type="integer" name="PAYMENTDESCRIPTIONALTERNATIVELANGUAGEISEMPTY" value="96"/>
+  <constant type="integer" name="WARRANTYDESCRIPTIONALTERNATIVELANGUAGEISEMPTY" value="97"/>
+  <constant type="integer" name="TITLEALTERNATIVELANGUAGEISEMPTY" value="98"/>
+  <constant type="integer" name="DESCRIPTIONALTERNATIVELANGUAGEISEMPTY" value="99"/>
+  <constant type="integer" name="SUBTITLEMAINLANGUAGEISEMPTY" value="100"/>
+  <constant type="integer" name="DELIVERYDESCRIPTIONMAINLANGUAGEISEMPTY" value="101"/>
+  <constant type="integer" name="PAYMENTDESCRIPTIONMAINLANGUAGEISEMPTY" value="102"/>
+  <constant type="integer" name="WARRANTYDESCRIPTIONMAINLANGUAGEISEMPTY" value="103"/>
+  <constant type="integer" name="TITLEMAINLANGUAGEISEMPTY" value="104"/>
+  <constant type="integer" name="DESCRIPTIONMAINLANGUAGEISEMPTY" value="105"/>
+  <constant type="integer" name="CLOSED" value="106"/>
+  <constant type="integer" name="TOOLONGMAINTITLE" value="107"/>
+  <constant type="integer" name="TOOLONGMAINDESCRIPTION" value="108"/>
+  <constant type="integer" name="TOOLONGMAINSUBTITLE" value="109"/>
+  <constant type="integer" name="TOOLONGALTERNATIVETITLE" value="110"/>
+  <constant type="integer" name="TOOLONGALTERNATIVEDESCRIPTION" value="111"/>
+  <constant type="integer" name="TOOLONGALTERNATIVESUBTITLE" value="112"/>
+  <constant type="integer" name="TOOLONGMAINPAYMENTDESCRIPTION" value="113"/>
+  <constant type="integer" name="TOOLONGALTERNATIVEPAYMENTDESCRIPTION" value="114"/>
+  <constant type="integer" name="TOOLONGMAINWARRANTYDESCRIPTION" value="115"/>
+  <constant type="integer" name="TOOLONGALTERNATIVEWARRANTYDESCRIPTION" value="116"/>
+  <constant type="integer" name="TOOLONGMAINDELIVERYDESCRIPTION" value="117"/>
+  <constant type="integer" name="TOOLONGALTERNATIVEDELIVERYDESCRIPTION" value="118"/>
+  <constant type="integer" name="BUYNOWPRICETOOLOW" value="119"/>
+  <constant type="integer" name="BUYNOWPROMOTIONNOTALLOWED" value="120"/>
+  <constant type="integer" name="CANTUPDATEPICTUREONARTICLEWITHBID" value="121"/>
+  <constant type="integer" name="HTMLTAGSNOTALLOWED" value="122"/>
+  <constant type="integer" name="WRONGPAYMENTCONDITIONS" value="123"/>
+  <constant type="integer" name="EMPTYPAYMENTCONDITIONIDS" value="124"/>
+  <constant type="integer" name="NODETAILS" value="125"/>
+  <constant type="integer" name="ARTICLEALREADYHASCARDPAYMENT" value="126"/>
+  <constant type="integer" name="ERRORINSERTINGCARDPAYMENT" value="127"/>
+  <constant type="integer" name="ARTICLEDOESNOTHAVECARDPAYMENT" value="128"/>
+  <constant type="integer" name="ERRORREMOVINGCARDPAYMENT" value="129"/>
+  <constant type="integer" name="RICARDOPAYNOTACTIVATED" value="130"/>
+  <constant type="integer" name="EMPTYPAYMENTMETHODSIDS" value="131"/>
+  <constant type="integer" name="EMPTYARTICLEID" value="132"/>
+  <constant type="integer" name="INVALIDCARDCOMBINATIONWITHDELIVERYCONDITION" value="133"/>
+  <constant type="integer" name="NUMBEROFARTICLELIMITED" value="134"/>
+  <constant type="integer" name="PAYMENTMETHODNEEDALTERNATEONE" value="135"/>
+  <constant type="integer" name="WRONGPAYMENTMETHODS" value="136"/>
+  <constant type="integer" name="CUMULATIVESHIPPINGNOTALLOWED" value="137"/>
+  <method name="getEnums" start="168" end="307" abstract="false" final="false" static="true" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
-    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="28" end="31" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+    <method name="getLabel" start="37" end="45" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param variable="$value"/>
         <return type="object">
           <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
@@ -164,9 +164,9 @@
       </docblock>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+    <method name="getValues" start="50" end="57" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>

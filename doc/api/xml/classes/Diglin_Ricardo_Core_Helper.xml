@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper" abstract="false" final="false" start="15" end="82">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Core" file="Helper.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Core/Helper.php" size="2120" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="a16a72d81856aeea2f03a85cef4ad9d0143aac8c"/>
-  <method name="getJsonTimestamp" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper" abstract="false" final="false" start="29" end="108">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Core" file="Helper.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Core/Helper.php" size="3182" time="2015-04-30T11:43:48+02:00" unixtime="1430387028" sha1="f4d77ccfec2e6a08c048ebf06cc4ecbc7541fde8" relative="Diglin/Ricardo/Core/Helper.php"/>
+  <docblock>
+    <description compact="Class Helper"/>
+    <package value="Diglin\Ricardo\Core"/>
+  </docblock>
+  <method name="getJsonTimestamp" start="41" end="49" abstract="false" final="false" static="true" visibility="public">
     <docblock>
       <description compact="Json Date coming from Ricardo API are formatted as the following '/Date(1400795100000+0200)/' We return the Unix timestamp part">We deal with UTC+0 for the timestamp</description>
       <param type="string" variable="$date"/>
@@ -9,15 +13,15 @@
     </docblock>
     <parameter name="date" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getJsonDate" start="45" end="52" abstract="false" final="false" static="true" visibility="public">
+  <method name="getJsonDate" start="59" end="66" abstract="false" final="false" static="true" visibility="public">
     <docblock>
       <description compact="Convert PHP date like date('Y-m-d H:m:i') to .NET Json '/Date(123456789+0200)/'">We deal with UTC+0 for the timestamp</description>
       <param type="string" variable="$unixTimestamp"/>
       <return type="string"/>
     </docblock>
-    <parameter name="unixTimestamp" byreference="false" type="{unknown}" default="null"/>
+    <parameter name="unixTimestamp" byreference="false" type="{unknown}" default="" constant="null"/>
   </method>
-  <method name="getPictureExtension" start="60" end="81" abstract="false" final="false" static="true" visibility="public">
+  <method name="getPictureExtension" start="74" end="95" abstract="false" final="false" static="true" visibility="public">
     <docblock>
       <description compact="Get the Picture Extension ID from the picture filename"/>
       <param type="string" variable="$filename"/>
@@ -26,5 +30,11 @@
       </return>
     </docblock>
     <parameter name="filename" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="guid" start="100" end="107" abstract="false" final="false" static="true" visibility="public">
+    <docblock>
+      <description/>
+      <return type="string"/>
+    </docblock>
   </method>
 </class>

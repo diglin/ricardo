@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>phpDox - Diglin\Ricardo\Api</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../reports.html">Reports</a>
+          <a href="../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -56,6 +56,9 @@
             <a href="#hierarchy">Hierarchy</a>
           </li>
           <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
             <a href="#members">Members</a>
           </li>
           <li>
@@ -63,6 +66,9 @@
           </li>
           <li>
             <a href="#history">History</a>
+          </li>
+          <li>
+            <a href="../source/Diglin/Ricardo/Api.php.html#line34">Source</a>
           </li>
         </ul>
       </nav>
@@ -75,18 +81,15 @@
         <div class="synopsis">class Api
                 implements
                 <a title="Diglin\Ricardo\Core\ApiInterface" href="../interfaces/Diglin_Ricardo_Core_ApiInterface.html">ApiInterface</a>
-            {<br/><ul class="none"><li>// members</li><li>protected <span title="Diglin\Ricardo\Core\ConfigInterface">ConfigInterface</span>
-                         <a href="#members">$_config</a>;
-                    </li><li>protected
-                         <a href="#members">$_username</a>;
-                    </li><li>protected
-                         <a href="#members">$_partnerKey</a>;
-                    </li><li>protected <span title="Diglin\Ricardo\bool">bool</span>
-                         <a href="#members">$_debug</a>;
-                    </li><li>protected
-                         <a href="#members">$_lastDebug</a>;
-                    </li><li>protected <span title="Diglin\Ricardo\bool">bool</span>
-                         <a href="#members">$_shouldSetPass</a>;
+            {<br/><ul class="none"><li>// members</li><li>protected <span title="Diglin\Ricardo\Core\ConfigInterface">ConfigInterface</span> <a href="#members">$_config</a>;
+                    </li><li>protected  <a href="#members">$_username</a>;
+                    </li><li>protected  <a href="#members">$_partnerKey</a>;
+                    </li><li>protected <span title="Diglin\Ricardo\bool">bool</span> <a href="#members">$_debug</a> =
+                        false;
+                    </li><li>protected array <a href="#members">$_lastDebug</a> =
+                        ;
+                    </li><li>protected <span title="Diglin\Ricardo\bool">bool</span> <a href="#members">$_shouldSetPass</a> =
+                        true;
                     </li></ul><ul class="none"><li>// methods</li><li>public void <a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/__construct.html">__construct</a>()
                     </li><li>public mixed <a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/connect.html">connect</a>()
                     </li><li>protected array <a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/_addHeaders.html">_addHeaders</a>()
@@ -98,6 +101,7 @@
                     </li><li>public array <a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/getLastDebug.html">getLastDebug</a>()
                     </li><li>public string <a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/revertUsername.html">revertUsername</a>()
                     </li><li>public bool <a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/removePictureBytesData.html">removePictureBytesData</a>()
+                    </li><li>public string <a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/jsonEncode.html">jsonEncode</a>()
                     </li></ul>
 
             }<br/></div>
@@ -106,9 +110,43 @@
           <h4>Implements</h4>
           <ul>
             <li>
-              <a href="../interfaces/Diglin_Ricardo_Core_ApiInterface.html">Diglin\Ricardo\Core\ApiInterface</a>
+              <a title="Diglin\Ricardo\Core\ApiInterface" href="../interfaces/Diglin_Ricardo_Core_ApiInterface.html">Diglin\Ricardo\Core\ApiInterface</a>
             </li>
           </ul>
+        </div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>PHPMessDetector</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Rule</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td class="line">85 - 148</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
+              </td>
+              <td>The method connect() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.</td>
+            </tr>
+            <tr>
+              <td class="line">286 - 314</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
+              </td>
+              <td>The method jsonEncode() has a Cyclomatic Complexity of 14. The configured cyclomatic complexity threshold is 10.</td>
+            </tr>
+            <tr>
+              <td class="line">286 - 314</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#npathcomplexity" target="_blank" title="Code Size Rules">NPathComplexity</a>
+              </td>
+              <td>The method jsonEncode() has an NPath complexity of 5760. The configured NPath complexity threshold is 200.</td>
+            </tr>
+          </table>
         </div>
         <h2 id="members">Members</h2>
         <div class="styled members">
@@ -116,10 +154,10 @@
           <ul class="members">
             <li id="_config"><strong>$_config</strong>
                 —
-                <a href="#">Diglin\Ricardo\Core\ConfigInterface</a></li>
+                <a title="Diglin\Ricardo\Core\ConfigInterface" href="../classes/Diglin_Ricardo_Core_ConfigInterface.html">Diglin\Ricardo\Core\ConfigInterface</a></li>
             <li id="_debug"><strong>$_debug</strong>
                 —
-                <a href="#">Diglin\Ricardo\bool</a></li>
+                <a title="Diglin\Ricardo\bool" href="../classes/Diglin_Ricardo_bool.html">Diglin\Ricardo\bool</a></li>
             <li id="_lastDebug"><strong>$_lastDebug</strong>
                 —
                 array</li>
@@ -128,7 +166,7 @@
                 string</li>
             <li id="_shouldSetPass"><strong>$_shouldSetPass</strong>
                 —
-                <a href="#">Diglin\Ricardo\bool</a></li>
+                <a title="Diglin\Ricardo\bool" href="../classes/Diglin_Ricardo_bool.html">Diglin\Ricardo\bool</a></li>
             <li id="_username"><strong>$_username</strong>
                 —
                 string</li>
@@ -156,6 +194,8 @@
                 — Get if the pass should be send or not</li>
             <li id="getUsername"><a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/getUsername.html">getUsername()</a>
                 — Get the username</li>
+            <li id="jsonEncode"><a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/jsonEncode.html">jsonEncode()</a>
+                — We implement our own json encode function to allow to have value having [...] as string and to prevent to be kept as a string when formatted as json</li>
             <li id="removePictureBytesData">
               <a title="Diglin\Ricardo\Api" href="../classes/Diglin_Ricardo_Api/removePictureBytesData.html">removePictureBytesData()</a>
             </li>
@@ -170,13 +210,113 @@
         <h2 id="history">History</h2>
         <ul class="styled history">
           <li>
+            <h3>2015-04-25T15:28:16+02:00 (commit #<span title="7ae4261b4e1164fc8646bf33750175a895c73ebb">7ae4261</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Add technical exception class, check if a directory exist before to try to create a new one when debugging is used</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-03-17T13:43:13+01:00 (commit #<span title="143b280ef1c2c93d0662956a9eb1fa035bef0c3d">143b280</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Tiny improvements for saves of log content</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-03-09T20:04:16+01:00 (commit #<span title="320c25ea20a091bf8daf4d660fca8ac6123148d2">320c25e</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Remove Curl Cipher due to ricardo SSL Certificate changes</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-21T13:52:07+01:00 (commit #<span title="c79290f27983b300ecc7b475f843c041e0ac4015">c79290f</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change curl option from 0 to 6 after changes done on ricardo.ch side regarding their SSL Certificate policy,, return debug information in the same format as the one sent to ricardo, do not format string starting with [ (string may be formatted this way to send picture bytes array</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-18T02:47:11+01:00 (commit #<span title="2276629d09e8869e5e67a7fa6ad075bb9f5664f3">2276629</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Fix character escape for json string</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-08T17:13:03+01:00 (commit #<span title="d631ec75ecf1c7e132c813858fa26aade5f7db54">d631ec7</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Implement own json encode method to allow to send pre-encoded json array (needed in case of picture set as parameter as it is byte array and PHP consumes lots of memory with an array)</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-05T13:02:27+01:00 (commit #<span title="17cc8fe2d7fb02ee28ad33b68b9966652ce28dff">17cc8fe</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change license from OSL v3 to GPL v3</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-05T10:15:07+01:00 (commit #<span title="98b7374996fcce1e1c2a268ac70f0f4b93f59eba">98b7374</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Try to force TLS connection when curl is used</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-03T11:09:11+01:00 (commit #<span title="070665e173fc8c655a805b84fbf503052ffedb8e">070665e</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change the type of parameters can be given with curl into the API to allow more flexibility and provide encoded json directly without to be done at API class level (for example to allow picture to be already embed as json instead as array cause of memory consumption</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-12-16T12:45:07+01:00 (commit #<span title="ec26574bac4de7e66aa27c9d98df19f1ac110fe7">ec26574</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre class="wrapped">PSR2 compliant</pre>
+            </div>
+          </li>
+          <li>
             <h3>2014-11-29T21:35:16+01:00 (commit #<span title="b245fb055b34264e30cd7d73aaa54553bca654b1">b245fb0</span>)</h3>
             <div>
               <p>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Remove PictureBytes when debug data is returned. Prevent problems</pre>
+              <pre class="wrapped">Remove PictureBytes when debug data is returned. Prevent problems</pre>
             </div>
           </li>
           <li>
@@ -186,7 +326,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Anonymize username and password for log and debug for future use</pre>
+              <pre class="wrapped">Anonymize username and password for log and debug for future use</pre>
             </div>
           </li>
           <li>
@@ -196,7 +336,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>update</pre>
+              <pre class="wrapped">update</pre>
             </div>
           </li>
           <li>
@@ -206,7 +346,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Change Partner ID to Partner Key to keep ricardo terminology</pre>
+              <pre class="wrapped">Change Partner ID to Partner Key to keep ricardo terminology</pre>
             </div>
           </li>
           <li>
@@ -216,7 +356,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+              <pre class="wrapped">Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
             </div>
           </li>
           <li>
@@ -226,7 +366,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Add curl exception in case of connection problem</pre>
+              <pre class="wrapped">[RIC-38] Add curl exception in case of connection problem</pre>
             </div>
           </li>
           <li>
@@ -236,7 +376,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Standardize namespace use</pre>
+              <pre class="wrapped">Standardize namespace use</pre>
             </div>
           </li>
           <li>
@@ -246,7 +386,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Implements getSellerPackages Service</pre>
+              <pre class="wrapped">[RIC-38] Implements getSellerPackages Service</pre>
             </div>
           </li>
           <li>
@@ -256,7 +396,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
+              <pre class="wrapped">Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
             </div>
           </li>
           <li>
@@ -266,7 +406,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
+              <pre class="wrapped">Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
 Add a way to configure the unit test, documentation exist to configure it thanks to a readme file
 Implement the security protocol at the manager level</pre>
             </div>
@@ -278,7 +418,7 @@ Implement the security protocol at the manager level</pre>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>change folders structure, add script specific for Magento to allow to install the library into it</pre>
+              <pre class="wrapped">change folders structure, add script specific for Magento to allow to install the library into it</pre>
             </div>
           </li>
           <li>
@@ -288,14 +428,14 @@ Implement the security protocol at the manager level</pre>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>init commit</pre>
+              <pre class="wrapped">init commit</pre>
             </div>
           </li>
         </ul>
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>

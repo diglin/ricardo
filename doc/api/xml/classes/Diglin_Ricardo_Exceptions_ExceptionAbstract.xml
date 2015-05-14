@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Exceptions\ExceptionAbstract" namespace="Diglin\Ricardo\Exceptions" name="ExceptionAbstract" abstract="false" final="false" start="18" end="47">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions" file="ExceptionAbstract.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Exceptions/ExceptionAbstract.php" size="1324" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6eb17cd1fb421c76b8f63282bcd913403caf8e54"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Exceptions\ExceptionAbstract" namespace="Diglin\Ricardo\Exceptions" name="ExceptionAbstract" abstract="false" final="false" start="28" end="57">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Exceptions" file="ExceptionAbstract.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Exceptions/ExceptionAbstract.php" size="1833" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="97cb241624422013dc486c6743e64fad92ece86e" relative="Diglin/Ricardo/Exceptions/ExceptionAbstract.php"/>
   <docblock>
     <description compact="Class ExceptionAbstract"/>
     <package value="Diglin\Ricardo\Exceptions"/>
   </docblock>
   <extends full="Exception" namespace="" name="Exception"/>
-  <constructor name="__construct" start="20" end="24" abstract="false" final="false" static="false" visibility="public">
+  <constructor name="__construct" start="30" end="34" abstract="false" final="false" static="false" visibility="public">
     <parameter name="message" byreference="false" type="string" default="&quot;&quot;"/>
     <parameter name="code" byreference="false" type="integer" default="0"/>
-    <parameter name="previous" byreference="false" type="object" default="null">
+    <parameter name="previous" byreference="false" type="{unknown}" default="" constant="null">
       <type full="Exception" namespace="" name="Exception"/>
     </parameter>
   </constructor>
-  <method name="_getMessage" start="31" end="46" abstract="false" final="false" static="false" visibility="protected">
+  <method name="_getMessage" start="41" end="56" abstract="false" final="false" static="false" visibility="protected">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param variable="$code"/>
       <param type="string" variable="$defaultMessage"/>
       <return type="object">
@@ -25,10 +25,17 @@
     <parameter name="code" byreference="false" type="{unknown}"/>
     <parameter name="defaultMessage" byreference="false" type="string" default="''"/>
   </method>
-  <extender full="Diglin\Ricardo\Exceptions\ArticleException" namespace="Diglin\Ricardo\Exceptions" name="ArticleException"/>
-  <extender full="Diglin\Ricardo\Exceptions\CurlException" namespace="Diglin\Ricardo\Exceptions" name="CurlException"/>
-  <extender full="Diglin\Ricardo\Exceptions\CustomerException" namespace="Diglin\Ricardo\Exceptions" name="CustomerException"/>
-  <parent full="Exception" namepsace="" name="Exception">
+  <extenders>
+    <extender full="Diglin\Ricardo\Exceptions\ArticleException" namespace="Diglin\Ricardo\Exceptions" name="ArticleException"/>
+    <extender full="Diglin\Ricardo\Exceptions\CurlException" namespace="Diglin\Ricardo\Exceptions" name="CurlException"/>
+    <extender full="Diglin\Ricardo\Exceptions\CustomerException" namespace="Diglin\Ricardo\Exceptions" name="CustomerException"/>
+    <extender full="Diglin\Ricardo\Exceptions\GeneralException" namespace="Diglin\Ricardo\Exceptions" name="GeneralException"/>
+    <extender full="Diglin\Ricardo\Exceptions\PictureException" namespace="Diglin\Ricardo\Exceptions" name="PictureException"/>
+    <extender full="Diglin\Ricardo\Exceptions\SearchException" namespace="Diglin\Ricardo\Exceptions" name="SearchException"/>
+    <extender full="Diglin\Ricardo\Exceptions\SecurityException" namespace="Diglin\Ricardo\Exceptions" name="SecurityException"/>
+    <extender full="Diglin\Ricardo\Exceptions\TechnicalException" namespace="Diglin\Ricardo\Exceptions" name="TechnicalException"/>
+  </extenders>
+  <parent full="Exception" namespace="" name="Exception">
     <member name="message" static="false" visibility="protected">
     <default>null</default>
     <docblock>
@@ -115,7 +122,4 @@
     </docblock>
   </method>
   </parent>
-  <extender full="Diglin\Ricardo\Exceptions\GeneralException" namespace="Diglin\Ricardo\Exceptions" name="GeneralException"/>
-  <extender full="Diglin\Ricardo\Exceptions\PictureException" namespace="Diglin\Ricardo\Exceptions" name="PictureException"/>
-  <extender full="Diglin\Ricardo\Exceptions\SecurityException" namespace="Diglin\Ricardo\Exceptions" name="SecurityException"/>
 </class>

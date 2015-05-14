@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>phpDox - Diglin\Ricardo\Managers\System</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../reports.html">Reports</a>
+          <a href="../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -64,6 +64,9 @@
           <li>
             <a href="#history">History</a>
           </li>
+          <li>
+            <a href="../source/Diglin/Ricardo/Managers/System.php.html#line29">Source</a>
+          </li>
         </ul>
       </nav>
       <section>
@@ -74,56 +77,32 @@
         <h2 id="synopsis">Synopsis</h2>
         <div class="synopsis">class System
                 extends <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract.html">ManagerAbstract</a>
-            {<br/><ul class="none"><li>// members</li><li>protected
-                         <a href="#members">$_serviceName</a>;
-                    </li><li>protected
-                         <a href="#members">$_errorCodes</a>;
-                    </li><li>protected
-                         <a href="#members">$_articleConditions</a>;
-                    </li><li>protected
-                         <a href="#members">$_availabilities</a>;
-                    </li><li>protected
-                         <a href="#members">$_categories</a>;
-                    </li><li>protected
-                         <a href="#members">$_category</a>;
-                    </li><li>protected
-                         <a href="#members">$_countries</a>;
-                    </li><li>protected
-                         <a href="#members">$_countryIsoCode</a>;
-                    </li><li>protected
-                         <a href="#members">$_deliveryConditions</a>;
-                    </li><li>protected
-                         <a href="#members">$_firstChildsCategories</a>;
-                    </li><li>protected
-                         <a href="#members">$_languages</a>;
-                    </li><li>protected
-                         <a href="#members">$_packages</a>;
-                    </li><li>protected
-                         <a href="#members">$_parentsCategories</a>;
-                    </li><li>protected
-                         <a href="#members">$_partnerConfigurations</a>;
-                    </li><li>protected
-                         <a href="#members">$_paymentConditions</a>;
-                    </li><li>protected
-                         <a href="#members">$_paymentConditionsAndMethods</a>;
-                    </li><li>protected
-                         <a href="#members">$_paymentMethods</a>;
-                    </li><li>protected
-                         <a href="#members">$_phonePrefixes</a>;
-                    </li><li>protected
-                         <a href="#members">$_promotions</a>;
-                    </li><li>protected
-                         <a href="#members">$_regions</a>;
-                    </li><li>protected
-                         <a href="#members">$_templates</a>;
-                    </li><li>protected
-                         <a href="#members">$_warranties</a>;
-                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Managers\ManagerAbstract">ManagerAbstract</span></li><li>protected
-                             <a href="#members">$_serviceName</a>;
-                        </li><li>protected Service
-                             <a href="#members">$_serviceManager</a>;
-                        </li><li>protected Helper
-                             <a href="#members">$_helper</a>;
+            {<br/><ul class="none"><li>// members</li><li>protected string <a href="#members">$_serviceName</a> =
+                        'system';
+                    </li><li>protected  <a href="#members">$_errorCodes</a>;
+                    </li><li>protected  <a href="#members">$_articleConditions</a>;
+                    </li><li>protected  <a href="#members">$_availabilities</a>;
+                    </li><li>protected  <a href="#members">$_categories</a>;
+                    </li><li>protected  <a href="#members">$_category</a>;
+                    </li><li>protected  <a href="#members">$_countries</a>;
+                    </li><li>protected  <a href="#members">$_countryIsoCode</a>;
+                    </li><li>protected  <a href="#members">$_deliveryConditions</a>;
+                    </li><li>protected  <a href="#members">$_firstChildsCategories</a>;
+                    </li><li>protected  <a href="#members">$_languages</a>;
+                    </li><li>protected  <a href="#members">$_packages</a>;
+                    </li><li>protected  <a href="#members">$_parentsCategories</a>;
+                    </li><li>protected  <a href="#members">$_partnerConfigurations</a>;
+                    </li><li>protected  <a href="#members">$_paymentConditions</a>;
+                    </li><li>protected  <a href="#members">$_paymentConditionsAndMethods</a>;
+                    </li><li>protected  <a href="#members">$_paymentMethods</a>;
+                    </li><li>protected  <a href="#members">$_phonePrefixes</a>;
+                    </li><li>protected  <a href="#members">$_promotions</a>;
+                    </li><li>protected  <a href="#members">$_regions</a>;
+                    </li><li>protected  <a href="#members">$_templates</a>;
+                    </li><li>protected  <a href="#members">$_warranties</a>;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Managers\ManagerAbstract">ManagerAbstract</span></li><li>protected  <a href="#members">$_serviceName</a>;
+                        </li><li>protected <span title="Diglin\Ricardo\Service">Service</span> <a href="#members">$_serviceManager</a>;
+                        </li><li>protected <span title="Diglin\Ricardo\Core\Helper">Helper</span> <a href="#members">$_helper</a>;
                         </li></ul><ul class="none"><li>// methods</li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getAllErrorsCodes.html">getAllErrorsCodes</a>()
                     </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getArticleConditions.html">getArticleConditions</a>()
                     </li><li>public array <a title="Diglin\Ricardo\Managers\System" href="../classes/Diglin_Ricardo_Managers_System/getAvailabilities.html">getAvailabilities</a>()
@@ -179,7 +158,7 @@
           <h4>Extends</h4>
           <ul>
             <li>
-              <a href="../classes/Diglin_Ricardo_Managers_ManagerAbstract.html">Diglin\Ricardo\Managers\ManagerAbstract</a>
+              <a title="Diglin\Ricardo\Managers\ManagerAbstract" href="../classes/Diglin_Ricardo_Managers_ManagerAbstract.html">Diglin\Ricardo\Managers\ManagerAbstract</a>
             </li>
           </ul>
         </div>
@@ -216,7 +195,7 @@
                 array</li>
             <li id="_helper"><strong>$_helper</strong>
                 —
-                <a href="#">Diglin\Ricardo\Core\Helper</a></li>
+                <a title="Diglin\Ricardo\Core\Helper" href="../classes/Diglin_Ricardo_Core_Helper.html">Diglin\Ricardo\Core\Helper</a></li>
             <li id="_languages"><strong>$_languages</strong>
                 —
                 array</li>
@@ -249,7 +228,7 @@
                 </li>
             <li id="_serviceManager"><strong>$_serviceManager</strong>
                 —
-                <a href="#">Diglin\Ricardo\Service</a></li>
+                <a title="Diglin\Ricardo\Service" href="../classes/Diglin_Ricardo_Service.html">Diglin\Ricardo\Service</a></li>
             <li id="_serviceName"><strong>$_serviceName</strong>
                 —
                 string</li>
@@ -417,13 +396,33 @@
         <h2 id="history">History</h2>
         <ul class="styled history">
           <li>
+            <h3>2015-02-05T13:02:27+01:00 (commit #<span title="17cc8fe2d7fb02ee28ad33b68b9966652ce28dff">17cc8fe</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change license from OSL v3 to GPL v3</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-12-16T12:45:07+01:00 (commit #<span title="ec26574bac4de7e66aa27c9d98df19f1ac110fe7">ec26574</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre class="wrapped">PSR2 compliant</pre>
+            </div>
+          </li>
+          <li>
             <h3>2014-10-06T14:18:46+02:00 (commit #<span title="40224e64adb66743303ebe7e04df331ba05f922b">40224e6</span>)</h3>
             <div>
               <p>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Implement method service GetCountriesIso but it's useless. No Data returned and parameter is not what we need</pre>
+              <pre class="wrapped">Implement method service GetCountriesIso but it's useless. No Data returned and parameter is not what we need</pre>
             </div>
           </li>
           <li>
@@ -433,7 +432,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+              <pre class="wrapped">Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
             </div>
           </li>
           <li>
@@ -443,7 +442,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[]RIC-38 Add log implementation for unit test, structure differently enumeration classes, update the constant of the enums in the different classes</pre>
+              <pre class="wrapped">[]RIC-38 Add log implementation for unit test, structure differently enumeration classes, update the constant of the enums in the different classes</pre>
             </div>
           </li>
           <li>
@@ -453,7 +452,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Add label to promotions based on its enums</pre>
+              <pre class="wrapped">[RIC-38] Add label to promotions based on its enums</pre>
             </div>
           </li>
           <li>
@@ -463,7 +462,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Add additional methods to services and their test</pre>
+              <pre class="wrapped">[RIC-38] Add additional methods to services and their test</pre>
             </div>
           </li>
           <li>
@@ -473,7 +472,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
+              <pre class="wrapped">[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
             </div>
           </li>
           <li>
@@ -483,14 +482,14 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
+              <pre class="wrapped">Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
             </div>
           </li>
         </ul>
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\PaymentMethods" namespace="Diglin\Ricardo\Enums" name="PaymentMethods" abstract="false" final="false" start="14" end="36">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums" file="PaymentMethods.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/PaymentMethods.php" size="967" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="acd43234cbe20c3235def9834a610b8a467ba908"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Enums\PaymentMethods" namespace="Diglin\Ricardo\Enums" name="PaymentMethods" abstract="false" final="false" start="24" end="46">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Enums" file="PaymentMethods.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/PaymentMethods.php" size="1476" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="7ac3b183889ebf8790324550562b49ff011edfb5" relative="Diglin/Ricardo/Enums/PaymentMethods.php"/>
   <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
-  <constant name="TYPE_BANK_TRANSFER" value="8192"/>
-  <constant name="TYPE_CASH" value="1073741824"/>
-  <constant name="TYPE_CREDIT_CARD" value="262144"/>
-  <constant name="TYPE_OTHER" value="0"/>
-  <method name="getEnums" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+  <constant type="integer" name="TYPE_BANK_TRANSFER" value="8192"/>
+  <constant type="integer" name="TYPE_CASH" value="1073741824"/>
+  <constant type="integer" name="TYPE_CREDIT_CARD" value="262144"/>
+  <constant type="integer" name="TYPE_OTHER" value="0"/>
+  <method name="getEnums" start="37" end="45" abstract="false" final="false" static="true" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
-    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="28" end="31" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+    <method name="getLabel" start="37" end="45" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param variable="$value"/>
         <return type="object">
           <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
@@ -29,9 +29,9 @@
       </docblock>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+    <method name="getValues" start="50" end="57" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>phpDox - Diglin\Ricardo\Core\Helper</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../reports.html">Reports</a>
+          <a href="../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -58,17 +58,22 @@
           <li>
             <a href="#history">History</a>
           </li>
+          <li>
+            <a href="../source/Diglin/Ricardo/Core/Helper.php.html#line29">Source</a>
+          </li>
         </ul>
       </nav>
       <section>
         <h1 id="introduction"><small>Diglin\Ricardo\Core\</small>Helper</h1>
-        <h4/>
+        <h4>Class Helper</h4>
         <p/>
+        <ul/>
         <h2 id="synopsis">Synopsis</h2>
         <div class="synopsis">class Helper
             {<br/><ul class="none"><li>// methods</li><li>public static string <a title="Diglin\Ricardo\Core\Helper" href="../classes/Diglin_Ricardo_Core_Helper/getJsonTimestamp.html">getJsonTimestamp</a>()
                     </li><li>public static string <a title="Diglin\Ricardo\Core\Helper" href="../classes/Diglin_Ricardo_Core_Helper/getJsonDate.html">getJsonDate</a>()
                     </li><li>public static bool|int <a title="Diglin\Ricardo\Core\Helper" href="../classes/Diglin_Ricardo_Core_Helper/getPictureExtension.html">getPictureExtension</a>()
+                    </li><li>public static string <a title="Diglin\Ricardo\Core\Helper" href="../classes/Diglin_Ricardo_Core_Helper/guid.html">guid</a>()
                     </li></ul>
 
             }<br/></div>
@@ -82,10 +87,63 @@
                 — Json Date coming from Ricardo API are formatted as the following '/Date(1400795100000+0200)/' We return the Unix timestamp part</li>
             <li id="getPictureExtension"><a title="Diglin\Ricardo\Core\Helper" href="../classes/Diglin_Ricardo_Core_Helper/getPictureExtension.html">getPictureExtension()</a>
                 — Get the Picture Extension ID from the picture filename</li>
+            <li id="guid">
+              <a title="Diglin\Ricardo\Core\Helper" href="../classes/Diglin_Ricardo_Core_Helper/guid.html">guid()</a>
+            </li>
           </ul>
         </div>
         <h2 id="history">History</h2>
         <ul class="styled history">
+          <li>
+            <h3>2015-04-26T00:57:30+02:00 (commit #<span title="8927cd2143015b0cd31436d0c0c6a1c044d285f6">8927cd2</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change helper time from int to string to prevent some on issue on some OS 32 bits</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-03-29T17:46:24+02:00 (commit #<span title="a83cf461adba4eb3524f223d8481e5ab72456593">a83cf46</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Force string to lower for Guid</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-03-29T14:51:27+02:00 (commit #<span title="b2e305c459a750079f2b32a26f49bb137330976f">b2e305c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Implement and test bulk method insertArticles</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-05T13:02:27+01:00 (commit #<span title="17cc8fe2d7fb02ee28ad33b68b9966652ce28dff">17cc8fe</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change license from OSL v3 to GPL v3</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-12-16T12:45:07+01:00 (commit #<span title="ec26574bac4de7e66aa27c9d98df19f1ac110fe7">ec26574</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre class="wrapped">PSR2 compliant</pre>
+            </div>
+          </li>
           <li>
             <h3>2014-12-03T20:43:38+01:00 (commit #<span title="bc8529c56fd1c779c9a2243a4524eeeff1a978dd">bc8529c</span>)</h3>
             <div>
@@ -93,7 +151,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Fix issue with empty or 0 optional properties (an optional property can have the value 0 and must be sent)</pre>
+              <pre class="wrapped">Fix issue with empty or 0 optional properties (an optional property can have the value 0 and must be sent)</pre>
             </div>
           </li>
           <li>
@@ -103,7 +161,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Change Partner ID to Partner Key to keep ricardo terminology</pre>
+              <pre class="wrapped">Change Partner ID to Partner Key to keep ricardo terminology</pre>
             </div>
           </li>
           <li>
@@ -113,7 +171,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+              <pre class="wrapped">Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
             </div>
           </li>
           <li>
@@ -123,7 +181,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Insert Article Implementation and test</pre>
+              <pre class="wrapped">[RIC-38] Insert Article Implementation and test</pre>
             </div>
           </li>
           <li>
@@ -133,7 +191,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Set any related dates be returned as a timestamp</pre>
+              <pre class="wrapped">[RIC-38] Set any related dates be returned as a timestamp</pre>
             </div>
           </li>
           <li>
@@ -143,7 +201,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Simplify date format, work on timestamp base UTC+0</pre>
+              <pre class="wrapped">[RIC-38] Simplify date format, work on timestamp base UTC+0</pre>
             </div>
           </li>
           <li>
@@ -153,7 +211,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
+              <pre class="wrapped">[RIC-2] [FEATURE] finish to implement the System Service for the PHP library.</pre>
             </div>
           </li>
           <li>
@@ -163,7 +221,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
+              <pre class="wrapped">Add test for Helper, add to the helper a method to convert in both directions date from/to json/php, add the Ricardo Service System and its test (still in progress), improve information of error curl message, add method into the testAbstract to get the latest api debug</pre>
             </div>
           </li>
           <li>
@@ -173,7 +231,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
+              <pre class="wrapped">Add PhpUnit Tests for Security, SellerAccount (in progress) and System (in progress) Services.
 Add a way to configure the unit test, documentation exist to configure it thanks to a readme file
 Implement the security protocol at the manager level</pre>
             </div>
@@ -182,7 +240,7 @@ Implement the security protocol at the manager level</pre>
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>

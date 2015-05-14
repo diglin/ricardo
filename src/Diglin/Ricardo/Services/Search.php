@@ -23,6 +23,10 @@ namespace Diglin\Ricardo\Services;
 
 use Diglin\Ricardo\Managers\Search\Parameter\GetCategoryBestMatchParameter;
 
+/**
+ * Class Search
+ * @package Diglin\Ricardo\Services
+ */
 class Search extends ServiceAbstract
 {
     /**
@@ -36,6 +40,8 @@ class Search extends ServiceAbstract
     protected $_typeOfToken = self::TOKEN_TYPE_ANONYMOUS;
 
     /**
+     * Get Category Best Match
+     *
      * @param GetCategoryBestMatchParameter $getCategoryBestMatchParameter
      * @return array
      */

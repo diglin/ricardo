@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Managers\SellerAccount" namespace="Diglin\Ricardo\Managers" name="SellerAccount" abstract="false" final="false" start="26" end="260">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Managers" file="SellerAccount.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount.php" size="6239" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="cca6590257f08bea94fe157a620a8099db5add49"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Managers\SellerAccount" namespace="Diglin\Ricardo\Managers" name="SellerAccount" abstract="false" final="false" start="36" end="270">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Managers" file="SellerAccount.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/SellerAccount.php" size="6748" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="90e2e104fe290c34704e8005c7602c6134812455" relative="Diglin/Ricardo/Managers/SellerAccount.php"/>
   <docblock>
     <description compact="Class SellerAccount"/>
     <package value="Diglin\Ricardo\Managers"/>
   </docblock>
   <extends full="Diglin\Ricardo\Managers\ManagerAbstract" namespace="Diglin\Ricardo\Managers" name="ManagerAbstract"/>
-  <member name="_serviceName" type="string" default="'seller_account'" visibility="protected" line="31">
+  <member name="_serviceName" type="string" default="'seller_account'" visibility="protected" line="41">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_templates" type="{unknown}" visibility="protected" line="36">
+  <member name="_templates" visibility="protected" line="46">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <method name="addCardPaymentOption" start="44" end="47" abstract="false" final="false" static="false" visibility="public">
+  <method name="addCardPaymentOption" start="54" end="57" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Add Card payment options to one or more articles"/>
       <param type="array" variable="$articleIds"/>
@@ -26,7 +26,7 @@
     </docblock>
     <parameter name="articleIds" byreference="false" type="array"/>
   </method>
-  <method name="getArticleModificationAllowed" start="55" end="58" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleModificationAllowed" start="65" end="68" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get if an article is allowed to be modified or not"/>
       <param type="int" variable="$articleId"/>
@@ -36,7 +36,7 @@
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getArticle" start="66" end="69" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticle" start="76" end="79" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get Article Information for NOT planned article"/>
       <param type="string" variable="$articleId"/>
@@ -44,7 +44,7 @@
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getArticles" start="77" end="80" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticles" start="87" end="90" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get all auctions by date and type"/>
       <param type="object" variable="$parameter">
@@ -56,9 +56,9 @@
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getClosedArticles" start="86" end="89" abstract="false" final="false" static="false" visibility="public">
+  <method name="getClosedArticles" start="96" end="99" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="object" variable="$parameter">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ClosedArticlesParameter"/>
       </param>
@@ -68,13 +68,13 @@
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ClosedArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getOpenArticle" start="94" end="97" abstract="false" final="false" static="false" visibility="public">
+  <method name="getOpenArticle" start="104" end="107" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets an open article."/>
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getOpenArticles" start="105" end="108" abstract="false" final="false" static="false" visibility="public">
+  <method name="getOpenArticles" start="115" end="118" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the open articles."/>
       <param type="object" variable="$parameter">
@@ -86,15 +86,15 @@
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="OpenArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getPaymentOptions" start="117" end="129" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPaymentOptions" start="127" end="139" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the payment options for a seller."/>
       <param type="int" variable="$customerId"/>
       <return type="array"/>
     </docblock>
-    <parameter name="customerId" byreference="false" type="{unknown}" default="null"/>
+    <parameter name="customerId" byreference="false" type="{unknown}" default="" constant="null"/>
   </method>
-  <method name="getPlannedArticle" start="137" end="140" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPlannedArticle" start="147" end="150" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets a planned articles"/>
       <param type="object" variable="$parameter">
@@ -106,7 +106,7 @@
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticleParameter"/>
     </parameter>
   </method>
-  <method name="getPlannedArticles" start="148" end="151" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPlannedArticles" start="158" end="161" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the planned articles."/>
       <param type="object" variable="$parameter">
@@ -118,18 +118,18 @@
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getPlannedPictures" start="156" end="159" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPlannedPictures" start="166" end="169" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the planned pictures."/>
     </docblock>
   </method>
-  <method name="getSellerPackages" start="166" end="169" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSellerPackages" start="176" end="179" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets list of customer's listing packages(normally should be just one item)"/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getSoldArticle" start="177" end="180" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSoldArticle" start="187" end="190" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the sold article."/>
       <param type="int" variable="$articleId"/>
@@ -137,9 +137,9 @@
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getSoldArticles" start="186" end="189" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSoldArticles" start="196" end="199" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="object" variable="$parameter">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="SoldArticlesParameter"/>
       </param>
@@ -149,19 +149,19 @@
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="SoldArticlesParameter"/>
     </parameter>
   </method>
-  <method name="getTemplates" start="194" end="200" abstract="false" final="false" static="false" visibility="public">
+  <method name="getTemplates" start="204" end="210" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getUnsoldArticle" start="205" end="208" abstract="false" final="false" static="false" visibility="public">
+  <method name="getUnsoldArticle" start="215" end="218" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the unsold article."/>
     </docblock>
     <parameter name="articleId" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getUnsoldArticles" start="216" end="219" abstract="false" final="false" static="false" visibility="public">
+  <method name="getUnsoldArticles" start="226" end="229" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Gets the unsold articles"/>
       <param type="object" variable="$parameter">
@@ -173,57 +173,57 @@
       <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="UnsoldArticlesParameter"/>
     </parameter>
   </method>
-  <method name="insertAnswer" start="224" end="227" abstract="false" final="false" static="false" visibility="public">
+  <method name="insertAnswer" start="234" end="237" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Inserts the answer."/>
     </docblock>
   </method>
-  <method name="insertSellerPackage" start="232" end="235" abstract="false" final="false" static="false" visibility="public">
+  <method name="insertSellerPackage" start="242" end="245" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Inserts selected by customer listing package"/>
     </docblock>
   </method>
-  <method name="removeCardPaymentOption" start="240" end="243" abstract="false" final="false" static="false" visibility="public">
+  <method name="removeCardPaymentOption" start="250" end="253" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Removes the card payment option from specified articles."/>
     </docblock>
   </method>
-  <method name="setCumulativeShipping" start="248" end="251" abstract="false" final="false" static="false" visibility="public">
+  <method name="setCumulativeShipping" start="258" end="261" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Sets if the article has cumulative shipping."/>
     </docblock>
   </method>
-  <method name="setPremiumPackageAutomaticReactivation" start="256" end="259" abstract="false" final="false" static="false" visibility="public">
+  <method name="setPremiumPackageAutomaticReactivation" start="266" end="269" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Change the automatic reactivation for a premium package"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Managers\ManagerAbstract" namepsace="Diglin\Ricardo\Managers" name="ManagerAbstract">
-    <member name="_serviceName" type="{unknown}" visibility="protected" line="29">
+  <parent full="Diglin\Ricardo\Managers\ManagerAbstract" namespace="Diglin\Ricardo\Managers" name="ManagerAbstract">
+    <member name="_serviceName" visibility="protected" line="39">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="string"/>
       </docblock>
     </member>
-    <member name="_serviceManager" type="{unknown}" visibility="protected" line="34">
+    <member name="_serviceManager" visibility="protected" line="44">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="object">
           <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
         </var>
       </docblock>
     </member>
-    <member name="_helper" type="{unknown}" visibility="protected" line="39">
+    <member name="_helper" visibility="protected" line="49">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="object">
           <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
         </var>
       </docblock>
     </member>
-    <constructor name="__construct" start="44" end="47" abstract="false" final="false" static="false" visibility="public">
+    <constructor name="__construct" start="54" end="57" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param type="object" variable="$serviceManager">
           <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
         </param>
@@ -232,17 +232,17 @@
         <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
       </parameter>
     </constructor>
-    <method name="getHelper" start="52" end="58" abstract="false" final="false" static="false" visibility="public">
+    <method name="getHelper" start="62" end="68" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="object">
           <type full="Diglin\Ricardo\Core\Helper" namespace="Diglin\Ricardo\Core" name="Helper"/>
         </return>
       </docblock>
     </method>
-    <method name="_proceed" start="67" end="105" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_proceed" start="77" end="115" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param type="string" variable="$method"/>
         <param type="mixed" variable="$parameters"/>
         <return type="array"/>
@@ -254,9 +254,9 @@
         </throws>
       </docblock>
       <parameter name="method" byreference="false" type="{unknown}"/>
-      <parameter name="parameters" byreference="false" type="{unknown}" default="null"/>
+      <parameter name="parameters" byreference="false" type="{unknown}" default="" constant="null"/>
     </method>
-    <method name="extractError" start="113" end="140" abstract="false" final="false" static="false" visibility="protected">
+    <method name="extractError" start="123" end="150" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Extract code error and type from API call"/>
         <param type="array" variable="$result"/>
@@ -264,17 +264,17 @@
       </docblock>
       <parameter name="result" byreference="false" type="array"/>
     </method>
-    <method name="getServiceManager" start="145" end="148" abstract="false" final="false" static="false" visibility="public">
+    <method name="getServiceManager" start="155" end="158" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="object">
           <type full="Diglin\Ricardo\Service" namespace="Diglin\Ricardo" name="Service"/>
         </return>
       </docblock>
     </method>
-    <method name="getTypeOfToken" start="153" end="156" abstract="false" final="false" static="false" visibility="public">
+    <method name="getTypeOfToken" start="163" end="166" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="string"/>
       </docblock>
     </method>

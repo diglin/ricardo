@@ -1,0 +1,3490 @@
+<?xml version="1.0"?>
+<source xmlns="http://xml.phpdox.net/token">
+  <file xmlns="http://xml.phpdox.net/src" path="/www-data/git/ricardo/src/Diglin/Ricardo/Services" file="Sell.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Services/Sell.php" size="19553" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="1d349c702ca14d9baedff240c8e4d1dc090c8700" relative="Diglin/Ricardo/Services/Sell.php"/>
+  <line no="1">
+    <token name="T_OPEN_TAG">&lt;?php</token>
+  </line>
+  <line no="2">
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="3">
+    <token name="T_DOC_COMMENT"> * Diglin GmbH - Switzerland</token>
+  </line>
+  <line no="4">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="5">
+    <token name="T_DOC_COMMENT"> * This file is part of a Diglin GmbH module.</token>
+  </line>
+  <line no="6">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="7">
+    <token name="T_DOC_COMMENT"> * This Diglin GmbH module is free software; you can redistribute it and/or</token>
+  </line>
+  <line no="8">
+    <token name="T_DOC_COMMENT"> * modify it under the terms of the GNU General Public License version 3 as</token>
+  </line>
+  <line no="9">
+    <token name="T_DOC_COMMENT"> * published by the Free Software Foundation.</token>
+  </line>
+  <line no="10">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="11">
+    <token name="T_DOC_COMMENT"> * This script is distributed in the hope that it will be useful, but WITHOUT</token>
+  </line>
+  <line no="12">
+    <token name="T_DOC_COMMENT"> * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS</token>
+  </line>
+  <line no="13">
+    <token name="T_DOC_COMMENT"> * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</token>
+  </line>
+  <line no="14">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="15">
+    <token name="T_DOC_COMMENT"> * @author      Sylvain Ray&#xE9; &lt;support at diglin.com&gt;</token>
+  </line>
+  <line no="16">
+    <token name="T_DOC_COMMENT"> * @category    Diglin</token>
+  </line>
+  <line no="17">
+    <token name="T_DOC_COMMENT"> * @package     Diglin_Ricardo</token>
+  </line>
+  <line no="18">
+    <token name="T_DOC_COMMENT"> * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)</token>
+  </line>
+  <line no="19">
+    <token name="T_DOC_COMMENT"> * @license     http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)</token>
+  </line>
+  <line no="20">
+    <token name="T_DOC_COMMENT"> */</token>
+  </line>
+  <line no="21">
+    <token name="T_NAMESPACE">namespace</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Services</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="22"/>
+  <line no="23">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">AddArticlePicturesParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="24">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">AppendArticleDescriptionParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="25">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">CloseArticleParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="26">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">CloseArticlesParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="27">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">DeletePlannedArticleParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="28">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">DeletePlannedArticlesParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="29">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">GetArticlesFeeParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="30">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">InsertArticleParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="31">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">InsertArticlesParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="32">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">UpdateArticleParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="33">
+    <token name="T_USE">use</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Diglin</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Ricardo</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Managers</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">Parameter</token>
+    <token name="T_NS_SEPARATOR">\</token>
+    <token name="T_STRING">UpdateArticlePicturesParameter</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="34"/>
+  <line no="35">
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="36">
+    <token name="T_DOC_COMMENT"> * Class Sell</token>
+  </line>
+  <line no="37">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="38">
+    <token name="T_DOC_COMMENT"> * This service is to be used to manage your articles as a seller: you can list, relist, modify, close an article ...</token>
+  </line>
+  <line no="39">
+    <token name="T_DOC_COMMENT"> *</token>
+  </line>
+  <line no="40">
+    <token name="T_DOC_COMMENT"> * @package Diglin\Ricardo\Services</token>
+  </line>
+  <line no="41">
+    <token name="T_DOC_COMMENT"> * @link https://ws.ricardo.ch/RicardoApi/documentation/html/T_Ricardo_Contracts_ISellService.htm</token>
+  </line>
+  <line no="42">
+    <token name="T_DOC_COMMENT"> */</token>
+  </line>
+  <line no="43">
+    <token name="T_CLASS">class</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">Sell</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_EXTENDS">extends</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">ServiceAbstract</token>
+  </line>
+  <line no="44">
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="45">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="46">
+    <token name="T_DOC_COMMENT">     * @var string</token>
+  </line>
+  <line no="47">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="48">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PROTECTED">protected</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$_service</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_EQUAL">=</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'SellService'</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="49"/>
+  <line no="50">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="51">
+    <token name="T_DOC_COMMENT">     * @var string</token>
+  </line>
+  <line no="52">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="53">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PROTECTED">protected</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$_typeOfToken</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_EQUAL">=</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">self</token>
+    <token name="T_DOUBLE_COLON">::</token>
+    <token name="T_STRING">TOKEN_TYPE_IDENTIFIED</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="54"/>
+  <line no="55">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="56">
+    <token name="T_DOC_COMMENT">     * Adds the article pictures.</token>
+  </line>
+  <line no="57">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="58">
+    <token name="T_DOC_COMMENT">     * @param AddArticlePicturesParameter $addArticlePicturesParameter</token>
+  </line>
+  <line no="59">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="60">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="61">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">addArticlePictures</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">AddArticlePicturesParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$addArticlePicturesParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="62">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="63">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="64">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'AddArticlePictures'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="65">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'addArticlePicturesParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$addArticlePicturesParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="66">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="67">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="68"/>
+  <line no="69">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="70">
+    <token name="T_DOC_COMMENT">     * Get the article fee</token>
+  </line>
+  <line no="71">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="72">
+    <token name="T_DOC_COMMENT">     * The Ricardo API returns:</token>
+  </line>
+  <line no="73">
+    <token name="T_DOC_COMMENT">     * &lt;pre&gt;</token>
+  </line>
+  <line no="74">
+    <token name="T_DOC_COMMENT">     * {</token>
+  </line>
+  <line no="75">
+    <token name="T_DOC_COMMENT">     *     "AddArticlePicturesResult": {</token>
+  </line>
+  <line no="76">
+    <token name="T_DOC_COMMENT">     *       "ArticleFee": "float"</token>
+  </line>
+  <line no="77">
+    <token name="T_DOC_COMMENT">     *     }</token>
+  </line>
+  <line no="78">
+    <token name="T_DOC_COMMENT">     *   }</token>
+  </line>
+  <line no="79">
+    <token name="T_DOC_COMMENT">     * &lt;/pre&gt;</token>
+  </line>
+  <line no="80">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="81">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="82">
+    <token name="T_DOC_COMMENT">     * @return bool</token>
+  </line>
+  <line no="83">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="84">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">addArticlePicturesResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="85">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="86">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_IF">if</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'AddArticlePicturesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="87">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'AddArticlePicturesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="88">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="89">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">false</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="90">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="91"/>
+  <line no="92">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="93">
+    <token name="T_DOC_COMMENT">     * Appends the article description.</token>
+  </line>
+  <line no="94">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="95">
+    <token name="T_DOC_COMMENT">     * @param AppendArticleDescriptionParameter $appendArticleDescriptionParameter</token>
+  </line>
+  <line no="96">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="97">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="98">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">appendArticleDescription</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">AppendArticleDescriptionParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$appendArticleDescriptionParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="99">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="100">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="101">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'AppendArticleDescription'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="102">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'appendArticleDescriptionParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$appendArticleDescriptionParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="103">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="104">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="105"/>
+  <line no="106">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="107">
+    <token name="T_DOC_COMMENT">     * Nothing to return normally, we keep for errors or to have consistent API</token>
+  </line>
+  <line no="108">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="109">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="110">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="111">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="112">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">appendArticleDescriptionResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="113">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="114">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="115">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="116"/>
+  <line no="117">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="118">
+    <token name="T_DOC_COMMENT">     * Closes the article.</token>
+  </line>
+  <line no="119">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="120">
+    <token name="T_DOC_COMMENT">     * @param CloseArticleParameter $closeArticleParameter</token>
+  </line>
+  <line no="121">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="122">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="123">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">closeArticle</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">CloseArticleParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$closeArticleParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="124">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="125">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="126">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CloseArticle'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="127">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'closeArticleParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$closeArticleParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="128">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="129">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="130"/>
+  <line no="131">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="132">
+    <token name="T_DOC_COMMENT">     * Get the result of the closed article</token>
+  </line>
+  <line no="133">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="134">
+    <token name="T_DOC_COMMENT">     * The Ricardo API returns:</token>
+  </line>
+  <line no="135">
+    <token name="T_DOC_COMMENT">     * &lt;pre&gt;</token>
+  </line>
+  <line no="136">
+    <token name="T_DOC_COMMENT">     * {</token>
+  </line>
+  <line no="137">
+    <token name="T_DOC_COMMENT">     *     "CloseArticleResult": {</token>
+  </line>
+  <line no="138">
+    <token name="T_DOC_COMMENT">     *       "ArticleNr": "int"</token>
+  </line>
+  <line no="139">
+    <token name="T_DOC_COMMENT">     *       "IsClosed": "bool"</token>
+  </line>
+  <line no="140">
+    <token name="T_DOC_COMMENT">     *     }</token>
+  </line>
+  <line no="141">
+    <token name="T_DOC_COMMENT">     *   }</token>
+  </line>
+  <line no="142">
+    <token name="T_DOC_COMMENT">     * &lt;/pre&gt;</token>
+  </line>
+  <line no="143">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="144">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="145">
+    <token name="T_DOC_COMMENT">     * @return array|bool</token>
+  </line>
+  <line no="146">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="147">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">closeArticleResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="148">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="149">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_IF">if</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CloseArticleResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="150">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CloseArticleResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="151">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="152">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">false</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="153">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="154"/>
+  <line no="155">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="156">
+    <token name="T_DOC_COMMENT">     * Closes a list of articles.</token>
+  </line>
+  <line no="157">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="158">
+    <token name="T_DOC_COMMENT">     * @param CloseArticlesParameter $closeArticlesParameter</token>
+  </line>
+  <line no="159">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="160">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="161">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">closeArticles</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">CloseArticlesParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$closeArticlesParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="162">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="163">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="164">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CloseArticles'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="165">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'closeArticlesParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$closeArticlesParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="166">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="167">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="168"/>
+  <line no="169">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="170">
+    <token name="T_DOC_COMMENT">     * Get the result of the closed articles</token>
+  </line>
+  <line no="171">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="172">
+    <token name="T_DOC_COMMENT">     * The Ricardo API returns:</token>
+  </line>
+  <line no="173">
+    <token name="T_DOC_COMMENT">     * &lt;pre&gt;</token>
+  </line>
+  <line no="174">
+    <token name="T_DOC_COMMENT">     * {</token>
+  </line>
+  <line no="175">
+    <token name="T_DOC_COMMENT">     *     "CloseArticlesResult":</token>
+  </line>
+  <line no="176">
+    <token name="T_DOC_COMMENT">     *      "CloseArticleResults":</token>
+  </line>
+  <line no="177">
+    <token name="T_DOC_COMMENT">     *          [{</token>
+  </line>
+  <line no="178">
+    <token name="T_DOC_COMMENT">     *          "ArticleNr": "int"</token>
+  </line>
+  <line no="179">
+    <token name="T_DOC_COMMENT">     *          "IsClosed": "bool"</token>
+  </line>
+  <line no="180">
+    <token name="T_DOC_COMMENT">     *          },</token>
+  </line>
+  <line no="181">
+    <token name="T_DOC_COMMENT">     *          {</token>
+  </line>
+  <line no="182">
+    <token name="T_DOC_COMMENT">     *          "ArticleNr": "int"</token>
+  </line>
+  <line no="183">
+    <token name="T_DOC_COMMENT">     *          "IsClosed": "bool"</token>
+  </line>
+  <line no="184">
+    <token name="T_DOC_COMMENT">     *          }]</token>
+  </line>
+  <line no="185">
+    <token name="T_DOC_COMMENT">     *   }</token>
+  </line>
+  <line no="186">
+    <token name="T_DOC_COMMENT">     * &lt;/pre&gt;</token>
+  </line>
+  <line no="187">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="188">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="189">
+    <token name="T_DOC_COMMENT">     * @return array|bool</token>
+  </line>
+  <line no="190">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="191">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">closeArticlesResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="192">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="193">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_IF">if</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CloseArticlesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_BOOLEAN_AND">&amp;&amp;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CloseArticlesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CloseArticleResults'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="194">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CloseArticlesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'CloseArticleResults'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="195">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="196"/>
+  <line no="197">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">false</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="198">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="199"/>
+  <line no="200">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="201">
+    <token name="T_DOC_COMMENT">     * Closes the classified.</token>
+  </line>
+  <line no="202">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="203">
+    <token name="T_DOC_COMMENT">     * @param $closeClassifiedParameter</token>
+  </line>
+  <line no="204">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="205">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">closeClassified</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$closeClassifiedParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="206">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="207">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="208"/>
+  <line no="209">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="210">
+    <token name="T_DOC_COMMENT">     * Closes list of classified.</token>
+  </line>
+  <line no="211">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="212">
+    <token name="T_DOC_COMMENT">     * @param $closeClassifiedsParameter</token>
+  </line>
+  <line no="213">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="214">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">closeClassifieds</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$closeClassifiedsParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="215">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="216">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="217"/>
+  <line no="218">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="219">
+    <token name="T_DOC_COMMENT">     * Deletes the planned article.</token>
+  </line>
+  <line no="220">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="221">
+    <token name="T_DOC_COMMENT">     * @param DeletePlannedArticleParameter $deletePlannedArticleParameter</token>
+  </line>
+  <line no="222">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="223">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="224">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">deletePlannedArticle</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">DeletePlannedArticleParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$deletePlannedArticleParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="225">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="226">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="227">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'DeletePlannedArticle'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="228">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'deletePlannedArticleParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$deletePlannedArticleParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="229">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="230"/>
+  <line no="231">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="232"/>
+  <line no="233">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="234">
+    <token name="T_DOC_COMMENT">     * Get the result of the deleted article</token>
+  </line>
+  <line no="235">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="236">
+    <token name="T_DOC_COMMENT">     * The Ricardo API returns:</token>
+  </line>
+  <line no="237">
+    <token name="T_DOC_COMMENT">     * &lt;pre&gt;</token>
+  </line>
+  <line no="238">
+    <token name="T_DOC_COMMENT">     * {</token>
+  </line>
+  <line no="239">
+    <token name="T_DOC_COMMENT">     *     "DeletePlannedArticleResult": {</token>
+  </line>
+  <line no="240">
+    <token name="T_DOC_COMMENT">     *       "PlannedArticleId": "int"</token>
+  </line>
+  <line no="241">
+    <token name="T_DOC_COMMENT">     *       "PlannedIndex": "int"</token>
+  </line>
+  <line no="242">
+    <token name="T_DOC_COMMENT">     *       "IsClosed": "bool"</token>
+  </line>
+  <line no="243">
+    <token name="T_DOC_COMMENT">     *     }</token>
+  </line>
+  <line no="244">
+    <token name="T_DOC_COMMENT">     *   }</token>
+  </line>
+  <line no="245">
+    <token name="T_DOC_COMMENT">     * &lt;/pre&gt;</token>
+  </line>
+  <line no="246">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="247">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="248">
+    <token name="T_DOC_COMMENT">     * @return array|bool</token>
+  </line>
+  <line no="249">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="250">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">deletePlannedArticleResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="251">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="252">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_IF">if</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'DeletePlannedArticleResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="253">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'DeletePlannedArticleResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="254">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="255">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">false</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="256">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="257"/>
+  <line no="258">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="259">
+    <token name="T_DOC_COMMENT">     * Deletes the planned articles.</token>
+  </line>
+  <line no="260">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="261">
+    <token name="T_DOC_COMMENT">     * @param DeletePlannedArticlesParameter $deletePlannedArticleParameter</token>
+  </line>
+  <line no="262">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="263">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="264">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">deletePlannedArticles</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">DeletePlannedArticlesParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$deletePlannedArticleParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="265">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="266">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="267">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'DeletePlannedArticles'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="268">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'deletePlannedArticlesParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$deletePlannedArticleParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="269">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="270">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="271"/>
+  <line no="272">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="273">
+    <token name="T_DOC_COMMENT">     * Get the result of the deleted articles</token>
+  </line>
+  <line no="274">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="275">
+    <token name="T_DOC_COMMENT">     * The Ricardo API returns:</token>
+  </line>
+  <line no="276">
+    <token name="T_DOC_COMMENT">     * &lt;pre&gt;</token>
+  </line>
+  <line no="277">
+    <token name="T_DOC_COMMENT">     * {</token>
+  </line>
+  <line no="278">
+    <token name="T_DOC_COMMENT">     *     "DeletePlannedArticlesResult":</token>
+  </line>
+  <line no="279">
+    <token name="T_DOC_COMMENT">     *       "DeleteResults": [{</token>
+  </line>
+  <line no="280">
+    <token name="T_DOC_COMMENT">     *           "PlannedArticleId": "int"</token>
+  </line>
+  <line no="281">
+    <token name="T_DOC_COMMENT">     *           "PlannedIndex": "int"</token>
+  </line>
+  <line no="282">
+    <token name="T_DOC_COMMENT">     *          "IsClosed": "bool"</token>
+  </line>
+  <line no="283">
+    <token name="T_DOC_COMMENT">     *          }]</token>
+  </line>
+  <line no="284">
+    <token name="T_DOC_COMMENT">     *   }</token>
+  </line>
+  <line no="285">
+    <token name="T_DOC_COMMENT">     * &lt;/pre&gt;</token>
+  </line>
+  <line no="286">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="287">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="288">
+    <token name="T_DOC_COMMENT">     * @return array|bool</token>
+  </line>
+  <line no="289">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="290">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">deletePlannedArticlesResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="291">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="292">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_IF">if</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'DeletePlannedArticlesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_BOOLEAN_AND">&amp;&amp;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'DeletePlannedArticlesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'DeleteResults'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="293">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'DeletePlannedArticlesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'DeleteResults'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="294">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="295">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">false</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="296">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="297"/>
+  <line no="298">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="299">
+    <token name="T_DOC_COMMENT">     * Gets the article fee.</token>
+  </line>
+  <line no="300">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="301">
+    <token name="T_DOC_COMMENT">     * @param $getArticleFeeParameter</token>
+  </line>
+  <line no="302">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="303">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="304">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">getArticleFee</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$getArticleFeeParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="305">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="306">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="307"/>
+  <line no="308">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">getArticleFeeResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$getArticleFeeParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="309">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="310">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="311"/>
+  <line no="312">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="313">
+    <token name="T_DOC_COMMENT">     * @param GetArticlesFeeParameter $getArticlesFeeParameter</token>
+  </line>
+  <line no="314">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="315">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="316">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">getArticlesFee</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">GetArticlesFeeParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$getArticlesFeeParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="317">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="318">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="319">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'GetArticlesFee'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="320">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'getArticlesFeeParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$getArticlesFeeParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="321">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="322">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="323"/>
+  <line no="324">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="325">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="326">
+    <token name="T_DOC_COMMENT">     * @return bool</token>
+  </line>
+  <line no="327">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="328">
+    <token name="T_DOC_COMMENT">     * [0] =&gt; Array</token>
+  </line>
+  <line no="329">
+    <token name="T_DOC_COMMENT">        (</token>
+  </line>
+  <line no="330">
+    <token name="T_DOC_COMMENT">            [CoveredByPLP] =&gt;</token>
+  </line>
+  <line no="331">
+    <token name="T_DOC_COMMENT">            [ListingFee] =&gt; 0</token>
+  </line>
+  <line no="332">
+    <token name="T_DOC_COMMENT">            [PromotionFees] =&gt; Array</token>
+  </line>
+  <line no="333">
+    <token name="T_DOC_COMMENT">                (</token>
+  </line>
+  <line no="334">
+    <token name="T_DOC_COMMENT">                    [0] =&gt; Array</token>
+  </line>
+  <line no="335">
+    <token name="T_DOC_COMMENT">                        (</token>
+  </line>
+  <line no="336">
+    <token name="T_DOC_COMMENT">                            [PromotionFee] =&gt; 0</token>
+  </line>
+  <line no="337">
+    <token name="T_DOC_COMMENT">                            [PromotionId] =&gt; 4194304</token>
+  </line>
+  <line no="338">
+    <token name="T_DOC_COMMENT">                        )</token>
+  </line>
+  <line no="339"/>
+  <line no="340">
+    <token name="T_DOC_COMMENT">                    [1] =&gt; Array</token>
+  </line>
+  <line no="341">
+    <token name="T_DOC_COMMENT">                        (</token>
+  </line>
+  <line no="342">
+    <token name="T_DOC_COMMENT">                            [PromotionFee] =&gt; 0</token>
+  </line>
+  <line no="343">
+    <token name="T_DOC_COMMENT">                            [PromotionId] =&gt; 8388608</token>
+  </line>
+  <line no="344">
+    <token name="T_DOC_COMMENT">                        )</token>
+  </line>
+  <line no="345">
+    <token name="T_DOC_COMMENT">                   [...] =&gt; ...</token>
+  </line>
+  <line no="346"/>
+  <line no="347">
+    <token name="T_DOC_COMMENT">                )</token>
+  </line>
+  <line no="348"/>
+  <line no="349">
+    <token name="T_DOC_COMMENT">            [TotalFee] =&gt; 5</token>
+  </line>
+  <line no="350">
+    <token name="T_DOC_COMMENT">        )</token>
+  </line>
+  <line no="351">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="352">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">getArticlesFeeResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="353">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="354">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_IF">if</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'GetArticlesFeeResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_BOOLEAN_AND">&amp;&amp;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'GetArticlesFeeResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'ArticlesFee'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="355">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'GetArticlesFeeResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'ArticlesFee'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="356">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="357">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">false</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="358">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="359"/>
+  <line no="360">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="361">
+    <token name="T_DOC_COMMENT">     * Gets the update article fee.</token>
+  </line>
+  <line no="362">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="363">
+    <token name="T_DOC_COMMENT">     * @param $getUpdateArticleFeeParameter</token>
+  </line>
+  <line no="364">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="365">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">getUpdateArticleFee</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$getUpdateArticleFeeParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="366">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="367">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="368"/>
+  <line no="369">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="370">
+    <token name="T_DOC_COMMENT">     * Gets the update classified fee.</token>
+  </line>
+  <line no="371">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="372">
+    <token name="T_DOC_COMMENT">     * @param $getUpdateClassifiedFeeParameter</token>
+  </line>
+  <line no="373">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="374">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">getUpdateClassifiedFee</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$getUpdateClassifiedFeeParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="375">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="376">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="377"/>
+  <line no="378">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="379">
+    <token name="T_DOC_COMMENT">     * Inserts an article or a planned article</token>
+  </line>
+  <line no="380">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="381">
+    <token name="T_DOC_COMMENT">     * @param $insertArticleParameter</token>
+  </line>
+  <line no="382">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="383">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="384">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">insertArticle</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">InsertArticleParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$insertArticleParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="385">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="386">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="387">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'InsertArticle'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="388">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'insertArticleParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$insertArticleParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="389">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="390">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="391"/>
+  <line no="392">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="393">
+    <token name="T_DOC_COMMENT">     * Get the article result data</token>
+  </line>
+  <line no="394">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="395">
+    <token name="T_DOC_COMMENT">     * The Ricardo API returns:</token>
+  </line>
+  <line no="396">
+    <token name="T_DOC_COMMENT">     * &lt;pre&gt;</token>
+  </line>
+  <line no="397">
+    <token name="T_DOC_COMMENT">     * {</token>
+  </line>
+  <line no="398">
+    <token name="T_DOC_COMMENT">     *     "InsertArticleResult": {</token>
+  </line>
+  <line no="399">
+    <token name="T_DOC_COMMENT">     *       "ArticleFee": [{</token>
+  </line>
+  <line no="400">
+    <token name="T_DOC_COMMENT">     *          "ListingFee": "float"</token>
+  </line>
+  <line no="401">
+    <token name="T_DOC_COMMENT">     *          "TotalFee": "float"</token>
+  </line>
+  <line no="402">
+    <token name="T_DOC_COMMENT">     *          "PromotionFees": [{</token>
+  </line>
+  <line no="403">
+    <token name="T_DOC_COMMENT">     *              "PromotionFee": "float"</token>
+  </line>
+  <line no="404">
+    <token name="T_DOC_COMMENT">     *              "PromotionId":  "int"</token>
+  </line>
+  <line no="405">
+    <token name="T_DOC_COMMENT">     *          }]</token>
+  </line>
+  <line no="406">
+    <token name="T_DOC_COMMENT">     *        }]</token>
+  </line>
+  <line no="407">
+    <token name="T_DOC_COMMENT">     *       "ArticleId": "int"</token>
+  </line>
+  <line no="408">
+    <token name="T_DOC_COMMENT">     *       "CarDealerArticleId": "int"</token>
+  </line>
+  <line no="409">
+    <token name="T_DOC_COMMENT">     *       "ErrorCodes": "int" ArticleErrors</token>
+  </line>
+  <line no="410">
+    <token name="T_DOC_COMMENT">     *       "PlannedArticleId": "int"</token>
+  </line>
+  <line no="411">
+    <token name="T_DOC_COMMENT">     *     }</token>
+  </line>
+  <line no="412">
+    <token name="T_DOC_COMMENT">     *   }</token>
+  </line>
+  <line no="413">
+    <token name="T_DOC_COMMENT">     * &lt;/pre&gt;</token>
+  </line>
+  <line no="414">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="415">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="416">
+    <token name="T_DOC_COMMENT">     * @return array|bool</token>
+  </line>
+  <line no="417">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="418">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">insertArticleResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="419">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="420">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_IF">if</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'InsertArticleResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="421">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'InsertArticleResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="422">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="423">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">false</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="424">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="425"/>
+  <line no="426">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="427">
+    <token name="T_DOC_COMMENT">     * Inserts a list of articles or a planned articles. This method is currently not fully usable to external partners</token>
+  </line>
+  <line no="428">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="429">
+    <token name="T_DOC_COMMENT">     * @param InsertArticlesParameter $insertArticlesParameter</token>
+  </line>
+  <line no="430">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="431">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="432">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">insertArticles</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">InsertArticlesParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$insertArticlesParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="433">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="434">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="435">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'InsertArticles'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="436">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'insertArticlesParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$insertArticlesParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="437">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="438">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="439"/>
+  <line no="440">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="441">
+    <token name="T_DOC_COMMENT">     * Get the article result data</token>
+  </line>
+  <line no="442">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="443">
+    <token name="T_DOC_COMMENT">     * The Ricardo API returns:</token>
+  </line>
+  <line no="444">
+    <token name="T_DOC_COMMENT">     * &lt;pre&gt;</token>
+  </line>
+  <line no="445">
+    <token name="T_DOC_COMMENT">     * {</token>
+  </line>
+  <line no="446">
+    <token name="T_DOC_COMMENT">     *     "InsertArticlesResult": {</token>
+  </line>
+  <line no="447">
+    <token name="T_DOC_COMMENT">     *      "Results": [{</token>
+  </line>
+  <line no="448">
+    <token name="T_DOC_COMMENT">     *          "ArticleFee": "float"</token>
+  </line>
+  <line no="449">
+    <token name="T_DOC_COMMENT">     *          "ArticleId": "int"</token>
+  </line>
+  <line no="450">
+    <token name="T_DOC_COMMENT">     *          "CarDealerArticleId": "int"</token>
+  </line>
+  <line no="451">
+    <token name="T_DOC_COMMENT">     *          "CorrelationKey": "int"</token>
+  </line>
+  <line no="452">
+    <token name="T_DOC_COMMENT">     *          "ErrorCodes": "int" ArticleErrors</token>
+  </line>
+  <line no="453">
+    <token name="T_DOC_COMMENT">     *          "ErrorCodesType": "int" @see https://ws.ricardo.ch/RicardoApi/documentation/html/T_Ricardo_Enums_Errors_ErrorList.htm</token>
+  </line>
+  <line no="454">
+    <token name="T_DOC_COMMENT">     *          "PlannedArticleId": "int"</token>
+  </line>
+  <line no="455">
+    <token name="T_DOC_COMMENT">     *      }]</token>
+  </line>
+  <line no="456">
+    <token name="T_DOC_COMMENT">     *   }</token>
+  </line>
+  <line no="457">
+    <token name="T_DOC_COMMENT">     * &lt;/pre&gt;</token>
+  </line>
+  <line no="458">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="459">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="460">
+    <token name="T_DOC_COMMENT">     * @return array|bool</token>
+  </line>
+  <line no="461">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="462">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">insertArticlesResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="463">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="464">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_IF">if</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'InsertArticlesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_BOOLEAN_AND">&amp;&amp;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'InsertArticlesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'Results'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="465">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'InsertArticlesResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'Results'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="466">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="467">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">false</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="468">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="469"/>
+  <line no="470">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="471">
+    <token name="T_DOC_COMMENT">     * Inserts the classified.</token>
+  </line>
+  <line no="472">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="473">
+    <token name="T_DOC_COMMENT">     * @param $insertClassifiedParameter</token>
+  </line>
+  <line no="474">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="475">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">insertClassified</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$insertClassifiedParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="476">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="477">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="478"/>
+  <line no="479">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="480">
+    <token name="T_DOC_COMMENT">     * Insert a list of classified items. This method is currently not fully usable to external partners</token>
+  </line>
+  <line no="481">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="482">
+    <token name="T_DOC_COMMENT">     * @param $insertClassifiedsParameter</token>
+  </line>
+  <line no="483">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="484">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">insertClassifieds</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$insertClassifiedsParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="485">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="486">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="487"/>
+  <line no="488">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="489">
+    <token name="T_DOC_COMMENT">     * Inserts the preview converted classified.</token>
+  </line>
+  <line no="490">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="491">
+    <token name="T_DOC_COMMENT">     * @param $insertPreviewConvertedClassifiedParameter</token>
+  </line>
+  <line no="492">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="493">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">insertPreviewConvertedClassified</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$insertPreviewConvertedClassifiedParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="494">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="495">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="496"/>
+  <line no="497">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="498">
+    <token name="T_DOC_COMMENT">     * Ocrs recognition.</token>
+  </line>
+  <line no="499">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="500">
+    <token name="T_DOC_COMMENT">     * @param $ocrRecognizesParameter</token>
+  </line>
+  <line no="501">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="502">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">ocrRecognize</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$ocrRecognizesParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="503">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="504">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="505"/>
+  <line no="506">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="507">
+    <token name="T_DOC_COMMENT">     * @param $parameters</token>
+  </line>
+  <line no="508">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="509">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="510">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">relistArticle</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$parameters</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="511">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="512">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_VARIABLE">$articleId</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_EQUAL">=</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$parameters</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'ArticleId'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="513">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_VARIABLE">$antiforgeryToken</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_EQUAL">=</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$parameters</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'AntiforgeryToken'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="514"/>
+  <line no="515">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="516">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'RelistArticle'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="517">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'relistArticleParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'ArticleId'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$articleId</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'AntiforgeryToken'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$antiforgeryToken</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="518">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="519">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="520"/>
+  <line no="521">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="522">
+    <token name="T_DOC_COMMENT">     * Relists the auction articles. This method is currently not fully usable to external partners</token>
+  </line>
+  <line no="523">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="524">
+    <token name="T_DOC_COMMENT">     * @param array $articleIds</token>
+  </line>
+  <line no="525">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="526">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="527">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">relistArticles</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$articleIds</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="528">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="529">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="530">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'RelistArticles'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="531">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'relistArticlesParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'ArticleId'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$articleIds</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="532">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="533">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="534"/>
+  <line no="535">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="536">
+    <token name="T_DOC_COMMENT">     * Relists the auction articles without modification. This method is currently not fully usable to external partners</token>
+  </line>
+  <line no="537">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="538">
+    <token name="T_DOC_COMMENT">     * @param $relistArticlesWithoutModificationParameter</token>
+  </line>
+  <line no="539">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="540">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">relistArticlesWithoutModification</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$relistArticlesWithoutModificationParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="541">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="542">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="543"/>
+  <line no="544">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="545">
+    <token name="T_DOC_COMMENT">     * Relists the article without modifing it.</token>
+  </line>
+  <line no="546">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="547">
+    <token name="T_DOC_COMMENT">     * @param $relistArticleWithoutModificationParameter</token>
+  </line>
+  <line no="548">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="549">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">relistArticleWithoutModification</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$relistArticleWithoutModificationParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="550">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="551">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="552"/>
+  <line no="553">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="554">
+    <token name="T_DOC_COMMENT">     * Relists the classified.</token>
+  </line>
+  <line no="555">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="556">
+    <token name="T_DOC_COMMENT">     * @param $relistClassifiedParameter</token>
+  </line>
+  <line no="557">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="558">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">relistClassified</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$relistClassifiedParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="559">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="560">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="561"/>
+  <line no="562">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="563">
+    <token name="T_DOC_COMMENT">     * Relists the classified articles. This method is currently not fully usable to external partners</token>
+  </line>
+  <line no="564">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="565">
+    <token name="T_DOC_COMMENT">     * @param $relistClassifiedsParameter</token>
+  </line>
+  <line no="566">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="567">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">relistClassifieds</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$relistClassifiedsParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="568">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="569">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="570"/>
+  <line no="571">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="572">
+    <token name="T_DOC_COMMENT">     * Relists the classified article without modification. This method is currently not fully usable to external partners</token>
+  </line>
+  <line no="573">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="574">
+    <token name="T_DOC_COMMENT">     * @param $relistClassifiedsWithoutModificationParameter</token>
+  </line>
+  <line no="575">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="576">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">relistClassifiedsWithoutModification</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$relistClassifiedsWithoutModificationParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="577">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="578">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="579"/>
+  <line no="580">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="581">
+    <token name="T_DOC_COMMENT">     * Relists the classified Without Modification.</token>
+  </line>
+  <line no="582">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="583">
+    <token name="T_DOC_COMMENT">     * @param $relistClassifiedWithoutModificationParameter</token>
+  </line>
+  <line no="584">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="585">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">relistClassifiedWithoutModification</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$relistClassifiedWithoutModificationParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="586">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="587">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="588"/>
+  <line no="589">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="590">
+    <token name="T_DOC_COMMENT">     * Ocrs recognition.</token>
+  </line>
+  <line no="591">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="592">
+    <token name="T_DOC_COMMENT">     * @param $ocrRecognizesParameter</token>
+  </line>
+  <line no="593">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="594">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">tesseractRecognize</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$ocrRecognizesParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="595">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="596">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="597"/>
+  <line no="598">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="599">
+    <token name="T_DOC_COMMENT">     * Updates the article.</token>
+  </line>
+  <line no="600">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="601">
+    <token name="T_DOC_COMMENT">     * @param UpdateArticleParameter $updateArticleParameter</token>
+  </line>
+  <line no="602">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="603">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="604">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updateArticle</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">UpdateArticleParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$updateArticleParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="605">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="606">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="607">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'UpdateArticle'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="608">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'updateArticleParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$updateArticleParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="609">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="610">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="611"/>
+  <line no="612">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="613">
+    <token name="T_DOC_COMMENT">     * Get the article result data</token>
+  </line>
+  <line no="614">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="615">
+    <token name="T_DOC_COMMENT">     * The Ricardo API returns:</token>
+  </line>
+  <line no="616">
+    <token name="T_DOC_COMMENT">     * &lt;pre&gt;</token>
+  </line>
+  <line no="617">
+    <token name="T_DOC_COMMENT">     * {</token>
+  </line>
+  <line no="618">
+    <token name="T_DOC_COMMENT">     *     "UpdateArticleResult": {</token>
+  </line>
+  <line no="619">
+    <token name="T_DOC_COMMENT">     *       "ArticleFee": "float"</token>
+  </line>
+  <line no="620">
+    <token name="T_DOC_COMMENT">     *     }</token>
+  </line>
+  <line no="621">
+    <token name="T_DOC_COMMENT">     *   }</token>
+  </line>
+  <line no="622">
+    <token name="T_DOC_COMMENT">     * &lt;/pre&gt;</token>
+  </line>
+  <line no="623">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="624">
+    <token name="T_DOC_COMMENT">     * @param array $data</token>
+  </line>
+  <line no="625">
+    <token name="T_DOC_COMMENT">     * @return bool|array</token>
+  </line>
+  <line no="626">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="627">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updateArticleResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="628">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="629">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_IF">if</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_ISSET">isset</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'UpdateArticleResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="630">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_OPEN_SQUARE">[</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'UpdateArticleResult'</token>
+    <token name="T_PHPDOX_CLOSE_SQUARE">]</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="631">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="632">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">false</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="633">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="634"/>
+  <line no="635">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="636">
+    <token name="T_DOC_COMMENT">     * Updates the article buy now price.</token>
+  </line>
+  <line no="637">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="638">
+    <token name="T_DOC_COMMENT">     * @param $updateArticleBuyNowPriceParameter</token>
+  </line>
+  <line no="639">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="640">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updateArticleBuyNowPrice</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$updateArticleBuyNowPriceParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="641">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="642">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="643"/>
+  <line no="644">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="645">
+    <token name="T_DOC_COMMENT">     * Updates the article buy now quantity.</token>
+  </line>
+  <line no="646">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="647">
+    <token name="T_DOC_COMMENT">     * @param $updateArticleBuyNowQuantityParameter</token>
+  </line>
+  <line no="648">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="649">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updateArticleBuyNowQuantity</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$updateArticleBuyNowQuantityParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="650">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="651">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="652"/>
+  <line no="653">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="654">
+    <token name="T_DOC_COMMENT">     * Updates the article buy now relist count.</token>
+  </line>
+  <line no="655">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="656">
+    <token name="T_DOC_COMMENT">     * @param $updateArticleBuyNowRelistCountParameter</token>
+  </line>
+  <line no="657">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="658">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updateArticleBuyNowRelistCount</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$updateArticleBuyNowRelistCountParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="659">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="660">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="661"/>
+  <line no="662">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="663">
+    <token name="T_DOC_COMMENT">     * Updates the article pictures.</token>
+  </line>
+  <line no="664">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="665">
+    <token name="T_DOC_COMMENT">     * @param UpdateArticlePicturesParameter $updateArticlePicturesParameter</token>
+  </line>
+  <line no="666">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="667">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="668">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updateArticlePictures</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_STRING">UpdateArticlePicturesParameter</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$updateArticlePicturesParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="669">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="670">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+  </line>
+  <line no="671">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'method'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'UpdateArticlePictures'</token>
+    <token name="T_PHPDOX_COMMA">,</token>
+  </line>
+  <line no="672">
+    <token name="T_WHITESPACE">            </token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'params'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_ARRAY">array</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_CONSTANT_ENCAPSED_STRING">'updateArticlePicturesParameter'</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_DOUBLE_ARROW">=&gt;</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$updateArticlePicturesParameter</token>
+    <token name="T_OBJECT_OPERATOR">-&gt;</token>
+    <token name="T_STRING">getDataProperties</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="673">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="674">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="675"/>
+  <line no="676">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="677">
+    <token name="T_DOC_COMMENT">     * Nothing to return normally, we keep for errors or to have consistent API</token>
+  </line>
+  <line no="678">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="679">
+    <token name="T_DOC_COMMENT">     * @param $data</token>
+  </line>
+  <line no="680">
+    <token name="T_DOC_COMMENT">     * @return array</token>
+  </line>
+  <line no="681">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="682">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updateArticlePicturesResult</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="683">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="684">
+    <token name="T_WHITESPACE">        </token>
+    <token name="T_RETURN">return</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_VARIABLE">$data</token>
+    <token name="T_PHPDOX_SEMICOLON">;</token>
+  </line>
+  <line no="685">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="686"/>
+  <line no="687">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="688">
+    <token name="T_DOC_COMMENT">     * Updates the classified.</token>
+  </line>
+  <line no="689">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="690">
+    <token name="T_DOC_COMMENT">     * @param $updateClassifiedParameter</token>
+  </line>
+  <line no="691">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="692">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updateClassified</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$updateClassifiedParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="693">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="694">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="695"/>
+  <line no="696">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="697">
+    <token name="T_DOC_COMMENT">     * Update classified pictures'</token>
+  </line>
+  <line no="698">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="699">
+    <token name="T_DOC_COMMENT">     * @param $updateClassifiedPicturesParameter</token>
+  </line>
+  <line no="700">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="701">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updateClassifiedPictures</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$updateClassifiedPicturesParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="702">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="703">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="704"/>
+  <line no="705">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="706">
+    <token name="T_DOC_COMMENT">     * Updates the planned article.</token>
+  </line>
+  <line no="707">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="708">
+    <token name="T_DOC_COMMENT">     * @param $updatePlannedArticleParameter</token>
+  </line>
+  <line no="709">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="710">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updatePlannedArticle</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$updatePlannedArticleParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="711">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="712">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="713"/>
+  <line no="714">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_DOC_COMMENT">/**</token>
+  </line>
+  <line no="715">
+    <token name="T_DOC_COMMENT">     * Upd</token>
+  </line>
+  <line no="716">
+    <token name="T_DOC_COMMENT">     *</token>
+  </line>
+  <line no="717">
+    <token name="T_DOC_COMMENT">     * @param $updatePlannedArticlePicturesParameter</token>
+  </line>
+  <line no="718">
+    <token name="T_DOC_COMMENT">     */</token>
+  </line>
+  <line no="719">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PUBLIC">public</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_FUNCTION">function</token>
+    <token name="T_WHITESPACE"> </token>
+    <token name="T_STRING">updatePlannedArticlePictures</token>
+    <token name="T_PHPDOX_OPEN_BRACKET">(</token>
+    <token name="T_VARIABLE">$updatePlannedArticlePicturesParameter</token>
+    <token name="T_PHPDOX_CLOSE_BRACKET">)</token>
+  </line>
+  <line no="720">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_OPEN_CURLY">{</token>
+  </line>
+  <line no="721">
+    <token name="T_WHITESPACE">    </token>
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="722">
+    <token name="T_PHPDOX_CLOSE_CURLY">}</token>
+  </line>
+  <line no="723"/>
+</source>

@@ -1,128 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<source xmlns="http://xml.phpdox.net/src#">
-  <dir name="src">
+<source xmlns="http://xml.phpdox.net/src">
+  <dir name="/www-data/git/ricardo/src">
     <dir name="Diglin">
       <dir name="Ricardo">
-        <file name="Api.php" size="6922" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="3721806362e4519575b2564d22e78cb9a3bff68a"/>
+        <file name="Api.php" size="8731" time="2015-04-25T15:30:37+02:00" unixtime="1429968637" sha1="42797523f7cda8e6603613bc05280831ab2b9747" xml="tokens/Diglin/Ricardo/Api.php.xml"/>
         <dir name="Composer">
-          <file name="Magento.php" size="2681" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="852497c50639b2146885e8ad6643f88da0148912"/>
+          <file name="Magento.php" size="3217" time="2015-02-05T13:01:59+01:00" unixtime="1423137719" sha1="a2e248e3bdf7016ec71f810c90ed914d3220b111" xml="tokens/Diglin/Ricardo/Composer/Magento.php.xml"/>
         </dir>
-        <file name="Config.php" size="2694" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="44b16a524c5c23dce6dcc65eeb0358fd5e84b65c"/>
+        <file name="Config.php" size="3195" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="5861abc6bd5cc497cd78bc575023d4d698535c79" xml="tokens/Diglin/Ricardo/Config.php.xml"/>
         <dir name="Core">
-          <file name="ApiInterface.php" size="1001" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1e213916ba4cb8beb770e27b6451b94d31af370c"/>
-          <file name="ConfigInterface.php" size="759" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="78204f96f2751f07bd7e21a58e792ccd6d3b7eb8"/>
-          <file name="Helper.php" size="2120" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="a16a72d81856aeea2f03a85cef4ad9d0143aac8c"/>
+          <file name="ApiInterface.php" size="1583" time="2015-02-08T20:55:36+01:00" unixtime="1423425336" sha1="de008dbb5f88071575e5e930f61bed079f32966a" xml="tokens/Diglin/Ricardo/Core/ApiInterface.php.xml"/>
+          <file name="ConfigInterface.php" size="1337" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="47b84ccd63a0f186905b651b162f5df578433abc" xml="tokens/Diglin/Ricardo/Core/ConfigInterface.php.xml"/>
+          <file name="Helper.php" size="3182" time="2015-04-30T11:43:48+02:00" unixtime="1430387028" sha1="f4d77ccfec2e6a08c048ebf06cc4ecbc7541fde8" xml="tokens/Diglin/Ricardo/Core/Helper.php.xml"/>
         </dir>
         <dir name="Enums">
-          <file name="AbstractEnums.php" size="1017" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="28b9ddf5f0250045443920bb13be2c31946c32c1"/>
+          <file name="AbstractEnums.php" size="1526" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="f04b4e852e1aa0d1cd58d2827763c56dfc939d4c" xml="tokens/Diglin/Ricardo/Enums/AbstractEnums.php.xml"/>
           <dir name="Article">
-            <file name="ArticlesTypes.php" size="1883" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="132791341de3fdfd15ba736b7503dd3fef9130bc"/>
-            <file name="CloseListStatus.php" size="1140" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="59cf24d9512b27318fe8d77a8156aa626c5b78c3"/>
-            <file name="InternalReferenceType.php" size="750" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="ff25b2fd6504d041bd6eeab289e234e3df8ba349"/>
-            <file name="PromotionCode.php" size="4050" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0c19ade396c1333021fe07b732d33ff26af46268"/>
-            <file name="Warranty.php" size="820" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5e269e5a4d67fc409580cc94fdbb12949da8558a"/>
+            <file name="ArticlesTypes.php" size="2392" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="b23c8a8cc4ee58e435f45b36b58a9ef2a293159a" xml="tokens/Diglin/Ricardo/Enums/Article/ArticlesTypes.php.xml"/>
+            <file name="CloseListStatus.php" size="1649" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="0deadffc6fefd1e482a56c4a439baa6d896ceb17" xml="tokens/Diglin/Ricardo/Enums/Article/CloseListStatus.php.xml"/>
+            <file name="InternalReferenceType.php" size="1259" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="0a2a17dc35b197ee3cc428646fc9255e9f222d20" xml="tokens/Diglin/Ricardo/Enums/Article/InternalReferenceType.php.xml"/>
+            <file name="PromotionCode.php" size="4559" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="fc336a59b8c76795ac323992763c7e4a44a1c62a" xml="tokens/Diglin/Ricardo/Enums/Article/PromotionCode.php.xml"/>
+            <file name="Warranty.php" size="1329" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="8f76feaf72752f8994379c755f241ea79368488d" xml="tokens/Diglin/Ricardo/Enums/Article/Warranty.php.xml"/>
           </dir>
-          <file name="ArticleErrors.php" size="19564" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="2781443a57110368606897874f2fa5e35fbf86d0"/>
+          <file name="ArticleErrors.php" size="20073" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="9b73dd7f73c371000ce53e002b5c8a0cf2233637" xml="tokens/Diglin/Ricardo/Enums/ArticleErrors.php.xml"/>
           <dir name="Customer">
-            <file name="ArticleTypeFilter.php" size="1294" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="ae9d2fdcccf9cd95eb7e41d5110f3193e377c710"/>
-            <file name="OpenArticlesSortBy.php" size="2853" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="45e5fc91fb7fca256ad546888caeede336d49cf2"/>
-            <file name="PaidStatusFilter.php" size="892" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="18eb7172c43147eafa7dc5312647f0c3d858d7b5"/>
-            <file name="ShippedStatusFilter.php" size="916" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1207a4970013b6a1e9635fa3198b65c2e9ab73ce"/>
-            <file name="SoldArticlesSortBy.php" size="4478" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="8ee62b5530c6ca5dc4a171b3bc66d5542ba1a792"/>
+            <file name="ArticleTypeFilter.php" size="1803" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="70eb0b9f7c4445021c2f838878c46966c866b50c" xml="tokens/Diglin/Ricardo/Enums/Customer/ArticleTypeFilter.php.xml"/>
+            <file name="OpenArticlesSortBy.php" size="3362" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="a0987543efbb88b0ff2b57a2a95dc992cac01ba5" xml="tokens/Diglin/Ricardo/Enums/Customer/OpenArticlesSortBy.php.xml"/>
+            <file name="PaidStatusFilter.php" size="1401" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="d9e0849daf74efabc24def87da9e97ff1a93fbba" xml="tokens/Diglin/Ricardo/Enums/Customer/PaidStatusFilter.php.xml"/>
+            <file name="ShippedStatusFilter.php" size="1425" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="7b4b35947ce51aa51143413b56b09af091755070" xml="tokens/Diglin/Ricardo/Enums/Customer/ShippedStatusFilter.php.xml"/>
+            <file name="SoldArticlesSortBy.php" size="4987" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="68bab31efd1653180e71c9ac3e1cf97f7d848573" xml="tokens/Diglin/Ricardo/Enums/Customer/SoldArticlesSortBy.php.xml"/>
           </dir>
-          <file name="CustomerErrors.php" size="8205" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1c83c94b40ba247117531ac142fc838051741cfd"/>
-          <file name="GeneralErrors.php" size="2750" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="66a41cad22a50ab037005e2f2acf7dbbdf9fa090"/>
-          <file name="PaymentMethods.php" size="967" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="acd43234cbe20c3235def9834a610b8a467ba908"/>
-          <file name="PictureErrors.php" size="1688" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="ef4ad02d8699655390058b4bf7d4d0045f86f4e5"/>
-          <file name="PictureExtension.php" size="749" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="84a810284831aa5d73600d7e99d3d773d716277d"/>
-          <file name="SecurityErrors.php" size="3514" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a4a4087d3eec15eb007aa1f644a7fabf244ca50e"/>
+          <file name="CustomerErrors.php" size="8714" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="34fdd63e7e141f94ee1b291bfb1f4b43c050be2c" xml="tokens/Diglin/Ricardo/Enums/CustomerErrors.php.xml"/>
+          <file name="GeneralErrors.php" size="3259" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="1c74b437c17c7d09da73378279cd2ac08f468de0" xml="tokens/Diglin/Ricardo/Enums/GeneralErrors.php.xml"/>
+          <file name="PaymentMethods.php" size="1476" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="7ac3b183889ebf8790324550562b49ff011edfb5" xml="tokens/Diglin/Ricardo/Enums/PaymentMethods.php.xml"/>
+          <file name="PictureErrors.php" size="2197" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="105e89de7f9052d73904759e8560756fea06acd0" xml="tokens/Diglin/Ricardo/Enums/PictureErrors.php.xml"/>
+          <file name="PictureExtension.php" size="1257" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="3e65d229257b2ff2d61a2537a9418e8f19f14212" xml="tokens/Diglin/Ricardo/Enums/PictureExtension.php.xml"/>
+          <file name="SearchErrors.php" size="2886" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="2e922f9836b2deaafaec225711890d30946d7f6b" xml="tokens/Diglin/Ricardo/Enums/SearchErrors.php.xml"/>
+          <file name="SecurityErrors.php" size="4023" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="90f582078cd9c6cb86ca3ffbb8a75e91a3152230" xml="tokens/Diglin/Ricardo/Enums/SecurityErrors.php.xml"/>
           <dir name="System">
-            <file name="CategoryArticleType.php" size="1062" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1b6e8a73683ac58be45fb9484fd0ad9185d4d04e"/>
-            <file name="CategoryBrandingFilter.php" size="1022" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="761720ef7737836795bc3286aaf9bb7209eeb11c"/>
-            <file name="LanguageCode.php" size="1340" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6a45bc8d01ef3f052590692626603ec3494d54bb"/>
-            <file name="LanguageId.php" size="882" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6468eb430369f8bc04dabe0b3a6e0f9d5b8f7683"/>
+            <file name="CategoryArticleType.php" size="1571" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="74fe99218efd0f02dc30fcf6994752c5829484c3" xml="tokens/Diglin/Ricardo/Enums/System/CategoryArticleType.php.xml"/>
+            <file name="CategoryBrandingFilter.php" size="1531" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="106dd2ab810408988e4b92d2b0bfc124ab59d871" xml="tokens/Diglin/Ricardo/Enums/System/CategoryBrandingFilter.php.xml"/>
+            <file name="LanguageCode.php" size="1854" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="37436c0ff63045be81567f535ae78155fb19df9b" xml="tokens/Diglin/Ricardo/Enums/System/LanguageCode.php.xml"/>
+            <file name="LanguageId.php" size="1390" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="a6426cb5afd62adfb3e6ac1e77f602317319b09b" xml="tokens/Diglin/Ricardo/Enums/System/LanguageId.php.xml"/>
           </dir>
         </dir>
         <dir name="Exceptions">
-          <file name="ArticleException.php" size="473" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="49f9ada5f7aec562192372db4d4b1ac430159f25"/>
-          <file name="CurlException.php" size="467" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="16ae7dde847b6dfb88c58fb4e2737cb25d4762de"/>
-          <file name="CustomerException.php" size="475" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="e0161500b023bc9576d8656e67818df04dd20730"/>
-          <file name="ExceptionAbstract.php" size="1324" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6eb17cd1fb421c76b8f63282bcd913403caf8e54"/>
-          <file name="GeneralException.php" size="473" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="38a4ab7a6d2478f46b9cef6613be6907c6987d54"/>
-          <file name="PictureException.php" size="473" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0de40c78a12e0a7091836db1bb48511bab3c9738"/>
-          <file name="SecurityException.php" size="571" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="c4cb56bca66d077c08c084c7c1cdd704be95e76c"/>
+          <file name="ArticleException.php" size="984" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="21623d2aff4d012909b1d8a086d10efa53e4e685" xml="tokens/Diglin/Ricardo/Exceptions/ArticleException.php.xml"/>
+          <file name="CurlException.php" size="978" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="d352e6181155a223703a9a8771f1edcd2ffaac62" xml="tokens/Diglin/Ricardo/Exceptions/CurlException.php.xml"/>
+          <file name="CustomerException.php" size="986" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="a7a0fc3f082f148ac61fbffcf54cda18e4ae2613" xml="tokens/Diglin/Ricardo/Exceptions/CustomerException.php.xml"/>
+          <file name="ExceptionAbstract.php" size="1833" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="97cb241624422013dc486c6743e64fad92ece86e" xml="tokens/Diglin/Ricardo/Exceptions/ExceptionAbstract.php.xml"/>
+          <file name="GeneralException.php" size="984" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="f7a26093f1476b3389e8f51b7ab79b2c32308f97" xml="tokens/Diglin/Ricardo/Exceptions/GeneralException.php.xml"/>
+          <file name="PictureException.php" size="984" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="f42e512927ff8e6269849c49c9233d433e216948" xml="tokens/Diglin/Ricardo/Exceptions/PictureException.php.xml"/>
+          <file name="SearchException.php" size="982" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="e086de31731d6202dc2a9456c171e8141f58b156" xml="tokens/Diglin/Ricardo/Exceptions/SearchException.php.xml"/>
+          <file name="SecurityException.php" size="1082" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="08cda93e27bbc038424ac01839d0b1502f7ba7f9" xml="tokens/Diglin/Ricardo/Exceptions/SecurityException.php.xml"/>
+          <file name="TechnicalException.php" size="1082" time="2015-04-25T15:30:37+02:00" unixtime="1429968637" sha1="bcb22a560d81083a85cf1820710d7392378b8a26" xml="tokens/Diglin/Ricardo/Exceptions/TechnicalException.php.xml"/>
         </dir>
         <dir name="Managers">
-          <file name="Customer.php" size="805" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="7b9fb006214c7fa8453804cdbe89cd732928753b"/>
-          <file name="ManagerAbstract.php" size="4559" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5cbc8500690e8a03c4cdbb31f31c4328018990a1"/>
-          <file name="ParameterAbstract.php" size="5050" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="e38960bb867e45076d65c91aea5f947a484ff178"/>
-          <file name="Security.php" size="17804" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="09f9dd6a48dab197e7b9bafddaa1a75d7a6b6306"/>
+          <file name="Customer.php" size="1376" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="64046e1c773b182a7d7f51596cab133e5969eb94" xml="tokens/Diglin/Ricardo/Managers/Customer.php.xml"/>
+          <file name="ManagerAbstract.php" size="5068" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="6fe599b91b65f4cbc18b47c390e0202982781c9d" xml="tokens/Diglin/Ricardo/Managers/ManagerAbstract.php.xml"/>
+          <file name="ParameterAbstract.php" size="5630" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="9deca00cba627010df759113a87c5838c3ee84b6" xml="tokens/Diglin/Ricardo/Managers/ParameterAbstract.php.xml"/>
+          <dir name="Search">
+            <dir name="Parameter">
+              <file name="GetCategoryBestMatchParameter.php" size="2960" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="49308cdce9b43db018c54f90263a48bbdb618495" xml="tokens/Diglin/Ricardo/Managers/Search/Parameter/GetCategoryBestMatchParameter.php.xml"/>
+            </dir>
+          </dir>
+          <file name="Search.php" size="1400" time="2015-05-14T23:21:09+02:00" unixtime="1431638469" sha1="9e82146414419a450a063818da5a74b7495956f2" xml="tokens/Diglin/Ricardo/Managers/Search.php.xml"/>
+          <file name="Security.php" size="18309" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="2cd57a3e8a5f5c78a711b98d096fab11dadd0328" xml="tokens/Diglin/Ricardo/Managers/Security.php.xml"/>
           <dir name="Sell">
             <dir name="Parameter">
-              <file name="AddArticlePicturesParameter.php" size="2187" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="32db577acbb3fd920ee85b12d372a689dfcf5652"/>
-              <file name="AppendArticleDescriptionParameter.php" size="2228" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="188a71d87f835aec1eeec2c156a05cada6466d41"/>
-              <file name="AppendDescriptionParameter.php" size="1780" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="44eea076eeaa9b859c3de89a6e46a7038f428542"/>
-              <file name="ArticleDeliveryParameter.php" size="2950" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="c440a870914e5ac9a047edeee8fd653fc41dc67a"/>
-              <file name="ArticleDescriptionParameter.php" size="4085" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1bafe266d3e6a0bab4d0d255ce02043025d885f2"/>
-              <file name="ArticleInformationParameter.php" size="10317" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="eacb558542128a6a11ae0f0df6bd4ff231bd66d3"/>
-              <file name="ArticleInternalReferenceParameter.php" size="1629" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="fe429f3fae3bff4faf356998944507b3568d66a2"/>
-              <file name="ArticlePictureParameter.php" size="1897" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="dfe0ac293497a64908cc8d0f956221f64f285693"/>
-              <file name="CloseArticleParameter.php" size="1473" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="34d7f1b00939914f7a6452a55eecfc58a44c806a"/>
-              <file name="CloseArticlesParameter.php" size="1771" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5377b401e6f8f0e02153ed74b38e247b0c3b5e2b"/>
-              <file name="DeletePlannedArticleParameter.php" size="2007" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="f19687bb02f9d539c2c70febe01f79febf6744fd"/>
-              <file name="DeletePlannedArticlesParameter.php" size="1807" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="38f6ddd556aa88bf59fbf026001f46b3d08c343d"/>
-              <file name="InsertArticleParameter.php" size="4778" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="d90185c8d987c06575f5de528500726950cce2c1"/>
-              <file name="InsertArticlesParameter.php" size="1636" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="72c2eeebc160eb48be0b1693aab63d21a96a4af9"/>
-              <file name="UpdateArticleParameter.php" size="3448" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="958827ea4958e4c171cc4af0dfedede3527627a0"/>
-              <file name="UpdateArticlePicturesParameter.php" size="2711" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="16ecf67783ab86ea7fb540e9322b9a80c1987eaf"/>
+              <file name="AddArticlePicturesParameter.php" size="2696" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="1eee3eab7b6ca94184b17a47823f0df81a5da3d9" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/AddArticlePicturesParameter.php.xml"/>
+              <file name="AppendArticleDescriptionParameter.php" size="2735" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="e941e89e5ec9eb445949ce7317ab1b4e16763d4f" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/AppendArticleDescriptionParameter.php.xml"/>
+              <file name="AppendDescriptionParameter.php" size="2289" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="c570c1993604ad146670f2d5e72b06c4e50fd9aa" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/AppendDescriptionParameter.php.xml"/>
+              <file name="ArticleDeliveryParameter.php" size="3552" time="2015-05-14T23:22:17+02:00" unixtime="1431638537" sha1="e8b691c3a934cb917c0bbcdeb48d0971acb0bf75" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/ArticleDeliveryParameter.php.xml"/>
+              <file name="ArticleDescriptionParameter.php" size="4592" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="96e2cb39a20759eed8c075abe5a999862cd29d1e" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/ArticleDescriptionParameter.php.xml"/>
+              <file name="ArticleInformationParameter.php" size="10824" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="affc7fd6208c189e9b4539bcf231052638ceb751" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/ArticleInformationParameter.php.xml"/>
+              <file name="ArticleInternalReferenceParameter.php" size="2138" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="862d0853413081ead414f3a149b7bd94eaa4ccdf" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/ArticleInternalReferenceParameter.php.xml"/>
+              <file name="ArticlePictureParameter.php" size="2497" time="2015-05-14T23:21:35+02:00" unixtime="1431638495" sha1="0dbbc639d251ebae1bb76595cfa3e849108770f8" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/ArticlePictureParameter.php.xml"/>
+              <file name="BaseInsertArticleWithTrackingParameter.php" size="1883" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="e9c8d6bac6392828af534cd2558a821be0c3e30c" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/BaseInsertArticleWithTrackingParameter.php.xml"/>
+              <file name="CloseArticleParameter.php" size="1982" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="8f121f07433f0647800bde74906114ba8dbfe9a3" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/CloseArticleParameter.php.xml"/>
+              <file name="CloseArticlesParameter.php" size="2391" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="18a54bbb3b0120e9d2ccbbf3fe465bf59f3d5358" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/CloseArticlesParameter.php.xml"/>
+              <file name="ClosePlannedArticleParameter.php" size="1233" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="74e19da96b8521eb4d1cce253313d812fc834e45" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/ClosePlannedArticleParameter.php.xml"/>
+              <file name="DeletePlannedArticleParameter.php" size="2625" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="013f3b64bbe9a8837a46992553915d1900a786bf" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/DeletePlannedArticleParameter.php.xml"/>
+              <file name="DeletePlannedArticlesParameter.php" size="2314" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="65dd86b247274590e2eef0e33c36cf4a999c3fc6" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/DeletePlannedArticlesParameter.php.xml"/>
+              <file name="GetArticleFeeParameter.php" size="5189" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="c1627315bdb59091e094c49391d57062b2416277" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/GetArticleFeeParameter.php.xml"/>
+              <file name="GetArticlesFeeParameter.php" size="1847" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="10c9d557597d0698816f03754bf3832071ef1005" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/GetArticlesFeeParameter.php.xml"/>
+              <file name="InsertArticleParameter.php" size="5287" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="cc7a525becbf4bb1a46ca9f3a79d1eaca3c9ab55" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/InsertArticleParameter.php.xml"/>
+              <file name="InsertArticlesParameter.php" size="2690" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="9e6a1cf727fae3e166ff9e037d1851703b84a344" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/InsertArticlesParameter.php.xml"/>
+              <file name="UpdateArticleParameter.php" size="3957" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="86f54ea1095d802958ff6c03fe2e9d8b64480692" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/UpdateArticleParameter.php.xml"/>
+              <file name="UpdateArticlePicturesParameter.php" size="3220" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="1b0ac31eb712c971490cc24f8c106ec7e3e72aa9" xml="tokens/Diglin/Ricardo/Managers/Sell/Parameter/UpdateArticlePicturesParameter.php.xml"/>
             </dir>
           </dir>
-          <file name="Sell.php" size="4261" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="2bff0a5d505e72aa9a2ad091254fdda07ee028ce"/>
+          <file name="Sell.php" size="5439" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="705eb8fdeaf2e4a44a33da1805e63fdc56740c04" xml="tokens/Diglin/Ricardo/Managers/Sell.php.xml"/>
           <dir name="SellerAccount">
             <dir name="Parameter">
-              <file name="ArticlesParameter.php" size="2641" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a4849a8a7c3d7861b4bf84e5b1e205f7004c7a73"/>
-              <file name="ClosedArticlesParameter.php" size="1702" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="c1349857466d3e3274072c2d5b54fba9149408b6"/>
-              <file name="OpenArticlesParameter.php" size="5669" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="98746f6939b40cd9c3a160ab18b3ee93b5d40c34"/>
-              <file name="PlannedArticleParameter.php" size="2027" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="e6b5f21fd6a7c7ddbbd065b5e79abbdd66e104e7"/>
-              <file name="PlannedArticlesParameter.php" size="3757" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="b3a0815218e93d71bcd80ab99b3cfc90289c3ab9"/>
-              <file name="SoldArticlesParameter.php" size="9093" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="f50d461e69c6c3255dea7b35eb695cbf35b489ba"/>
-              <file name="UnsoldArticlesParameter.php" size="5717" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="272d173407fb648cba0cf38bb1d4dc50ad0cbd8c"/>
+              <file name="ArticlesParameter.php" size="3150" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="00af0f4a0eeabac6ba31c14192445e357b478cf4" xml="tokens/Diglin/Ricardo/Managers/SellerAccount/Parameter/ArticlesParameter.php.xml"/>
+              <file name="ClosedArticlesParameter.php" size="2211" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="9830ab97bc49594dcde43603dc3c67d2ad2edf89" xml="tokens/Diglin/Ricardo/Managers/SellerAccount/Parameter/ClosedArticlesParameter.php.xml"/>
+              <file name="OpenArticlesParameter.php" size="6178" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="348bc42921859b4e22dba943ecd618b641315652" xml="tokens/Diglin/Ricardo/Managers/SellerAccount/Parameter/OpenArticlesParameter.php.xml"/>
+              <file name="PlannedArticleParameter.php" size="2536" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="c92cdd8027f2027c6764a7b0436dda31104f53fb" xml="tokens/Diglin/Ricardo/Managers/SellerAccount/Parameter/PlannedArticleParameter.php.xml"/>
+              <file name="PlannedArticlesParameter.php" size="4266" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="91922c071a6e1b5f96d9c27b7264db1cef289b8f" xml="tokens/Diglin/Ricardo/Managers/SellerAccount/Parameter/PlannedArticlesParameter.php.xml"/>
+              <file name="SoldArticlesParameter.php" size="10671" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="5d25687c72e4be05ce57616dfaa24ba9abd40421" xml="tokens/Diglin/Ricardo/Managers/SellerAccount/Parameter/SoldArticlesParameter.php.xml"/>
+              <file name="UnsoldArticlesParameter.php" size="6226" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="d3549ce87968bec48f7ffe40cdcc6a4eb10e7707" xml="tokens/Diglin/Ricardo/Managers/SellerAccount/Parameter/UnsoldArticlesParameter.php.xml"/>
             </dir>
           </dir>
-          <file name="SellerAccount.php" size="6239" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="cca6590257f08bea94fe157a620a8099db5add49"/>
-          <file name="System.php" size="13617" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a00014524fe83c19d5bdb7e7259f75826cbcbab0"/>
+          <file name="SellerAccount.php" size="6748" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="90e2e104fe290c34704e8005c7602c6134812455" xml="tokens/Diglin/Ricardo/Managers/SellerAccount.php.xml"/>
+          <file name="System.php" size="14117" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="f4afb66f22f9689ce8ea06afe1abec9fe72ba617" xml="tokens/Diglin/Ricardo/Managers/System.php.xml"/>
         </dir>
-        <file name="Service.php" size="8794" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="b0c4fec68116094528526c6e1df86fd02c96f3f8"/>
+        <file name="Service.php" size="9511" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="6ccd6735a1f7ebefa2df78312785bc418bf5f696" xml="tokens/Diglin/Ricardo/Service.php.xml"/>
         <dir name="Services">
-          <file name="Customer.php" size="2247" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="12e0919530c9a287f4cad9a6813137222332122e"/>
-          <file name="Security.php" size="8124" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="d18ae9c58ad714f7195c3c9d4f8bdb6c668cc3c3"/>
-          <file name="Sell.php" size="17378" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="074ac317e96e2683698f40825d790d49a3951ef9"/>
-          <file name="SellerAccount.php" size="15317" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="db67cd8abe62bb3c5efe4803f2da31d5d2f7b6a7"/>
-          <file name="ServiceAbstract.php" size="1317" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="319080d69fb827b8c14ac135bd5be1d338a1dd71"/>
-          <file name="System.php" size="32729" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="61d5b11a59ee9b6de711001f54741669a9e06e75"/>
+          <file name="Customer.php" size="2756" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="45d3609af94add01e7c5d9dcb0292ec7f8c1ed29" xml="tokens/Diglin/Ricardo/Services/Customer.php.xml"/>
+          <file name="Search.php" size="2477" time="2015-05-14T23:20:31+02:00" unixtime="1431638431" sha1="8e19a8e23c20789e85501dd5d60ed5de8b542e10" xml="tokens/Diglin/Ricardo/Services/Search.php.xml"/>
+          <file name="Security.php" size="8633" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="ba619522c86331853d57e380187b970561d36ad8" xml="tokens/Diglin/Ricardo/Services/Security.php.xml"/>
+          <file name="Sell.php" size="19553" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="1d349c702ca14d9baedff240c8e4d1dc090c8700" xml="tokens/Diglin/Ricardo/Services/Sell.php.xml"/>
+          <file name="SellerAccount.php" size="15810" time="2015-04-17T00:11:29+02:00" unixtime="1429222289" sha1="260c6993aff64cae3510ae1636c7a328353e7627" xml="tokens/Diglin/Ricardo/Services/SellerAccount.php.xml"/>
+          <file name="ServiceAbstract.php" size="1822" time="2015-02-08T20:55:36+01:00" unixtime="1423425336" sha1="6edc0800aa280f1644b200b0104f1aa7288ec3c8" xml="tokens/Diglin/Ricardo/Services/ServiceAbstract.php.xml"/>
+          <file name="System.php" size="33238" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="257d9a71481baafd42727bc55a1c05d9ee8e8f75" xml="tokens/Diglin/Ricardo/Services/System.php.xml"/>
         </dir>
       </dir>
-    </dir>
-    <file name="SplAutoloader.php" size="3848" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="5d7d0dfcdb846d056ee3d421db55a4d690d10800"/>
-    <dir name="Zend">
-      <dir name="Config">
-        <file name="Exception.php" size="1092" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="7dd25661d6845de62c3a928c9db042b4bc24beae"/>
-        <file name="Ini.php" size="10865" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="ba552066fca9b572856849b57887be0f394fb7d2"/>
-        <file name="Json.php" size="8382" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0c80c703a5a4e12b01b33f20ec0776cf186b0f44"/>
-        <dir name="Writer">
-          <file name="Array.php" size="1634" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="662c596ddec7b9b645eee750a263bf3a3b9cb1ef"/>
-          <file name="FileAbstract.php" size="3477" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6b8548f1f19cc704fb62f1c56cfc37195309fcc2"/>
-          <file name="Ini.php" size="5745" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="0a30827c700d251a3b71bebd2ec36c2316781ad9"/>
-          <file name="Json.php" size="3024" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="212d39150a6c700f3c8e1954549ba950ebc9608b"/>
-          <file name="Xml.php" size="4142" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="3bdd42ff5fde5dd9eafee6c2c3d671fdbfc072f5"/>
-          <file name="Yaml.php" size="4142" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="c6de05888e1b4757a3c69f07f53c9f5e3c718a03"/>
-        </dir>
-        <file name="Writer.php" size="2475" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="a56f80b991f0a9552964ed315f51dd7cae2de236"/>
-        <file name="Xml.php" size="11380" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="9a03b3cc0aab1cab2bc4b2a6c11a89c49b1dd168"/>
-        <file name="Yaml.php" size="13297" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="21a1000fb1bb76937020887bc477675235363b6b"/>
-      </dir>
-      <file name="Config.php" size="12962" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="3b08a16c7e6470f4e134b3625c022a5204b31e21"/>
-      <file name="Exception.php" size="2557" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="6cbfd61e22eeb058844c3cf49749a2f2cc6637b6"/>
     </dir>
   </dir>
 </source>

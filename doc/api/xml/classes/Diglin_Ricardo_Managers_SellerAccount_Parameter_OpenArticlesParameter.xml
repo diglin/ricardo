@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="OpenArticlesParameter" abstract="false" final="false" start="21" end="295">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter" file="OpenArticlesParameter.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/OpenArticlesParameter.php" size="5669" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="98746f6939b40cd9c3a160ab18b3ee93b5d40c34"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="OpenArticlesParameter" abstract="false" final="false" start="31" end="305">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter" file="OpenArticlesParameter.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/SellerAccount/Parameter/OpenArticlesParameter.php" size="6178" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="348bc42921859b4e22dba943ecd618b641315652" relative="Diglin/Ricardo/Managers/SellerAccount/Parameter/OpenArticlesParameter.php"/>
   <docblock>
     <description compact="Class OpenArticlesParameter"/>
     <package value="Diglin\Ricardo\Managers\SellerAccount\Parameter"/>
   </docblock>
   <extends full="Diglin\Ricardo\Managers\ParameterAbstract" namespace="Diglin\Ricardo\Managers" name="ParameterAbstract"/>
-  <member name="_articleTitleFilter" type="{unknown}" default="null" visibility="protected" line="28">
+  <member name="_articleTitleFilter" type="{unknown}" default="" constant="null" visibility="protected" line="38">
     <docblock>
       <description compact="Required"/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_articleTypeFilter" type="{unknown}" default="ArticlesTypes::ALL" visibility="protected" line="35">
+  <member name="_articleTypeFilter" type="{unknown}" default="" constant="ArticlesTypes::ALL" visibility="protected" line="45">
     <docblock>
       <description compact="Required"/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_internalReferenceFilter" type="{unknown}" default="null" visibility="protected" line="42">
+  <member name="_internalReferenceFilter" type="{unknown}" default="" constant="null" visibility="protected" line="52">
     <docblock>
       <description compact="Required"/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_lastnameFilter" type="{unknown}" default="null" visibility="protected" line="49">
+  <member name="_lastnameFilter" type="{unknown}" default="" constant="null" visibility="protected" line="59">
     <docblock>
       <description compact="Required"/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_nicknameFilter" type="{unknown}" default="null" visibility="protected" line="56">
+  <member name="_nicknameFilter" type="{unknown}" default="" constant="null" visibility="protected" line="66">
     <docblock>
       <description compact="Required"/>
       <var type="string"/>
     </docblock>
   </member>
-  <member name="_articleIdsFilter" type="array" visibility="protected" line="63">
+  <member name="_articleIdsFilter" type="array" default="" visibility="protected" line="73">
     <docblock>
       <description compact="Optional"/>
       <var type="array"/>
     </docblock>
   </member>
-  <member name="_ascendingSort" type="{unknown}" default="true" visibility="protected" line="70">
+  <member name="_ascendingSort" type="boolean" default="true" visibility="protected" line="80">
     <docblock>
       <description compact="Optional"/>
       <var type="object">
@@ -50,34 +50,34 @@
       </var>
     </docblock>
   </member>
-  <member name="_pageNumber" type="{unknown}" visibility="protected" line="77">
+  <member name="_pageNumber" visibility="protected" line="87">
     <docblock>
       <description compact="Optional"/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_pageSize" type="{unknown}" visibility="protected" line="84">
+  <member name="_pageSize" visibility="protected" line="94">
     <docblock>
       <description compact="Optional"/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_sortBy" type="{unknown}" visibility="protected" line="91">
+  <member name="_sortBy" visibility="protected" line="101">
     <docblock>
       <description compact="Optional"/>
       <var type="int"/>
     </docblock>
   </member>
-  <member name="_requiredProperties" type="array" visibility="protected" line="96">
+  <member name="_requiredProperties" type="array" default="" visibility="protected" line="106">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <member name="_optionalProperties" type="array" visibility="protected" line="104"/>
-  <method name="setArticleIdsFilter" start="116" end="120" abstract="false" final="false" static="false" visibility="public">
+  <member name="_optionalProperties" type="array" default="" visibility="protected" line="114"/>
+  <method name="setArticleIdsFilter" start="126" end="130" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="array" variable="$articleIdsFilter"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\$this" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="$this"/>
@@ -85,15 +85,15 @@
     </docblock>
     <parameter name="articleIdsFilter" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getArticleIdsFilter" start="125" end="128" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleIdsFilter" start="135" end="138" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="setArticleTitleFilter" start="134" end="138" abstract="false" final="false" static="false" visibility="public">
+  <method name="setArticleTitleFilter" start="144" end="148" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="mixed" variable="$articleTitleFilter"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\$this" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="$this"/>
@@ -101,15 +101,15 @@
     </docblock>
     <parameter name="articleTitleFilter" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getArticleTitleFilter" start="143" end="146" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleTitleFilter" start="153" end="156" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="mixed"/>
     </docblock>
   </method>
-  <method name="setArticleTypeFilter" start="152" end="156" abstract="false" final="false" static="false" visibility="public">
+  <method name="setArticleTypeFilter" start="162" end="166" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="int" variable="$articleTypeFilter"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\$this" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="$this"/>
@@ -117,15 +117,15 @@
     </docblock>
     <parameter name="articleTypeFilter" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getArticleTypeFilter" start="161" end="168" abstract="false" final="false" static="false" visibility="public">
+  <method name="getArticleTypeFilter" start="171" end="178" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="int"/>
     </docblock>
   </method>
-  <method name="setAscendingSort" start="174" end="178" abstract="false" final="false" static="false" visibility="public">
+  <method name="setAscendingSort" start="184" end="188" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="boolean" variable="$ascendingSort"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\$this" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="$this"/>
@@ -133,15 +133,15 @@
     </docblock>
     <parameter name="ascendingSort" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getAscendingSort" start="183" end="186" abstract="false" final="false" static="false" visibility="public">
+  <method name="getAscendingSort" start="193" end="196" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="boolean"/>
     </docblock>
   </method>
-  <method name="setInternalReferenceFilter" start="192" end="196" abstract="false" final="false" static="false" visibility="public">
+  <method name="setInternalReferenceFilter" start="202" end="206" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="mixed" variable="$internalReferenceFilter"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\$this" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="$this"/>
@@ -149,15 +149,15 @@
     </docblock>
     <parameter name="internalReferenceFilter" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getInternalReferenceFilter" start="201" end="204" abstract="false" final="false" static="false" visibility="public">
+  <method name="getInternalReferenceFilter" start="211" end="214" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="mixed"/>
     </docblock>
   </method>
-  <method name="setLastnameFilter" start="210" end="214" abstract="false" final="false" static="false" visibility="public">
+  <method name="setLastnameFilter" start="220" end="224" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="mixed" variable="$lastnameFilter"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\$this" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="$this"/>
@@ -165,15 +165,15 @@
     </docblock>
     <parameter name="lastnameFilter" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getLastnameFilter" start="219" end="222" abstract="false" final="false" static="false" visibility="public">
+  <method name="getLastnameFilter" start="229" end="232" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="mixed"/>
     </docblock>
   </method>
-  <method name="setNicknameFilter" start="228" end="232" abstract="false" final="false" static="false" visibility="public">
+  <method name="setNicknameFilter" start="238" end="242" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="mixed" variable="$nicknameFilter"/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\$this" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="$this"/>
@@ -181,15 +181,15 @@
     </docblock>
     <parameter name="nicknameFilter" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getNicknameFilter" start="237" end="240" abstract="false" final="false" static="false" visibility="public">
+  <method name="getNicknameFilter" start="247" end="250" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="mixed"/>
     </docblock>
   </method>
-  <method name="setPageNumber" start="246" end="250" abstract="false" final="false" static="false" visibility="public">
+  <method name="setPageNumber" start="256" end="260" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="object" variable="$pageNumber">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\null" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="null"/>
       </param>
@@ -199,17 +199,17 @@
     </docblock>
     <parameter name="pageNumber" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getPageNumber" start="255" end="258" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPageNumber" start="265" end="268" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\null" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="null"/>
       </return>
     </docblock>
   </method>
-  <method name="setPageSize" start="264" end="268" abstract="false" final="false" static="false" visibility="public">
+  <method name="setPageSize" start="274" end="278" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="object" variable="$pageSize">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\null" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="null"/>
       </param>
@@ -219,17 +219,17 @@
     </docblock>
     <parameter name="pageSize" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getPageSize" start="273" end="276" abstract="false" final="false" static="false" visibility="public">
+  <method name="getPageSize" start="283" end="286" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\null" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="null"/>
       </return>
     </docblock>
   </method>
-  <method name="setSortBy" start="282" end="286" abstract="false" final="false" static="false" visibility="public">
+  <method name="setSortBy" start="292" end="296" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <param type="object" variable="$sortBy">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\null" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="null"/>
       </param>
@@ -239,49 +239,47 @@
     </docblock>
     <parameter name="sortBy" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getSortBy" start="291" end="294" abstract="false" final="false" static="false" visibility="public">
+  <method name="getSortBy" start="301" end="304" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="object">
         <type full="Diglin\Ricardo\Managers\SellerAccount\Parameter\null" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="null"/>
       </return>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Managers\ParameterAbstract" namepsace="Diglin\Ricardo\Managers" name="ParameterAbstract">
-    <member name="_requiredProperties" type="array" visibility="protected" line="23">
+  <parent full="Diglin\Ricardo\Managers\ParameterAbstract" namespace="Diglin\Ricardo\Managers" name="ParameterAbstract">
+    <implements full="ArrayAccess" namespace="" name="ArrayAccess"/>
+    <member name="_requiredProperties" type="array" default="" visibility="protected" line="37">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="array"/>
       </docblock>
     </member>
-    <member name="_optionalProperties" type="array" visibility="protected" line="28">
+    <member name="_optionalProperties" type="array" default="" visibility="protected" line="42">
       <docblock>
-        <description compact=""/>
+        <description/>
         <var type="array"/>
       </docblock>
     </member>
-    <method name="getRequiredProperties" start="33" end="36" abstract="false" final="false" static="false" visibility="public">
+    <method name="getRequiredProperties" start="47" end="50" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getOptionalProperties" start="41" end="44" abstract="false" final="false" static="false" visibility="public">
+    <method name="getOptionalProperties" start="55" end="58" abstract="false" final="false" static="false" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getDataProperties" start="51" end="91" abstract="false" final="false" static="false" visibility="public">
+    <method name="getDataProperties" start="65" end="105" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Get all properties of a class as an array to be send or use properly by the ricardo.ch API"/>
         <return type="array"/>
       </docblock>
-      <inline>
-        <comment value="skip empty value for properties which are optional" line="82"/>
-      </inline>
     </method>
-    <method name="_normalizeProperty" start="99" end="105" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_normalizeProperty" start="113" end="119" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Normalize the property from &quot;_myProperty&quot; to &quot;MyProperty&quot;"/>
         <param variable="$name"/>
@@ -289,7 +287,7 @@
       </docblock>
       <parameter name="name" byreference="false" type="{unknown}"/>
     </method>
-    <method name="_getGetterMethod" start="113" end="116" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_getGetterMethod" start="127" end="130" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Get the getter method name"/>
         <param variable="$name"/>
@@ -297,7 +295,7 @@
       </docblock>
       <parameter name="name" byreference="false" type="{unknown}"/>
     </method>
-    <method name="_getSetterMethod" start="124" end="127" abstract="false" final="false" static="false" visibility="protected">
+    <method name="_getSetterMethod" start="138" end="141" abstract="false" final="false" static="false" visibility="protected">
       <docblock>
         <description compact="Get the setter method name"/>
         <param variable="$name"/>
@@ -305,7 +303,7 @@
       </docblock>
       <parameter name="name" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetSet" start="136" end="144" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetSet" start="150" end="158" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetSet()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetset.php"/>
@@ -315,7 +313,7 @@
       <parameter name="offset" byreference="false" type="{unknown}"/>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetExists" start="153" end="161" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetExists" start="167" end="175" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetExists()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetexists.php"/>
@@ -324,7 +322,7 @@
       </docblock>
       <parameter name="offset" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetUnset" start="169" end="177" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetUnset" start="183" end="191" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetUnset()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetunset.php"/>
@@ -332,7 +330,7 @@
       </docblock>
       <parameter name="offset" byreference="false" type="{unknown}"/>
     </method>
-    <method name="offsetGet" start="186" end="194" abstract="false" final="false" static="false" visibility="public">
+    <method name="offsetGet" start="200" end="208" abstract="false" final="false" static="false" visibility="public">
       <docblock>
         <description compact="Implementation of ArrayAccess::offsetGet()"/>
         <link value="http://www.php.net/manual/en/arrayaccess.offsetget.php"/>
@@ -342,7 +340,7 @@
       <parameter name="offset" byreference="false" type="{unknown}"/>
     </method>
   </parent>
-  <interface full="ArrayAccess" namepsace="" name="ArrayAccess">
+  <interface full="ArrayAccess" namespace="" name="ArrayAccess">
     <method name="offsetExists" abstract="false" static="false" visibility="public" final="false">
     <docblock>
       <description compact="Whether a offset exists">Whether or not an offset exists.</description>

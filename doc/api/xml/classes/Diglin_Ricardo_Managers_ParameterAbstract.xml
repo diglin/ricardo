@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Managers\ParameterAbstract" namespace="Diglin\Ricardo\Managers" name="ParameterAbstract" abstract="true" final="false" start="13" end="195">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Managers" file="ParameterAbstract.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Managers/ParameterAbstract.php" size="5050" time="2014-12-16T11:06:10+01:00" unixtime="1418724370" sha1="e38960bb867e45076d65c91aea5f947a484ff178"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Managers\ParameterAbstract" namespace="Diglin\Ricardo\Managers" name="ParameterAbstract" abstract="true" final="false" start="27" end="209">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Managers" file="ParameterAbstract.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Managers/ParameterAbstract.php" size="5630" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="9deca00cba627010df759113a87c5838c3ee84b6" relative="Diglin/Ricardo/Managers/ParameterAbstract.php"/>
+  <docblock>
+    <description compact="Class ParameterAbstract"/>
+    <package value="Diglin\Ricardo\Managers"/>
+  </docblock>
   <implements full="ArrayAccess" namespace="" name="ArrayAccess"/>
-  <member name="_data" type="{unknown}" visibility="private" line="18">
+  <member name="_data" visibility="private" line="32">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <member name="_requiredProperties" type="array" visibility="protected" line="23">
+  <member name="_requiredProperties" type="array" default="" visibility="protected" line="37">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <member name="_optionalProperties" type="array" visibility="protected" line="28">
+  <member name="_optionalProperties" type="array" default="" visibility="protected" line="42">
     <docblock>
-      <description compact=""/>
+      <description/>
       <var type="array"/>
     </docblock>
   </member>
-  <method name="getRequiredProperties" start="33" end="36" abstract="false" final="false" static="false" visibility="public">
+  <method name="getRequiredProperties" start="47" end="50" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getOptionalProperties" start="41" end="44" abstract="false" final="false" static="false" visibility="public">
+  <method name="getOptionalProperties" start="55" end="58" abstract="false" final="false" static="false" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <method name="getDataProperties" start="51" end="91" abstract="false" final="false" static="false" visibility="public">
+  <method name="getDataProperties" start="65" end="105" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get all properties of a class as an array to be send or use properly by the ricardo.ch API"/>
       <return type="array"/>
     </docblock>
-    <inline>
-      <comment value="skip empty value for properties which are optional" line="82"/>
-    </inline>
   </method>
-  <method name="_normalizeProperty" start="99" end="105" abstract="false" final="false" static="false" visibility="protected">
+  <method name="_normalizeProperty" start="113" end="119" abstract="false" final="false" static="false" visibility="protected">
     <docblock>
       <description compact="Normalize the property from &quot;_myProperty&quot; to &quot;MyProperty&quot;"/>
       <param variable="$name"/>
@@ -49,7 +50,7 @@
     </docblock>
     <parameter name="name" byreference="false" type="{unknown}"/>
   </method>
-  <method name="_getGetterMethod" start="113" end="116" abstract="false" final="false" static="false" visibility="protected">
+  <method name="_getGetterMethod" start="127" end="130" abstract="false" final="false" static="false" visibility="protected">
     <docblock>
       <description compact="Get the getter method name"/>
       <param variable="$name"/>
@@ -57,7 +58,7 @@
     </docblock>
     <parameter name="name" byreference="false" type="{unknown}"/>
   </method>
-  <method name="_getSetterMethod" start="124" end="127" abstract="false" final="false" static="false" visibility="protected">
+  <method name="_getSetterMethod" start="138" end="141" abstract="false" final="false" static="false" visibility="protected">
     <docblock>
       <description compact="Get the setter method name"/>
       <param variable="$name"/>
@@ -65,7 +66,7 @@
     </docblock>
     <parameter name="name" byreference="false" type="{unknown}"/>
   </method>
-  <method name="offsetSet" start="136" end="144" abstract="false" final="false" static="false" visibility="public">
+  <method name="offsetSet" start="150" end="158" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Implementation of ArrayAccess::offsetSet()"/>
       <link value="http://www.php.net/manual/en/arrayaccess.offsetset.php"/>
@@ -75,7 +76,7 @@
     <parameter name="offset" byreference="false" type="{unknown}"/>
     <parameter name="value" byreference="false" type="{unknown}"/>
   </method>
-  <method name="offsetExists" start="153" end="161" abstract="false" final="false" static="false" visibility="public">
+  <method name="offsetExists" start="167" end="175" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Implementation of ArrayAccess::offsetExists()"/>
       <link value="http://www.php.net/manual/en/arrayaccess.offsetexists.php"/>
@@ -84,7 +85,7 @@
     </docblock>
     <parameter name="offset" byreference="false" type="{unknown}"/>
   </method>
-  <method name="offsetUnset" start="169" end="177" abstract="false" final="false" static="false" visibility="public">
+  <method name="offsetUnset" start="183" end="191" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Implementation of ArrayAccess::offsetUnset()"/>
       <link value="http://www.php.net/manual/en/arrayaccess.offsetunset.php"/>
@@ -92,7 +93,7 @@
     </docblock>
     <parameter name="offset" byreference="false" type="{unknown}"/>
   </method>
-  <method name="offsetGet" start="186" end="194" abstract="false" final="false" static="false" visibility="public">
+  <method name="offsetGet" start="200" end="208" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Implementation of ArrayAccess::offsetGet()"/>
       <link value="http://www.php.net/manual/en/arrayaccess.offsetget.php"/>
@@ -101,7 +102,7 @@
     </docblock>
     <parameter name="offset" byreference="false" type="{unknown}"/>
   </method>
-  <interface full="ArrayAccess" namepsace="" name="ArrayAccess">
+  <interface full="ArrayAccess" namespace="" name="ArrayAccess">
     <method name="offsetExists" abstract="false" static="false" visibility="public" final="false">
     <docblock>
       <description compact="Whether a offset exists">Whether or not an offset exists.</description>
@@ -132,27 +133,34 @@
     <parameter name="offset" optional="false" byreference="false" type="object" class="mixed"/>
   </method>
   </interface>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\AddArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AddArticlePicturesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendArticleDescriptionParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\AppendDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendDescriptionParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleDeliveryParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleDescriptionParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInformationParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInternalReferenceParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticlePictureParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticleParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticlesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticleParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticlesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="InsertArticleParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="InsertArticlesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticleParameter"/>
-  <extender full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticlePicturesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ArticlesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ClosedArticlesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="OpenArticlesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticleParameter"/>
-  <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticlesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="SoldArticlesParameter"/>
-  <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="UnsoldArticlesParameter"/>
+  <extenders>
+    <extender full="Diglin\Ricardo\Managers\Search\Parameter\GetCategoryBestMatchParameter" namespace="Diglin\Ricardo\Managers\Search\Parameter" name="GetCategoryBestMatchParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\AddArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AddArticlePicturesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\AppendArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendArticleDescriptionParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\AppendDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="AppendDescriptionParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleDeliveryParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleDescriptionParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleDescriptionParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInformationParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticleInternalReferenceParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ArticlePictureParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\BaseInsertArticleWithTrackingParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="BaseInsertArticleWithTrackingParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticleParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="CloseArticlesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\ClosePlannedArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="ClosePlannedArticleParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticleParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="DeletePlannedArticlesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\GetArticleFeeParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="GetArticleFeeParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\GetArticlesFeeParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="GetArticlesFeeParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="InsertArticleParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="InsertArticlesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticleParameter"/>
+    <extender full="Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter" namespace="Diglin\Ricardo\Managers\Sell\Parameter" name="UpdateArticlePicturesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ArticlesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="ClosedArticlesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="OpenArticlesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticleParameter"/>
+    <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="PlannedArticlesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="SoldArticlesParameter"/>
+    <extender full="Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter" namespace="Diglin\Ricardo\Managers\SellerAccount\Parameter" name="UnsoldArticlesParameter"/>
+  </extenders>
 </class>

@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Enums\Customer\OpenArticlesSortBy" namespace="Diglin\Ricardo\Enums\Customer" name="OpenArticlesSortBy" abstract="false" final="false" start="19" end="74">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer" file="OpenArticlesSortBy.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Enums/Customer/OpenArticlesSortBy.php" size="2853" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="45e5fc91fb7fca256ad546888caeede336d49cf2"/>
+<class xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Enums\Customer\OpenArticlesSortBy" namespace="Diglin\Ricardo\Enums\Customer" name="OpenArticlesSortBy" abstract="false" final="false" start="29" end="84">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/Customer" file="OpenArticlesSortBy.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Enums/Customer/OpenArticlesSortBy.php" size="3362" time="2015-02-05T12:57:19+01:00" unixtime="1423137439" sha1="a0987543efbb88b0ff2b57a2a95dc992cac01ba5" relative="Diglin/Ricardo/Enums/Customer/OpenArticlesSortBy.php"/>
   <docblock>
     <description compact="Class OpenArticlesSortBy"/>
     <package value="Diglin\Ricardo\Enums\Customer"/>
   </docblock>
   <extends full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums"/>
-  <constant name="SORTBYARTICLEID" value="1"/>
-  <constant name="SORTBYTITLE" value="2"/>
-  <constant name="SORTBYINTERNALREFERENCE" value="3"/>
-  <constant name="SORTBYQUANTITY" value="4"/>
-  <constant name="SORTBYVIEWCOUNT" value="5"/>
-  <constant name="SORTBYOBSERVERCOUNT" value="6"/>
-  <constant name="SORTBYBIDCOUNT" value="7"/>
-  <constant name="SORTBYSTARTPRICE" value="8"/>
-  <constant name="SORTBYBUYNOWPRICE" value="9"/>
-  <constant name="SORTBYCURRENTPRICE" value="11"/>
-  <constant name="SORTBYENDDATE" value="12"/>
-  <constant name="SORTBYREPOSTCOUNT" value="13"/>
-  <constant name="SORTBYSTARTDATE" value="14"/>
-  <constant name="SORTBYCATEGORY" value="15"/>
-  <constant name="SORTBYSHIPPINGFEES" value="16"/>
-  <method name="getEnums" start="54" end="73" abstract="false" final="false" static="true" visibility="public">
+  <constant type="integer" name="SORTBYARTICLEID" value="1"/>
+  <constant type="integer" name="SORTBYTITLE" value="2"/>
+  <constant type="integer" name="SORTBYINTERNALREFERENCE" value="3"/>
+  <constant type="integer" name="SORTBYQUANTITY" value="4"/>
+  <constant type="integer" name="SORTBYVIEWCOUNT" value="5"/>
+  <constant type="integer" name="SORTBYOBSERVERCOUNT" value="6"/>
+  <constant type="integer" name="SORTBYBIDCOUNT" value="7"/>
+  <constant type="integer" name="SORTBYSTARTPRICE" value="8"/>
+  <constant type="integer" name="SORTBYBUYNOWPRICE" value="9"/>
+  <constant type="integer" name="SORTBYCURRENTPRICE" value="11"/>
+  <constant type="integer" name="SORTBYENDDATE" value="12"/>
+  <constant type="integer" name="SORTBYREPOSTCOUNT" value="13"/>
+  <constant type="integer" name="SORTBYSTARTDATE" value="14"/>
+  <constant type="integer" name="SORTBYCATEGORY" value="15"/>
+  <constant type="integer" name="SORTBYSHIPPINGFEES" value="16"/>
+  <method name="getEnums" start="64" end="83" abstract="false" final="false" static="true" visibility="public">
     <docblock>
-      <description compact=""/>
+      <description/>
       <return type="array"/>
     </docblock>
   </method>
-  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namepsace="Diglin\Ricardo\Enums" name="AbstractEnums">
-    <method name="getEnums" start="18" end="21" abstract="false" final="false" static="true" visibility="public">
+  <parent full="Diglin\Ricardo\Enums\AbstractEnums" namespace="Diglin\Ricardo\Enums" name="AbstractEnums">
+    <method name="getEnums" start="28" end="31" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>
-    <method name="getLabel" start="27" end="35" abstract="false" final="false" static="true" visibility="public">
+    <method name="getLabel" start="37" end="45" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <param variable="$value"/>
         <return type="object">
           <type full="Diglin\Ricardo\Enums\bool" namespace="Diglin\Ricardo\Enums" name="bool"/>
@@ -44,9 +44,9 @@
       </docblock>
       <parameter name="value" byreference="false" type="{unknown}"/>
     </method>
-    <method name="getValues" start="40" end="47" abstract="false" final="false" static="true" visibility="public">
+    <method name="getValues" start="50" end="57" abstract="false" final="false" static="true" visibility="public">
       <docblock>
-        <description compact=""/>
+        <description/>
         <return type="array"/>
       </docblock>
     </method>

@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<interface xmlns="http://xml.phpdox.net/src#" full="Diglin\Ricardo\Core\ApiInterface" namespace="Diglin\Ricardo\Core" name="ApiInterface" abstract="false" final="false" start="14" end="47">
-  <file path="/rissip/github/ricardo/src/Diglin/Ricardo/Core" file="ApiInterface.php" realpath="/rissip/github/ricardo/src/Diglin/Ricardo/Core/ApiInterface.php" size="1001" time="2014-12-16T11:05:52+01:00" unixtime="1418724352" sha1="1e213916ba4cb8beb770e27b6451b94d31af370c"/>
-  <method name="connect" start="24" end="24" abstract="false" final="false" static="false" visibility="public">
+<interface xmlns="http://xml.phpdox.net/src" full="Diglin\Ricardo\Core\ApiInterface" namespace="Diglin\Ricardo\Core" name="ApiInterface" abstract="false" final="false" start="28" end="61">
+  <file path="/www-data/git/ricardo/src/Diglin/Ricardo/Core" file="ApiInterface.php" realpath="/www-data/git/ricardo/src/Diglin/Ricardo/Core/ApiInterface.php" size="1583" time="2015-02-08T20:55:36+01:00" unixtime="1423425336" sha1="de008dbb5f88071575e5e930f61bed079f32966a" relative="Diglin/Ricardo/Core/ApiInterface.php"/>
+  <docblock>
+    <description compact="Interface ApiInterface"/>
+    <package value="Diglin\Ricardo\Core"/>
+  </docblock>
+  <method name="connect" start="38" end="38" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Connect to the API"/>
       <param type="string" variable="$service"/>
       <param type="string" variable="$method"/>
-      <param type="array" variable="$params"/>
+      <param type="object" variable="$params">
+        <type full="Diglin\Ricardo\Core\array|string" namespace="Diglin\Ricardo\Core" name="array|string"/>
+      </param>
       <return type="mixed"/>
     </docblock>
     <parameter name="service" byreference="false" type="{unknown}"/>
     <parameter name="method" byreference="false" type="{unknown}"/>
     <parameter name="params" byreference="false" type="array"/>
   </method>
-  <method name="getConfig" start="31" end="31" abstract="false" final="false" static="false" visibility="public">
+  <method name="getConfig" start="45" end="45" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get the config of the API"/>
       <return type="mixed"/>
     </docblock>
   </method>
-  <method name="setShouldSetPass" start="39" end="39" abstract="false" final="false" static="false" visibility="public">
+  <method name="setShouldSetPass" start="53" end="53" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Set if the pass should be sent or not"/>
       <param type="boolean" variable="$boolean"/>
@@ -27,11 +33,13 @@
     </docblock>
     <parameter name="boolean" byreference="false" type="{unknown}"/>
   </method>
-  <method name="getShouldSetPass" start="46" end="46" abstract="false" final="false" static="false" visibility="public">
+  <method name="getShouldSetPass" start="60" end="60" abstract="false" final="false" static="false" visibility="public">
     <docblock>
       <description compact="Get if the pass should be sent or not"/>
       <return type="mixed"/>
     </docblock>
   </method>
-  <implementor full="Diglin\Ricardo\Api" namespace="Diglin\Ricardo" name="Api"/>
+  <implementors>
+    <class full="Diglin\Ricardo\Api" namespace="Diglin\Ricardo" name="Api"/>
+  </implementors>
 </interface>

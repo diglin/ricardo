@@ -23,6 +23,10 @@ namespace Diglin\Ricardo\Managers;
 
 use Diglin\Ricardo\Managers\Search\Parameter\GetCategoryBestMatchParameter;
 
+/**
+ * Class Search
+ * @package Diglin\Ricardo\Managers
+ */
 class Search extends ManagerAbstract
 {
     /**
@@ -31,6 +35,8 @@ class Search extends ManagerAbstract
     protected $_serviceName = 'search';
 
     /**
+     * Get Category Best Match
+     *
      * @param GetCategoryBestMatchParameter $parameter
      * @return array
      */

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>phpDox - Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../reports.html">Reports</a>
+          <a href="../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -64,6 +64,9 @@
           <li>
             <a href="#history">History</a>
           </li>
+          <li>
+            <a href="../source/Diglin/Ricardo/Managers/Sell/Parameter/InsertArticlesParameter.php.html#line29">Source</a>
+          </li>
         </ul>
       </nav>
       <section>
@@ -74,20 +77,19 @@
         <h2 id="synopsis">Synopsis</h2>
         <div class="synopsis">class InsertArticlesParameter
                 extends <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract.html">ParameterAbstract</a>
-            {<br/><ul class="none"><li>// members</li><li>protected
-                         <a href="#members">$_antiforgeryToken</a>;
-                    </li><li>protected
-                         <a href="#members">$_articles</a>;
-                    </li><li>protected
-                         <a href="#members">$_requiredProperties</a>;
-                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Managers\ParameterAbstract">ParameterAbstract</span></li><li>protected
-                             <a href="#members">$_requiredProperties</a>;
-                        </li><li>protected
-                             <a href="#members">$_optionalProperties</a>;
+            {<br/><ul class="none"><li>// members</li><li>protected  <a href="#members">$_antiforgeryToken</a>;
+                    </li><li>protected array <a href="#members">$_articlesToInsert</a> =
+                        ;
+                    </li><li>protected array <a href="#members">$_requiredProperties</a> =
+                        ;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Managers\ParameterAbstract">ParameterAbstract</span></li><li>protected array <a href="#members">$_requiredProperties</a>;
+                        </li><li>protected array <a href="#members">$_optionalProperties</a>;
                         </li></ul><ul class="none"><li>// methods</li><li>public $this <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/setAntiforgeryToken.html">setAntiforgeryToken</a>()
                     </li><li>public string <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/getAntiforgeryToken.html">getAntiforgeryToken</a>()
                     </li><li>public $this <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/setArticles.html">setArticles</a>()
                     </li><li>public array <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/getArticles.html">getArticles</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/setArticlesToInsert.html">setArticlesToInsert</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/getArticlesToInsert.html">getArticlesToInsert</a>()
                     </li></ul><ul class="none"><li>// Inherited methods from <span title="Diglin\Ricardo\Managers\ParameterAbstract">ParameterAbstract</span></li><li>public array <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract/getRequiredProperties.html">getRequiredProperties</a>()
                         </li><li>public array <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract/getOptionalProperties.html">getOptionalProperties</a>()
                         </li><li>public array <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract/getDataProperties.html">getDataProperties</a>()
@@ -106,7 +108,7 @@
           <h4>Extends</h4>
           <ul>
             <li>
-              <a href="../classes/Diglin_Ricardo_Managers_ParameterAbstract.html">Diglin\Ricardo\Managers\ParameterAbstract</a>
+              <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract.html">Diglin\Ricardo\Managers\ParameterAbstract</a>
             </li>
           </ul>
         </div>
@@ -117,7 +119,7 @@
             <li id="_antiforgeryToken"><strong>$_antiforgeryToken</strong>
                 —
                 string</li>
-            <li id="_articles"><strong>$_articles</strong>
+            <li id="_articlesToInsert"><strong>$_articlesToInsert</strong>
                 —
                 array</li>
             <li id="_optionalProperties"><strong>$_optionalProperties</strong>
@@ -141,11 +143,17 @@
             <li id="getArticles">
               <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/getArticles.html">getArticles()</a>
             </li>
+            <li id="getArticlesToInsert">
+              <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/getArticlesToInsert.html">getArticlesToInsert()</a>
+            </li>
             <li id="setAntiforgeryToken">
               <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/setAntiforgeryToken.html">setAntiforgeryToken()</a>
             </li>
             <li id="setArticles">
               <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/setArticles.html">setArticles()</a>
+            </li>
+            <li id="setArticlesToInsert">
+              <a title="Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter" href="../classes/Diglin_Ricardo_Managers_Sell_Parameter_InsertArticlesParameter/setArticlesToInsert.html">setArticlesToInsert()</a>
             </li>
           </ul>
           <h3>Inherited from <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract.html">Diglin\Ricardo\Managers\ParameterAbstract</a></h3>
@@ -181,13 +189,43 @@
         <h2 id="history">History</h2>
         <ul class="styled history">
           <li>
+            <h3>2015-03-29T14:51:27+02:00 (commit #<span title="b2e305c459a750079f2b32a26f49bb137330976f">b2e305c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Implement and test bulk method insertArticles</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-05T13:02:27+01:00 (commit #<span title="17cc8fe2d7fb02ee28ad33b68b9966652ce28dff">17cc8fe</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change license from OSL v3 to GPL v3</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-12-16T12:45:07+01:00 (commit #<span title="ec26574bac4de7e66aa27c9d98df19f1ac110fe7">ec26574</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre class="wrapped">PSR2 compliant</pre>
+            </div>
+          </li>
+          <li>
             <h3>2014-09-28T11:22:59+02:00 (commit #<span title="3e11a2cf9148ee20ec7e06905b6b86a0c74ea70d">3e11a2c</span>)</h3>
             <div>
               <p>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+              <pre class="wrapped">Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
             </div>
           </li>
           <li>
@@ -197,7 +235,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Insert Article Implementation and test</pre>
+              <pre class="wrapped">[RIC-38] Insert Article Implementation and test</pre>
             </div>
           </li>
           <li>
@@ -207,14 +245,14 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] Start the implementation of SellService, add parameter abstract and their classes to facilitate data manipulation of parameters between the lib and ricardo API</pre>
+              <pre class="wrapped">[RIC-38] Start the implementation of SellService, add parameter abstract and their classes to facilitate data manipulation of parameters between the lib and ricardo API</pre>
             </div>
           </li>
         </ul>
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>

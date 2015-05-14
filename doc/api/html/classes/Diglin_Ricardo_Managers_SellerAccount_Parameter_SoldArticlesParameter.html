@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:pdxf="http://xml.phpdox.net/functions" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>phpDox - Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
   <body>
     <nav class="topnav">
@@ -25,7 +25,7 @@
           <a href="../classes.html">Classes</a>
         </li>
         <li class="separator">
-          <a href="../reports.html">Reports</a>
+          <a href="../source/index.html">Source</a>
         </li>
       </ul>
     </nav>
@@ -64,6 +64,9 @@
           <li>
             <a href="#history">History</a>
           </li>
+          <li>
+            <a href="../source/Diglin/Ricardo/Managers/SellerAccount/Parameter/SoldArticlesParameter.php.html#line36">Source</a>
+          </li>
         </ul>
       </nav>
       <section>
@@ -74,46 +77,43 @@
         <h2 id="synopsis">Synopsis</h2>
         <div class="synopsis">class SoldArticlesParameter
                 extends <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract.html">ParameterAbstract</a>
-            {<br/><ul class="none"><li>// members</li><li>protected
-                         <a href="#members">$_articleTitleFilter</a>;
-                    </li><li>protected
-                         <a href="#members">$_articleTypeFilter</a>;
-                    </li><li>protected
-                         <a href="#members">$_internalReferenceFilter</a>;
-                    </li><li>protected
-                         <a href="#members">$_lastnameFilter</a>;
-                    </li><li>protected
-                         <a href="#members">$_nicknameFilter</a>;
-                    </li><li>protected <span title="Diglin\Ricardo\Managers\SellerAccount\Parameter\bool">bool</span>
-                         <a href="#members">$_isCompletedTransaction</a>;
-                    </li><li>protected
-                         <a href="#members">$_articleIdsFilter</a>;
-                    </li><li>protected <span title="Diglin\Ricardo\Managers\SellerAccount\Parameter\bool">bool</span>
-                         <a href="#members">$_ascendingSort</a>;
-                    </li><li>protected
-                         <a href="#members">$_pageNumber</a>;
-                    </li><li>protected
-                         <a href="#members">$_pageSize</a>;
-                    </li><li>protected
-                         <a href="#members">$_sortBy</a>;
-                    </li><li>protected <span title="Diglin\Ricardo\Managers\SellerAccount\Parameter\bool">bool</span>
-                         <a href="#members">$_isArchived</a>;
-                    </li><li>protected
-                         <a href="#members">$_maximumEndDate</a>;
-                    </li><li>protected
-                         <a href="#members">$_minimumEndDate</a>;
-                    </li><li>protected
-                         <a href="#members">$_paidStatusFilter</a>;
-                    </li><li>protected
-                         <a href="#members">$_shippedStatusFilter</a>;
-                    </li><li>protected
-                         <a href="#members">$_requiredProperties</a>;
-                    </li><li>protected
-                         <a href="#members">$_optionalProperties</a>;
-                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Managers\ParameterAbstract">ParameterAbstract</span></li><li>protected
-                             <a href="#members">$_requiredProperties</a>;
-                        </li><li>protected
-                             <a href="#members">$_optionalProperties</a>;
+            {<br/><ul class="none"><li>// members</li><li>protected string <a href="#members">$_articleTitleFilter</a> =
+                        null;
+                    </li><li>protected int <a href="#members">$_articleTypeFilter</a> =
+                        ArticlesTypes::ALL;
+                    </li><li>protected string <a href="#members">$_internalReferenceFilter</a> =
+                        null;
+                    </li><li>protected string <a href="#members">$_lastnameFilter</a> =
+                        null;
+                    </li><li>protected string <a href="#members">$_nicknameFilter</a> =
+                        null;
+                    </li><li>protected <span title="Diglin\Ricardo\Managers\SellerAccount\Parameter\bool">bool</span> <a href="#members">$_isCompletedTransaction</a> =
+                        false;
+                    </li><li>protected array <a href="#members">$_articleIdsFilter</a> =
+                        null;
+                    </li><li>protected <span title="Diglin\Ricardo\Managers\SellerAccount\Parameter\bool">bool</span> <a href="#members">$_ascendingSort</a> =
+                        false;
+                    </li><li>protected  <a href="#members">$_pageNumber</a>;
+                    </li><li>protected  <a href="#members">$_pageSize</a>;
+                    </li><li>protected int <a href="#members">$_sortBy</a> =
+                        SoldArticlesSortBy::SORTBYENDDATE;
+                    </li><li>protected <span title="Diglin\Ricardo\Managers\SellerAccount\Parameter\bool">bool</span> <a href="#members">$_isArchived</a>;
+                    </li><li>protected  <a href="#members">$_maximumEndDate</a>;
+                    </li><li>protected  <a href="#members">$_minimumEndDate</a>;
+                    </li><li>protected int <a href="#members">$_paidStatusFilter</a> =
+                        PaidStatusFilter::ANY;
+                    </li><li>protected int <a href="#members">$_shippedStatusFilter</a> =
+                        ShippedStatusFilter::ANY;
+                    </li><li>protected array <a href="#members">$_excludedTransactionIdsFilter</a> =
+                        ;
+                    </li><li>protected array <a href="#members">$_transactionIdsFilter</a> =
+                        ;
+                    </li><li>protected array <a href="#members">$_requiredProperties</a> =
+                        ;
+                    </li><li>protected array <a href="#members">$_optionalProperties</a> =
+                        ;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="Diglin\Ricardo\Managers\ParameterAbstract">ParameterAbstract</span></li><li>protected array <a href="#members">$_requiredProperties</a>;
+                        </li><li>protected array <a href="#members">$_optionalProperties</a>;
                         </li></ul><ul class="none"><li>// methods</li><li>public $this <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setArticleIdsFilter.html">setArticleIdsFilter</a>()
                     </li><li>public array <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getArticleIdsFilter.html">getArticleIdsFilter</a>()
                     </li><li>public $this <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setArticleTitleFilter.html">setArticleTitleFilter</a>()
@@ -146,6 +146,10 @@
                     </li><li>public int <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getPaidStatusFilter.html">getPaidStatusFilter</a>()
                     </li><li>public $this <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setShippedStatusFilter.html">setShippedStatusFilter</a>()
                     </li><li>public int <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getShippedStatusFilter.html">getShippedStatusFilter</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getTransactionIdsFilter.html">getTransactionIdsFilter</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setTransactionIdsFilter.html">setTransactionIdsFilter</a>()
+                    </li><li>public array <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getExcludedTransactionIdsFilter.html">getExcludedTransactionIdsFilter</a>()
+                    </li><li>public $this <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setExcludedTransactionIdsFilter.html">setExcludedTransactionIdsFilter</a>()
                     </li></ul><ul class="none"><li>// Inherited methods from <span title="Diglin\Ricardo\Managers\ParameterAbstract">ParameterAbstract</span></li><li>public array <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract/getRequiredProperties.html">getRequiredProperties</a>()
                         </li><li>public array <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract/getOptionalProperties.html">getOptionalProperties</a>()
                         </li><li>public array <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract/getDataProperties.html">getDataProperties</a>()
@@ -164,7 +168,7 @@
           <h4>Extends</h4>
           <ul>
             <li>
-              <a href="../classes/Diglin_Ricardo_Managers_ParameterAbstract.html">Diglin\Ricardo\Managers\ParameterAbstract</a>
+              <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract.html">Diglin\Ricardo\Managers\ParameterAbstract</a>
             </li>
           </ul>
         </div>
@@ -183,16 +187,19 @@
                 int<br/><span class="indent">Required</span></li>
             <li id="_ascendingSort"><strong>$_ascendingSort</strong>
                 —
-                <a href="#">Diglin\Ricardo\Managers\SellerAccount\Parameter\bool</a><br/><span class="indent">Optional</span></li>
+                <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\bool" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_bool.html">Diglin\Ricardo\Managers\SellerAccount\Parameter\bool</a><br/><span class="indent">Optional</span></li>
+            <li id="_excludedTransactionIdsFilter"><strong>$_excludedTransactionIdsFilter</strong>
+                —
+                array</li>
             <li id="_internalReferenceFilter"><strong>$_internalReferenceFilter</strong>
                 —
                 string<br/><span class="indent">Required</span></li>
             <li id="_isArchived"><strong>$_isArchived</strong>
                 —
-                <a href="#">Diglin\Ricardo\Managers\SellerAccount\Parameter\bool</a><br/><span class="indent">Optional</span></li>
+                <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\bool" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_bool.html">Diglin\Ricardo\Managers\SellerAccount\Parameter\bool</a><br/><span class="indent">Optional</span></li>
             <li id="_isCompletedTransaction"><strong>$_isCompletedTransaction</strong>
                 —
-                <a href="#">Diglin\Ricardo\Managers\SellerAccount\Parameter\bool</a><br/><span class="indent">Required</span></li>
+                <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\bool" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_bool.html">Diglin\Ricardo\Managers\SellerAccount\Parameter\bool</a><br/><span class="indent">Required</span></li>
             <li id="_lastnameFilter"><strong>$_lastnameFilter</strong>
                 —
                 string<br/><span class="indent">Required</span></li>
@@ -232,6 +239,9 @@
             <li id="_sortBy"><strong>$_sortBy</strong>
                 —
                 int<br/><span class="indent">Optional</span></li>
+            <li id="_transactionIdsFilter"><strong>$_transactionIdsFilter</strong>
+                —
+                array</li>
           </ul>
         </div>
         <h2 id="methods">Methods</h2>
@@ -249,6 +259,9 @@
             </li>
             <li id="getAscendingSort">
               <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getAscendingSort.html">getAscendingSort()</a>
+            </li>
+            <li id="getExcludedTransactionIdsFilter">
+              <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getExcludedTransactionIdsFilter.html">getExcludedTransactionIdsFilter()</a>
             </li>
             <li id="getInternalReferenceFilter">
               <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getInternalReferenceFilter.html">getInternalReferenceFilter()</a>
@@ -286,6 +299,9 @@
             <li id="getSortBy">
               <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getSortBy.html">getSortBy()</a>
             </li>
+            <li id="getTransactionIdsFilter">
+              <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/getTransactionIdsFilter.html">getTransactionIdsFilter()</a>
+            </li>
             <li id="setArticleIdsFilter">
               <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setArticleIdsFilter.html">setArticleIdsFilter()</a>
             </li>
@@ -297,6 +313,9 @@
             </li>
             <li id="setAscendingSort">
               <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setAscendingSort.html">setAscendingSort()</a>
+            </li>
+            <li id="setExcludedTransactionIdsFilter">
+              <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setExcludedTransactionIdsFilter.html">setExcludedTransactionIdsFilter()</a>
             </li>
             <li id="setInternalReferenceFilter">
               <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setInternalReferenceFilter.html">setInternalReferenceFilter()</a>
@@ -334,6 +353,9 @@
             <li id="setSortBy">
               <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setSortBy.html">setSortBy()</a>
             </li>
+            <li id="setTransactionIdsFilter">
+              <a title="Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter" href="../classes/Diglin_Ricardo_Managers_SellerAccount_Parameter_SoldArticlesParameter/setTransactionIdsFilter.html">setTransactionIdsFilter()</a>
+            </li>
           </ul>
           <h3>Inherited from <a title="Diglin\Ricardo\Managers\ParameterAbstract" href="../classes/Diglin_Ricardo_Managers_ParameterAbstract.html">Diglin\Ricardo\Managers\ParameterAbstract</a></h3>
           <h4>protected</h4>
@@ -368,13 +390,43 @@
         <h2 id="history">History</h2>
         <ul class="styled history">
           <li>
+            <h3>2015-03-31T00:39:32+02:00 (commit #<span title="533bf68b8442b10e0aa4aeb68eb78417a3f35a3d">533bf68</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Add new attribute excludedTransactionIdsFilter to filter sold articles, getSoldArticlesResult return all variables now, not only "SoldArticles"</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-02-05T13:02:27+01:00 (commit #<span title="17cc8fe2d7fb02ee28ad33b68b9966652ce28dff">17cc8fe</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change license from OSL v3 to GPL v3</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-12-16T12:45:07+01:00 (commit #<span title="ec26574bac4de7e66aa27c9d98df19f1ac110fe7">ec26574</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sylvain.raye@rissip.com) /
+                        Commiter: Sylvain Rayé (sylvain.raye@rissip.com)
+                    </p>
+              <pre class="wrapped">PSR2 compliant</pre>
+            </div>
+          </li>
+          <li>
             <h3>2014-10-20T13:39:26+02:00 (commit #<span title="177d7305faf9bbdffe4ad1b81475a23c583e8eed">177d730</span>)</h3>
             <div>
               <p>
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>update</pre>
+              <pre class="wrapped">update</pre>
             </div>
           </li>
           <li>
@@ -384,7 +436,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Implement method service GetCountriesIso but it's useless. No Data returned and parameter is not what we need</pre>
+              <pre class="wrapped">Implement method service GetCountriesIso but it's useless. No Data returned and parameter is not what we need</pre>
             </div>
           </li>
           <li>
@@ -394,7 +446,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] For sellerAccount service, implement in a clean way parameter to send to the service</pre>
+              <pre class="wrapped">[RIC-38] For sellerAccount service, implement in a clean way parameter to send to the service</pre>
             </div>
           </li>
           <li>
@@ -404,7 +456,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
+              <pre class="wrapped">Update the License to OSL v3.0, add license file, change code header and composer.json</pre>
             </div>
           </li>
           <li>
@@ -414,7 +466,7 @@
                         Author: Sylvain Rayé (sly@diglin.com) /
                         Commiter: Sylvain Rayé (sly@diglin.com)
                     </p>
-              <pre>[RIC-38] - Add enums for ArticleTypeFiler, OpenArticleSortBy, PaidStatusFilter, SkippedStatusFiler, SoldArticlesSortBy
+              <pre class="wrapped">[RIC-38] - Add enums for ArticleTypeFiler, OpenArticleSortBy, PaidStatusFilter, SkippedStatusFiler, SoldArticlesSortBy
 - Add class parameter for Articles, ClosedArticles, OpenArticles, PlannedArticle, PlannedArticles, SoldArticles and UnsoldArticles</pre>
             </div>
           </li>
@@ -422,7 +474,7 @@
       </section>
     </div>
     <footer>
-      <span>Generated using phpDox 0.6 - Copyright (C) 2010 - 2014 by Arne Blankerts</span>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
     </footer>
   </body>
 </html>
