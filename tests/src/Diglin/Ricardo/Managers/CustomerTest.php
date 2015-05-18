@@ -20,8 +20,10 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-use Diglin\Ricardo\Core\Helper;
-
+/**
+ * Class CustomerTest
+ * @package Diglin\Ricardo\Managers
+ */
 class CustomerTest extends TestAbstract
 {
     /**
