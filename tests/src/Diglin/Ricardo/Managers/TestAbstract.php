@@ -273,18 +273,17 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             ->setWarrantyDescription($this->_generateRandomString(2000));
 
 //        $filename = __DIR__ . '/../../../media/pictures/hallgerdur_black_f-1.jpg'; // 4MB Picture - Take ~1GB RAM Memory when encoded with json_encode / > ~1GB RAM when not json encoded (Memory limit reached) !!!
-//        $filename = __DIR__ . '/../../../media/pictures/46325.JPG'; // 2MB Picture - Take ~500 MB RAM Memory when encoded with json_encode / ~1GB RAM when not json encoded !!!
+        $filename = __DIR__ . '/../../../media/pictures/46325.JPG'; // 2MB Picture - Take ~500 MB RAM Memory when encoded with json_encode / ~1GB RAM when not json encoded !!!
 //        $filename = __DIR__ . '/../../../media/pictures/22-syncmaster-lcd-monitor.jpg'; // 40 KB
-        $filename = __DIR__ . '/../../../media/pictures/46325-500k.jpg'; // 500 KB
+//        $filename = __DIR__ . '/../../../media/pictures/46325-500k.jpg'; // 500 KB
 
-        if (file_exists($filename) && false) {
-            for ($i = 1; $i < 3; $i++) {
-//            $imageContent = array_values(unpack('C*', file_get_contents($filename)));
-
+        if (file_exists($filename)) {
+            for ($i = 1; $i < 5; $i++) {
                 $pictures = new ArticlePictureParameter();
                 $pictures
-//                ->setPictureBytes($imageContent)
-                    ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($filename)))))// save 10 MB Memory with a picture of 40 KB
+                    ->setPictureInBase64(base64_encode(file_get_contents($filename)))
+//                    ->setPictureBytes($imageContent)
+//                    ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($filename)))))// save 10 MB Memory with a picture of 40 KB
                     ->setPictureExtension(Helper::getPictureExtension($filename))
                     ->setPictureIndex($i);
 
@@ -409,16 +408,17 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
             ->setWarrantyDescription($this->_generateRandomString(2000));
 
 //        $filename = __DIR__ . '/../../../media/pictures/hallgerdur_black_f-1.jpg'; // 4MB Picture - Take ~1GB RAM Memory when encoded with json_encode / > ~1GB RAM when not json encoded (Memory limit reached) !!!
-//        $filename = __DIR__ . '/../../../media/pictures/46325.JPG'; // 2MB Picture - Take ~500 MB RAM Memory when encoded with json_encode / ~1GB RAM when not json encoded !!!
+        $filename = __DIR__ . '/../../../media/pictures/46325.JPG'; // 2MB Picture - Take ~500 MB RAM Memory when encoded with json_encode / ~1GB RAM when not json encoded !!!
 //        $filename = __DIR__ . '/../../../media/pictures/22-syncmaster-lcd-monitor.jpg'; // 40 KB
-        $filename = __DIR__ . '/../../../media/pictures/46325-500k.jpg'; // 500 KB
+//        $filename = __DIR__ . '/../../../media/pictures/46325-500k.jpg'; // 500 KB
 
         if (file_exists($filename)) {
             for ($i = 1; $i < 3; $i++) {
 
                 $pictures = new ArticlePictureParameter();
                 $pictures
-                    ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($filename)))))// save 10 MB Memory with a picture of 40 KB
+                    ->setPictureInBase64(base64_encode(file_get_contents($filename)))
+//                    ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($filename)))))// save 10 MB Memory with a picture of 40 KB
                     ->setPictureExtension(Helper::getPictureExtension($filename))
                     ->setPictureIndex($i);
 
