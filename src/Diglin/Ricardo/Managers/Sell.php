@@ -104,21 +104,41 @@ class Sell extends ManagerAbstract
     }
 
     /**
+     * @deprecated
      * @param InsertArticleParameter $parameter
      * @return array
      */
     public function insertArticle(InsertArticleParameter $parameter)
     {
-        return $this->_lastInsertArticle = $this->_proceed('InsertArticle', $parameter);
+        return $this->createArticle($parameter);
+    }
+
+    /**
+     * @deprecated
+     * @param InsertArticlesParameter $parameter
+     * @return array
+     */
+    public function insertArticles(InsertArticlesParameter $parameter)
+    {
+        return $this->createArticles($parameter);
+    }
+
+    /**
+     * @param InsertArticleParameter $parameter
+     * @return array
+     */
+    public function createArticle(InsertArticleParameter $parameter)
+    {
+        return $this->_lastInsertArticle = $this->_proceed('CreateArticle', $parameter);
     }
 
     /**
      * @param InsertArticlesParameter $parameter
      * @return array
      */
-    public function insertArticles(InsertArticlesParameter $parameter)
+    public function createArticles(InsertArticlesParameter $parameter)
     {
-        return $this->_proceed('InsertArticles', $parameter);
+        return $this->_proceed('CreateArticles', $parameter);
     }
 
     /**
@@ -130,25 +150,50 @@ class Sell extends ManagerAbstract
     }
 
     /**
+     * @deprecated
      * @param $articleId
      * @return array
      */
     public function relistArticle($articleId)
     {
-        $antiforgery = $this->getServiceManager()->getSecurityManager()->getAntiforgeryToken();
-        return $this->_proceed('RelistArticle', array('ArticleId' => $articleId, 'AntiforgeryToken' => $antiforgery));
+        return $this->republishArticle($articleId);
     }
 
     /**
+     * @param $articleId
+     * @return array
+     * @throws \Diglin\Ricardo\Exceptions\ExceptionAbstract
+     * @throws \Diglin\Ricardo\Exceptions\SecurityException
+     * @throws \Exception
+     */
+    public function republishArticle($articleId)
+    {
+        $antiforgery = $this->getServiceManager()->getSecurityManager()->getAntiforgeryToken();
+        return $this->_proceed('RepublishArticle', array('ArticleId' => $articleId, 'AntiforgeryToken' => $antiforgery));
+    }
+
+    /**
+     * @deprecated
      * @param UpdateArticleParameter $parameter
      * @return float
      */
     public function updateArticle(UpdateArticleParameter $parameter)
     {
-        $result = $this->_proceed('UpdateArticle', $parameter);
-        return $result['ArticleFee'];
+        return $this->modifyArticle($parameter);
     }
 
+    /**
+     * @param UpdateArticleParameter $parameter
+     * @return mixed
+     * @throws \Diglin\Ricardo\Exceptions\ExceptionAbstract
+     * @throws \Diglin\Ricardo\Exceptions\SecurityException
+     * @throws \Exception
+     */
+    public function modifyArticle(UpdateArticleParameter $parameter)
+    {
+        $result = $this->_proceed('ModifyArticle', $parameter);
+        return $result['ArticleFee'];
+    }
 
     /**
      * @param UpdateArticlePicturesParameter $parameter

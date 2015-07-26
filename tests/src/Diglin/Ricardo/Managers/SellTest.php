@@ -21,15 +21,6 @@
 namespace Diglin\Ricardo\Managers;
 
 use Diglin\Ricardo\Core\Helper;
-use Diglin\Ricardo\Enums\Article\InternalReferenceType;
-use Diglin\Ricardo\Enums\Article\PromotionCode;
-use Diglin\Ricardo\Enums\PictureExtension;
-use Diglin\Ricardo\Enums\System\CategoryBrandingFilter;
-use Diglin\Ricardo\Managers\Sell\Parameter\ArticleDeliveryParameter;
-use Diglin\Ricardo\Managers\Sell\Parameter\ArticleDescriptionParameter;
-use Diglin\Ricardo\Managers\Sell\Parameter\ArticleInformationParameter;
-use Diglin\Ricardo\Managers\Sell\Parameter\ArticleInternalReferenceParameter;
-use Diglin\Ricardo\Managers\Sell\Parameter\ArticlePictureParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
@@ -56,7 +47,7 @@ class SellTest extends TestAbstract
         $insertArticleParameter = $this->getArticle(true, true, false);
 
         try {
-            $result = $this->_sellManager->insertArticle($insertArticleParameter);
+            $result = $this->_sellManager->createArticle($insertArticleParameter);
         } catch (\Exception $e) {
             $this->getLastApiDebug(true, false, true);
             throw $e;
@@ -66,6 +57,8 @@ class SellTest extends TestAbstract
         $this->assertArrayHasKey('ArticleFee', $result, 'Article does not have any article fee');
 
         $this->outputContent($result, 'Insert Planned Article: ', true);
+
+        $this->outputContent('Memory Get Max Usage' . memory_get_peak_usage());
     }
 
     public function testInsertBuyNowArticle()
@@ -73,7 +66,7 @@ class SellTest extends TestAbstract
         $insertArticleParameter = $this->getArticle(false, true, false);
 
         try {
-            $result = $this->_sellManager->insertArticle($insertArticleParameter);
+            $result = $this->_sellManager->createArticle($insertArticleParameter);
         } catch (\Exception $e) {
             $this->getLastApiDebug(true, false, true);
             throw $e;
@@ -91,7 +84,7 @@ class SellTest extends TestAbstract
     public function testDeletePlannedArticle()
     {
         $insertArticleParameter = $this->getArticle(true, true, false);
-        $result = $this->_sellManager->insertArticle($insertArticleParameter);
+        $result = $this->_sellManager->createArticle($insertArticleParameter);
 
         $articleId = $result['PlannedArticleId'];
 
@@ -126,14 +119,14 @@ class SellTest extends TestAbstract
 
                     if ($i == ($totalInserted - 1)) {
                         $insertArticles->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken());
-                        $result = $this->_sellManager->insertArticles($insertArticles);
+                        $result = $this->_sellManager->createArticles($insertArticles);
                         $flush = true;
 
                         $this->assertCount($totalInserted, $result, $totalInserted . ' inserted articles were expected.');
                         $this->assertArrayHasKey('PlannedArticleId', $result[0], 'Article does not have an article ID');
                         $this->assertArrayHasKey('ArticleFee', $result[0], 'Article does not have any article fee');
 
-                        $this->outputContent($result, 'Insert Articles: ');
+                        $this->outputContent($result, 'Insert Planned Articles: ');
                     }
                 }
             }
@@ -173,12 +166,11 @@ class SellTest extends TestAbstract
         $this->assertArrayHasKey('IsClosed', $result[0], 'No IsClosed found');
         $this->assertArrayHasKey('PlannedIndex', $result[0], 'No PlannedIndex found');
         $this->assertEquals($articles[0], $result[0]['PlannedArticleId'], 'Article ID returned not equal');
-
     }
 
     public function testCloseArticle()
     {
-        $insertedArticle = $this->_sellManager->insertArticle($this->getArticle(true, true, true));
+        $insertedArticle = $this->_sellManager->createArticle($this->getArticle(true, true, true));
 
         $this->outputContent($insertedArticle, 'Inserted Buy Now Article with start now: ', true);
 
@@ -196,15 +188,6 @@ class SellTest extends TestAbstract
         // ricardo API return some empty values so it means that everything is fine. In case, not, an exception will be thrown
         $this->assertArrayHasKey('ArticleNr', $result, 'No article ID returned');
         $this->assertArrayHasKey('IsClosed', $result, 'Result does not have IsClosed Key');
-    }
-
-    public function RelistArticle()
-    {
-//        $articleId = 729014362;
-//
-//        $relist = $this->_sellManager->relistArticle($articleId);
-//
-//        $this->outputContent($relist, 'Relist Article: ', true);
     }
 
     public function testGetArticlesFee()

@@ -86,6 +86,7 @@ class Sell extends ServiceAbstract
         if (isset($data['AddArticlePicturesResult'])) {
             return $data['AddArticlePicturesResult'];
         }
+
         return false;
     }
 
@@ -149,6 +150,7 @@ class Sell extends ServiceAbstract
         if (isset($data['CloseArticleResult'])) {
             return $data['CloseArticleResult'];
         }
+
         return false;
     }
 
@@ -252,6 +254,7 @@ class Sell extends ServiceAbstract
         if (isset($data['DeletePlannedArticleResult'])) {
             return $data['DeletePlannedArticleResult'];
         }
+
         return false;
     }
 
@@ -292,6 +295,7 @@ class Sell extends ServiceAbstract
         if (isset($data['DeletePlannedArticlesResult']) && isset($data['DeletePlannedArticlesResult']['DeleteResults'])) {
             return $data['DeletePlannedArticlesResult']['DeleteResults'];
         }
+
         return false;
     }
 
@@ -326,34 +330,35 @@ class Sell extends ServiceAbstract
      * @return bool
      *
      * [0] => Array
-        (
-            [CoveredByPLP] =>
-            [ListingFee] => 0
-            [PromotionFees] => Array
-                (
-                    [0] => Array
-                        (
-                            [PromotionFee] => 0
-                            [PromotionId] => 4194304
-                        )
-
-                    [1] => Array
-                        (
-                            [PromotionFee] => 0
-                            [PromotionId] => 8388608
-                        )
-                   [...] => ...
-
-                )
-
-            [TotalFee] => 5
-        )
+     * (
+     * [CoveredByPLP] =>
+     * [ListingFee] => 0
+     * [PromotionFees] => Array
+     * (
+     * [0] => Array
+     * (
+     * [PromotionFee] => 0
+     * [PromotionId] => 4194304
+     * )
+     *
+     * [1] => Array
+     * (
+     * [PromotionFee] => 0
+     * [PromotionId] => 8388608
+     * )
+     * [...] => ...
+     *
+     * )
+     *
+     * [TotalFee] => 5
+     * )
      */
     public function getArticlesFeeResult(array $data)
     {
         if (isset($data['GetArticlesFeeResult']) && isset($data['GetArticlesFeeResult']['ArticlesFee'])) {
             return $data['GetArticlesFeeResult']['ArticlesFee'];
         }
+
         return false;
     }
 
@@ -378,15 +383,13 @@ class Sell extends ServiceAbstract
     /**
      * Inserts an article or a planned article
      *
+     * @deprecated
      * @param $insertArticleParameter
      * @return array
      */
     public function insertArticle(InsertArticleParameter $insertArticleParameter)
     {
-        return array(
-            'method' => 'InsertArticle',
-            'params' => array('insertArticleParameter' => $insertArticleParameter->getDataProperties())
-        );
+        return $this->createArticle($insertArticleParameter);
     }
 
     /**
@@ -412,15 +415,102 @@ class Sell extends ServiceAbstract
      *   }
      * </pre>
      *
+     * @deprecated
      * @param array $data
      * @return array|bool
      */
     public function insertArticleResult(array $data)
     {
-        if (isset($data['InsertArticleResult'])) {
-            return $data['InsertArticleResult'];
+        return $this->createArticleResult($data);
+    }
+
+    /**
+     * Inserts an article or a planned article
+     *
+     * @param $insertArticleParameter
+     * @return array
+     */
+    public function createArticle(InsertArticleParameter $insertArticleParameter)
+    {
+        return array(
+            'method' => 'CreateArticle',
+            'params' => array('insertArticleParameter' => $insertArticleParameter->getDataProperties())
+        );
+    }
+
+    /**
+     * Get the article result data
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "CreateArticleResult": {
+     *       "ArticleFee": [{
+     *          "ListingFee": "float"
+     *          "TotalFee": "float"
+     *          "PromotionFees": [{
+     *              "PromotionFee": "float"
+     *              "PromotionId":  "int"
+     *          }]
+     *        }]
+     *       "ArticleId": "int"
+     *       "CarDealerArticleId": "int"
+     *       "ErrorCodes": "int" ArticleErrors
+     *       "PlannedArticleId": "int"
+     *     }
+     *   }
+     * </pre>
+     *
+     * @param array $data
+     * @return array|bool
+     */
+    public function createArticleResult(array $data)
+    {
+        if (isset($data['CreateArticleResult'])) {
+            return $data['CreateArticleResult'];
         }
+
         return false;
+    }
+
+    /**
+     * Inserts a list of articles or a planned articles. This method is currently not fully usable to external partners
+     *
+     * @deprecated
+     * @param InsertArticlesParameter $insertArticlesParameter
+     * @return array
+     */
+    public function insertArticles(InsertArticlesParameter $insertArticlesParameter)
+    {
+        return $this->createArticles($insertArticlesParameter);
+    }
+
+    /**
+     * Get the article result data
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "CreateArticlesResult": {
+     *      "Results": [{
+     *          "ArticleFee": "float"
+     *          "ArticleId": "int"
+     *          "CarDealerArticleId": "int"
+     *          "CorrelationKey": "int"
+     *          "ErrorCodes": "int" ArticleErrors
+     *          "ErrorCodesType": "int" @see https://ws.ricardo.ch/RicardoApi/documentation/html/T_Ricardo_Enums_Errors_ErrorList.htm
+     *          "PlannedArticleId": "int"
+     *      }]
+     *   }
+     * </pre>
+     *
+     * @deprecated
+     * @param array $data
+     * @return array|bool
+     */
+    public function insertArticlesResult(array $data)
+    {
+        return $this->createArticlesResult($data);
     }
 
     /**
@@ -429,10 +519,10 @@ class Sell extends ServiceAbstract
      * @param InsertArticlesParameter $insertArticlesParameter
      * @return array
      */
-    public function insertArticles(InsertArticlesParameter $insertArticlesParameter)
+    public function createArticles(InsertArticlesParameter $insertArticlesParameter)
     {
         return array(
-            'method' => 'InsertArticles',
+            'method' => 'CreateArticles',
             'params' => array('insertArticlesParameter' => $insertArticlesParameter->getDataProperties())
         );
     }
@@ -443,7 +533,7 @@ class Sell extends ServiceAbstract
      * The Ricardo API returns:
      * <pre>
      * {
-     *     "InsertArticlesResult": {
+     *     "CreateArticlesResult": {
      *      "Results": [{
      *          "ArticleFee": "float"
      *          "ArticleId": "int"
@@ -459,11 +549,12 @@ class Sell extends ServiceAbstract
      * @param array $data
      * @return array|bool
      */
-    public function insertArticlesResult(array $data)
+    public function createArticlesResult(array $data)
     {
-        if (isset($data['InsertArticlesResult']) && isset($data['InsertArticlesResult']['Results'])) {
-            return $data['InsertArticlesResult']['Results'];
+        if (isset($data['CreateArticlesResult']) && isset($data['CreateArticlesResult']['Results'])) {
+            return $data['CreateArticlesResult']['Results'];
         }
+
         return false;
     }
 
@@ -488,9 +579,20 @@ class Sell extends ServiceAbstract
     /**
      * Inserts the preview converted classified.
      *
+     * @deprecated
      * @param $insertPreviewConvertedClassifiedParameter
      */
     public function insertPreviewConvertedClassified($insertPreviewConvertedClassifiedParameter)
+    {
+        return $this->createPreviewConvertedClassified($insertPreviewConvertedClassifiedParameter);
+    }
+
+    /**
+     * Inserts the preview converted classified.
+     *
+     * @param $insertPreviewConvertedClassifiedParameter
+     */
+    public function createPreviewConvertedClassified($insertPreviewConvertedClassifiedParameter)
     {
     }
 
@@ -504,18 +606,53 @@ class Sell extends ServiceAbstract
     }
 
     /**
+     * @deprecated
      * @param $parameters
      * @return array
      */
     public function relistArticle($parameters)
     {
+        return $this->republishArticle($parameters);
+    }
+
+    /**
+     * Relists the auction articles. This method is currently not fully usable to external partners
+     *
+     * @deprecated
+     * @param array $articleIds
+     * @return array
+     */
+    public function relistArticles($articleIds)
+    {
+        return $this->republishArticles($articleIds);
+    }
+
+    /**
+     * @param $parameters
+     * @return array
+     */
+    public function republishArticle($parameters)
+    {
         $articleId = $parameters['ArticleId'];
         $antiforgeryToken = $parameters['AntiforgeryToken'];
 
         return array(
-            'method' => 'RelistArticle',
+            'method' => 'RepublishArticle',
             'params' => array('relistArticleParameter' => array('ArticleId', $articleId, 'AntiforgeryToken' => $antiforgeryToken))
         );
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public function republishArticleResult(array $data)
+    {
+        if (isset($data['RepublishArticleResult'])) {
+            return $data['RepublishArticleResult'];
+        }
+
+        return false;
     }
 
     /**
@@ -524,21 +661,36 @@ class Sell extends ServiceAbstract
      * @param array $articleIds
      * @return array
      */
-    public function relistArticles($articleIds)
+    public function republishArticles($articleIds)
     {
         return array(
-            'method' => 'RelistArticles',
+            'method' => 'RepublishArticles',
             'params' => array('relistArticlesParameter' => array('ArticleId', $articleIds))
         );
     }
 
     /**
+     * @param array $data
+     * @return bool
+     */
+    public function republishArticlesResult(array $data)
+    {
+        if (isset($data['RepublishArticlesResult'])) {
+            return $data['RepublishArticlesResult'];
+        }
+
+        return false;
+    }
+
+    /**
      * Relists the auction articles without modification. This method is currently not fully usable to external partners
      *
+     * @deprecated
      * @param $relistArticlesWithoutModificationParameter
      */
     public function relistArticlesWithoutModification($relistArticlesWithoutModificationParameter)
     {
+        return $this->republishArticleWithoutModification($relistArticlesWithoutModificationParameter);
     }
 
     /**
@@ -547,6 +699,21 @@ class Sell extends ServiceAbstract
      * @param $relistArticleWithoutModificationParameter
      */
     public function relistArticleWithoutModification($relistArticleWithoutModificationParameter)
+    {
+        return $this->republishArticlesWithoutModification($relistArticleWithoutModificationParameter);
+    }
+
+    /**
+     * @param $relistArticlesWithoutModificationParameter
+     */
+    public function republishArticleWithoutModification($relistArticlesWithoutModificationParameter)
+    {
+    }
+
+    /**
+     * @param $relistArticleWithoutModificationParameter
+     */
+    public function republishArticlesWithoutModification($relistArticleWithoutModificationParameter)
     {
     }
 
@@ -598,13 +765,46 @@ class Sell extends ServiceAbstract
     /**
      * Updates the article.
      *
+     * @deprecated
      * @param UpdateArticleParameter $updateArticleParameter
      * @return array
      */
     public function updateArticle(UpdateArticleParameter $updateArticleParameter)
     {
+        return $this->modifyArticle($updateArticleParameter);
+    }
+
+    /**
+     * Get the article result data
+     *
+     * The Ricardo API returns:
+     * <pre>
+     * {
+     *     "UpdateArticleResult": {
+     *       "ArticleFee": "float"
+     *     }
+     *   }
+     * </pre>
+     *
+     * @deprecated
+     * @param array $data
+     * @return bool|array
+     */
+    public function updateArticleResult(array $data)
+    {
+        return $this->modifyArticleResult($data);
+    }
+
+    /**
+     * Updates the article.
+     *
+     * @param UpdateArticleParameter $updateArticleParameter
+     * @return array
+     */
+    public function modifyArticle(UpdateArticleParameter $updateArticleParameter)
+    {
         return array(
-            'method' => 'UpdateArticle',
+            'method' => 'ModifyArticle',
             'params' => array('updateArticleParameter' => $updateArticleParameter->getDataProperties())
         );
     }
@@ -624,11 +824,12 @@ class Sell extends ServiceAbstract
      * @param array $data
      * @return bool|array
      */
-    public function updateArticleResult(array $data)
+    public function modifyArticleResult(array $data)
     {
-        if (isset($data['UpdateArticleResult'])) {
-            return $data['UpdateArticleResult'];
+        if (isset($data['ModifyArticleResult'])) {
+            return $data['ModifyArticleResult'];
         }
+
         return false;
     }
 
@@ -703,11 +904,22 @@ class Sell extends ServiceAbstract
     }
 
     /**
-     * Updates the planned article.
+     * Update the planned article.
      *
+     * @deprecated
      * @param $updatePlannedArticleParameter
      */
     public function updatePlannedArticle($updatePlannedArticleParameter)
+    {
+        return $this->modifyPlannedArticle($updatePlannedArticleParameter);
+    }
+
+    /**
+     * Modify/Update the planned article.
+     *
+     * @param $updatePlannedArticleParameter
+     */
+    public function modifyPlannedArticle($updatePlannedArticleParameter)
     {
     }
 
