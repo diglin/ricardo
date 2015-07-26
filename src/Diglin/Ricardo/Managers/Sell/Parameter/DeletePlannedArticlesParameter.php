@@ -65,11 +65,11 @@ class DeletePlannedArticlesParameter extends ParameterAbstract
     }
 
     /**
-     * @param ClosePlannedArticleParameter $plannedArticle
+     * @param DeletePlannedArticleParameter $plannedArticle
      * @param bool $clear
      * @return $this
      */
-    public function setArticles(ClosePlannedArticleParameter $plannedArticle = null, $clear = false)
+    public function setArticles(DeletePlannedArticleParameter $plannedArticle = null, $clear = false)
     {
         if ($clear) {
             $this->_articles = array();
