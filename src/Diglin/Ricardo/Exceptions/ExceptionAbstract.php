@@ -44,7 +44,7 @@ class ExceptionAbstract extends \Exception
         $class = str_replace('Exceptions', 'Enums', $class);
         $class = str_replace('Exception', 'Errors', $class);
 
-        if (class_exists($class)) {
+        if (@class_exists($class)) {
             /* @var $class \Diglin\Ricardo\Enums\AbstractEnums */
             $message = $class::getLabel($code);
             if (!empty($message)) {

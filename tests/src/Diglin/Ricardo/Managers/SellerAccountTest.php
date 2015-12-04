@@ -24,12 +24,15 @@ namespace Diglin\Ricardo\Managers;
 use Diglin\Ricardo\Core\Helper;
 use Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use Diglin\Ricardo\Enums\Article\CloseListStatus;
+use Diglin\Ricardo\Enums\Customer\ArticleTypeFilter;
+use Diglin\Ricardo\Enums\Customer\TransitionStatus;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\CloseArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\ClosePlannedArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\GetInTransitionArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter;
@@ -341,6 +344,26 @@ class SellerAccountTest extends TestAbstract
 
         $this->assertArrayHasKey('TotalLines', $result, 'Total Lines result is not defined');
         $this->assertArrayHasKey('OpenArticles', $result, 'Open Articles result is not returned');
+    }
+
+    public function testGetInTransitionArticles()
+    {
+        $inTransitionParameter = new GetInTransitionArticlesParameter();
+        $inTransitionParameter
+            ->setArticleTitleFilter(null)
+            ->setLastname(null)
+            ->setNickname(null)
+            ->setInternalReferenceFilter(null)
+            ->setPageSize(5)
+            ->setTransitionStatusFilter(TransitionStatus::BOTH)
+            ->setArticleTypeFilter(ArticleTypeFilter::ALL);
+
+        $result = $this->_sellerAccountManager->getTransitionArticles($inTransitionParameter);
+
+        parent::outputContent($result, 'Get Transition Articles: ', true);
+
+        $this->assertArrayHasKey('TotalLines', $result, 'Total Lines result is not defined');
+        $this->assertArrayHasKey('InTransitionArticles', $result, 'InTransitionArticles result is not returned');
     }
 
 }

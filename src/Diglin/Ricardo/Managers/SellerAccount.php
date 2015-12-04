@@ -23,6 +23,7 @@ namespace Diglin\Ricardo\Managers;
 use Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\GetInTransitionArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticlesParameter;
@@ -266,5 +267,17 @@ class SellerAccount extends ManagerAbstract
     public function setPremiumPackageAutomaticReactivation()
     {
         // @todo
+    }
+
+    /**
+     * @param GetInTransitionArticlesParameter $parameter
+     * @return array
+     * @throws \Diglin\Ricardo\Exceptions\ExceptionAbstract
+     * @throws \Diglin\Ricardo\Exceptions\SecurityException
+     * @throws \Exception
+     */
+    public function getTransitionArticles(GetInTransitionArticlesParameter $parameter)
+    {
+        return $this->_proceed('InTransitionArticles', $parameter);
     }
 }

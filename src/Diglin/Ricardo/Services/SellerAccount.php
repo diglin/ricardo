@@ -24,6 +24,7 @@ use Diglin\Ricardo\Core\Helper;
 use Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\GetInTransitionArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter;
@@ -602,5 +603,33 @@ class SellerAccount extends ServiceAbstract
             'method' => 'SetPremiumPackageAutomaticReactivation',
             'params' => array('SetPremiumPackageAutomaticReactivationParameter' => array())
         );
+    }
+
+    /**
+     * Get In Transition Articles
+     *
+     * @param GetInTransitionArticlesParameter $parameter
+     * @return array
+     */
+    public function getInTransitionArticles(GetInTransitionArticlesParameter $parameter)
+    {
+        return array(
+            'method' => 'GetInTransitionArticles',
+            'params' => array('GetInTransitionArticlesParameter' => $parameter->getDataProperties())
+        );
+    }
+
+    /**
+     * Get In Transition Articles Result
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getInTransitionArticlesResult(array $data)
+    {
+        if (isset($data['GetInTransitionArticlesResult'])) {
+            return $data['GetInTransitionArticlesResult'];
+        }
+        return array();
     }
 }
