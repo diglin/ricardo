@@ -38,11 +38,11 @@ class GetInTransitionArticlesParameter extends ParameterAbstract
     /**
      * @var string
      */
-    protected $_articleTitleFilter;
+    protected $_articleTitleFilter = null;
     /**
      * @var string
      */
-    protected $_articleTypeFilter;
+    protected $_articleTypeFilter = null;
 
     /**
      * @var boolean
@@ -52,17 +52,17 @@ class GetInTransitionArticlesParameter extends ParameterAbstract
     /**
      * @var string
      */
-    protected $_internalReferenceFilter;
+    protected $_internalReferenceFilter = null;
 
     /**
      * @var string
      */
-    protected $_lastname;
+    protected $_lastname = null;
 
     /**
      * @var string
      */
-    protected $_nickname;
+    protected $_nickname = null;
 
     /**
      * @var int
@@ -82,7 +82,7 @@ class GetInTransitionArticlesParameter extends ParameterAbstract
     /**
      * @var int
      */
-    protected $_transitionStatusFilter;
+    protected $_transitionStatusFilter = null;
 
     /**
      * @var array
