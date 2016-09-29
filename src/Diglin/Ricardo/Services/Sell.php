@@ -29,6 +29,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\GetArticlesFeeParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleBuyNowQuantityParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter;
 
@@ -845,10 +846,28 @@ class Sell extends ServiceAbstract
     /**
      * Updates the article buy now quantity.
      *
-     * @param $updateArticleBuyNowQuantityParameter
+     * @param UpdateArticleBuyNowQuantityParameter $updateArticleBuyNowQuantityParameter
+     * @return array
      */
-    public function updateArticleBuyNowQuantity($updateArticleBuyNowQuantityParameter)
+    public function updateArticleBuyNowQuantity(UpdateArticleBuyNowQuantityParameter $updateArticleBuyNowQuantityParameter)
     {
+        return array(
+            'method' => 'UpdateArticleBuyNowQuantity',
+            'params' => array('updateArticleBuyNowQuantityParameter' => $updateArticleBuyNowQuantityParameter->getDataProperties())
+        );
+    }
+
+    /**
+     * Get the pudate article buy now quantity result data
+     *
+     * @return bool
+     */
+    public function updateArticleBuyNowQuantityResult()
+    {
+        if (isset($data['UpdateArticleBuyNowQuantityResult'])) {
+            return $data['UpdateArticleBuyNowQuantityResult'];
+        }
+        return false;
     }
 
     /**

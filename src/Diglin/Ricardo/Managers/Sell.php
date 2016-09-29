@@ -30,6 +30,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\DeletePlannedArticlesParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\GetArticlesFeeParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleBuyNowQuantityParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticlePicturesParameter;
 
@@ -219,5 +220,17 @@ class Sell extends ManagerAbstract
     public function getArticlesFee(GetArticlesFeeParameter $parameter)
     {
         return $this->_proceed('ArticlesFee', $parameter);
+    }
+
+    /**
+     * @param UpdateArticleBuyNowQuantityParameter $parameter
+     * @return array
+     * @throws \Diglin\Ricardo\Exceptions\ExceptionAbstract
+     * @throws \Diglin\Ricardo\Exceptions\SecurityException
+     * @throws \Exception
+     */
+    public function updateArticleBuyNowQuantity (UpdateArticleBuyNowQuantityParameter $parameter)
+    {
+        return $this->_proceed('UpdateArticleBuyNowQuantity', $parameter);
     }
 }

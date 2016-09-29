@@ -28,6 +28,7 @@ use Diglin\Ricardo\Managers\Sell\Parameter\GetArticleFeeParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\GetArticlesFeeParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticleParameter;
 use Diglin\Ricardo\Managers\Sell\Parameter\InsertArticlesParameter;
+use Diglin\Ricardo\Managers\Sell\Parameter\UpdateArticleBuyNowQuantityParameter;
 
 class SellTest extends TestAbstract
 {
@@ -76,6 +77,29 @@ class SellTest extends TestAbstract
         $this->assertArrayHasKey('ArticleFee', $result, 'Article does not have any article fee');
 
         $this->outputContent($result, 'Insert Buy Now Article: ', true);
+
+        return $result;
+    }
+
+    /**
+     * @depends testInsertBuyNowArticle
+     */
+    public function testUpdateArticleBuyNowQuantity(array $item)
+    {
+        $updateParameter = new UpdateArticleBuyNowQuantityParameter();
+        $updateParameter
+            ->setAntiforgeryToken($this->_serviceManager->getSecurityManager()->getAntiforgeryToken())
+            ->setQuantity(123)
+            ->setArticleId($item['ArticleId']);
+
+        try {
+            $result = $this->_sellManager->updateArticleBuyNowQuantity($updateParameter);
+        } catch (\Exception $e) {
+            $this->getLastApiDebug(true, false, true);
+            throw $e;
+        }
+
+        $this->outputContent($result, 'Update Article Buy Now Quantity: ', true);
     }
 
     /**
