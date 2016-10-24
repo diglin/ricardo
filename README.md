@@ -71,13 +71,13 @@ Add the following requirements into your composer.json at root project level. Yo
  }
  ```
  
- ## How to use it
+## How to use it
  
  TODO
 
- ## Tests
+## Tests
 
- ### How to configure the test case
+### How to configure the test case
 
 To configure the test, please create an ini file in `tests/conf/config.ini` with the following content:
 Pay attention, you need two different configurations for each interface language. During the tests, only the German section is supported. So use only this one.
