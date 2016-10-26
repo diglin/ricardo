@@ -5,7 +5,8 @@
     "keywords": ["Ricardo", "Library", "PHP", "Diglin", "API"],
     "homepage": "http://www.diglin.com",
     "require": {
-        "php": ">=5.3.2"
+        "php": ">=5.3.2",
+        "zf1/zend-config":"1.12.*"
     },
     "require-dev": {
         "zf1/zend-config": "^1.12",
