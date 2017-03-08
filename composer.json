@@ -9,7 +9,6 @@
         "zf1/zend-config":"1.12.*"
     },
     "require-dev": {
-        "zf1/zend-config": "^1.12",
         "phpunit/phpunit": "4.4.*",
         "phploc/phploc": "*",
         "phpmd/phpmd" : "@stable",

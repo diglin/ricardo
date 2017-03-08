@@ -20,7 +20,6 @@
  */
 namespace Diglin\Ricardo\Managers;
 
-use Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\GetInTransitionArticlesParameter;
