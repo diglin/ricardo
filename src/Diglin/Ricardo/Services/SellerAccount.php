@@ -18,15 +18,15 @@
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
  * @license     http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
  */
+
 namespace Diglin\Ricardo\Services;
 
-use Diglin\Ricardo\Core\Helper;
-use Diglin\Ricardo\Enums\Article\ArticlesTypes;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\ClosedArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\GetInTransitionArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\OpenArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticleParameter;
+use Diglin\Ricardo\Managers\SellerAccount\Parameter\PlannedArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\SoldArticlesParameter;
 use Diglin\Ricardo\Managers\SellerAccount\Parameter\UnsoldArticlesParameter;
 
@@ -323,10 +323,10 @@ class SellerAccount extends ServiceAbstract
     /**
      * Gets the planned articles parameter
      *
-     * @param PlannedArticleParameter $parameter
+     * @param PlannedArticlesParameter $parameter
      * @return array
      */
-    public function getPlannedArticles(PlannedArticleParameter $parameter)
+    public function getPlannedArticles(PlannedArticlesParameter $parameter)
     {
         return array(
             'method' => 'GetPlannedArticles',
